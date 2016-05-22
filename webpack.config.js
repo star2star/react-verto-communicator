@@ -4,7 +4,7 @@ var webpack = require('webpack')
 var config = {
   entry: {
     app: path.resolve(__dirname, './src/main.js'),
-    vendors: ['react','react-dom']
+    vendors: ['react','react-dom', 'react-router']
   },
   output: {
     path: './src',
@@ -27,7 +27,7 @@ var config = {
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(true),
     new webpack.optimize.DedupePlugin(),
-    /* jes uncomment when moved to production 
+    /* jes uncomment when moved to production
     new webpack.optimize.UglifyJsPlugin({
       output: {
         comments: false
