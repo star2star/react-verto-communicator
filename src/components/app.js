@@ -8,6 +8,7 @@ class App extends React.Component {
         <Link to="/login" activeClassName="active" >Login</Link>&nbsp;
         <Link to="/dial" activeClassName="active" >Dial</Link>&nbsp;
         <Link to="/session" activeClassName="active" >Session</Link>&nbsp;
+        <Link to="/bns" activeClassName="active" >Browser Not Supported</Link>&nbsp;
         {this.props.children}
       </div>);
 
