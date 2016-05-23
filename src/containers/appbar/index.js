@@ -1,6 +1,7 @@
 import React from 'react';
 import Radium from 'radium';
 //import ReactTooltip from 'react-tooltip';
+import VCStatus from '../../components/vcstatus';
 
 class AppBar extends React.Component {
   constructor(props) {
@@ -30,7 +31,7 @@ class AppBar extends React.Component {
     return (
       <div>
         <div className="appbar" style={styles}>
-
+          <VCStatus status="offline" />
         </div>
       </div>
     );
