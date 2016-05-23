@@ -1,0 +1,9 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+/* temporary links for routes */
+div div a {
+  margin-right: 10px;
+}
