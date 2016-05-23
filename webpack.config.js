@@ -4,7 +4,7 @@ var webpack = require('webpack')
 var config = {
   entry: {
     app: path.resolve(__dirname, './src/main.js'),
-    vendors: ['react','react-dom', 'react-router']
+    vendors: ['react','react-dom']
   },
   output: {
     path: './src',
