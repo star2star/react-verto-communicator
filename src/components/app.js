@@ -5,10 +5,10 @@ class App extends React.Component {
   render(){
     return (
       <div>
-        <Link to="/">Home</Link>
-        <Link to="/login">Login</Link>
-        <Link to="/dial">Dial</Link>
-        <Link to="/session">Session</Link>
+        <Link to="/" activeClassName="active" >Home</Link>&nbsp;
+        <Link to="/login" activeClassName="active" >Login</Link>&nbsp;
+        <Link to="/dial" activeClassName="active" >Dial</Link>&nbsp;
+        <Link to="/session" activeClassName="active" >Session</Link>&nbsp;
         {this.props.children}
       </div>);
 
