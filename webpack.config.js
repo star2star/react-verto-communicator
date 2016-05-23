@@ -20,7 +20,7 @@ var config = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel'
+        loaders:  ["react-hot", "babel?presets[]=es2015&presets[]=stage-0&presets[]=react"]
       }
     ]
   },

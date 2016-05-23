@@ -11,9 +11,9 @@ class Browser extends React.Component {
   }
 
   getStyle(styleName) {
-        const styles = {
+    const styles = {
 
-        };
+    };
 
   let styleReturn = styles[styleName];
   if(this.props.Style && this.props.Style[styleName]) {
