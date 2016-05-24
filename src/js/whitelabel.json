@@ -1,0 +1,9 @@
+{
+  "companyShortDisplayName" : "Star2Star",
+  "marketingExternalURL"    : "http://www.star2star.com/why-star2star",
+  "flashDownloadURL"        : "https://get.adobe.com/flashplayer/",
+  "ieDownloadURL"           : "https://www.microsoft.com/en-us/download/internet-explorer.aspx",
+  "chromeDownloadURL"       : "https://www.google.com/chrome/browser/desktop/",
+  "firefoxDownloadURL"      : "https://www.mozilla.org/en-US/firefox/new",
+  "safariDownloadURL"       : "https://support.apple.com/downloads/safari"
+}

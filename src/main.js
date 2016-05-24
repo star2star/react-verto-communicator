@@ -7,7 +7,7 @@ import {IntlProvider} from 'react-intl';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
-//import Messages from './js/messages';
+import Messages from './js/messages';
 
 import App from './components/app';
 import Dial from './components/dial';
@@ -41,11 +41,12 @@ function getLanguage(){
 }
 
 const locale = getLanguage();
-//const messages = (new Messages(locale)).getAllMessages();
+const messages = (new Messages(locale)).getAllMessages();
 
 //const store = createStore(reducer, applyMiddleware(thunk));
 
 ReactDOM.render((
+    <IntlProvider locale={locale} messages={messages}>
       <StyleRoot>
         <AppBar />
         <Router history={hashHistory}>
@@ -57,4 +58,5 @@ ReactDOM.render((
           </Route>
         </Router>
       </StyleRoot>
+    </IntlProvider>
 ), document.getElementById('app'))
