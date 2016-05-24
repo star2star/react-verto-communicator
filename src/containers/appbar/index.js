@@ -31,7 +31,7 @@ class AppBar extends React.Component {
     return (
       <div>
         <div className="appbar" style={styles}>
-          <VCStatus status="offline" />
+          <VCStatus status = 'Connecting' />
         </div>
       </div>
     );
