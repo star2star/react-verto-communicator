@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
 import Messages from './js/messages';
+import VertoService from './js/vertoService';
 
 import App from './components/app';
 import Dial from './components/dial';
