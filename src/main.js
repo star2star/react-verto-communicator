@@ -7,6 +7,7 @@ import {IntlProvider} from 'react-intl';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
+import reducer from './containers/reducers.js';
 import Messages from './js/messages';
 import VertoService from './js/vertoService';
 
@@ -43,14 +44,17 @@ function getLanguage(){
 
 //TODO where will this be set and managed when this is released??
 // Set styling theme globally
-window.theme={ value: 'default'};
+window.theme={ value: 'light'};
 
 const locale = getLanguage();
 const messages = (new Messages(locale)).getAllMessages();
 
-//const store = createStore(reducer, applyMiddleware(thunk));
+const store = createStore(reducer, applyMiddleware(thunk));
+
+window.theStore = store;
 
 ReactDOM.render((
+  <Provider store={store}>
     <IntlProvider locale={locale} messages={messages}>
       <StyleRoot>
         <AppBar />
@@ -64,4 +68,5 @@ ReactDOM.render((
         </Router>
       </StyleRoot>
     </IntlProvider>
-), document.getElementById('app'))
+  </Provider>
+), document.getElementById('app'));

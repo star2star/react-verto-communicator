@@ -14,6 +14,21 @@ const themes = {
         appbarStyles: {
         backgroundColor: '#0099ee'
       }
+    },
+    vcstatus: {
+      svgStyle: {
+        width: '25px',
+        height: '25px'
+      },
+      disconnectedFill: {
+        fill: "pink"
+      },
+      connectingFill: {
+        fill: "white"
+      },
+      connectedFill: {
+        fill: "aqua"
+      }
     }
   },
   dark: {
