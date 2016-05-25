@@ -1,39 +1,53 @@
 import React from 'react';
+import VertoBaseComponent from './vertobase';
 import { MenuIconSVG } from './svgIcons';
-//waiting on the SVG icon from design CJS
-const propTypes = {
-  status : React.PropTypes.oneOf(['Connected','Disconnected', 'Connecting']).isRequired,
-}
 
-class VCStatus extends React.Component {
+// TODO: SVG from design
+const propTypes = {
+  status: React.PropTypes.oneOf(['Connected','Disconnected', 'Connecting']).isRequired,
+  Style:   React.PropTypes.object
+};
+class VCStatus extends VertoBaseComponent {
   constructor(props) {
     super(props);
+    console.log('^^^^^^^', this.getClassName());
   }
-  getStyle(styleName) {
-    const styles = {
-      svgStyle: {width: "25px",
-      height: "25px"}
-
-    };
-
-  let styleReturn = styles[styleName];
-  if(this.props.Style && this.props.Style[styleName]) {
-    styleReturn = {...styleReturn, ...this.props.Style[styleName]};
+  getDefaultStyle(styleName) {
+      const styles = {
+            svgStyle: {
+              width: '25px',
+              height: '25px'
+            },
+            disconnectedFill: {
+              fill: "red"
+            },
+            connectingFill: {
+              fill: "yellow"
+            },
+            connectedFill: {
+              fill: "green"
+      }
+  };
+      return (styles[styleName]);
   }
-  return styleReturn;
-}
-
   render() {
-    //Still waiting on what the actual status name will be, should still be pretty clear
     let fillColor;
-    if(this.props.status == 'Disconnected'){
-      fillColor = "red";
-    }else if(this.props.status == 'Connecting'){
-      fillColor = "yellow";
-    }else if(this.props.status == 'Connected' ){
-      fillColor = "green";
-    }
-     return (< MenuIconSVG svgStyle = {{...this.getStyle('svgStyle'), fill: fillColor}} />);
+    switch (this.props.status) {
+      case 'Disconnected':
+        fillColor = this.getStyle('disconnectedFill');
+        break;
+      case 'Connecting':
+        fillColor = this.getStyle('connectingFill');
+        break;
+      case 'Connected':
+        fillColor = this.getStyle('connectedFill');
+        break;
+      default:
+        fillColor = this.getDefaultStyle('disconnectedFill');
+        break;
+      }
+
+     return (< MenuIconSVG svgStyle = {{...this.getStyle('svgStyle'), ...fillColor}} />);
   }
 }
 

@@ -6,14 +6,17 @@ class VertoBaseComponent extends React.Component {
     super(props);
   }
   getClassName() {
-    return Object.getPrototypeOf(this.constructor).name;
+    //console.log('*****', this, this.constructor.name );
+    const xName = Object.getPrototypeOf(this.constructor).name;
+    // if it equals base we need to just get it from constructor ... we handle higher order objects by default 
+    return xName.toLowerCase() === 'vertobasecomponent' ? this.constructor.name : xName;
   }
   applyThemeStyle(styleName, styles) {
     // NOTE: the 'themes' object is imported (in case you are looking for where
     // it is defined)
 
     const componentName = this.getClassName().toLowerCase();
-
+    //console.log("############################",componentName);
     if(themes[window.theme.value][componentName][styleName]) {
       //console.log('Theme Styling',themes[window.theme.value][componentName][styleName]);
       return( {...styles, ...themes[window.theme.value][componentName][styleName]});
