@@ -1,6 +1,7 @@
 import React from 'react';
 import VertoBaseComponent from '../../components/vertobase';
 import Radium from 'radium';
+import { connect } from 'react-redux';
 //import ReactTooltip from 'react-tooltip';
 import VCStatus from '../../components/vcstatus';
 
@@ -32,38 +33,11 @@ class AppBar extends VertoBaseComponent {
     return (styles[styleName]);
   }
 
-//   getStyle(styleName) {
-//     const styles = {
-//       appbarStyles: {
-//         display: 'flex',
-//         alignItems: 'center',
-//         justifyContent: 'space-between',
-//         flexDirection: 'row',
-//         order: '0',
-//         backgroundColor: '#0544a4',
-//         width: '100%',
-//         color: '#FFFFFF',
-//         height: '70px'
-//       }
-//     };
-//
-//   let styleReturn = styles[styleName];
-//
-//   // apply the themed styling
-//   if(window.theme && (window.theme.value != 'default') && window.theme.themes[window.theme.value]['appbar'][styleName]) {
-//     console.log('Theme Styling',window.theme.themes[window.theme.value]['appbar'][styleName]);
-//     styleReturn = {...styleReturn, ...window.theme.themes[window.theme.value]['appbar'][styleName]};
-//   }
-//
-//   if(this.props.Style && this.props.Style[styleName]) {
-//     styleReturn = {...styleReturn, ...this.props.Style[styleName]};
-//   }
-//   return styleReturn;
-// }
-
-
   render() {
-    console.log('#### window theme style', window.theme);
+    //console.log('#### window theme style', window.theme);
+    console.log('this.props.settings', this.props.settings);
+    console.log('this.props.bandwidthInfo', this.props.bandwidthInfo);
+
     return (
       <div>
         <div className="appbar" style={this.getStyle('appbarStyles')}>
@@ -74,8 +48,12 @@ class AppBar extends VertoBaseComponent {
   }
 }
 
-AppBar.contextTypes = {
-  store: React.PropTypes.object
-};
-
 export default Radium(AppBar);
+
+export default connect((state)=>{
+  console.log('----STORE in appbar ----', state);
+  return ({
+    settings: state.app.settings,
+    bandwidthInfo: state.app.bandwidthInfo
+  });
+})(Radium(AppBar));

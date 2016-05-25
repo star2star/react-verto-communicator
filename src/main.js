@@ -7,6 +7,7 @@ import {IntlProvider} from 'react-intl';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
+import reducer from './containers/reducers.js';
 import Messages from './js/messages';
 
 import App from './components/app';
@@ -47,9 +48,12 @@ window.theme={ value: 'light'};
 const locale = getLanguage();
 const messages = (new Messages(locale)).getAllMessages();
 
-//const store = createStore(reducer, applyMiddleware(thunk));
+const store = createStore(reducer, applyMiddleware(thunk));
+
+window.theStore = store;
 
 ReactDOM.render((
+  <Provider store={store}>
     <IntlProvider locale={locale} messages={messages}>
       <StyleRoot>
         <AppBar />
@@ -63,4 +67,5 @@ ReactDOM.render((
         </Router>
       </StyleRoot>
     </IntlProvider>
-), document.getElementById('app'))
+  </Provider>
+), document.getElementById('app'));
