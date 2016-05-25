@@ -6,13 +6,13 @@ class VertoBaseComponent extends React.Component {
     super(props);
   }
   getClassName() {
-    return this.name;
+    return Object.getPrototypeOf(this.constructor).name;
   }
   applyThemeStyle(styleName, styles) {
     // NOTE: the 'themes' object is imported (in case you are looking for where
     // it is defined)
 
-    const componentName = Object.getPrototypeOf(this.constructor).name.toLowerCase();
+    const componentName = this.getClassName().toLowerCase();
 
     if(themes[window.theme.value][componentName][styleName]) {
       //console.log('Theme Styling',themes[window.theme.value][componentName][styleName]);
