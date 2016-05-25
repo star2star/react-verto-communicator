@@ -21,13 +21,13 @@ const themes = {
         height: '25px'
       },
       disconnectedFill: {
-        fill: "pink"
+        fill: "hotpink"
       },
       connectingFill: {
         fill: "white"
       },
       connectedFill: {
-        fill: "aqua"
+        fill: "limegreen"
       }
     }
   },
