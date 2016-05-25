@@ -1,6 +1,42 @@
 [
     {
-        "id": "",
-        "value": ""
+      "id" : "bvh.browserSupportTitle",
+      "defaultMessage" : "Browser not supported"
+    },
+    {
+      "id" : "bvh.browserSupportBodyText",
+      "defaultMessage" : "The browser you are using isn't supported by our software. Please see below for alternate browser you can use. Once you have chosen an alternative browser you'll be able to access the session."
+    },
+    {
+      "id" : "bns.edge",
+      "defaultMessage" : "Edge"
+    },
+    {
+      "id" : "bns.edgeVersions",
+      "defaultMessage" : "All(?)"
+    },
+    {
+      "id" : "bns.chromeName",
+      "defaultMessage" : "Chrome"
+    },
+    {
+      "id" : "bns.chromeVersions",
+      "defaultMessage" : "All"
+    },
+    {
+        "id": "bns.firefoxName",
+        "value": "Firefox"
+    },
+    {
+      "id" : "bns.operaVersions",
+      "defaultMessage" : "All"
+    },
+    {
+        "id": "bns.operaName",
+        "value": "Opera"
+    },
+    {
+      "id" : "bns.operaVersions",
+      "defaultMessage" : "All"
     }
-]    
+]
