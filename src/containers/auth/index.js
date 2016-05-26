@@ -4,6 +4,7 @@ import VertoBaseComponent from '../../components/vertobase';
 import { connect } from 'react-redux';
 //import ReactTooltip from 'react-tooltip';
 import VCStatus from '../../components/vcstatus';
+import { doSubmitLogin, doSubmitLogOut } from './action-creators';
 
 class Auth extends VertoBaseComponent {
   constructor(props) {
@@ -24,13 +25,23 @@ class Auth extends VertoBaseComponent {
   }
 
   render() {
+    let loggedInfo;
+    if (this.props.auth.showLogin ){
+      loggedInfo = (<div style={{cursor: "pointer"}} onClick={()=>{
+        this.props.dispatch(doSubmitLogin({a:1,b:2}));
+      }} >Simulate login</div>);
 
-    return (<div>auth {this.props.auth.showLogin ? 'login will be shown' : 'logout '}</div>);
+    } else {
+      loggedInfo = (<div style={{cursor: "pointer"}}  onClick={()=>{
+        this.props.dispatch(doSubmitLogOut());
+      }} >Simulate LOGOUT</div>);
+    }
+
+    return (<div>auth {loggedInfo}</div>);
   }
 }
 
 export default connect((state)=>{
-  console.log('----STORE aaaa in auth ----', state.auth);
   return ({
     auth: state.auth
   });
