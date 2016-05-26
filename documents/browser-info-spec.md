@@ -1,4 +1,4 @@
-# Component Name:  < BrowserInfo \>   #
+# Component Name: BrowserInfo   #
 
 # 1. Functional Description #
 
