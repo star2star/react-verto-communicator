@@ -42,17 +42,15 @@ class AppBar extends VertoBaseComponent {
     return (
       <div>
         <div className="appbar" style={this.getStyle('appbarStyles')}>
-          <VCStatus status="Connecting" />
           <NetworkStatusIndicator
               conn={{upkpbs: 2000, downkpbs: 1000, vidQual: 'Fantastic'}}
           />
+          <VCStatus status = 'connecting' />
         </div>
       </div>
     );
   }
 }
-
-export default Radium(AppBar);
 
 export default connect((state)=>{
   console.log('----STORE in appbar ----', state);

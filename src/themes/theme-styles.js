@@ -21,20 +21,26 @@ const themes = {
         height: '25px'
       },
       disconnectedFill: {
-        fill: "pink"
+        fill: "hotpink"
       },
       connectingFill: {
         fill: "white"
       },
       connectedFill: {
-        fill: "aqua"
+        fill: "limegreen"
       }
-    }
-  },
+      }
+    },
   dark: {
     appbar: {
         appbarStyles: {
         backgroundColor: '#002277'
+      }
+    },
+    vcstatus: {
+      svgStyle: {
+        width: '25px',
+        height: '25px'
       }
     }
   },
