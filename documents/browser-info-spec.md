@@ -21,8 +21,6 @@ This component will be a 'pure' component.  It will accept props for styling, th
 
 Prop Name | Sample | Description
 ------------ | -------------
-bhtitle | {"id": "bvh.browserSupportTitle","value": "Browser not supported"} | An object. Required.
-bhBodyText | {"id": "bvh.browserSupportBodyText","value": "The browser you are using isn't supported by our software. Please see below for alternate browser. Once you have chosen an alternative browser you'll be able to access the session link using it."} | An object. Required.
 browserIcon | svgIcon | Browser icon.
 browserLink | "http://..." | String. Required.
 browserName | {"id" : "bns.name", "defaultMessage" : "BrowserName"}, | An object. Required.
