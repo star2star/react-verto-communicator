@@ -19,7 +19,7 @@ This component will be a 'pure' component.
 
 ## a. Required Props ##
 | prop Name | sample | description |
-| ------------ | ------------- |
+| ------------ | ------------- | ------------ |
 |status | "disconnected" | This prop is sent into the component as a string and is required. The component receives this prop from the appbar. If this prop has a value of 'disconnected', 'connected', or 'connecting' the color of the status icon will change accordingly.|
 | Style |   Style = {} | This prop is an object and is not required. This object sets the height and width of the SVG status icon.|
 
