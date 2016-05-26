@@ -28,7 +28,11 @@ styles |   Style = {} | This prop is an object and is not required. This object 
 
 ## b. Component State ##
 
-This component will not maintain its own state.  It will change as new prop values are passed into it from its parent.
+This component will maintain its own state.  It will change as new prop values are passed into it from its parent.
+
+## c. Context-Aware Specification ##
+
+This component is a 'pure component' and will maintain its' own state.
 
 # 4. Reference Components #
 
@@ -56,21 +60,8 @@ Refer to the following links:
 * Sinon: http://www.sitepoint.com/sinon-tutorial-javascript-testing-mocks-spies-stubs/?utm_source=javascriptweekly&utm_medium=email
 * http://sinonjs.org/docs/
 
-# 6. Deliverables #
 
-The following items must be delivered to Star2Star at the completion of the component development; full implementation of component meeting the requirements of this specification
-
-  a. Complete and accurate README.md
-
-  b. Unit tests must cover at least 80% branch coverage.  We require using Jest for unit testing with the __--verbose__ and __--coverage__ options set.
-
-  c. Component must render correctly in demo.
-
-  d. Must comply to Star2Star Component Specification Standards; which includes theming, accessibility, white labeling and internationalization
-
-  e. All documented functional requirements must be met.
-
-# 7. Acceptance Criteria #
+# 6. Acceptance Criteria #
 
 a. All unit tests must pass.
 
