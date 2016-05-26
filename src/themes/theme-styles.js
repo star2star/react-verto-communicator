@@ -29,12 +29,18 @@ const themes = {
       connectedFill: {
         fill: "limegreen"
       }
-    }
-  },
+      }
+    },
   dark: {
     appbar: {
         appbarStyles: {
         backgroundColor: '#002277'
+      }
+    },
+    vcstatus: {
+      svgStyle: {
+        width: '25px',
+        height: '25px'
       }
     }
   },

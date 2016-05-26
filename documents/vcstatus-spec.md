@@ -1,14 +1,17 @@
 # Component Name:  < vcstatus \>   #
 # 1. Functional Description #
 
-This component will take in the prop __status__. When the component is rendered the __status__ prop is passed to it as a string; that string goes through a switch statement to determine what color to fill the status icon svg. An example of this being the icon filling in green when a user is in a call. If the status can not be found the fill color defaults to red. This component is styled through the __Style__ prop.   
+This component will take in the __status__ prop. When the component is rendered the __status__ prop is passed to it as a string; that string goes through a switch statement to determine what color to fill the status icon svg. An example of this being the icon filling in green when a user is in a call. If the status can not be found the fill color defaults to red. This component is styled through the __Style__ prop.   
 
 
 # 2. Visual Design #  
 
-![An example of this component's output shown here on the default theme with the user connected to a call](https://raw.githubusercontent.com/star2star/react-verto-communicator/master/documents/img/Status-Icon.png)
+![Component's output on the light theme when connecting](https://raw.githubusercontent.com/star2star/react-verto-communicator/master/documents/img/Status-Icon.png)
 
-This picture shows the component's output on the default theme when the communicator is connected to a call.
+
+![Component's output on the default theme when connecting](https://raw.githubusercontent.com/star2star/react-verto-communicator/master/documents/img/vcstatus-conencting.png)
+
+![Component's output on the default theme when disconnected](https://raw.githubusercontent.com/star2star/react-verto-communicator/master/documents/img/vcstatus-disconnected.png)
 
 # 3. Component Type #
 
@@ -21,7 +24,7 @@ This component will be a 'pure' component.  It will accept props for style and s
 prop Name | sample | description
 ------------ | -------------
 status | "Offline", “Logged-On”, “In-Call” | This prop is sent into the component as a string and is required. The component receives this prop from the appbar. This prop is used to determine what color to fill the vcstatus svg.
-styles |   Style: {} | This prop is an object and is not required. This object sets the height and width of the SVG status icon.
+styles |   Style = {} | This prop is an object and is not required. This object sets the height and width of the SVG status icon.
 
 
 ## b. Component State ##
@@ -42,7 +45,7 @@ This component will not maintain its own state.  It will change as new prop valu
 * The status prop is passed into the statement. <br>
 * If the status is set to either 'connected', 'disconnected', or 'connecting' the fill color will be set appropriately. <br>
 * If the status is none of those values it will default to the fill color for 'disconnected'.
-* The SVG with the appropriate fill color will be displayed. 
+* The SVG with the appropriate fill color will be displayed.
 
 
 A unit test suite must be developed as part of the component development process.  Unit tests must be provided to Star2Star and be runnable using 'npm test'.  Refer to the Star2Star Unit Testing standards document.  Test framework must use Jest/Jasmine, Enzyme and Sinon.
