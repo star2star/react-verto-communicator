@@ -10,12 +10,11 @@ import thunk from 'redux-thunk';
 import reducer from './containers/reducers.js';
 import Messages from './js/messages';
 
-import VertoService from './js/vertoService';
-import {doSubmitLogin} from './containers/auth/action-creators';
+import { doShowLogin } from './containers/auth/action-creators';
 
 import App from './components/app';
 import Dial from './components/dial';
-import Auth from './components/auth';
+import Auth from './containers/auth/index.js';
 import Session from './components/session';
 import Browser from './components/browser';
 import AppBar from './containers/appbar/index.js';
@@ -56,7 +55,7 @@ const store = createStore(reducer, applyMiddleware(thunk));
 
 window.theStore = store;
 
-store.dispatch(doSubmitLogin({a:1, b:2}));
+store.dispatch(doShowLogin());
 
 ReactDOM.render((
   <Provider store={store}>

@@ -1,4 +1,28 @@
 import VertoService from '../../js/vertoService';
+import { browserHistory } from 'react-router'
+
+
+const doShowLogin = () => {
+  // rendering login through navigation
+  browserHistory.push('#/login');
+  return {
+    "type": "SHOW_LOGIN"
+  }
+};
+const doLogOut = () => {
+  return {
+    "type": "LOGOUT"
+  }
+};
+
+const doSubmitLogOut = () =>{
+  return dispatch => {
+    // dispatching so we change from not authorized to pending
+    dispatch(doLogOut());
+    // Thunk here
+    VertoService.getInstance();
+  };
+};
 
 const doSubmitLogin = (data) => {
   return dispatch => {
@@ -32,4 +56,4 @@ const doGetLoginSettings = (data) => {
   };
 };
 
-export { doSubmitLogin, doGetLoginSettings };
+export { doSubmitLogin, doGetLoginSettings, doShowLogin, doSubmitLogOut };
