@@ -2,7 +2,7 @@
 
 # 1. Functional Description #
 
-The BrowserInfo component is an internationalized component with accessibility features. The component renders a browserData object which displays a browser Icon, browser Link, browser Name, & browser Version. The component styles can be adjusted through the ** Style ** prop. When the browser Link is clicked, the contents will open in a new window.
+The BrowserInfo component is an internationalized component with accessibility features. The component renders a **browserData** object which contains the browser Icon, Name of the browser, Link to download said browser, & the compatible Versions accepted. When the browser Link is clicked, the contents will open in a new window. The component styles can be adjusted through the **compStyle** prop.
 
 # 2. Visual Design #  
 
@@ -16,10 +16,7 @@ The BrowserInfo component is an internationalized component with accessibility f
 
 |Prop Name | Sample | Description|
 |------------ | ------------ | ------------|
-|browserData | icon: ChromeBrowserIconSVG
-link: "https://www.google.com/chrome/browser/desktop/"
-name: "Chrome",
-version: "All" | An object. Required. Contains browser info|
+|browserData | icon: ChromeBrowserIconSVG,<br> link:"https://www.google.com/chrome/browser/desktop/"<br>name: "Chrome",<br>versions: "All" <br>| An object. Required. Contains browser info|
 |compStyle | style={} | An object|
 
 ## b. Component State ##
