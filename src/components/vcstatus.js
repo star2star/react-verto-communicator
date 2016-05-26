@@ -1,8 +1,7 @@
 import React from 'react';
 import VertoBaseComponent from './vertobase';
-import { MenuIconSVG } from './svgIcons';
+import { StatusIconSVG } from './svgIcons';
 
-// TODO: SVG from design
 const propTypes = {
   status: React.PropTypes.oneOf(['Connected','Disconnected', 'Connecting']).isRequired,
   Style:   React.PropTypes.object
@@ -10,7 +9,6 @@ const propTypes = {
 class VCStatus extends VertoBaseComponent {
   constructor(props) {
     super(props);
-    console.log('^^^^^^^', this.getClassName());
   }
   getDefaultStyle(styleName) {
       const styles = {
@@ -19,13 +17,13 @@ class VCStatus extends VertoBaseComponent {
               height: '25px'
             },
             disconnectedFill: {
-              fill: "red"
+              fill: "#F45A5A"
             },
             connectingFill: {
-              fill: "yellow"
+              fill: "#F7D965"
             },
             connectedFill: {
-              fill: "green"
+              fill: "#4ACF55"
       }
   };
       return (styles[styleName]);
@@ -47,7 +45,7 @@ class VCStatus extends VertoBaseComponent {
         break;
       }
 
-     return (< MenuIconSVG svgStyle = {{...this.getStyle('svgStyle'), ...fillColor}} />);
+     return (< StatusIconSVG svgStyle = {{...this.getStyle('svgStyle'), ...fillColor}} />);
   }
 }
 
