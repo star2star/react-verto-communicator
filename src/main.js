@@ -15,7 +15,7 @@ import {doSubmitLogin} from './containers/auth/action-creators';
 
 import App from './components/app';
 import Dial from './components/dial';
-import Auth from './components/auth';
+import Auth from './containers/auth/index.js';
 import Session from './components/session';
 import Browser from './components/browser';
 import AppBar from './containers/appbar/index.js';

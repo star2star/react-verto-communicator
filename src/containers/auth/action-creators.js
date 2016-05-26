@@ -1,5 +1,11 @@
 import VertoService from '../../js/vertoService';
 
+const doShowLogin = () => {
+  return {
+    "type": "SHOW_LOGIN"
+  }
+};
+
 const doSubmitLogin = (data) => {
   return dispatch => {
     // dispatching so we change from not authorized to pending

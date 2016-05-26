@@ -15,21 +15,20 @@ const auth = (state, action)=>{
               },
               sessionActive: false,
               sessionInfo: {
-              }
+              },
+              showLogin: false
             };
   }
 
   //TODO ta handle actions type changes to state...
 
   switch (action.type) {
+    case "SHOW_LOGIN":
+      return { ...state, showLogin: true };
     case 'AUTH_SUBMIT_LOGIN':
-      return {
-                ...state
-      };
+      return { ...state };
     case 'VERTO_LOGIN':
-      return {
-                ...state
-      };
+      return { ...state };
     default:
      return state;
     }

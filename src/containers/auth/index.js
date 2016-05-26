@@ -24,13 +24,14 @@ class Auth extends VertoBaseComponent {
   }
 
   render() {
-    return (<div>auth</div>);
+
+    return (<div>auth {this.props.auth.showLogin ? 'login will be shown' : 'logout '}</div>);
   }
 }
 
 export default connect((state)=>{
-  console.log('----STORE in auth ----', state);
+  console.log('----STORE aaaa in auth ----', state.auth);
   return ({
-    authSettings: state.auth.loginSettings
+    auth: state.auth
   });
 })(Auth);
