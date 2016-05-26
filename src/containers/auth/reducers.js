@@ -26,11 +26,11 @@ const auth = (state, action)=>{
     case "SHOW_LOGIN":
       return { ...state, showLogin: true };
     case "LOGOUT":
-        return { ...state, showLogin: !state.showLogin }
+        return { ...state, showLogin: true }
     case 'AUTH_SUBMIT_LOGIN':
-      return { ...state, showLogin: !state.showLogin };
+      return { ...state, showLogin: false };
     case 'VERTO_LOGIN':
-      return { ...state };
+      return { ...state, showLogin: false };
     default:
      return state;
     }

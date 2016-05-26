@@ -28,7 +28,15 @@ class Auth extends VertoBaseComponent {
     let loggedInfo;
     if (this.props.auth.showLogin ){
       loggedInfo = (<div style={{cursor: "pointer"}} onClick={()=>{
-        this.props.dispatch(doSubmitLogin({a:1,b:2}));
+        const xLoginData = { ...this.props.auth.loginSettings};
+        xLoginData.callerId = 'James';
+        xLoginData.email = 'james@james.com';
+        xLoginData.user = 1008;
+        xLoginData.hostname = "verto.star2starglobal.com";
+        xLoginData.name = "James Schimmoeller";
+        xLoginData.wsURL = "wss://verto.star2starglobal.com:8082"
+
+        this.props.dispatch(doSubmitLogin(xLoginData));
       }} >Simulate login</div>);
 
     } else {

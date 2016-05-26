@@ -17,10 +17,10 @@ const doLogOut = () => {
 
 const doSubmitLogOut = () =>{
   return dispatch => {
+    VertoService.logout(dispatch);
     // dispatching so we change from not authorized to pending
-    dispatch(doLogOut());
     // Thunk here
-    VertoService.getInstance();
+
   };
 };
 
@@ -29,12 +29,13 @@ const doSubmitLogin = (data) => {
     // dispatching so we change from not authorized to pending
     dispatch(doLogin(data));
     // Thunk here
-    VertoService.getInstance();
-    dispatch(doVertoLogin(data)); // this sent the WS request
+    VertoService.login(dispatch, data);
+    //dispatch(doVertoLogin(data)); // this sent the WS request
   };
 };
 
 const doVertoLogin = (data) => {
+  console.log('vvvvvv', data);
   return {
     "type": "VERTO_LOGIN",
     "data": data
@@ -56,4 +57,4 @@ const doGetLoginSettings = (data) => {
   };
 };
 
-export { doSubmitLogin, doGetLoginSettings, doShowLogin, doSubmitLogOut };
+export { doSubmitLogin, doGetLoginSettings, doShowLogin, doVertoLogin, doSubmitLogOut, doLogOut };
