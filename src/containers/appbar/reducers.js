@@ -35,13 +35,10 @@ const app = (state, action)=>{
             };
   }
 
-  // switch (action.type) {
-  //   case 'TOGGLE_USER_MENU':
-  //     return {
-  //               ...state,
-  //               visibleList: !state.visibleList
-  //     };
-  //   }
+  switch (action.type) {
+    default:
+      return state;
+    }
 };
 
 export { app };

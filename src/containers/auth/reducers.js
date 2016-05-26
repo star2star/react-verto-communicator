@@ -21,13 +21,18 @@ const auth = (state, action)=>{
 
   //TODO ta handle actions type changes to state...
 
-  // switch (action.type) {
-  //   case 'TOGGLE_USER_MENU':
-  //     return {
-  //               ...state,
-  //               visibleList: !state.visibleList
-  //     };
-  //   }
+  switch (action.type) {
+    case 'AUTH_SUBMIT_LOGIN':
+      return {
+                ...state
+      };
+    case 'VERTO_LOGIN':
+      return {
+                ...state
+      };
+    default:
+     return state;
+    }
 };
 
 export { auth };
