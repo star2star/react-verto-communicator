@@ -48,8 +48,6 @@ class AppBar extends VertoBaseComponent {
   }
 }
 
-export default Radium(AppBar);
-
 export default connect((state)=>{
   console.log('----STORE in appbar ----', state);
   return ({
