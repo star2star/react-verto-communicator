@@ -2,7 +2,7 @@
 
 # 1. Functional Description #
 
-The BrowserInfo component renders a browserData object which displays a browser Icon, browser Link, browser Name, & browser Version. The component styles can be adjusted through the ** Style ** prop. The component will render all elements in a flex column.
+The BrowserInfo component is an internationalized component with accessibility features. The component renders a **browserData** object which contains the browser Icon, Name of the browser, Link to download said browser in a new window, & the compatible Versions accepted. The component styles can be adjusted through the **compStyle** prop.
 
 # 2. Visual Design #  
 
@@ -16,11 +16,8 @@ The BrowserInfo component renders a browserData object which displays a browser 
 
 |Prop Name | Sample | Description|
 |------------ | ------------ | ------------|
-|browserIcon | svgIcon | Browser icon|
-|browserLink | "http://..." | String. Required|
-|browserName | {"id" : "bns.name", "defaultMessage" : "BrowserName"}, | An object. Required|
-|browserVersion | {"id" : "bns.browserVersions","defaultMessage" : "Versions"}, | An object Required|
-|Style | style={} | An object|
+|browserData | icon: ChromeBrowserIconSVG,<br> link:"https://www.google.com/chrome/browser/desktop/"<br>name: "Chrome",<br>versions: "All" <br>| An object. Required. Contains browser info|
+|compStyle | style={} | An object|
 
 ## b. Component State ##
 
@@ -39,4 +36,4 @@ This component is a pure component and it will not maintain it’s own state.
 The Browser component imports:
 
 - VertoBaseComponent
-- React intl
+- ReactIntl
