@@ -4,7 +4,7 @@ import { StatusIconSVG } from './svgIcons';
 
 const propTypes = {
   status: React.PropTypes.oneOf(['connected','disconnected', 'connecting']).isRequired,
-  Dtyle:   React.PropTypes.object
+  Style:   React.PropTypes.object
 };
 class VCStatus extends VertoBaseComponent {
   constructor(props) {
