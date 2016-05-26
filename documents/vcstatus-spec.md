@@ -1,7 +1,7 @@
 # Component Name:  < vcstatus \>   #
 # 1. Functional Description #
 
-This component will take in the __status__ prop. When the component is rendered the __status__ prop is passed to it as a string; that string goes through a switch statement to determine what color to fill the status icon svg. An example of this being the icon filling in green when a user is in a call. If the status can not be found the fill color defaults to red. This component is styled through the __Style__ prop.   
+ When the component is rendered the __status__ prop is passed to it as a string; that string goes through a switch statement to determine what color to use for status icon. An example of this being the icon filling in green when a user is in a call; assuming that they are on the default theme. If the status can not be found the color defaults to fill color for disconnected. This component is styled through the __Style__ prop.   
 
 
 # 2. Visual Design #  
@@ -15,8 +15,7 @@ This component will take in the __status__ prop. When the component is rendered 
 
 # 3. Component Type #
 
-This component will be a 'pure' component.  It will accept props for style and status.
-
+This component will be a 'pure' component.
 
 
 
