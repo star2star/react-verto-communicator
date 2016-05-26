@@ -1,4 +1,4 @@
-# Component Name: BrowserInfo   #
+# Component Name: BrowserInfo #
 
 # 1. Functional Description #
 
@@ -15,20 +15,20 @@ Images: TBA
 
 # 4. Component Type #
 
-This component will be a 'pure' component.  It will accept props for styling, the browser Icon, browser Link, browser Name, & browser Version. It also accepts accessibility props for label & tab index.
+This component will be a 'pure' component.
 
 ## a. Required Props ##
 
-Prop Name | Sample | Description
------------- | -------------
-browserIcon | svgIcon | Browser icon.<br>
-browserLink | "http://..." | String. Required.<br>
-browserName | {"id" : "bns.name", "defaultMessage" : "BrowserName"}, | An object. Required.<br>
-browserVersion | {"id" : "bns.browserVersions","defaultMessage" : "Versions"}, | An object. Required.<br>
-style | style={} | An object.<br>
-ariaLabel | label="browser name" | A string.<br>
-role | role="browser link" | A string.<br>
-tabIndex | tabIndex={0} | A number.<br>
+|Prop Name | Sample | Description|
+|------------ | ------------- |-----------|
+|browserIcon | svgIcon | Browser icon|
+|browserLink | "http://..." | String. Required|
+|browserName | {"id" : "bns.name", "defaultMessage" : "BrowserName"}, | An object. Required|
+|browserVersion | {"id" : "bns.browserVersions","defaultMessage" : "Versions"}, | An object Required|
+|style | style={} | An object|
+|ariaLabel | label="browser name" | A string|
+|role | role="browser link" | A string|
+|tabIndex | tabIndex={0} | A number|
 
 ## b. Component State ##
 
