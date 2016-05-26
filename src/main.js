@@ -9,6 +9,7 @@ import thunk from 'redux-thunk';
 
 import reducer from './containers/reducers.js';
 import Messages from './js/messages';
+import VertoService from './js/vertoService';
 
 import App from './components/app';
 import Dial from './components/dial';
