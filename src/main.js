@@ -18,6 +18,8 @@ import Session from './components/session';
 import Browser from './components/browser';
 import AppBar from './containers/appbar/index.js';
 
+
+
 function getLanguage(){
   let sReturn = 'en-US';
 
