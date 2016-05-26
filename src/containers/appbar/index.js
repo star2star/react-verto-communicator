@@ -45,7 +45,7 @@ class AppBar extends VertoBaseComponent {
           <NetworkStatusIndicator
               conn={{upkpbs: 2000, downkpbs: 1000, vidQual: 'Fantastic'}}
           />
-          <VCStatus status = 'connecting' />
+          <VCStatus status = 'connected' />
         </div>
       </div>
     );

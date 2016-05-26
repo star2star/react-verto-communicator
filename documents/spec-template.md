@@ -8,6 +8,7 @@
 *This component will be a text input control that will invoke a callback function when the enter/return key is pressed by the user.  When the enter key is pressed, the input field will be cleared and will retain focus.  The input must be contained in div that has rounded corners at the bottom and square corners at the top so it can be aligned with another component.  Default styling should include font-size, line-height, color, border-radius, margin and padding for the input, and for the container, background-color, border, and border-radius.  The default styles should be overridable via props in part or in their entirety.  Placeholder text value is passed in using props.*
 
   (REMOVE)
+
 # 2. Star2Star Spore Component Project - SCP #
 
 Star2Star will provide a spore (aka skeletal or seed) component project that can be used as a starting point for new component development.  To get started execute to below command in your new project area.
@@ -60,11 +61,11 @@ If the prop is a callback function, then a sample of the function call including
 
 Sample:
 
-Prop Name | Sample | Description
------------- | -------------
-placeHolderTxt | "Send a message..." | _Include a brief description of what the prop does as well as whether it is required or not and its' type_
-styles |  _NOTE styles are in JSX, not CSX_ { inputWrapStyle: {backgroundColor: '#ddd'} inputStyle {fontSize: '1rem'} }m | Sample:
-cbSubmit |  _Function implemented and bound to a higher-order parent container of this component_ | This prop is a string and is required. This prop is passed into this component from the session component and controls what message we display to the user.
+| Prop Name | Sample | Description |
+| ------------ | ------------- | ------------- |
+| placeHolderTxt | "Send a message..." | _Include a brief description of what the prop does as well as whether it is required or not and its' type_ |
+| styles |  _NOTE styles are in JSX, not CSX_ { inputWrapStyle: {backgroundColor: '#ddd'} inputStyle {fontSize: '1rem'} }m | Sample: |
+| cbSubmit |  _Function implemented and bound to a higher-order parent container of this component_ | This prop is a string and is required. This prop is passed into this component from the session component and controls what message we display to the user. |
 
 (REMOVE)
 

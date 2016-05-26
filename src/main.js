@@ -47,7 +47,7 @@ function getLanguage(){
 
 //TODO where will this be set and managed when this is released??
 // Set styling theme globally
-window.theme={ value: 'dark'};
+window.theme={ value: 'default'};
 
 const locale = getLanguage();
 const messages = (new Messages(locale)).getAllMessages();

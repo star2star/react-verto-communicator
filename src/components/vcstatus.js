@@ -6,10 +6,12 @@ const propTypes = {
   status: React.PropTypes.oneOf(['connected','disconnected', 'connecting']).isRequired,
   Style:   React.PropTypes.object
 };
+
 class VCStatus extends VertoBaseComponent {
   constructor(props) {
     super(props);
   }
+
   getDefaultStyle(styleName) {
       const styles = {
             svgStyle: {
@@ -24,10 +26,11 @@ class VCStatus extends VertoBaseComponent {
             },
             connectedFill: {
               fill: "#4ACF55"
-      }
-  };
+            }
+      };
       return (styles[styleName]);
   }
+
   render() {
     let fillColor;
     switch (this.props.status) {
