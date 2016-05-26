@@ -19,14 +19,14 @@ This component will be a 'pure' component.
 |------------ | ------------- | ---------------|
 |networkData | networkData={<br>upkpbs: {value},<br> downkpbs: {value},<br>videoResolution: {value}<br>} | Required. An object that contains properties necessary for calculating the correct icon to render and content to display.  |
 |addMenuOption |  addMenuOption={}| An optional object that may contain a method to run onClick|
-|Style | Style={} | An object that contains css styles.|
+|compStyle | compStyle={} | An object that contains css styles.|
 | allowDisplayDetails | allowDisplayDetails={true} | A boolean. If true, it will render the caret icon and a dropdown menu. If false, it will simply render the network-status icon|
 
 ## b. Component State ##
 
 This component will maintain it's own state for dropdownDisplayed.
 
-## c .Component Events ##
+## c. Component Events ##
 
 |Event | Action(s)|
 |------------ | -------------|
