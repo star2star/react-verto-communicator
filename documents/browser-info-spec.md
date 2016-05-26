@@ -14,10 +14,10 @@ The BrowserInfo component is a basic component with accessibility features. The 
 
 ## a. Required Props ##
 
-  | Prop Name | Sample | Description |
-  | ------------ | ------------------------ | ------------ |
-  | browserData | browserData={<br>icon: ChromeBrowserIconSVG,<br> link:"https://www.google.com/chrome/browser/desktop/",<br> name: "Chrome",<br> versions: "All"<br>} |An object. Required. Contains browser info |
-  |compStyle | compStyle={} | An object|
+| Prop Name | Sample | Description |
+|------------ | -------------- | ------------|
+|browserData | browserData={<br>icon: ChromeBrowserIconSVG,<br> link:"https://www.google.com/chrome/browser/desktop/",<br> name: "Chrome",<br> versions: "All"<br>} |An object. Required. Contains browser info |
+|compStyle | compStyle={} | An object|
 
 ## b. Component State ##
 
