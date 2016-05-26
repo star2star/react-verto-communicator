@@ -64,7 +64,7 @@ Prop Name | Sample | Description
 ------------ | -------------
 placeHolderTxt | "Send a message..." | _Include a brief description of what the prop does as well as whether it is required or not and its' type_
 styles |  _NOTE styles are in JSX, not CSX_ { inputWrapStyle: {backgroundColor: '#ddd'} inputStyle {fontSize: '1rem'} }m | Sample:
-cbSubmit |  _Function implemented and bound to a higher-order parent container of this component_ | This prop is a string and is required. This prop is passed into this component from the session component and controls what message we display to the user. 
+cbSubmit |  _Function implemented and bound to a higher-order parent container of this component_ | This prop is a string and is required. This prop is passed into this component from the session component and controls what message we display to the user.
 
 (REMOVE)
 
@@ -153,6 +153,18 @@ Refer to the following links:
 The following items must be delivered to Star2Star at the completion of the component development; full implementation of component meeting the requirements of this specification
 
   a. Complete and accurate README.md
+
+  b. Unit tests must cover at least 80% branch coverage.  We require using Jest for unit testing with the __--verbose__ and __--coverage__ options set.
+
+  c. Component must render correctly in demo.
+
+  d. Must comply to Star2Star Component Specification Standards; which includes theming, accessibility, white labeling and internationalization
+
+  e. All documented functional requirements must be met.
+
+# 8. Acceptance Criteria #
+
+  a. All unit tests must pass.
 
   b. Unit tests must cover at least 80% branch coverage.  We require using Jest for unit testing with the __--verbose__ and __--coverage__ options set.
 

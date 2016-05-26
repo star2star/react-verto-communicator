@@ -1,38 +1,27 @@
-# Component Name:  < component name \>   #
+# Component Name:  < vcstatus \>   #
 # 1. Functional Description #
-(REMOVE WHEN DONE)
 
- Write a brief description of what this component will do, how it is intended to be used, etc.  This description should give the reader a high level idea of what the component development requirements are.
+This component will take in the prop __status__. When the component is rendered the __status__ prop is passed to it as a string; that string goes through a switch statement to determine what color to fill the status icon svg. An example of this being the icon filling in green when a user is in a call. If the status can not be found the fill color defaults to red. This component is styled through the __Style__ prop.   
 
- Sample:
-*This component will be a text input control that will invoke a callback function when the enter/return key is pressed by the user.  When the enter key is pressed, the input field will be cleared and will retain focus.  The input must be contained in div that has rounded corners at the bottom and square corners at the top so it can be aligned with another component.  Default styling should include font-size, line-height, color, border-radius, margin and padding for the input, and for the container, background-color, border, and border-radius.  The default styles should be overridable via props in part or in their entirety.  Placeholder text value is passed in using props.*
-
-  (REMOVE)
 
 # 2. Visual Design #  
 
-(REMOVE WHEN DONE)
+![An example of this component's output shown here on the default theme with the user connected to a call](https://raw.githubusercontent.com/star2star/react-verto-communicator/master/documents/img/Status-Icon.png)
 
-Images with callouts for size, colors, etc. and/or reference to a document containing the visual design specification for the component.  Extract from design documentation and paste here.
-
-Sample:
-
-![A breakdown of how this component looks](https://raw.githubusercontent.com/star2star/react-verto-communicator/master/documents/img/Template-Image.png)
-
-(REMOVE)
+This picture shows the component's output on the default theme when the communicator is connected to a call.
 
 # 3. Component Type #
 
-This component will be a 'pure' component.  It will accept props for styling and the status of the communicator.
+This component will be a 'pure' component.  It will accept props for style and status.
 
 
 
 
 ## a. Required Props ##
-rop Name | Sample | description
+prop Name | sample | description
 ------------ | -------------
 status | "Offline", “Logged-On”, “In-Call” | This prop is sent into the component as a string and is required. The component receives this prop from the appbar. This prop is used to determine what color to fill the vcstatus svg.
-styles |  { svgStyle: {width: "25px", height: "25px"} } | This prop is an object and is not required. This object sets the height and width of the SVG status icon.
+styles |   Style: {} | This prop is an object and is not required. This object sets the height and width of the SVG status icon.
 
 
 ## b. Component State ##
@@ -42,15 +31,19 @@ This component will not maintain its own state.  It will change as new prop valu
 # 4. Reference Components #
 
 * This component requires the vertobase component.
+* This component requires the svgicons component.
 
 
 # 5. Unit Testing Requirement #
 
-(REMOVE WHEN DONE)
+* The status prop gets passed to the component. <br>
+* If style is provided the SVG renders.<br>
+* If style is NOT provided the SVG does not render.<br>
+* The status prop is passed into the statement. <br>
+* If the status is set to either 'connected', 'disconnected', or 'connecting' the fill color will be set appropriately. <br>
+* If the status is none of those values it will default to the fill color for 'disconnected'.
+* The SVG with the appropriate fill color will be displayed. 
 
-If the software engineer want to require specific unit tests be conducted on the component, they should be listed here.  Otherwise the component developer is free to develop the unit test suite on his own.
-
-(REMOVE)
 
 A unit test suite must be developed as part of the component development process.  Unit tests must be provided to Star2Star and be runnable using 'npm test'.  Refer to the Star2Star Unit Testing standards document.  Test framework must use Jest/Jasmine, Enzyme and Sinon.
 
@@ -74,3 +67,15 @@ The following items must be delivered to Star2Star at the completion of the comp
   d. Must comply to Star2Star Component Specification Standards; which includes theming, accessibility, white labeling and internationalization
 
   e. All documented functional requirements must be met.
+
+# 7. Acceptance Criteria #
+
+a. All unit tests must pass.
+
+b. Unit tests must cover at least 80% branch coverage.  We require using Jest for unit testing with the __--verbose__ and __--coverage__ options set.
+
+c. Component must render correctly in demo.
+
+d. Must comply to Star2Star Component Specification Standards; which includes theming, accessibility, white labeling and internationalization
+
+e. All documented functional requirements must be met.
