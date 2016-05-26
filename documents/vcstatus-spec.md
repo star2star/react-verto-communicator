@@ -1,7 +1,7 @@
 # Component Name:  < vcstatus \>   #
 # 1. Functional Description #
 
-This component will take in the __status__ prop. When the component is rendered the __status__ prop is passed to it as a string; that string goes through a switch statement to determine what color to fill the status icon svg. An example of this being the icon filling in green when a user is in a call. If the status can not be found the fill color defaults to red. This component is styled through the __Style__ prop.   
+ When the component is rendered the __status__ prop is passed to it as a string; that string goes through a switch statement to determine what color to use for status icon. An example of this being the icon filling in green when a user is in a call; assuming that they are on the default theme. If the status can not be found the color defaults to fill color for disconnected. This component is styled through the __Style__ prop.   
 
 
 # 2. Visual Design #  
@@ -15,8 +15,7 @@ This component will take in the __status__ prop. When the component is rendered 
 
 # 3. Component Type #
 
-This component will be a 'pure' component.  It will accept props for style and status.
-
+This component will be a 'pure' component.
 
 
 
@@ -29,7 +28,11 @@ styles |   Style = {} | This prop is an object and is not required. This object 
 
 ## b. Component State ##
 
-This component will not maintain its own state.  It will change as new prop values are passed into it from its parent.
+This component will maintain its own state.  It will change as new prop values are passed into it from its parent.
+
+## c. Context-Aware Specification ##
+
+This component is a 'pure component' and will maintain its' own state.
 
 # 4. Reference Components #
 
@@ -57,21 +60,8 @@ Refer to the following links:
 * Sinon: http://www.sitepoint.com/sinon-tutorial-javascript-testing-mocks-spies-stubs/?utm_source=javascriptweekly&utm_medium=email
 * http://sinonjs.org/docs/
 
-# 6. Deliverables #
 
-The following items must be delivered to Star2Star at the completion of the component development; full implementation of component meeting the requirements of this specification
-
-  a. Complete and accurate README.md
-
-  b. Unit tests must cover at least 80% branch coverage.  We require using Jest for unit testing with the __--verbose__ and __--coverage__ options set.
-
-  c. Component must render correctly in demo.
-
-  d. Must comply to Star2Star Component Specification Standards; which includes theming, accessibility, white labeling and internationalization
-
-  e. All documented functional requirements must be met.
-
-# 7. Acceptance Criteria #
+# 6. Acceptance Criteria #
 
 a. All unit tests must pass.
 

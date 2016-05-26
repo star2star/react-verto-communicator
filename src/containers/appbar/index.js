@@ -4,6 +4,7 @@ import Radium from 'radium';
 import { connect } from 'react-redux';
 //import ReactTooltip from 'react-tooltip';
 import VCStatus from '../../components/vcstatus';
+import NetworkStatusIndicator from '../../components/nsindicator';
 
 class AppBar extends VertoBaseComponent {
   constructor(props) {
@@ -35,12 +36,15 @@ class AppBar extends VertoBaseComponent {
 
   render() {
     //console.log('#### window theme style', window.theme);
-    console.log('this.props.settings', this.props.settings);
-    console.log('this.props.bandwidthInfo', this.props.bandwidthInfo);
+    //console.log('this.props.settings', this.props.settings);
+    //console.log('this.props.bandwidthInfo', this.props.bandwidthInfo);
 
     return (
       <div>
         <div className="appbar" style={this.getStyle('appbarStyles')}>
+          <NetworkStatusIndicator
+              conn={{upkpbs: 2000, downkpbs: 1000, vidQual: 'Fantastic'}}
+          />
           <VCStatus status = 'connecting' />
         </div>
       </div>
