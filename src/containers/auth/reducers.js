@@ -25,8 +25,10 @@ const auth = (state, action)=>{
   switch (action.type) {
     case "SHOW_LOGIN":
       return { ...state, showLogin: true };
+    case "LOGOUT":
+        return { ...state, showLogin: !state.showLogin }
     case 'AUTH_SUBMIT_LOGIN':
-      return { ...state };
+      return { ...state, showLogin: !state.showLogin };
     case 'VERTO_LOGIN':
       return { ...state };
     default:
