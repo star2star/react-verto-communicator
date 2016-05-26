@@ -10,7 +10,7 @@ import thunk from 'redux-thunk';
 import reducer from './containers/reducers.js';
 import Messages from './js/messages';
 
-import { doShowLogin } from './containers/auth/action-creators';
+import { doBrowserCheck } from './containers/auth/action-creators';
 
 import App from './components/app';
 import Dial from './components/dial';
@@ -55,7 +55,7 @@ const store = createStore(reducer, applyMiddleware(thunk));
 
 window.theStore = store;
 
-store.dispatch(doShowLogin());
+store.dispatch(doBrowserCheck());
 
 ReactDOM.render((
   <Provider store={store}>

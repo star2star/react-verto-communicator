@@ -1,6 +1,21 @@
 import VertoService from '../../js/vertoService';
 import { browserHistory } from 'react-router'
 
+const doBrowserCheck = () => {
+  return dispatch => {
+    navigator.getUserMedia = navigator.getUserMedia ||
+      navigator.webkitGetUserMedia ||
+      navigator.mozGetUserMedia;
+
+    if (!navigator.getUserMedia) {
+      browserHistory.push('#/bns');
+    } else {
+      dispatch(doBrowserValid());
+      dispatch(doShowLogin());
+    }
+
+  }
+}
 
 const doShowLogin = () => {
   // rendering login through navigation
@@ -33,7 +48,11 @@ const doSubmitLogin = (data) => {
     //dispatch(doVertoLogin(data)); // this sent the WS request
   };
 };
-
+const doBrowserValid = () => {
+  return {
+    "type": "BROWSER_VALID"
+  }
+}
 const doVertoLogin = (data) => {
   console.log('vvvvvv', data);
   return {
@@ -57,4 +76,4 @@ const doGetLoginSettings = (data) => {
   };
 };
 
-export { doSubmitLogin, doGetLoginSettings, doShowLogin, doVertoLogin, doSubmitLogOut, doLogOut };
+export { doSubmitLogin, doGetLoginSettings, doShowLogin, doVertoLogin, doSubmitLogOut, doLogOut, doBrowserValid, doBrowserCheck };
