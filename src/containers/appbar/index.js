@@ -41,7 +41,7 @@ class AppBar extends VertoBaseComponent {
     return (
       <div>
         <div className="appbar" style={this.getStyle('appbarStyles')}>
-          <VCStatus status = 'Connected' />
+          <VCStatus status = 'connecting' />
         </div>
       </div>
     );
