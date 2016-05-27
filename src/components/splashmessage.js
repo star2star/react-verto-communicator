@@ -1,4 +1,3 @@
-
 import React from 'react';
 import VertoBaseComponent from './vertobase';
 //prop valudation
@@ -38,3 +37,5 @@ class SplashMessage extends VertoBaseComponent{
 }
 
 //return tiitle && errorMessage
+//return(<div> {statusTitle} </div>
+         //<div>   )
