@@ -1,10 +1,10 @@
 import React from 'react';
-import VertoBaseComponent from './vertobase';
+import VertoBaseComponent from './vertobasecomponent';
 import { StatusIconSVG } from './svgIcons';
 
 const propTypes = {
   status: React.PropTypes.oneOf(['connected','disconnected', 'connecting']).isRequired,
-  Style:   React.PropTypes.object
+  compStyle:   React.PropTypes.object
 };
 
 class VCStatus extends VertoBaseComponent {

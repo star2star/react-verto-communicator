@@ -8,7 +8,7 @@ class VertoBaseComponent extends React.Component {
   getClassName() {
     //console.log('*****', this, this.constructor.name );
     const xName = Object.getPrototypeOf(this.constructor).name;
-    // if it equals base we need to just get it from constructor ... we handle higher order objects by default 
+    // if it equals base we need to just get it from constructor ... we handle higher order objects by default
     return xName.toLowerCase() === 'vertobasecomponent' ? this.constructor.name : xName;
   }
   applyThemeStyle(styleName, styles) {
@@ -34,8 +34,9 @@ class VertoBaseComponent extends React.Component {
     }
 
     // apply style from props
-    if(this.props.Style && this.props.Style[styleName]) {
-      styleReturn = {...styleReturn, ...this.props.Style[styleName]};
+    console.log('base style props', this.props.compStyle, this.props);
+    if(this.props.compStyle && this.props.compStyle[styleName]) {
+      styleReturn = {...styleReturn, ...this.props.compStyle[styleName]};
     }
     return styleReturn;
   }
