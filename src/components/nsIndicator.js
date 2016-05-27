@@ -5,13 +5,13 @@ SignalNoneIconSVG,
 SignalMediumIconSVG,
 SignalFullIconSVG,
 SignalLowIconSVG,
+CaretUpIconSVG,
 CaretDownIconSVG } from './svgIcons';
 
 
 const propTypes = {
   networkData : React.PropTypes.object.isRequired,
-  cbMenuClick : React.PropTypes.func,
-  menuDisplayed : React.PropTypes.bool,
+  allowDisplayDetails : React.PropTypes.bool,
   compStyle : React.PropTypes.object
 };
 
@@ -96,6 +96,9 @@ class NetworkStatusIndicator extends VertoBaseComponent {
             icon = (<SignalLowIconSVG svgStyle={{...this.getDefaultStyle('icon'), fill: 'red'}} />);
     }
 
+    const caret = this.state.dropdownDisplayed ? (<CaretUpIconSVG svgStyle={this.getDefaultStyle('caret')}/>)
+    : (<CaretDownIconSVG svgStyle={this.getDefaultStyle('caret')}/>);
+
     return (
       <div
           onClick={()=>{
@@ -108,7 +111,7 @@ class NetworkStatusIndicator extends VertoBaseComponent {
             style={this.getDefaultStyle('container')}
         >
           {icon}
-          <CaretDownIconSVG svgStyle={this.getDefaultStyle('caret')}/>
+          {caret}
         </div>
         <div style={this.getDefaultStyle('menu')} >
           <div style={this.getDefaultStyle('header')} >Bandwidth Info</div>
