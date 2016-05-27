@@ -16,6 +16,21 @@ const sampleData = {
   vidQual : 'Swell'
 };
 
+const medData = {
+  upkpbs : 2001,
+  downkpbs : 1999,
+  vidQual : 'Splendid'
+};
+
+const lowData = {
+  upkpbs : 1999,
+  downkpbs: 1999,
+  vidQual : 'so fresh'
+};
+
+const badData = {
+  fakeData: 'hehehehehehee'
+};
   // networkData prop is provided.
   it('renders networkData', () => {
     const wrapper = mount(<NetworkStatusIndicator networkData={sampleData} />);
@@ -23,65 +38,66 @@ const sampleData = {
 
   });
 
-  // If compStyle is provided it is rendered.
-  it('renders provided styles', () => {
-    const wrapper = mount(<NetworkStatusIndicator networkData={sampleData} compStyle={{height: '30px'}} />);
-    //console.log('%%%%%%%%%%%%', wrapper);
-    expect(wrapper.props().compStyle.height).toEqual('30px');
-  });
-
-  // If allowDisplayDetails is false, it is false.
+  // If allowDisplayDetails is true whole component will render :D
   it('renders allowDisplayDetails as false if provided', () => {
     const wrapper = mount(<NetworkStatusIndicator networkData={sampleData} allowDisplayDetails={false}/>);
-    //console.log('%%%%%%%%%%%%', wrapper);
-    expect(wrapper.props().allowDisplayDetails).toEqual(false);
+    expect(wrapper.find('NetworkStatusIndicator').length).toEqual(1);
   });
 
+  //If allowDisplayDetails is false an icon will render
   it('renders allowDisplayDetails as true if NOT provided', () => {
-
     const wrapper = mount(<NetworkStatusIndicator networkData={sampleData} />);
-    expect(wrapper.props().allowDisplayDetails).toEqual(true);
-
-  });
-
-  // If allowDisplayDetails is true, it is true.
-  it('renders allowDisplayDetails as true if provided', () => {
-
-    const wrapper = mount(<NetworkStatusIndicator networkData={sampleData} />);
-    expect(wrapper.props().allowDisplayDetails).toEqual(true);
-
+    expect(wrapper.find('SignalFullIconSVG').length).toEqual(1);
   });
 
   // Menu displays networkData.upkpbs
   it('renders allowDisplayDetails as true if provided', () => {
-
-    const wrapper = mount(<NetworkStatusIndicator networkData={sampleData} allowDisplayDetails={true} />);
+    const wrapper = mount(<NetworkStatusIndicator networkData={sampleData} allowDisplayDetails />);
     expect(wrapper.props().allowDisplayDetails).toEqual(true);
-
   });
 
-  // Menu displays networkData.downkpbs
-  // Menu displays networkData.videoResolution
   // If displayDropdown is true it renders dropdown Menu
+
   // If displayDropdown is false it does NOT render dropdown.
+  it('renders menuContainer if displayDropdown is true', () => {
+    const wrapper = mount(<NetworkStatusIndicator networkData={sampleData} />);
+    wrapper.setState({ dropdownDisplayed: true});
+    console.log('%%%%%%%%%%%%%',wrapper);//////////////////////////
+    expect(wrapper.props().compStyle.display).toEqual('none');
+  });
+
   // If displayDropdown is true it renders CaretUpIconSVG.
   it('renders CaretUpIconSVG if displayDropdown is true', () => {
     const wrapper = shallow(<NetworkStatusIndicator networkData={sampleData} />);
-    wrapper.setState({ dropdownDisplayed: true})
+    wrapper.setState({ dropdownDisplayed: true});
     expect(wrapper.find('CaretUpIconSVG').length).toEqual(1);
-    expect(wrapper.find('CaretDownIconSVG').length).toEqual(0);
   });
 
-  // If displayDropdown is false it renders CaretDownIconSVG.
-  // it('renders CaretUpIconSVG if displayDropdown is true', () => {
-  //   const wrapper = shallow(<NetworkStatusIndicator networkData={sampleData} />);
-  //   wrapper.setState({ dropdownDisplayed: true})
-  //   expect(wrapper.find('CaretUpIconSVG').length).toEqual(1);
-  // });
+  //If displayDropdown is false it renders CaretDownIconSVG.
+  it('renders CaretUpIconSVG if displayDropdown is true', () => {
+    const wrapper = shallow(<NetworkStatusIndicator networkData={sampleData} />);
+    wrapper.setState({ dropdownDisplayed: false});
+    expect(wrapper.find('CaretDownIconSVG').length).toEqual(1);
+  });
 
   // If bwp is 4 it renders full signal svgIcons
-  // If bwp is 3 it renders med signal svgIcons
-  // if bwp is less than 3 it renders low signal svgIcons
+  it('renders SignalFullIconSVG if network data is considered good', () => {
+     const wrapper = mount(<NetworkStatusIndicator networkData={sampleData} />);
+     expect(wrapper.find('SignalFullIconSVG').length).toEqual(1);
+  });
 
+  // If bwp is 3 it renders med signal svgIcons
+  it('renders SignalMedIconSVG if network data is considered med', () => {
+    //expect(true).toBe(true);
+     const wrapper = mount(<NetworkStatusIndicator networkData={medData} />);
+     expect(wrapper.find('SignalMediumIconSVG').length).toEqual(1);
+  });
+
+  // if bwp is less than 3 it renders low signal svgIcons
+  it('renders SignalLowIconSVG if network data is considered med', () => {
+    //expect(true).toBe(true);
+     const wrapper = mount(<NetworkStatusIndicator networkData={lowData} />);
+     expect(wrapper.find('SignalLowIconSVG').length).toEqual(1);
+  });
 
 });

@@ -18,7 +18,7 @@ class Splash extends VertoBaseComponent {
         <div style={{paddingBottom: "20px"}}>Loading</div>
         <div style={{background: "yellow", width: "500px", height: "20px", opacity: ".4" }}>
         </div>
-        <SplashMessage statusTitle="Media Check" />
+        <SplashMessage statusTitle="Media Check" errorObject={{header: 'error', body: 'Message'}} />
       </div>);
   }
 }

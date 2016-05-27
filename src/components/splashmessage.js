@@ -33,9 +33,16 @@ class SplashMessage extends VertoBaseComponent{
   render() {
     let errorMessage;
     if(this.props.errorObject){
-      errorMessage = this.props.errorObject;
+      errorMessage = (<div>
+        <div> {this.props.errorObject.header} </div>
+        <div> {this.props.errorObject.body} </div>
+         </div>);
     }
-    return (<div>aaaa</div>);
+    return (<div>
+      <div> {this.props.statusTitle} </div>
+      {errorMessage}
+      </div>
+    );
   }
 }
 
