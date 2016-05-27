@@ -23,6 +23,9 @@ class NetworkStatusIndicator extends VertoBaseComponent {
   constructor(props) {
     super(props);
     this.state = {'dropdownDisplayed': false};
+
+    this.toggleDisplay = this.toggleDisplay.bind(this);
+    NetworkStatusIndicator.toggleNetworkStatus = this.toggleDisplay.bind(this);
   }
 
   getDefaultStyle(styleName) {
@@ -67,12 +70,14 @@ class NetworkStatusIndicator extends VertoBaseComponent {
 
     };
 
-  return (styles[styleName]);
-}
+    return (styles[styleName]);
+  }
 
-toggleDisplay() {
-  this.setState({...this.state,'dropdownDisplayed': !this.state.dropdownDisplayed});
-}
+  toggleDisplay() {
+    this.setState({...this.state,'dropdownDisplayed': !this.state.dropdownDisplayed});
+  }
+
+
 
   render() {
 
@@ -140,9 +145,9 @@ toggleDisplay() {
     if(this.props.allowDisplayDetails) {
       nsi =
         (<div
-            onClick={()=>{
-              this.setState({...this.state,'dropdownDisplayed': !this.state.dropdownDisplayed});
-            }}
+            onClick={
+              this.toggleDisplay
+            }
          >
           {iconsContainer}
           {menuContainer}
