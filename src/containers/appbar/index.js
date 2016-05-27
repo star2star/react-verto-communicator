@@ -2,6 +2,7 @@ import React from 'react';
 import VertoBaseComponent from '../../components/vertobase';
 import Radium from 'radium';
 import { connect } from 'react-redux';
+import WhiteLabel from '../../js/whitelabel.js';
 //import ReactTooltip from 'react-tooltip';
 import VCStatus from '../../components/vcstatus';
 import NetworkStatusIndicator from '../../components/nsindicator';
@@ -28,6 +29,16 @@ class AppBar extends VertoBaseComponent {
             width: '100%',
             color: '#FFFFFF',
             height: '70px'
+          },
+          appNameStyles: {
+            alignText: 'center',
+            fontSize: '1.2rem',
+            marginLeft: '20px'
+          },
+          appControlStyles: {
+            display: 'flex',
+            marginRight: '10px',
+            justifyContent: 'space-around'
           }
         };
 
@@ -39,13 +50,20 @@ class AppBar extends VertoBaseComponent {
     //console.log('this.props.settings', this.props.settings);
     //console.log('this.props.bandwidthInfo', this.props.bandwidthInfo);
 
+    const appName = WhiteLabel.get('appName');
+
+
     return (
       <div>
         <div className="appbar" style={this.getStyle('appbarStyles')}>
-          <NetworkStatusIndicator
-              conn={{upkpbs: 2000, downkpbs: 1000, vidQual: 'Fantastic'}}
-          />
-          <VCStatus status = 'connected' />
+          <span className="appName" style={this.getStyle("appNameStyles")}>{appName}</span>
+
+          <span className="appControls" style={this.getStyle('appControlStyles')}>
+            <NetworkStatusIndicator
+                conn={{upkpbs: 2000, downkpbs: 1000, vidQual: 'Fantastic'}}
+            />
+            <VCStatus status = 'connected' />
+          </span>
         </div>
       </div>
     );
