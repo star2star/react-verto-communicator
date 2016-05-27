@@ -1,5 +1,5 @@
 import React from 'react';
-import VertoBaseComponent from './vertobase.js';
+import VertoBaseComponent from './vertobasecomponent.js';
 import {
 //SignalNoneIconSVG,
 SignalMediumIconSVG,

@@ -11,7 +11,6 @@ class NoMedia extends React.Component {
   }
 
   render() {
-    console.log('rrrrrr');
     return (<div> No Media enable it </div>);
   }
 }

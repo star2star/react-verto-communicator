@@ -1,5 +1,5 @@
 import React from 'react';
-import VertoBaseComponent from '../../components/vertobase';
+import VertoBaseComponent from '../../components/vertobasecomponent';
 //import Radium from 'radium';
 import { connect } from 'react-redux';
 //import ReactTooltip from 'react-tooltip';
