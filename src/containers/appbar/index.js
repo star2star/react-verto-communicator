@@ -72,7 +72,7 @@ class AppBar extends VertoBaseComponent {
 
           <span className="appControls" style={this.getStyle('appControlStyles')}>
             {nsIndicator}
-            <VCStatus status = 'connected' />
+            <VCStatus status = {this.props.vcStatus} />
             <div>Last Call: .....</div>
             <div>S</div>
             <div> U </div>
@@ -88,6 +88,7 @@ export default connect((state)=>{
   console.log('----STORE in appbar ----', state);
   return ({
     settings: state.app.settings,
-    bandwidthInfo: state.app.bandwidthInfo
+    bandwidthInfo: state.app.bandwidthInfo,
+    vcStatus: state.auth.vcStatus
   });
 })(Radium(AppBar));
