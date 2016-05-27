@@ -43,6 +43,9 @@ class AppBar extends VertoBaseComponent {
             display: 'flex',
             marginRight: '10px',
             justifyContent: 'space-around'
+          },
+          lastCallStyles: {
+            marginRight: '15px'
           }
         };
 
@@ -69,6 +72,19 @@ class AppBar extends VertoBaseComponent {
       );
     }
 
+    // only show the 'Last Call' info if there is call history to retrieve it from
+    // TODO - Check for call history in store and get the most recent one to build
+    // the string
+    let lastCall;
+    if (true) {
+      lastCall = (
+        <div  className="lastCall" style={this.getStyle('lastCallStyles')}>
+          Last Call: (941) 867-5309
+        </div>
+      );
+    }
+
+
     return (
       <div>
         <div className="appbar" style={this.getStyle('appbarStyles')}>
@@ -77,7 +93,7 @@ class AppBar extends VertoBaseComponent {
           <span className="appControls" style={this.getStyle('appControlStyles')}>
             {nsIndicator}
             <VCStatus status = {this.props.vcStatus} compStyle={{svgStyle:{marginRight: '20px'}}}/>
-            <div style={{marginRight: '20px'}}>Last Call: .....</div>
+            {lastCall}
             <div style={{marginRight: '20px'}}> S </div>
             <div style={{marginRight: '20px'}}> U </div>
             <div style={{marginRight: '20px'}}> A </div>
