@@ -1,5 +1,5 @@
 import React from 'react';
-import VertoBaseComponent from '../../components/vertobase';
+import VertoBaseComponent from '../../components/vertobasecomponent';
 import Radium from 'radium';
 import { connect } from 'react-redux';
 import WhiteLabel from '../../js/whitelabel.js';
@@ -57,7 +57,7 @@ class AppBar extends VertoBaseComponent {
     if (this.props.bandwidthInfo.outgoingBandwidth && this.props.bandwidthInfo.incomingBandwidth) {
       const vidQual = this.props.bandwidthInfo.vidQual ? this.props.bandwidthInfo.vidQual : '';
       nsIndicator = (
-        <NetworkStatusIndicator
+        <NetworkStatusIndicator compStyle={{container:{marginRight: '10px'}}}
             networkData={{upkpbs: this.props.bandwidthInfo.outgoingBandwidth,
                           downkpbs: this.props.bandwidthInfo.incomingBandwidth,
                           vidQual: vidQual}}
@@ -73,6 +73,10 @@ class AppBar extends VertoBaseComponent {
           <span className="appControls" style={this.getStyle('appControlStyles')}>
             {nsIndicator}
             <VCStatus status = 'connected' />
+            <div>Last Call: .....</div>
+            <div>S</div>
+            <div> U </div>
+            <div> A </div>
           </span>
         </div>
       </div>

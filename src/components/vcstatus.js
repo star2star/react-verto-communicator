@@ -1,5 +1,5 @@
 import React from 'react';
-import VertoBaseComponent from './vertobase';
+import VertoBaseComponent from './vertobasecomponent';
 import { StatusIconSVG } from './svgIcons';
 
 const propTypes = {
