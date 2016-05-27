@@ -243,6 +243,7 @@ class VertoService {
     _verto.set(window, v);
   }
 
+
   getOptions(data) {
     return {
         login: data.user + '@' + data.hostname,
@@ -282,6 +283,10 @@ VertoService.login = (dispatch, data) => {
 VertoService.logout = (dispatch) =>{
   _dispatch.set(window, dispatch);
   return VertoService.getInstance().logout();
+}
+
+VertoService.mediaPerm = (callback) => {
+    $.FSRTC.checkPerms(callback, true, true);
 }
 
 //exporting
