@@ -25,6 +25,7 @@ class NetworkStatusIndicator extends VertoBaseComponent {
     this.state = {'dropdownDisplayed': false};
 
     this.toggleDisplay = this.toggleDisplay.bind(this);
+
     NetworkStatusIndicator.toggleNetworkStatus = this.toggleDisplay.bind(this);
   }
 
@@ -122,13 +123,15 @@ class NetworkStatusIndicator extends VertoBaseComponent {
     );
 
     const menuContainer = (
-      <div style={this.getStyle('menu')} >
+
+      <div className="menuContainer" style={this.getStyle('menu')} >
         <div style={this.getStyle('header')} >
             Bandwidth Info
         </div>
         <div
             onClick={this.props.cbMenuClick}
             style={this.getStyle('li')}
+            className="upkpbs"
         >
           Outgoing: {this.props.networkData.upkpbs}
         </div>
@@ -151,6 +154,7 @@ class NetworkStatusIndicator extends VertoBaseComponent {
     if(this.props.allowDisplayDetails) {
       nsi =
         (<div
+            style={this.getStyle('container')}
             onClick={
               this.toggleDisplay
             }
