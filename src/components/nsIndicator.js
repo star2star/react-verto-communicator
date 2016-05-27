@@ -1,7 +1,7 @@
 import React from 'react';
 import VertoBaseComponent from './vertobase.js';
 import {
-SignalNoneIconSVG,
+//SignalNoneIconSVG,
 SignalMediumIconSVG,
 SignalFullIconSVG,
 SignalLowIconSVG,
@@ -16,7 +16,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  //menuDisplayed : false
+  allowDisplayDetails : true
 };
 
 class NetworkStatusIndicator extends VertoBaseComponent {
@@ -70,6 +70,10 @@ class NetworkStatusIndicator extends VertoBaseComponent {
   return (styles[styleName]);
 }
 
+toggleDisplay() {
+  this.setState({...this.state,'dropdownDisplayed': !this.state.dropdownDisplayed});
+}
+
   render() {
 
     let bwp = 4;
@@ -89,9 +93,6 @@ class NetworkStatusIndicator extends VertoBaseComponent {
         case 3:
             icon = (<SignalMediumIconSVG svgStyle={{...this.getDefaultStyle('icon'), fill: 'yellow'}} />);
             break;
-        case 2:
-            icon = (<SignalMediumIconSVG svgStyle={{...this.getDefaultStyle('icon'), fill: 'yellow'}} />);
-            break;
         default:
             icon = (<SignalLowIconSVG svgStyle={{...this.getDefaultStyle('icon'), fill: 'red'}} />);
     }
@@ -99,42 +100,59 @@ class NetworkStatusIndicator extends VertoBaseComponent {
     const caret = this.state.dropdownDisplayed ? (<CaretUpIconSVG svgStyle={this.getDefaultStyle('caret')}/>)
     : (<CaretDownIconSVG svgStyle={this.getDefaultStyle('caret')}/>);
 
-    return (
+    const iconsContainer = (
       <div
-          onClick={()=>{
-            //console.log(this.state.menuDisplayed);
-            this.setState({...this.state,'dropdownDisplayed': !this.state.dropdownDisplayed});
-          }}
+          networkData={this.networkData}
+          style={this.getDefaultStyle('container')}
       >
-        <div
-            conn={this.conn}
-            style={this.getDefaultStyle('container')}
-        >
-          {icon}
-          {caret}
+        {icon}
+        {caret}
+      </div>
+    );
+
+    const menuContainer = (
+      <div style={this.getDefaultStyle('menu')} >
+        <div style={this.getDefaultStyle('header')} >
+            Bandwidth Info
         </div>
-        <div style={this.getDefaultStyle('menu')} >
-          <div style={this.getDefaultStyle('header')} >Bandwidth Info</div>
-          <div
-              onClick={this.props.cbMenuClick}
-              style={this.getDefaultStyle('li')}
-          >
-            Outgoing: {this.props.networkData.upkpbs}
-          </div>
-          <div
-              onClick={this.props.cbMenuClick}
-              style={this.getDefaultStyle('li')}
-          >
-            Incoming: {this.props.networkData.downkpbs}
-          </div>
-          <div
-              onClick={this.props.cbMenuClick}
-              style={this.getDefaultStyle('li')}
-          >
-              Video Resolution: {this.props.networkData.vidQual}
-          </div>
+        <div
+            onClick={this.props.cbMenuClick}
+            style={this.getDefaultStyle('li')}
+        >
+          Outgoing: {this.props.networkData.upkpbs}
+        </div>
+        <div
+            onClick={this.props.cbMenuClick}
+            style={this.getDefaultStyle('li')}
+        >
+          Incoming: {this.props.networkData.downkpbs}
+        </div>
+        <div
+            onClick={this.props.cbMenuClick}
+            style={this.getDefaultStyle('li')}
+        >
+            Video Resolution: {this.props.networkData.vidQual}
         </div>
       </div>
+    );
+
+    let nsi;
+    if(this.props.allowDisplayDetails) {
+      nsi =
+        (<div
+            onClick={()=>{
+              this.setState({...this.state,'dropdownDisplayed': !this.state.dropdownDisplayed});
+            }}
+         >
+          {iconsContainer}
+          {menuContainer}
+        </div>);
+    } else {
+      return icon;
+    }
+
+    return (
+      nsi
     );
   }
 }
