@@ -52,6 +52,18 @@ class AppBar extends VertoBaseComponent {
 
     const appName = WhiteLabel.get('appName');
 
+    // only show network status if we have speed data ....
+    let nsIndicator;
+    if (this.props.bandwidthInfo.outgoingBandwidth && this.props.bandwidthInfo.incomingBandwidth) {
+      const vidQual = this.props.bandwidthInfo.vidQual ? this.props.bandwidthInfo.vidQual : '';
+      nsIndicator = (
+        <NetworkStatusIndicator
+            networkData={{upkpbs: this.props.bandwidthInfo.outgoingBandwidth,
+                          downkpbs: this.props.bandwidthInfo.incomingBandwidth,
+                          vidQual: vidQual}}
+          />
+      );
+    }
 
     return (
       <div>
@@ -59,9 +71,7 @@ class AppBar extends VertoBaseComponent {
           <span className="appName" style={this.getStyle("appNameStyles")}>{appName}</span>
 
           <span className="appControls" style={this.getStyle('appControlStyles')}>
-            <NetworkStatusIndicator
-                networkData={{upkpbs: 2000, downkpbs: 1000, vidQual: 'Fantastic'}}
-            />
+            {nsIndicator}
             <VCStatus status = 'connected' />
           </span>
         </div>
