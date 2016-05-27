@@ -28,6 +28,11 @@ class NetworkStatusIndicator extends VertoBaseComponent {
     NetworkStatusIndicator.toggleNetworkStatus = this.toggleDisplay.bind(this);
   }
 
+  getCompStyle() {
+    console.log('#### compStyle', this.props.compStyle);
+    return this.props.compStyle;
+  }
+
   getDefaultStyle(styleName) {
     const styles = {
       container: {
@@ -81,6 +86,8 @@ class NetworkStatusIndicator extends VertoBaseComponent {
 
   render() {
 
+    console.log('&&&&&&&&&&&&& this.props.compStyle', this.props.compStyle);
+
     let bwp = 4;
     const networkData = this.props.networkData;
     if(networkData.upkpbs < 2000) {
@@ -93,22 +100,22 @@ class NetworkStatusIndicator extends VertoBaseComponent {
     let icon;
     switch(bwp) {
         case 4:
-            icon = (<SignalFullIconSVG svgStyle={{...this.getDefaultStyle('icon'), fill: 'green'}} />);
+            icon = (<SignalFullIconSVG svgStyle={{...this.getStyle('icon'), fill: 'green'}} />);
             break;
         case 3:
-            icon = (<SignalMediumIconSVG svgStyle={{...this.getDefaultStyle('icon'), fill: 'yellow'}} />);
+            icon = (<SignalMediumIconSVG svgStyle={{...this.getStyle('icon'), fill: 'yellow'}} />);
             break;
         default:
-            icon = (<SignalLowIconSVG svgStyle={{...this.getDefaultStyle('icon'), fill: 'red'}} />);
+            icon = (<SignalLowIconSVG svgStyle={{...this.getStyle('icon'), fill: 'red'}} />);
     }
 
-    const caret = this.state.dropdownDisplayed ? (<CaretUpIconSVG svgStyle={this.getDefaultStyle('caret')}/>)
-    : (<CaretDownIconSVG svgStyle={this.getDefaultStyle('caret')}/>);
+    const caret = this.state.dropdownDisplayed ? (<CaretUpIconSVG svgStyle={this.getStyle('caret')}/>)
+    : (<CaretDownIconSVG svgStyle={this.getStyle('caret')}/>);
 
     const iconsContainer = (
       <div
           networkData={this.networkData}
-          style={this.getDefaultStyle('container')}
+          style={this.getStyle('container')}
       >
         {icon}
         {caret}
@@ -116,25 +123,25 @@ class NetworkStatusIndicator extends VertoBaseComponent {
     );
 
     const menuContainer = (
-      <div style={this.getDefaultStyle('menu')} >
-        <div style={this.getDefaultStyle('header')} >
+      <div style={this.getStyle('menu')} >
+        <div style={this.getStyle('header')} >
             Bandwidth Info
         </div>
         <div
             onClick={this.props.cbMenuClick}
-            style={this.getDefaultStyle('li')}
+            style={this.getStyle('li')}
         >
           Outgoing: {this.props.networkData.upkpbs}
         </div>
         <div
             onClick={this.props.cbMenuClick}
-            style={this.getDefaultStyle('li')}
+            style={this.getStyle('li')}
         >
           Incoming: {this.props.networkData.downkpbs}
         </div>
         <div
             onClick={this.props.cbMenuClick}
-            style={this.getDefaultStyle('li')}
+            style={this.getStyle('li')}
         >
             Video Resolution: {this.props.networkData.vidQual}
         </div>

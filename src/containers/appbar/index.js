@@ -61,7 +61,7 @@ class AppBar extends VertoBaseComponent {
     if (this.props.bandwidthInfo.outgoingBandwidth && this.props.bandwidthInfo.incomingBandwidth) {
       const vidQual = this.props.bandwidthInfo.vidQual ? this.props.bandwidthInfo.vidQual : '';
       nsIndicator = (
-        <NetworkStatusIndicator compStyle={{container:{marginRight: '10px'}}}
+        <NetworkStatusIndicator compStyle={{container:{marginRight: '20px'}}}
             networkData={{upkpbs: this.props.bandwidthInfo.outgoingBandwidth,
                           downkpbs: this.props.bandwidthInfo.incomingBandwidth,
                           vidQual: vidQual}}
@@ -76,11 +76,11 @@ class AppBar extends VertoBaseComponent {
 
           <span className="appControls" style={this.getStyle('appControlStyles')}>
             {nsIndicator}
-            <VCStatus status = {this.props.vcStatus} />
-            <div>Last Call: .....</div>
-            <div>S</div>
-            <div> U </div>
-            <div> A </div>
+            <VCStatus status = {this.props.vcStatus} compStyle={{svgStyle:{marginRight: '20px'}}}/>
+            <div style={{marginRight: '20px'}}>Last Call: .....</div>
+            <div style={{marginRight: '20px'}}> S </div>
+            <div style={{marginRight: '20px'}}> U </div>
+            <div style={{marginRight: '20px'}}> A </div>
           </span>
         </div>
       </div>
