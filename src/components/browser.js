@@ -56,7 +56,7 @@ class Browser extends VertoBaseComponent {
 
   render() {
     return (
-    <div>Browser</div>
+    <div>Browser Not Supported</div>
       /*<div style={this.getStyle("pageStyle")}>
           <div
               className="headerContainer"
