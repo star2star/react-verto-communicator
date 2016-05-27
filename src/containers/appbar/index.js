@@ -60,7 +60,7 @@ class AppBar extends VertoBaseComponent {
 
           <span className="appControls" style={this.getStyle('appControlStyles')}>
             <NetworkStatusIndicator
-                conn={{upkpbs: 2000, downkpbs: 1000, vidQual: 'Fantastic'}}
+                networkData={{upkpbs: 2000, downkpbs: 1000, vidQual: 'Fantastic'}}
             />
             <VCStatus status = 'connected' />
           </span>
