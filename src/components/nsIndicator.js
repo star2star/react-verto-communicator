@@ -16,7 +16,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  //menuDisplayed : false
+  allowDisplayDetails : true
 };
 
 class NetworkStatusIndicator extends VertoBaseComponent {
@@ -99,42 +99,58 @@ class NetworkStatusIndicator extends VertoBaseComponent {
     const caret = this.state.dropdownDisplayed ? (<CaretUpIconSVG svgStyle={this.getDefaultStyle('caret')}/>)
     : (<CaretDownIconSVG svgStyle={this.getDefaultStyle('caret')}/>);
 
-    return (
+    const iconsContainer = (
       <div
-          onClick={()=>{
-            //console.log(this.state.menuDisplayed);
-            this.setState({...this.state,'dropdownDisplayed': !this.state.dropdownDisplayed});
-          }}
+          networkData={this.networkData}
+          style={this.getDefaultStyle('container')}
       >
+        {icon}
+        {caret}
+      </div>
+    );
+
+    const menuContainer = (
+      <div style={this.getDefaultStyle('menu')} >
+        <div style={this.getDefaultStyle('header')} >Bandwidth Info</div>
         <div
-            conn={this.conn}
-            style={this.getDefaultStyle('container')}
+            onClick={this.props.cbMenuClick}
+            style={this.getDefaultStyle('li')}
         >
-          {icon}
-          {caret}
+          Outgoing: {this.props.networkData.upkpbs}
         </div>
-        <div style={this.getDefaultStyle('menu')} >
-          <div style={this.getDefaultStyle('header')} >Bandwidth Info</div>
-          <div
-              onClick={this.props.cbMenuClick}
-              style={this.getDefaultStyle('li')}
-          >
-            Outgoing: {this.props.networkData.upkpbs}
-          </div>
-          <div
-              onClick={this.props.cbMenuClick}
-              style={this.getDefaultStyle('li')}
-          >
-            Incoming: {this.props.networkData.downkpbs}
-          </div>
-          <div
-              onClick={this.props.cbMenuClick}
-              style={this.getDefaultStyle('li')}
-          >
-              Video Resolution: {this.props.networkData.vidQual}
-          </div>
+        <div
+            onClick={this.props.cbMenuClick}
+            style={this.getDefaultStyle('li')}
+        >
+          Incoming: {this.props.networkData.downkpbs}
+        </div>
+        <div
+            onClick={this.props.cbMenuClick}
+            style={this.getDefaultStyle('li')}
+        >
+            Video Resolution: {this.props.networkData.vidQual}
         </div>
       </div>
+    );
+
+    let nsi;
+    if(this.props.allowDisplayDetails) {
+      nsi =
+        (<div
+            onClick={()=>{
+              //console.log(this.state.menuDisplayed);
+              this.setState({...this.state,'dropdownDisplayed': !this.state.dropdownDisplayed});
+            }}
+         >
+          {iconsContainer}
+          {menuContainer}
+        </div>);
+    } else {
+      return icon;
+    }
+
+    return (
+      nsi
     );
   }
 }
