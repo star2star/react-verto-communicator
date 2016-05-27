@@ -16,7 +16,8 @@ const auth = (state, action)=>{
               sessionActive: false,
               sessionInfo: {
               },
-              showLogin: true
+              showLogin: true,
+              vcStatus: 'disconnected'
             };
   }
 
@@ -24,21 +25,21 @@ const auth = (state, action)=>{
 
   switch (action.type) {
     case "SHOW_LOGIN":
-      return { ...state, showPage: 'login' };
+      return { ...state, showPage: 'login', vcStatus: 'disconnected' };
     case "LOGOUT":
-        return { ...state, showPage: 'logout' }
+        return { ...state, showPage: 'logout', vcStatus: 'disconnected' }
     case 'AUTH_SUBMIT_LOGIN':
-      return { ...state, showPage: 'logout'};
+      return { ...state, showPage: 'logout', vcStatus: 'connecting'};
     case 'VERTO_LOGIN':
-      return { ...state, showPage: 'loggedIn' };
+      return { ...state, showPage: 'loggedIn', sessionInfo: action.data, vcStatus: 'connecting' };
     case 'NO_MEDIA':
-      return { ...state, showPage: 'noMedia' };
+      return { ...state, showPage: 'noMedia', vcStatus: 'disconnected' };
     case 'BNS':
-      return { ...state, showPage: 'bns' };
+      return { ...state, showPage: 'bns', vcStatus: 'disconnected' };
     case 'RESOLUTION_REFRESH':
-      return { ...state, showPage: 'resolution_refresh' };
+      return { ...state, showPage: 'resolution_refresh'  };
     case 'RESOLUTION_FAILED':
-      return { ...state, showPage: 'resolution_failed' };
+      return { ...state, showPage: 'resolution_failed'  };
     default:
      return state;
     }

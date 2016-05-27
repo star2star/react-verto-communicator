@@ -144,7 +144,7 @@ const doVertoLogin = (data) => {
 }
 
 const doVertoLoginValid = (data) => {
-  //console.log('****', data);
+  console.log('****', data);
   return {
     "type": "VERTO_LOGIN",
     "data": data
