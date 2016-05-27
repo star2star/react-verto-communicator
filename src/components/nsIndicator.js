@@ -1,7 +1,7 @@
 import React from 'react';
 import VertoBaseComponent from './vertobase.js';
 import {
-SignalNoneIconSVG,
+//SignalNoneIconSVG,
 SignalMediumIconSVG,
 SignalFullIconSVG,
 SignalLowIconSVG,
@@ -70,6 +70,10 @@ class NetworkStatusIndicator extends VertoBaseComponent {
   return (styles[styleName]);
 }
 
+toggleDisplay() {
+  this.setState({...this.state,'dropdownDisplayed': !this.state.dropdownDisplayed});
+}
+
   render() {
 
     let bwp = 4;
@@ -87,9 +91,6 @@ class NetworkStatusIndicator extends VertoBaseComponent {
             icon = (<SignalFullIconSVG svgStyle={{...this.getDefaultStyle('icon'), fill: 'green'}} />);
             break;
         case 3:
-            icon = (<SignalMediumIconSVG svgStyle={{...this.getDefaultStyle('icon'), fill: 'yellow'}} />);
-            break;
-        case 2:
             icon = (<SignalMediumIconSVG svgStyle={{...this.getDefaultStyle('icon'), fill: 'yellow'}} />);
             break;
         default:
@@ -111,7 +112,9 @@ class NetworkStatusIndicator extends VertoBaseComponent {
 
     const menuContainer = (
       <div style={this.getDefaultStyle('menu')} >
-        <div style={this.getDefaultStyle('header')} >Bandwidth Info</div>
+        <div style={this.getDefaultStyle('header')} >
+            Bandwidth Info
+        </div>
         <div
             onClick={this.props.cbMenuClick}
             style={this.getDefaultStyle('li')}
@@ -138,7 +141,6 @@ class NetworkStatusIndicator extends VertoBaseComponent {
       nsi =
         (<div
             onClick={()=>{
-              //console.log(this.state.menuDisplayed);
               this.setState({...this.state,'dropdownDisplayed': !this.state.dropdownDisplayed});
             }}
          >
