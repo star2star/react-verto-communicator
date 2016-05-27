@@ -1,14 +1,16 @@
 import {doLogOut, doVertoLogin } from '../containers/auth/action-creators';
+import VideoConstants from './VideoConstants';
 
 // private stuff
 const _callbacks = new WeakMap();
 const _dispatch = new WeakMap();
 const _verto = new WeakMap();
+const _data = new WeakMap();
 
 //class
 class VertoService {
   constructor(){
-
+    _data.set(window, {});
 
     const callbacks = {
       onMessage: function(verto, dialog, msg, data) {
@@ -237,28 +239,38 @@ class VertoService {
 
   }
   login(data){
-    console.log('logging in',  data);
+    //console.log('logging in',  data);
     const v = new $.verto(this.getOptions(data), _callbacks.get(window));
-    console.log('>>>>>', v);
+
+    //console.log('>>>>>', v);
     _verto.set(window, v);
   }
 
 
   getOptions(data) {
+    const data1 = _data.get(window);
+
     return {
         login: data.user + '@' + data.hostname,
         passwd: data.password,
         socketUrl: data.wsURL,
         tag: "webcam",
         ringFile: null,
-        videoParams: {
-          "minWidth": "1280",
-          "minHeight": "720"
+        // videoParams: {
+        //   "minWidth": "1280",
+        //   "minHeight": "720"
+        // },
+        deviceParams: {
+          useCamera: true, //data1.selectedVideo,
+          //TODO
+          // useSpeak: data1.selectedSpeaker,
+          // useMic: data1.selectedAudio,
+          onResCheck: VertoService.refreshVideoResolution
         },
         audioParams: {
-          googAutoGainControl: false,
-          googNoiseSuppression: false,
-          googHighpassFilter: false
+          googAutoGainControl: true,
+          googNoiseSuppression: true,
+          googHighpassFilter: true
         },
         iceServers: true
       };
@@ -289,20 +301,223 @@ VertoService.mediaPerm = (callback) => {
     $.FSRTC.checkPerms(callback, true, true);
 }
 
+VertoService.refreshVideoResolution = (resolutions) =>{
+  setTimeout(()=>{
+    //console.debug('Attempting to refresh video resolutions.');
+    let data = _data.get(window);
+    let v = _verto.get(window);
+    if (!data)
+      data = {};
+
+      //console.log('VVVVVVV', v)
+    if (v) {
+      var w = resolutions['bestResSupported'][0];
+      var h = resolutions['bestResSupported'][1];
+
+      if (h === 1080) {
+        w = 1280;
+        h = 720;
+      }
+
+      VertoService.updateResolutions(resolutions['validRes'], data);
+      v.videoParams({
+        minWidth: w,
+        minHeight: h,
+        maxWidth: w,
+        maxHeight: h,
+        minFrameRate: 15,
+        vertoBestFrameRate: 15 //TOOD Fix this  --- storage.data.bestFrameRate
+      });
+      data.videoQuality.map((qual) => {
+        if (w === qual.width && h === qual.height) {
+          //console.log('****', qual);
+          data.vidQual = qual;
+
+          // if (storage.data.vidQual !== qual.id || storage.data.vidQual === undefined) {
+          //   storage.data.vidQual = qual.id;
+          // }
+        }
+
+      });
+       _data.set(window,data);
+       console.log('ddddd:', data);
+    } else {
+      console.debug('There is no instance of verto.');
+    }
+
+  }, 0);
+}
+
+VertoService.updateResolutions = (supportedResolutions, data) => {
+  //console.debug('Attempting to sync supported and available resolutions');
+
+  //var removed = 0;
+
+  //console.debug("VQ length: " + VideoConstants.VIDEO_QUALITY_SOURCE.length);
+  //console.debug(supportedResolutions);
+
+  const videoQuality = VideoConstants.VIDEO_QUALITY_SOURCE.filter((resolution)=> {
+     return supportedResolutions.filter((res) => {
+       //console.log('RES: ', res);
+        var width = res[0];
+        var height = res[1];
+
+      return (resolution.width == width && resolution.height == height);
+    }).length > 0;
+  });
+
+  // videoQuality.length = videoQuality.length - removed;
+  //console.debug("VQ length 2: " + videoQuality.length);
+  data.videoQuality = videoQuality;
+
+  data.vidQual = (videoQuality.length > 0) ? videoQuality[videoQuality.length - 1] : null;
+  console.debug('vidQual', data.vidQual);
+
+  return videoQuality;
+}
+
 VertoService.refreshDevices = (callback) => {
-  console.debug('Attempting to refresh the devices.');
-  $.verto.refreshDevices(callback);
+  //console.debug('Attempting to refresh the devices.', $.verto );
+  $.verto.refreshDevices((status)=>{
+    //console.log('refreshing devices ...... here', status);
+    let data = _data.get(window);
+
+    if (!data)
+      data = {};
+
+    //reset stuff
+    data.videoDevices = [{
+      id: 'none',
+      label: 'No Camera'
+    }];
+    data.shareDevices = [{
+      id: 'screen',
+      label: 'Screen'
+    }];
+    data.audioDevices = [];
+    data.speakerDevices = [];
+
+    // if(!storage.data.selectedShare) {
+    //   storage.data.selectedShare = data.shareDevices[0]['id'];
+    // }
+
+    $.verto.videoDevices.map((device)=>{
+      if (!device.label) {
+        data.videoDevices.push({
+          id: 'Camera ' + i,
+          label: 'Camera ' + i
+        });
+      } else {
+        data.videoDevices.push({
+          id: device.id,
+          label: device.label || device.id
+        });
+      };
+      // // Selecting the first source.
+      // if (i == 0 && !storage.data.selectedVideo) {
+      //   storage.data.selectedVideo = device.id;
+      // }
+
+      if (!device.label) {
+        data.shareDevices.push({
+          id: 'Share Device ' + i,
+          label: 'Share Device ' + i
+        });
+      } else {
+        data.shareDevices.push({
+          id: device.id,
+          label: device.label || device.id
+        });
+      };
+    });
+
+    $.verto.audioInDevices.map((device)=>{
+
+      // // Selecting the first source.
+      // if (i == 0 && !storage.data.selectedAudio) {
+      //   storage.data.selectedAudio = device.id;
+      // }
+
+      if (!device.label) {
+        data.audioDevices.push({
+          id: 'Microphone ' + i,
+          label: 'Microphone ' + i
+        });
+      } else {
+        data.audioDevices.push({
+          id: device.id,
+          label: device.label || device.id
+        });
+      };
+    });
+
+
+    $.verto.audioOutDevices.map((device)=>{
+
+      // // Selecting the first source.
+      // if (i == 0 && !storage.data.selectedSpeaker) {
+      //   storage.data.selectedSpeaker = device.id;
+      // }
+
+      if (!device.label) {
+        data.speakerDevices.push({
+          id: 'Speaker ' + i,
+          label: 'Speaker ' + i
+        });
+      } else {
+        data.speakerDevices.push({
+          id: device.id,
+          label: device.label || device.id
+        });
+      };
+    });
+
+    console.debug('Devices were refreshed, checking that we have cameras.');
+
+    // Verify if selected devices are valid
+    var videoFlag = data.videoDevices.length > 0 ;
+
+    var shareFlag = data.shareDevices.length > 0;
+
+    var audioFlag = data.audioDevices.length > 0;
+
+    var speakerFlag = data.speakerDevices.length > 0;
+
+    // if (!videoFlag) storage.data.selectedVideo = data.videoDevices[0].id;
+    // if (!shareFlag) storage.data.selectedShare = data.shareDevices[0].id;
+    // if (!audioFlag) storage.data.selectedAudio = data.audioDevices[0].id;
+    // if (!speakerFlag && data.speakerDevices.length > 0) storage.data.selectedSpeaker = data.speakerDevices[0].id;
+
+    // This means that we cannot use video!
+    if (data.videoDevices.length === 0) {
+      console.log('No camera, disabling video.');
+      data.canVideo = false;
+      data.videoDevices.push({
+        id: 'none',
+        label: 'No camera'
+      });
+    } else {
+      data.canVideo = true;
+    }
+
+    // put data back on object
+    _data.set(window, data);
+    //console.log('DDDDDD', data);
+    // when done ... call here
+    callback(status);
+  });
 }
 
 VertoService.speedTest = (callback=()=>{}) => {
   const v = _verto.get(window);
   if (v){
-    console.log('vvv is good');
+    //console.log('vvv is good');
     v.rpcClient.speedTest(1024 * 256, (e, data) => {
-
-      console.log('spppppppppp', e, data)
+      const d = _data.get(window);
+      //console.log('spppppppppp', d, data)
       var upBand = Math.ceil(data.upKPS * .75),
           downBand = Math.ceil(data.downKPS * .75);
+
 
       //TODO if auto then do something with it
       // if (storage.data.autoBand) {
@@ -319,7 +534,13 @@ VertoService.speedTest = (callback=()=>{}) => {
       //   }
       // }
 
-      callback(data);
+      const returnData =  { ...data, upBand, downBand  };
+      // assign vidQual here since it will need it down stream
+      returnData.vidQual = d.vidQual;
+
+      //console.log('^^^^',d, returnData);
+
+      callback(returnData);
     });
   } else {
     console.log('v is bad');

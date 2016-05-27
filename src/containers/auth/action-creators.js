@@ -29,7 +29,7 @@ const doBNS = () => {
 const doMediaCheck = () => {
   return dispatch => {
     VertoService.mediaPerm((status)=>{ //permissions
-        console.log('^^^^^', status);
+        //console.log('^^^^^', status);
         if (!status) {
           dispatch(doNoMedia());
         } else {
@@ -44,7 +44,7 @@ const doResolutionRefresh = () => {
   return dispatch => {
     dispatch(doingResolutionRefresh());
     VertoService.refreshDevices((status) => {
-      console.log('doRefresh Resolution: ', status);
+      //console.log('doRefresh Resolution: ', status);
       if (status){
         dispatch(doShowLogin());
       } else {
@@ -59,7 +59,7 @@ const doSpeedTest = () => {
   return dispatch => {
     dispatch(doingSpeedTest());
     VertoService.speedTest((data)=>{
-      console.log('doing speed test : ', data);
+      //console.log('doing speed test : ', data);
       //TODO
       dispatch(doSpeedTestResults(data))
     });
@@ -70,8 +70,8 @@ const doSpeedTestResults = (data) => {
   const bw = {};
   bw.outgoingBandwidth = data.upKPS ?data.upKPS: undefined ;
   bw.incomingBandwidth = data.downKPS? data.downKPS: undefined;
-  bw.vidQual = undefined;
-
+  bw.vidQual = data.vidQual.label;
+  //console.log('BBBSSSWWWW:', bw);
   return {
     "type": "SPEED_TEST",
     "data": bw
@@ -135,7 +135,7 @@ const doBrowserValid = () => {
 }
 const doVertoLogin = (data) => {
   return dispatch => {
-    console.log('verto ....', data);
+    //console.log('verto ....', data);
     dispatch(doVertoLoginValid(data));
     dispatch(doSpeedTest());
 
@@ -144,7 +144,7 @@ const doVertoLogin = (data) => {
 }
 
 const doVertoLoginValid = (data) => {
-  console.log('****', data);
+  //console.log('****', data);
   return {
     "type": "VERTO_LOGIN",
     "data": data
