@@ -1,9 +1,9 @@
 import React from 'react';
-import VertoBaseComponent from './vertobase';
+import VertoBaseComponent from './vertobasecomponent';
 
  const propTypes = {
    browserData : React.PropTypes.object.isRequired,
-    compStyle : React.PropTypes.object
+   compStyle : React.PropTypes.object
 };
 
 class BrowserInfo extends VertoBaseComponent {
@@ -41,17 +41,17 @@ class BrowserInfo extends VertoBaseComponent {
 
         render() {
           return (
-              <div style={this.getStyle("bnsInfoStyle")}>
-                  <div style={this.getStyle("browserIconStyle")}>
+              <div style={this.getDefaultStyle("bnsInfoStyle")}>
+                  <div style={this.getDefaultStyle("browserIconStyle")}>
                       <a href={this.props.browserData.link} target="_blank">
                           {this.props.browserData.icon}
                       </a>
                   </div>
                   <div
-                      style={this.getStyle("browserNameStyle")}>
+                      style={this.getDefaultStyle("browserNameStyle")}>
                       {this.props.browserData.name}
                   </div>
-                  <div  style={this.getStyle("browserVersionStyle")}>
+                  <div  style={this.getDefaultStyle("browserVersionStyle")}>
                       {this.props.browserData.version}
                   </div>
               </div>

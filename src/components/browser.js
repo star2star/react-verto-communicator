@@ -1,5 +1,5 @@
 import React from 'react';
-import VertoBaseComponent from './vertobase';
+import VertoBaseComponent from './vertobasecomponent';
 import { FormattedMessage } from 'react-intl';
 import { EdgeBrowserIconSVG,
               ChromeBrowserIconSVG,
@@ -56,7 +56,7 @@ class Browser extends VertoBaseComponent {
 
   render() {
     return (
-    <div>Browser</div>
+    <div>Browser Not Supported</div>
       /*<div style={this.getStyle("pageStyle")}>
           <div
               className="headerContainer"
