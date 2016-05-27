@@ -29,7 +29,7 @@ class Auth extends VertoBaseComponent {
   }
 
   render() {
-    console.log('SPLLLL', Splash)
+
     /*
     let loggedInfo;
     switch (this.props.auth.showPage){
