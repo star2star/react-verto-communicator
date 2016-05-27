@@ -17,6 +17,10 @@ class AppBar extends VertoBaseComponent {
   componentWillMount() {
   }
 
+  getCompStyle() {
+    return this.props.compStyle;
+  }
+
   getDefaultStyle(styleName) {
     const styles = {
           appbarStyles: {
