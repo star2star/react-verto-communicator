@@ -16,7 +16,7 @@ const auth = (state, action)=>{
               sessionActive: false,
               sessionInfo: {
               },
-              showLogin: false
+              showLogin: true
             };
   }
 
@@ -24,13 +24,17 @@ const auth = (state, action)=>{
 
   switch (action.type) {
     case "SHOW_LOGIN":
-      return { ...state, showLogin: true };
+      return { ...state, showPage: 'login' };
     case "LOGOUT":
-        return { ...state, showLogin: true }
+        return { ...state, showPage: 'logout' }
     case 'AUTH_SUBMIT_LOGIN':
-      return { ...state, showLogin: false };
+      return { ...state, showPage: 'logout'};
     case 'VERTO_LOGIN':
-      return { ...state, showLogin: false };
+      return { ...state, showPage: 'loggedIn' };
+    case 'NO_MEDIA':
+      return { ...state, showPage: 'noMedia' };
+    case 'BNS':
+      return { ...state, showPage: 'bns' };
     default:
      return state;
     }
