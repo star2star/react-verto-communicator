@@ -44,11 +44,21 @@ const browserData = {
       expect(wrapper.prop('compStyle')).toEqual(undefined);
     });
 
+    it('does not renders compStyle if provided', () =>{
+       const wrapper = mount(<BrowserInfo browserData={browserData} compStyle={{height: '30px'}} />);
+       expect(wrapper.find('BrowserInfo').props().compStyle.height).toEqual('30px');
+     });
+
   it('renders if bnsInfoStyle is provided', () => {
     const wrapper = shallow(<BrowserInfo browserData={browserData} bnsInfoStyle={{display: 'inline-block', width: '11rem', textAlign: 'center'}} />)
+    console.log('------>', wrapper.prop('style'));
     expect(wrapper.prop('style')).toEqual({display: 'inline-block', width: '11rem', textAlign: 'center'});
   });
 
+  it('does not renders browserIconStyle if provided', () =>{
+     const wrapper = mount(<BrowserInfo browserData={browserData} browserIconStyle={{paddingLeft: '1rem'}} />);
+     expect(wrapper.find('BrowserInfo').props().browserIconStyle.paddingLeft).toEqual('1rem');
+   });
 
 
 });
