@@ -5,8 +5,10 @@ import { connect } from 'react-redux';
 //import ReactTooltip from 'react-tooltip';
 import VCStatus from '../../components/vcstatus';
 import { doSubmitLogin, doSubmitLogOut } from './action-creators';
-import Browser from '../../components/browser';
-import NoMedia from '../../components/nomedia';
+import Splash from '../../components/splash';
+
+
+
 
 class Auth extends VertoBaseComponent {
   constructor(props) {
@@ -27,6 +29,8 @@ class Auth extends VertoBaseComponent {
   }
 
   render() {
+    console.log('SPLLLL', Splash)
+    /*
     let loggedInfo;
     switch (this.props.auth.showPage){
       case 'login':
@@ -63,8 +67,11 @@ class Auth extends VertoBaseComponent {
       default:
         break;
     }
-
-    return (<div>auth {loggedInfo}</div>);
+    */
+    return (
+      <div>
+        <Splash />
+      </div>);
   }
 }
 
