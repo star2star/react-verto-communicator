@@ -14,9 +14,10 @@ class Splash extends VertoBaseComponent {
   render() {
 
     return (
-      <div>
-        <div>Loading</div>
-        <div>bar goes here</div>
+      <div style={{display: "flex", flexDirection: "column", alignItems: "center", width: "600px", background: "green", color: 'yellow'}}>
+        <div >Loading</div>
+        <div style={{background: "yellow", width: "500px", height: "20px", opacity: ".4"}}>
+        </div>
         <SplashMessage statusTitle="Media Check" />
       </div>);
   }
