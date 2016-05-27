@@ -116,10 +116,7 @@ class NetworkStatusIndicator extends VertoBaseComponent {
     const iconsContainer = (
       <div
           networkData={this.networkData}
-<<<<<<< HEAD
-=======
           style={this.getStyle('container')}
->>>>>>> 814ffc744c5214969f45e6d475e3ffbb3f85f76a
       >
         {icon}
         {caret}
@@ -127,21 +124,15 @@ class NetworkStatusIndicator extends VertoBaseComponent {
     );
 
     const menuContainer = (
-<<<<<<< HEAD
+
       <div className="menuContainer" style={this.getStyle('menu')} >
-=======
-      <div style={this.getStyle('menu')} >
->>>>>>> 814ffc744c5214969f45e6d475e3ffbb3f85f76a
         <div style={this.getStyle('header')} >
             Bandwidth Info
         </div>
         <div
             onClick={this.props.cbMenuClick}
             style={this.getStyle('li')}
-<<<<<<< HEAD
             className="upkpbs"
-=======
->>>>>>> 814ffc744c5214969f45e6d475e3ffbb3f85f76a
         >
           Outgoing: {this.props.networkData.upkpbs}
         </div>
