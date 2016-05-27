@@ -29,7 +29,6 @@ class NetworkStatusIndicator extends VertoBaseComponent {
   }
 
   getCompStyle() {
-    console.log('#### compStyle', this.props.compStyle);
     return this.props.compStyle;
   }
 
