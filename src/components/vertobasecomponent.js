@@ -35,7 +35,7 @@ class VertoBaseComponent extends React.Component {
 
     // apply style from props
     const compStyle = this.getCompStyle();
-    console.log('base style props', compStyle);
+    //console.log('base style props', compStyle);
     if(compStyle && compStyle[styleName]) {
       styleReturn = {...styleReturn, ...compStyle[styleName]};
     }

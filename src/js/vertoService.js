@@ -10,13 +10,12 @@ let _data;
 //class
 class VertoService {
   constructor(){
-    const instance = this;
     _data = {};
 
 
     _callbacks = {
       onMessage: (verto, dialog, msg, data) => {
-        console.log("in onMessage", data);
+        //console.log("in onMessage", data);
           switch (msg) {
               case $.verto.enum.message.pvtEvent:
                   if (data.pvtData) {
@@ -68,7 +67,7 @@ class VertoService {
                   break;
 
               case $.verto.enum.message.display:
-                  console.log("$.verto.enum.message.display", dialog.params.remote_caller_id_number);
+                  //console.log("$.verto.enum.message.display", dialog.params.remote_caller_id_number);
                   var party = dialog.params.remote_caller_id_name + "<" + dialog.params.remote_caller_id_number + ">";
                   //console.log('onMessage display', party, arguments);
                   //tell them who they are talking to
@@ -197,11 +196,11 @@ class VertoService {
       },
 
       onWSLogin: (v, success) => {
-          console.log('onWSLogin: ', v, success);
+          //console.log('onWSLogin: ', v, success);
           //display("");
 
           if (success) {
-            console.log('-- SUCCESS ---', v.options, _dispatch);
+            //console.log('-- SUCCESS ---', v.options, _dispatch);
               _dispatch(doVertoLogin(v.options));
               //TODO
               //Processor.starphone('userLoggedIn', {status: 'loggedin', type: 'ext-change', extensionId: s2sVerto.currentExtensionId, callerId: s2sVerto.callerId, callerName: s2sVerto.callerName, locationId: s2sVerto.locationId });
@@ -217,7 +216,7 @@ class VertoService {
       },
 
       onWSClose: (v, success) => {
-          console.log('onWSClose', arguments);
+          //console.log('onWSClose', arguments);
           _dispatch(doLogOut());
           //if (_loggedIn) {
             //var today = new Date();
@@ -240,7 +239,7 @@ class VertoService {
     this.getOptions = this.getOptions.bind(this);
 
     VertoService.getInstance = VertoService.getInstance.bind(this);
-    VertoService.login = VertoService.login.bind(instance);
+    VertoService.login = VertoService.login.bind(this);
     VertoService.logout = VertoService.logout.bind(this);
     VertoService.mediaPerm = VertoService.mediaPerm.bind(this);
     VertoService.speedTest = VertoService.speedTest.bind(this);
@@ -297,7 +296,7 @@ class VertoService {
   }
 
   static login(dispatch, data) {
-    console.log('DDDD', dispatch);
+    //console.log('DDDD', dispatch);
     _dispatch = dispatch;
     return VertoService.getInstance().login(data);
   }
@@ -317,12 +316,12 @@ class VertoService {
       let data = _data;
       let v = _verto.verto;
       if (!data){
-        console.log('this shouldnt be blank', data);
+        //console.log('this shouldnt be blank', data);
         data = {};
       }
 
 
-      console.log('VVVVVVV', v)
+      //console.log('VVVVVVV', v)
       if (v) {
         var w = resolutions['bestResSupported'][0];
         var h = resolutions['bestResSupported'][1];
@@ -353,9 +352,9 @@ class VertoService {
 
         });
 
-         console.log('ddddd:', data);
+         //console.log('ddddd:', data);
       } else {
-        console.debug('There is no instance of verto.');
+        //console.debug('There is no instance of verto.');
       }
 
     }, 0);
@@ -503,7 +502,7 @@ class VertoService {
 
       // This means that we cannot use video!
       if (data.videoDevices.length === 0) {
-        console.log('No camera, disabling video.');
+        //console.log('No camera, disabling video.');
         data.canVideo = false;
         data.videoDevices.push({
           id: 'none',
@@ -527,7 +526,7 @@ class VertoService {
         //console.log('vvv is good');
         v.rpcClient.speedTest(1024 * 256, (e, data) => {
           const d = _data;
-          console.log('spppppppppp', d, data)
+          //console.log('spppppppppp', d, data)
           var upBand = Math.ceil(data.upKPS * .75),
               downBand = Math.ceil(data.downKPS * .75);
 
@@ -556,7 +555,7 @@ class VertoService {
           callback(returnData);
         });
       } else {
-        console.log('v is bad');
+        //console.log('v is bad');
       }
 
     }
