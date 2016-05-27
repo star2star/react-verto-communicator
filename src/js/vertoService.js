@@ -289,5 +289,42 @@ VertoService.mediaPerm = (callback) => {
     $.FSRTC.checkPerms(callback, true, true);
 }
 
+VertoService.refreshDevices = (callback) => {
+  console.debug('Attempting to refresh the devices.');
+  $.verto.refreshDevices(callback);
+}
+
+VertoService.speedTest = (callback=()=>{}) => {
+  const v = _verto.get(window);
+  if (v){
+    console.log('vvv is good');
+    v.rpcClient.speedTest(1024 * 256, (e, data) => {
+
+      console.log('spppppppppp', e, data)
+      var upBand = Math.ceil(data.upKPS * .75),
+          downBand = Math.ceil(data.downKPS * .75);
+
+      //TODO if auto then do something with it
+      // if (storage.data.autoBand) {
+      //   storage.data.incomingBandwidth = downBand;
+      //   storage.data.outgoingBandwidth = upBand;
+      //   storage.data.useDedenc = false;
+      //   storage.data.vidQual = 'hd';
+      //
+      //   if (upBand < 512) {
+      //     storage.data.vidQual = 'qvga';
+      //   }
+      //   else if (upBand < 1024) {
+      //     storage.data.vidQual = 'vga';
+      //   }
+      // }
+
+      callback(data);
+    });
+  } else {
+    console.log('v is bad');
+  }
+
+}
 //exporting
 export default VertoService;

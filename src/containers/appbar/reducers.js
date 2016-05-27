@@ -36,6 +36,8 @@ const app = (state, action)=>{
   }
 
   switch (action.type) {
+    case "SPEED_TEST":
+      return { ...state, "bandwidthInfo": action.data }
     default:
       return state;
     }

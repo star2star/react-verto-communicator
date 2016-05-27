@@ -35,6 +35,10 @@ const auth = (state, action)=>{
       return { ...state, showPage: 'noMedia' };
     case 'BNS':
       return { ...state, showPage: 'bns' };
+    case 'RESOLUTION_REFRESH':
+      return { ...state, showPage: 'resolution_refresh' };
+    case 'RESOLUTION_FAILED':
+      return { ...state, showPage: 'resolution_failed' };
     default:
      return state;
     }

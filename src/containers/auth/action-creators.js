@@ -28,17 +28,75 @@ const doBNS = () => {
 }
 const doMediaCheck = () => {
   return dispatch => {
-    VertoService.mediaPerm((status)=>{
+    VertoService.mediaPerm((status)=>{ //permissions
         console.log('^^^^^', status);
         if (!status) {
           dispatch(doNoMedia());
         } else {
-          dispatch(doShowLogin());
+          dispatch(doResolutionRefresh());
         }
 
     });
   }
-}
+};
+
+const doResolutionRefresh = () => {
+  return dispatch => {
+    dispatch(doingResolutionRefresh());
+    VertoService.refreshDevices((status) => {
+      console.log('doRefresh Resolution: ', status);
+      if (status){
+        dispatch(doShowLogin());
+      } else {
+        dispatch(doResolutionFailed());
+      }
+
+    });
+  }
+};
+
+const doSpeedTest = () => {
+  return dispatch => {
+    dispatch(doingSpeedTest());
+    VertoService.speedTest((data)=>{
+      console.log('doing speed test : ', data);
+      //TODO
+      dispatch(doSpeedTestResults(data))
+    });
+  }
+};
+
+const doSpeedTestResults = (data) => {
+  const bw = {};
+  bw.outgoingBandwidth = data.upKPS ?data.upKPS: undefined ;
+  bw.incomingBandwidth = data.downKPS? data.downKPS: undefined;
+  bw.vidQual = undefined;
+
+  return {
+    "type": "SPEED_TEST",
+    "data": bw
+  }
+};
+
+const doingSpeedTest = () => {
+  return {
+    "type": "SPEED_TEST_INPROGRESS"
+  }
+};
+
+const doingResolutionRefresh = () => {
+  // rendering login through navigation
+  return {
+    "type": "RESOLUTION_REFRESH"
+  }
+};
+
+const doResolutionFailed = () => {
+  // rendering login through navigation
+  return {
+    "type": "RESOLUTION_FAILED"
+  }
+};
 
 const doShowLogin = () => {
   // rendering login through navigation
@@ -76,13 +134,22 @@ const doBrowserValid = () => {
   }
 }
 const doVertoLogin = (data) => {
-  console.log('vvvvvv', data);
+  return dispatch => {
+    console.log('verto ....', data);
+    dispatch(doVertoLoginValid(data));
+    dispatch(doSpeedTest());
+
+  }
+
+}
+
+const doVertoLoginValid = (data) => {
+  console.log('****', data);
   return {
     "type": "VERTO_LOGIN",
     "data": data
-  }
+  };
 }
-
 const doLogin = (data) => {
   return {
     type: "AUTH_SUBMIT_LOGIN",

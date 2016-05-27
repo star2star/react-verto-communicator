@@ -43,11 +43,17 @@ class Auth extends VertoBaseComponent {
           this.props.dispatch(doSubmitLogin(xLoginData));
         }} >Simulate login</div>);
         break;
+      case 'resolution_refresh':
+        loggedInfo = (<div >Resolution Refresh .... in progress</div>);
+        break;
       case 'loggedIn':
         loggedInfo = (<div style={{cursor: "pointer"}}  onClick={()=>{
           this.props.dispatch(doSubmitLogOut());
         }} >Simulate LOGOUT</div>);
-        break
+        break;
+      case 'resolution_failed':
+        loggedInfo = (<div >Resolution failed</div>);
+        break;
       case 'bns':
         loggedInfo = (<Browser />);
         break;
