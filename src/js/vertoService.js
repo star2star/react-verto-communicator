@@ -304,7 +304,7 @@ class VertoService {
 
   static logout(dispatch) {
     _dispatch = dispatch;
-    return VertoService.getInstance().logout();
+    return _verto.verto.logout();
   }
 
   static mediaPerm(callback) {
