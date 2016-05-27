@@ -7,6 +7,7 @@ import {IntlProvider} from 'react-intl';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
+
 import reducer from './containers/reducers.js';
 import Messages from './js/messages';
 
@@ -16,7 +17,7 @@ import App from './components/app';
 import Dial from './components/dial';
 import Auth from './containers/auth/index.js';
 import Session from './components/session';
-import Browser from './components/browser';
+
 import AppBar from './containers/appbar/index.js';
 
 
@@ -56,6 +57,7 @@ const store = createStore(reducer, applyMiddleware(thunk));
 window.theStore = store;
 
 store.dispatch(doBrowserCheck());
+browserHistory.push('#/login');
 
 ReactDOM.render((
   <Provider store={store}>
@@ -66,8 +68,8 @@ ReactDOM.render((
           <Route path="/" component={App}>
             <Route path="/login" component={Auth} />
             <Route path="/dial" component={Dial} />
-            <Route path="/session" component={Session}/>
-            <Route path="/bns" component={Browser}/>
+            <Route path="/session" component={Session} />
+
           </Route>
         </Router>
       </StyleRoot>

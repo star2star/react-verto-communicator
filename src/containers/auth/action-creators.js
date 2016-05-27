@@ -1,5 +1,4 @@
 import VertoService from '../../js/vertoService';
-import { browserHistory } from 'react-router'
 
 const doBrowserCheck = () => {
   return dispatch => {
@@ -8,18 +7,41 @@ const doBrowserCheck = () => {
       navigator.mozGetUserMedia;
 
     if (!navigator.getUserMedia) {
-      browserHistory.push('#/bns');
+      dispatch(doBNS());
     } else {
       dispatch(doBrowserValid());
-      dispatch(doShowLogin());
+      dispatch(doMediaCheck());
     }
 
+  }
+}
+const doNoMedia = () => {
+  return {
+    type: "NO_MEDIA"
+  }
+
+}
+const doBNS = () => {
+  return {
+    type: "BNS"
+  }
+}
+const doMediaCheck = () => {
+  return dispatch => {
+    VertoService.mediaPerm((status)=>{
+        console.log('^^^^^', status);
+        if (!status) {
+          dispatch(doNoMedia());
+        } else {
+          dispatch(doShowLogin());
+        }
+
+    });
   }
 }
 
 const doShowLogin = () => {
   // rendering login through navigation
-  browserHistory.push('#/login');
   return {
     "type": "SHOW_LOGIN"
   }
