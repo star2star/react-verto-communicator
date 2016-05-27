@@ -1,5 +1,6 @@
 import React from 'react';
-import VertoBaseComponent from './vertobase';
+import VertoBaseComponent from './vertobasecomponent';
+
 //prop valudation
 const propTypes = {
   errorObject: React.PropTypes.object,
@@ -28,14 +29,17 @@ class SplashMessage extends VertoBaseComponent{
       };
       return (styles[styleName]);
   }
+
   render() {
     let errorMessage;
     if(this.props.errorObject){
       errorMessage = this.props.errorObject;
     }
+    return (<div>aaaa</div>);
   }
 }
 
+export default SplashMessage;
 //return tiitle && errorMessage
 //return(<div> {statusTitle} </div>
          //<div>   )

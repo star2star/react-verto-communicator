@@ -16,6 +16,10 @@ class Browser extends VertoBaseComponent {
     super(props);
   }
 
+  getCompStyle() {
+    return this.props.compStyle;
+  }
+
   getDefaultStyle(styleName) {
     const styles = {
       browserStyles : {
@@ -61,15 +65,13 @@ class Browser extends VertoBaseComponent {
           <div
               className="headerContainer"
               style={this.getStyle("headerContainerStyle")}>
-            <BrowserVideoHeader
                 titleStyle={this.getStyle("titleStyle")}
                 bhTitle=<FormattedMessage
                     id="bh.browserSupportTitle"
-                    defaultMessage="Browser not supported"/>
+                    value="Browser not supported"/>
                 bhText=<FormattedMessage
                     id="bh.browserSupportText"
                     defaultMessage="The browser you are using isn't supported by our software. Please see below for alternate browser you can use. Once you have chosen an alternative browser you'll be able to access the session link using it."/>
-            />
             </div>
 
                 <div style={{width:'100%'}}>
