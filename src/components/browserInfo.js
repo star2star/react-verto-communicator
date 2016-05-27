@@ -1,15 +1,9 @@
 import React from 'react';
-import VertoBaseComponent from '../../components/vertobase';
+import VertoBaseComponent from './vertobase';
 
  const propTypes = {
-    browserIcon : React.PropTypes.object.isRequired,
-    browserLink : React.PropTypes.string.isRequired,
-    browserName : React.PropTypes.object.isRequired,
-    browserVersion : React.PropTypes.object.isRequired,
-    ariaLabel : React.PropTypes.string,
-    role : React.PropTypes.string,
-    tabIndex : React.PropTypes.number,
-    style : React.PropTypes.object
+   browserData : React.PropTypes.object.isRequired,
+    compStyle : React.PropTypes.object
 };
 
 class BrowserInfo extends VertoBaseComponent {
@@ -48,31 +42,17 @@ class BrowserInfo extends VertoBaseComponent {
         render() {
           return (
               <div style={this.getStyle("bnsInfoStyle")}>
-                  <div
-                      style={this.getStyle("browserIconStyle")}
-                      tabIndex={this.props.tabIndex}
-                      >
-                      <a
-                          href ={this.props.browserLink} target="_blank"
-                          ariaLabel={this.props.ariaLabel}
-                          role={this.props.role}
-                        >
-                        {this.props.browserIcon}
+                  <div style={this.getStyle("browserIconStyle")}>
+                      <a href={this.props.browserData.link} target="_blank">
+                          {this.props.browserData.icon}
                       </a>
                   </div>
                   <div
-                      style={this.getStyle("browserNameStyle")}
-                      ariaLabel={this.props.ariaLabel}
-                      tabIndex={this.props.tabIndex}
-                      >
-                      {this.props.browserName}
+                      style={this.getStyle("browserNameStyle")}>
+                      {this.props.browserData.name}
                   </div>
-                  <div
-                      style={this.getStyle("browserVersionStyle")}
-                      tabIndex={this.props.tabIndex}
-                      ariaLabel={this.props.ariaLabel}
-                      >
-                      {this.props.browserVersion}
+                  <div  style={this.getStyle("browserVersionStyle")}>
+                      {this.props.browserData.version}
                   </div>
               </div>
 
@@ -83,3 +63,12 @@ class BrowserInfo extends VertoBaseComponent {
 BrowserInfo.propTypes = propTypes;
 
 export default BrowserInfo;
+
+/*
+const browserData = {
+  icon:
+  name:
+  link:
+  version:
+};
+*/
