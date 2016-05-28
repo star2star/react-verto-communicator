@@ -3,13 +3,14 @@ import SvgIcons from './svgIcons';
 
 const propTypes = {
   Style : React.PropTypes.object,
-  cbCall: React.PropTypes.func.isRequired
+  cbCall: React.PropTypes.func.isRequired,
+  nbrToDial: React.PropTypes.string
 };
 
 class Dialpad extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {number: ''};
+    this.state = {number: this.props.nbrToDial};
   }
 
   makeCall(){
@@ -18,7 +19,7 @@ class Dialpad extends React.Component {
   }
 
   changingNumber(e){
-    //TODO convert letter to numeric 
+    //TODO convert letter to numeric
     this.setState({ ...this.state, number: e.target.value });
   }
 

@@ -54,7 +54,7 @@ class Auth extends VertoBaseComponent {
       case 'loggedIn':
         loggedInfo = (
           <div>
-            <Dialpad cbCall={this.makeCall.bind(this)} />
+            <Dialpad cbCall={this.makeCall.bind(this)} nbrToDial="1000" />
             <div style={{cursor: "pointer"}}  onClick={()=>{
               this.props.dispatch(doSubmitLogOut());
             }} >Simulate LOGOUT</div>
