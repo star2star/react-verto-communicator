@@ -7,6 +7,7 @@ import VCStatus from '../../components/vcstatus';
 import { doSubmitLogin, doSubmitLogOut } from './action-creators';
 import Splash from '../../components/splash';
 import Login from '../../components/login';
+import Dialpad from '../../components/dialpad';
 
 
 
@@ -28,6 +29,10 @@ class Auth extends VertoBaseComponent {
     return (styles[styleName]);
   }
 
+  makeCall(number) {
+    console.log('calling ...', number);
+  }
+
   render() {
 
 
@@ -47,9 +52,13 @@ class Auth extends VertoBaseComponent {
         loggedInfo = (<div >Resolution Refresh .... in progress</div>);
         break;
       case 'loggedIn':
-        loggedInfo = (<div style={{cursor: "pointer"}}  onClick={()=>{
-          this.props.dispatch(doSubmitLogOut());
-        }} >Simulate LOGOUT</div>);
+        loggedInfo = (
+          <div>
+            <Dialpad cbCall={this.makeCall.bind(this)} />
+            <div style={{cursor: "pointer"}}  onClick={()=>{
+              this.props.dispatch(doSubmitLogOut());
+            }} >Simulate LOGOUT</div>
+        </div>);
         break;
       case 'resolution_failed':
         //TODO fix splash object here intl
