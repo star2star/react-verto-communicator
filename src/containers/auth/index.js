@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 import VCStatus from '../../components/vcstatus';
 import { doSubmitLogin, doSubmitLogOut } from './action-creators';
 import Splash from '../../components/splash';
-
+import Dialpad from '../../components/dialpad';
+import Login from '../../components/login';
 
 
 
@@ -35,17 +36,20 @@ class Auth extends VertoBaseComponent {
     switch (this.props.auth.showPage){
       case 'login':
       case 'logout':
-        loggedInfo = (<div style={{cursor: "pointer"}} onClick={()=>{
-          const xLoginData = { ...this.props.auth.loginSettings};
-          xLoginData.callerId = 'James';
-          xLoginData.email = 'james@james.com';
-          xLoginData.user = 1008;
-          xLoginData.hostname = "verto.star2starglobal.com";
-          xLoginData.name = "James Schimmoeller";
-          xLoginData.wsURL = "wss://verto.star2starglobal.com:8082"
+        loggedInfo = (
+          <div>
+            <Login cbClick={()=>{
+              const xLoginData = { ...this.props.auth.loginSettings};
+              xLoginData.callerId = 'James';
+              xLoginData.email = 'james@james.com';
+              xLoginData.user = 1008;
+              xLoginData.hostname = "verto.star2starglobal.com";
+              xLoginData.name = "James Schimmoeller";
+              xLoginData.wsURL = "wss://verto.star2starglobal.com:8082"
 
-          this.props.dispatch(doSubmitLogin(xLoginData));
-        }} >Simulate login</div>);
+              this.props.dispatch(doSubmitLogin(xLoginData));
+            }} />
+        </div>);
         break;
       case 'resolution_refresh':
         loggedInfo = (<div >Resolution Refresh .... in progress</div>);
