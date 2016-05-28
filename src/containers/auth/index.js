@@ -30,7 +30,7 @@ class Auth extends VertoBaseComponent {
 
   render() {
 
-    /*
+
     let loggedInfo;
     switch (this.props.auth.showPage){
       case 'login':
@@ -67,10 +67,11 @@ class Auth extends VertoBaseComponent {
       default:
         break;
     }
-    */
+
     return (
       <div>
-        <Splash />
+        {loggedInfo}
+        <Splash step={this.props.auth.splash} />
       </div>);
   }
 }

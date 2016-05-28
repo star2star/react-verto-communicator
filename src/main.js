@@ -11,7 +11,7 @@ import thunk from 'redux-thunk';
 import reducer from './containers/reducers.js';
 import Messages from './js/messages';
 
-import { doBrowserCheck } from './containers/auth/action-creators';
+import { doValidation } from './containers/auth/action-creators';
 
 import App from './components/app';
 import Dial from './components/dial';
@@ -56,7 +56,7 @@ const store = createStore(reducer, applyMiddleware(thunk));
 
 window.theStore = store;
 
-store.dispatch(doBrowserCheck());
+store.dispatch(doValidation());
 browserHistory.push('#/login');
 
 ReactDOM.render((

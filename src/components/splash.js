@@ -3,6 +3,11 @@ import VertoBaseComponent from './vertobasecomponent';
 import SplashMessage from './splashmessage';
 
 const propTypes = {
+  step:   React.PropTypes.shape({
+    number: React.PropTypes.number,
+    current: React.PropTypes.number,
+    title: React.PropTypes.string
+  }).isRequired,
   Style : React.PropTypes.object
 };
 
@@ -18,7 +23,7 @@ class Splash extends VertoBaseComponent {
         <div style={{paddingBottom: "20px"}}>Loading</div>
         <div style={{background: "yellow", width: "500px", height: "20px", opacity: ".4" }}>
         </div>
-        <SplashMessage statusTitle="Media Check" errorObject={{header: 'error', body: 'Message'}} />
+        <SplashMessage statusTitle={this.props.step.title} errorObject={{header: 'error', body: 'Message'}} />
       </div>);
   }
 }

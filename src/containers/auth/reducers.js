@@ -24,6 +24,8 @@ const auth = (state, action)=>{
   //TODO ta handle actions type changes to state...
 
   switch (action.type) {
+    case 'VALIDATION':
+      return { ...state, splash: action.data };
     case "SHOW_LOGIN":
       return { ...state, showPage: 'login', vcStatus: 'disconnected' };
     case "LOGOUT":
