@@ -57,15 +57,15 @@ class Auth extends VertoBaseComponent {
         break;
       case 'resolution_failed':
         //TODO fix splash object here intl
-        loggedInfo = (<div >Resolution failed</div>);
+        //loggedInfo = (<div >Resolution failed</div>);
         break;
       case 'bns':
         //TODO fix splash object here intl
-        loggedInfo = (<Browser />);
+        //loggedInfo = (<Browser />);
         break;
       case 'noMedia':
         //TODO fix splash object here intl
-        loggedInfo = (<NoMedia />);
+        //loggedInfo = (<NoMedia />);
         break;
       default:
         break;
