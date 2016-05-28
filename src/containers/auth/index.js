@@ -56,22 +56,28 @@ class Auth extends VertoBaseComponent {
         }} >Simulate LOGOUT</div>);
         break;
       case 'resolution_failed':
+        //TODO fix splash object here intl
         loggedInfo = (<div >Resolution failed</div>);
         break;
       case 'bns':
+        //TODO fix splash object here intl
         loggedInfo = (<Browser />);
         break;
       case 'noMedia':
+        //TODO fix splash object here intl
         loggedInfo = (<NoMedia />);
         break;
       default:
         break;
     }
-
+    let showSplash;
+    if (this.props.auth.splash && this.props.auth.splash.current != this.props.auth.splash.number) {
+      showSplash = (<Splash step={this.props.auth.splash} />);
+    }
     return (
       <div>
         {loggedInfo}
-        <Splash step={this.props.auth.splash} />
+        {showSplash}
       </div>);
   }
 }

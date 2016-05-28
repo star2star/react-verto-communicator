@@ -20,13 +20,14 @@ const doValidation = (step=1) => {
   }
 }
 
-const doingValidation = (step, title, number) => {
+const doingValidation = (step, title, number, errorObject) => {
   return {
     type: "VALIDATION",
     data: {
       current: step,
       title: title,
-      number: number
+      number: number,
+      errorObject
     }
   }
 }
