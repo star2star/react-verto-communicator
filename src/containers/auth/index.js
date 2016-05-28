@@ -38,10 +38,8 @@ class Auth extends VertoBaseComponent {
         loggedInfo = (
           <div>
             <Login cbClick={(data)=>{
-              const xLoginData = { ...data};
-              xLoginData.wsURL = data.websocketurl;
-
-              this.props.dispatch(doSubmitLogin(xLoginData));
+              // fix websocket url
+              this.props.dispatch(doSubmitLogin({ ...data, wsURL: data.websocketurl }));
             }} settings={this.props.auth.loginSettings} />
         </div>);
         break;
