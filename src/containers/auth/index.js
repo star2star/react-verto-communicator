@@ -38,17 +38,12 @@ class Auth extends VertoBaseComponent {
       case 'logout':
         loggedInfo = (
           <div>
-            <Login cbClick={()=>{
-              const xLoginData = { ...this.props.auth.loginSettings};
-              xLoginData.callerId = 'James';
-              xLoginData.email = 'james@james.com';
-              xLoginData.user = 1008;
-              xLoginData.hostname = "verto.star2starglobal.com";
-              xLoginData.name = "James Schimmoeller";
-              xLoginData.wsURL = "wss://verto.star2starglobal.com:8082"
+            <Login cbClick={(data)=>{
+              const xLoginData = { ...data};
+              xLoginData.wsURL = data.websocketurl;
 
               this.props.dispatch(doSubmitLogin(xLoginData));
-            }} />
+            }} settings={this.props.auth.loginSettings} />
         </div>);
         break;
       case 'resolution_refresh':

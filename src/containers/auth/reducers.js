@@ -5,13 +5,13 @@ const auth = (state, action)=>{
     // be a direct copy of the 'local storage' that Verto originally used...
     // This is just here to get the 'store' started up
     return  { loginSettings :{
-                name: '',
-                email: '',
+                name: 'James',
+                email: 'James@james.com',
                 user: 1008,
                 password: '1234',
-                callerId: '',
-                hostname: 'localhost',
-                wsURL: 'wss://locahost:8082'
+                callerid: 'James',
+                hostname: 'verto.star2starglobal.com',
+                websocketurl: 'wss://verto.star2starglobal.com:8082'
               },
               sessionActive: false,
               sessionInfo: {
