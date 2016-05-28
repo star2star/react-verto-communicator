@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import VCStatus from '../../components/vcstatus';
 import { doSubmitLogin, doSubmitLogOut } from './action-creators';
 import Splash from '../../components/splash';
-import Dialpad from '../../components/dialpad';
 import Login from '../../components/login';
 
 
