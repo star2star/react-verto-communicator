@@ -9,7 +9,7 @@ const defaultProps = {
   allowDisplayDetails : false
 };
 
-class UserMenuItem extends VertoBaseComponent {
+class MenuItem extends VertoBaseComponent {
   constructor(props) {
     super(props);
   }
@@ -49,6 +49,6 @@ class UserMenuItem extends VertoBaseComponent {
   }
 }
 
-UserMenuItem.propTypes = propTypes;
-UserMenuItem.defaultProps = defaultProps;
-export default UserMenuItem;
+MenuItem.propTypes = propTypes;
+MenuItem.defaultProps = defaultProps;
+export default MenuItem;

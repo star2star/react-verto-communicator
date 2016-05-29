@@ -7,7 +7,9 @@ import WhiteLabel from '../../js/whitelabel.js';
 import VCStatus from '../../components/vcstatus';
 import NetworkStatusIndicator from '../../components/nsindicator';
 import UserMenu from '../../components/userMenu';
-import UserMenuItem from '../../components/userMenuItem';
+import MenuItem from '../../components/menuItem';
+import TagMenu from '../../components/tagMenu';
+import Settings from '../../components/settings';
 import { doSubmitLogOut } from '../main/action-creators';
 
 class AppBar extends VertoBaseComponent {
@@ -98,20 +100,36 @@ class AppBar extends VertoBaseComponent {
             {nsIndicator}
             <VCStatus status = {this.props.vcStatus} compStyle={{svgStyle:{marginRight: '20px'}}}/>
             {lastCall}
-            <div style={{marginRight: '20px'}}> S </div>
+            <div style={{marginRight: '20px'}}>
+              <Settings />
+            </div>
             <div style={{marginRight: '20px'}}>
               <UserMenu allowDisplayDetails={this.props.vcStatus != 'disconnected'} >
-                <UserMenuItem label="Open New Window" cbAction={()=>{
+                <MenuItem label="Open New Window" cbAction={()=>{
                   window.open(location.href);
                 }} />
-                <UserMenuItem label="Change Login Information" cbAction={()=>{
+                <MenuItem label="Change Login Information" cbAction={()=>{
                   this.props.dispatch(doSubmitLogOut());
                 }} />
-                <UserMenuItem label="Logout" cbAction={()=>{this.props.dispatch(doSubmitLogOut())}} />
+                <MenuItem label="Logout" cbAction={()=>{
+                  this.props.dispatch(doSubmitLogOut())
+                }} />
               </UserMenu>
 
             </div>
-            <div style={{marginRight: '20px'}}> A </div>
+            <div style={{marginRight: '20px'}}>
+              <TagMenu allowDisplayDetails="true" >
+                <MenuItem label="About" cbAction={()=>{
+                  //TODO dispatch
+                }} />
+                <MenuItem label="Contributors" cbAction={()=>{
+                  //TODO dispatch
+                }} />
+                <MenuItem label="Help" cbAction={()=>{
+                  window.open('https://freeswitch.org/confluence/display/FREESWITCH/Verto+Communicator');
+                }} />
+              </TagMenu>
+            </div>
           </span>
         </div>
       </div>
