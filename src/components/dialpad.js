@@ -1,5 +1,6 @@
 import React from 'react';
-import SvgIcons from './svgIcons';
+import VertoBaseComponent from './vertobasecomponent';
+import Numberpad from './numberpad';
 
 const propTypes = {
   Style : React.PropTypes.object,
@@ -7,7 +8,7 @@ const propTypes = {
   nbrToDial: React.PropTypes.string
 };
 
-class Dialpad extends React.Component {
+class Dialpad extends VertoBaseComponent {
   constructor(props) {
     super(props);
     this.state = {number: this.props.nbrToDial};
@@ -23,6 +24,10 @@ class Dialpad extends React.Component {
     this.setState({ ...this.state, number: e.target.value });
   }
 
+  dialNumber(k) {
+    this.setState({ ...this.state, number: this.state.number + k });
+  }
+
   render() {
     return (
       <div style={{background: "green", color: "yellow", display: "flex", alignItems: "center", flexDirection: "column", width: "300px", height: "400px"}}>
@@ -30,7 +35,7 @@ class Dialpad extends React.Component {
           <input value={this.state.number} onChange={this.changingNumber.bind(this)}/>
           <button onClick={this.makeCall.bind(this)}>Call</button>
         </div>
-
+        <Numberpad cbClick={this.dialNumber.bind(this)} />
       </div>);
   }
 }
