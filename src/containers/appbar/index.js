@@ -6,6 +6,9 @@ import WhiteLabel from '../../js/whitelabel.js';
 //import ReactTooltip from 'react-tooltip';
 import VCStatus from '../../components/vcstatus';
 import NetworkStatusIndicator from '../../components/nsindicator';
+import UserMenu from '../../components/userMenu';
+import UserMenuItem from '../../components/userMenuItem';
+import { doSubmitLogOut } from '../main/action-creators';
 
 class AppBar extends VertoBaseComponent {
   constructor(props) {
@@ -52,6 +55,7 @@ class AppBar extends VertoBaseComponent {
     return (styles[styleName]);
   }
 
+
   render() {
     //console.log('#### window theme style', window.theme);
     //console.log('this.props.settings', this.props.settings);
@@ -95,7 +99,18 @@ class AppBar extends VertoBaseComponent {
             <VCStatus status = {this.props.vcStatus} compStyle={{svgStyle:{marginRight: '20px'}}}/>
             {lastCall}
             <div style={{marginRight: '20px'}}> S </div>
-            <div style={{marginRight: '20px'}}> U </div>
+            <div style={{marginRight: '20px'}}>
+              <UserMenu allowDisplayDetails={this.props.vcStatus != 'disconnected'} >
+                <UserMenuItem label="Open New Window" cbAction={()=>{
+                  window.open(location.href);
+                }} />
+                <UserMenuItem label="Change Login Information" cbAction={()=>{
+                  this.props.dispatch(doSubmitLogOut());
+                }} />
+                <UserMenuItem label="Logout" cbAction={()=>{this.props.dispatch(doSubmitLogOut())}} />
+              </UserMenu>
+
+            </div>
             <div style={{marginRight: '20px'}}> A </div>
           </span>
         </div>

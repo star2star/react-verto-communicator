@@ -55,9 +55,6 @@ class Main extends VertoBaseComponent {
         loggedInfo = (
           <div>
             <Dialpad cbCall={this.makeCall.bind(this)} nbrToDial="1000" />
-            <div style={{cursor: "pointer"}}  onClick={()=>{
-              this.props.dispatch(doSubmitLogOut());
-            }} >Simulate LOGOUT</div>
         </div>);
         break;
       case 'resolution_failed':
