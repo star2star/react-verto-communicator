@@ -14,9 +14,8 @@ import Messages from './js/messages';
 import { doValidation } from './containers/auth/action-creators';
 
 import App from './components/app';
-import Dial from './components/dial';
-import Auth from './containers/auth/index.js';
-import Session from './components/session';
+import Main from './containers/main/index.js';
+
 
 import AppBar from './containers/appbar/index.js';
 
@@ -63,15 +62,8 @@ ReactDOM.render((
   <Provider store={store}>
     <IntlProvider locale={locale} messages={messages}>
       <StyleRoot>
-        <AppBar />
-        <Router history={hashHistory}>
-          <Route path="/" component={App}>
-            <Route path="/login" component={Auth} />
-            <Route path="/dial" component={Dial} />
-            <Route path="/session" component={Session} />
-
-          </Route>
-        </Router>
+          <AppBar />
+          <Main />
       </StyleRoot>
     </IntlProvider>
   </Provider>

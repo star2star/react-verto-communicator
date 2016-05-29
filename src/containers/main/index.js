@@ -11,7 +11,7 @@ import Dialpad from '../../components/dialpad';
 
 
 
-class Auth extends VertoBaseComponent {
+class Main extends VertoBaseComponent {
   constructor(props) {
     super(props);
 
@@ -80,7 +80,7 @@ class Auth extends VertoBaseComponent {
       showSplash = (<Splash step={this.props.auth.splash} />);
     }
     return (
-      <div>
+      <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
         {loggedInfo}
         {showSplash}
       </div>);
@@ -91,4 +91,4 @@ export default connect((state)=>{
   return ({
     auth: state.auth
   });
-})(Auth);
+})(Main);
