@@ -117,7 +117,7 @@ class AppBar extends VertoBaseComponent {
     const settingsMenu = this.getSettingsMenu();
 
     return (
-      <div style={{position: "absolute", left: "0", right: "0", top: "0"}}>
+      <div style={{position: "absolute", left: "0px", right: "0px", top: "0px"}}>
         <div className="appbar" style={this.getStyle('appbarStyles')}>
           <span className="appName" style={this.getStyle("appNameStyles")}>{appName}</span>
 
