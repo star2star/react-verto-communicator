@@ -14,6 +14,7 @@ class App extends VertoBaseComponent {
     this.modal = undefined;
     App.toggleModal = this.toggleModal.bind(this);
   }
+  
   toggleModal(aModal){
     //console.log('aaaaa')
     if (!this.state.isModalOpen) {
