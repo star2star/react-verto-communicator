@@ -86,7 +86,7 @@ class NetworkStatusIndicator extends VertoBaseComponent {
 
   render() {
 
-    console.log('&&&&&&&&&&&&& this.props.compStyle', this.props.compStyle);
+    //console.log('&&&&&&&&&&&&& this.props.compStyle', this.props.compStyle);
 
     let bwp = 4;
     const networkData = this.props.networkData;

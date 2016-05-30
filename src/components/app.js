@@ -3,8 +3,6 @@ import { Link } from 'react-router'
 import VertoBaseComponent from './vertobasecomponent';
 
 import Main from '../containers/main/index.js';
-import Modal from 'react-modal';
-
 import AppBar from '../containers/appbar/index.js';
 
 class App extends VertoBaseComponent {
@@ -14,7 +12,7 @@ class App extends VertoBaseComponent {
     this.modal = undefined;
     App.toggleModal = this.toggleModal.bind(this);
   }
-  
+
   toggleModal(aModal){
     //console.log('aaaaa')
     if (!this.state.isModalOpen) {
