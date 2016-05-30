@@ -13,6 +13,7 @@ import Settings from '../../components/settings';
 import { doSubmitLogOut } from '../main/action-creators';
 import App from '../../components/app';
 import About from '../../components/about';
+import Contributors from '../../components/contributors';
 
 
 class AppBar extends VertoBaseComponent {
@@ -148,11 +149,12 @@ class AppBar extends VertoBaseComponent {
             <div style={{marginRight: '20px'}}>
               <TagMenu allowDisplayDetails="true" >
                 <MenuItem label="About" cbAction={()=>{
-                  //TODO dispatch
+
                   App.toggleModal((<About />));
                 }} />
                 <MenuItem label="Contributors" cbAction={()=>{
-                  //TODO dispatch
+
+                  App.toggleModal((<Contributors />));
                 }} />
                 <MenuItem label="Help" cbAction={()=>{
                   window.open('https://freeswitch.org/confluence/display/FREESWITCH/Verto+Communicator');
