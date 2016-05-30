@@ -6,7 +6,8 @@ CaretUpIconSVG,
 CaretDownIconSVG } from './svgIcons';
 
 const propTypes = {
-  compStyle : React.PropTypes.object
+  compStyle : React.PropTypes.object,
+  cbClick: React.PropTypes.func.isRequired
 };
 
 const defaultProps = {
@@ -16,7 +17,11 @@ const defaultProps = {
 class Settings extends VertoBaseComponent {
   constructor(props) {
     super(props);
-    this.state = {'dropdownDisplayed': false};
+    this.state = {'dropdownDisplayed': this.props.allowDisplayDetails };
+
+    this.showMenu = this.showMenu.bind(this);
+
+    Settings.toggleSettings = this.showMenu;
   }
 
   getCompStyle() {
@@ -73,7 +78,9 @@ class Settings extends VertoBaseComponent {
 
   showMenu() {
     if (this.props.allowDisplayDetails) {
-      this.setState({...this.state, dropdownDisplayed: !this.state.dropdownDisplayed});
+      const newShow = !this.state.dropdownDisplayed;
+      this.props.cbClick(newShow)
+      this.setState({...this.state, dropdownDisplayed: newShow});
     }
   }
 

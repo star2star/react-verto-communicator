@@ -16,7 +16,7 @@ class AppBar extends VertoBaseComponent {
   constructor(props) {
     super(props);
 
-    this.state={};
+    this.state={showSettings: false };
   }
 
   componentWillMount() {
@@ -51,13 +51,36 @@ class AppBar extends VertoBaseComponent {
           },
           lastCallStyles: {
             marginRight: '15px'
+          },
+          settingsStyles: {
+            opacity: '.7',
+            backgroundColor: 'purple',
+            color: 'yellow'
           }
         };
 
     return (styles[styleName]);
   }
 
+  settings(displaySettings) {
+    //console.log('toggle settings', displaySettings);
+    this.setState({ ...this.state, showSettings: displaySettings });
+  }
 
+  getSettingsMenu(){
+    let rSettings;
+
+    if (this.state.showSettings) {
+      rSettings = (
+        <div style={this.getStyle('settingsStyles')}>
+          settings here
+        </div>
+      );
+    }
+    //console.log('aaaa', rSettings, this.state.showSettings );
+
+    return rSettings;
+  }
   render() {
     //console.log('#### window theme style', window.theme);
     //console.log('this.props.settings', this.props.settings);
@@ -90,6 +113,8 @@ class AppBar extends VertoBaseComponent {
       );
     }
 
+    // settings here
+    const settingsMenu = this.getSettingsMenu();
 
     return (
       <div style={{position: "absolute", left: "0", right: "0", top: "0"}}>
@@ -101,7 +126,7 @@ class AppBar extends VertoBaseComponent {
             <VCStatus status = {this.props.vcStatus} compStyle={{svgStyle:{marginRight: '20px'}}}/>
             {lastCall}
             <div style={{marginRight: '20px'}}>
-              <Settings />
+              <Settings  allowDisplayDetails={this.props.vcStatus != 'disconnected'} cbClick={this.settings.bind(this)} />
             </div>
             <div style={{marginRight: '20px'}}>
               <UserMenu allowDisplayDetails={this.props.vcStatus != 'disconnected'} >
@@ -132,6 +157,7 @@ class AppBar extends VertoBaseComponent {
             </div>
           </span>
         </div>
+        {settingsMenu}
       </div>
     );
   }
