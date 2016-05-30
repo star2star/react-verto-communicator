@@ -11,6 +11,9 @@ import MenuItem from '../../components/menuItem';
 import TagMenu from '../../components/tagMenu';
 import Settings from '../../components/settings';
 import { doSubmitLogOut } from '../main/action-creators';
+import App from '../../components/app';
+import About from '../../components/about';
+
 
 class AppBar extends VertoBaseComponent {
   constructor(props) {
@@ -146,6 +149,7 @@ class AppBar extends VertoBaseComponent {
               <TagMenu allowDisplayDetails="true" >
                 <MenuItem label="About" cbAction={()=>{
                   //TODO dispatch
+                  App.toggleModal((<About />));
                 }} />
                 <MenuItem label="Contributors" cbAction={()=>{
                   //TODO dispatch

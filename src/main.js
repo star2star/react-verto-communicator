@@ -8,16 +8,15 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
 
+
+
 import reducer from './containers/reducers.js';
 import Messages from './js/messages';
 
 import { doValidation } from './containers/auth/action-creators';
 
 import App from './components/app';
-import Main from './containers/main/index.js';
 
-
-import AppBar from './containers/appbar/index.js';
 
 
 function getLanguage(){
@@ -62,8 +61,7 @@ ReactDOM.render((
   <Provider store={store}>
     <IntlProvider locale={locale} messages={messages}>
       <StyleRoot>
-          <AppBar />
-          <Main />
+        <App />
       </StyleRoot>
     </IntlProvider>
   </Provider>

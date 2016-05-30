@@ -1,14 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router'
+import VertoBaseComponent from './vertobasecomponent';
 
-class App extends React.Component {
+import Main from '../containers/main/index.js';
+import Modal from 'react-modal';
+
+import AppBar from '../containers/appbar/index.js';
+
+class App extends VertoBaseComponent {
+  constructor(props){
+    super(props)
+    this.state = {isModalOpen: false};
+    this.modal = undefined;
+    App.toggleModal = this.toggleModal.bind(this);
+  }
+  toggleModal(aModal){
+    //console.log('aaaaa')
+    if (!this.state.isModalOpen) {
+      this.modal = aModal;
+    } else {
+      this.modal = undefined;
+    }
+
+    this.setState({ ...this.state, isModalOpen: !this.state.isModalOpen });
+
+  }
   render(){
     return (
       <div>
-        <Link to="/login" activeClassName="active" >Login</Link>&nbsp;
-        <Link to="/dial" activeClassName="active" >Dial</Link>&nbsp;
-        <Link to="/session" activeClassName="active" >Session</Link>&nbsp;
-        {this.props.children}
+        <AppBar />
+        <Main />
+        {this.modal}
+
       </div>);
 
   }
