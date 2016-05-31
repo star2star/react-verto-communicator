@@ -183,6 +183,10 @@ const doMakeCall = (aPhoneNumber, appSettings) => {
     VertoService.getInstance().makeCall(aPhoneNumber, appSettings);
     // dispatching so we change from not authorized to pending
     // Thunk here
+    setTimeout(()=>{
+      dispatch(doMakeCallError({destination: aPhoneNumber, error:"manually aborted"}));
+
+    }, 5000);
 
   };
 };
