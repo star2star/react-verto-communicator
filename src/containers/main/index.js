@@ -4,10 +4,11 @@ import VertoBaseComponent from '../../components/vertobasecomponent';
 import { connect } from 'react-redux';
 //import ReactTooltip from 'react-tooltip';
 import VCStatus from '../../components/vcstatus';
-import { doSubmitLogin, doSubmitLogOut } from './action-creators';
+import { doSubmitLogin, doSubmitLogOut, doMakeCall } from './action-creators';
 import Splash from '../../components/splash';
 import Login from '../../components/login';
 import Dialpad from '../../components/dialpad';
+
 
 
 
@@ -30,7 +31,8 @@ class Main extends VertoBaseComponent {
   }
 
   makeCall(number) {
-    console.log('calling ...', number);
+    console.log('calling ...', number, this.props.app);
+    this.props.dispatch(doMakeCall(number, this.props.app));
   }
 
   render() {
@@ -86,6 +88,7 @@ class Main extends VertoBaseComponent {
 
 export default connect((state)=>{
   return ({
-    auth: state.auth
+    auth: state.auth,
+    app: state.app
   });
 })(Main);

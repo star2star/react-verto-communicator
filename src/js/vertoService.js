@@ -1,11 +1,13 @@
-import {doLogOut, doVertoLogin } from '../containers/main/action-creators';
+import {doLogOut, doVertoLogin, doMakeCallError } from '../containers/main/action-creators';
 import VideoConstants from './VideoConstants';
+import md5 from 'md5';
 
 // private stuff
 let _callbacks;
 let _dispatch;
 let _verto;
 let _data;
+let _loginData;
 
 //class
 class VertoService {
@@ -283,8 +285,42 @@ class VertoService {
           googNoiseSuppression: true,
           googHighpassFilter: true
         },
-        iceServers: true
+        iceServers: true,
+        loginParams: data
       };
+  }
+
+  makeCall(destination, settings) {
+    console.log('calling desitnation', destination);
+    if (!_verto.verto) {
+      const message = "not connected";
+      return _dispatch(doMakeCallError({destination, message }));
+    }
+    // ok make a call
+    console.log('DATA & VERTO:', _data, _verto.verto, md5(_verto.verto.options.loginParams.email));
+    /*
+    const phoneObject = {
+      destination_number: destination,
+      caller_id_name: _verto.verto.options.loginParams.name,
+      caller_id_number: _verto.verto.options.loginParams.callerid ? _verto.verto.options.loginParams.callerid  : _verto.verto.options.loginParams.email ,
+      //outgoingBandwidth: storage.data.outgoingBandwidth,
+      //incomingBandwidth: storage.data.incomingBandwidth,
+      // get from settings
+      useVideo: true, // storage.data.useVideo,
+      useStereo: true, //storage.data.useStereo,
+      useCamera: true, // storage.data.selectedVideo,
+      useSpeak: storage.data.selectedSpeaker,
+      useMic: storage.data.selectedAudio,
+      dedEnc: storage.data.useDedenc,
+      mirrorInput: storage.data.mirrorInput,
+      userVariables: {
+        email :  _verto.verto.options.loginParams.email, //storage.data.email,
+        avatar:  "http://gravatar.com/avatar/" + md5(_verto.verto.options.loginParams.email) + ".png?s=600"    // "http://gravatar.com/avatar/" + md5(storage.data.email) + ".png?s=600"
+      }
+    };
+
+    _verto.verto.newCall()
+    */
   }
 
   static getInstance() {
@@ -296,7 +332,7 @@ class VertoService {
   }
 
   static login(dispatch, data) {
-    //console.log('DDDD', dispatch);
+    //console.log('LOGIN DDDD', data);
     _dispatch = dispatch;
     return VertoService.getInstance().login(data);
   }
