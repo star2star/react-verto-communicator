@@ -38,6 +38,9 @@ const app = (state, action)=>{
   switch (action.type) {
     case "SPEED_TEST":
       return { ...state, "bandwidthInfo": action.data }
+    case "SETTINGS_UPDATE":
+      console.log("settings update JES: ", action.data);
+      return { ...state, settings: { ...state.settings, ...action.data} };
     default:
       return state;
     }

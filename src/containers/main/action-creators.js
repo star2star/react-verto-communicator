@@ -74,6 +74,8 @@ const doResolutionRefresh = () => {
     VertoService.refreshDevices((status) => {
       //console.log('doRefresh Resolution: ', status);
       if (status){
+        const resolutionInstanceData = VertoService.getInstanceData();
+        dispatch(doUpdateSettings(resolutionInstanceData));
         dispatch(doValidation(4));
       } else {
         dispatch({
@@ -202,5 +204,12 @@ const doingMakeCall = (aPhoneNumber) => {
     "data": aPhoneNumber
   }
 };
+
+const doUpdateSettings = (aData) => {
+  return {
+    "type": "SETTINGS_UPDATE",
+    "data": aData
+  }
+}
 
 export { doValidation, doSubmitLogin, doShowLogin, doVertoLogin, doSubmitLogOut, doLogOut, doBrowserCheck, doMakeCall, doMakeCallError };
