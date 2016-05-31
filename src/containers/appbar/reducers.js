@@ -54,7 +54,8 @@ const app = (state, action)=>{
 
   switch (action.type) {
     case "SPEED_TEST":
-      return { ...state, "bandwidthInfo": action.data }
+      //video quality only is available after login which is speed test time 
+      return { ...state, "bandwidthInfo": action.data, settings: { ...state.settings, vidQual: action.data.vidQual, videoQuality: action.videoQuality } };
     case "SETTINGS_UPDATE":
       //console.log("settings update JES: ", action.data);
       return { ...state, settings: { ...state.settings, ...action.data, bandwidth: VideoConstants.BAND_WIDTH} };
