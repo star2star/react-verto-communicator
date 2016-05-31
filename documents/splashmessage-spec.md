@@ -17,7 +17,7 @@ This component will be a 'pure' component.
 | ------------ | ------------- | ------------- |
 | progressTitle | "Checking media permissions." | This is what will display underneath the loading bar. This provides the user with updates on what the communicator is doing when it is loading. |
 | compStyle | compStyle = {} | This prop is an object and is not required. This object sets the style for this component |
-| errorObject | errorObject = {header: "Error", body: "Please enable your webcam and refresh the page"  } | This prop is an object that contains two strings. These two strings are used to print out an error message. |
+| errorObject | errorObject = {header: "Error", body: "Please enable your webcam and refresh the page"  } | This prop is an object and is not required. The contents of this object are used to print out an error message. |
 
 ## b. Component State ##
 
