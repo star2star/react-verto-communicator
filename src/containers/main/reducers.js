@@ -25,7 +25,7 @@ const auth = (state, action)=>{
 
   switch (action.type) {
     case 'VALIDATION':
-      return { ...state, splash: action.data };
+      return { ...state, showPage: 'splash', splash: action.data };
     case "SHOW_LOGIN":
       return { ...state, showPage: 'login', vcStatus: 'disconnected' };
     case "LOGOUT":
@@ -42,6 +42,10 @@ const auth = (state, action)=>{
       return { ...state, showPage: 'resolution_refresh'  };
     case 'RESOLUTION_FAILED':
       return { ...state, showPage: 'resolution_failed'  };
+    case 'CALLING':
+      return { ...state, showPage: 'call_inprogress', destination: action.data };
+    case 'CALLING_ERROR':
+      return { ...state, showPage: 'loggedIn', error: action.data };
     default:
      return state;
     }

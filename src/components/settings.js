@@ -1,5 +1,6 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent.js';
+import { FormattedMessage } from 'react-intl';
 import {
 SettingsIconSVG,
 CaretUpIconSVG,
@@ -36,13 +37,13 @@ class Settings extends VertoBaseComponent {
         position: 'relative'
       },
       icon: {
-        height: '32px',
-        width: '32px'
+        height: '24px',
+        width: '24px'
       },
       caret: {
         fill: '#fff',
         flexGrow: 1,
-        height: '20px',
+        height: '16px',
         width: '20px',
         paddingBottom: '3px'
       },

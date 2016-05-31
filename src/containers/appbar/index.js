@@ -15,6 +15,7 @@ import App from '../../components/app';
 import About from '../../components/about';
 import Contributors from '../../components/contributors';
 import { MenuIconSVG } from '../../components/svgIcons';
+import { FormattedMessage } from 'react-intl';
 
 
 class AppBar extends VertoBaseComponent {
@@ -186,13 +187,13 @@ class AppBar extends VertoBaseComponent {
             </div>
             <div style={!this.state.showAltAppControls ? {marginRight: '20px'}:{marginBottom:'10px'}}>
               <UserMenu allowDisplayDetails={this.props.vcStatus != 'disconnected'} >
-                <MenuItem label="Open New Window" cbAction={()=>{
+                <MenuItem label={<FormattedMessage id='OPEN_NEW_WINDOW' />}cbAction={()=>{
                   window.open(location.href);
                 }} />
-                <MenuItem label="Change Login Information" cbAction={()=>{
+                <MenuItem label={<FormattedMessage id='CHANGE_LOGIN_INFO' />} cbAction={()=>{
                   this.props.dispatch(doSubmitLogOut());
                 }} />
-                <MenuItem label="Logout" cbAction={()=>{
+                <MenuItem label={<FormattedMessage id='LOGOUT' />} cbAction={()=>{
                   this.props.dispatch(doSubmitLogOut());
                 }} />
               </UserMenu>

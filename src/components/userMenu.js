@@ -17,6 +17,9 @@ class UserMenu extends VertoBaseComponent {
   constructor(props) {
     super(props);
     this.state = {'dropdownDisplayed': false};
+
+    this.toggleMenu = this.toggleMenu.bind(this);
+    UserMenu.toggleMenu = this.toggleMenu.bind(this);
   }
 
   getCompStyle() {
@@ -30,22 +33,21 @@ class UserMenu extends VertoBaseComponent {
         position: 'relative'
       },
       icon: {
-        height: '32px',
-        width: '32px',
+        height: '24px',
+        width: '24px',
         cursor: 'pointer'
       },
       caret: {
         fill: '#fff',
         flexGrow: 1,
         cursor: 'pointer',
-        height: '20px',
+        height: '16px',
         width: '20px',
         paddingBottom: '3px'
       },
       menu: {
         position: 'absolute',
         fontSize: '14px',
-        //top: '60px',
         right: '100px',
         minWidth: '160px',
         padding: '5px 0',
@@ -57,34 +59,13 @@ class UserMenu extends VertoBaseComponent {
         borderBottomLeftRadius: '4px',
         borderBottomRightRadius: '4px',
         boxShadow: '0 2px 5px 0 rgba(0,0,0,.25)'
-      },
-      // header: {
-      //   display: 'flex',
-      //   justifyContent: 'center',
-      //   color: '#4a4a4a',
-      //   padding: '5px',
-      //   backgroundColor: '#F7F7F7',
-      //   fontFamily: 'sans-serif'
-      // },
-      ul: {
-
-      },
-      li: {
-        color: 'red',
-        //padding: '8px 20px',
-        //padding: '20px 20px',
-        fontWeight: '400',
-        fontSize: '14px',
-        fontFamily: 'sans-serif'
       }
-
     };
-
     return (styles[styleName]);
   }
 
 
-  showMenu() {
+  toggleMenu() {
     if (this.props.allowDisplayDetails) {
       this.setState({...this.state, dropdownDisplayed: !this.state.dropdownDisplayed});
     }
@@ -100,7 +81,7 @@ class UserMenu extends VertoBaseComponent {
 
 
     return (
-      <span onClick={this.showMenu.bind(this)}  >
+      <span onClick={this.toggleMenu.bind(this)}  >
         <AvatarSVG svgStyle={{...this.getStyle('icon'), fill: 'white'}}  />
           {this.state.dropdownDisplayed ?
               <CaretUpIconSVG svgStyle={{...this.getStyle('caret'), fill: 'white'}} /> :

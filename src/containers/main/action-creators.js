@@ -74,6 +74,8 @@ const doResolutionRefresh = () => {
     VertoService.refreshDevices((status) => {
       //console.log('doRefresh Resolution: ', status);
       if (status){
+        const resolutionInstanceData = VertoService.getInstanceData();
+        dispatch(doUpdateSettings(resolutionInstanceData));
         dispatch(doValidation(4));
       } else {
         dispatch({
@@ -177,12 +179,16 @@ const doSubmitLogOut = () =>{
 };
 
 // making a phone call
-const doMakeCall = (aPhoneNumber) => {
+const doMakeCall = (aPhoneNumber, appSettings) => {
   return dispatch => {
     dispatch(doingMakeCall(aPhoneNumber));
-    VertoService.getInstance().makeCall(aPhoneNumber);
+    VertoService.getInstance().makeCall(aPhoneNumber, appSettings);
     // dispatching so we change from not authorized to pending
     // Thunk here
+    setTimeout(()=>{
+      dispatch(doMakeCallError({destination: aPhoneNumber, error:"manually aborted"}));
+
+    }, 5000);
 
   };
 };
@@ -198,5 +204,12 @@ const doingMakeCall = (aPhoneNumber) => {
     "data": aPhoneNumber
   }
 };
+
+const doUpdateSettings = (aData) => {
+  return {
+    "type": "SETTINGS_UPDATE",
+    "data": aData
+  }
+}
 
 export { doValidation, doSubmitLogin, doShowLogin, doVertoLogin, doSubmitLogOut, doLogOut, doBrowserCheck, doMakeCall, doMakeCallError };
