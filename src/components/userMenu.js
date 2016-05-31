@@ -30,15 +30,15 @@ class UserMenu extends VertoBaseComponent {
         position: 'relative'
       },
       icon: {
-        height: '32px',
-        width: '32px',
+        height: '24px',
+        width: '24px',
         cursor: 'pointer'
       },
       caret: {
         fill: '#fff',
         flexGrow: 1,
         cursor: 'pointer',
-        height: '20px',
+        height: '16px',
         width: '20px',
         paddingBottom: '3px'
       },
