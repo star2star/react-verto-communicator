@@ -37,9 +37,7 @@ class AppBar extends VertoBaseComponent {
             alignItems: 'center',
             justifyContent: 'space-between',
             flexDirection: 'row',
-            order: '0',
             backgroundColor: '#0544a4',
-            width: '100%',
             color: '#FFFFFF',
             height: '70px'
           },
@@ -51,8 +49,15 @@ class AppBar extends VertoBaseComponent {
           appControlStyles: {
             display: 'flex',
             marginRight: '10px',
-            justifyContent: 'space-around'
+            justifyContent: 'space-around',
+            alignItems: 'center'
+
+            // '@media (max-width: 768px)': {
+            //
+            // }
           },
+
+
           lastCallStyles: {
             marginRight: '15px'
           },
