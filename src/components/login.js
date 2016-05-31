@@ -1,7 +1,7 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
-import SvgIcons from './svgIcons';
-import ReactIntl, { FormattedMessage } from 'react-intl';
+//import SvgIcons from './svgIcons';
+import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-intl';
 
 const propTypes = {
   Style : React.PropTypes.object,
@@ -42,10 +42,12 @@ class Login extends VertoBaseComponent{
   submitLogin() {
     //TODO validate data before sending
     //console.log('submitting login with this data: ', this.state.settings);
-    this.props.cbClick(this.state.settings)
+    this.props.cbClick(this.state.settings);
   }
   //TODO intl
   render() {
+    const { formatMessage } = this.props.intl;
+
     let moreSettings;
     if (this.state.advanced) {
       moreSettings = (
@@ -62,8 +64,8 @@ class Login extends VertoBaseComponent{
     return (
       <div style={{background: "green", color: "yellow", display: "flex", alignItems: "center", flexDirection: "column", width: "300px"}}>
         <div><FormattedMessage id="LOGIN" /></div>
-        <Input label="Name" placeholder="Enter your name" cbChanging={this.changingInput.bind(this)}  value={this.state.settings.name}/>
-        <Input label="Email" placeholder="Your Email"  cbChanging={this.changingInput.bind(this)}  value={this.state.settings.email }/>
+        <Input label={formatMessage({"id":"NAME", "defaultMessage":"Name"})} placeholder="Enter your name" cbChanging={this.changingInput.bind(this)}  value={this.state.settings.name}/>
+        <Input label="Email" placeholder="Your Email"  cbChanging={this.changingInput.bind(this)}  value={this.state.settings.email}/>
         {moreSettings}
         <div>
           <span onClick={()=>{
@@ -77,4 +79,4 @@ class Login extends VertoBaseComponent{
 
 Login.propTypes = propTypes;
 
-export default Login;
+export default injectIntl(Login);

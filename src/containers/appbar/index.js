@@ -141,7 +141,7 @@ class AppBar extends VertoBaseComponent {
                   this.props.dispatch(doSubmitLogOut());
                 }} />
                 <MenuItem label="Logout" cbAction={()=>{
-                  this.props.dispatch(doSubmitLogOut())
+                  this.props.dispatch(doSubmitLogOut());
                 }} />
               </UserMenu>
 
