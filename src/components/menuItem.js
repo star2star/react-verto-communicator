@@ -25,9 +25,10 @@ class MenuItem extends VertoBaseComponent {
         position: 'relative'
       },
       li: {
-        color: '#4a4a4a',
-        paddingLeft: '10px',
-        paddingRight: '10px',
+        color: '#333',
+        padding: '5px 20px',
+        // paddingLeft: '10px',
+        // paddingRight: '10px',
         fontFamily: 'sans-serif',
         cursor: 'pointer'
       }
