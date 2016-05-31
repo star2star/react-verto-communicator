@@ -149,5 +149,8 @@
   "CHAT_GAIN_MINUS": "Gain -",
   "CHAT_GAIN_PLUS": "Gain +",
   "LANGUAGE": "Language:",
-  "BROWSER_LANGUAGE": "Browser Language"
+  "BROWSER_LANGUAGE": "Browser Language",
+  "MORE_SETTINGS": "More Settings",
+  "LESS_SETTINGS": "Less Settings",
+  "YOUR_PASSWORD": "Your Password"
 }]

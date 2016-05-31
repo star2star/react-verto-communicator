@@ -138,5 +138,20 @@
   "CHECK_CONNECTION_SPEED": " Verificar la velocidad de conexión.",
   "ERROR_PERMISSION_MEDIA": "Error: permiso de medios negado",
   "ERROR_PROVISIONING_CONF": "Error: Provisión falló.",
-  "PLEASE_WAIT": "Por favor espere..."
+  "PLEASE_WAIT": "Por favor espere...",
+  "CANCEL": "Cancelar",
+  "CHAT_TITLE_VOL_MINUS": "Volumen -",
+  "CHAT_TITLE_VOL_PLUS": "Volumen +",
+  "CHAT_TITLE_GAIN_MINUS": "Ganancia -",
+  "CHAT_TITLE_GAIN_PLUS": "Ganancia +",
+  "CHAT_VOL_MINUS": "Vol -",
+  "CHAT_VOL_PLUS": "Vol +",
+  "CHAT_GAIN_MINUS": "Ganancia -",
+  "CHAT_GAIN_PLUS": "Ganancia +",
+  "LANGUAGE": "Lengua:",
+  "BROWSER_LANGUAGE": "Lengua del navegador",
+  "MORE_SETTINGS": "Más Configuraciónes",
+  "LESS_SETTINGS": "Menos Configuraciónes",
+  "YOUR_PASSWORD": "Su Contraseña"
+
 }]
