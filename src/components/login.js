@@ -1,7 +1,7 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
-import SvgIcons from './svgIcons';
-import ReactIntl, { FormattedMessage } from 'react-intl';
+//import SvgIcons from './svgIcons';
+import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-intl';
 
 const propTypes = {
   Style : React.PropTypes.object,
@@ -17,7 +17,7 @@ class Input extends VertoBaseComponent {
           (e) =>{
             this.props.cbChanging(this.props.label.replace(' ', '').toLowerCase(), e.target.value );
           }
-        } value={this.props.value}/></div>
+        } defaultValue={this.props.value}/></div>
       </div>);
   }
 }
@@ -46,30 +46,67 @@ class Login extends VertoBaseComponent{
   }
   //TODO intl
   render() {
+    const { formatMessage } = this.props.intl;
+
     let moreSettings;
     if (this.state.advanced) {
       moreSettings = (
         <span>
-          <Input label="User" placeholder="User i.e. 1008"  cbChanging={this.changingInput.bind(this)} value={this.state.settings.user}/>
-          <Input label="Password" placeholder="Your Password i.e. 1234"  cbChanging={this.changingInput.bind(this)}  value={this.state.settings.password}/>
-          <Input label="Caller ID" placeholder="Caller ID"  cbChanging={this.changingInput.bind(this)} value={this.state.settings.callerid}/>
-          <Input label="Hostname" placeholder="Hostname" cbChanging={this.changingInput.bind(this)}  value={this.state.settings.hostname}/>
-          <Input label="Websocket URL" placeholder="websocket url" cbChanging={this.changingInput.bind(this)}  value={this.state.settings.websocketurl}/>
+          <Input
+              label={formatMessage({"id":"USER", "defaultMessage":"User"})}
+              placeholder= {formatMessage({"id":"USER", "defaultMessage":"User"})+" i.e. 1008"}
+              cbChanging={this.changingInput.bind(this)}
+              value={this.state.settings.user}
+          />
+          <Input
+              label={formatMessage({"id":"PASSWORD", "defaultMessage":"Password"})}
+              placeholder={formatMessage({"id":"YOUR_PASSWORD", "defaultMessage":"Your Password"})+" i.e. 1234"}
+              cbChanging={this.changingInput.bind(this)}
+              value={this.state.settings.password}
+          />
+          <Input
+              label={formatMessage({"id":"CALLER_ID", "defaultMessage":"Caller Id"})}
+              placeholder={formatMessage({"id":"CALLER_ID", "defaultMessage":"Caller Id"})}
+              cbChanging={this.changingInput.bind(this)}
+              value={this.state.settings.callerid}
+          />
+          <Input
+              label={formatMessage({"id":"HOSTNAME", "defaultMessage":"Hostname"})}
+              placeholder={formatMessage({"id":"HOSTNAME", "defaultMessage":"Hostname"})}
+              cbChanging={this.changingInput.bind(this)}
+              value={this.state.settings.hostname}
+          />
+          <Input
+              label={formatMessage({"id":"WEBSOCKET_URL", "defaultMessage":"Websocket URL"})}
+              placeholder={formatMessage({"id":"WEBSOCKET_URL", "defaultMessage":"Websocket URL"})}
+              cbChanging={this.changingInput.bind(this)}
+              value={this.state.settings.websocketurl}/>
         </span>
       );
     }
 
     return (
       <div style={{background: "green", color: "yellow", display: "flex", alignItems: "center", flexDirection: "column", width: "300px"}}>
-        <div><FormattedMessage id="LOGIN" /></div>
-        <Input label="Name" placeholder="Enter your name" cbChanging={this.changingInput.bind(this)}  value={this.state.settings.name}/>
-        <Input label="Email" placeholder="Your Email"  cbChanging={this.changingInput.bind(this)}  value={this.state.settings.email }/>
+        <div><FormattedMessage id="LOGIN" defaultMessage="Login"/></div>
+        <Input
+            label={formatMessage({"id":"NAME", "defaultMessage":"Name"})}
+            placeholder={formatMessage({"id":"YOUR_NAME", "defaultMessage":"Your name"})}
+            cbChanging={this.changingInput.bind(this)}
+            value={this.state.settings.name}
+        />
+        <Input
+            label={formatMessage({"id":"EMAIL", "defaultMessage":"Email"})}
+            placeholder={formatMessage({"id":"YOUR_EMAIL", "defaultMessage":"Your email"})}
+            cbChanging={this.changingInput.bind(this)}
+            value={this.state.settings.email}
+        />
         {moreSettings}
         <div>
           <span onClick={()=>{
             this.setState({...this.state, advanced: !this.state.advanced });
-          }}>{this.state.advanced ? "Less Settings" : "More Settings"}</span>
-          <button onClick={this.submitLogin.bind(this)}>Login</button>
+          }}>{this.state.advanced ? <FormattedMessage id="LESS_SETTINGS" defaultMessage="Less Settings"/> :
+              <FormattedMessage id="MORE_SETTINGS" defaultMessage="More Settings"/>}</span>
+          <button onClick={this.submitLogin.bind(this)}><FormattedMessage id="LOGIN" defaultMessage="Login"/></button>
         </div>
       </div>);
   }
@@ -77,4 +114,4 @@ class Login extends VertoBaseComponent{
 
 Login.propTypes = propTypes;
 
-export default Login;
+export default injectIntl(Login);

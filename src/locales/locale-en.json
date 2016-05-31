@@ -159,6 +159,8 @@
   "BROWSER_NAME_FIREFOX": "Firefox",
   "BROWSER_VERSIONS_FIREFOX": "All",
   "BROWSER_NAME_OPERA": "Opera",
-  "BROWSER_VERSIONS_OPERA": "All"
-
+  "BROWSER_VERSIONS_OPERA": "All",
+  "MORE_SETTINGS": "More Settings",
+  "LESS_SETTINGS": "Less Settings",
+  "YOUR_PASSWORD": "Your Password"
 }]

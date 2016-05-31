@@ -58,8 +58,8 @@ class AppBar extends VertoBaseComponent {
           },
           settingsStyles: {
             opacity: '.7',
-            backgroundColor: 'purple',
-            color: 'yellow'
+            backgroundColor: '#0A387F',
+            color: '#FFFFFF'
           }
         };
 
@@ -141,7 +141,7 @@ class AppBar extends VertoBaseComponent {
                   this.props.dispatch(doSubmitLogOut());
                 }} />
                 <MenuItem label="Logout" cbAction={()=>{
-                  this.props.dispatch(doSubmitLogOut())
+                  this.props.dispatch(doSubmitLogOut());
                 }} />
               </UserMenu>
 
