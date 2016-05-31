@@ -80,7 +80,7 @@ class Browser extends VertoBaseComponent {
 
                         <BrowserInfo
                             browserIcon=<EdgeBrowserIconSVG
-                                svgStyle={{fill: '#6b6c6c', height: '24px', width: '24px'}}/>
+                                svgStyle={{height: '24px', width: '24px'}}/>
                             browserName=<FormattedMessage
                                 id="bns.edge"
                                 defaultMessage="Edge"/>
@@ -91,7 +91,7 @@ class Browser extends VertoBaseComponent {
 
                         <BrowserInfo
                             browserIcon=<ChromeBrowserIconSVG
-                                svgStyle={{fill: '#6b6c6c', height: '24px', width: '24px'}}
+                                svgStyle={{'height: '24px', width: '24px'}}
                               />
                             browserLink={WhiteLabel.get('chromeDownloadURL')}
                             browserName=<FormattedMessage
@@ -104,7 +104,7 @@ class Browser extends VertoBaseComponent {
 
                         <BrowserInfo
                             browserIcon=<FireFoxBrowserIconSVG
-                                svgStyle={{fill: '#6b6c6c', height: '24px', width: '24px'}}
+                                svgStyle={{ height: '24px', width: '24px'}}
                               />
                             browserLink={WhiteLabel.get('firefoxDownloadURL')}
                             browserName=<FormattedMessage
@@ -117,7 +117,7 @@ class Browser extends VertoBaseComponent {
 
                       <BrowserInfo
                           browserIcon=<OperaBrowserIconSVG
-                              svgStyle={{fill: '#6b6c6c', height: '24px', width: '24px'}} />
+                              svgStyle={{height: '24px', width: '24px'}} />
                           browserLink={WhiteLabel.get('safariDownloadURL')}
                           browserName=<FormattedMessage
                               id="bns.operaName"
