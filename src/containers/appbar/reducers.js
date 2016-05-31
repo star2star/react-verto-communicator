@@ -15,7 +15,21 @@ const app = (state, action)=>{
 
                 mirrorInput: false, // scale video
                 askRecoverCall: false, // ask before recovering
-                language: undefined,
+                language: 'en',
+                languages: [
+                     {id: 'en', name: 'English'},
+                     {id: 'it', name: 'Italiano'},
+                     {id: 'fr', name: 'Français'},
+                     {id: 'de', name: 'Deutsch'},
+                     {id: 'pt', name: 'Português'},
+                     {id: 'pl', name: 'Polski'},
+                     {id: 'zh', name: '中國'},
+                     {id: 'ru', name: 'Pусский'},
+                     {id: 'sv', name: 'Svenska'},
+                     {id: 'da', name: 'Dansk'},
+                     {id: 'es', name: 'Español'},
+                     {id: 'id', name: 'Indonesia'}
+                ],
                 googEchoCancellation: true,
                 googNoiseSuppression: true,
                 googHighpassFilter: true,
