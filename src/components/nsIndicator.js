@@ -7,6 +7,7 @@ SignalFullIconSVG,
 SignalLowIconSVG,
 CaretUpIconSVG,
 CaretDownIconSVG } from './svgIcons';
+import { FormattedMessage } from 'react-intl';
 
 
 const propTypes = {
@@ -53,7 +54,7 @@ class NetworkStatusIndicator extends VertoBaseComponent {
       menu: {
         position: 'absolute',
         //zIndex: 1,
-        minWidth: '250px',
+        //minWidth: '250px',
         top: '40px',
         right: '20px',
         display: this.state.dropdownDisplayed ? 'flex' : 'none',
@@ -79,6 +80,7 @@ class NetworkStatusIndicator extends VertoBaseComponent {
         fontFamily: 'sans-serif'
       },
       li: {
+        minWidth: '250px',
         color: '#333',
         fontSize: '14px',
         fontWeight: 400,
@@ -86,9 +88,7 @@ class NetworkStatusIndicator extends VertoBaseComponent {
         backgroundColor: '#fff',
         padding: '5px',
         paddingLeft: '15px',
-        paddingRight: '15px',
-        // borderBottomLeftRadius: '4px',
-        // borderBottomRightRadius: '4px'
+        paddingRight: '15px'
       }
 
     };
@@ -144,26 +144,26 @@ class NetworkStatusIndicator extends VertoBaseComponent {
 
       <div className="menuContainer" style={this.getStyle('menu')} >
         <div style={this.getStyle('header')} >
-            Bandwidth Info
+            <FormattedMessage id="BANDWIDTH_INFO" />
         </div>
         <div
             onClick={this.props.cbMenuClick}
             style={this.getStyle('li')}
             className="upkpbs"
         >
-          Outgoing: {this.props.networkData.upkpbs}
+          <FormattedMessage id="BANDWIDTH_INFO_OUTGOING" /> {this.props.networkData.upkpbs}
         </div>
         <div
             onClick={this.props.cbMenuClick}
             style={this.getStyle('li')}
         >
-          Incoming: {this.props.networkData.downkpbs}
+          <FormattedMessage id="BANDWIDTH_INFO_INCOMING" /> {this.props.networkData.downkpbs}
         </div>
         <div
             onClick={this.props.cbMenuClick}
             style={this.getStyle('li')}
         >
-            Video Resolution: {this.props.networkData.vidQual}
+            <FormattedMessage id="BANDWIDTH_INFO_VIDEO_RES" /> {this.props.networkData.vidQual}
         </div>
       </div>
     );
