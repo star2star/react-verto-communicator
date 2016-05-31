@@ -1,5 +1,6 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent.js';
+import Radium from 'radium';
 
 const propTypes = {
   compStyle : React.PropTypes.object
@@ -27,10 +28,11 @@ class MenuItem extends VertoBaseComponent {
       li: {
         color: '#333',
         padding: '5px 20px',
-        // paddingLeft: '10px',
-        // paddingRight: '10px',
         fontFamily: 'sans-serif',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        ':hover': {
+          color: '#009688'
+        }
       }
 
     };
@@ -52,4 +54,4 @@ class MenuItem extends VertoBaseComponent {
 
 MenuItem.propTypes = propTypes;
 MenuItem.defaultProps = defaultProps;
-export default MenuItem;
+export default Radium(MenuItem);
