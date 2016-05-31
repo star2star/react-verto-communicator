@@ -176,5 +176,27 @@ const doSubmitLogOut = () =>{
   };
 };
 
+// making a phone call
+const doMakeCall = (aPhoneNumber) => {
+  return dispatch => {
+    dispatch(doingMakeCall(aPhoneNumber));
+    VertoService.getInstance().makeCall(aPhoneNumber);
+    // dispatching so we change from not authorized to pending
+    // Thunk here
 
-export { doValidation, doSubmitLogin, doShowLogin, doVertoLogin, doSubmitLogOut, doLogOut, doBrowserCheck };
+  };
+};
+const doMakeCallError = (aErrorObject) =>{
+  return {
+    "type": "CALLING_ERROR",
+    "data": aErrorObject
+  }
+}
+const doingMakeCall = (aPhoneNumber) => {
+  return {
+    "type": "CALLING",
+    "data": aPhoneNumber
+  }
+};
+
+export { doValidation, doSubmitLogin, doShowLogin, doVertoLogin, doSubmitLogOut, doLogOut, doBrowserCheck, doMakeCall, doMakeCallError };

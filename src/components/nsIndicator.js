@@ -74,7 +74,7 @@ class NetworkStatusIndicator extends VertoBaseComponent {
         padding: '5px',
         paddingTop: '10px',
         paddingBottom: '10px',
-        margin: '0',
+        margin: '0px',
         borderBottom: '1px solid #ebebeb',
         backgroundColor: '#F7F7F7',
         fontFamily: 'sans-serif'

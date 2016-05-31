@@ -13,6 +13,7 @@
   "license": "MIT",
   "dependencies": {
     "json-loader": "^0.5.4",
+    "md5": "^2.1.0",
     "radium": "^0.17.1",
     "react": "^15.0.2",
     "react-dom": "^15.0.2",

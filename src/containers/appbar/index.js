@@ -62,7 +62,7 @@ class AppBar extends VertoBaseComponent {
             marginRight: '15px'
           },
           settingsStyles: {
-            opacity: '.7',
+            opacity: '.9',
             backgroundColor: '#0A387F',
             color: '#FFFFFF'
           }
@@ -135,7 +135,8 @@ class AppBar extends VertoBaseComponent {
             <VCStatus status = {this.props.vcStatus} compStyle={{svgStyle:{marginRight: '20px'}}}/>
             {lastCall}
             <div style={{marginRight: '20px'}}>
-              <Settings  allowDisplayDetails={this.props.vcStatus != 'disconnected'} cbClick={this.settings.bind(this)} />
+              <Settings  allowDisplayDetails={this.props.vcStatus != 'disconnected'} cbClick={this.settings.bind(this)}
+                data={this.props.settings} />
             </div>
             <div style={{marginRight: '20px'}}>
               <UserMenu allowDisplayDetails={this.props.vcStatus != 'disconnected'} >
