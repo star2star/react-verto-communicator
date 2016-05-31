@@ -24,7 +24,6 @@ This component will be a 'pure' component.
 This component will maintain it's own state for dropdownDisplayed.
 
 ## c .Component Events ##
-(REMOVE WHEN DONE)
 
 If the component needs to react to events (clicks, key presses, etc.) then those events should be listed here along with the action that should be taken:
 

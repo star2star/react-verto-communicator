@@ -57,7 +57,7 @@ class AppBar extends VertoBaseComponent {
             marginRight: '15px'
           },
           settingsStyles: {
-            opacity: '.7',
+            opacity: '.9',
             backgroundColor: '#0A387F',
             color: '#FFFFFF'
           }
