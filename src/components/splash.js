@@ -8,7 +8,7 @@ const propTypes = {
     current: React.PropTypes.number,
     title: React.PropTypes.string
   }).isRequired,
-  Style : React.PropTypes.object
+  compStyle : React.PropTypes.object
 };
 
 class Splash extends VertoBaseComponent {
@@ -16,19 +16,51 @@ class Splash extends VertoBaseComponent {
     super(props);
   }
 
+  getCompStyle() {
+    return this.props.compStyle;
+  }
+
+  getDefaultStyle(styleName) {
+    const styles = {
+      splashStyle: {
+        display: "flex",
+        flexDirection: "column",
+        paddingTop: "20px",
+        paddingBottom: "20px",
+        alignItems: "center",
+        width: "600px",
+        background: "green",
+        color: 'yellow',
+        boxShadow: '10px 10px 5px #888888'
+      },
+      loadingStyle: {
+        paddingBottom: "20px"
+      },
+      loadingBarStyle: {
+        position: "relative",
+        width: "500px",
+        height: "30px",
+        backgroundColor: "gray"
+      },
+      loadingBarFilled: {
+        position: "absolute",
+        height: "100%",
+        backgroundColor: "#4CAF50"
+      }
+    };
+    return (styles[styleName]);
+  }
   render() {
     //calc for progress bar width
     const progressWidth = Math.ceil(this.props.step.current/this.props.step.number * 100) + "%";
     return (
-      <div style={{display: "flex", flexDirection: "column", paddingTop: "20px", paddingBottom: "20px", alignItems: "center", width: "600px", background: "green", color: 'yellow'}}>
-        <div style={{paddingBottom: "20px"}}>Loading</div>
+      <div style={this.getStyle('splashStyle')}>
+        <div style={this.getStyle('loadingStyle')}>Loading</div>
         {/* progress bar */}
-        <div style={{position: "relative", width: "500px", height: "30px", backgroundColor: "gray" }}>
-          <div style={{position: "absolute", width: progressWidth, height: "100%", backgroundColor: "#4CAF50" }} />
+        <div style={this.getStyle('loadingBarStyle')}>
+          <div style={{...this.getStyle('loadingBarFilled'), width: progressWidth}}/>
         </div>
-        <div style= {{width: "95%", margin: "0 2.5%", paddingTop: "20px"}}>
           <SplashMessage statusTitle={this.props.step.title} errorObject={{header: 'Error', body: 'You media permissions are turned off.'}} />
-        </div>
       </div>);
   }
 }

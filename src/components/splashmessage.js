@@ -18,6 +18,11 @@ class SplashMessage extends VertoBaseComponent{
 
   getDefaultStyle(styleName) {
       const styles = {
+            combinedStyle: {
+              width: "95%",
+              margin: "0 2.5%",
+              paddingTop: "20px"
+            },
             titleStyle: {
               color: "#272727",
               alignSelf: "center",
@@ -65,7 +70,7 @@ class SplashMessage extends VertoBaseComponent{
     }
     // main return
     return (
-      <div>
+      <div style={this.getStyle('combinedStyle')}>
         <div style={this.getStyle('titleStyle')}> {this.props.statusTitle} </div>
         {errorMessage}
       </div>
