@@ -31,37 +31,50 @@ class UserMenu extends VertoBaseComponent {
       },
       icon: {
         height: '32px',
-        width: '32px'
+        width: '32px',
+        cursor: 'pointer'
       },
       caret: {
         fill: '#fff',
         flexGrow: 1,
+        cursor: 'pointer',
         height: '20px',
         width: '20px',
         paddingBottom: '3px'
       },
       menu: {
         position: 'absolute',
-        top: '60px',
-        right: '30px',
+        fontSize: '14px',
+        //top: '60px',
+        right: '100px',
+        minWidth: '160px',
+        padding: '5px 0',
+        margin: '2px 0 0',
         display: this.state.dropdownDisplayed ? 'flex' : 'none',
         flexDirection: 'column',
-        //padding: '10px',
         border: '1px solid #ccc',
-        backgroundColor: 'white'
+        backgroundColor: '#fff',
+        borderBottomLeftRadius: '4px',
+        borderBottomRightRadius: '4px',
+        boxShadow: '0 2px 5px 0 rgba(0,0,0,.25)'
       },
-      header: {
-        display: 'flex',
-        justifyContent: 'center',
-        color: '#4a4a4a',
-        padding: '5px',
-        backgroundColor: '#F7F7F7',
-        fontFamily: 'sans-serif'
+      // header: {
+      //   display: 'flex',
+      //   justifyContent: 'center',
+      //   color: '#4a4a4a',
+      //   padding: '5px',
+      //   backgroundColor: '#F7F7F7',
+      //   fontFamily: 'sans-serif'
+      // },
+      ul: {
+
       },
       li: {
-        color: '#4a4a4a',
-        paddingLeft: '10px',
-        paddingRight: '10px',
+        color: 'red',
+        //padding: '8px 20px',
+        //padding: '20px 20px',
+        fontWeight: '400',
+        fontSize: '14px',
         fontFamily: 'sans-serif'
       }
 
@@ -92,7 +105,7 @@ class UserMenu extends VertoBaseComponent {
           {this.state.dropdownDisplayed ?
               <CaretUpIconSVG svgStyle={{...this.getStyle('caret'), fill: 'white'}} /> :
               <CaretDownIconSVG svgStyle={{...this.getStyle('caret'), fill: 'white'}} />}
-          {menuContainer}
+            {menuContainer}
       </span>
     );
   }
