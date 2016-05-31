@@ -445,9 +445,9 @@ class VertoService {
       data.audioDevices = [];
       data.speakerDevices = [];
 
-      // if(!storage.data.selectedShare) {
-      //   storage.data.selectedShare = data.shareDevices[0]['id'];
-      // }
+      if(!data.selectedShare) {
+        data.selectedShare = data.shareDevices[0];
+      }
 
       $.verto.videoDevices.map((device)=>{
         if (!device.label) {
@@ -461,10 +461,10 @@ class VertoService {
             label: device.label || device.id
           });
         };
-        // // Selecting the first source.
-        // if (i == 0 && !storage.data.selectedVideo) {
-        //   storage.data.selectedVideo = device.id;
-        // }
+        // Selecting the first source.
+        if (!data.selectedVideo) {
+          data.selectedVideo = device;
+        }
 
         if (!device.label) {
           data.shareDevices.push({
@@ -481,10 +481,10 @@ class VertoService {
 
       $.verto.audioInDevices.map((device)=>{
 
-        // // Selecting the first source.
-        // if (i == 0 && !storage.data.selectedAudio) {
-        //   storage.data.selectedAudio = device.id;
-        // }
+        // Selecting the first source.
+        if (!data.selectedAudio) {
+          data.selectedAudio = device;
+        }
 
         if (!device.label) {
           data.audioDevices.push({
@@ -502,10 +502,10 @@ class VertoService {
 
       $.verto.audioOutDevices.map((device)=>{
 
-        // // Selecting the first source.
-        // if (i == 0 && !storage.data.selectedSpeaker) {
-        //   storage.data.selectedSpeaker = device.id;
-        // }
+        // Selecting the first source.
+        if (!data.selectedSpeaker) {
+          data.selectedSpeaker = device;
+        }
 
         if (!device.label) {
           data.speakerDevices.push({
