@@ -14,14 +14,16 @@ import { doSubmitLogOut } from '../main/action-creators';
 import App from '../../components/app';
 import About from '../../components/about';
 import Contributors from '../../components/contributors';
+import { MenuIconSVG } from '../../components/svgIcons';
 import { FormattedMessage } from 'react-intl';
 
 
 class AppBar extends VertoBaseComponent {
   constructor(props) {
     super(props);
+    this.state={showSettings: false, showAltAppControls: false };
 
-    this.state={showSettings: false };
+    this.handleAltMenuClick = this.handleAltMenuClick.bind(this);
   }
 
   componentWillMount() {
@@ -40,7 +42,10 @@ class AppBar extends VertoBaseComponent {
             flexDirection: 'row',
             backgroundColor: '#0544a4',
             color: '#FFFFFF',
-            height: '70px'
+            height: '70px',
+            '@media (max-width: 768px)': {
+              justifyContent: 'flex-start'
+            }
           },
           appNameStyles: {
             alignText: 'center',
@@ -51,13 +56,36 @@ class AppBar extends VertoBaseComponent {
             display: 'flex',
             marginRight: '10px',
             justifyContent: 'space-around',
-            alignItems: 'center'
+            alignItems: 'center',
 
-            // '@media (max-width: 768px)': {
-            //
-            // }
+            '@media (max-width: 768px)': { // when less than 768px wide, hide this and show alt menu (hamburger)
+              display: 'none'
+            }
           },
-
+          altMenuStyles: {
+            display: 'none',
+            '@media (max-width: 768px)': { // when less than 768px wide, show this and hide app controls
+              display: 'block'
+            }
+          },
+          altMenuSvgStyles: {
+            height:'24px',
+            width: '24px',
+            fill: 'white'
+          },
+          altAppControlStyles: {
+            display: 'none',
+            '@media (max-width: 768px)': { // when less than 768px wide, show this and hide app controls
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'flex-start',
+              alignItems: 'flex-start',
+              position: 'absolute',
+              top: '70px',
+              left: '0px',
+              backgroundColor: '#0544a4'
+            }
+          },
 
           lastCallStyles: {
             marginRight: '15px'
@@ -71,6 +99,13 @@ class AppBar extends VertoBaseComponent {
 
     return (styles[styleName]);
   }
+
+  handleAltMenuClick(){
+    console.log('Alt Menu Clicked');
+    this.setState({...this.state, showAltAppControls: !this.state.showAltAppControls });
+  }
+
+
 
   settings(displaySettings) {
     //console.log('toggle settings', displaySettings);
@@ -98,12 +133,18 @@ class AppBar extends VertoBaseComponent {
 
     const appName = WhiteLabel.get('appName');
 
+
+    // showAltAppControls is true, then set const acStyles to altAppControlStyles
+    // otherwise set it to appControlStyles.
+    const acStyles = this.state.showAltAppControls ? this.getStyle("altAppControlStyles") : this.getStyle("appControlStyles");
+
+
     // only show network status if we have speed data ....
     let nsIndicator;
     if (this.props.bandwidthInfo.outgoingBandwidth && this.props.bandwidthInfo.incomingBandwidth) {
       const vidQual = this.props.bandwidthInfo.vidQual ? this.props.bandwidthInfo.vidQual : '';
       nsIndicator = (
-        <NetworkStatusIndicator compStyle={{container:{marginRight: '20px'}}}
+        <NetworkStatusIndicator compStyle={!this.state.showAltAppControls ? {container:{marginRight: '20px'}} : {container:{marginBottom: '10px'}}}
             networkData={{upkpbs: this.props.bandwidthInfo.outgoingBandwidth,
                           downkpbs: this.props.bandwidthInfo.incomingBandwidth,
                           vidQual: vidQual}}
@@ -112,10 +153,12 @@ class AppBar extends VertoBaseComponent {
     }
 
     // only show the 'Last Call' info if there is call history to retrieve it from
+    // and if showAltAppControls is false
     // TODO - Check for call history in store and get the most recent one to build
     // the string
     let lastCall;
-    if (true) {
+
+    if (true && !this.state.showAltAppControls) {
       lastCall = (
         <div  className="lastCall" style={this.getStyle('lastCallStyles')}>
           Last Call: (941) 867-5309
@@ -129,17 +172,20 @@ class AppBar extends VertoBaseComponent {
     return (
       <div style={{position: "absolute", left: "0px", right: "0px", top: "0px"}}>
         <div className="appbar" style={this.getStyle('appbarStyles')}>
+          <span className="altMenu" style={this.getStyle("altMenuStyles")} onClick={this.handleAltMenuClick}>
+            <MenuIconSVG svgStyle={this.getStyle("altMenuSvgStyles")} />
+          </span>
           <span className="appName" style={this.getStyle("appNameStyles")}>{appName}</span>
 
-          <span className="appControls" style={this.getStyle('appControlStyles')}>
+          <span className="appControls" style={acStyles}>
             {nsIndicator}
-            <VCStatus status = {this.props.vcStatus} compStyle={{svgStyle:{marginRight: '20px'}}}/>
+            <VCStatus status = {this.props.vcStatus} compStyle={!this.state.showAltAppControls ? {svgStyle:{marginRight: '20px'}}:{svgStyle:{marginBottom:'10px'}}}/>
             {lastCall}
-            <div style={{marginRight: '20px'}}>
+            <div style={!this.state.showAltAppControls ? {marginRight: '20px'}:{marginBottom:'10px'}}>
               <Settings  allowDisplayDetails={this.props.vcStatus != 'disconnected'} cbClick={this.settings.bind(this)}
                 data={this.props.settings} />
             </div>
-            <div style={{marginRight: '20px'}}>
+            <div style={!this.state.showAltAppControls ? {marginRight: '20px'}:{marginBottom:'10px'}}>
               <UserMenu allowDisplayDetails={this.props.vcStatus != 'disconnected'} >
                 <MenuItem label={<FormattedMessage id='OPEN_NEW_WINDOW' />}cbAction={()=>{
                   window.open(location.href);
@@ -153,7 +199,7 @@ class AppBar extends VertoBaseComponent {
               </UserMenu>
 
             </div>
-            <div style={{marginRight: '20px'}}>
+            <div style={!this.state.showAltAppControls ? {marginRight: '20px'}:{marginBottom:'10px', position:'relative'}}>
               <TagMenu allowDisplayDetails="true" >
                 <MenuItem label="About" cbAction={()=>{
 
@@ -169,6 +215,7 @@ class AppBar extends VertoBaseComponent {
               </TagMenu>
             </div>
           </span>
+
         </div>
         {settingsMenu}
       </div>
