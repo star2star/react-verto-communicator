@@ -56,16 +56,6 @@ const badData = {
     expect(wrapper.props().allowDisplayDetails).toEqual(true);
   });
 
-  // If displayDropdown is true it renders dropdown Menu
-
-  // If displayDropdown is false it does NOT render dropdown.
-  it('renders menuContainer if displayDropdown is true', () => {
-    const wrapper = mount(<NetworkStatusIndicator networkData={sampleData} />);
-    wrapper.setState({ dropdownDisplayed: true});
-    console.log('%%%%%%%%%%%%%',wrapper);//////////////////////////
-    expect(wrapper.props().compStyle.display).toEqual('none');
-  });
-
   // If displayDropdown is true it renders CaretUpIconSVG.
   it('renders CaretUpIconSVG if displayDropdown is true', () => {
     const wrapper = shallow(<NetworkStatusIndicator networkData={sampleData} />);
