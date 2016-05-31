@@ -1,40 +1,40 @@
 const DIALECTS = {
     'en': 'en',
-    'en-GB': 'en',
-    'en-US': 'en',
+    'en-gb': 'en',
+    'en-us': 'en',
     'it': 'it',
-    'it-IT': 'it',
+    'it-it': 'it',
     'fr': 'fr',
-    'fr-FR': 'fr',
-    'fr-CA': 'fr',
+    'fr-fr': 'fr',
+    'fr-ca': 'fr',
     'pt': 'pt',
-    'pt-BR': 'pt',
-    'pt-PT': 'pt',
+    'pt-br': 'pt',
+    'pt-pt': 'pt',
     'de': 'de',
-    'de-DE': 'de',
+    'de-de': 'de',
     'es': 'es',
-    'es-ES': 'es',
+    'es-es': 'es',
     'pl': 'pl',
-    'pl-PL': 'pl',
+    'pl-pl': 'pl',
     'ru': 'ru',
-    'ru-RU': 'ru',
+    'ru-ru': 'ru',
     'sv': 'sv',
-    'sv-SV': 'sv',
-    'sv-FI': 'sv',
+    'sv-sv': 'sv',
+    'sv-fi': 'sv',
     'da': 'da',
-    'da-DK': 'da',
+    'da-dk': 'da',
     'id': 'id',
-    'id-ID': 'id',
+    'id-id': 'id',
     'zh': 'zh',
-    'zh-CN': 'zh',
-    'zh-TW': 'zh',
-    'zh-HK': 'zh'
+    'zh-cn': 'zh',
+    'zh-tw': 'zh',
+    'zh-hk': 'zh'
 }
 
 export default class Messages {
   constructor(aLocale="en-US") {
     this.locale = aLocale;
-    this.dialect = DIALECTS[this.locale];
+    this.dialect = Messages.getDialect(this.locale.toLowerCase());
     //const localeFile = 'locale-' + this.dialect;
     //console.log('^^^^^^', aLocale, this.locale, DIALECTS, this.dialect);
 
@@ -65,7 +65,8 @@ export default class Messages {
   }
 
   static getDialect(aLocale="en-US") {
-    return DIALECTS[aLocale];
+
+    return DIALECTS[aLocale.toLowerCase()];
   }
 
   getAllMessages(){
