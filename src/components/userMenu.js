@@ -45,7 +45,7 @@ class UserMenu extends VertoBaseComponent {
       menu: {
         position: 'absolute',
         fontSize: '14px',
-        top: '60px',
+        //top: '60px',
         right: '100px',
         minWidth: '160px',
         padding: '5px 0',
