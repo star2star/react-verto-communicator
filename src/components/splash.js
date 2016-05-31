@@ -18,7 +18,7 @@ class Splash extends VertoBaseComponent {
 
   render() {
     //calc for progress bar width
-    const progressWidth = Math.ceil(this.props.step.current/this.props.step.number * 100) + "%"
+    const progressWidth = Math.ceil(this.props.step.current/this.props.step.number * 100) + "%";
     return (
       <div style={{display: "flex", flexDirection: "column", paddingTop: "20px", paddingBottom: "20px", alignItems: "center", width: "600px", background: "green", color: 'yellow'}}>
         <div style={{paddingBottom: "20px"}}>Loading</div>
@@ -27,7 +27,7 @@ class Splash extends VertoBaseComponent {
           <div style={{position: "absolute", width: progressWidth, height: "100%", backgroundColor: "#4CAF50" }} />
         </div>
         <div style= {{width: "95%", margin: "0 2.5%", paddingTop: "20px"}}>
-          <SplashMessage statusTitle={this.props.step.title} errorObject={{header: 'error', body: 'Message'}} />
+          <SplashMessage statusTitle={this.props.step.title} errorObject={{header: 'Error', body: 'You media permissions are turned off.'}} />
         </div>
       </div>);
   }
