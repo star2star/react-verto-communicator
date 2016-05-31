@@ -51,6 +51,8 @@ const dialect = Messages.getDialect(locale);
 const messages = (new Messages(locale)).getAllMessages();
 
 // needed for INTL
+console.log('$$$$', locale, dialect);
+
 const localeData = require('react-intl/locale-data/'+dialect);
 addLocaleData(localeData);
 
