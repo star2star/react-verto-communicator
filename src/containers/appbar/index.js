@@ -58,8 +58,8 @@ class AppBar extends VertoBaseComponent {
           },
           settingsStyles: {
             opacity: '.7',
-            backgroundColor: 'purple',
-            color: 'yellow'
+            backgroundColor: '#0A387F',
+            color: '#FFFFFF'
           }
         };
 
