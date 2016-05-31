@@ -72,7 +72,7 @@ const doResolutionRefresh = () => {
   return dispatch => {
     dispatch(doingResolutionRefresh());
     VertoService.refreshDevices((status) => {
-      //console.log('doRefresh Resolution: ', status);
+      console.log('doRefresh Resolution: ', status);
       if (status){
         const resolutionInstanceData = VertoService.getInstanceData();
         console.log('------^^^^^^______', resolutionInstanceData);
