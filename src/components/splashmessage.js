@@ -1,30 +1,36 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 
-//prop valudation
 const propTypes = {
   errorObject: React.PropTypes.object,
   compStyle:   React.PropTypes.object,
   statusTitle: React.PropTypes.string
 };
-//errorObject has 2 props header and body
+
 class SplashMessage extends VertoBaseComponent{
   constructor(props) {
     super(props);
   }
 
+  getCompStyle() {
+    return this.props.compStyle;
+  }
+
   getDefaultStyle(styleName) {
       const styles = {
             titleStyle: {
-              width: '100%'
+              textAlign: "center",
+              width: "100%"
             },
             headerStyle: {
-              width: '100%',
-              backgroundColor: 'darkred'
+              backgroundColor: "red",
+              width: "100%",
+              textAlign: "center"
             },
             bodyStyle: {
-              width: '100%',
-              backgroundColor: 'red'
+              width: "100%",
+              textAlign: "center",
+              backgroundColor: "darkred"
             }
       };
       return (styles[styleName]);
@@ -34,12 +40,12 @@ class SplashMessage extends VertoBaseComponent{
     let errorMessage;
     if(this.props.errorObject){
       errorMessage = (<div>
-        <div> {this.props.errorObject.header} </div>
-        <div> {this.props.errorObject.body} </div>
+        <div style={this.getStyle('headerStyle')}> {this.props.errorObject.header} </div>
+        <div style={this.getStyle('bodyStyle')}>  {this.props.errorObject.body}  </div>
          </div>);
     }
     return (<div>
-      <div> {this.props.statusTitle} </div>
+      <div style={this.getStyle('titleStyle')}> {this.props.statusTitle} </div>
       {errorMessage}
       </div>
     );
