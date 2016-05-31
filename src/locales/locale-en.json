@@ -129,6 +129,8 @@
   "MAX_OUTGOING_BANDWIDTH": "Max outgoing bandwidth:",
   "FACTORY_RESET": "Factory reset",
   "SAVE_DEVICE_SETTINGS": "Save Device Settings",
+  "CHECK_RESOLUTION": "Checking resolution.",
+  "ERROR_RESOLUTION": "Error: internal error checking resolution",
   "BROWSER_COMPATIBILITY": "Checking browser compatibility.",
   "REFRESH_MEDIA_DEVICES": "Refresh Media Devices.",
   "BROWSER_WITHOUT_WEBRTC": "Error: browser doesn't support WebRTC.",
