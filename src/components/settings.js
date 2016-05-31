@@ -7,7 +7,8 @@ CaretDownIconSVG } from './svgIcons';
 
 const propTypes = {
   compStyle : React.PropTypes.object,
-  cbClick: React.PropTypes.func.isRequired
+  cbClick: React.PropTypes.func.isRequired,
+  data: React.PropTypes.object.isRequired
 };
 
 const defaultProps = {
@@ -92,7 +93,7 @@ class Settings extends VertoBaseComponent {
       </div>
     );
 
-
+    console.log('settings render props: ', this.props.data);
     return (
       <span onClick={this.showMenu.bind(this)}  >
         <SettingsIconSVG svgStyle={{...this.getStyle('icon'), fill: 'white'}}  />
