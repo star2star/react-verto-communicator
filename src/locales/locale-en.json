@@ -149,5 +149,16 @@
   "CHAT_GAIN_MINUS": "Gain -",
   "CHAT_GAIN_PLUS": "Gain +",
   "LANGUAGE": "Language:",
-  "BROWSER_LANGUAGE": "Browser Language"
+  "BROWSER_LANGUAGE": "Browser Language",
+  "BROWSER_SUPPORT_TITLE": "Browser not supported",
+  "BROWSER_SUPPORT_TEXT": "The browser you are using isn't supported by our software. Please see below for alternate browser you can use. Once you have chosen an alternative browser you'll be able to access the session link using it.",
+  "BROWSER_NAME_EDGE": "Edge",
+  "BROWSER_VERSIONS_EDGE": "All",
+  "BROWSER_NAME_CHROME": "Chrome",
+  "BROWSER_VERSIONS_CHROME": "All",
+  "BROWSER_NAME_FIREFOX": "Firefox",
+  "BROWSER_VERSIONS_FIREFOX": "All",
+  "BROWSER_NAME_OPERA": "Opera",
+  "BROWSER_VERSIONS_OPERA": "All",
+
 }]

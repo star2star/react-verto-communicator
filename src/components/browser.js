@@ -66,11 +66,11 @@ class Browser extends VertoBaseComponent {
               className="headerContainer"
               style={this.getStyle("headerContainerStyle")}>
                 titleStyle={this.getStyle("titleStyle")}
-                bhTitle=<FormattedMessage
-                    id="bh.browserSupportTitle"
+                <FormattedMessage
+                    id="BROWSER_SUPPORT_TITLE"
                     value="Browser not supported"/>
-                bhText=<FormattedMessage
-                    id="bh.browserSupportText"
+                <FormattedMessage
+                    id="BROWSER_SUPPORT_TEXT"
                     defaultMessage="The browser you are using isn't supported by our software. Please see below for alternate browser you can use. Once you have chosen an alternative browser you'll be able to access the session link using it."/>
             </div>
 
@@ -82,11 +82,11 @@ class Browser extends VertoBaseComponent {
                             browserIcon=<EdgeBrowserIconSVG
                                 svgStyle={{height: '24px', width: '24px'}}/>
                             browserName=<FormattedMessage
-                                id="bns.edge"
+                                id="BROWSER_NAME_EDGE"
                                 defaultMessage="Edge"/>
                             browserVersion=<FormattedMessage
-                                id="bns.edgeVersions"
-                                defaultMessage="All(?)"/>
+                                id="BROWSER_VERSIONS_EDGE"
+                                defaultMessage="All"/>
                               />
 
                         <BrowserInfo
@@ -95,10 +95,10 @@ class Browser extends VertoBaseComponent {
                               />
                             browserLink={WhiteLabel.get('chromeDownloadURL')}
                             browserName=<FormattedMessage
-                                id="bns.chromeName"
+                                id="BROWSER_NAME_CHROME"
                                 defaultMessage="Chrome"/>
                             browserVersion=<FormattedMessage
-                                id="bns.chromeVersions"
+                                id=""BROWSER_VERSIONS_CHROME"
                                 defaultMessage="All"/>
                         />
 
@@ -108,10 +108,10 @@ class Browser extends VertoBaseComponent {
                               />
                             browserLink={WhiteLabel.get('firefoxDownloadURL')}
                             browserName=<FormattedMessage
-                                id="bns.firefoxName"
+                                id="BROWSER_NAME_FIREFOX"
                                 defaultMessage="Firefox"/>
                             browserVersion=<FormattedMessage
-                                id="bns.firefoxVersions"
+                                id="BROWSER_VERSIONS_FIREFOX"
                                 defaultMessage="All"/>
                         />
 
@@ -120,7 +120,7 @@ class Browser extends VertoBaseComponent {
                               svgStyle={{height: '24px', width: '24px'}} />
                           browserLink={WhiteLabel.get('safariDownloadURL')}
                           browserName=<FormattedMessage
-                              id="bns.operaName"
+                              id="BROWSER_NAME_OPERA"
                               defaultMessage="Opera" />
                           browserVersion=<FormattedMessage
                               id="bns.operaVersions"
