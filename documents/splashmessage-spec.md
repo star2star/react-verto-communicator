@@ -5,7 +5,7 @@ This component displays the conditions, one at a time, that get checked when the
 
 # 2. Visual Design #
 
-//have to wait util I have the code done to get the screenshots.
+![A sample error message](https://raw.githubusercontent.com/star2star/react-verto-communicator/master/documents/img/splashmessage-screenshot.png)
 
 # 3. Component Type #
 
