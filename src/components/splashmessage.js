@@ -19,18 +19,25 @@ class SplashMessage extends VertoBaseComponent{
   getDefaultStyle(styleName) {
       const styles = {
             titleStyle: {
-              textAlign: "center",
-              width: "100%"
+              alignSelf: "center",
+              display: "flex",
+              flexDirection: "column"
             },
             headerStyle: {
-              backgroundColor: "red",
-              width: "100%",
-              textAlign: "center"
+              flex: "1",
+              alignSelf: "center"
             },
             bodyStyle: {
-              width: "100%",
               textAlign: "center",
-              backgroundColor: "darkred"
+              width: "95%",
+              backgroundColor: "gray",
+              alignSelf: "center"
+            },
+            errorStyle: {
+              backgroundColor: "red",
+              display: "flex",
+              flexDirection: "column",
+              paddingBottom: "15px"
             }
       };
       return (styles[styleName]);
@@ -39,14 +46,18 @@ class SplashMessage extends VertoBaseComponent{
   render() {
     let errorMessage;
     if(this.props.errorObject){
-      errorMessage = (<div>
-        <div style={this.getStyle('headerStyle')}> {this.props.errorObject.header} </div>
-        <div style={this.getStyle('bodyStyle')}>  {this.props.errorObject.body}  </div>
-         </div>);
+      errorMessage = (
+        <div style={this.getStyle('errorStyle')}>
+          <div style={this.getStyle('headerStyle')}> {this.props.errorObject.header} </div>
+          <div style={this.getStyle('bodyStyle')}>  {this.props.errorObject.body}  </div>
+         </div>
+       );
     }
-    return (<div>
-      <div style={this.getStyle('titleStyle')}> {this.props.statusTitle} </div>
-      {errorMessage}
+    // main return
+    return (
+      <div>
+        <div style={this.getStyle('titleStyle')}> {this.props.statusTitle} </div>
+        {errorMessage}
       </div>
     );
   }

@@ -7,6 +7,7 @@ SignalFullIconSVG,
 SignalLowIconSVG,
 CaretUpIconSVG,
 CaretDownIconSVG } from './svgIcons';
+import { FormattedMessage } from 'react-intl';
 
 
 const propTypes = {
@@ -37,11 +38,12 @@ class NetworkStatusIndicator extends VertoBaseComponent {
     const styles = {
       container: {
         display: 'flex',
-        position: 'relative'
+        position: 'relative',
+        alignItems: 'center'
       },
       icon: {
-        height: '24px',
-        width: '24px'
+        height: '32px',
+        width: '32px'
       },
       caret: {
         fill: '#fff',
@@ -51,26 +53,42 @@ class NetworkStatusIndicator extends VertoBaseComponent {
       },
       menu: {
         position: 'absolute',
-        top: '60px',
-        right: '30px',
+        //zIndex: 1,
+        //minWidth: '250px',
+        top: '40px',
+        right: '20px',
         display: this.state.dropdownDisplayed ? 'flex' : 'none',
         flexDirection: 'column',
         //padding: '10px',
-        border: '1px solid #ccc'
+        border: '1px solid #ccc',
+        borderBottomLeftRadius: '4px',
+        borderBottomRightRadius: '4px',
+        boxShadow: '0 2px 5px 0 rgba(0,0,0,.25)'
       },
       header: {
         display: 'flex',
         justifyContent: 'center',
         color: '#4a4a4a',
+        fontSize: '14px',
+        fontWeight: '700',
         padding: '5px',
+        paddingTop: '10px',
+        paddingBottom: '10px',
+        margin: '0',
+        borderBottom: '1px solid #ebebeb',
         backgroundColor: '#F7F7F7',
         fontFamily: 'sans-serif'
       },
       li: {
-        color: '#4a4a4a',
-        paddingLeft: '10px',
-        paddingRight: '10px',
-        fontFamily: 'sans-serif'
+        minWidth: '250px',
+        color: '#333',
+        fontSize: '14px',
+        fontWeight: 400,
+        fontFamily: 'Helvetica',
+        backgroundColor: '#fff',
+        padding: '5px',
+        paddingLeft: '15px',
+        paddingRight: '15px'
       }
 
     };
@@ -100,7 +118,7 @@ class NetworkStatusIndicator extends VertoBaseComponent {
     let icon;
     switch(bwp) {
         case 4:
-            icon = (<SignalFullIconSVG svgStyle={{...this.getStyle('icon'), fill: 'green'}} />);
+            icon = (<SignalFullIconSVG svgStyle={{...this.getStyle('icon'), fill: '#4CAF50'}} />);
             break;
         case 3:
             icon = (<SignalMediumIconSVG svgStyle={{...this.getStyle('icon'), fill: 'yellow'}} />);
@@ -126,26 +144,26 @@ class NetworkStatusIndicator extends VertoBaseComponent {
 
       <div className="menuContainer" style={this.getStyle('menu')} >
         <div style={this.getStyle('header')} >
-            Bandwidth Info
+            <FormattedMessage id="BANDWIDTH_INFO" />
         </div>
         <div
             onClick={this.props.cbMenuClick}
             style={this.getStyle('li')}
             className="upkpbs"
         >
-          Outgoing: {this.props.networkData.upkpbs}
+          <FormattedMessage id="BANDWIDTH_INFO_OUTGOING" /> {this.props.networkData.upkpbs}
         </div>
         <div
             onClick={this.props.cbMenuClick}
             style={this.getStyle('li')}
         >
-          Incoming: {this.props.networkData.downkpbs}
+          <FormattedMessage id="BANDWIDTH_INFO_INCOMING" /> {this.props.networkData.downkpbs}
         </div>
         <div
             onClick={this.props.cbMenuClick}
             style={this.getStyle('li')}
         >
-            Video Resolution: {this.props.networkData.vidQual}
+            <FormattedMessage id="BANDWIDTH_INFO_VIDEO_RES" /> {this.props.networkData.vidQual}
         </div>
       </div>
     );

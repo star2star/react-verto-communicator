@@ -79,7 +79,7 @@ class Settings extends VertoBaseComponent {
   showMenu() {
     if (this.props.allowDisplayDetails) {
       const newShow = !this.state.dropdownDisplayed;
-      this.props.cbClick(newShow)
+      this.props.cbClick(newShow);
       this.setState({...this.state, dropdownDisplayed: newShow});
     }
   }
