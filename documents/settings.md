@@ -68,7 +68,7 @@ Language menu clicked| "..."
 Echo Cancellation checkbox| "..."
 Noise Suppression checkbox| "..."
 Highpass filter checkbox| "..."
-Automatically Determine Speed and Resolution Settings checkbox| "..."
+Automatically Determine Speed and Resolution Settings checkbox *additional menu| "..."
 Recheck Bandwidth Before Each Outgoing Call checkbox| "..."
 Check Network Speed Button| "..."
 
