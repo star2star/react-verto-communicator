@@ -6,8 +6,8 @@ The entire menu consists of five areas in a three column format: media, General 
 The first column contains a media area. It has headings with select menu's for **Camera:**, **Share Device**, **Microphone:**, **Speaker:**, and **Best Frame Rate:**. At the bottom of this column are two buttons positioned one above the other. The top button is labelled **Preview Settings**. The bottom button is labelled **Refresh Device List**.<br>
 The second column consists of General Settings, Language, and Audio Settings areas. Under the **General Settings:** header is a list of five checkboxes (see image for details) **Language:** has a select menu to choose your language. **Audio Settings** is a list of three  checkboxes (see image for details).<br>
 The third column consists of the Video Settings with two checkboxes under the **Video Settings:** header (see image for details). Below that is a button labelled **Check Network Settings**.<br>
-The default settings data will be passed in as a prop: **data**.<br>
-All text will be passed in as Formatted Messages with an id describing the text and a default message the text as a string.
+The default settings data will be passed in as the prop: **data**.<br>
+All text will be passed in as Formatted Messages with an id labelling the text and a default message the text as a string.
 
 # 2. Visual Design #  
 
@@ -38,10 +38,10 @@ This component will maintain it's own state for dropdownDisplayed.
 
 This component is a drop down menu and will toggle between up and down based on click of a button(SettingsIconSVG).
 Initial state:
-State = {menuDown: false}  // menu is initially 'up'
+State = {dropdownDisplayed: false}  // menu is initially 'up'
 onClick of button
-	// set menuDown to the inverse of its current value
-this.setState({...this.state, menuDown: !this.state.menuDown});
+	// set dropdownDisplayed to the inverse of its current value
+this.setState({...this.state, dropdownDisplayed: !this.state.dropdownDisplayed});
 
 ## c .Component Events ##
 
@@ -52,11 +52,25 @@ Sample:
 Event | Action(s)
 ------------ | -------------
 Settings icon clicked | Invoke the callback function cbClick(), dropdownDisplayed state is toggled.
-Camera menu clicked | "..."
-Share screen menu clicked | "..."
-Microphone menu clicked | "..."
-Speaker menu clicked | "..."
-Best frame rate menu clicked | "..."
+Camera Menu clicked | "..."
+Share screen Menu clicked | "..."
+Microphone Menu clicked | "..."
+Speaker Menu clicked | "..."
+Best frame rate Menu clicked | "..."
+Preview Settings Button | "..."
+Refresh Device List Button| "..."
+Use Video checkbox | "..."
+Stereo Audio checkbox | "..."
+Use STUN checkbox | "..."
+Scale Remote Video to Match Camera Resolution checkbox| "..."
+Ask Before Recovering a Call checkbox| "..."
+Language menu clicked| "..."
+Echo Cancellation checkbox| "..."
+Noise Suppression checkbox| "..."
+Highpass filter checkbox| "..."
+Automatically Determine Speed and Resolution Settings checkbox| "..."
+Recheck Bandwidth Before Each Outgoing Call checkbox| "..."
+Check Network Speed Button| "..."
 
 
 ## d. Context-Aware Specification ##
@@ -67,7 +81,7 @@ This component is a pure component and it will maintain it’s own state.
 
 The component to be developed requires the following components:
 
-- VertoBaseComponent
+- vertobasecomponent
 - svgIcons
 - react-intl
 
