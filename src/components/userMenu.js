@@ -17,6 +17,9 @@ class UserMenu extends VertoBaseComponent {
   constructor(props) {
     super(props);
     this.state = {'dropdownDisplayed': false};
+
+    this.showMenu = this.showMenu.bind(this);
+    UserMenu.showMenu = this.showMenu.bind(this);
   }
 
   getCompStyle() {
