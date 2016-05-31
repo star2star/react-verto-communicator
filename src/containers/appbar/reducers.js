@@ -1,3 +1,5 @@
+import VideoConstants from '../../js/VideoConstants';
+
 const app = (state, action)=>{
 
   if (typeof state === 'undefined') {
@@ -38,7 +40,8 @@ const app = (state, action)=>{
                 testSpeedJoin: true,
                 vidQual: undefined,
                 outgoingBandwidth: 'default',
-                incomingBandwidth: 'default'
+                incomingBandwidth: 'default',
+                bandwidth: VideoConstants.BAND_WIDTH
               },
 
               bandwidthInfo: {
@@ -53,8 +56,8 @@ const app = (state, action)=>{
     case "SPEED_TEST":
       return { ...state, "bandwidthInfo": action.data }
     case "SETTINGS_UPDATE":
-      console.log("settings update JES: ", action.data);
-      return { ...state, settings: { ...state.settings, ...action.data} };
+      //console.log("settings update JES: ", action.data);
+      return { ...state, settings: { ...state.settings, ...action.data, bandwidth: VideoConstants.BAND_WIDTH} };
     default:
       return state;
     }
