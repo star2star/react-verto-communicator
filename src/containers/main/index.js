@@ -71,6 +71,11 @@ class Main extends VertoBaseComponent {
         //TODO fix splash object here intl
         //loggedInfo = (<NoMedia />);
         break;
+      case 'call_inprogress':
+        loggedInfo = (
+          <div>call in progress screen --- will timeout after 5 seconds </div>
+        );
+        break;
       default:
         break;
     }
