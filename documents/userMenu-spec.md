@@ -3,12 +3,12 @@
 
 The UserMenu component displays a user icon. When clicked, the user icon displays a menu containing a list of actions. When the actions are clicked, they carry out a specific task.
 
-# 3. Visual Design #  
+# 2. Visual Design #  
 
 ![UserMenu Icon](img/um-icon.png)<br><br>
 ![UserMenu Menu](img/um-menu.png)
 
-# 4. Component Type #
+# 3. Component Type #
 
 This component will be a 'pure' component.
 
@@ -37,7 +37,7 @@ Sample:
 
 This component is a pure component and it will maintain it’s own state for presentational purposes.
 
-# 5. Reference Components #
+# 4. Reference Components #
 
 The component to be developed requires the following components:
 
@@ -45,7 +45,7 @@ The component to be developed requires the following components:
 - svgIcons
 - react-intl
 
-# 6. Unit Testing Requirement #
+# 5. Unit Testing Requirement #
 
 Tests for this component are located at:
 
