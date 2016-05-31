@@ -3,7 +3,7 @@ import ReactDOM, {server } from 'react-dom';
 import { Router, Route, browserHistory, hashHistory, IndexRoute } from 'react-router';
 import {StyleRoot} from 'radium';
 import { createStore, applyMiddleware } from 'redux';
-import {IntlProvider} from 'react-intl';
+import { addLocaleData, IntlProvider} from 'react-intl';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
@@ -13,11 +13,9 @@ import thunk from 'redux-thunk';
 import reducer from './containers/reducers.js';
 import Messages from './js/messages';
 
-import { doValidation } from './containers/auth/action-creators';
+import { doValidation } from './containers/main/action-creators';
 
 import App from './components/app';
-
-
 
 function getLanguage(){
   let sReturn = 'en-US';
@@ -28,7 +26,7 @@ function getLanguage(){
 
     switch( lang.toLowerCase() ){
       case 'es':
-        sReturn = 'es-ES';
+        sReturn = 'es';
 
         break;
       default:
@@ -48,7 +46,13 @@ function getLanguage(){
 window.theme={ value: 'default'};
 
 const locale = getLanguage();
+const dialect = Messages.getDialect(locale);
+
 const messages = (new Messages(locale)).getAllMessages();
+
+// needed for INTL
+const localeData = require('react-intl/locale-data/'+dialect);
+addLocaleData(localeData);
 
 const store = createStore(reducer, applyMiddleware(thunk));
 
@@ -56,7 +60,7 @@ window.theStore = store;
 
 store.dispatch(doValidation());
 browserHistory.push('#/login');
-
+console.log('INTL: ', locale, messages);
 ReactDOM.render((
   <Provider store={store}>
     <IntlProvider locale={locale} messages={messages}>

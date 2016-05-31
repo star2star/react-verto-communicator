@@ -1,4 +1,4 @@
-import {doLogOut, doVertoLogin } from '../containers/auth/action-creators';
+import {doLogOut, doVertoLogin } from '../containers/main/action-creators';
 import VideoConstants from './VideoConstants';
 
 // private stuff
@@ -416,8 +416,8 @@ class VertoService {
       $.verto.videoDevices.map((device)=>{
         if (!device.label) {
           data.videoDevices.push({
-            id: 'Camera ' + i,
-            label: 'Camera ' + i
+            id: 'Camera ' + device,
+            label: 'Camera ' + device
           });
         } else {
           data.videoDevices.push({
@@ -432,8 +432,8 @@ class VertoService {
 
         if (!device.label) {
           data.shareDevices.push({
-            id: 'Share Device ' + i,
-            label: 'Share Device ' + i
+            id: 'Share Device ' + device,
+            label: 'Share Device ' + device
           });
         } else {
           data.shareDevices.push({
@@ -452,8 +452,8 @@ class VertoService {
 
         if (!device.label) {
           data.audioDevices.push({
-            id: 'Microphone ' + i,
-            label: 'Microphone ' + i
+            id: 'Microphone ' + device,
+            label: 'Microphone ' + device
           });
         } else {
           data.audioDevices.push({
@@ -473,8 +473,8 @@ class VertoService {
 
         if (!device.label) {
           data.speakerDevices.push({
-            id: 'Speaker ' + i,
-            label: 'Speaker ' + i
+            id: 'Speaker ' + device,
+            label: 'Speaker ' + device
           });
         } else {
           data.speakerDevices.push({

@@ -2,6 +2,7 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import Modal from 'react-modal';
 import App from './app';
+import { FormattedMessage } from 'react-intl';
 
 
 const propTypes = {
@@ -16,7 +17,7 @@ class About extends VertoBaseComponent{
 
 
   render() {
-
+    console.log('........');
     return (
       <Modal isOpen={true} onRequestClose={()=>{
         console.log('closing');
@@ -32,7 +33,8 @@ class About extends VertoBaseComponent{
   }
 }}>
         <div style={{width: "300px", height: "300px"}}>
-          <h1>About</h1>
+          <h1><FormattedMessage
+              id="ABOUT" /> </h1>
         </div>
       </Modal> );
   }

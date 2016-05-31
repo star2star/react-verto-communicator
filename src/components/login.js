@@ -1,6 +1,7 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import SvgIcons from './svgIcons';
+import ReactIntl, { FormattedMessage } from 'react-intl';
 
 const propTypes = {
   Style : React.PropTypes.object,
@@ -60,7 +61,7 @@ class Login extends VertoBaseComponent{
 
     return (
       <div style={{background: "green", color: "yellow", display: "flex", alignItems: "center", flexDirection: "column", width: "300px"}}>
-        <div>Login</div>
+        <div><FormattedMessage id="LOGIN" /></div>
         <Input label="Name" placeholder="Enter your name" cbChanging={this.changingInput.bind(this)}  value={this.state.settings.name}/>
         <Input label="Email" placeholder="Your Email"  cbChanging={this.changingInput.bind(this)}  value={this.state.settings.email }/>
         {moreSettings}

@@ -36,7 +36,7 @@ export default class Messages {
     this.locale = aLocale;
     this.dialect = DIALECTS[this.locale];
     //const localeFile = 'locale-' + this.dialect;
-    //console.log('^^^^^^', this.locale, DIALECTS, this.dialect);
+    //console.log('^^^^^^', aLocale, this.locale, DIALECTS, this.dialect);
 
     var req = require.context("../locales", true, /^\.\/.*\.json$/);
     //var req = require.context("../messages", true, /^\.\/.*\.json$/);
@@ -60,7 +60,12 @@ export default class Messages {
       }
 
     });
+    //console.log('*****', this.get('ABOUT')) ;
 
+  }
+
+  static getDialect(aLocale="en-US") {
+    return DIALECTS[aLocale];
   }
 
   getAllMessages(){
