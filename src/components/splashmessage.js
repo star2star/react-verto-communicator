@@ -52,7 +52,7 @@ class SplashMessage extends VertoBaseComponent{
               backgroundColor: "#FC7E7E",
               display: "flex",
               flexDirection: "column",
-              paddingBottom: "15px"
+              paddingBottom: "25px"
             }
       };
       return (styles[styleName]);

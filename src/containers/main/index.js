@@ -8,6 +8,7 @@ import { doSubmitLogin, doSubmitLogOut, doMakeCall } from './action-creators';
 import Splash from '../../components/splash';
 import Login from '../../components/login';
 import Dialpad from '../../components/dialpad';
+import {injectIntl} from 'react-intl'
 
 
 
@@ -36,10 +37,26 @@ class Main extends VertoBaseComponent {
   }
 
   render() {
-
+    const { formatMessage } = this.props.intl;
 
     let loggedInfo;
+    const splashObject = { ...this.props.auth.splash };
+
     switch (this.props.auth.showPage){
+      case 'splash':
+        switch(this.props.auth.splash.title){
+          case 'browser':
+            splashObject.title = formatMessage({"id":"BROWSER_COMPATIBILITY", "defaultMessage":"Checking browser compatibility."});
+            break;
+          case 'media':
+            splashObject.title = formatMessage({"id":"CHECK_PERMISSION_MEDIA", "defaultMessage":"Checking media permissions"});
+            break;
+          case 'resolution':
+          default:
+            splashObject.title = formatMessage({"id":"CHECK_RESOLUTION", "defaultMessage":"Checking resolution."});
+            break;
+        }
+        break;
       case 'login':
       case 'logout':
         loggedInfo = (
@@ -60,16 +77,26 @@ class Main extends VertoBaseComponent {
         </div>);
         break;
       case 'resolution_failed':
-        //TODO fix splash object here intl
-        //loggedInfo = (<div >Resolution failed</div>);
+        splashObject.title = formatMessage({"id":"CHECK_RESOLUTION", "defaultMessage":"Checking resolution."});
+        splashObject.errorObject = {
+          header: formatMessage({"id":"ERRORS", "defaultMessage":"Errors"}),
+          body: formatMessage({"id":"ERROR_PERMISSION_MEDIA", "defaultMessage":"Error: internal error checking resolution"})
+        }
         break;
       case 'bns':
-        //TODO fix splash object here intl
-        //loggedInfo = (<Browser />);
+        console.log('BBBNNNNSSSS', this.props.auth);
+        splashObject.title = formatMessage({"id":"BROWSER_COMPATIBILITY", "defaultMessage":"Checking browser compatibility."});
+        splashObject.errorObject = {
+          header: formatMessage({"id":"ERRORS", "defaultMessage":"Errors"}),
+          body: formatMessage({"id":"BROWSER_WITHOUT_WEBRTC", "defaultMessage":"Error: browser doesn't support WebRTC"})
+        }
         break;
       case 'noMedia':
-        //TODO fix splash object here intl
-        //loggedInfo = (<NoMedia />);
+        splashObject.title = formatMessage({"id":"CHECK_PERMISSION_MEDIA", "defaultMessage":"Checking media permissions"});
+        splashObject.errorObject = {
+          header: formatMessage({"id":"ERRORS", "defaultMessage":"Errors"}),
+          body: formatMessage({"id":"ERROR_PERMISSION_MEDIA", "defaultMessage":"Error: Media Permission Denied"})
+        }
         break;
       case 'call_inprogress':
         loggedInfo = (
@@ -81,7 +108,7 @@ class Main extends VertoBaseComponent {
     }
     let showSplash;
     if (this.props.auth.splash && this.props.auth.splash.current != this.props.auth.splash.number) {
-      showSplash = (<Splash step={this.props.auth.splash} />);
+      showSplash = (<Splash step={splashObject} />);
     }
     return (
       <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
@@ -96,4 +123,4 @@ export default connect((state)=>{
     auth: state.auth,
     app: state.app
   });
-})(Main);
+})(injectIntl(Main));
