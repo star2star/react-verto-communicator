@@ -42,14 +42,14 @@ class NetworkStatusIndicator extends VertoBaseComponent {
         alignItems: 'center'
       },
       icon: {
-        height: '32px',
-        width: '32px'
+        height: '24px',
+        width: '24px'
       },
       caret: {
         fill: '#fff',
         flexGrow: 1,
-        height: '17px',
-        width: '19px'
+        height: '16px',
+        width: '20px'
       },
       menu: {
         position: 'absolute',
