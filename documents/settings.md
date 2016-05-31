@@ -1,18 +1,20 @@
 # Component Name:  Settings   #
 # 1. Functional Description #
 
-
-*This component will be a text input control that will invoke a callback function when the enter/return key is pressed by the user.  When the enter key is pressed, the input field will be cleared and will retain focus.  The input must be contained in div that has rounded corners at the bottom and square corners at the top so it can be aligned with another component.  Default styling should include font-size, line-height, color, border-radius, margin and padding for the input, and for the container, background-color, border, and border-radius.  The default styles should be overridable via props in part or in their entirety.  Placeholder text value is passed in using props.*
+The Settings Menu is a large dropdown menu that drops down under the **App Bar** when the **settings icon** in clicked.  The settings menu will stretch to full length of the App Bar (which is also the full width of the window). The Settings menu will be horizontal three column layout until the window width is resized to 991px or smaller. At this point, the columns will stack vertically.
+The entire menu consists of five areas in column format: media, General Settings, Language, Audio Settings, and Video Settings.
+The first column contains the Media area. It has headings with select menu's for **Camera:**, **Share Device**, **Microphone:**, **Speaker:**, and **Best Frame Rate:**. At the bottom of this column are two buttons positioned one above the other. The top button is labelled **Preview Settings**. The bottom button is labelled **Refresh Device List**.
+The second column consists of General Settings, Language, and Audio Settings areas. Under the **General Settings:** header is a list of five checkboxes (see image for details)**Language:** has a select menu to choose your language. **Audio Settings** is a list of three  checkboxes (see image for details).
+The third column consists of the Video Settings with two checkboxes under the **Video Settings:** header (see image for details). Below that is a button labelled **Check Network Settings**.
+All text will be passed in as Formatted Messages
 
 # 2. Visual Design #  
-
-(REMOVE WHEN DONE)
 
 Images with callouts for size, colors, etc. and/or reference to a document containing the visual design specification for the component.  Extract from design documentation and paste here.
 
 Sample:
 
-![A breakdown of how this component looks](https://raw.githubusercontent.com/star2star/react-verto-communicator/master/documents/img/Template-Image.png)
+![A breakdown of how this component looks](https://raw.githubusercontent.com/star2star/react-verto-communicator/master/documents/img/Settings-image-full.png)
 
 (REMOVE)
 
