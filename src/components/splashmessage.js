@@ -4,7 +4,7 @@ import VertoBaseComponent from './vertobasecomponent';
 const propTypes = {
   errorObject: React.PropTypes.object,
   compStyle:   React.PropTypes.object,
-  statusTitle: React.PropTypes.string
+  statusTitle: React.PropTypes.string.isRequired
 };
 
 class SplashMessage extends VertoBaseComponent{

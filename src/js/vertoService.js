@@ -297,7 +297,7 @@ class VertoService {
       return _dispatch(doMakeCallError({destination, message }));
     }
     // ok make a call
-    console.log('DATA & VERTO:', _data, _verto.verto, md5(_verto.verto.options.loginParams.email));
+    console.log('DATA & VERTO:', _data, settings, _verto.verto, md5(_verto.verto.options.loginParams.email));
     /*
     const phoneObject = {
       destination_number: destination,
@@ -319,7 +319,7 @@ class VertoService {
       }
     };
 
-    _verto.verto.newCall()
+    _verto.verto.newCall(phoneObject)
     */
   }
 
