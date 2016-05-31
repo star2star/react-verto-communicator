@@ -177,10 +177,10 @@ const doSubmitLogOut = () =>{
 };
 
 // making a phone call
-const doMakeCall = (aPhoneNumber) => {
+const doMakeCall = (aPhoneNumber, appSettings) => {
   return dispatch => {
     dispatch(doingMakeCall(aPhoneNumber));
-    VertoService.getInstance().makeCall(aPhoneNumber);
+    VertoService.getInstance().makeCall(aPhoneNumber, appSettings);
     // dispatching so we change from not authorized to pending
     // Thunk here
 
