@@ -38,7 +38,8 @@ class Settings extends VertoBaseComponent {
       },
       icon: {
         height: '24px',
-        width: '24px'
+        width: '24px',
+        cursor: 'pointer'
       },
       caret: {
         fill: '#fff',
