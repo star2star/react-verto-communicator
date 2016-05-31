@@ -1,5 +1,6 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent.js';
+import { FormattedMessage } from 'react-intl';
 import {
 SettingsIconSVG,
 CaretUpIconSVG,

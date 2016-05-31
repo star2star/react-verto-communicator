@@ -28,9 +28,9 @@ Sample:
 
 | Prop Name | Sample | Description |
 | ------------ | ------------- | ------------- |
-| placeHolder | "..." | _Include a brief description of what the prop does as well as whether it is required or not and its' type_ |
-| styles |  _NOTE styles are in JSX, not CSX_ { inputWrapStyle: {backgroundColor: '#ddd'} inputStyle {fontSize: '1rem'} }m | Sample: |
-| cbClick |  _Function implemented and bound to a higher-order parent container of this component_ | This prop is a string and is required. This prop is passed into this component from the session component and controls what message we display to the user. |
+| data | data={<br>askRecoverCall: false, <br>autoBand: true,<br> bestFrameRate: "15", <br>googEchoCancellation: true,<br> googNoiseSuppression: true,<br> incomingBandwidth: "default",<br> language:"English",<br> mirrorInput: false,<br> outgoingBandwidth: "default", <br>selectedAudio: null, selectedShare: null,<br> selectedSpeaker: null,<br> selectedVideo: null, testSpeedJoin: true, useDedence: false, useSTUN: true, useStereo: true, vidQual:undefined<br>| An object. Required. Contains the default data for each setting field.  
+| compStyle |  _NOTE styles are in JSX, not CSX_ {   container: {display: 'flex', position: 'relative'},  inputStyle {fontSize: '1rem'} }m | Optional prop. If value is provided, then it will render new styles, if not it will render default styling. |
+| cbClick |  Function implemented and bound to a higher-order parent container of this component | Function. Required. This prop  controls the dropdownDisplayed state. |
 
 ## b. Component State ##
 
@@ -52,10 +52,16 @@ Sample:
 Event | Action(s)
 ------------ | -------------
 Settings icon clicked | Invoke the callback function cbClick(), dropdownDisplayed state is toggled.
+Camera menu clicked | "..."
+Share screen menu clicked | "..."
+Microphone menu clicked | "..."
+Speaker menu clicked | "..."
+Best frame rate menu clicked | "..."
+
 
 ## d. Context-Aware Specification ##
 
-If the component is a context-aware component, then this section must define the structure of the store, the dispatch functions, action creators, reducers, middleware, and subscriptions that need to be implemented.
+This component is a pure component and it will maintain it’s own state.
 
 # 4. Reference Components #
 
