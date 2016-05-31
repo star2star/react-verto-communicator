@@ -31,11 +31,13 @@ class UserMenu extends VertoBaseComponent {
       },
       icon: {
         height: '32px',
-        width: '32px'
+        width: '32px',
+        cursor: 'pointer'
       },
       caret: {
         fill: '#fff',
         flexGrow: 1,
+        cursor: 'pointer',
         height: '20px',
         width: '20px',
         paddingBottom: '3px'
@@ -46,7 +48,7 @@ class UserMenu extends VertoBaseComponent {
         top: '60px',
         right: '100px',
         minWidth: '160px',
-        //padding: '5px 0',
+        padding: '5px 0',
         margin: '2px 0 0',
         display: this.state.dropdownDisplayed ? 'flex' : 'none',
         flexDirection: 'column',
@@ -69,7 +71,7 @@ class UserMenu extends VertoBaseComponent {
       },
       li: {
         color: 'red',
-        padding: '8px 20px',
+        //padding: '8px 20px',
         //padding: '20px 20px',
         fontWeight: '400',
         fontSize: '14px',
@@ -92,9 +94,7 @@ class UserMenu extends VertoBaseComponent {
     const menuContainer = (
 
       <div className="menuContainer" style={this.getStyle('menu')} >
-        <div style={this.getStyle('li')} >
-          {this.props.children}
-        </div>
+        {this.props.children}
       </div>
     );
 
