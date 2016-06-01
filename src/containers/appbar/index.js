@@ -21,6 +21,10 @@ import { FormattedMessage } from 'react-intl';
 // Need to close menu on resize so that if we pass media query limit then
 // normal size menu will reappear...
 window.onresize=()=>{
+  // close any open 'menus'
+  // NetworkStatusIndicator && NetworkStatusIndicator.closeNetworkStatus();
+  // UserMenu.closeMenu();
+  // TagMenu.closeMenu();
   AppBar.closeMenu();
 };
 
@@ -152,7 +156,9 @@ class AppBar extends VertoBaseComponent {
   handleAltMenuClick(){
     console.log('Alt Menu Clicked');
     // close any open 'menus'
-    NetworkStatusIndicator.closeNetworkStatus();
+    if (this.props.bandwidthInfo.outgoingBandwidth && this.props.bandwidthInfo.incomingBandwidth) {
+      NetworkStatusIndicator && NetworkStatusIndicator.closeNetworkStatus();
+    }
     UserMenu.closeMenu();
     TagMenu.closeMenu();
 
