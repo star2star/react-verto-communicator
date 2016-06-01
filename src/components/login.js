@@ -72,7 +72,10 @@ class Login extends VertoBaseComponent{
         color: "rgba(0,0,0,84)",
         flexDirection: "column",
         boxShadow: "0px 8px 17px 0px rgba(0,0,0,.2), 0px 6px 20px 0px rgba(0,0,0,.19)",
-        width: "30vw"
+        width: "30vw",
+        '@media (max-width: 991px)': {
+          width: '80vw'
+        }
       },
       header: {
         fontSize: '24px',
