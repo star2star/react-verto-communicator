@@ -31,42 +31,33 @@ class TagMenu extends VertoBaseComponent {
       },
       icon: {
         height: '24px',
-        width: '24px'
+        width: '24px',
+        cursor: 'pointer'
       },
       caret: {
         fill: '#fff',
         flexGrow: 1,
+        cursor: 'pointer',
         height: '16px',
         width: '20px',
         paddingBottom: '3px'
       },
       menu: {
         position: 'absolute',
-        top: '60px',
-        right: '30px',
+        fontSize: '14px',
+        right: '100px',
+        minWidth: '160px',
+        padding: '5px 0',
+        margin: '2px 0 0',
         display: this.state.dropdownDisplayed ? 'flex' : 'none',
         flexDirection: 'column',
-        //padding: '10px',
         border: '1px solid #ccc',
-        backgroundColor: 'white'
-      },
-      header: {
-        display: 'flex',
-        justifyContent: 'center',
-        color: '#4a4a4a',
-        padding: '5px',
-        backgroundColor: '#F7F7F7',
-        fontFamily: 'sans-serif'
-      },
-      li: {
-        color: '#4a4a4a',
-        paddingLeft: '10px',
-        paddingRight: '10px',
-        fontFamily: 'sans-serif'
+        backgroundColor: '#fff',
+        borderBottomLeftRadius: '4px',
+        borderBottomRightRadius: '4px',
+        boxShadow: '0 2px 5px 0 rgba(0,0,0,.25)'
       }
-
     };
-
     return (styles[styleName]);
   }
 
