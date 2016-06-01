@@ -29,14 +29,15 @@ class SplashMessage extends VertoBaseComponent{
               display: "flex",
               flexDirection: "column",
               textAlign: "center",
-              paddingBottom: "5px"
+              paddingBottom: "10px"
             },
             headerStyle: {
               color: "#FFFFFF",
               flex: "1",
               alignSelf: "center",
-              fontSize: "24px",
-              padding: "5px 0px"
+              fontSize: "20px",
+              padding: "5px 0px",
+              paddingTop: "10px"
             },
             bodyStyle: {
               color: "#FFFFFF",
@@ -52,7 +53,8 @@ class SplashMessage extends VertoBaseComponent{
               backgroundColor: "#FC7E7E",
               display: "flex",
               flexDirection: "column",
-              paddingBottom: "25px"
+              paddingBottom: "25px",
+              paddingTop: "5px"
             }
       };
       return (styles[styleName]);
