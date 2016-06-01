@@ -17,6 +17,9 @@ class TagMenu extends VertoBaseComponent {
   constructor(props) {
     super(props);
     this.state = {'dropdownDisplayed': false};
+
+    this.toggleMenu = this.toggleMenu.bind(this);
+    TagMenu.closeMenu = this.closeMenu.bind(this);
   }
 
   getCompStyle() {
@@ -62,12 +65,17 @@ class TagMenu extends VertoBaseComponent {
   }
 
 
-  showMenu() {
+  toggleMenu() {
     if (this.props.allowDisplayDetails) {
       this.setState({...this.state, dropdownDisplayed: !this.state.dropdownDisplayed});
     }
   }
 
+  closeMenu() {
+    if (this.props.allowDisplayDetails) {
+      this.setState({...this.state, dropdownDisplayed: false});
+    }
+  }
   render() {
     const menuContainer = (
 
@@ -78,7 +86,7 @@ class TagMenu extends VertoBaseComponent {
 
 
     return (
-      <span onClick={this.showMenu.bind(this)}  style={this.getStyle("container")}>
+      <span onClick={this.toggleMenu}  style={this.getStyle("container")}>
         <TagIconSVG svgStyle={{...this.getStyle('icon'), fill: 'white'}}  />
           {this.state.dropdownDisplayed ?
               <CaretUpIconSVG svgStyle={{...this.getStyle('caret'), fill: 'white'}} /> :

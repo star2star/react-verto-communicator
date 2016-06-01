@@ -20,6 +20,7 @@ class UserMenu extends VertoBaseComponent {
 
     this.toggleMenu = this.toggleMenu.bind(this);
     UserMenu.toggleMenu = this.toggleMenu.bind(this);
+    UserMenu.closeMenu = this.closeMenu.bind(this);
   }
 
   getCompStyle() {
@@ -69,6 +70,12 @@ class UserMenu extends VertoBaseComponent {
   toggleMenu() {
     if (this.props.allowDisplayDetails) {
       this.setState({...this.state, dropdownDisplayed: !this.state.dropdownDisplayed});
+    }
+  }
+
+  closeMenu() {
+    if (this.props.allowDisplayDetails) {
+      this.setState({...this.state, dropdownDisplayed: false});
     }
   }
 

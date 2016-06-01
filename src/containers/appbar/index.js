@@ -132,6 +132,7 @@ class AppBar extends VertoBaseComponent {
               position: 'absolute',
               top: '70px',
               left: '0px',
+              paddingLeft: '5px',
               backgroundColor: '#0544a4'
             }
           },
@@ -149,7 +150,13 @@ class AppBar extends VertoBaseComponent {
   }
 
   handleAltMenuClick(){
-    // console.log('Alt Menu Clicked');
+    console.log('Alt Menu Clicked');
+    // close any open 'menus'
+    if (this.state.showAltAppControls) {
+      NetworkStatusIndicator.closeNetworkStatus();
+      UserMenu.closeMenu();
+      TagMenu.closeMenu();
+    }
     this.setState({...this.state, showAltAppControls: !this.state.showAltAppControls });
   }
 

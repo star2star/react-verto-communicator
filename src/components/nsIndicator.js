@@ -28,6 +28,7 @@ class NetworkStatusIndicator extends VertoBaseComponent {
     this.toggleDisplay = this.toggleDisplay.bind(this);
 
     NetworkStatusIndicator.toggleNetworkStatus = this.toggleDisplay.bind(this);
+    NetworkStatusIndicator.closeNetworkStatus = this.closeDisplay.bind(this);
   }
 
   getCompStyle() {
@@ -47,8 +48,8 @@ class NetworkStatusIndicator extends VertoBaseComponent {
         alignItems: 'center'
       },
       icon: {
-        height: '32px',
-        width: '32px'
+        height: '24px',
+        width: '24px'
       },
       caret: {
         fill: '#fff',
@@ -105,7 +106,10 @@ class NetworkStatusIndicator extends VertoBaseComponent {
     this.setState({...this.state,'dropdownDisplayed': !this.state.dropdownDisplayed});
   }
 
-
+  closeDisplay() {
+    console.log('$$$$$$ Close NetworkStatusIndicator!!!!');
+    this.setState({...this.state,'dropdownDisplayed': false});
+  }
 
   render() {
 
