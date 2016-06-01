@@ -15,6 +15,9 @@ const propTypes = {
 class Splash extends VertoBaseComponent {
   constructor(props) {
     super(props);
+    this.getProgressBarWidth = this.getProgressBarWidth.bind(this);
+    Splash.getProgressBarWidth = this.getProgressBarWidth.bind(this);
+
   }
 
   getCompStyle() {
@@ -53,10 +56,16 @@ class Splash extends VertoBaseComponent {
     };
     return (styles[styleName]);
   }
+
+// testability change
+  getProgressBarWidth(aStepObject) {
+    return Math.ceil(aStepObject.current/aStepObject.number * 100)  ;
+  }
+
   render() {
 
     //calc for progress bar width
-    const progressWidth = Math.ceil(this.props.step.current/this.props.step.number * 100) + "%";
+    const progressWidth = this.getProgressBarWidth(this.props.step) + "%";
     return (
       <div style={this.getStyle('splashStyle')}>
         <div style={this.getStyle('loadingStyle')}>{this.props.title}</div>
