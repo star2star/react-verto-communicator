@@ -152,11 +152,10 @@ class AppBar extends VertoBaseComponent {
   handleAltMenuClick(){
     console.log('Alt Menu Clicked');
     // close any open 'menus'
-    if (this.state.showAltAppControls) {
-      NetworkStatusIndicator.closeNetworkStatus();
-      UserMenu.closeMenu();
-      TagMenu.closeMenu();
-    }
+    NetworkStatusIndicator.closeNetworkStatus();
+    UserMenu.closeMenu();
+    TagMenu.closeMenu();
+
     this.setState({...this.state, showAltAppControls: !this.state.showAltAppControls });
   }
 
@@ -250,7 +249,7 @@ class AppBar extends VertoBaseComponent {
                 data={this.props.settings} />
             </div>
             <div style={!this.state.showAltAppControls ? {marginRight: '20px'}:{marginBottom:'10px'}}>
-              <UserMenu allowDisplayDetails={this.props.vcStatus != 'disconnected'} compStyle={this.getStyle("altUserMenu")}>
+              <UserMenu allowDisplayDetails={this.props.vcStatus != 'disconnected'} compStyle={this.state.showAltAppControls ? this.getStyle("altUserMenu") : undefined}>
                 <MenuItem label={<FormattedMessage id='OPEN_NEW_WINDOW' />}cbAction={()=>{
                   window.open(location.href);
                 }} />
@@ -264,7 +263,7 @@ class AppBar extends VertoBaseComponent {
 
             </div>
             <div style={!this.state.showAltAppControls ? {marginRight: '20px'}:{marginBottom:'10px', position:'relative'}}>
-              <TagMenu allowDisplayDetails="true" compStyle={this.getStyle("altTagMenu")}>
+              <TagMenu allowDisplayDetails="true" compStyle={this.state.showAltAppControls ? this.getStyle("altTagMenu") : undefined}>
                 <MenuItem label="About" cbAction={()=>{
 
                   App.toggleModal((<About />));

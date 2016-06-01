@@ -48,7 +48,8 @@ class TagMenu extends VertoBaseComponent {
       menu: {
         position: 'absolute',
         fontSize: '14px',
-        right: '35px',
+        right: '0px',
+        top: '40px',
         minWidth: '160px',
         padding: '5px 0',
         margin: '2px 0 0',
