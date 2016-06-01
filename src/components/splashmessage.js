@@ -45,7 +45,7 @@ class SplashMessage extends VertoBaseComponent{
               alignSelf: "center",
               width: "95%",
               backgroundColor: "#E16565",
-              textWeight: "bold",
+              fontWeight: "500",
               wordWrap: "break-word",
               padding: "5px"
             },

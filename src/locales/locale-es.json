@@ -129,6 +129,8 @@
   "MAX_OUTGOING_BANDWIDTH": "Máxima amplitude banda saliente:",
   "FACTORY_RESET": "Restablecimiento de fábrica",
   "SAVE_DEVICE_SETTINGS": "Guardar la Configuración del dispositivo ",
+  "CHECK_RESOLUTION": "Comprobación de resolución.",
+  "ERROR_RESOLUTION": "Error: la resolución de la comprobación de errores internos",
   "BROWSER_COMPATIBILITY": "Comprobar Compatibilidad de navegadores.",
   "REFRESH_MEDIA_DEVICES": "Actualizar dispositivos de medios.",
   "BROWSER_WITHOUT_WEBRTC": "Error: el navegador no soporta WebRTC.",

@@ -29,6 +29,7 @@ This component is a 'pure component'.
 
 * vertobase component
 * splashmessage component
+* ReactIntl
 
 # 5. Unit Testing Requirement #
 
