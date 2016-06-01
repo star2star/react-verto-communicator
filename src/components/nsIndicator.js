@@ -41,17 +41,20 @@ class NetworkStatusIndicator extends VertoBaseComponent {
         position: 'relative',
         alignItems: 'center'
       },
+      iconsContainer: {
+        display: 'flex',
+        position: 'relative',
+        alignItems: 'center'
+      },
       icon: {
-        height: '24px',
-        width: '24px',
-        cursor: 'pointer'
+        height: '32px',
+        width: '32px'
       },
       caret: {
         fill: '#fff',
         flexGrow: 1,
-        height: '16px',
-        width: '20px',
-        cursor: 'pointer'
+        height: '17px',
+        width: '19px'
       },
       menu: {
         position: 'absolute',
@@ -135,7 +138,7 @@ class NetworkStatusIndicator extends VertoBaseComponent {
     const iconsContainer = (
       <div
           networkData={this.networkData}
-          style={this.getStyle('container')}
+          style={this.getStyle('iconsContainer')}
       >
         {icon}
         {caret}
@@ -143,30 +146,31 @@ class NetworkStatusIndicator extends VertoBaseComponent {
     );
 
     const menuContainer = (
-        <div className="menuContainer" style={this.getStyle('menu')} >
-          <div style={this.getStyle('header')} >
-              <FormattedMessage id="BANDWIDTH_INFO" />
-          </div>
-          <div
-              onClick={this.props.cbMenuClick}
-              style={this.getStyle('li')}
-              className="upkpbs"
-          >
-            <FormattedMessage id="BANDWIDTH_INFO_OUTGOING" /> {this.props.networkData.upkpbs}
-          </div>
-          <div
-              onClick={this.props.cbMenuClick}
-              style={this.getStyle('li')}
-          >
-            <FormattedMessage id="BANDWIDTH_INFO_INCOMING" /> {this.props.networkData.downkpbs}
-          </div>
-          <div
-              onClick={this.props.cbMenuClick}
-              style={this.getStyle('li')}
-          >
-              <FormattedMessage id="BANDWIDTH_INFO_VIDEO_RES" /> {this.props.networkData.vidQual}
-          </div>
+
+      <div className="menuContainer" style={this.getStyle('menu')} >
+        <div style={this.getStyle('header')} >
+            <FormattedMessage id="BANDWIDTH_INFO" />
         </div>
+        <div
+            onClick={this.props.cbMenuClick}
+            style={this.getStyle('li')}
+            className="upkpbs"
+        >
+          <FormattedMessage id="BANDWIDTH_INFO_OUTGOING" /> {this.props.networkData.upkpbs}
+        </div>
+        <div
+            onClick={this.props.cbMenuClick}
+            style={this.getStyle('li')}
+        >
+          <FormattedMessage id="BANDWIDTH_INFO_INCOMING" /> {this.props.networkData.downkpbs}
+        </div>
+        <div
+            onClick={this.props.cbMenuClick}
+            style={this.getStyle('li')}
+        >
+            <FormattedMessage id="BANDWIDTH_INFO_VIDEO_RES" /> {this.props.networkData.vidQual}
+        </div>
+      </div>
     );
 
     let nsi;
