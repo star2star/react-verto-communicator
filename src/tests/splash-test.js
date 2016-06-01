@@ -9,9 +9,15 @@ jest.unmock('../components/splash.js');
 describe('Splash Screen Component', ()=>{
 
   const SampleStep = {
-    number: "4",
-    current: "2",
+    number: 4,
+    current: 2,
     title: "Checking Media Permissions"
+  };
+
+  const SampleStep2 = {
+    number: 4,
+    current: 3,
+    title: "Checking Connection Speed"
   };
 
   it('renders a given step', () => {
@@ -19,9 +25,17 @@ describe('Splash Screen Component', ()=>{
     expect(wrapper.props().step).toEqual(SampleStep);
   });
 
-  it('fills the loading bar correctly', ()=> {
+  it('sets the correct width for the loading bar when 2 of 4 steps are completed.', ()=> {
+    expect(Splash.getProgressBarWidth(SampleStep)).toEqual(50);
+  });
 
-    expect(Splash.getProgressBarWidth(SampleStep)).toEqual(60);
+  it('sets the correct width for the loading bar when 3 of 4 steps are completed.', ()=> {
+    expect(Splash.getProgressBarWidth(SampleStep2)).toEqual(75);
+  });
+
+  it('uses the SplashMessage component', ()=> {
+    const wrapper = mount(<Splash step={SampleStep2} />);
+    expect(wrapper.find('SplashMessage').props().statusTitle).toEqual('Checking Connection Speed');
   });
 
 });

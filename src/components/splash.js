@@ -1,6 +1,7 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import SplashMessage from './splashmessage';
+import Radium from 'radium';
 
 const propTypes = {
   step:   React.PropTypes.shape({
@@ -35,16 +36,20 @@ class Splash extends VertoBaseComponent {
         width: "600px",
         background: "#FFFFFF",
         color: '#282828',
-        boxShadow: ' 0px 2px 2.5px #D3D3D3, -2.5px 2px 3.75px #D3D3D3, 2.5px 2px 3.75px #D3D3D3'
+        boxShadow: ' 0px 2px 2.5px #D3D3D3, -2.5px 2px 3.75px #D3D3D3, 2.5px 2px 3.75px #D3D3D3',
+        '@media (max-width: 991px)': {
+          width: '80vw'
+        }
       },
       loadingStyle: {
         paddingBottom: "20px",
         paddingTop: "15px",
-        fontSize: "30px"
+        fontSize: "30px",
+        fontWeight: "200"
       },
       loadingBarStyle: {
         position: "relative",
-        width: "500px",
+        width: "90%",
         height: "4px",
         backgroundColor: "#C8C8C8"
       },
@@ -80,4 +85,4 @@ class Splash extends VertoBaseComponent {
 
 Splash.propTypes = propTypes;
 
-export default Splash;
+export default Radium(Splash);
