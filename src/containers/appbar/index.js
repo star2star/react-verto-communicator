@@ -18,12 +18,19 @@ import { MenuIconSVG } from '../../components/svgIcons';
 import { FormattedMessage } from 'react-intl';
 
 
+// Need to close menu on resize so that if we pass media query limit then
+// normal size menu will reappear...
+window.onresize=()=>{
+  AppBar.closeMenu();
+};
+
 class AppBar extends VertoBaseComponent {
   constructor(props) {
     super(props);
     this.state={showSettings: false, showAltAppControls: false };
 
     this.handleAltMenuClick = this.handleAltMenuClick.bind(this);
+    AppBar.closeMenu = this.handleCloseMenu.bind(this);
   }
 
   componentWillMount() {
@@ -62,10 +69,52 @@ class AppBar extends VertoBaseComponent {
               display: 'none'
             }
           },
+          nsiCompStyle: {
+            container:{
+              marginRight: '10px'
+            }
+          },
+          altNsiCompStyle: {
+            container:{
+              marginBottom: '10px'
+            },
+            menu: {
+              top: '10px',
+              right: 'initial',
+              left: '48px'
+            }
+          },
+          altUserMenu: {
+            menu: {
+              top: '10px',
+              right: 'initial',
+              left: '48px'
+            }
+          },
+          altTagMenu: {
+            menu: {
+              top: '10px',
+              right: 'initial',
+              left: '48px'
+            }
+          },
+          vcsCompStyle: {
+            svgStyle:{
+              marginRight: '20px',
+              '@media (max-width: 768px)': { // when less than 768px wide, adjust for column orientation
+                  marginBottom: '10px',
+                  marginRight: '0px'
+                }
+            }
+          },
+
           altMenuStyles: {
             display: 'none',
+            visbility: 'hidden',
             '@media (max-width: 768px)': { // when less than 768px wide, show this and hide app controls
-              display: 'block'
+              display: 'block',
+              visibility: 'visible',
+              cursor: 'pointer'
             }
           },
           altMenuSvgStyles: {
@@ -86,7 +135,6 @@ class AppBar extends VertoBaseComponent {
               backgroundColor: '#0544a4'
             }
           },
-
           lastCallStyles: {
             marginRight: '15px'
           },
@@ -101,11 +149,14 @@ class AppBar extends VertoBaseComponent {
   }
 
   handleAltMenuClick(){
-    console.log('Alt Menu Clicked');
+    // console.log('Alt Menu Clicked');
     this.setState({...this.state, showAltAppControls: !this.state.showAltAppControls });
   }
 
-
+  handleCloseMenu(){
+    console.log('Handle Close Menu');
+    this.setState({...this.state, showAltAppControls: false });
+  }
 
   settings(displaySettings) {
     //console.log('toggle settings', displaySettings);
@@ -134,17 +185,22 @@ class AppBar extends VertoBaseComponent {
     const appName = WhiteLabel.get('appName');
 
 
-    // showAltAppControls is true, then set const acStyles to altAppControlStyles
-    // otherwise set it to appControlStyles.
-    const acStyles = this.state.showAltAppControls ? this.getStyle("altAppControlStyles") : this.getStyle("appControlStyles");
+    // showAltAppControls is true, then reset styles for alt menu positions and orientations
+    // otherwise leave set it to appControlStyles.
 
+    let acStyles = this.getStyle("appControlStyles");
+
+    if (this.state.showAltAppControls) {
+      acStyles =  this.getStyle("altAppControlStyles");
+    }
 
     // only show network status if we have speed data ....
     let nsIndicator;
     if (this.props.bandwidthInfo.outgoingBandwidth && this.props.bandwidthInfo.incomingBandwidth) {
       const vidQual = this.props.bandwidthInfo.vidQual ? this.props.bandwidthInfo.vidQual : '';
       nsIndicator = (
-        <NetworkStatusIndicator compStyle={!this.state.showAltAppControls ? {container:{marginRight: '20px'}} : {container:{marginBottom: '10px'}}}
+        <NetworkStatusIndicator
+            compStyle={this.state.showAltAppControls ? this.getStyle("altNsiCompStyle") : this.getStyle("nsiCompStyle")}
             networkData={{upkpbs: this.props.bandwidthInfo.outgoingBandwidth,
                           downkpbs: this.props.bandwidthInfo.incomingBandwidth,
                           vidQual: vidQual}}
@@ -167,6 +223,7 @@ class AppBar extends VertoBaseComponent {
     }
 
     // settings here
+    //TODO define settings style for alt menu orientation
     const settingsMenu = this.getSettingsMenu();
 
     return (
@@ -186,7 +243,7 @@ class AppBar extends VertoBaseComponent {
                 data={this.props.settings} />
             </div>
             <div style={!this.state.showAltAppControls ? {marginRight: '20px'}:{marginBottom:'10px'}}>
-              <UserMenu allowDisplayDetails={this.props.vcStatus != 'disconnected'} >
+              <UserMenu allowDisplayDetails={this.props.vcStatus != 'disconnected'} compStyle={this.getStyle("altUserMenu")}>
                 <MenuItem label={<FormattedMessage id='OPEN_NEW_WINDOW' />}cbAction={()=>{
                   window.open(location.href);
                 }} />
@@ -200,7 +257,7 @@ class AppBar extends VertoBaseComponent {
 
             </div>
             <div style={!this.state.showAltAppControls ? {marginRight: '20px'}:{marginBottom:'10px', position:'relative'}}>
-              <TagMenu allowDisplayDetails="true" >
+              <TagMenu allowDisplayDetails="true" compStyle={this.getStyle("altTagMenu")}>
                 <MenuItem label="About" cbAction={()=>{
 
                   App.toggleModal((<About />));

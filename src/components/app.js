@@ -7,7 +7,7 @@ import AppBar from '../containers/appbar/index.js';
 
 class App extends VertoBaseComponent {
   constructor(props){
-    super(props)
+    super(props);
     this.state = {isModalOpen: false};
     this.modal = undefined;
     App.toggleModal = this.toggleModal.bind(this);
