@@ -31,7 +31,8 @@ class UserMenu extends VertoBaseComponent {
     const styles = {
       container: {
         display: 'flex',
-        position: 'relative'
+        position: 'relative',
+        alignItems: 'center'
       },
       icon: {
         fill: this.props.allowDisplayDetails ? '#fff' : '#ccc',

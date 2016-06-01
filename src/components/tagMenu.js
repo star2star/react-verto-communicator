@@ -30,7 +30,8 @@ class TagMenu extends VertoBaseComponent {
     const styles = {
       container: {
         display: 'flex',
-        position: 'relative'
+        position: 'relative',
+        alignItems: 'center'
       },
       icon: {
         height: '24px',
