@@ -14,7 +14,7 @@ All text will be passed in as Formatted Messages with an id labelling the text a
 ![A breakdown of how this component looks](https://raw.githubusercontent.com/star2star/react-verto-communicator/master/documents/img/Settings-image-full.png)
 
 -Secondary Video Settings (Automatically determine speed and resolution settings NOT selected)
-![A breakdown of how this menu looks](https://raw.githubusercontent.com/star2star/react-verto-communicator/master/documents/img/Settings-Video-Secondary Menu.png)
+![A breakdown of how this menu looks](https://raw.githubusercontent.com/star2star/react-verto-communicator/master/documents/img/settings-video-secondary-menu.png)
 
 # 3. Component Type #
 
