@@ -26,6 +26,12 @@ class Settings extends VertoBaseComponent {
     Settings.toggleSettings = this.showMenu;
   }
 
+  handleChange() {
+      const setChange= this.refs.settingSelect.value;
+      // console.log('------->', setChange);
+      this.props.cbSettingSubmit(setChange);
+    }
+
   getCompStyle() {
     return this.props.compStyle;
   }
@@ -37,11 +43,13 @@ class Settings extends VertoBaseComponent {
         position: 'relative'
       },
       icon: {
+        fill: this.props.allowDisplayDetails ? '#fff' : '#ccc',
         height: '24px',
-        width: '24px'
+        width: '24px',
+        cursor: 'pointer'
       },
       caret: {
-        fill: '#fff',
+        fill: this.props.allowDisplayDetails ? '#fff' : '#ccc',
         flexGrow: 1,
         height: '16px',
         width: '20px',
@@ -97,10 +105,10 @@ class Settings extends VertoBaseComponent {
     console.log('settings render props: ', this.props.data);
     return (
       <span onClick={this.showMenu.bind(this)}  >
-        <SettingsIconSVG svgStyle={{...this.getStyle('icon'), fill: 'white'}}  />
+        <SettingsIconSVG svgStyle={{...this.getStyle('icon')}}  />
           {this.state.dropdownDisplayed ?
-              <CaretUpIconSVG svgStyle={{...this.getStyle('caret'), fill: 'white'}} /> :
-              <CaretDownIconSVG svgStyle={{...this.getStyle('caret'), fill: 'white'}} />}
+              <CaretUpIconSVG svgStyle={{...this.getStyle('caret')}} /> :
+              <CaretDownIconSVG svgStyle={{...this.getStyle('caret')}} />}
           {menuContainer}
       </span>
     );

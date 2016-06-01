@@ -367,7 +367,15 @@ class VertoService {
           h = 720;
         }
 
-        VertoService.updateResolutions(resolutions['validRes'], data);
+        data.videoQuality = VertoService.updateResolutions(resolutions['validRes']);
+
+        // videoQuality.length = videoQuality.length - removed;
+        console.log("******* VQ length 2: " + data.videoQuality.length);
+
+
+        data.vidQual = (data.videoQuality.length > 0) ? data.videoQuality[data.videoQuality.length - 1] : null;
+        console.debug('vidQual', data.vidQual);
+
         v.videoParams({
           minWidth: w,
           minHeight: h,
@@ -393,10 +401,10 @@ class VertoService {
         //console.debug('There is no instance of verto.');
       }
 
-    }, 0);
+    }, 10);
   }
 
-  static updateResolutions (supportedResolutions, data) {
+  static updateResolutions (supportedResolutions) {
     //console.debug('Attempting to sync supported and available resolutions');
 
     //var removed = 0;
@@ -404,7 +412,7 @@ class VertoService {
     //console.debug("VQ length: " + VideoConstants.VIDEO_QUALITY_SOURCE.length);
     //console.debug(supportedResolutions);
 
-    const videoQuality = VideoConstants.VIDEO_QUALITY_SOURCE.filter((resolution)=> {
+    return VideoConstants.VIDEO_QUALITY_SOURCE.filter((resolution)=> {
        return supportedResolutions.filter((res) => {
          //console.log('RES: ', res);
           var width = res[0];
@@ -413,15 +421,6 @@ class VertoService {
         return (resolution.width == width && resolution.height == height);
       }).length > 0;
     });
-
-    // videoQuality.length = videoQuality.length - removed;
-    //console.debug("VQ length 2: " + videoQuality.length);
-    data.videoQuality = videoQuality;
-
-    data.vidQual = (videoQuality.length > 0) ? videoQuality[videoQuality.length - 1] : null;
-    console.debug('vidQual', data.vidQual);
-
-    return videoQuality;
   }
 
   static refreshDevices(callback){

@@ -108,7 +108,8 @@ class Main extends VertoBaseComponent {
     }
     let showSplash;
     if (this.props.auth.splash && this.props.auth.splash.current != this.props.auth.splash.number) {
-      showSplash = (<Splash step={splashObject} />);
+      const intlTitle = formatMessage({"id": "LOADING", "defaultMessage": "Loading"});
+      showSplash = (<Splash step={splashObject} title={intlTitle} />);
     }
     return (
       <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>

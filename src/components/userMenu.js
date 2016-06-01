@@ -33,12 +33,13 @@ class UserMenu extends VertoBaseComponent {
         position: 'relative'
       },
       icon: {
+        fill: this.props.allowDisplayDetails ? '#fff' : '#ccc',
         height: '24px',
         width: '24px',
         cursor: 'pointer'
       },
       caret: {
-        fill: '#fff',
+        fill: this.props.allowDisplayDetails ? '#fff' : '#ccc',
         flexGrow: 1,
         cursor: 'pointer',
         height: '16px',
@@ -82,10 +83,10 @@ class UserMenu extends VertoBaseComponent {
 
     return (
       <span onClick={this.toggleMenu.bind(this)}  style={this.getStyle("container")}>
-        <AvatarSVG svgStyle={{...this.getStyle('icon'), fill: 'white'}}  />
+        <AvatarSVG svgStyle={{...this.getStyle('icon')}}  />
           {this.state.dropdownDisplayed ?
-              <CaretUpIconSVG svgStyle={{...this.getStyle('caret'), fill: 'white'}} /> :
-              <CaretDownIconSVG svgStyle={{...this.getStyle('caret'), fill: 'white'}} />}
+              <CaretUpIconSVG svgStyle={{...this.getStyle('caret')}} /> :
+              <CaretDownIconSVG svgStyle={{...this.getStyle('caret')}} />}
             {menuContainer}
       </span>
     );

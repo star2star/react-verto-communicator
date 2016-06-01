@@ -72,9 +72,10 @@ const doResolutionRefresh = () => {
   return dispatch => {
     dispatch(doingResolutionRefresh());
     VertoService.refreshDevices((status) => {
-      //console.log('doRefresh Resolution: ', status);
+      console.log('doRefresh Resolution: ', status);
       if (status){
         const resolutionInstanceData = VertoService.getInstanceData();
+        console.log('------^^^^^^______', resolutionInstanceData);
         dispatch(doUpdateSettings(resolutionInstanceData));
         dispatch(doValidation(4));
       } else {
@@ -106,7 +107,8 @@ const doSpeedTestResults = (data) => {
   //console.log('BBBSSSWWWW:', bw);
   return {
     "type": "SPEED_TEST",
-    "data": bw
+    "data": bw,
+    'videoQuality': VertoService.getInstanceData().videoQuality
   }
 };
 

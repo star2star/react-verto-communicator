@@ -1,7 +1,6 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import SplashMessage from './splashmessage';
-import { FormattedMessage } from 'react-intl';
 
 const propTypes = {
   step:   React.PropTypes.shape({
@@ -9,28 +8,72 @@ const propTypes = {
     current: React.PropTypes.number,
     title: React.PropTypes.string
   }).isRequired,
-  Style : React.PropTypes.object
+  title: React.PropTypes.string,
+  compStyle : React.PropTypes.object
 };
 
 class Splash extends VertoBaseComponent {
   constructor(props) {
     super(props);
+    this.getProgressBarWidth = this.getProgressBarWidth.bind(this);
+    Splash.getProgressBarWidth = this.getProgressBarWidth.bind(this);
+
+  }
+
+  getCompStyle() {
+    return this.props.compStyle;
+  }
+
+  getDefaultStyle(styleName) {
+    const styles = {
+      splashStyle: {
+        display: "flex",
+        flexDirection: "column",
+        paddingTop: "20px",
+        paddingBottom: "20px",
+        alignItems: "center",
+        width: "600px",
+        background: "#FFFFFF",
+        color: '#282828',
+        boxShadow: ' 0px 2px 2.5px #D3D3D3, -2.5px 2px 3.75px #D3D3D3, 2.5px 2px 3.75px #D3D3D3'
+      },
+      loadingStyle: {
+        paddingBottom: "20px",
+        paddingTop: "15px",
+        fontSize: "30px"
+      },
+      loadingBarStyle: {
+        position: "relative",
+        width: "500px",
+        height: "4px",
+        backgroundColor: "#C8C8C8"
+      },
+      loadingBarFilled: {
+        position: "absolute",
+        height: "100%",
+        backgroundColor: "#26A599"
+      }
+    };
+    return (styles[styleName]);
+  }
+
+// testability change
+  getProgressBarWidth(aStepObject) {
+    return Math.ceil(aStepObject.current/aStepObject.number * 100)  ;
   }
 
   render() {
 
     //calc for progress bar width
-    const progressWidth = Math.ceil(this.props.step.current/this.props.step.number * 100) + "%";
+    const progressWidth = this.getProgressBarWidth(this.props.step) + "%";
     return (
-      <div style={{display: "flex", flexDirection: "column", paddingTop: "20px", paddingBottom: "20px", alignItems: "center", width: "600px", background: "green", color: 'yellow'}}>
-        <div style={{paddingBottom: "20px"}}><FormattedMessage id="LOADING" defaultMessage="Loading"/></div>
+      <div style={this.getStyle('splashStyle')}>
+        <div style={this.getStyle('loadingStyle')}>{this.props.title}</div>
         {/* progress bar */}
-        <div style={{position: "relative", width: "500px", height: "30px", backgroundColor: "gray" }}>
-          <div style={{position: "absolute", width: progressWidth, height: "100%", backgroundColor: "#4CAF50" }} />
+        <div style={this.getStyle('loadingBarStyle')}>
+          <div style={{...this.getStyle('loadingBarFilled'), width: progressWidth}}/>
         </div>
-        <div style= {{width: "95%", margin: "0 2.5%", paddingTop: "20px"}}>
-          <SplashMessage statusTitle={this.props.step.title} errorObject={this.props.step.errorObject} />
-        </div>
+        <SplashMessage statusTitle={this.props.step.title} errorObject={this.props.step.errorObject}  />
       </div>);
   }
 }
