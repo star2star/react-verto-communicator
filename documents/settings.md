@@ -3,17 +3,18 @@
 
 The Settings Menu is a large dropdown menu that drops down under the **App Bar** when the **settings icon** in clicked.  The settings menu will stretch to full length of the App Bar (which is also the full width of the window). The Settings menu will be horizontal three column layout until the window width is resized to 991px or smaller. At this point, the columns will stack vertically.
 The entire menu consists of five areas in a three column format: media, General Settings, Language, Audio Settings, and Video Settings.<br>
-The first column contains a media area. It has headings with select menu's for **Camera:**, **Share Device**, **Microphone:**, **Speaker:**, and **Best Frame Rate:**. At the bottom of this column are two buttons positioned one above the other. The top button is labelled **Preview Settings**. The bottom button is labelled **Refresh Device List**.<br>
-The second column consists of General Settings, Language, and Audio Settings areas. Under the **General Settings:** header is a list of five checkboxes (see image for details) **Language:** has a select menu to choose your language. **Audio Settings** is a list of three  checkboxes (see image for details).<br>
-The third column consists of the Video Settings with two checkboxes under the **Video Settings:** header (see image for details). Below that is a button labelled **Check Network Settings**.<br>
+The first column contains a media area. It is designated with headings for **Camera:**, **Share Device**, **Microphone:**, **Speaker:**, and **Best Frame Rate:** with select menus underneath. At the bottom of this column are two buttons positioned one above the other. The top button is labelled **Preview Settings**. The bottom button is labelled **Refresh Device List**. **Preview Settings** opens a modal with Camera and Microphone settings choices <br>
+The second column consists of General Settings, Language, and Audio Settings areas. Under the **General Settings:** header is a list of five checkboxes (Use Video, Stereo Audio, Use STUN, Scale Remote Video) **Language:** has a select menu to choose your language. **Audio Settings** is a list of three checkboxes (1.Echo cancellation, 2.Noise Suppression, 3.Highpass Filter).<br>
+The third column consists of the Video Settings with two checkboxes under the **Video Settings:** header (1. Automatically Determine Speed and Resolution Settings 2. Recheck Bandwidth Before Each Outgoing Call). Below that is a button labelled **Check Network Settings**. When <br>
 The default settings data will be passed in as the prop: **data**.<br>
 All text will be passed in as Formatted Messages with an id labelling the text and a default message the text as a string.
 
 # 2. Visual Design #  
 
-Images with callouts for size, colors, etc. and/or reference to a document containing the visual design specification for the component.  Extract from design documentation and paste here.
-
 ![A breakdown of how this component looks](https://raw.githubusercontent.com/star2star/react-verto-communicator/master/documents/img/Settings-image-full.png)
+
+-Secondary Video Settings (Automatically determine speed and resolution settings NOT selected)
+![A breakdown of how this menu looks](https://raw.githubusercontent.com/star2star/react-verto-communicator/master/documents/img/Settings-Video-Secondary Menu.png)
 
 # 3. Component Type #
 
