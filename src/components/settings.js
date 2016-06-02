@@ -9,6 +9,9 @@ CaretDownIconSVG } from './svgIcons';
 const propTypes = {
   compStyle : React.PropTypes.object,
   cbClick: React.PropTypes.func.isRequired,
+  /*cbDeviceList: React.PropTypes.func.isRequired,
+  cbNetSpeed: React.PropTypes.func.isRequired,
+  cbPreviewSet: React.PropTypes.func.isRequired,*/
   data: React.PropTypes.object.isRequired
 };
 
