@@ -132,7 +132,6 @@ class Settings extends VertoBaseComponent {
 
   render() {
     const settingsContainer = this.buildSettingsContainer();
-
     // console.log('settings render props: ', this.props.settingsData);
     return (
       <div>

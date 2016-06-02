@@ -1,4 +1,5 @@
-[{
+"use strict";
+const messages = {
   "TITLE_ACTIVE_CALL": "Oops, actives Gespräch in Bearbeitung.",
   "MESSAGE_ACTIVE_CALL_HANGUP": "Es wärst du bereits in einer Konversation. Konversation beenden?",
   "MESSAGE_ACTIVE_CALL_BACK": "Es scheint als warst du in einer Konversation bevor die Sitzung beendet wurde. Diese Konversation fortsetzen?",
@@ -168,4 +169,5 @@
   "VERSION": "Fassung: ",
   "GIT_REV": "Git Rev: ",
   "POWERED_BY": "Unterstützt von: "
-}]
+};
+module.exports = messages;

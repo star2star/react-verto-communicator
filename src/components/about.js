@@ -23,17 +23,29 @@ class About extends VertoBaseComponent{
 
   getDefaultStyle(styleName) {
     const styles = {
-      Modal : {
+
+      gitRevStyle: {
+        paddingTop: '15px'
+      },
+
+      imageStyle: {
+        width: '100%',
+        height: '100%'
+      },
+
+      container: {
+        '@media (max-width: 767px)': {
+          alignItems: "center"
+        }
+      },
+      mymodal : {
         content: {
           top                   : '50%',
           left                  : '50%',
           right                 : 'auto',
           bottom                : 'auto',
           marginRight           : '-50%',
-          transform             : 'translate(-50%, -50%)',
-          '@media (minWidth: 786px)': {
-            width: '80vw'
-          }
+          transform             : 'translate(-50%, -50%)'
         }
       }
     };
@@ -42,10 +54,28 @@ class About extends VertoBaseComponent{
 
   render() {
     const logoSrc = WhiteLabel.get('logoSrc');
+    const poweredBy = WhiteLabel.get('poweredBy');
     return (
-      <Modal isOpen={true} onRequestClose={()=>{App.toggleModal();}} style={{...this.getStyle('Modal')}}>
-        <div>
-          <img src={logoSrc}  />
+      <Modal isOpen={true} onRequestClose={()=>{App.toggleModal();}} style={this.getStyle('mymodal')}>
+        <div style={this.getStyle('container')}>
+          <div style={this.getStyle('imageStyle')}>
+            <img src={logoSrc} style={{width: "100%" }}  />
+          </div>
+
+          <div>
+           <FormattedMessage id='VERSION' />
+           <span> {this.props.version} </span>
+          </div>
+
+          <div style={this.getStyle('gitRevStyle')}>
+            <FormattedMessage id='GIT_REV' />
+            <span> {this.props.gitRev} </span>
+          </div>
+
+          <div>
+            <FormattedMessage id='POWERED_BY' />
+            <img src={poweredBy} />
+          </div>
         </div>
       </Modal> );
   }

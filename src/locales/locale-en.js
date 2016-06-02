@@ -1,3 +1,4 @@
+"use strict";
 const messages = {
   "TITLE_ACTIVE_CALL": "Oops, Active Call in Course.",
   "MESSAGE_ACTIVE_CALL_HANGUP": "It seems that you are in a call. Do you want to hang up?",

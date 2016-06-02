@@ -1,4 +1,5 @@
-[{
+"use strict";
+const messages = {
   "TITLE_ACTIVE_CALL": "Ups, der er et aktivt opkald.",
   "MESSAGE_ACTIVE_CALL_HANGUP": "Du er allerede i et opkald. Vil du lægge på?",
   "MESSAGE_ACTIVE_CALL_BACK": "Det ser ud til du sidste gang var i et opkald. Vil du tilbage til det?",
@@ -168,4 +169,5 @@
   "VERSION": "Oversættelse: ",
   "GIT_REV": "Git Rev: ",
   "POWERED_BY": "Drevet af: "
-}]
+};
+module.exports = messages;

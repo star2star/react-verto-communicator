@@ -1,4 +1,5 @@
-[{
+"use strict";
+const messages = {
   "TITLE_ACTIVE_CALL": "Oops, Chiamata in corso.",
   "MESSAGE_ACTIVE_CALL_HANGUP": "Sembra che tu sia in conversazione. Vuoi chiudere la chiamata?",
   "MESSAGE_ACTIVE_CALL_BACK": "Sembra che eri in conversazione prima di abbandonare la sessione l'ultima volta. Vuoi tornare in quella conversazione?",
@@ -168,4 +169,5 @@
   "VERSION": "Versione: ",
   "GIT_REV": "Git Rev: ",
   "POWERED_BY": "Offerto da: "
-}]
+};
+module.exports = messages;

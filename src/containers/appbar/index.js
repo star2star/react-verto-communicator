@@ -15,16 +15,13 @@ import App from '../../components/app';
 import About from '../../components/about';
 import Contributors from '../../components/contributors';
 import { MenuIconSVG } from '../../components/svgIcons';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl, FormattedMessage } from 'react-intl';
+
 
 
 // Need to close menu on resize so that if we pass media query limit then
 // normal size menu will reappear...
 window.onresize=()=>{
-  // close any open 'menus'
-  // NetworkStatusIndicator && NetworkStatusIndicator.closeNetworkStatus();
-  // UserMenu.closeMenu();
-  // TagMenu.closeMenu();
   AppBar.closeMenu();
 };
 
@@ -35,9 +32,6 @@ class AppBar extends VertoBaseComponent {
 
     this.handleAltMenuClick = this.handleAltMenuClick.bind(this);
     AppBar.closeMenu = this.handleCloseMenu.bind(this);
-  }
-
-  componentWillMount() {
   }
 
   getCompStyle() {
@@ -170,7 +164,7 @@ class AppBar extends VertoBaseComponent {
   }
 
   handleCloseMenu(){
-    console.log('Handle Close Menu');
+    //console.log('Handle Close Menu');
     this.setState({...this.state, showAltAppControls: false });
   }
 
@@ -197,6 +191,8 @@ class AppBar extends VertoBaseComponent {
     //console.log('#### window theme style', window.theme);
     //console.log('this.props.settings', this.props.settings);
     //console.log('this.props.bandwidthInfo', this.props.bandwidthInfo);
+
+    const { formatMessage } = this.props.intl;
 
     const appName = WhiteLabel.get('appName');
 
@@ -255,8 +251,8 @@ class AppBar extends VertoBaseComponent {
             <VCStatus status = {this.props.vcStatus} compStyle={!this.state.showAltAppControls ? {svgStyle:{marginRight: '20px'}}:{svgStyle:{marginBottom:'10px'}}}/>
             {lastCall}
             <div style={!this.state.showAltAppControls ? {marginRight: '20px'}:{marginBottom:'10px'}}>
-              <Settings  allowDisplayDetails={this.props.vcStatus != 'disconnected'} cbToggleShowSettings={this.settings.bind(this)}
-                settingsData={this.props.settings} />
+              <Settings  allowDisplayDetails={this.props.vcStatus != 'disconnected'} cbClick={this.settings.bind(this)}
+                data={this.props.settings} />
             </div>
             <div style={!this.state.showAltAppControls ? {marginRight: '20px'}:{marginBottom:'10px'}}>
               <UserMenu allowDisplayDetails={this.props.vcStatus != 'disconnected'} compStyle={this.state.showAltAppControls ? this.getStyle("altUserMenu") : undefined}>
@@ -274,15 +270,15 @@ class AppBar extends VertoBaseComponent {
             </div>
             <div style={!this.state.showAltAppControls ? {marginRight: '20px'}:{marginBottom:'10px', position:'relative'}}>
               <TagMenu allowDisplayDetails="true" compStyle={this.state.showAltAppControls ? this.getStyle("altTagMenu") : undefined}>
-                <MenuItem label="About" cbAction={()=>{
-
-                  App.toggleModal((<About />));
+                <MenuItem label={formatMessage({"id":"ABOUT", "defaultMessage":"About"})} cbAction={()=>{
+                  // TODO ta need to pass version and gitRev in to the About component
+                  App.toggleModal((<About version="0.2.0" gitRev="xxxxx"/>));
                 }} />
-                <MenuItem label="Contributors" cbAction={()=>{
+                <MenuItem label={formatMessage({"id":"TITLE_CONTRIBUTORS", "defaultMessage":"Contributors"})} cbAction={()=>{
 
                   App.toggleModal((<Contributors />));
                 }} />
-                <MenuItem label="Help" cbAction={()=>{
+                <MenuItem label={formatMessage({"id":"HELP", "defaultMessage":"Help"})} cbAction={()=>{
                   window.open('https://freeswitch.org/confluence/display/FREESWITCH/Verto+Communicator');
                 }} />
               </TagMenu>
@@ -302,4 +298,4 @@ export default connect((state)=>{
     bandwidthInfo: state.app.bandwidthInfo,
     vcStatus: state.auth.vcStatus
   });
-})(Radium(AppBar));
+})(injectIntl(Radium(AppBar)));
