@@ -45,7 +45,15 @@ const auth = (state, action)=>{
     case 'CALLING':
       return { ...state, showPage: 'call_inprogress', destination: action.data };
     case 'CALLING_ERROR':
-      return { ...state, showPage: 'loggedIn', error: action.data };
+      const oReturn =  { ...state, showPage: 'loggedIn', error: action.data };
+      // remove destination
+      delete oReturn.destination;
+      return oReturn;
+    case 'CALL_HUNG_UP':
+      const chu =  { ...state, showPage: 'loggedIn', lastCall: action.data };
+      // remove destination
+      delete chu.destination;
+      return chu;
     default:
      return state;
     }

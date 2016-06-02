@@ -4,14 +4,12 @@ import VertoBaseComponent from '../../components/vertobasecomponent';
 import { connect } from 'react-redux';
 //import ReactTooltip from 'react-tooltip';
 import VCStatus from '../../components/vcstatus';
-import { doSubmitLogin, doSubmitLogOut, doMakeCall } from './action-creators';
+import { doSubmitLogin, doSubmitLogOut, doMakeCall, doHangUp } from './action-creators';
 import Splash from '../../components/splash';
 import Login from '../../components/login';
 import Dialpad from '../../components/dialpad';
-import {injectIntl} from 'react-intl'
-
-
-
+import {injectIntl} from 'react-intl';
+import CallProgress from '../../components/callprogress';
 
 class Main extends VertoBaseComponent {
   constructor(props) {
@@ -73,7 +71,7 @@ class Main extends VertoBaseComponent {
       case 'loggedIn':
         loggedInfo = (
           <div>
-            <Dialpad cbCall={this.makeCall.bind(this)} nbrToDial="1000" />
+            <Dialpad cbCall={this.makeCall.bind(this)} nbrToDial="0" />
         </div>);
         break;
       case 'resolution_failed':
@@ -100,7 +98,22 @@ class Main extends VertoBaseComponent {
         break;
       case 'call_inprogress':
         loggedInfo = (
-          <div>call in progress screen --- will timeout after 5 seconds </div>
+          <div>
+            <CallProgress callData={this.props.auth.destination}
+              cbHangup={(callId)=>{
+                this.props.dispatch(doHangUp(callId));
+              }}
+              cbMute ={(callId)=>{
+
+              }}
+              cbDTMF={(callId, key)=>{
+
+              }}
+              cbHold={(callId)=>{
+
+              }}
+            />
+          </div>
         );
         break;
       default:

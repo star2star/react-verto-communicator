@@ -1,4 +1,4 @@
-import {doLogOut, doVertoLogin, doMakeCallError } from '../containers/main/action-creators';
+import {doLogOut, doVertoLogin, doMakeCallError, doHungUp} from '../containers/main/action-creators';
 import VideoConstants from './VideoConstants';
 import md5 from 'md5';
 
@@ -173,6 +173,7 @@ class VertoService {
 
               //TODO
               //Processor.starphone('destroy', d.params);
+              _dispatch(doHungUp(d));
               break;
 
           case $.verto.enum.state.held:

@@ -183,17 +183,22 @@ const doSubmitLogOut = () =>{
 // making a phone call
 const doMakeCall = (aPhoneNumber, appSettings) => {
   return dispatch => {
-    dispatch(doingMakeCall(aPhoneNumber));
+
     const callID = VertoService.getInstance().makeCall(aPhoneNumber, appSettings);
-    // dispatching so we change from not authorized to pending
-    // Thunk here
-    setTimeout(()=>{
-      VertoService.getInstance().hangup(callID);
-      dispatch(doMakeCallError({destination: aPhoneNumber, error:"manually aborted"}));
-
-    }, 30000);
-
+    dispatch(doingMakeCall(aPhoneNumber, callID));
   };
+};
+
+const doHangUp = (callId) => {
+  return dispatch =>{
+    VertoService.getInstance().hangup(callId);
+  }
+}
+const doHungUp = (dialog) =>{
+  return {
+    "type": "CALL_HUNG_UP",
+    "data": dialog.destintation
+  }
 };
 const doMakeCallError = (aErrorObject) =>{
   return {
@@ -201,10 +206,10 @@ const doMakeCallError = (aErrorObject) =>{
     "data": aErrorObject
   }
 }
-const doingMakeCall = (aPhoneNumber) => {
+const doingMakeCall = (aPhoneNumber, callID) => {
   return {
     "type": "CALLING",
-    "data": aPhoneNumber
+    "data": {destination: aPhoneNumber, callId: callID}
   }
 };
 
@@ -215,4 +220,7 @@ const doUpdateSettings = (aData) => {
   }
 }
 
-export { doValidation, doSubmitLogin, doShowLogin, doVertoLogin, doSubmitLogOut, doLogOut, doBrowserCheck, doMakeCall, doMakeCallError };
+export { doValidation, doBrowserCheck,
+  doSubmitLogin, doShowLogin, doVertoLogin, doSubmitLogOut, doLogOut,
+  doMakeCall, doMakeCallError,
+  doHungUp, doHangUp };
