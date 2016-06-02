@@ -31,7 +31,7 @@ class About extends VertoBaseComponent{
           bottom                : 'auto',
           marginRight           : '-50%',
           transform             : 'translate(-50%, -50%)',
-          '@media (min-width: 786px)': {
+          '@media (minWidth: 786px)': {
             width: '80vw'
           }
         }
@@ -41,10 +41,11 @@ class About extends VertoBaseComponent{
   }
 
   render() {
+    const logoSrc = WhiteLabel.get('logoSrc');
     return (
       <Modal isOpen={true} onRequestClose={()=>{App.toggleModal();}} style={{...this.getStyle('Modal')}}>
         <div>
-          <h1><FormattedMessage id="ABOUT" /> </h1>
+          <img src={logoSrc} />
         </div>
       </Modal> );
   }
