@@ -56,8 +56,8 @@ class Settings extends VertoBaseComponent {
         left: '0',
         width: '100%',
         display: this.state.dropdownDisplayed ? 'flex' : 'none',
-        flexDirection: 'column',
-        justifyContent: 'space-around',
+        flexDirection: 'row',
+        // justifyContent: 'space-around',
         opacity: '.9',
         padding: '20px',
         // border: '1px solid #ccc',
@@ -76,6 +76,13 @@ class Settings extends VertoBaseComponent {
         paddingLeft: '10px',
         paddingRight: '10px',
         fontFamily: 'sans-serif'
+      },
+      button: {
+        padding: '8px 30px',
+        border: '0',
+        margin: '10px 1px',
+        cursor: 'pointer',
+        borderRadius: '2px'
       }
 
     };
@@ -95,8 +102,8 @@ class Settings extends VertoBaseComponent {
   buildSettingsContainer() {
     console.log('xxxxxxxxxxxx', this.props.settingsData);
     return (
-          <div className="menuContainer" style={this.getStyle('menu')} >
-
+          <div className="menuContainer" style={{...this.getStyle('menu')}}>
+            <div>
               <SettingsMenuSelect
                   cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
                   options={this.props.settingsData.videoDevices ? this.props.settingsData.videoDevices : []}
@@ -122,6 +129,10 @@ class Settings extends VertoBaseComponent {
                       selectedOption={{id:"selectedSpeaker", label:this.props.settingsData.selectedSpeaker && this.props.settingsData.selectedSpeaker.label}}
                     />
 
+                    <button style={{...this.getStyle('button')}} />
+                    <button style={{...this.getStyle('button')}}/>
+
+              </div>
           </div>
     );
   }

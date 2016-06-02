@@ -33,7 +33,8 @@ handleSelect() {
         padding: '10px'
       },
       label: {
-        display:'flex'
+        display:'flex',
+        paddingBottom: '10px'
       }
     };
 
