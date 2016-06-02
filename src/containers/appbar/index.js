@@ -144,12 +144,12 @@ class AppBar extends VertoBaseComponent {
             marginRight: '15px'
           },
           settingsStyles: {
-            opacity: '.9',
+            // opacity: '.9',
             backgroundColor: '#0A387F',
             color: '#FFFFFF',
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-around'
+            display: 'flex'
+            // flexDirection: 'row',
+            // justifyContent: 'space-around'
 
           }
         };
@@ -179,22 +179,20 @@ class AppBar extends VertoBaseComponent {
     this.setState({ ...this.state, showSettings: displaySettings });
   }
 
-  getSettingsMenu(){
-    let rSettings;
-
-    if (this.state.showSettings) {
-      rSettings = (
-        <div style={this.getStyle('settingsStyles')}>
-          <div> column1 </div>
-          <div> column2 </div>
-          <div> column3 </div>
-        </div>
-      );
-    }
-    //console.log('aaaa', rSettings, this.state.showSettings );
-
-    return rSettings;
-  }
+  // getSettingsMenu(){
+  //   let rSettings;
+  //
+  //   if (this.state.showSettings) {
+  //     rSettings = (
+  //       <div style={this.getStyle('settingsStyles')}>
+  //         <Settings />
+  //       </div>
+  //     );
+  //   }
+  //   //console.log('aaaa', rSettings, this.state.showSettings );
+  //
+  //   return rSettings;
+  // }
   render() {
     //console.log('#### window theme style', window.theme);
     //console.log('this.props.settings', this.props.settings);
@@ -242,7 +240,7 @@ class AppBar extends VertoBaseComponent {
 
     // settings here
     //TODO define settings style for alt menu orientation
-    const settingsMenu = this.getSettingsMenu();
+    // const settingsMenu = this.getSettingsMenu();
 
     return (
       <div style={{position: "absolute", left: "0px", right: "0px", top: "0px"}}>
@@ -292,7 +290,6 @@ class AppBar extends VertoBaseComponent {
           </span>
 
         </div>
-        {settingsMenu}
       </div>
     );
   }

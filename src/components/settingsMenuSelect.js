@@ -44,13 +44,15 @@ handleSelect() {
     });
 
     return (
-      <select
-          label={this.props.label}
-          ref="select"
-          onChange={()=>this.handleSelect()}
-      >
-        {options}
-      </select>
+      <div>
+        <span>{this.props.label}</span>
+        <select
+            ref="select"
+            onChange={()=>this.handleSelect()}
+        >
+          {options}
+        </select>
+      </div>
     );
   }
 }

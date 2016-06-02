@@ -56,9 +56,10 @@ class Settings extends VertoBaseComponent {
         right: '30px',
         display: this.state.dropdownDisplayed ? 'flex' : 'none',
         flexDirection: 'column',
+        opacity: '.9',
         //padding: '10px',
-        border: '1px solid #ccc',
-        backgroundColor: 'white'
+        // border: '1px solid #ccc',
+        backgroundColor: '#0A387F'
       },
       header: {
         display: 'flex',
@@ -89,23 +90,60 @@ class Settings extends VertoBaseComponent {
     }
   }
 
-  render() {
-    const menuContainer = (
-
-      <div className="menuContainer" style={this.getStyle('menu')} >
-        {this.props.children}
-      </div>
-    );
-
-    console.log('settings render props: ', this.props.settingsData);
+  buildSettingsContainer() {
+    console.log('xxxxxxxxxxxx', this.props.settingsData);
     return (
-      <span onClick={this.showMenu.bind(this)}  >
-        <SettingsIconSVG svgStyle={{...this.getStyle('icon')}}  />
-          {this.state.dropdownDisplayed ?
-              <CaretUpIconSVG svgStyle={{...this.getStyle('caret')}} /> :
-              <CaretDownIconSVG svgStyle={{...this.getStyle('caret')}} />}
-          {menuContainer}
-      </span>
+          <div className="menuContainer" style={this.getStyle('menu')} >
+            <div>
+              <SettingsMenuSelect
+                  cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                  options={this.props.settingsData.videoDevices ? this.props.settingsData.videoDevices : []}
+                  label="Camera:"
+                  selectedOption={{id:"selectedVideo", label:this.props.settingsData.selectedVideo && this.props.settingsData.selectedVideo.label}}
+                />
+              <SettingsMenuSelect
+                  cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                  options={this.props.settingsData.shareDevices ? this.props.settingsData.shareDevices : []}
+                  label="Share Device:"
+                  selectedOption={{id:"selectedShare", label:this.props.settingsData.selectedShare && this.props.settingsData.selectedShare.label}}
+                />
+                <SettingsMenuSelect
+                    cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                    options={this.props.settingsData.audioDevices ? this.props.settingsData.audioDevices : []}
+                    label="Microphone:"
+                    selectedOption={{id:"selectedAudio", label:this.props.settingsData.selectedAudio && this.props.settingsData.selectedAudio.label}}
+                  />
+                  <SettingsMenuSelect
+                      cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                      options={this.props.settingsData.speakerDevices ? this.props.settingsData.speakerDevices : []}
+                      label="Speaker:"
+                      selectedOption={{id:"selectedSpeaker", label:this.props.settingsData.selectedSpeaker && this.props.settingsData.selectedSpeaker.label}}
+                    />
+                  {/*<SettingsMenuSelect
+                        cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                        options={this.props.settingsData.bestFrameRate ? this.props.settingsData.bestFrameRate : []}
+                        label="Best Frame Rate:"
+                        selectedOption={{id:"bestFrameRate", label:this.props.settingsData.bestFrameRate && this.props.settingsData.bestFrameRate.label}}
+                      />*/}
+            </div>
+          </div>
+    );
+  }
+
+  render() {
+    const settingsContainer = this.buildSettingsContainer();
+
+    // console.log('settings render props: ', this.props.settingsData);
+    return (
+      <div>
+        <span onClick={this.showMenu.bind(this)}  >
+          <SettingsIconSVG svgStyle={{...this.getStyle('icon')}}  />
+            {this.state.dropdownDisplayed ?
+                <CaretUpIconSVG svgStyle={{...this.getStyle('caret')}} /> :
+                <CaretDownIconSVG svgStyle={{...this.getStyle('caret')}} />}
+        </span>
+          {settingsContainer}
+      </div>
     );
   }
 }
