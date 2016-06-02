@@ -27,4 +27,11 @@ This component does not have any events, however its imported components may and
 # 5. Reference Components #
   * vcstatus
   * vertobasecomponent
-  * nsindicator
+  * nsIndicator
+  * userMenu
+  * tagMenu
+  * menuItem
+  * settings
+  * app
+  * about
+  * contributors
