@@ -9,9 +9,6 @@ CaretDownIconSVG } from './svgIcons';
 const propTypes = {
   compStyle : React.PropTypes.object,
   cbClick: React.PropTypes.func.isRequired,
-  /*cbDeviceList: React.PropTypes.func.isRequired,
-  cbNetSpeed: React.PropTypes.func.isRequired,
-  cbPreviewSet: React.PropTypes.func.isRequired,*/
   data: React.PropTypes.object.isRequired
 };
 
@@ -28,12 +25,6 @@ class Settings extends VertoBaseComponent {
 
     Settings.toggleSettings = this.showMenu;
   }
-
-  handleChange() {
-      const setChange= this.refs.settingSelect.value;
-      // console.log('------->', setChange);
-      this.props.cbSettingSubmit(setChange);
-    }
 
   getCompStyle() {
     return this.props.compStyle;
