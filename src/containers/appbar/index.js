@@ -257,8 +257,8 @@ class AppBar extends VertoBaseComponent {
             <VCStatus status = {this.props.vcStatus} compStyle={!this.state.showAltAppControls ? {svgStyle:{marginRight: '20px'}}:{svgStyle:{marginBottom:'10px'}}}/>
             {lastCall}
             <div style={!this.state.showAltAppControls ? {marginRight: '20px'}:{marginBottom:'10px'}}>
-              <Settings  allowDisplayDetails={this.props.vcStatus != 'disconnected'} cbClick={this.settings.bind(this)}
-                data={this.props.settings} />
+              <Settings  allowDisplayDetails={this.props.vcStatus != 'disconnected'} cbToggleShowSettings={this.settings.bind(this)}
+                settingsData={this.props.settings} />
             </div>
             <div style={!this.state.showAltAppControls ? {marginRight: '20px'}:{marginBottom:'10px'}}>
               <UserMenu allowDisplayDetails={this.props.vcStatus != 'disconnected'} compStyle={this.state.showAltAppControls ? this.getStyle("altUserMenu") : undefined}>
