@@ -45,7 +45,7 @@ class About extends VertoBaseComponent{
     return (
       <Modal isOpen={true} onRequestClose={()=>{App.toggleModal();}} style={{...this.getStyle('Modal')}}>
         <div>
-          <img src={logoSrc} />
+          <img src={logoSrc}  />
         </div>
       </Modal> );
   }

@@ -164,5 +164,8 @@
   "BROWSER_VERSIONS_OPERA": "Todos os",
   "MORE_SETTINGS": "Mais definições",
   "LESS_SETTINGS": "Menos Definições",
-  "YOUR_PASSWORD": "Sua senha"
+  "YOUR_PASSWORD": "Sua senha",
+  "VERSION": "Versão: ",
+  "GIT_REV": "Git Rev: ",
+  "POWERED_BY": "Distribuído por: "
 }]

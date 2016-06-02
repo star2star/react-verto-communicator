@@ -164,5 +164,8 @@
   "BROWSER_VERSIONS_OPERA": "所有",
   "MORE_SETTINGS": "更多设置",
   "LESS_SETTINGS": "少设置",
-  "YOUR_PASSWORD": "你的密码"
+  "YOUR_PASSWORD": "你的密码",
+  "VERSION": "版: ",
+  "GIT_REV": "git的轉: ",
+  "POWERED_BY": "供電: "
 }]
