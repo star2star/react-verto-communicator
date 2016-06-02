@@ -97,7 +97,7 @@ class Settings extends VertoBaseComponent {
       </div>
     );
 
-    console.log('settings render props: ', this.props.settingsData);
+    //console.log('settings render props: ', this.props.settingsData);
     return (
       <span onClick={this.showMenu.bind(this)}  >
         <SettingsIconSVG svgStyle={{...this.getStyle('icon')}}  />
