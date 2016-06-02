@@ -30,15 +30,6 @@ Sample:
 
 ## b. Component State ##
 
-This component will maintain it's own state for dropdownDisplayed.
-
-This component is a drop down menu and will toggle between up and down based on click of a button(SettingsIconSVG).
-Initial state:
-State = {dropdownDisplayed: false}  // menu is initially 'up'
-onClick of button
-	// set dropdownDisplayed to the inverse of its current value
-this.setState({...this.state, dropdownDisplayed: !this.state.dropdownDisplayed});
-
 ## c .Component Events ##
 
 If the component needs to react to events (clicks, key presses, etc.) then those events should be listed here along with the action that should be taken:
@@ -47,30 +38,16 @@ Sample:
 
 Event | Action(s)
 ------------ | -------------
-Settings icon clicked | Invoke the callback function cbClick(), dropdownDisplayed state is toggled.
 Camera Menu clicked | cbSubmitSetting()
 Share screen Menu clicked | cbSubmitSetting()
 Microphone Menu clicked | cbSubmitSetting()
 Speaker Menu clicked | cbSubmitSetting()
 Best frame rate Menu clicked | cbSubmitSetting()
-Preview Settings Button | Invoke the callback function cbPreviewSet(), when button clicked.
-Refresh Device List Button | Invoke the callback function cbDeviceList(), when button clicked.
-Use Video checkbox | cbSubmitSetting()
-Stereo Audio checkbox | cbSubmitSetting()
-Use STUN checkbox | cbSubmitSetting()
-Scale Remote Video to Match Camera Resolution checkbox | cbSubmitSetting()
-Ask Before Recovering a Call checkbox | cbSubmitSetting()
-Language menu clicked | cbSubmitSetting()
-Echo Cancellation checkbox | cbSubmitSetting()
-Noise Suppression checkbox | cbSubmitSetting()
-Highpass filter checkbox | cbSubmitSetting()
-Automatically Determine Speed and Resolution Settings checkbox *additional menu | cbSubmitSetting()
+Language Menu clicked | cbSubmitSetting()
  *Video Quality Menu clicked | cbSubmitSetting()
  *Max Incoming Bandwidth Menu clicked | cbSubmitSetting()
  *Max Outgoing bandwidth Menu clicked | cbSubmitSetting()
 Recheck Bandwidth Before Each Outgoing Call checkbox | cbSubmitSetting()
-Check Network Speed Button| Invoke the callback function cbNetSpeed(), when button clicked.
-
 
 ## d. Context-Aware Specification ##
 
@@ -82,11 +59,8 @@ The component to be developed requires the following components:
 
 - vertobasecomponent
 - svgIcons
-- react-intl
--settingSelectMenu
--settingCheckBox
 
 # 5. Unit Testing Requirement #
 Tests for this component are located at:
 
-        src/tests/settings-test.js
+        src/tests/settingsMenuSelect-test.js
