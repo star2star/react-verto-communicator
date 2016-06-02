@@ -3,59 +3,12 @@ import VertoBaseComponent from './vertobasecomponent';
 //import SvgIcons from './svgIcons';
 import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-intl';
 import Radium from 'radium';
+import Input from './input';
 
 const propTypes = {
   compStyle : React.PropTypes.object,
   settings: React.PropTypes.object.isRequired
 };
-
-class Input extends VertoBaseComponent {
-
-  getCompStyle() {
-    return this.props.compStyle;
-  }
-
-  getDefaultStyle(styleName) {
-    const styles = {
-      fieldset: {
-        display: 'flex',
-        width: '100%',
-        flexDirection: 'column',
-        paddingBottom: '15px'
-      },
-      label: {
-        paddingBottom: '15px',
-        fontWeight: '700',
-        fontSize: '14px'
-      },
-      inputArea: {
-        paddingBottom: '3px',
-        border: '0px',
-        borderBottom: '1px solid #d2d2d2',
-        color: "rgba(0,0,0,84)",
-        fontSize: '14px',
-        fontWeight: '300',
-        width: '100%'
-      }
-    };
-
-    return (styles[styleName]);
-  }
-
-
-  render(){
-    return (
-      <div style={{...this.getStyle('fieldset')}}>
-        <div style={{...this.getStyle('label')}}>{this.props.label}</div>
-        <div ><input placeholder={this.props.placeholder} style={{...this.getStyle('inputArea')}} onChange={
-          (e) =>{
-            this.props.cbChanging(this.props.label.replace(' ', '').toLowerCase(), e.target.value );
-          }
-        } defaultValue={this.props.value}/></div>
-      </div>);
-  }
-}
-
 
 class Login extends VertoBaseComponent{
 
@@ -204,5 +157,4 @@ class Login extends VertoBaseComponent{
 }
 
 Login.propTypes = propTypes;
-
 export default injectIntl(Radium(Login));
