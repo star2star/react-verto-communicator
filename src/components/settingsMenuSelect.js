@@ -1,12 +1,13 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent.js';
-import { FormattedMessage } from 'react-intl';
+
 
 const propTypes = {
   compStyle : React.PropTypes.object,
-  cbClick: React.PropTypes.func.isRequired,
   cbSubmitSetting: React.PropTypes.func.isRequired,
-  data: React.PropTypes.object.isRequired
+  options: React.PropTypes.array.isRequired,
+  label: React.PropTypes.string.isRequired,
+  selectedOption: React.PropTypes.object.isRequired
 };
 
 
@@ -16,7 +17,9 @@ class SettingsMenuSelect extends VertoBaseComponent {
   }
 
 handleSelect() {
-  this.setState({value: event.target.value});
+  // this.setState({value: event.target.value});
+  console.log('handleSelect');
+  // this.props.cbSubmitSetting();
 }
 
 
@@ -36,16 +39,18 @@ handleSelect() {
 
 
   render() {
+    const options=this.props.options.map((option, index)=>{
+      return (<option key={index} value={option}> {option.label} </option>);
+    });
 
     return (
-    <div>
       <select
-        value=
-        onChange={()=>this.handleSelect()}
+          label={this.props.label}
+          ref="select"
+          onChange={()=>this.handleSelect()}
       >
+        {options}
       </select>
-      <option> </option>
-    </div>
     );
   }
 }

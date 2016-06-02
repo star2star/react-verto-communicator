@@ -1,6 +1,7 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent.js';
 import { FormattedMessage } from 'react-intl';
+import SettingsMenuSelect from './settingsMenuSelect.js';
 import {
 SettingsIconSVG,
 CaretUpIconSVG,
@@ -8,8 +9,8 @@ CaretDownIconSVG } from './svgIcons';
 
 const propTypes = {
   compStyle : React.PropTypes.object,
-  cbClick: React.PropTypes.func.isRequired,
-  data: React.PropTypes.object.isRequired
+  cbToggleShowSettings: React.PropTypes.func.isRequired,
+  settingsData: React.PropTypes.object.isRequired
 };
 
 const defaultProps = {
@@ -83,7 +84,7 @@ class Settings extends VertoBaseComponent {
   showMenu() {
     if (this.props.allowDisplayDetails) {
       const newShow = !this.state.dropdownDisplayed;
-      this.props.cbClick(newShow);
+      this.props.cbToggleShowSettings(newShow);
       this.setState({...this.state, dropdownDisplayed: newShow});
     }
   }
@@ -96,7 +97,7 @@ class Settings extends VertoBaseComponent {
       </div>
     );
 
-    console.log('settings render props: ', this.props.data);
+    console.log('settings render props: ', this.props.settingsData);
     return (
       <span onClick={this.showMenu.bind(this)}  >
         <SettingsIconSVG svgStyle={{...this.getStyle('icon')}}  />

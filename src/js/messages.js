@@ -39,7 +39,7 @@ export default class Messages {
     //console.log('^^^^^^', aLocale, this.locale, DIALECTS, this.dialect);
 
     const messages = require('../locales/locale-'+this.dialect+'.js');
-    //console.log('MMEESSAAGGEESS', messages);
+    // console.log('MMEESSAAGGEESS', messages);
     this.msg = messages;
 
   }
