@@ -184,13 +184,14 @@ const doSubmitLogOut = () =>{
 const doMakeCall = (aPhoneNumber, appSettings) => {
   return dispatch => {
     dispatch(doingMakeCall(aPhoneNumber));
-    VertoService.getInstance().makeCall(aPhoneNumber, appSettings);
+    const callID = VertoService.getInstance().makeCall(aPhoneNumber, appSettings);
     // dispatching so we change from not authorized to pending
     // Thunk here
     setTimeout(()=>{
+      VertoService.getInstance().hangup(callID);
       dispatch(doMakeCallError({destination: aPhoneNumber, error:"manually aborted"}));
 
-    }, 5000);
+    }, 30000);
 
   };
 };

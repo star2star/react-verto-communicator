@@ -13,6 +13,7 @@ const app = (state, action)=>{
                 selectedSpeaker: null,
                 bestFrameRate: "15",
                 useStereo: true,
+                useVideo: true,
                 useSTUN: true,
 
                 mirrorInput: false, // scale video
@@ -54,7 +55,7 @@ const app = (state, action)=>{
 
   switch (action.type) {
     case "SPEED_TEST":
-      //video quality only is available after login which is speed test time 
+      //video quality only is available after login which is speed test time
       return { ...state, "bandwidthInfo": action.data, settings: { ...state.settings, vidQual: action.data.vidQual, videoQuality: action.videoQuality } };
     case "SETTINGS_UPDATE":
       //console.log("settings update JES: ", action.data);

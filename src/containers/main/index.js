@@ -113,6 +113,7 @@ class Main extends VertoBaseComponent {
     }
     return (
       <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
+        <video id="webcam" autoplay="autoplay"  style={{display:"none", width:"100%", height:"100%", objectFit:"inherit"}}></video>
         {loggedInfo}
         {showSplash}
       </div>);

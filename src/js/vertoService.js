@@ -7,11 +7,14 @@ let _callbacks;
 let _dispatch;
 let _verto;
 
+
 //class
 class VertoService {
   constructor(){
     console.log('building VERTO SERVICE: <<<<<<<<<<<<<<<<')
-    this._data = {};
+    this._data = {_activeCalls:[], _maxActiveCalls: 32 };
+
+    const xInstance = this;
 
 
     _callbacks = {
@@ -85,7 +88,7 @@ class VertoService {
           //adding params since this is what is sent to processor
 
           d.params.direction = d.direction.name;
-          if (d.audioStream.volume)
+          if (d.audioStream && d.audioStream.volume)
             d.params.volume =  d.audioStream.volume;
           d.params.event = d.state;
           d.params.caller_id_ext = parseInt(d.params.caller_id_number);
@@ -95,12 +98,12 @@ class VertoService {
               case $.verto.enum.state.ringing:
                   // console.log('ringing ... onDialogState display', d, arguments);
 
-                  _activeCalls[d.callID] = d;
+                  xInstance._data._activeCalls[d.callID] = d;
 
                   //console.log('#### s2sVerto.activeCalls.length', s2sVerto.activeCalls.length);
                   //console.log('#### s2sVerto.maxActiveCalls', s2sVerto.maxActiveCalls);
 
-                	if (Object.keys(_activeCalls).length > _maxActiveCalls) {
+                	if (Object.keys(xInstance._data._activeCalls).length > xInstance._data._maxActiveCalls) {
                 		d.hangup();
                 	} else {
                 		d.params.direction = d.direction.name;
@@ -151,9 +154,9 @@ class VertoService {
               //jes TODO tell we are hanging up
               //$("#main_info").html("Call ended with cause: " + d.cause);
               //goto_page("main");
-              //console.log('hangup event', d);
-              if (_activeCalls[d.callID]) {
-                  delete _activeCalls[d.callID];
+              console.log('hangup event', d);
+              if (xInstance._data._activeCalls[d.callID]) {
+                  delete xInstance._data._activeCalls[d.callID];
               } else {
                   //console.log('hangup not found', d, s2sVerto.activeCalls);
               }
@@ -164,7 +167,7 @@ class VertoService {
               //$("#hangup_cause").html("");
               //clearConfMan();
               //jes TODO remove from activeCalls
-              //console.log('destroy event', d);
+              console.log('destroy event', d);
 
 
 
@@ -182,8 +185,8 @@ class VertoService {
               break;
 
           case $.verto.enum.state.requesting:
-              //console.log('REQUESTING ....', d);
-              _activeCalls[d.callID] = d;
+              console.log('REQUESTING ....', d);
+              xInstance._data._activeCalls[d.callID] = d;
               //jes tom does not want it
               //TODO
               //Processor.starphone('requesting', d.params);
@@ -191,7 +194,7 @@ class VertoService {
 
           default:
               //display("");
-              //console.log('default state not handled:', d.state, d);
+              console.log('default state not handled:', d.state, d);
               break;
           }
       },
@@ -274,10 +277,10 @@ class VertoService {
         //   "minHeight": "720"
         // },
         deviceParams: {
-          useCamera: true, //data1.selectedVideo,
+          useCamera: 'default', //data1.selectedVideo,
           //TODO
-          // useSpeak: data1.selectedSpeaker,
-          // useMic: data1.selectedAudio,
+          useSpeak: 'default', //data1.selectedSpeaker,
+          useMic: 'default', //data1.selectedAudio,
           onResCheck: VertoService.refreshVideoResolution
         },
         audioParams: {
@@ -290,6 +293,14 @@ class VertoService {
       };
   }
 
+  hangup(callerId){
+    if (_verto._data._activeCalls[callerId]) {
+      _verto.verto.hangup(callerId);
+    } else {
+      console.log('hangup NOT FOUND----------');
+    }
+  }
+
   makeCall(destination, settings) {
     console.log('calling desitnation', destination);
     if (!_verto.verto) {
@@ -297,30 +308,32 @@ class VertoService {
       return _dispatch(doMakeCallError({destination, message }));
     }
     // ok make a call
-    console.log('DATA & VERTO:', this._data, settings, _verto.verto, md5(_verto.verto.options.loginParams.email));
-    /*
+    console.log('DATA & VERTO:', this._data, settings.settings, _verto.verto, md5(_verto.verto.options.loginParams.email));
     const phoneObject = {
       destination_number: destination,
       caller_id_name: _verto.verto.options.loginParams.name,
       caller_id_number: _verto.verto.options.loginParams.callerid ? _verto.verto.options.loginParams.callerid  : _verto.verto.options.loginParams.email ,
-      //outgoingBandwidth: storage.data.outgoingBandwidth,
-      //incomingBandwidth: storage.data.incomingBandwidth,
+      outgoingBandwidth: settings.settings.outgoingBandwidth, //storage.data.outgoingBandwidth,
+      incomingBandwidth: settings.settings.incomingBandwidth, //storage.data.incomingBandwidth,
       // get from settings
-      useVideo: true, // storage.data.useVideo,
-      useStereo: true, //storage.data.useStereo,
-      useCamera: true, // storage.data.selectedVideo,
-      useSpeak: storage.data.selectedSpeaker,
-      useMic: storage.data.selectedAudio,
-      dedEnc: storage.data.useDedenc,
-      mirrorInput: storage.data.mirrorInput,
+      useVideo: settings.settings.useVideo, // storage.data.useVideo,
+      useStereo: settings.settings.useStereo, //storage.data.useStereo,
+      useCamera: settings.settings.useVideo, // storage.data.selectedVideo,
+      useSpeak: settings.settings.selectedSpeaker.id, //storage.data.selectedSpeaker,
+      useMic: settings.settings.selectedAudio.id, //storage.data.selectedAudio,
+      dedEnc: settings.settings.useDedenc, //storage.data.useDedenc,
+      mirrorInput: settings.settings.mirrorInput, //storage.data.mirrorInput,
       userVariables: {
         email :  _verto.verto.options.loginParams.email, //storage.data.email,
         avatar:  "http://gravatar.com/avatar/" + md5(_verto.verto.options.loginParams.email) + ".png?s=600"    // "http://gravatar.com/avatar/" + md5(storage.data.email) + ".png?s=600"
       }
     };
 
-    _verto.verto.newCall(phoneObject)
-    */
+    console.log('------', phoneObject);
+    const ncDialog = _verto.verto.newCall(phoneObject);
+
+    console.log('*****', ncDialog);
+    return ncDialog.callID;
   }
 
   static getInstance() {
