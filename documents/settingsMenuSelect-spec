@@ -1,0 +1,66 @@
+# Component Name:  Settings   #
+# 1. Functional Description #
+
+SettingsMenuSelect is a simple select menu component used in the Settings component.
+
+# 2. Visual Design #
+
+ - Settings Menu Select Default:
+![Settings Component Full](img/settings-menuSelect-default.png)
+
+- Settings Menu Select Open:
+![Settings Component Full](img/settings-menuSelect-open.png)
+
+# 3. Component Type #
+
+This is a ‘pure' component.
+
+## a. Required Props ##
+
+If the prop is an object, a sample of the object structure needs to be provided.
+If the prop is a callback function, then a sample of the function call including input arguments and their data types must be provided.  If an argument is an object, then a sample of its structure must be provided.
+
+Sample:
+
+| Prop Name | Sample | Description |
+| ------------ | ------------- | ------------- |
+| data | data={<br>askRecoverCall: false, <br>autoBand: true,<br> bestFrameRate: "15", <br>googEchoCancellation: true,<br> googNoiseSuppression: true,<br> incomingBandwidth: "default",<br> language:"English",<br> mirrorInput: false,<br> outgoingBandwidth: "default", <br>selectedAudio: null, selectedShare: null,<br> selectedSpeaker: null,<br> selectedVideo: null, testSpeedJoin: true, useDedence: false, useSTUN: true, useStereo: true, vidQual:undefined<br>| An object. Required. Contains the default data for each setting field.
+| compStyle |  _NOTE styles are in JSX, not CSX_ {   container: {display: 'flex', position: 'relative'},  inputStyle {fontSize: '1rem'} }m | Optional prop. If value is provided, then it will render new styles, if not it will render default styling. |
+| cbSubmitSetting | Function implemented and bound to a higher-order parent container of this component | Function. Required. This prop is invoked when a setting is changed by either selecting a menu item or checking a box. |
+
+## b. Component State ##
+
+## c .Component Events ##
+
+If the component needs to react to events (clicks, key presses, etc.) then those events should be listed here along with the action that should be taken:
+
+Sample:
+
+Event | Action(s)
+------------ | -------------
+Camera Menu clicked | cbSubmitSetting()
+Share screen Menu clicked | cbSubmitSetting()
+Microphone Menu clicked | cbSubmitSetting()
+Speaker Menu clicked | cbSubmitSetting()
+Best frame rate Menu clicked | cbSubmitSetting()
+Language Menu clicked | cbSubmitSetting()
+ *Video Quality Menu clicked | cbSubmitSetting()
+ *Max Incoming Bandwidth Menu clicked | cbSubmitSetting()
+ *Max Outgoing bandwidth Menu clicked | cbSubmitSetting()
+Recheck Bandwidth Before Each Outgoing Call checkbox | cbSubmitSetting()
+
+## d. Context-Aware Specification ##
+
+This component is a pure component and it will maintain it’s own state.
+
+# 4. Reference Components #
+
+The component to be developed requires the following components:
+
+- vertobasecomponent
+- svgIcons
+
+# 5. Unit Testing Requirement #
+Tests for this component are located at:
+
+        src/tests/settingsMenuSelect-test.js

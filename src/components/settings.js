@@ -26,12 +26,6 @@ class Settings extends VertoBaseComponent {
     Settings.toggleSettings = this.showMenu;
   }
 
-  handleChange() {
-      const setChange= this.refs.settingSelect.value;
-      // console.log('------->', setChange);
-      this.props.cbSettingSubmit(setChange);
-    }
-
   getCompStyle() {
     return this.props.compStyle;
   }

@@ -164,5 +164,8 @@
   "BROWSER_VERSIONS_OPERA": "Wszystkie",
   "MORE_SETTINGS": "Więcej ustawień",
   "LESS_SETTINGS": "Mniej ustawień",
-  "YOUR_PASSWORD": "Twoje hasło"
+  "YOUR_PASSWORD": "Twoje hasło",
+  "VERSION": "Wersja: ",
+  "GIT_REV": "Git Rev: ",
+  "POWERED_BY": "Powered By: "
 }]

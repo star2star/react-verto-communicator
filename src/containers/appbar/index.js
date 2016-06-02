@@ -146,7 +146,11 @@ class AppBar extends VertoBaseComponent {
           settingsStyles: {
             opacity: '.9',
             backgroundColor: '#0A387F',
-            color: '#FFFFFF'
+            color: '#FFFFFF',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-around'
+
           }
         };
 
@@ -181,7 +185,9 @@ class AppBar extends VertoBaseComponent {
     if (this.state.showSettings) {
       rSettings = (
         <div style={this.getStyle('settingsStyles')}>
-          settings here
+          <div> column1 </div>
+          <div> column2 </div>
+          <div> column3 </div>
         </div>
       );
     }

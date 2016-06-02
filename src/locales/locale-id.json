@@ -164,5 +164,8 @@
   "BROWSER_VERSIONS_OPERA": "Semua",
   "MORE_SETTINGS": "Pengaturan lebih",
   "LESS_SETTINGS": "Kurang Pengaturan",
-  "YOUR_PASSWORD": "Kata sandi Anda"
+  "YOUR_PASSWORD": "Kata sandi Anda",
+  "VERSION": "Versi: ",
+  "GIT_REV": "Git Rev: ",
+  "POWERED_BY": "Dikuasai oleh: "
 }]

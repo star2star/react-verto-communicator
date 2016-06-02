@@ -164,5 +164,8 @@
   "BROWSER_VERSIONS_OPERA": "Все",
   "MORE_SETTINGS": "Дополнительные настройки",
   "LESS_SETTINGS": "Меньше настроек",
-  "YOUR_PASSWORD": "Ваш пароль"
+  "YOUR_PASSWORD": "Ваш пароль",
+  "VERSION": "Версия: ",
+  "GIT_REV": "Гит Rev: ",
+  "POWERED_BY": "Питаться от: "
 }]

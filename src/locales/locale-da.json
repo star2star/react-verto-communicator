@@ -164,5 +164,8 @@
   "BROWSER_VERSIONS_OPERA": "Alle",
   "MORE_SETTINGS": "Flere indstillinger",
   "LESS_SETTINGS": "Mindre indstillinger",
-  "YOUR_PASSWORD": "Dit kodeord"
+  "YOUR_PASSWORD": "Dit kodeord",
+  "VERSION": "Oversættelse: ",
+  "GIT_REV": "Git Rev: ",
+  "POWERED_BY": "Drevet af: "
 }]
