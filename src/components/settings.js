@@ -119,12 +119,6 @@ class Settings extends VertoBaseComponent {
                       label="Speaker:"
                       selectedOption={{id:"selectedSpeaker", label:this.props.settingsData.selectedSpeaker && this.props.settingsData.selectedSpeaker.label}}
                     />
-                  {/*<SettingsMenuSelect
-                        cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
-                        options={this.props.settingsData.bestFrameRate ? this.props.settingsData.bestFrameRate : []}
-                        label="Best Frame Rate:"
-                        selectedOption={{id:"bestFrameRate", label:this.props.settingsData.bestFrameRate && this.props.settingsData.bestFrameRate.label}}
-                      />*/}
             </div>
           </div>
     );
