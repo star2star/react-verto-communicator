@@ -14,7 +14,7 @@ describe('Splash Screen Message Component', ()=>{
     //expect(true).toBe(true);
      const wrapper = shallow(
        <SplashMessage statusTitle='Checking Media Permissions' />);
-     expect(wrapper.find('div').length).toEqual(2);
+     expect(wrapper.find('div').length).toEqual(2 );
    });
 
    it('renders 5 <div> tags if  errorObject is passed into it', () => {

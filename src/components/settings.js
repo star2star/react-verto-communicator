@@ -1,6 +1,6 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent.js';
-import { FormattedMessage } from 'react-intl';
+// import { FormattedMessage } from 'react-intl';
 import SettingsMenuSelect from './settingsMenuSelect.js';
 import {
 SettingsIconSVG,
@@ -52,12 +52,14 @@ class Settings extends VertoBaseComponent {
       },
       menu: {
         position: 'absolute',
-        top: '60px',
-        right: '30px',
+        top: '70px',
+        left: '0',
+        width: '100%',
         display: this.state.dropdownDisplayed ? 'flex' : 'none',
-        flexDirection: 'column',
+        flexDirection: 'row',
+        // justifyContent: 'space-around',
         opacity: '.9',
-        //padding: '10px',
+        padding: '20px',
         // border: '1px solid #ccc',
         backgroundColor: '#0A387F'
       },
@@ -74,6 +76,13 @@ class Settings extends VertoBaseComponent {
         paddingLeft: '10px',
         paddingRight: '10px',
         fontFamily: 'sans-serif'
+      },
+      button: {
+        padding: '8px 30px',
+        border: '0',
+        margin: '10px 1px',
+        cursor: 'pointer',
+        borderRadius: '2px'
       }
 
     };
@@ -93,7 +102,7 @@ class Settings extends VertoBaseComponent {
   buildSettingsContainer() {
     console.log('xxxxxxxxxxxx', this.props.settingsData);
     return (
-          <div className="menuContainer" style={this.getStyle('menu')} >
+          <div className="menuContainer" style={{...this.getStyle('menu')}}>
             <div>
               <SettingsMenuSelect
                   cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
@@ -119,7 +128,11 @@ class Settings extends VertoBaseComponent {
                       label="Speaker:"
                       selectedOption={{id:"selectedSpeaker", label:this.props.settingsData.selectedSpeaker && this.props.settingsData.selectedSpeaker.label}}
                     />
-            </div>
+
+                    <button style={{...this.getStyle('button')}} />
+                    <button style={{...this.getStyle('button')}}/>
+
+              </div>
           </div>
     );
   }

@@ -29,8 +29,12 @@ handleSelect() {
 
   getDefaultStyle(styleName) {
     const styles = {
-      menu: {
-
+      container: {
+        padding: '10px'
+      },
+      label: {
+        display:'flex',
+        paddingBottom: '10px'
       }
     };
 
@@ -44,8 +48,8 @@ handleSelect() {
     });
 
     return (
-      <div>
-        <span>{this.props.label}</span>
+      <div style={{...this.getStyle('container')}}>
+        <span style={{...this.getStyle('label')}}>{this.props.label}</span>
         <select
             ref="select"
             onChange={()=>this.handleSelect()}
