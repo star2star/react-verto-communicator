@@ -1,6 +1,7 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent.js';
 import { FormattedMessage } from 'react-intl';
+import SettingsMenuSelect from './settingsMenuSelect.js';
 import {
 SettingsIconSVG,
 CaretUpIconSVG,
@@ -8,11 +9,8 @@ CaretDownIconSVG } from './svgIcons';
 
 const propTypes = {
   compStyle : React.PropTypes.object,
-  cbClick: React.PropTypes.func.isRequired,
-  /*cbDeviceList: React.PropTypes.func.isRequired,
-  cbNetSpeed: React.PropTypes.func.isRequired,
-  cbPreviewSet: React.PropTypes.func.isRequired,*/
-  data: React.PropTypes.object.isRequired
+  cbToggleShowSettings: React.PropTypes.func.isRequired,
+  settingsData: React.PropTypes.object.isRequired
 };
 
 const defaultProps = {
@@ -28,12 +26,6 @@ class Settings extends VertoBaseComponent {
 
     Settings.toggleSettings = this.showMenu;
   }
-
-  handleChange() {
-      const setChange= this.refs.settingSelect.value;
-      // console.log('------->', setChange);
-      this.props.cbSettingSubmit(setChange);
-    }
 
   getCompStyle() {
     return this.props.compStyle;
@@ -64,9 +56,10 @@ class Settings extends VertoBaseComponent {
         right: '30px',
         display: this.state.dropdownDisplayed ? 'flex' : 'none',
         flexDirection: 'column',
+        opacity: '.9',
         //padding: '10px',
-        border: '1px solid #ccc',
-        backgroundColor: 'white'
+        // border: '1px solid #ccc',
+        backgroundColor: '#0A387F'
       },
       header: {
         display: 'flex',
@@ -92,28 +85,58 @@ class Settings extends VertoBaseComponent {
   showMenu() {
     if (this.props.allowDisplayDetails) {
       const newShow = !this.state.dropdownDisplayed;
-      this.props.cbClick(newShow);
+      this.props.cbToggleShowSettings(newShow);
       this.setState({...this.state, dropdownDisplayed: newShow});
     }
   }
 
-  render() {
-    const menuContainer = (
-
-      <div className="menuContainer" style={this.getStyle('menu')} >
-        {this.props.children}
-      </div>
-    );
-
-    console.log('settings render props: ', this.props.data);
+  buildSettingsContainer() {
+    console.log('xxxxxxxxxxxx', this.props.settingsData);
     return (
-      <span onClick={this.showMenu.bind(this)}  >
-        <SettingsIconSVG svgStyle={{...this.getStyle('icon')}}  />
-          {this.state.dropdownDisplayed ?
-              <CaretUpIconSVG svgStyle={{...this.getStyle('caret')}} /> :
-              <CaretDownIconSVG svgStyle={{...this.getStyle('caret')}} />}
-          {menuContainer}
-      </span>
+          <div className="menuContainer" style={this.getStyle('menu')} >
+            <div>
+              <SettingsMenuSelect
+                  cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                  options={this.props.settingsData.videoDevices ? this.props.settingsData.videoDevices : []}
+                  label="Camera:"
+                  selectedOption={{id:"selectedVideo", label:this.props.settingsData.selectedVideo && this.props.settingsData.selectedVideo.label}}
+                />
+              <SettingsMenuSelect
+                  cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                  options={this.props.settingsData.shareDevices ? this.props.settingsData.shareDevices : []}
+                  label="Share Device:"
+                  selectedOption={{id:"selectedShare", label:this.props.settingsData.selectedShare && this.props.settingsData.selectedShare.label}}
+                />
+                <SettingsMenuSelect
+                    cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                    options={this.props.settingsData.audioDevices ? this.props.settingsData.audioDevices : []}
+                    label="Microphone:"
+                    selectedOption={{id:"selectedAudio", label:this.props.settingsData.selectedAudio && this.props.settingsData.selectedAudio.label}}
+                  />
+                  <SettingsMenuSelect
+                      cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                      options={this.props.settingsData.speakerDevices ? this.props.settingsData.speakerDevices : []}
+                      label="Speaker:"
+                      selectedOption={{id:"selectedSpeaker", label:this.props.settingsData.selectedSpeaker && this.props.settingsData.selectedSpeaker.label}}
+                    />
+            </div>
+          </div>
+    );
+  }
+
+  render() {
+    const settingsContainer = this.buildSettingsContainer();
+    // console.log('settings render props: ', this.props.settingsData);
+    return (
+      <div>
+        <span onClick={this.showMenu.bind(this)}  >
+          <SettingsIconSVG svgStyle={{...this.getStyle('icon')}}  />
+            {this.state.dropdownDisplayed ?
+                <CaretUpIconSVG svgStyle={{...this.getStyle('caret')}} /> :
+                <CaretDownIconSVG svgStyle={{...this.getStyle('caret')}} />}
+        </span>
+          {settingsContainer}
+      </div>
     );
   }
 }

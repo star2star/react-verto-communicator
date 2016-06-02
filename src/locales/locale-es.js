@@ -1,4 +1,5 @@
-[{
+"use strict";
+const messages = {
   "TITLE_ACTIVE_CALL": "Uy, llamada activa en curso.",
   "MESSAGE_ACTIVE_CALL_HANGUP": "Parece que estas en una llamada, Desea colgar?",
   "MESSAGE_ACTIVE_CALL_BACK": "Parece que estabas en una llamada la ultima vez, quieres regresar a eso?",
@@ -55,7 +56,6 @@
   "CHAT_TITLE_MUTE_UNMUTE_MIC": "Silenciar/Des Silenciar Microfono",
   "CHAT_MUTE_MIC": "Silenciar ",
   "CHAT_UNMUTE_MIC": "Des Silenciar",
-  "CHAT_TITLE_MUTE_UNMUTE_MIC": "Silenciar/Des Silenciar Video",
   "CHAT_NO_MESSAGES": "No hay mensajes para mostrar.",
   "CHAT_SEND_MESSAGE": "Enviar",
   "CHAT_TYPE_MESSAGE": "Escriba su mensaje aquí...",
@@ -164,5 +164,9 @@
   "BROWSER_VERSIONS_OPERA": "Todas",
   "MORE_SETTINGS": "Más Configuraciónes",
   "LESS_SETTINGS": "Menos Configuraciónes",
-  "YOUR_PASSWORD": "Su Contraseña"
-}]
+  "YOUR_PASSWORD": "Su Contraseña",
+  "VERSION": "Versión: ",
+  "GIT_REV": "Git Rev: ",
+  "POWERED_BY": "Energizado por: "
+};
+module.exports = messages;

@@ -1,4 +1,5 @@
-[{
+"use strict";
+const messages = {
   "TITLE_ACTIVE_CALL": "囧，正在通话中",
   "MESSAGE_ACTIVE_CALL_HANGUP": "好像正在通话中，你想挂断吗？",
   "MESSAGE_ACTIVE_CALL_BACK": "好像上次还有个电话没有挂断？你想恢复上次的通话吗？",
@@ -164,5 +165,9 @@
   "BROWSER_VERSIONS_OPERA": "所有",
   "MORE_SETTINGS": "更多设置",
   "LESS_SETTINGS": "少设置",
-  "YOUR_PASSWORD": "你的密码"
-}]
+  "YOUR_PASSWORD": "你的密码",
+  "VERSION": "版: ",
+  "GIT_REV": "git的轉: ",
+  "POWERED_BY": "供電: "
+  };
+  module.exports = messages;

@@ -8,8 +8,6 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
 
-
-
 import reducer from './containers/reducers.js';
 import Messages from './js/messages';
 
@@ -50,6 +48,7 @@ const dialect = Messages.getDialect(locale);
 
 const messages = (new Messages(locale)).getAllMessages();
 
+console.log('##########', messages);
 // needed for INTL
 const localeData = require('react-intl/locale-data/'+dialect);
 addLocaleData(localeData);

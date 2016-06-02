@@ -1,4 +1,5 @@
-[{
+"use strict";
+const messages = {
   "TITLE_ACTIVE_CALL": "Oops, Active Call in Course.",
   "MESSAGE_ACTIVE_CALL_HANGUP": "It seems that you are in a call. Do you want to hang up?",
   "MESSAGE_ACTIVE_CALL_BACK": "It seems you were in a call before leaving the last time. Wanna go back to that?",
@@ -164,5 +165,9 @@
   "BROWSER_VERSIONS_OPERA": "All",
   "MORE_SETTINGS": "More Settings",
   "LESS_SETTINGS": "Less Settings",
-  "YOUR_PASSWORD": "Your Password"
-}]
+  "YOUR_PASSWORD": "Your Password",
+  "VERSION": "Version: ",
+  "GIT_REV": "Git Rev: ",
+  "POWERED_BY": "Powered By: "
+};
+module.exports = messages;

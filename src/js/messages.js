@@ -29,7 +29,7 @@ const DIALECTS = {
     'zh-cn': 'zh',
     'zh-tw': 'zh',
     'zh-hk': 'zh'
-}
+};
 
 export default class Messages {
   constructor(aLocale="en-US") {
@@ -38,29 +38,9 @@ export default class Messages {
     //const localeFile = 'locale-' + this.dialect;
     //console.log('^^^^^^', aLocale, this.locale, DIALECTS, this.dialect);
 
-    var req = require.context("../locales", true, /^\.\/.*\.json$/);
-    //var req = require.context("../messages", true, /^\.\/.*\.json$/);
-    //console.log('------->', aLocale);
-    this.msg = {};
-
-    req.keys().forEach((msgFile) => {
-      //console.log('aaaaaaa',msgFile);
-      const msgF = msgFile.substring(2);
-      if (msgF.indexOf(this.dialect) > -1) {
-      //if (msgF.indexOf(this.locale) > -1) {
-        //const msgData = require(`json!../messages/${msgF}`);
-        const msgData = require(`json!../locales/${msgF}`);
-        //console.log(msgFile + "data is: ", msgData);
-        msgData.forEach((msgObject)=>{
-          //console.log('-----', msgObject);
-          //this.msg[msgObject['id']] = msgObject['value'];
-          this.msg = msgObject;
-        });
-        //console.log('-----', this.msg);
-      }
-
-    });
-    //console.log('*****', this.get('ABOUT')) ;
+    const messages = require('../locales/locale-'+this.dialect+'.js');
+    // console.log('MMEESSAAGGEESS', messages);
+    this.msg = messages;
 
   }
 
