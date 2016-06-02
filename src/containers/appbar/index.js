@@ -17,7 +17,6 @@ import Contributors from '../../components/contributors';
 import { MenuIconSVG } from '../../components/svgIcons';
 import { FormattedMessage } from 'react-intl';
 
-
 // Need to close menu on resize so that if we pass media query limit then
 // normal size menu will reappear...
 window.onresize=()=>{

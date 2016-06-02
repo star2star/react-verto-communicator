@@ -1,5 +1,4 @@
 "use strict";
-
 const messages = {
   "TITLE_ACTIVE_CALL": "Uy, llamada activa en curso.",
   "MESSAGE_ACTIVE_CALL_HANGUP": "Parece que estas en una llamada, Desea colgar?",
@@ -57,7 +56,6 @@ const messages = {
   "CHAT_TITLE_MUTE_UNMUTE_MIC": "Silenciar/Des Silenciar Microfono",
   "CHAT_MUTE_MIC": "Silenciar ",
   "CHAT_UNMUTE_MIC": "Des Silenciar",
-  "CHAT_TITLE_MUTE_UNMUTE_MIC": "Silenciar/Des Silenciar Video",
   "CHAT_NO_MESSAGES": "No hay mensajes para mostrar.",
   "CHAT_SEND_MESSAGE": "Enviar",
   "CHAT_TYPE_MESSAGE": "Escriba su mensaje aquí...",

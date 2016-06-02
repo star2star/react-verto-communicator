@@ -1,4 +1,5 @@
-[{
+"use strict";
+const messages = {
   "TITLE_ACTIVE_CALL": "Ups, jesteś w trakcie Aktywnego Połączenia.",
   "MESSAGE_ACTIVE_CALL_HANGUP": "Wygląda na to że jesteś połączony. Czy chcesz się rozłączyć?",
   "MESSAGE_ACTIVE_CALL_BACK": "Wygląda na to że byłeś połączony. Czy chcesz do tego wrócić?",
@@ -168,4 +169,5 @@
   "VERSION": "Wersja: ",
   "GIT_REV": "Git Rev: ",
   "POWERED_BY": "Powered By: "
-}]
+};
+module.exports = messages;
