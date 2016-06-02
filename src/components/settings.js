@@ -1,6 +1,6 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent.js';
-import { FormattedMessage } from 'react-intl';
+// import { FormattedMessage } from 'react-intl';
 import SettingsMenuSelect from './settingsMenuSelect.js';
 import {
 SettingsIconSVG,
@@ -52,12 +52,14 @@ class Settings extends VertoBaseComponent {
       },
       menu: {
         position: 'absolute',
-        top: '60px',
-        right: '30px',
+        top: '70px',
+        left: '0',
+        width: '100%',
         display: this.state.dropdownDisplayed ? 'flex' : 'none',
         flexDirection: 'column',
+        justifyContent: 'space-around',
         opacity: '.9',
-        //padding: '10px',
+        padding: '20px',
         // border: '1px solid #ccc',
         backgroundColor: '#0A387F'
       },
@@ -94,7 +96,7 @@ class Settings extends VertoBaseComponent {
     console.log('xxxxxxxxxxxx', this.props.settingsData);
     return (
           <div className="menuContainer" style={this.getStyle('menu')} >
-            <div>
+
               <SettingsMenuSelect
                   cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
                   options={this.props.settingsData.videoDevices ? this.props.settingsData.videoDevices : []}
@@ -119,7 +121,7 @@ class Settings extends VertoBaseComponent {
                       label="Speaker:"
                       selectedOption={{id:"selectedSpeaker", label:this.props.settingsData.selectedSpeaker && this.props.settingsData.selectedSpeaker.label}}
                     />
-            </div>
+
           </div>
     );
   }
