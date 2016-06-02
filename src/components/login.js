@@ -197,7 +197,7 @@ class Login extends VertoBaseComponent{
             this.setState({...this.state, advanced: !this.state.advanced });
           }}>{this.state.advanced ? <FormattedMessage id="LESS_SETTINGS" defaultMessage="Less Settings"/> :
               <FormattedMessage id="MORE_SETTINGS" defaultMessage="More Settings"/>}</span>
-          <button style={{...this.getStyle('loginButton')}}onClick={this.submitLogin.bind(this)}><FormattedMessage id="LOGIN" defaultMessage="Login"/></button>
+          <button style={{...this.getStyle('loginButton')}} onClick={this.submitLogin.bind(this)}><FormattedMessage id="LOGIN" defaultMessage="Login"/></button>
         </div>
       </div>);
   }
