@@ -78,12 +78,18 @@ class Settings extends VertoBaseComponent {
         paddingRight: '10px',
         fontFamily: 'sans-serif'
       },
+      buttonContainer: {
+        display: 'flex',
+        flexDirection: 'column'
+      },
       button: {
-        padding: '8px 30px',
+        //padding: '8px 30px',
         border: '0px',
+        borderRadius: '2px',
+        fontSize: '1rem',
         margin: '10px 1px',
         cursor: 'pointer',
-        borderRadius: '2px',
+        color: '#0A387F',
         textTransform: 'uppercase'
       }
 
@@ -136,14 +142,14 @@ class Settings extends VertoBaseComponent {
                         label="Best Frame Rate:"
                         selectedOption={{id:"selectedBestFrameRate", label:this.props.settingsData.selectedBestFrameRate && this.props.settingsData.selectedBestFrameRate.label}}
                       />
-
-                    <button style={{...this.getStyle('button')}}>
-                      <FormattedMessage id="PREVIEW_SETTINGS" defaultMessage="Preview Settings"/>
-                    </button>
-                    <button style={{...this.getStyle('button')}}>
-                      <FormattedMessage id="REFRESH_DEVICE_LIST" defaultMessage="Refresh Device List"/>
-                    </button>
-
+                    <div style={{...this.getStyle('buttonContainer')}}>
+                      <button style={{...this.getStyle('button')}}>
+                        <FormattedMessage id="PREVIEW_SETTINGS" defaultMessage="Preview Settings"/>
+                      </button>
+                      <button style={{...this.getStyle('button')}}>
+                        <FormattedMessage id="REFRESH_DEVICE_LIST" defaultMessage="Refresh Device List"/>
+                      </button>
+                    </div>
               </div>
           </div>
     );

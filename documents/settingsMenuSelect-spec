@@ -17,11 +17,6 @@ This is a ‘pure' component.
 
 ## a. Required Props ##
 
-If the prop is an object, a sample of the object structure needs to be provided.
-If the prop is a callback function, then a sample of the function call including input arguments and their data types must be provided.  If an argument is an object, then a sample of its structure must be provided.
-
-Sample:
-
 | Prop Name | Sample | Description |
 | ------------ | ------------- | ------------- |
 | selectedOption | selectedOption={id:"selectedVideo", label:"FaceTime HD Camera"} | An object. Required. Contains the selected data for a setting select field.
