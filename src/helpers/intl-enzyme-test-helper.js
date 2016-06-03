@@ -23,6 +23,7 @@ function nodeWithIntlProp(node) {
 }
 
 function shallowWithIntl(node) {
+  console.log('shallowwithintl node',node);
   return shallow(nodeWithIntlProp(node), { context: { intl } });
 }
 

@@ -272,7 +272,7 @@ class AppBar extends VertoBaseComponent {
               <TagMenu allowDisplayDetails="true" compStyle={this.state.showAltAppControls ? this.getStyle("altTagMenu") : undefined}>
                 <MenuItem label={formatMessage({"id":"ABOUT", "defaultMessage":"About"})} cbAction={()=>{
                   // TODO ta need to pass version and gitRev in to the About component
-                  App.toggleModal((<About version="0.2.0" gitRev="xxxxx"/>));
+                  App.toggleModal((<About version="0.2.0" gitRev="xxxxx" cbClose={App.toggleModal}/>));
                 }} />
                 <MenuItem label={formatMessage({"id":"TITLE_CONTRIBUTORS", "defaultMessage":"Contributors"})} cbAction={()=>{
 
