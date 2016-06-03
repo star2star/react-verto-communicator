@@ -8,6 +8,7 @@ let _dispatch;
 let _verto;
 
 
+
 //class
 class VertoService {
   constructor(){
@@ -15,7 +16,6 @@ class VertoService {
     this._data = {_activeCalls:[], _maxActiveCalls: 32 };
 
     const xInstance = this;
-
 
     _callbacks = {
       onMessage: (verto, dialog, msg, data) => {
@@ -244,6 +244,8 @@ class VertoService {
 
     this.login = this.login.bind(this);
     this.getOptions = this.getOptions.bind(this);
+    this.stopConference = this.stopConference.bind(this);
+    this.startConference = this.startConference.bind(this);
 
     VertoService.getInstance = VertoService.getInstance.bind(this);
     VertoService.login = VertoService.login.bind(this);
@@ -253,6 +255,138 @@ class VertoService {
     VertoService.refreshVideoResolution = VertoService.refreshVideoResolution.bind(this);
     VertoService.updateResolutions = VertoService.updateResolutions.bind(this);
 
+  }
+
+  startConference(v, dialog, pvtData) {
+    //$rootScope.$emit('call.video', 'video');
+    //$rootScope.$emit('call.conference', 'conference');
+    this._data.chattingWith = pvtData.chatID;
+    this._data.confRole = pvtData.role;
+    this._data.conferenceMemberID = pvtData.conferenceMemberID;
+    var conf = new $.verto.conf(v, {
+      dialog: dialog,
+      hasVid: true, //TODO storage.data.useVideo,
+      laData: pvtData,
+      chatCallback: function(v, e) {
+        var from = e.data.fromDisplay || e.data.from || "Unknown";
+        var message = e.data.message || "";
+        //TODO
+        //$rootScope.$emit('chat.newMessage', {
+        //  from: from,
+        //  body: message
+        //});
+      },
+      onBroadcast: (v, conf, message) => {
+        console.log('>>> conf.onBroadcast:', arguments);
+        if (message.action == 'response') {
+          // This is a response with the video layouts list.
+          if (message['conf-command'] == 'list-videoLayouts') {
+            var rdata = [];
+
+            for (var i in message.responseData) {
+              rdata.push(message.responseData[i].name);
+            }
+
+            var options = rdata.sort(function(a, b) {
+              var ga = a.substring(0, 6) == "group:" ? true : false;
+              var gb = b.substring(0, 6) == "group:" ? true : false;
+
+              if ((ga || gb) && ga != gb) {
+                return ga ? -1 : 1;
+              }
+
+              return ( ( a == b ) ? 0 : ( ( a > b ) ? 1 : -1 ) );
+            });
+            this._data.confLayoutsData = message.responseData;
+            this._data.confLayouts = options;
+          } else if (message['conf-command'] == 'canvasInfo') {
+            this._data.canvasInfo = message.responseData;
+            //TODO
+            //$rootScope.$emit('conference.canvasInfo', message.responseData);
+          } else {
+            //TODO
+            //$rootScope.$emit('conference.broadcast', message);
+          }
+        }
+      }
+    });
+
+    if (this._data.confRole == "moderator") {
+      console.log('>>> conf.listVideoLayouts();');
+      conf.listVideoLayouts();
+      conf.modCommand('canvasInfo');
+    }
+
+    this._data.conf = conf;
+
+    this._data.liveArray = new $.verto.liveArray(
+      //TODO check on instance
+      this._data.instance, pvtData.laChannel,
+      pvtData.laName, {
+        subParams: {
+          callID: dialog ? dialog.callID : null
+        }
+      });
+
+    this._data.liveArray.onErr = (obj, args) => {
+      console.log('liveArray.onErr', obj, args);
+    };
+
+    this._data.liveArray.onChange = (obj, args) => {
+      // console.log('liveArray.onChange', obj, args);
+
+      switch (args.action) {
+        case 'bootObj':
+          //TODO
+          //$rootScope.$emit('members.boot', args.data);
+          args.data.forEach(function(member){
+            var callId = member[0];
+            //TODO fix this
+            // var status = true; //angular.fromJson(member[1][4]);
+            // if (callId === data.call.callID) {
+            //   $rootScope.$apply(function(){
+            //     data.mutedMic = status.audio.muted;
+            //     data.mutedVideo = status.video.muted;
+            //   });
+            // }
+          });
+          break;
+        case 'add':
+          var member = [args.key, args.data];
+          //TODO $rootScope.$emit('members.add', member);
+          break;
+        case 'del':
+          var uuid = args.key;
+          //TODO $rootScope.$emit('members.del', uuid);
+          break;
+        case 'clear':
+          //TODO $rootScope.$emit('members.clear');
+          break;
+        case 'modify':
+          var member = [args.key, args.data];
+          //TODO $rootScope.$emit('members.update', member);
+          break;
+        default:
+          console.log('NotImplemented', args.action);
+      }
+    };
+  }
+
+  stopConference() {
+    //console.log('stopConference()');
+    if (this._data.liveArray) {
+      this._data.liveArray.destroy();
+      console.log('Has data.liveArray.');
+      //TODO $rootScope.$emit('members.clear');
+      this._data.liveArray = null;
+    } else {
+      console.log('Doesn\'t found data.liveArray.');
+    }
+
+    if (this._data.conf) {
+      this._data.conf.destroy();
+      this._data.conf = null;
+    }
   }
 
 
