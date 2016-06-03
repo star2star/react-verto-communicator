@@ -1,6 +1,6 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent.js';
-// import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import SettingsMenuSelect from './settingsMenuSelect.js';
 import {
 SettingsIconSVG,
@@ -53,7 +53,7 @@ class Settings extends VertoBaseComponent {
       menu: {
         position: 'absolute',
         top: '70px',
-        left: '0',
+        left: '0px',
         width: '100%',
         display: this.state.dropdownDisplayed ? 'flex' : 'none',
         flexDirection: 'row',
@@ -79,10 +79,11 @@ class Settings extends VertoBaseComponent {
       },
       button: {
         padding: '8px 30px',
-        border: '0',
+        border: '0px',
         margin: '10px 1px',
         cursor: 'pointer',
-        borderRadius: '2px'
+        borderRadius: '2px',
+        textTransform: 'uppercase'
       }
 
     };
@@ -128,9 +129,19 @@ class Settings extends VertoBaseComponent {
                       label="Speaker:"
                       selectedOption={{id:"selectedSpeaker", label:this.props.settingsData.selectedSpeaker && this.props.settingsData.selectedSpeaker.label}}
                     />
+                    <SettingsMenuSelect
+                        cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                        options={this.props.settingsData.bestFrameRate ? this.props.settingsData.bestFrameRate : []}
+                        label="Best Frame Rate:"
+                        selectedOption={{id:"selectedBestFrameRate", label:this.props.settingsData.selectedBestFrameRate && this.props.settingsData.selectedBestFrameRate.label}}
+                      />
 
-                    <button style={{...this.getStyle('button')}} />
-                    <button style={{...this.getStyle('button')}}/>
+                    <button style={{...this.getStyle('button')}}>
+                      <FormattedMessage id="PREVIEW_SETTINGS" defaultMessage="Preview Settings"/>
+                    </button>
+                    <button style={{...this.getStyle('button')}}>
+                      <FormattedMessage id="REFRESH_DEVICE_LIST" defaultMessage="Refresh Device List"/>
+                    </button>
 
               </div>
           </div>
