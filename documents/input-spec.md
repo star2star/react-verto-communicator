@@ -1,7 +1,7 @@
 # Component Name:  Input   #
 # 1. Functional Description #
 
-
+The Input component is an area that displays a label and an input area.
 
 # 2. Visual Design #  
 
