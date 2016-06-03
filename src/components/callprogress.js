@@ -60,7 +60,7 @@ class CallProgress extends VertoBaseComponent {
     }
 
     render() {
-      //console.log('CP: ', this.props.callData);
+      console.log('<<<<<< CP: ', this.props.callData, this.state );
 
       return (
           <div style={{flexDirection: "column", display:"flex"}}>

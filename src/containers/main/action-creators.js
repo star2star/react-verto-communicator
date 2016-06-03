@@ -1,4 +1,5 @@
 import VertoService from '../../js/vertoService';
+
 // validation steps include
 const doValidation = (step=1) => {
   return dispatch => {
@@ -181,6 +182,15 @@ const doSubmitLogOut = () =>{
 };
 
 // making a phone call
+const doIncomingCall = (dialog) =>{
+  return dispatch => {
+    console.log('incoming call: ', dialog);
+    dispatch({
+      type: "INCOMING_CALL",
+      data: dialog
+    });
+  }
+}
 const doMakeCall = (aPhoneNumber, appSettings) => {
   return dispatch => {
 
@@ -194,10 +204,15 @@ const doHangUp = (callId) => {
     VertoService.getInstance().hangup(callId);
   }
 }
+const doAnswer = (callId) => {
+  return dispatch =>{
+    VertoService.getInstance().answer(callId);
+  }
+}
 const doHungUp = (dialog) =>{
   return {
     "type": "CALL_HUNG_UP",
-    "data": dialog.destintation
+    "data": dialog
   }
 };
 const doMakeCallError = (aErrorObject) =>{
@@ -223,5 +238,5 @@ const doUpdateSettings = (aData) => {
 
 export { doValidation, doBrowserCheck,
   doSubmitLogin, doShowLogin, doVertoLogin, doSubmitLogOut, doLogOut,
-  doMakeCall, doMakeCallError,
-  doingMakeCall, doHungUp, doHangUp };
+  doMakeCall, doMakeCallError, doIncomingCall,
+  doingMakeCall, doHungUp, doHangUp, doAnswer };

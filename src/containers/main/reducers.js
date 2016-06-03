@@ -43,17 +43,49 @@ const auth = (state, action)=>{
     case 'RESOLUTION_FAILED':
       return { ...state, showPage: 'resolution_failed'  };
     case 'CALLING':
-      return { ...state, showPage: 'call_inprogress', callInfo: action.data };
+
+      const cg= { ...state, showPage: 'call_inprogress', callInfo: action.data };
+      console.log('ccccccc: ', action.data, cg);
+      if (cg.incomingCall && cg.incomingCall.callID == action.data.callId){
+        // delete
+        delete cg.incomingCall;
+      }
+
+      return cg;
     case 'CALLING_ERROR':
       const oReturn =  { ...state, showPage: 'loggedIn', error: action.data };
       // remove destination
       delete oReturn.destination;
       return oReturn;
+    case "INCOMING_CALL":
+      return { ...state, incomingCall: action.data };
     case 'CALL_HUNG_UP':
-      const chu =  { ...state, showPage: 'loggedIn', lastCall: action.data };
-      // remove destination
-      delete chu.destination;
-      return chu;
+      if (state.callInfo){
+        // check to see if it is the current call
+        if (state.callInfo.callId == action.data.callID) {
+          // yes it is so
+          const chu =  { ...state, showPage: 'loggedIn', lastCall: action.data.destination };
+          // remove destination
+          delete chu.callInfo;
+          return chu;
+        }
+      }
+
+      if (state.incomingCall) {
+        // check incoming
+        if (state.incomingCall.callID == action.data.callID) {
+          // yes it is so
+          const ic =  { ...state };
+          // remove destination
+          delete ic.incomingCall;
+          return ic;
+        }
+      }
+
+      console.log('aaaaaaahhhhhh bbbbaaadddd', action.data);
+      return state;
+
+
     default:
      return state;
     }

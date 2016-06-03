@@ -4,12 +4,13 @@ import VertoBaseComponent from '../../components/vertobasecomponent';
 import { connect } from 'react-redux';
 //import ReactTooltip from 'react-tooltip';
 import VCStatus from '../../components/vcstatus';
-import { doSubmitLogin, doSubmitLogOut, doMakeCall, doHangUp } from './action-creators';
+import { doSubmitLogin, doSubmitLogOut, doMakeCall, doHangUp, doAnswer } from './action-creators';
 import Splash from '../../components/splash';
 import Login from '../../components/login';
 import Dialpad from '../../components/dialpad';
 import {injectIntl} from 'react-intl';
 import CallProgress from '../../components/callprogress';
+import IncomingCall from '../../components/incomingcall';
 
 class Main extends VertoBaseComponent {
   constructor(props) {
@@ -39,6 +40,19 @@ class Main extends VertoBaseComponent {
 
     let loggedInfo;
     const splashObject = { ...this.props.auth.splash };
+
+    let incomingCall;
+    if (this.props.auth.incomingCall) {
+      console.log('------- GOT CALL', this.props.auth.incomingCall);
+      incomingCall = (<IncomingCall callData={this.props.auth.incomingCall} cbHangup={(d)=>{
+        console.log('hang up', d);
+        this.props.dispatch(doHangUp(d.callID));
+      }}
+      cbAnswer={(d)=>{
+        console.log('Answering: ', d);
+        this.props.dispatch(doAnswer(d.callID));
+      }}  />);
+    }
 
     switch (this.props.auth.showPage){
       case 'splash':
@@ -126,6 +140,7 @@ class Main extends VertoBaseComponent {
     }
     return (
       <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
+        {incomingCall}
         <video id="webcam" autoplay="autoplay"  style={{display:"none", width:"100%", height:"100%", objectFit:"inherit"}}></video>
         {loggedInfo}
         {showSplash}

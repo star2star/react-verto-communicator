@@ -1,4 +1,4 @@
-import {doLogOut, doVertoLogin, doMakeCallError, doHungUp, doingMakeCall} from '../containers/main/action-creators';
+import {doLogOut, doVertoLogin, doMakeCallError, doHungUp, doingMakeCall, doIncomingCall } from '../containers/main/action-creators';
 import VideoConstants from './VideoConstants';
 import md5 from 'md5';
 
@@ -88,6 +88,7 @@ class VertoService {
 
                 		//TODO jes inbound call
                 		//Processor.starphone('inboundCall', d.params);
+                    _dispatch(doIncomingCall(d));
                 	}
 
                   break;
@@ -123,7 +124,7 @@ class VertoService {
               } else {
               	//TODO
                 //Processor.starphone('answered', d.params);
-                _dispatch(doingMakeCall('active', d.params.destination_number, d.callID));
+                _dispatch(doingMakeCall('active', (d.direction.name == 'outbound' ? d.params.destination_number : d.params.caller_id_number), d.callID));
               }
 
               break;
@@ -414,6 +415,14 @@ class VertoService {
         iceServers: true,
         loginParams: data
       };
+  }
+
+  answer(callerId){
+    if (_verto._data._activeCalls[callerId]) {
+      _verto._data._activeCalls[callerId].answer();
+    } else {
+      console.log('answer    NOT FOUND----------');
+    }
   }
 
   hangup(callerId){
