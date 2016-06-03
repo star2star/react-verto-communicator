@@ -60,6 +60,7 @@ class Settings extends VertoBaseComponent {
         // justifyContent: 'space-around',
         opacity: '.9',
         padding: '20px',
+        paddingLeft: '120px',
         // border: '1px solid #ccc',
         backgroundColor: '#0A387F'
       },
