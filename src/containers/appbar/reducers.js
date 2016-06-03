@@ -11,7 +11,7 @@ const app = (state, action)=>{
                 selectedAudio: null,
                 selectedShare: null,
                 selectedSpeaker: null,
-                bestFrameRate: "15",
+                selectedBestFrameRate: "15",
                 useStereo: true,
                 useVideo: true,
                 useSTUN: true,
@@ -42,7 +42,8 @@ const app = (state, action)=>{
                 vidQual: undefined,
                 outgoingBandwidth: 'default',
                 incomingBandwidth: 'default',
-                bandwidth: VideoConstants.BAND_WIDTH
+                bandwidth: VideoConstants.BAND_WIDTH,
+                bestFrameRate: VideoConstants.FRAME_RATE
               },
 
               bandwidthInfo: {

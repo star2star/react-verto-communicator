@@ -1,6 +1,6 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent.js';
-// import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import SettingsMenuSelect from './settingsMenuSelect.js';
 import {
 SettingsIconSVG,
@@ -53,13 +53,14 @@ class Settings extends VertoBaseComponent {
       menu: {
         position: 'absolute',
         top: '70px',
-        left: '0',
+        left: '0px',
         width: '100%',
         display: this.state.dropdownDisplayed ? 'flex' : 'none',
         flexDirection: 'row',
         // justifyContent: 'space-around',
         opacity: '.9',
         padding: '20px',
+        paddingLeft: '120px',
         // border: '1px solid #ccc',
         backgroundColor: '#0A387F'
       },
@@ -77,12 +78,21 @@ class Settings extends VertoBaseComponent {
         paddingRight: '10px',
         fontFamily: 'sans-serif'
       },
+      buttonContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start'
+      },
       button: {
         padding: '8px 30px',
-        border: '0',
-        margin: '10px 1px',
+        border: '0px',
+        borderRadius: '2px',
+        fontSize: '.9rem',
+        fontWeight: '400',
+        margin: '25px 1px 10px 1px',
         cursor: 'pointer',
-        borderRadius: '2px'
+        color: '#0A387F',
+        textTransform: 'uppercase'
       }
 
     };
@@ -128,10 +138,20 @@ class Settings extends VertoBaseComponent {
                       label="Speaker:"
                       selectedOption={{id:"selectedSpeaker", label:this.props.settingsData.selectedSpeaker && this.props.settingsData.selectedSpeaker.label}}
                     />
-
-                    <button style={{...this.getStyle('button')}} />
-                    <button style={{...this.getStyle('button')}}/>
-
+                    <SettingsMenuSelect
+                        cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                        options={this.props.settingsData.bestFrameRate ? this.props.settingsData.bestFrameRate : []}
+                        label="Best Frame Rate:"
+                        selectedOption={{id:"selectedBestFrameRate", label:this.props.settingsData.selectedBestFrameRate && this.props.settingsData.selectedBestFrameRate.label}}
+                      />
+                    <div style={{...this.getStyle('buttonContainer')}}>
+                      <button style={{...this.getStyle('button')}}>
+                        <FormattedMessage id="PREVIEW_SETTINGS" defaultMessage="Preview Settings"/>
+                      </button>
+                      <button style={{...this.getStyle('button')}}>
+                        <FormattedMessage id="REFRESH_DEVICE_LIST" defaultMessage="Refresh Device List"/>
+                      </button>
+                    </div>
               </div>
           </div>
     );

@@ -1,7 +1,7 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 //import SvgIcons from './svgIcons';
-import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-intl';
+//import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-intl';
 import Radium from 'radium';
 
 const propTypes = {
@@ -137,4 +137,4 @@ class Input extends VertoBaseComponent {
 }
 
 Input.propTypes = propTypes;
-export default injectIntl(Radium(Input));
+export default Radium(Input);

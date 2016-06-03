@@ -1,7 +1,6 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent.js';
 
-
 const propTypes = {
   compStyle : React.PropTypes.object,
   cbSubmitSetting: React.PropTypes.func.isRequired,
@@ -9,7 +8,6 @@ const propTypes = {
   label: React.PropTypes.string.isRequired,
   selectedOption: React.PropTypes.object.isRequired
 };
-
 
 class SettingsMenuSelect extends VertoBaseComponent {
   constructor(props) {
@@ -22,7 +20,6 @@ handleSelect() {
   // this.props.cbSubmitSetting();
 }
 
-
   getCompStyle() {
     return this.props.compStyle;
   }
@@ -30,17 +27,18 @@ handleSelect() {
   getDefaultStyle(styleName) {
     const styles = {
       container: {
-        padding: '10px'
+        padding: '10px',
+        borderBottom: '1px solid #FFF'
       },
       label: {
         display:'flex',
-        paddingBottom: '10px'
+        paddingBottom: '10px',
+        fontWeight: 'bold'
       }
     };
 
     return (styles[styleName]);
   }
-
 
   render() {
     const options=this.props.options.map((option, index)=>{
