@@ -9,14 +9,13 @@ body {
 div div a {
   margin-right: 10px;
 }
-
+/*settings select-menu styles*/
 select {
   border: 0;
   box-shadow:none;
   border-radius: 0;
-  width: 250px;
+  width: 350px;
   font-size: .85rem;
   background-color: rgba(0,0,0,0);
   color: #FFF;
-  /*border-bottom: '1px solid #FFF';*/
 }

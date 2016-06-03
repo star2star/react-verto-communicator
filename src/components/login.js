@@ -95,7 +95,7 @@ class Login extends VertoBaseComponent{
     let moreSettings;
     if (this.state.advanced) {
       moreSettings = (
-        <span>
+        <form>
           <Input
               label={formatMessage({"id":"USER", "defaultMessage":"User"})}
               placeholder= {formatMessage({"id":"USER", "defaultMessage":"User"})+" i.e. 1008"}
@@ -103,6 +103,7 @@ class Login extends VertoBaseComponent{
               value={this.state.settings.user}
           />
           <Input
+              type="password"
               label={formatMessage({"id":"PASSWORD", "defaultMessage":"Password"})}
               placeholder={formatMessage({"id":"YOUR_PASSWORD", "defaultMessage":"Your Password"})+" i.e. 1234"}
               cbChanging={this.changingInput.bind(this)}
@@ -125,7 +126,7 @@ class Login extends VertoBaseComponent{
               placeholder={formatMessage({"id":"WEBSOCKET_URL", "defaultMessage":"Websocket URL"})}
               cbChanging={this.changingInput.bind(this)}
               value={this.state.settings.websocketurl}/>
-        </span>
+        </form>
       );
     }
 

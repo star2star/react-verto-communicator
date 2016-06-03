@@ -1,7 +1,7 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 //import SvgIcons from './svgIcons';
-import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-intl';
+//import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-intl';
 import Radium from 'radium';
 
 const propTypes = {
@@ -13,6 +13,8 @@ class Input extends VertoBaseComponent {
   constructor(props) {
     super(props);
     this.state = { 'onFocus' : false };
+
+    this.setFocusState = this.setFocusState.bind(this);
 }
 
   getCompStyle() {
@@ -26,7 +28,6 @@ class Input extends VertoBaseComponent {
         width: '100%',
         flexDirection: 'column',
         paddingBottom: '15px'
-        //':focus': { borderBottom: ' 5px solid red'}
       },
       label: {
         paddingBottom: '15px',
@@ -46,82 +47,94 @@ class Input extends VertoBaseComponent {
         boxShadow: 'none',
         backgroundColor: 'rgba(0,0,0,0)',
         backgroundPosition: 'center bottom,center calc(100% - 1px)',
-        backgroundRepeat: 'no-repeat',
-        backgroundImage: 'linearGradient(#009688,#009688),linearGradient(#d2d2d2,#d2d2d2)',
-        backgroundSize: '0 2px,100% 1px',
-        transition: 'borderColor ease-in-out .30s, width ease-in-out .30s',
-        //transition: 'width ease-in-out .15s,box-shadow ease-in-out .15s',
-        // ':focus': {
-        //   // borderBottomWidth: '3px',
-        //   // borderColor: '#009688'
-        //   //width: '50%'
-        // }
+        backgroundRepeat: 'no-repeat'
       },
-
       bar: {
-        height: '2px',
-        //backgroundColor: '#009688',
         position: 'relative',
-        display: 'block',
-        width: '100%',
-        ':focus': {
-          // backgroundColor: '#009688',
-          // borderBottomWidth: '3px',
-          // borderColor: '#009688'
-      },
-      before: {
+        bottom: '3px',
+        display: 'flex',
+        justifyContent: 'space-between',
         content: '" "',
         height: '2px',
-        width: '0px',
-        bottom: '1px',
-        position: 'absolute',
-        background: '#5264ae',
-        transition: '0.2s ease all',
-        left:'50%'
+        borderWidth: '3px',
+        borderColor: '#fff',
+        width: '101%',
+        backgroundColor: '#fff'
       },
-      after: {
+      left: {
         content: '" "',
-        height: '2px',
-        width: '0px',
-        bottom: '1px',
+        height: '3px',
         position: 'absolute',
-        background: '#5264ae',
-        transition: '0.2s ease all',
+        backgroundColor: '#009688',
+        transition : 'left 1s',
+        left: this.state.onFocus ?  '0%' : '50%',
         right: '50%'
+      },
+      right: {
+        content: '" "',
+        height: '3px',
+        //width: '0px',
+        position: 'absolute',
+        backgroundColor: '#009688',
+        transition : 'right 1s',
+        right: this.state.onFocus ?  '0%' : '50%',
+        left: '50%'
       }
-    }
+
      };
 
     return (styles[styleName]);
   }
 
+  setFocusState() {
+    this.setState({...this.state,'onFocus': true});
+    console.log('%%%%%%%%%%%%%%%%%%%%%%', this.state.onFocus);
+  }
+
 
 
   render(){
-//console.log('..............................................',this.refs.name.value ? 'sugar')
+
+    if(this.state.onFocus) {
+      //console.log('set them styles baby');
+
+    } else {
+      //console.log('dont set them styles ho');
+    }
+
     return (
       <div style={{...this.getStyle('fieldset')}}>
         <div style={{...this.getStyle('label')}}>{this.props.label}</div>
         <div>
           <input
+            type={this.props.type}
             ref="name"
             placeholder={this.props.placeholder}
             style={{...this.getStyle('inputArea') }}
+            onBlur={()=>{
+              this.setState({...this.state, 'onFocus': false });
+              console.log('LOSING FOCUS', this.state.onFocus);
+            }}
+            onFocus={()=>{
+              this.setState({...this.state,'onFocus': true});
+              console.log('GETTING FOCUSED', this.state.onFocus);
+            }}
             onChange={
             (e) =>{
               this.props.cbChanging(this.props.label.replace(' ', '').toLowerCase(), e.target.value );
             }
           } defaultValue={this.props.value}
           />
+          <span style={{...this.getStyle('bar')}}>
+            <span className="left" style={{...this.getStyle('left')}}> &nbsp;</span>
+            <span className="right" style={{...this.getStyle('right')}}>&nbsp; </span>
+          </span>
         </div>
-        <span style={{...this.getStyle('bar')}}>
-          <span style={{...this.getStyle('before')}}> </span>
-          <span style={{...this.getStyle('after')}}> </span>
-        </span>
+
       </div>);
   }
 
 }
 
 Input.propTypes = propTypes;
-export default injectIntl(Radium(Input));
+export default Radium(Input);

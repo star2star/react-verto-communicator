@@ -1,15 +1,14 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import Modal from 'react-modal';
-import App from './app';
 import { FormattedMessage } from 'react-intl';
-import Radium from 'radium';
 import WhiteLabel from '../js/whitelabel.js';
 
 const propTypes = {
   compStyle: React.PropTypes.object,
   version: React.PropTypes.string,
-  gitRev: React.PropTypes.string
+  gitRev: React.PropTypes.string,
+  cbClose: React.PropTypes.func.isRequired
 };
 
 class About extends VertoBaseComponent{
@@ -34,9 +33,9 @@ class About extends VertoBaseComponent{
       },
 
       container: {
-        '@media (max-width: 767px)': {
-          alignItems: "center"
-        }
+        //'@media (max-width: 767px)': {
+        //  alignItems: "center"
+        // }
       },
       mymodal : {
         content: {
@@ -56,24 +55,24 @@ class About extends VertoBaseComponent{
     const logoSrc = WhiteLabel.get('logoSrc');
     const poweredBy = WhiteLabel.get('poweredBy');
     return (
-      <Modal isOpen={true} onRequestClose={()=>{App.toggleModal();}} style={this.getStyle('mymodal')}>
+      <Modal isOpen onRequestClose={this.props.cbClose} style={this.getStyle('mymodal')}>
         <div style={this.getStyle('container')}>
           <div style={this.getStyle('imageStyle')}>
             <img src={logoSrc} style={{width: "100%" }}  />
           </div>
 
           <div>
-           {<FormattedMessage id='VERSION' defaultValue="Version"/>}
+           <FormattedMessage id='VERSION' defaultMessage="Version"/>
            <span> {this.props.version} </span>
           </div>
 
           <div style={this.getStyle('gitRevStyle')}>
-            <FormattedMessage id='GIT_REV' defaultValue="Gizt Rev" />
+            <FormattedMessage id='GIT_REV' defaultMessage="Git Rev" />
             <span> {this.props.gitRev} </span>
           </div>
 
           <div>
-            <FormattedMessage id='POWERED_BY' defaultValue="Powered By: " />
+            <FormattedMessage id='POWERED_BY' defaultMessage="Powered By: " />
             <img src={poweredBy} />
           </div>
         </div>
@@ -83,4 +82,4 @@ class About extends VertoBaseComponent{
 
 About.propTypes = propTypes;
 
-export default Radium(About);
+export default About;

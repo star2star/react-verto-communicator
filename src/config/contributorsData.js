@@ -1,3 +1,4 @@
+'use strict';
 const contributors = [
   {
     "name":  "Jonatas Oliveira",
@@ -29,4 +30,4 @@ const contributors = [
   }
 ];
 
-export default contributors;
+module.exports = contributors;
