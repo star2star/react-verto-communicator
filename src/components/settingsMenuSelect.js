@@ -32,7 +32,8 @@ handleSelect() {
       },
       label: {
         display:'flex',
-        paddingBottom: '10px'
+        paddingBottom: '10px',
+        fontWeight: 'bold'
       }
     };
 

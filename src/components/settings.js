@@ -80,14 +80,16 @@ class Settings extends VertoBaseComponent {
       },
       buttonContainer: {
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        alignItems: 'flex-start'
       },
       button: {
-        //padding: '8px 30px',
+        padding: '8px 30px',
         border: '0px',
         borderRadius: '2px',
-        fontSize: '1rem',
-        margin: '10px 1px',
+        fontSize: '.9rem',
+        fontWeight: '400',
+        margin: '25px 1px 10px 1px',
         cursor: 'pointer',
         color: '#0A387F',
         textTransform: 'uppercase'
