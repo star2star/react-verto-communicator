@@ -19,7 +19,7 @@ class VertoService {
 
     _callbacks = {
       onMessage: (v, dialog, msg, params) => {
-        console.debug('onMessage:', v, dialog, msg, params);
+        console.debug('^^^^^^^ onMessage:', v, dialog, msg, params);
 
         switch (msg) {
           case $.verto.enum.message.pvtEvent:
@@ -245,6 +245,7 @@ class VertoService {
   startConference(v, dialog, pvtData) {
     //$rootScope.$emit('call.video', 'video');
     //$rootScope.$emit('call.conference', 'conference');
+    console.log('^^^^^ startConference: ', v, dialog, pvtData);
     this._data.chattingWith = pvtData.chatID;
     this._data.confRole = pvtData.role;
     this._data.conferenceMemberID = pvtData.conferenceMemberID;
@@ -252,7 +253,7 @@ class VertoService {
       dialog: dialog,
       hasVid: true, //TODO storage.data.useVideo,
       laData: pvtData,
-      chatCallback: function(v, e) {
+      chatCallback: (v, e) => {
         var from = e.data.fromDisplay || e.data.from || "Unknown";
         var message = e.data.message || "";
         //TODO
@@ -305,8 +306,8 @@ class VertoService {
     this._data.conf = conf;
 
     this._data.liveArray = new $.verto.liveArray(
-      //TODO check on instance
-      this._data.instance, pvtData.laChannel,
+      //jes fixed this ... check on instance ..this._data.instance
+      _verto.verto, pvtData.laChannel,
       pvtData.laName, {
         subParams: {
           callID: dialog ? dialog.callID : null
@@ -420,6 +421,7 @@ class VertoService {
       _verto.verto.hangup(callerId);
     } else {
       console.log('hangup NOT FOUND----------');
+      _verto.verto.hangup();
     }
   }
 
