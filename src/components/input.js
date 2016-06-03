@@ -2,7 +2,6 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 //import SvgIcons from './svgIcons';
 import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-intl';
-import Radium from 'radium';
 
 const propTypes = {
   compStyle : React.PropTypes.object
@@ -70,7 +69,6 @@ class Input extends VertoBaseComponent {
       right: {
         content: '" "',
         height: '3px',
-        //width: '0px',
         position: 'absolute',
         backgroundColor: '#009688',
         transition : this.state.onFocus ? 'right 1s' : 'right 0s',
@@ -120,4 +118,4 @@ class Input extends VertoBaseComponent {
 }
 
 Input.propTypes = propTypes;
-export default injectIntl(Radium(Input));
+export default injectIntl(Input);
