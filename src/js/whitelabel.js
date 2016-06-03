@@ -1,4 +1,4 @@
-const data = require("json!./whitelabel.json");
+const data = require("./whitelabelData.js");
 
 export default class WhiteLabel {
   static get(id) {
