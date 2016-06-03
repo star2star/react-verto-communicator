@@ -2,10 +2,10 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent.js';
 
 const propTypes = {
-  compStyle : React.PropTypes.object,
   cbSubmitSetting: React.PropTypes.func.isRequired,
-  options: React.PropTypes.array.isRequired,
+  compStyle : React.PropTypes.object,
   label: React.PropTypes.string.isRequired,
+  options: React.PropTypes.array.isRequired,
   selectedOption: React.PropTypes.object.isRequired
 };
 
@@ -27,7 +27,8 @@ handleSelect() {
   getDefaultStyle(styleName) {
     const styles = {
       container: {
-        padding: '10px',
+        paddingTop: '10px',
+        paddingBottom: '5px',
         borderBottom: '1px solid #FFF'
       },
       label: {

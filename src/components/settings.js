@@ -8,8 +8,10 @@ CaretUpIconSVG,
 CaretDownIconSVG } from './svgIcons';
 
 const propTypes = {
-  compStyle : React.PropTypes.object,
+  cbDeviceList: React.PropTypes.func,
+  cbPreviewSet: React.PropTypes.func,
   cbToggleShowSettings: React.PropTypes.func.isRequired,
+  compStyle : React.PropTypes.object,
   settingsData: React.PropTypes.object.isRequired
 };
 
@@ -34,8 +36,8 @@ class Settings extends VertoBaseComponent {
   getDefaultStyle(styleName) {
     const styles = {
       container: {
-        display: 'flex',
-        position: 'relative'
+        display: 'flex'
+        // position: 'relative'
       },
       icon: {
         fill: this.props.allowDisplayDetails ? '#fff' : '#ccc',
@@ -57,11 +59,11 @@ class Settings extends VertoBaseComponent {
         width: '100%',
         display: this.state.dropdownDisplayed ? 'flex' : 'none',
         flexDirection: 'row',
-        // justifyContent: 'space-around',
+        alignContent: 'center',
+        flexWrap: 'wrap',
+        justifyContent: 'space-around',
         opacity: '.9',
-        padding: '20px',
-        paddingLeft: '120px',
-        // border: '1px solid #ccc',
+        paddingBottom: '20px',
         backgroundColor: '#0A387F'
       },
       header: {
@@ -80,17 +82,17 @@ class Settings extends VertoBaseComponent {
       },
       buttonContainer: {
         display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start'
+        flexDirection: 'column'
       },
       button: {
         padding: '8px 30px',
         border: '0px',
-        borderRadius: '2px',
+        borderRadius: '3px',
         fontSize: '.9rem',
         fontWeight: '400',
         margin: '25px 1px 10px 1px',
         cursor: 'pointer',
+        backgroundColor: '#FFF',
         color: '#0A387F',
         textTransform: 'uppercase'
       }
@@ -100,7 +102,6 @@ class Settings extends VertoBaseComponent {
     return (styles[styleName]);
   }
 
-
   showMenu() {
     if (this.props.allowDisplayDetails) {
       const newShow = !this.state.dropdownDisplayed;
@@ -109,11 +110,26 @@ class Settings extends VertoBaseComponent {
     }
   }
 
+  submitPreview() {
+    console.log('Preview Settings Clicked');
+    //this.props.cbPreviewSet();
+  }
+
+  submitRefresh() {
+    console.log('Refresh Device List Clicked');
+    //this.props.cbDeviceList();
+  }
+
+  submitSpeedCheck(){
+    console.log('Check Network Speed Clicked');
+    //this.props.cbNetSpeed();
+  }
+
   buildSettingsContainer() {
     console.log('xxxxxxxxxxxx', this.props.settingsData);
     return (
           <div className="menuContainer" style={{...this.getStyle('menu')}}>
-            <div>
+            <div className="column1" style={{}}>
               <SettingsMenuSelect
                   cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
                   options={this.props.settingsData.videoDevices ? this.props.settingsData.videoDevices : []}
@@ -144,14 +160,35 @@ class Settings extends VertoBaseComponent {
                         label="Best Frame Rate:"
                         selectedOption={{id:"selectedBestFrameRate", label:this.props.settingsData.selectedBestFrameRate && this.props.settingsData.selectedBestFrameRate.label}}
                       />
-                    <div style={{...this.getStyle('buttonContainer')}}>
-                      <button style={{...this.getStyle('button')}}>
+                    <div className="buttonContainer" style={{...this.getStyle('buttonContainer')}}>
+                      <button style={{...this.getStyle('button')}} onClick={this.submitPreview.bind(this)}>
                         <FormattedMessage id="PREVIEW_SETTINGS" defaultMessage="Preview Settings"/>
                       </button>
-                      <button style={{...this.getStyle('button')}}>
+                      <button style={{...this.getStyle('button')}} onClick={this.submitRefresh.bind(this)}>
                         <FormattedMessage id="REFRESH_DEVICE_LIST" defaultMessage="Refresh Device List"/>
                       </button>
                     </div>
+              </div>
+              <div className="column2" style={{}}>
+                <SettingsMenuSelect
+                    cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                    options={this.props.settingsData.languages ? this.props.settingsData.languages : []}
+                    label="Language:"
+                    selectedOption={{id:"language", label:this.props.settingsData.language && this.props.settingsData.language.label}}
+                  />
+              </div>
+              <div className="column3" style={{}}>
+                <SettingsMenuSelect
+                    cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                    options={this.props.settingsData.languages ? this.props.settingsData.languages : []}
+                    label="Filler Test Menu:"
+                    selectedOption={{id:"language", label:this.props.settingsData.language && this.props.settingsData.language.label}}
+                  />
+                  <div className="buttonContainer" style={{...this.getStyle('buttonContainer')}}>
+                    <button style={{...this.getStyle('button')}} onClick={this.submitSpeedCheck.bind(this)}>
+                      <FormattedMessage id="CHECK_NETWORK_SPEED" defaultMessage="Check Network Speed"/>
+                    </button>
+                  </div>
               </div>
           </div>
     );
