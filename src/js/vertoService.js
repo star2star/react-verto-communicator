@@ -18,70 +18,46 @@ class VertoService {
     const xInstance = this;
 
     _callbacks = {
-      onMessage: (verto, dialog, msg, data) => {
-        //console.log("in onMessage", data);
-          switch (msg) {
-              case $.verto.enum.message.pvtEvent:
-                  if (data.pvtData) {
-                      switch (data.pvtData.action) {
+      onMessage: (v, dialog, msg, params) => {
+        console.debug('onMessage:', v, dialog, msg, params);
 
-                          case "conference-liveArray-part":
-                              //clear conf
-                              //clearConfMan();
-                              break;
-                          case "conference-liveArray-join":
-                              //clearConfMan();
-                              // start a new conf now
-                              confMan = new $.verto.confMan(verto, {
-                                  tableID: "#conf_list",
-                                  statusID: "#conf_count",
-                                  mainModID: "#conf_mod",
-                                  displayID: "#conf_display",
-                                  dialog: dialog,
-                                  hasVid: s2sVerto.checkVideo(),
-                                  laData: data.pvtData
-                                  });
-
-                              //$("#conf").show();
-                              //clear old messages
-                              //$("#chatwin").html("");
-                              //$("#message").show();
-
-                              chatting_with = data.pvtData.chatID;
-
-                              break;
-                      }
+        switch (msg) {
+          case $.verto.enum.message.pvtEvent:
+            if (params.pvtData) {
+              switch (params.pvtData.action) {
+                case "conference-liveArray-join":
+                  if (!params.pvtData.screenShare && !params.pvtData.videoOnly) {
+                    console.log("conference-liveArray-join");
+                    xInstance.stopConference();
+                    xInstance.startConference(v, dialog, params.pvtData);
                   }
                   break;
-
-              case $.verto.enum.message.info:
-                  var body = data.body;
-
-                  var from = data.from_msg_name || data.from;
-                  // new messages
-                  /*
-                  $('#chatwin')
-                      .append($('<span class="chatuid" />').text(from + ':'))
-                      .append($('<br />'))
-                      .append(messageTextToJQ(body))
-                      .append($('<br />'));
-                  $('#chatwin').animate({"scrollTop": $('#chatwin')[0].scrollHeight}, "fast");
-                  */
-
+                case "conference-liveArray-part":
+                  if (!params.pvtData.screenShare && !params.pvtData.videoOnly) {
+                    console.log("conference-liveArray-part");
+                    xInstance.stopConference();
+                  }
                   break;
-
-              case $.verto.enum.message.display:
-                  //console.log("$.verto.enum.message.display", dialog.params.remote_caller_id_number);
-                  var party = dialog.params.remote_caller_id_name + "<" + dialog.params.remote_caller_id_number + ">";
-                  //console.log('onMessage display', party, arguments);
-                  //tell them who they are talking to
-                  //display("Talking to: " + dialog.cidString());
-                  break;
-
-              default:
-                  //console.log('onMessage: default', arguments);
-                  break;
-          }
+              }
+            }
+            break;
+          /**
+            * This is not being used for conferencing chat
+            * anymore (see conf.chatCallback for that).
+            */
+          case $.verto.enum.message.info:
+            var body = params.body;
+            var from = params.from_msg_name || params.from;
+            //TODO
+            // $rootScope.$emit('chat.newMessage', {
+            //   from: from,
+            //   body: body
+            // });
+            break;
+          default:
+            console.warn('Got a not implemented message:', msg, dialog, params);
+            break;
+        }
       }, //end onMessage
 
       onDialogState: (d)=> {
@@ -170,7 +146,16 @@ class VertoService {
               //clearConfMan();
               //jes TODO remove from activeCalls
               console.log('^^^^^^^^^^destroy event', d);
-
+              //console.debug('Destroying: ' + d.cause);
+              if (d.params.screenShare) {
+                //TODO cleanShareCall(xInstance);
+              } else {
+                xInstance.stopConference();
+                //TODO
+                // if (!xInstance.reloaded) {
+                //   cleanCall();
+                // }
+              }
 
 
               //TODO
