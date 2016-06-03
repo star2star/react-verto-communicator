@@ -1,20 +1,17 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 //import SvgIcons from './svgIcons';
-//import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-intl';
+import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-intl';
 import Radium from 'radium';
 
 const propTypes = {
-  compStyle : React.PropTypes.object,
-  //settings: React.PropTypes.object.isRequired
+  compStyle : React.PropTypes.object
 };
 
 class Input extends VertoBaseComponent {
   constructor(props) {
     super(props);
     this.state = { 'onFocus' : false };
-
-    this.setFocusState = this.setFocusState.bind(this);
 }
 
   getCompStyle() {
@@ -66,7 +63,7 @@ class Input extends VertoBaseComponent {
         height: '3px',
         position: 'absolute',
         backgroundColor: '#009688',
-        transition : 'left 1s',
+        transition : this.state.onFocus ? 'left 1s' : 'left 0s',
         left: this.state.onFocus ?  '0%' : '50%',
         right: '50%'
       },
@@ -76,7 +73,7 @@ class Input extends VertoBaseComponent {
         //width: '0px',
         position: 'absolute',
         backgroundColor: '#009688',
-        transition : 'right 1s',
+        transition : this.state.onFocus ? 'right 1s' : 'right 0s',
         right: this.state.onFocus ?  '0%' : '50%',
         left: '50%'
       }
@@ -86,21 +83,7 @@ class Input extends VertoBaseComponent {
     return (styles[styleName]);
   }
 
-  setFocusState() {
-    this.setState({...this.state,'onFocus': true});
-    console.log('%%%%%%%%%%%%%%%%%%%%%%', this.state.onFocus);
-  }
-
-
-
   render(){
-
-    if(this.state.onFocus) {
-      //console.log('set them styles baby');
-
-    } else {
-      //console.log('dont set them styles ho');
-    }
 
     return (
       <div style={{...this.getStyle('fieldset')}}>
@@ -137,4 +120,4 @@ class Input extends VertoBaseComponent {
 }
 
 Input.propTypes = propTypes;
-export default Radium(Input);
+export default injectIntl(Radium(Input));
