@@ -2,7 +2,8 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import Modal from 'react-modal';
 import App from './app';
-
+import ContributorsListItem from './contributorsListItem';
+import ContributorsData from '../config/contributorsData.js';
 
 const propTypes = {
   compStyle : React.PropTypes.object
@@ -41,7 +42,7 @@ class Contributors extends VertoBaseComponent{
       },
       header : {
         fontWeight: '300',
-        fontSize: '24px',
+        fontSize: '24px'
         //padding: '24px 24px 0px'
       },
       ul : {
@@ -58,23 +59,23 @@ class Contributors extends VertoBaseComponent{
 
 
   render() {
-
+    //CD.map
+    const contributorsArray = ContributorsData;
+    //this is just for testing
+    //console.log(contributorsArray[0]);
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^
     return (
       <Modal isOpen={true} onRequestClose={()=>{
         console.log('closing');
         App.toggleModal();
       }} style={{...this.getStyle('modal')}} >
-        <div style={{}}>
+        <div >
           <h1 style={{...this.getStyle('header')}}>
             Contributors
           </h1>
-          <ul>
-            <li>
-              <img src="" alt="" />
-              <h1> </h1>
-              <h3> </h3>
-            </li>
-          </ul>
+        </div>
+        <div>
+          <ContributorsListItem contr={contributorsArray[0]} index={0} />
         </div>
       </Modal> );
   }
