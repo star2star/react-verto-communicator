@@ -14,7 +14,7 @@ import {AvatarSVG, DialPadIconSVG, MicrophoneIconSVG, PauseIconSVG, MuteMicropho
 class CallProgress extends VertoBaseComponent {
     constructor(props){
         super(props);
-        this.state={startTime: Date.now(), timer: 0};
+        this.state={startTime: Date.now(), timer: 0, status: 'trying'};
         this.padLeft = (s, len, c) =>{
               var c = c || '0';
               while (s.length < len) s = c+s;
@@ -22,19 +22,23 @@ class CallProgress extends VertoBaseComponent {
             }
     }
 
+    componentWillReceiveProps(nextProp){
+      console.log('&&&&', nextProp);
+      if (this.state.status != nextProp.callData.status ) {
+        console.log('------- changing ', nextProp.callData.status );
+        this.interval = setInterval(()=>{
+          const xTimer = Date.now() - this.state.startTime;
+          //console.log('xXXXXX', xTimer);
+          const hours = Math.floor(xTimer / (1000 * 60 * 60));
+          const minutes = Math.floor( (xTimer - (hours * 1000 * 60 * 60))  / (1000* 60));
+          const seconds = Math.floor( (xTimer - (hours * 1000 * 60 * 60) - (minutes * 1000 * 60 ))  / 1000);
+          //console.log('xxxTIMER: ', xTimer, hours, minutes, seconds);
+          const yTimer = this.padLeft(hours+"", 2)+':'+ this.padLeft(minutes+"", 2)+':'+ this.padLeft(seconds+"", 2)
+          this.setState({ ...this.state, timer: yTimer });
+        }, 1000);
 
-
-    componentDidMount(){
-      this.interval = setInterval(()=>{
-        const xTimer = Date.now() - this.state.startTime;
-        //console.log('xXXXXX', xTimer);
-        const hours = Math.floor(xTimer / (1000 * 60 * 60));
-        const minutes = Math.floor( (xTimer - (hours * 1000 * 60 * 60))  / (1000* 60));
-        const seconds = Math.floor( (xTimer - (hours * 1000 * 60 * 60) - (minutes * 1000 * 60 ))  / 1000);
-        //console.log('xxxTIMER: ', xTimer, hours, minutes, seconds);
-        const yTimer = this.padLeft(hours+"", 2)+':'+ this.padLeft(minutes+"", 2)+':'+ this.padLeft(seconds+"", 2)
-        this.setState({ ...this.state, timer: yTimer });
-      }, 1000)
+        this.setState({ ...this.state, status: nextProp.callData.status, startTime: Date.now()});
+      }
     }
 
     componentWillUnmount(){
@@ -64,7 +68,7 @@ class CallProgress extends VertoBaseComponent {
               <AvatarSVG svgStyle={{width: "100px", height: "100px", fillColor: "white"}} />
               <div style={{flexDirection: "column", display:"flex"}} >
                 <div>{this.props.callData.destination}</div>
-                <div>{this.state.timer}</div>
+                <div>{this.state.status == 'active'? this.state.timer: 'Connecting ...' }</div>
               </div>
             </div>
             <div style={{backgroundColor: "green"}}>

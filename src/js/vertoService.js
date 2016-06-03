@@ -1,4 +1,4 @@
-import {doLogOut, doVertoLogin, doMakeCallError, doHungUp} from '../containers/main/action-creators';
+import {doLogOut, doVertoLogin, doMakeCallError, doHungUp, doingMakeCall} from '../containers/main/action-creators';
 import VideoConstants from './VideoConstants';
 import md5 from 'md5';
 
@@ -96,7 +96,7 @@ class VertoService {
 
           switch (d.state) {
               case $.verto.enum.state.ringing:
-                  // console.log('ringing ... onDialogState display', d, arguments);
+                  console.log('^^^^^^ringing ... onDialogState display', d, arguments);
 
                   xInstance._data._activeCalls[d.callID] = d;
 
@@ -120,18 +120,19 @@ class VertoService {
               //jes TODO tell it is ringing
               //display("Calling: " + d.cidString());
               //goto_page("incall");
-              //console.log('trying .. calling', d);
+              console.log('^^^^^^trying .. calling', d);
+              _dispatch(doingMakeCall('trying', d.params.destination_number, d.callID));
               break;
 
           case $.verto.enum.state.early:
-              //console.log('early:', d);
+              console.log('^^^^^^early:', d);
               break;
 
           case $.verto.enum.state.active:
               //jes TODO tell them we are now talking
               //display("Talking to: " + d.cidString());
               //goto_page("incall");
-              //console.log('active ... answered:', d);
+              console.log('^^^^^active ...:', d);
               d.params.isHeld = false;
               // ta- added to init isMuted attribute
               d.params.isMuted = false;
@@ -146,6 +147,7 @@ class VertoService {
               } else {
               	//TODO
                 //Processor.starphone('answered', d.params);
+                _dispatch(doingMakeCall('active', d.params.destination_number, d.callID));
               }
 
               break;
@@ -154,7 +156,7 @@ class VertoService {
               //jes TODO tell we are hanging up
               //$("#main_info").html("Call ended with cause: " + d.cause);
               //goto_page("main");
-              console.log('hangup event', d);
+              console.log('^^^^^^^^^hangup event', d);
               if (xInstance._data._activeCalls[d.callID]) {
                   delete xInstance._data._activeCalls[d.callID];
               } else {
@@ -167,7 +169,7 @@ class VertoService {
               //$("#hangup_cause").html("");
               //clearConfMan();
               //jes TODO remove from activeCalls
-              console.log('destroy event', d);
+              console.log('^^^^^^^^^^destroy event', d);
 
 
 
@@ -186,7 +188,7 @@ class VertoService {
               break;
 
           case $.verto.enum.state.requesting:
-              console.log('REQUESTING ....', d);
+              console.log('^^^^^^^REQUESTING ....', d);
               xInstance._data._activeCalls[d.callID] = d;
               //jes tom does not want it
               //TODO
@@ -195,7 +197,7 @@ class VertoService {
 
           default:
               //display("");
-              console.log('default state not handled:', d.state, d);
+              console.error('^^^^^^^default state not handled:', d.state, d);
               break;
           }
       },
@@ -260,13 +262,13 @@ class VertoService {
 
 
     _verto.verto =v;
-      console.log('>>>>>', _verto.verto, this._data);
+    //console.log('>>>>>', _verto.verto, this._data);
   }
 
 
   getOptions(data) {
     const data1 = this._data;
-    console.log('>>>>> _DATA', this._data);
+    //console.log('>>>>> _DATA', this._data);
     return {
         login: data.user + '@' + data.hostname,
         passwd: data.password,
@@ -302,14 +304,15 @@ class VertoService {
     }
   }
 
-  makeCall(destination, settings) {
-    console.log('calling desitnation', destination);
+  makeCall(dispatch, destination, settings) {
+    //console.log('calling desitnation', destination);
+    _dispatch = dispatch;
     if (!_verto.verto) {
       const message = "not connected";
       return _dispatch(doMakeCallError({destination, message }));
     }
     // ok make a call
-    console.log('DATA & VERTO:', this._data, settings.settings, _verto.verto, md5(_verto.verto.options.loginParams.email));
+    //console.log('DATA & VERTO:', this._data, settings.settings, _verto.verto, md5(_verto.verto.options.loginParams.email));
     const phoneObject = {
       destination_number: destination,
       caller_id_name: _verto.verto.options.loginParams.name,
@@ -330,10 +333,10 @@ class VertoService {
       }
     };
 
-    console.log('------', phoneObject);
+    //console.log('------', phoneObject);
     const ncDialog = _verto.verto.newCall(phoneObject);
 
-    console.log('*****', ncDialog);
+    //console.log('*****', ncDialog);
     return ncDialog.callID;
   }
 
@@ -384,11 +387,11 @@ class VertoService {
         data.videoQuality = VertoService.updateResolutions(resolutions['validRes']);
 
         // videoQuality.length = videoQuality.length - removed;
-        console.log("******* VQ length 2: " + data.videoQuality.length);
+        //console.log("******* VQ length 2: " + data.videoQuality.length);
 
 
         data.vidQual = (data.videoQuality.length > 0) ? data.videoQuality[data.videoQuality.length - 1] : null;
-        console.debug('vidQual', data.vidQual);
+        //console.debug('vidQual', data.vidQual);
 
         v.videoParams({
           minWidth: w,

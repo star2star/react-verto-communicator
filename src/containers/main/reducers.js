@@ -43,7 +43,7 @@ const auth = (state, action)=>{
     case 'RESOLUTION_FAILED':
       return { ...state, showPage: 'resolution_failed'  };
     case 'CALLING':
-      return { ...state, showPage: 'call_inprogress', destination: action.data };
+      return { ...state, showPage: 'call_inprogress', callInfo: action.data };
     case 'CALLING_ERROR':
       const oReturn =  { ...state, showPage: 'loggedIn', error: action.data };
       // remove destination

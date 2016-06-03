@@ -99,7 +99,7 @@ class Main extends VertoBaseComponent {
       case 'call_inprogress':
         loggedInfo = (
           <div>
-            <CallProgress callData={this.props.auth.destination}
+            <CallProgress callData={this.props.auth.callInfo}
               cbHangup={(callId)=>{
                 this.props.dispatch(doHangUp(callId));
               }}

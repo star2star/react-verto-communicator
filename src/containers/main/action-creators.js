@@ -184,8 +184,8 @@ const doSubmitLogOut = () =>{
 const doMakeCall = (aPhoneNumber, appSettings) => {
   return dispatch => {
 
-    const callID = VertoService.getInstance().makeCall(aPhoneNumber, appSettings);
-    dispatch(doingMakeCall(aPhoneNumber, callID));
+    const callID = VertoService.getInstance().makeCall(dispatch, aPhoneNumber, appSettings);
+    dispatch(doingMakeCall('trying', aPhoneNumber, callID));
   };
 };
 
@@ -206,10 +206,11 @@ const doMakeCallError = (aErrorObject) =>{
     "data": aErrorObject
   }
 }
-const doingMakeCall = (aPhoneNumber, callID) => {
+const doingMakeCall = (status, dest, callId) => {
+  //console.log('doingMakeCall', dialog);
   return {
     "type": "CALLING",
-    "data": {destination: aPhoneNumber, callId: callID}
+    "data": {status: status, destination: dest, callId: callId}
   }
 };
 
@@ -223,4 +224,4 @@ const doUpdateSettings = (aData) => {
 export { doValidation, doBrowserCheck,
   doSubmitLogin, doShowLogin, doVertoLogin, doSubmitLogOut, doLogOut,
   doMakeCall, doMakeCallError,
-  doHungUp, doHangUp };
+  doingMakeCall, doHungUp, doHangUp };
