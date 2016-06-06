@@ -950,6 +950,21 @@ class VideoModeIconSVG extends React.Component {
 }
 
 
+// Verto Logo
+
+class VertoLogoSVG extends React.Component {
+
+	render() {
+		return (
+			<ContainerIconSVG svgStyle={this.props.svgStyle}>
+				<title>{this.props.title}</title>
+				<desc>{this.props.description}</desc>
+				<path d="M12,2.5 C15.954,2.5 19.369,4.626 20.968,7.703 C22.143,8.251 23,9.968 23,12 C23,14.475 21.729,16.481 20.161,16.481 C19.877,16.481 19.603,16.415 19.344,16.293 C18.259,19.33 15.38,21.5 12,21.5 C8.62,21.5 5.741,19.33 4.656,16.293 C4.397,16.415 4.123,16.481 3.839,16.481 C2.271,16.481 1,14.475 1,12 C1,9.968 1.857,8.251 3.032,7.703 C4.631,4.626 8.046,2.5 12,2.5 z M12,6.802 C9.256,6.802 7.032,9.851 7.032,13.613 C7.032,17.375 9.256,20.425 12,20.425 C14.744,20.425 16.968,17.375 16.968,13.613 C16.968,9.851 14.744,6.802 12,6.802 z M12.006,4.2 C9.073,4.2 6.46,5.556 4.77,7.67 C5.17,7.888 5.53,8.243 5.827,8.7 C7.255,6.835 9.492,5.634 12.006,5.634 C14.52,5.634 16.757,6.664 18.185,8.529 C18.482,8.072 18.841,7.888 19.242,7.67 C17.552,5.556 14.939,4.2 12.006,4.2 z"></path>
+			</ContainerIconSVG>
+		);
+	}
+}
+
 export {
 NotificationsNoneIconSVG,
 NotificationsIconSVG,
@@ -1009,7 +1024,8 @@ VolumeDownIconSVG,
 KickIconSVG,
 PresenterIconSVG,
 SnapshotIconSVG,
-VideoModeIconSVG
+VideoModeIconSVG,
+VertoLogoSVG
 };
 
 

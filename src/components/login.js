@@ -96,12 +96,14 @@ class Login extends VertoBaseComponent{
       moreSettings = (
         <form>
           <Input
+              tabindex="0"
               label={formatMessage({"id":"USER", "defaultMessage":"User"})}
               placeholder= {formatMessage({"id":"USER", "defaultMessage":"User"})+" i.e. 1008"}
               cbChanging={this.changingInput.bind(this)}
               value={this.state.settings.user}
           />
           <Input
+              tabindex="0"
               type="password"
               label={formatMessage({"id":"PASSWORD", "defaultMessage":"Password"})}
               placeholder={formatMessage({"id":"YOUR_PASSWORD", "defaultMessage":"Your Password"})+" i.e. 1234"}
@@ -109,18 +111,21 @@ class Login extends VertoBaseComponent{
               value={this.state.settings.password}
           />
           <Input
+              tabindex="0"
               label={formatMessage({"id":"CALLER_ID", "defaultMessage":"Caller Id"})}
               placeholder={formatMessage({"id":"CALLER_ID", "defaultMessage":"Caller Id"})}
               cbChanging={this.changingInput.bind(this)}
               value={this.state.settings.callerid}
           />
           <Input
+              tabindex="0"
               label={formatMessage({"id":"HOSTNAME", "defaultMessage":"Hostname"})}
               placeholder={formatMessage({"id":"HOSTNAME", "defaultMessage":"Hostname"})}
               cbChanging={this.changingInput.bind(this)}
               value={this.state.settings.hostname}
           />
           <Input
+              tabindex="0"
               label={formatMessage({"id":"WEBSOCKET_URL", "defaultMessage":"Websocket URL"})}
               placeholder={formatMessage({"id":"WEBSOCKET_URL", "defaultMessage":"Websocket URL"})}
               cbChanging={this.changingInput.bind(this)}

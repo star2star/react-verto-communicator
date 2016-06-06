@@ -59,6 +59,8 @@ const auth = (state, action)=>{
       return oReturn;
     case "INCOMING_CALL":
       return { ...state, incomingCall: action.data };
+    case "CONFERENCE_DATA":
+      return { ...state, conferenceCall: {users: action.data } };
     case 'CALL_HUNG_UP':
       if (state.callInfo){
         // check to see if it is the current call
@@ -82,7 +84,7 @@ const auth = (state, action)=>{
         }
       }
 
-      console.log('aaaaaaahhhhhh bbbbaaadddd', action.data);
+      //console.log('aaaaaaahhhhhh bbbbaaadddd', action.data);
       return state;
 
 

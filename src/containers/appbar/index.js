@@ -173,25 +173,28 @@ class AppBar extends VertoBaseComponent {
     this.setState({ ...this.state, showSettings: displaySettings });
   }
 
-  // getSettingsMenu(){
-  //   let rSettings;
-  //
-  //   if (this.state.showSettings) {
-  //     rSettings = (
-  //       <div style={this.getStyle('settingsStyles')}>
-  //         <Settings />
-  //       </div>
-  //     );
-  //   }
-  //   //console.log('aaaa', rSettings, this.state.showSettings );
-  //
-  //   return rSettings;
-  // }
+  getSettingsMenu(){
+    let rSettings;
+
+    if (this.state.showSettings) {
+      rSettings = (
+        <div style={this.getStyle('settingsStyles')}>
+            {settingsContainer}
+        </div>
+      );
+    }
+    //console.log('aaaa', rSettings, this.state.showSettings );
+
+    return rSettings;
+  }
   render() {
     //console.log('#### window theme style', window.theme);
     //console.log('this.props.settings', this.props.settings);
     //console.log('this.props.bandwidthInfo', this.props.bandwidthInfo);
+<<<<<<< HEAD
     //console.log("%%%%%%%%%%%%%%%%%%%%%%%%", this.props.contributorsData);
+=======
+>>>>>>> 74cf17b9ad7c2f3ef9a9b5c390738f94c0d6a096
     const { formatMessage } = this.props.intl;
 
     const appName = WhiteLabel.get('appName');
@@ -237,6 +240,7 @@ class AppBar extends VertoBaseComponent {
     // settings here
     //TODO define settings style for alt menu orientation
     // const settingsMenu = this.getSettingsMenu();
+    //const settingsContainer = this.buildSettingsContainer();
 
     return (
       <div style={{position: "absolute", left: "0px", right: "0px", top: "0px"}}>
@@ -297,6 +301,6 @@ export default connect((state)=>{
     settings: state.app.settings,
     bandwidthInfo: state.app.bandwidthInfo,
     vcStatus: state.auth.vcStatus,
-    contributorsData: state.app.settings.contributors
+    contributorsData: state.app.contributors
   });
 })(injectIntl(Radium(AppBar)));

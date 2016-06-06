@@ -1,23 +1,29 @@
+"use strict";
+
 import md5 from 'md5';
 import contribData from '../config/contributorsData';
 
+let _instance;
+
 class ContributorService {
   constructor(){
-    //console.log('building CONTRIBUTOR SERVICE: <<<<<<<<<<<<<<<<');
-
-    this.contibutorsData = contribData.map((contrib)=>{
-      const avatar = "http://gravatar.com/avatar/" + md5(contrib.email) + ".png?s=75";
-      let newContrib = {};
-      newContrib = {...contrib, avatar: avatar};
-
-      return newContrib;
+    this.contributorsData = contribData.map((contrib)=>{
+        return {...contrib, avatar: "http://gravatar.com/avatar/" + md5(contrib.email) + ".png?s=75"};
     });
 
-    ContributorService.getContributors = ContributorService.getContributors.bind(this);
+    //ContributorService.getContributors = ContributorService.getContributors.bind(this);
   }
 
-  static getContributors() {
-    return this.contibutorsData;
+  getContributors(){
+    return this.contributorsData;
+  }
+
+  static getInstance() {
+    if (!_instance) {
+      _instance = new ContributorService();
+    }
+
+    return _instance;
   }
 
 }
