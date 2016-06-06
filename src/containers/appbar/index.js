@@ -191,10 +191,6 @@ class AppBar extends VertoBaseComponent {
     //console.log('#### window theme style', window.theme);
     //console.log('this.props.settings', this.props.settings);
     //console.log('this.props.bandwidthInfo', this.props.bandwidthInfo);
-<<<<<<< HEAD
-    //console.log("%%%%%%%%%%%%%%%%%%%%%%%%", this.props.contributorsData);
-=======
->>>>>>> 74cf17b9ad7c2f3ef9a9b5c390738f94c0d6a096
     const { formatMessage } = this.props.intl;
 
     const appName = WhiteLabel.get('appName');
