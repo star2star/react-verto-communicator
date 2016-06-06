@@ -175,7 +175,7 @@ class AppBar extends VertoBaseComponent {
     this.setState({ ...this.state, showSettings: displaySettings });
   }
 
-  buildSettingsContainer() {
+  // buildSettingsContainer() {
   //   // console.log('xxxxxxxxxxxx', this.props.settingsData);
   //   return (
   //         <div
@@ -342,7 +342,7 @@ class AppBar extends VertoBaseComponent {
   //   //console.log('aaaa', rSettings, this.state.showSettings );
   //
   //   return rSettings;
-  }
+  // }
   render() {
     //console.log('#### window theme style', window.theme);
     //console.log('this.props.settings', this.props.settings);
@@ -392,7 +392,7 @@ class AppBar extends VertoBaseComponent {
     // settings here
     //TODO define settings style for alt menu orientation
     // const settingsMenu = this.getSettingsMenu();
-    const settingsContainer = this.buildSettingsContainer();
+    // const settingsContainer = this.buildSettingsContainer();
 
     return (
       <div style={{position: "absolute", left: "0px", right: "0px", top: "0px"}}>
