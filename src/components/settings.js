@@ -2,6 +2,7 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent.js';
 import { FormattedMessage } from 'react-intl';
 import SettingsMenuSelect from './settingsMenuSelect.js';
+import SettingsCheckbox from './settingsCheckbox.js';
 import {
 SettingsIconSVG,
 CaretUpIconSVG,
@@ -178,6 +179,10 @@ class Settings extends VertoBaseComponent {
                   />
               </div>
               <div className="column3" style={{}}>
+                <SettingsCheckbox
+                    cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                    label="Automatically blah, blah..."
+                  />
                 <SettingsMenuSelect
                     cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
                     options={this.props.settingsData.languages ? this.props.settingsData.languages : []}
