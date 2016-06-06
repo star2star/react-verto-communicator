@@ -64,6 +64,7 @@
       "<rootDir>/node_modules/react-addons-test-utils",
       "<rootDir>/node_modules/enzyme",
       "<rootDir>/node_modules/sinon",
+      "<rootDir>/node_modules/radium",
       "<rootDir>/src/components"
     ]
   },
