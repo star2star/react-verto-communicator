@@ -5,7 +5,6 @@ const app = (state, action)=>{
 
   if (typeof state === 'undefined') {
     // Create ContributorService object
-    new ContributorService();
 
     //TODO ta Figure out what the default store will look like... it won't
     // be a direct copy of the 'local storage' that Verto originally used...
@@ -47,10 +46,9 @@ const app = (state, action)=>{
                 outgoingBandwidth: 'default',
                 incomingBandwidth: 'default',
                 bandwidth: VideoConstants.BAND_WIDTH,
-                bestFrameRate: VideoConstants.FRAME_RATE,
-                contributors: ContributorService.getContributors()
+                bestFrameRate: VideoConstants.FRAME_RATE
               },
-
+              contributors: ContributorService.getInstance().getContributors(),
               bandwidthInfo: {
                 outgoingBandwidth: undefined,
                 incomingBandwidth: undefined,
