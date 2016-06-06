@@ -62,7 +62,7 @@ class Contributors extends VertoBaseComponent{
   render() {
     console.log("^^^^^^^^^^^^^^^^^^", this.props.contributorsData);
     let contList = (this.props.contributorsData).map((cont,index) => {
-
+      return(<ContributorsListItem key={index} name={cont.name} email={cont.email} avatar={cont.avatar} />);
     });
     return (
       <Modal isOpen={true} onRequestClose={()=>{
@@ -71,12 +71,12 @@ class Contributors extends VertoBaseComponent{
       }} style={{...this.getStyle('modal')}} >
         <div >
           <h1 style={{...this.getStyle('header')}}>
-            Contributors
+              Contributors
           </h1>
-        </div>
-        <div>
-          <ContributorsListItem />
-        </div>
+          </div>
+          <div>
+            {contList}
+          </div>
       </Modal> );
   }
 }

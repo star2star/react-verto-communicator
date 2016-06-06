@@ -85,6 +85,26 @@ class Settings extends VertoBaseComponent {
         display: 'flex',
         flexDirection: 'column'
       },
+      column1: {
+        display: 'flex',
+        flexDirection: 'column'
+      },
+      column2: {
+        marginTop:'10px',
+        display: 'flex',
+        flexDirection: 'column'
+      },
+      column3: {
+        marginTop:'10px',
+        display: 'flex',
+        flexDirection: 'column'
+      },
+      headerLabel: {
+        fontWeight: 'bold',
+        marginTop:'10px',
+        marginBottom: '5px',
+        paddingLeft:'5px'
+      },
       button: {
         padding: '8px 30px',
         border: '0px',
@@ -130,7 +150,7 @@ class Settings extends VertoBaseComponent {
     //console.log('xxxxxxxxxxxx', this.props.settingsData);
     return (
           <div className="menuContainer" style={{...this.getStyle('menu')}}>
-            <div className="column1" style={{}}>
+            <div className="column1" style={{...this.getStyle('column1')}}>
               <SettingsMenuSelect
                   cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
                   options={this.props.settingsData.videoDevices ? this.props.settingsData.videoDevices : []}
@@ -170,25 +190,64 @@ class Settings extends VertoBaseComponent {
                       </button>
                     </div>
               </div>
-              <div className="column2" style={{}}>
+              <div className="column2" style={{...this.getStyle('column2')}}>
+                <span style={{...this.getStyle('headerLabel')}}>
+                  <FormattedMessage id="GENERAL_SETTINGS" defaultMessage= "General settings:"/>
+                  </span>
+              <SettingsCheckbox
+                  cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                  label="Use Video"
+                />
+                <SettingsCheckbox
+                    cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                    label="Stereo Audio"
+                  />
+                  <SettingsCheckbox
+                      cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                      label="Use STUN"
+                    />
+                    <SettingsCheckbox
+                        cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                        label="Scale Remote Video to Match Camera Resolution"
+                      />
+                      <SettingsCheckbox
+                          cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                          label="Ask Before Recovering a Call"
+                        />
+
                 <SettingsMenuSelect
                     cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
                     options={this.props.settingsData.languages ? this.props.settingsData.languages : []}
                     label="Language:"
                     selectedOption={{id:"language", label:this.props.settingsData.language && this.props.settingsData.language.label}}
                   />
+                <span style={{...this.getStyle('headerLabel')}}>
+                  <FormattedMessage id="AUDIO_SETTINGS" defaultMessage= "Audio settings:"/>
+                  </span>
+                  <SettingsCheckbox
+                      cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                      label="Echo Cancellation"
+                    />
+                    <SettingsCheckbox
+                        cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                        label="Noise Suppression"
+                      />
+                      <SettingsCheckbox
+                          cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                          label="Highpass Filter"
+                        />
               </div>
-              <div className="column3" style={{}}>
+              <div className="column3" style={{...this.getStyle('column3')}}>
+                  <span style={{...this.getStyle('headerLabel')}}><FormattedMessage id="VIDEO_SETTINGS" defaultMessage= "Video settings:"/></span>
                 <SettingsCheckbox
                     cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
-                    label="Automatically blah, blah..."
+                    label="Automatically determine speed and resolution settings"
                   />
-                <SettingsMenuSelect
-                    cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
-                    options={this.props.settingsData.languages ? this.props.settingsData.languages : []}
-                    label="Video Quality:"
-                    selectedOption={{id:"", label:this.props.settingsData.language && this.props.settingsData.language.label}}
-                  />
+                  <SettingsCheckbox
+                      cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                      label="Recheck Bandwidth Before Each Outgoing Call"
+                    />
+
                   <div className="buttonContainer" style={{...this.getStyle('buttonContainer')}}>
                     <button style={{...this.getStyle('button')}} onClick={this.submitSpeedCheck.bind(this)}>
                       <FormattedMessage id="CHECK_NETWORK_SPEED" defaultMessage="Check Network Speed"/>
