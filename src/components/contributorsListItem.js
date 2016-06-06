@@ -4,7 +4,9 @@ import VertoBaseComponent from './vertobasecomponent';
 
 const propTypes = {
   compStyle: React.PropTypes.object,
-  contributorsObject: React.PropTypes.object
+  name: React.PropTypes.string,
+  email: React.PropTypes.string,
+  avatar: React.PropTypes.string
 };
 
 class ContributorsList extends VertoBaseComponent{
@@ -16,11 +18,11 @@ class ContributorsList extends VertoBaseComponent{
   getCompStyle() {
     return this.props.compStyle;
   }
+  
   render() {
     return (
       <div>
-        <div> REEEE </div>
-        <div> REEEE </div>
+        <img src={this.props.avatar} />
       </div>
     );
   }

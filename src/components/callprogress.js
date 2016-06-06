@@ -1,6 +1,6 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
-import {AvatarSVG, DialPadIconSVG, MicrophoneIconSVG, PauseIconSVG, MuteMicrophoneIconSVG, PhoneIconSVG } from './svgIcons';
+import {AvatarSVG, DialPadIconSVG, MicrophoneIconSVG, PauseIconSVG, MuteMicrophoneIconSVG, PhoneIconSVG, VideoIconSVG } from './svgIcons';
 
  const propTypes = {
    callData : React.PropTypes.object.isRequired,
@@ -76,9 +76,15 @@ class CallProgress extends VertoBaseComponent {
 
               <span onClick={()=>{
                 //console.log('mute Microphone clicked: ', this.props);
-                this.props.cbMute(this.props.callData.callId);
+                this.props.cbMute(this.props.callData.callId, 'mic');
               }}>
                 <MicrophoneIconSVG svgStyle={{width: "20px", height: "20px", fillColor: "white"}} />
+              </span>
+              <span onClick={()=>{
+                //console.log('mute Microphone clicked: ', this.props);
+                this.props.cbMute(this.props.callData.callId, 'video');
+              }}>
+                <VideoIconSVG svgStyle={{width: "20px", height: "20px", fillColor: "white"}} />
               </span>
               <span onClick={()=>{
                 //console.log('mute Microphone clicked: ', this.props);
