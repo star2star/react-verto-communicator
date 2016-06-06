@@ -297,6 +297,6 @@ export default connect((state)=>{
     settings: state.app.settings,
     bandwidthInfo: state.app.bandwidthInfo,
     vcStatus: state.auth.vcStatus,
-    contributorsData: state.app.settings.contributors
+    contributorsData: state.app.contributors
   });
 })(injectIntl(Radium(AppBar)));
