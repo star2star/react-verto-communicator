@@ -1,10 +1,12 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
-//import SvgIcons from './svgIcons';
-import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-intl';
 
 const propTypes = {
-  compStyle : React.PropTypes.object
+  compStyle : React.PropTypes.object,
+  label : React.PropTypes.string,
+  type : React.PropTypes.string,
+  placeholder : React.PropTypes.string,
+  value : React.PropTypes.string
 };
 
 class Input extends VertoBaseComponent {
@@ -94,11 +96,11 @@ class Input extends VertoBaseComponent {
             style={{...this.getStyle('inputArea') }}
             onBlur={()=>{
               this.setState({...this.state, 'onFocus': false });
-              console.log('LOSING FOCUS', this.state.onFocus);
+              //console.log('LOSING FOCUS', this.state.onFocus);
             }}
             onFocus={()=>{
               this.setState({...this.state,'onFocus': true});
-              console.log('GETTING FOCUSED', this.state.onFocus);
+              //console.log('GETTING FOCUSED', this.state.onFocus);
             }}
             onChange={
             (e) =>{
@@ -118,4 +120,4 @@ class Input extends VertoBaseComponent {
 }
 
 Input.propTypes = propTypes;
-export default injectIntl(Input);
+export default Input;
