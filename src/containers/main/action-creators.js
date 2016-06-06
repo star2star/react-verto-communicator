@@ -216,6 +216,11 @@ const doMuteMic = (callId) => {
   }
 }
 
+const doMuteVideo = (callId) => {
+  return dispatch =>{
+    VertoService.getInstance().muteVideo(callId);
+  }
+}
 const doConferenceData = (confData) =>{
   return {
     "type": "CONFERENCE_DATA",
@@ -258,4 +263,4 @@ const doUpdateSettings = (aData) => {
 export { doValidation, doBrowserCheck,
   doSubmitLogin, doShowLogin, doVertoLogin, doSubmitLogOut, doLogOut,
   doMakeCall, doMakeCallError, doIncomingCall,
-  doingMakeCall, doHungUp, doHangUp, doAnswer, doMuteMic, doConferenceData, doHold };
+  doingMakeCall, doHungUp, doHangUp, doAnswer, doMuteMic, doConferenceData, doHold, doMuteVideo };

@@ -400,6 +400,24 @@ class VertoService {
 
   muteMic(callerId){
   		this.sendDtmf(callerId, '0');
+      // if (_verto._data._activeCalls[callerId]) {
+      //   console.log('****', _verto._data._activeCalls[callerId].setMute('toggle'));
+      //   //_verto._data._activeCalls[callerId].toggleHold();
+      // } else {
+      //   console.log('mute mic    NOT FOUND----------');
+      // }
+  }
+
+  muteVideo(callerId) {
+    console.log('toggle MUTE VIDEO', callerId);
+    if (_verto._data._activeCalls[callerId]) {
+      console.log('****', _verto._data._activeCalls[callerId].setVideoMute('toggle'));
+      //_verto._data._activeCalls[callerId].toggleHold();
+    } else {
+      console.log('hold    NOT FOUND----------');
+    }
+    //dialog.rtc.getVideoMute();
+    //this.sendDtmf(callerId, '*0');
   }
 
   hold(callerId){
