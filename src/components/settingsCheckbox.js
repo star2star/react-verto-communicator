@@ -29,8 +29,12 @@ handleSelect() {
     const styles = {
       container: {
         paddingTop: '10px',
-        paddingBottom: '5px',
-        borderBottom: '1px solid #FFF'
+        paddingBottom: '5px'
+        // borderBottom: '1px solid #FFF'
+      },
+      label: {
+        fontSize:'.85rem',
+        paddingLeft: '10px'
       }
     };
 
@@ -38,9 +42,7 @@ handleSelect() {
   }
 
   render() {
-    // const options=this.props.options.map((option, index)=>{
-    //   return (<option key={index} value={option}> {option.label} </option>);
-    // });
+
     return (
       <div style={{...this.getStyle('container')}}>
       <input
@@ -48,7 +50,7 @@ handleSelect() {
           checked={this.state.isChecked}
           onChange={this.handleSelect}
     />
-        {this.props.label}
+        <span style={{...this.getStyle('label')}}>{this.props.label}</span>
       </div>
     );
   }
