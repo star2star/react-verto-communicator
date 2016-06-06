@@ -419,7 +419,7 @@ class VertoService {
     //   console.log('hold    NOT FOUND----------');
     // }
     //dialog.rtc.getVideoMute();
-    this.sendDtmf(callerId, '#');
+    this.sendDtmf(callerId, "*0");
   }
 
   hold(callerId){
