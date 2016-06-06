@@ -389,12 +389,25 @@ class VertoService {
     //console.log('>>>>>', _verto.verto, this._data);
   }
 
+  sendDtmf(callerId, key) {
+    //console.log('toggle MUTE', callerId);
+    if (_verto._data._activeCalls[callerId]) {
+      _verto._data._activeCalls[callerId].dtmf('0');
+    } else {
+      console.log('DTMF    NOT FOUND----------');
+    }
+  }
+
   muteMic(callerId){
-  		//console.log('toggle MUTE', callerId);
+  		this.sendDtmf(callerId, '0');
+  }
+
+  hold(callerId){
+      console.log('toggle HOLD', callerId);
       if (_verto._data._activeCalls[callerId]) {
-        _verto._data._activeCalls[callerId].dtmf('0');
+        _verto._data._activeCalls[callerId].toggleHold();
       } else {
-        console.log('muted    NOT FOUND----------');
+        console.log('hold    NOT FOUND----------');
       }
   }
 

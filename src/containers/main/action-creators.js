@@ -205,6 +205,11 @@ const doHangUp = (callId) => {
     VertoService.getInstance().hangup(callId);
   }
 }
+const doHold = (callId) => {
+  return dispatch =>{
+    VertoService.getInstance().hold(callId);
+  }
+}
 const doMuteMic = (callId) => {
   return dispatch =>{
     VertoService.getInstance().muteMic(callId);
@@ -253,4 +258,4 @@ const doUpdateSettings = (aData) => {
 export { doValidation, doBrowserCheck,
   doSubmitLogin, doShowLogin, doVertoLogin, doSubmitLogOut, doLogOut,
   doMakeCall, doMakeCallError, doIncomingCall,
-  doingMakeCall, doHungUp, doHangUp, doAnswer, doMuteMic, doConferenceData };
+  doingMakeCall, doHungUp, doHangUp, doAnswer, doMuteMic, doConferenceData, doHold };
