@@ -57,13 +57,14 @@ class Contributors extends VertoBaseComponent{
     return (styles[styleName]);
   }
 
-
+//cont.avatar
 
   render() {
     console.log("^^^^^^^^^^^^^^^^^^", this.props.contributorsData);
     let contList = (this.props.contributorsData).map((cont,index) => {
-
+      return(<ContributorsListItem key={index} name={cont.name} email={cont.email} avatar={cont.avatar} />);
     });
+    console.log({contList});
     return (
       <Modal isOpen={true} onRequestClose={()=>{
         console.log('closing');
@@ -74,9 +75,9 @@ class Contributors extends VertoBaseComponent{
             Contributors
           </h1>
         </div>
-        <div>
-          <ContributorsListItem />
-        </div>
+
+      <div> {contList} </div>
+
       </Modal> );
   }
 }
