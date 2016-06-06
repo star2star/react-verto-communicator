@@ -181,8 +181,8 @@ class Settings extends VertoBaseComponent {
                 <SettingsMenuSelect
                     cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
                     options={this.props.settingsData.languages ? this.props.settingsData.languages : []}
-                    label="Filler Test Menu:"
-                    selectedOption={{id:"language", label:this.props.settingsData.language && this.props.settingsData.language.label}}
+                    label="Video Qualiyt:"
+                    selectedOption={{id:"", label:this.props.settingsData.language && this.props.settingsData.language.label}}
                   />
                   <div className="buttonContainer" style={{...this.getStyle('buttonContainer')}}>
                     <button style={{...this.getStyle('button')}} onClick={this.submitSpeedCheck.bind(this)}>
