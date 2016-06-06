@@ -4,7 +4,7 @@ import VertoBaseComponent from '../../components/vertobasecomponent';
 import { connect } from 'react-redux';
 //import ReactTooltip from 'react-tooltip';
 import VCStatus from '../../components/vcstatus';
-import { doSubmitLogin, doSubmitLogOut, doMakeCall, doHangUp, doAnswer, doMuteMic, doHold } from './action-creators';
+import { doSubmitLogin, doSubmitLogOut, doMakeCall, doHangUp, doAnswer, doMuteMic, doHold, doMuteVideo } from './action-creators';
 import Splash from '../../components/splash';
 import Login from '../../components/login';
 import Dialpad from '../../components/dialpad';
@@ -117,8 +117,12 @@ class Main extends VertoBaseComponent {
               cbHangup={(callId)=>{
                 this.props.dispatch(doHangUp(callId));
               }}
-              cbMute ={(callId)=>{
-                this.props.dispatch(doMuteMic(callId));
+              cbMute ={(callId, mutedDevice='mic' )=>{
+                if (mutedDevice === 'mic'){
+                  this.props.dispatch(doMuteMic(callId));
+                } else {
+                  this.props.dispatch(doMuteVideo(callId));
+                }
               }}
               cbDTMF={(callId, key)=>{
 
