@@ -1,4 +1,4 @@
-import {doLogOut, doVertoLogin, doMakeCallError, doHungUp, doingMakeCall, doIncomingCall } from '../containers/main/action-creators';
+import {doLogOut, doVertoLogin, doMakeCallError, doHungUp, doingMakeCall, doIncomingCall, doConferenceData } from '../containers/main/action-creators';
 import VideoConstants from './VideoConstants';
 import md5 from 'md5';
 
@@ -246,7 +246,7 @@ class VertoService {
   startConference(v, dialog, pvtData) {
     //$rootScope.$emit('call.video', 'video');
     //$rootScope.$emit('call.conference', 'conference');
-    console.log('^^^^^ startConference: ', v, dialog, pvtData);
+    //console.log('^^^^^ startConference: ', v, dialog, pvtData);
     this._data.chattingWith = pvtData.chatID;
     this._data.confRole = pvtData.role;
     this._data.conferenceMemberID = pvtData.conferenceMemberID;
@@ -299,7 +299,7 @@ class VertoService {
     });
 
     if (this._data.confRole == "moderator") {
-      console.log('>>> conf.listVideoLayouts();');
+      //console.log('>>> conf.listVideoLayouts();');
       conf.listVideoLayouts();
       conf.modCommand('canvasInfo');
     }
@@ -320,38 +320,41 @@ class VertoService {
     };
 
     this._data.liveArray.onChange = (obj, args) => {
-      console.log('liveArray.onChange --- action: ' + args.action, obj, args);
+      window.foo = obj;
+      //console.log('liveArray.onChange --- action: ' + args.action, obj, args);
 
       switch (args.action) {
         case 'bootObj':
           //TODO
           //$rootScope.$emit('members.boot', args.data);
-          args.data.forEach(function(member){
-            var callId = member[0];
-            //TODO fix this
-            // var status = true; //angular.fromJson(member[1][4]);
-            // if (callId === data.call.callID) {
-            //   $rootScope.$apply(function(){
-            //     data.mutedMic = status.audio.muted;
-            //     data.mutedVideo = status.video.muted;
-            //   });
-            // }
-          });
-          break;
+          // args.data.forEach(function(member){
+          //   var callId = member[0];
+          //   //TODO fix this
+          //   // var status = true; //angular.fromJson(member[1][4]);
+          //   // if (callId === data.call.callID) {
+          //   //   $rootScope.$apply(function(){
+          //   //     data.mutedMic = status.audio.muted;
+          //   //     data.mutedVideo = status.video.muted;
+          //   //   });
+          //   // }
+          // });
+          //break;
         case 'add':
-          var member = [args.key, args.data];
+          //var member = [args.key, args.data];
           //TODO $rootScope.$emit('members.add', member);
-          break;
+          //break;
         case 'del':
-          var uuid = args.key;
+          //var uuid = args.key;
           //TODO $rootScope.$emit('members.del', uuid);
-          break;
+          //break;
         case 'clear':
           //TODO $rootScope.$emit('members.clear');
-          break;
+          //break;
         case 'modify':
-          var member = [args.key, args.data];
+          //var member = [args.key, args.data];
           //TODO $rootScope.$emit('members.update', member);
+          //break;
+          _dispatch(doConferenceData(obj.asArray()));
           break;
         default:
           console.log('NotImplemented', args.action);
@@ -363,7 +366,7 @@ class VertoService {
     //console.log('stopConference()');
     if (this._data.liveArray) {
       this._data.liveArray.destroy();
-      console.log('Has data.liveArray.');
+      //console.log('Has data.liveArray.');
       //TODO $rootScope.$emit('members.clear');
       this._data.liveArray = null;
     } else {
@@ -387,11 +390,11 @@ class VertoService {
   }
 
   muteMic(callerId){
-  		console.log('toggle MUTE', callerId);
+  		//console.log('toggle MUTE', callerId);
       if (_verto._data._activeCalls[callerId]) {
         _verto._data._activeCalls[callerId].dtmf('0');
       } else {
-        console.log('answer    NOT FOUND----------');
+        console.log('muted    NOT FOUND----------');
       }
   }
 

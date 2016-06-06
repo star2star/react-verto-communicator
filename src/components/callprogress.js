@@ -75,7 +75,7 @@ class CallProgress extends VertoBaseComponent {
               <DialPadIconSVG svgStyle={{width: "20px", height: "20px", fillColor: "white"}} />
 
               <span onClick={()=>{
-                console.log('mute Microphone clicked: ', this.props);
+                //console.log('mute Microphone clicked: ', this.props);
                 this.props.cbMute(this.props.callData.callId);
               }}>
                 <MicrophoneIconSVG svgStyle={{width: "20px", height: "20px", fillColor: "white"}} />
@@ -84,7 +84,7 @@ class CallProgress extends VertoBaseComponent {
               <PauseIconSVG svgStyle={{width: "20px", height: "20px", fillColor: "white"}} />
 
               <span onClick={()=>{
-                console.log('hangup clicked: ', this.props);
+                //console.log('hangup clicked: ', this.props);
                 this.props.cbHangup(this.props.callData.callId);
               }}>
                 <PhoneIconSVG svgStyle={{width: "20px", height: "20px", fillColor: "white"}} />
