@@ -398,6 +398,15 @@ class VertoService {
       }
   }
 
+  hold(callerId){
+      console.log('toggle HOLD', callerId);
+      if (_verto._data._activeCalls[callerId]) {
+        _verto._data._activeCalls[callerId].toggleHold();
+      } else {
+        console.log('hold    NOT FOUND----------');
+      }
+  }
+
   getOptions(data) {
     const data1 = this._data;
     //console.log('>>>>> _DATA', this._data);
