@@ -320,7 +320,7 @@ class VertoService {
     };
 
     this._data.liveArray.onChange = (obj, args) => {
-      console.log('liveArray.onChange', obj, args);
+      console.log('liveArray.onChange --- action: ' + args.action, obj, args);
 
       switch (args.action) {
         case 'bootObj':
