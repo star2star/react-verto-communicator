@@ -73,7 +73,7 @@ const doResolutionRefresh = () => {
   return dispatch => {
     dispatch(doingResolutionRefresh());
     VertoService.refreshDevices((status) => {
-      console.log('doRefresh Resolution: ', status);
+      //console.log('doRefresh Resolution: ', status);
       if (status){
         const resolutionInstanceData = VertoService.getInstanceData();
         //console.log('------^^^^^^______', resolutionInstanceData);
@@ -184,7 +184,8 @@ const doSubmitLogOut = () =>{
 // making a phone call
 const doIncomingCall = (dialog) =>{
   return dispatch => {
-    console.log('incoming call: ', dialog);
+    //console.log('incoming call: ', dialog);
+
     dispatch({
       type: "INCOMING_CALL",
       data: dialog
@@ -207,6 +208,13 @@ const doHangUp = (callId) => {
 const doMuteMic = (callId) => {
   return dispatch =>{
     VertoService.getInstance().muteMic(callId);
+  }
+}
+
+const doConferenceData = (confData) =>{
+  return {
+    "type": "CONFERENCE_DATA",
+    "data": confData
   }
 }
 
@@ -245,4 +253,4 @@ const doUpdateSettings = (aData) => {
 export { doValidation, doBrowserCheck,
   doSubmitLogin, doShowLogin, doVertoLogin, doSubmitLogOut, doLogOut,
   doMakeCall, doMakeCallError, doIncomingCall,
-  doingMakeCall, doHungUp, doHangUp, doAnswer, doMuteMic };
+  doingMakeCall, doHungUp, doHangUp, doAnswer, doMuteMic, doConferenceData };
