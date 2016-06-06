@@ -102,8 +102,8 @@ class Settings extends VertoBaseComponent {
       headerLabel: {
         fontWeight: 'bold',
         marginTop:'10px',
-        marginBottom: '5px',
-        paddingLeft:'5px'
+        marginBottom: '5px'
+        //paddingLeft:'5px'
       },
       button: {
         padding: '8px 30px',
@@ -147,10 +147,16 @@ class Settings extends VertoBaseComponent {
   }
 
   buildSettingsContainer() {
-    //console.log('xxxxxxxxxxxx', this.props.settingsData);
+    // console.log('xxxxxxxxxxxx', this.props.settingsData);
     return (
-          <div className="menuContainer" style={{...this.getStyle('menu')}}>
-            <div className="column1" style={{...this.getStyle('column1')}}>
+          <div
+              className="menuContainer"
+              style={{...this.getStyle('menu')}}
+            >
+            <div
+                className="column1"
+                style={{...this.getStyle('column1')}}
+              >
               <SettingsMenuSelect
                   cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
                   options={this.props.settingsData.videoDevices ? this.props.settingsData.videoDevices : []}
@@ -182,17 +188,35 @@ class Settings extends VertoBaseComponent {
                         selectedOption={{id:"selectedBestFrameRate", label:this.props.settingsData.selectedBestFrameRate && this.props.settingsData.selectedBestFrameRate.label}}
                       />
                     <div className="buttonContainer" style={{...this.getStyle('buttonContainer')}}>
-                      <button style={{...this.getStyle('button')}} onClick={this.submitPreview.bind(this)}>
-                        <FormattedMessage id="PREVIEW_SETTINGS" defaultMessage="Preview Settings"/>
+                      <button
+                          style={{...this.getStyle('button')}}
+                          onClick={this.submitPreview.bind(this)}
+                        >
+                        <FormattedMessage
+                            id="PREVIEW_SETTINGS"
+                            defaultMessage="Preview Settings"
+                          />
                       </button>
-                      <button style={{...this.getStyle('button')}} onClick={this.submitRefresh.bind(this)}>
-                        <FormattedMessage id="REFRESH_DEVICE_LIST" defaultMessage="Refresh Device List"/>
+                      <button
+                          style={{...this.getStyle('button')}}
+                          onClick={this.submitRefresh.bind(this)}
+                        >
+                        <FormattedMessage
+                            id="REFRESH_DEVICE_LIST"
+                            defaultMessage="Refresh Device List"
+                          />
                       </button>
                     </div>
               </div>
-              <div className="column2" style={{...this.getStyle('column2')}}>
+              <div
+                  className="column2"
+                  style={{...this.getStyle('column2')}}
+                >
                 <span style={{...this.getStyle('headerLabel')}}>
-                  <FormattedMessage id="GENERAL_SETTINGS" defaultMessage= "General settings:"/>
+                  <FormattedMessage
+                      id="GENERAL_SETTINGS"
+                      defaultMessage= "General settings:"
+                    />
                   </span>
               <SettingsCheckbox
                   cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
@@ -214,7 +238,6 @@ class Settings extends VertoBaseComponent {
                           cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
                           label="Ask Before Recovering a Call"
                         />
-
                 <SettingsMenuSelect
                     cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
                     options={this.props.settingsData.languages ? this.props.settingsData.languages : []}
@@ -222,7 +245,10 @@ class Settings extends VertoBaseComponent {
                     selectedOption={{id:"language", label:this.props.settingsData.language && this.props.settingsData.language.label}}
                   />
                 <span style={{...this.getStyle('headerLabel')}}>
-                  <FormattedMessage id="AUDIO_SETTINGS" defaultMessage= "Audio settings:"/>
+                  <FormattedMessage
+                      id="AUDIO_SETTINGS"
+                      defaultMessage= "Audio settings:"
+                    />
                   </span>
                   <SettingsCheckbox
                       cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
@@ -237,8 +263,16 @@ class Settings extends VertoBaseComponent {
                           label="Highpass Filter"
                         />
               </div>
-              <div className="column3" style={{...this.getStyle('column3')}}>
-                  <span style={{...this.getStyle('headerLabel')}}><FormattedMessage id="VIDEO_SETTINGS" defaultMessage= "Video settings:"/></span>
+              <div
+                  className="column3"
+                  style={{...this.getStyle('column3')}}
+                >
+                  <span style={{...this.getStyle('headerLabel')}}>
+                    <FormattedMessage
+                        id="VIDEO_SETTINGS"
+                        defaultMessage= "Video settings:"
+                      />
+                    </span>
                 <SettingsCheckbox
                     cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
                     label="Automatically determine speed and resolution settings"
@@ -247,10 +281,18 @@ class Settings extends VertoBaseComponent {
                       cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
                       label="Recheck Bandwidth Before Each Outgoing Call"
                     />
-
-                  <div className="buttonContainer" style={{...this.getStyle('buttonContainer')}}>
-                    <button style={{...this.getStyle('button')}} onClick={this.submitSpeedCheck.bind(this)}>
-                      <FormattedMessage id="CHECK_NETWORK_SPEED" defaultMessage="Check Network Speed"/>
+                  <div
+                      className="buttonContainer"
+                      style={{...this.getStyle('buttonContainer')}}
+                      >
+                    <button
+                        style={{...this.getStyle('button')}}
+                        onClick={this.submitSpeedCheck.bind(this)}
+                      >
+                      <FormattedMessage
+                          id="CHECK_NETWORK_SPEED"
+                          defaultMessage="Check Network Speed"
+                        />
                     </button>
                   </div>
               </div>
@@ -269,7 +311,7 @@ class Settings extends VertoBaseComponent {
                 <CaretUpIconSVG svgStyle={{...this.getStyle('caret')}} /> :
                 <CaretDownIconSVG svgStyle={{...this.getStyle('caret')}} />}
         </span>
-          {settingsContainer}
+        {settingsContainer}
       </div>
     );
   }
