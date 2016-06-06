@@ -29,11 +29,11 @@ describe('<Numberpad />', ()=>{
 
   });
 
-  // TODO: figure out why click tests aren't working
+  //TODO: figure out why click tests aren't working
   // it('Click event fires callback function', () => {
   //   const wrapper = shallow(<Numberpad cbClick={cbTest} />);
   //   //console.log(wrapper.find('NumberItem'));
-  //   //console.log(wrapper.first());
+  //   console.log(wrapper.first());
   //   wrapper.first().simulate('click');
   //   expect(cbTest.calledOnce).toEqual(true);
   //
