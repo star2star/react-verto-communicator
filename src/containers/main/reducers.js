@@ -45,7 +45,7 @@ const auth = (state, action)=>{
     case 'CALLING':
 
       const cg= { ...state, showPage: 'call_inprogress', callInfo: action.data };
-      console.log('ccccccc: ', action.data, cg);
+      //console.log('ccccccc: ', action.data, cg);
       if (cg.incomingCall && cg.incomingCall.callID == action.data.callId){
         // delete
         delete cg.incomingCall;

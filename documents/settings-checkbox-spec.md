@@ -22,10 +22,10 @@ This is a ‘pure' component.
 | selectedOption | selectedOption={id:"selectedVideo", label:"FaceTime HD Camera"} | An object. Required. Contains the selected data for a setting select field.
 | compStyle |  _NOTE styles are in JSX, not CSX_ {   container: {display: 'flex', position: 'relative'},  inputStyle {fontSize: '1rem'} }m | Optional prop. If value is provided, then it will render new styles, if not it will render default styling. |
 | cbSubmitSetting | Function implemented and bound to a higher-order parent container of this component | Function. Required. This prop is invoked when a setting is changed by either selecting a menu item or checking a box. |
-| options | options =[{id:"none", label:"No Camera"}, {id: "...", label:"FaceTime HD Camera"}]  | Array.Required. Array of options for select menu.|
-| label | "Camera:" | String. Required. Label for select menu.
+
 
 ## b. Component State ##
+This component will maintain it's own state for checkStatus.
 
 ## c .Component Events ##
 
@@ -42,6 +42,7 @@ This component is a pure component and it will maintain it’s own state.
 The component to be developed requires the following components:
 
 - vertobasecomponent
+- svgIcons
 
 # 5. Unit Testing Requirement #
 Tests for this component are located at:
