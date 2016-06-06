@@ -176,158 +176,158 @@ class AppBar extends VertoBaseComponent {
   }
 
   buildSettingsContainer() {
-    // console.log('xxxxxxxxxxxx', this.props.settingsData);
-    return (
-          <div
-              className="menuContainer"
-              style={{...this.getStyle('menu')}}
-            >
-            <div
-                className="column1"
-                style={{...this.getStyle('column1')}}
-              >
-              <SettingsMenuSelect
-                  cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
-                  options={this.props.settingsData.videoDevices ? this.props.settingsData.videoDevices : []}
-                  label="Camera:"
-                  selectedOption={{id:"selectedVideo", label:this.props.settingsData.selectedVideo && this.props.settingsData.selectedVideo.label}}
-                />
-              <SettingsMenuSelect
-                  cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
-                  options={this.props.settingsData.shareDevices ? this.props.settingsData.shareDevices : []}
-                  label="Share Device:"
-                  selectedOption={{id:"selectedShare", label:this.props.settingsData.selectedShare && this.props.settingsData.selectedShare.label}}
-                />
-                <SettingsMenuSelect
-                    cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
-                    options={this.props.settingsData.audioDevices ? this.props.settingsData.audioDevices : []}
-                    label="Microphone:"
-                    selectedOption={{id:"selectedAudio", label:this.props.settingsData.selectedAudio && this.props.settingsData.selectedAudio.label}}
-                  />
-                  <SettingsMenuSelect
-                      cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
-                      options={this.props.settingsData.speakerDevices ? this.props.settingsData.speakerDevices : []}
-                      label="Speaker:"
-                      selectedOption={{id:"selectedSpeaker", label:this.props.settingsData.selectedSpeaker && this.props.settingsData.selectedSpeaker.label}}
-                    />
-                    <SettingsMenuSelect
-                        cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
-                        options={this.props.settingsData.bestFrameRate ? this.props.settingsData.bestFrameRate : []}
-                        label="Best Frame Rate:"
-                        selectedOption={{id:"selectedBestFrameRate", label:this.props.settingsData.selectedBestFrameRate && this.props.settingsData.selectedBestFrameRate.label}}
-                      />
-                    <div className="buttonContainer" style={{...this.getStyle('buttonContainer')}}>
-                      <button
-                          style={{...this.getStyle('button')}}
-                          onClick={this.submitPreview.bind(this)}
-                        >
-                        <FormattedMessage
-                            id="PREVIEW_SETTINGS"
-                            defaultMessage="Preview Settings"
-                          />
-                      </button>
-                      <button
-                          style={{...this.getStyle('button')}}
-                          onClick={this.submitRefresh.bind(this)}
-                        >
-                        <FormattedMessage
-                            id="REFRESH_DEVICE_LIST"
-                            defaultMessage="Refresh Device List"
-                          />
-                      </button>
-                    </div>
-              </div>
-              <div
-                  className="column2"
-                  style={{...this.getStyle('column2')}}
-                >
-                <span style={{...this.getStyle('headerLabel')}}>
-                  <FormattedMessage
-                      id="GENERAL_SETTINGS"
-                      defaultMessage= "General settings:"
-                    />
-                  </span>
-              <SettingsCheckbox
-                  cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
-                  label="Use Video"
-                />
-                <SettingsCheckbox
-                    cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
-                    label="Stereo Audio"
-                  />
-                  <SettingsCheckbox
-                      cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
-                      label="Use STUN"
-                    />
-                    <SettingsCheckbox
-                        cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
-                        label="Scale Remote Video to Match Camera Resolution"
-                      />
-                      <SettingsCheckbox
-                          cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
-                          label="Ask Before Recovering a Call"
-                        />
-                <SettingsMenuSelect
-                    cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
-                    options={this.props.settingsData.languages ? this.props.settingsData.languages : []}
-                    label="Language:"
-                    selectedOption={{id:"language", label:this.props.settingsData.language && this.props.settingsData.language.label}}
-                  />
-                <span style={{...this.getStyle('headerLabel')}}>
-                  <FormattedMessage
-                      id="AUDIO_SETTINGS"
-                      defaultMessage= "Audio settings:"
-                    />
-                  </span>
-                  <SettingsCheckbox
-                      cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
-                      label="Echo Cancellation"
-                    />
-                    <SettingsCheckbox
-                        cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
-                        label="Noise Suppression"
-                      />
-                      <SettingsCheckbox
-                          cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
-                          label="Highpass Filter"
-                        />
-              </div>
-              <div
-                  className="column3"
-                  style={{...this.getStyle('column3')}}
-                >
-                  <span style={{...this.getStyle('headerLabel')}}>
-                    <FormattedMessage
-                        id="VIDEO_SETTINGS"
-                        defaultMessage= "Video settings:"
-                      />
-                    </span>
-                <SettingsCheckbox
-                    cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
-                    label="Automatically determine speed and resolution settings"
-                  />
-                  <SettingsCheckbox
-                      cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
-                      label="Recheck Bandwidth Before Each Outgoing Call"
-                    />
-                  <div
-                      className="buttonContainer"
-                      style={{...this.getStyle('buttonContainer')}}
-                      >
-                    <button
-                        style={{...this.getStyle('button')}}
-                        onClick={this.submitSpeedCheck.bind(this)}
-                      >
-                      <FormattedMessage
-                          id="CHECK_NETWORK_SPEED"
-                          defaultMessage="Check Network Speed"
-                        />
-                    </button>
-                  </div>
-              </div>
-          </div>
-    );
-  }
+  //   // console.log('xxxxxxxxxxxx', this.props.settingsData);
+  //   return (
+  //         <div
+  //             className="menuContainer"
+  //             style={{...this.getStyle('menu')}}
+  //           >
+  //           <div
+  //               className="column1"
+  //               style={{...this.getStyle('column1')}}
+  //             >
+  //             <SettingsMenuSelect
+  //                 cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+  //                 options={this.props.settingsData.videoDevices ? this.props.settingsData.videoDevices : []}
+  //                 label="Camera:"
+  //                 selectedOption={{id:"selectedVideo", label:this.props.settingsData.selectedVideo && this.props.settingsData.selectedVideo.label}}
+  //               />
+  //             <SettingsMenuSelect
+  //                 cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+  //                 options={this.props.settingsData.shareDevices ? this.props.settingsData.shareDevices : []}
+  //                 label="Share Device:"
+  //                 selectedOption={{id:"selectedShare", label:this.props.settingsData.selectedShare && this.props.settingsData.selectedShare.label}}
+  //               />
+  //               <SettingsMenuSelect
+  //                   cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+  //                   options={this.props.settingsData.audioDevices ? this.props.settingsData.audioDevices : []}
+  //                   label="Microphone:"
+  //                   selectedOption={{id:"selectedAudio", label:this.props.settingsData.selectedAudio && this.props.settingsData.selectedAudio.label}}
+  //                 />
+  //                 <SettingsMenuSelect
+  //                     cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+  //                     options={this.props.settingsData.speakerDevices ? this.props.settingsData.speakerDevices : []}
+  //                     label="Speaker:"
+  //                     selectedOption={{id:"selectedSpeaker", label:this.props.settingsData.selectedSpeaker && this.props.settingsData.selectedSpeaker.label}}
+  //                   />
+  //                   <SettingsMenuSelect
+  //                       cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+  //                       options={this.props.settingsData.bestFrameRate ? this.props.settingsData.bestFrameRate : []}
+  //                       label="Best Frame Rate:"
+  //                       selectedOption={{id:"selectedBestFrameRate", label:this.props.settingsData.selectedBestFrameRate && this.props.settingsData.selectedBestFrameRate.label}}
+  //                     />
+  //                   <div className="buttonContainer" style={{...this.getStyle('buttonContainer')}}>
+  //                     <button
+  //                         style={{...this.getStyle('button')}}
+  //                         onClick={this.submitPreview.bind(this)}
+  //                       >
+  //                       <FormattedMessage
+  //                           id="PREVIEW_SETTINGS"
+  //                           defaultMessage="Preview Settings"
+  //                         />
+  //                     </button>
+  //                     <button
+  //                         style={{...this.getStyle('button')}}
+  //                         onClick={this.submitRefresh.bind(this)}
+  //                       >
+  //                       <FormattedMessage
+  //                           id="REFRESH_DEVICE_LIST"
+  //                           defaultMessage="Refresh Device List"
+  //                         />
+  //                     </button>
+  //                   </div>
+  //             </div>
+  //             <div
+  //                 className="column2"
+  //                 style={{...this.getStyle('column2')}}
+  //               >
+  //               <span style={{...this.getStyle('headerLabel')}}>
+  //                 <FormattedMessage
+  //                     id="GENERAL_SETTINGS"
+  //                     defaultMessage= "General settings:"
+  //                   />
+  //                 </span>
+  //             <SettingsCheckbox
+  //                 cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+  //                 label="Use Video"
+  //               />
+  //               <SettingsCheckbox
+  //                   cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+  //                   label="Stereo Audio"
+  //                 />
+  //                 <SettingsCheckbox
+  //                     cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+  //                     label="Use STUN"
+  //                   />
+  //                   <SettingsCheckbox
+  //                       cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+  //                       label="Scale Remote Video to Match Camera Resolution"
+  //                     />
+  //                     <SettingsCheckbox
+  //                         cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+  //                         label="Ask Before Recovering a Call"
+  //                       />
+  //               <SettingsMenuSelect
+  //                   cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+  //                   options={this.props.settingsData.languages ? this.props.settingsData.languages : []}
+  //                   label="Language:"
+  //                   selectedOption={{id:"language", label:this.props.settingsData.language && this.props.settingsData.language.label}}
+  //                 />
+  //               <span style={{...this.getStyle('headerLabel')}}>
+  //                 <FormattedMessage
+  //                     id="AUDIO_SETTINGS"
+  //                     defaultMessage= "Audio settings:"
+  //                   />
+  //                 </span>
+  //                 <SettingsCheckbox
+  //                     cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+  //                     label="Echo Cancellation"
+  //                   />
+  //                   <SettingsCheckbox
+  //                       cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+  //                       label="Noise Suppression"
+  //                     />
+  //                     <SettingsCheckbox
+  //                         cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+  //                         label="Highpass Filter"
+  //                       />
+  //             </div>
+  //             <div
+  //                 className="column3"
+  //                 style={{...this.getStyle('column3')}}
+  //               >
+  //                 <span style={{...this.getStyle('headerLabel')}}>
+  //                   <FormattedMessage
+  //                       id="VIDEO_SETTINGS"
+  //                       defaultMessage= "Video settings:"
+  //                     />
+  //                   </span>
+  //               <SettingsCheckbox
+  //                   cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+  //                   label="Automatically determine speed and resolution settings"
+  //                 />
+  //                 <SettingsCheckbox
+  //                     cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+  //                     label="Recheck Bandwidth Before Each Outgoing Call"
+  //                   />
+  //                 <div
+  //                     className="buttonContainer"
+  //                     style={{...this.getStyle('buttonContainer')}}
+  //                     >
+  //                   <button
+  //                       style={{...this.getStyle('button')}}
+  //                       onClick={this.submitSpeedCheck.bind(this)}
+  //                     >
+  //                     <FormattedMessage
+  //                         id="CHECK_NETWORK_SPEED"
+  //                         defaultMessage="Check Network Speed"
+  //                       />
+  //                   </button>
+  //                 </div>
+  //             </div>
+  //         </div>
+  //   );
+  // }
 
   // getSettingsMenu(){
   //   let rSettings;
@@ -335,14 +335,14 @@ class AppBar extends VertoBaseComponent {
   //   if (this.state.showSettings) {
   //     rSettings = (
   //       <div style={this.getStyle('settingsStyles')}>
-  //           // {settingsContainer}
+  //           {settingsContainer}
   //       </div>
   //     );
   //   }
   //   //console.log('aaaa', rSettings, this.state.showSettings );
   //
   //   return rSettings;
-  // }
+  }
   render() {
     //console.log('#### window theme style', window.theme);
     //console.log('this.props.settings', this.props.settings);
