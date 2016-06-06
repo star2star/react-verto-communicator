@@ -6,7 +6,8 @@ const propTypes = {
   label : React.PropTypes.string,
   type : React.PropTypes.string,
   placeholder : React.PropTypes.string,
-  value : React.PropTypes.string
+  value : React.PropTypes.string,
+  //tabIndex : React.PropTypes.string
 };
 
 class Input extends VertoBaseComponent {
@@ -90,6 +91,7 @@ class Input extends VertoBaseComponent {
         <div style={{...this.getStyle('label')}}>{this.props.label}</div>
         <div>
           <input
+            tabindex="0"
             type={this.props.type}
             ref="name"
             placeholder={this.props.placeholder}
