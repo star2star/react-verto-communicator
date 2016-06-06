@@ -7,7 +7,7 @@ const auth = (state, action)=>{
     return  { loginSettings :{
                 name: 'James',
                 email: 'James@james.com',
-                user: 1008,
+                user: '1008',
                 password: '1234',
                 callerid: 'James',
                 hostname: 'verto.star2starglobal.com',

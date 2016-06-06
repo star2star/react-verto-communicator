@@ -112,8 +112,8 @@ class Settings extends VertoBaseComponent {
   }
 
   submitPreview() {
-    console.log('Preview Settings Clicked');
-    //this.props.cbPreviewSet();
+    //console.log('Preview Settings Clicked');
+    this.props.cbPreviewSet();
   }
 
   submitRefresh() {
