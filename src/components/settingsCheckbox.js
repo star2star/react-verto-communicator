@@ -4,7 +4,7 @@ import VertoBaseComponent from './vertobasecomponent.js';
 const propTypes = {
   cbSubmitSetting: React.PropTypes.func.isRequired,
   compStyle : React.PropTypes.object,
-  checkLabel: React.PropTypes.string
+  label: React.PropTypes.string.isRequired
 };
 
 class SettingsCheckbox extends VertoBaseComponent {
