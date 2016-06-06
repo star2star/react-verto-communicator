@@ -191,7 +191,7 @@ class AppBar extends VertoBaseComponent {
     //console.log('#### window theme style', window.theme);
     //console.log('this.props.settings', this.props.settings);
     //console.log('this.props.bandwidthInfo', this.props.bandwidthInfo);
-
+    console.log("%%%%%%%%%%%%%%%%%%%%%%%%", this.props.contributorsData);
     const { formatMessage } = this.props.intl;
 
     const appName = WhiteLabel.get('appName');
@@ -275,9 +275,9 @@ class AppBar extends VertoBaseComponent {
                   // TODO ta need to pass version and gitRev in to the About component
                   App.toggleModal((<About version="0.2.0" gitRev="xxxxx" cbClose={App.toggleModal}/>));
                 }} />
-                <MenuItem label={formatMessage({"id":"TITLE_CONTRIBUTORS", "defaultMessage":"Contributors"})} cbAction={()=>{
+                <MenuItem label={formatMessage({"id":"TITLE_CONTRIBUTORS", "defaultMessage":"Contributors"})}  cbAction={()=>{
 
-                  App.toggleModal((<Contributors />));
+                  App.toggleModal((<Contributors contributorsData={this.props.contributorsData} />));
                 }} />
                 <MenuItem label={formatMessage({"id":"HELP", "defaultMessage":"Help"})} cbAction={()=>{
                   window.open('https://freeswitch.org/confluence/display/FREESWITCH/Verto+Communicator');
@@ -297,6 +297,7 @@ export default connect((state)=>{
   return ({
     settings: state.app.settings,
     bandwidthInfo: state.app.bandwidthInfo,
-    vcStatus: state.auth.vcStatus
+    vcStatus: state.auth.vcStatus,
+    contributorsData: state.app.settings.contributors
   });
 })(injectIntl(Radium(AppBar)));

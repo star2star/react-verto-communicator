@@ -23,9 +23,9 @@ class CallProgress extends VertoBaseComponent {
     }
 
     componentWillReceiveProps(nextProp){
-      console.log('&&&&', nextProp);
+      //console.log('&&&&', nextProp);
       if (this.state.status != nextProp.callData.status ) {
-        console.log('------- changing ', nextProp.callData.status );
+        //console.log('------- changing ', nextProp.callData.status );
         this.interval = setInterval(()=>{
           const xTimer = Date.now() - this.state.startTime;
           //console.log('xXXXXX', xTimer);
@@ -60,7 +60,7 @@ class CallProgress extends VertoBaseComponent {
     }
 
     render() {
-      console.log('<<<<<< CP: ', this.props.callData, this.state );
+      //console.log('<<<<<< CP: ', this.props.callData, this.state );
 
       return (
           <div style={{flexDirection: "column", display:"flex"}}>
@@ -73,13 +73,21 @@ class CallProgress extends VertoBaseComponent {
             </div>
             <div style={{backgroundColor: "green"}}>
               <DialPadIconSVG svgStyle={{width: "20px", height: "20px", fillColor: "white"}} />
-              <MicrophoneIconSVG svgStyle={{width: "20px", height: "20px", fillColor: "white"}} />
+
+              <span onClick={()=>{
+                console.log('mute Microphone clicked: ', this.props);
+                this.props.cbMute(this.props.callData.callId);
+              }}>
+                <MicrophoneIconSVG svgStyle={{width: "20px", height: "20px", fillColor: "white"}} />
+              </span>
+
               <PauseIconSVG svgStyle={{width: "20px", height: "20px", fillColor: "white"}} />
+
               <span onClick={()=>{
                 console.log('hangup clicked: ', this.props);
                 this.props.cbHangup(this.props.callData.callId);
               }}>
-              <PhoneIconSVG svgStyle={{width: "20px", height: "20px", fillColor: "white"}} />
+                <PhoneIconSVG svgStyle={{width: "20px", height: "20px", fillColor: "white"}} />
               </span>
             </div>
           </div>

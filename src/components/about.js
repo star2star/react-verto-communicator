@@ -32,11 +32,6 @@ class About extends VertoBaseComponent{
         height: '100%'
       },
 
-      container: {
-        //'@media (max-width: 767px)': {
-        //  alignItems: "center"
-        // }
-      },
       mymodal : {
         content: {
           top                   : '50%',
@@ -48,6 +43,7 @@ class About extends VertoBaseComponent{
         }
       }
     };
+
     return (styles[styleName]);
   }
 
@@ -58,7 +54,7 @@ class About extends VertoBaseComponent{
       <Modal isOpen onRequestClose={this.props.cbClose} style={this.getStyle('mymodal')}>
         <div style={this.getStyle('container')}>
           <div style={this.getStyle('imageStyle')}>
-            <img src={logoSrc} style={{width: "100%" }}  />
+            <img src={logoSrc} style={{width: "100%"}}  />
           </div>
 
           <div>

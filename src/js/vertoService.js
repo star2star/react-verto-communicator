@@ -12,14 +12,14 @@ let _verto;
 //class
 class VertoService {
   constructor(){
-    console.log('building VERTO SERVICE: <<<<<<<<<<<<<<<<')
+    //console.log('building VERTO SERVICE: <<<<<<<<<<<<<<<<')
     this._data = {_activeCalls:[], _maxActiveCalls: 32 };
 
     const xInstance = this;
 
     _callbacks = {
       onMessage: (v, dialog, msg, params) => {
-        console.debug('^^^^^^^ onMessage:', v, dialog, msg, params);
+        //console.debug('^^^^^^^ onMessage:', v, dialog, msg, params);
 
         switch (msg) {
           case $.verto.enum.message.pvtEvent:
@@ -27,14 +27,14 @@ class VertoService {
               switch (params.pvtData.action) {
                 case "conference-liveArray-join":
                   if (!params.pvtData.screenShare && !params.pvtData.videoOnly) {
-                    console.log("conference-liveArray-join");
+                    //console.log("conference-liveArray-join");
                     xInstance.stopConference();
                     xInstance.startConference(v, dialog, params.pvtData);
                   }
                   break;
                 case "conference-liveArray-part":
                   if (!params.pvtData.screenShare && !params.pvtData.videoOnly) {
-                    console.log("conference-liveArray-part");
+                    //console.log("conference-liveArray-part");
                     xInstance.stopConference();
                   }
                   break;
@@ -72,7 +72,7 @@ class VertoService {
 
           switch (d.state) {
               case $.verto.enum.state.ringing:
-                  console.log('^^^^^^ringing ... onDialogState display', d, arguments);
+                  //console.log('^^^^^^ringing ... onDialogState display', d, arguments);
 
                   xInstance._data._activeCalls[d.callID] = d;
 
@@ -97,19 +97,19 @@ class VertoService {
               //jes TODO tell it is ringing
               //display("Calling: " + d.cidString());
               //goto_page("incall");
-              console.log('^^^^^^trying .. calling', d);
+              //console.log('^^^^^^trying .. calling', d);
               _dispatch(doingMakeCall('trying', d.params.destination_number, d.callID));
               break;
 
           case $.verto.enum.state.early:
-              console.log('^^^^^^early:', d);
+              //console.log('^^^^^^early:', d);
               break;
 
           case $.verto.enum.state.active:
               //jes TODO tell them we are now talking
               //display("Talking to: " + d.cidString());
               //goto_page("incall");
-              console.log('^^^^^active ...:', d);
+              //console.log('^^^^^active ...:', d);
               d.params.isHeld = false;
               // ta- added to init isMuted attribute
               d.params.isMuted = false;
@@ -133,7 +133,7 @@ class VertoService {
               //jes TODO tell we are hanging up
               //$("#main_info").html("Call ended with cause: " + d.cause);
               //goto_page("main");
-              console.log('^^^^^^^^^hangup event', d);
+              //console.log('^^^^^^^^^hangup event', d);
               if (xInstance._data._activeCalls[d.callID]) {
                   delete xInstance._data._activeCalls[d.callID];
               } else {
@@ -146,7 +146,7 @@ class VertoService {
               //$("#hangup_cause").html("");
               //clearConfMan();
               //jes TODO remove from activeCalls
-              console.log('^^^^^^^^^^destroy event', d);
+              //console.log('^^^^^^^^^^destroy event', d);
               //console.debug('Destroying: ' + d.cause);
               if (d.params.screenShare) {
                 //TODO cleanShareCall(xInstance);
@@ -174,7 +174,7 @@ class VertoService {
               break;
 
           case $.verto.enum.state.requesting:
-              console.log('^^^^^^^REQUESTING ....', d);
+              //console.log('^^^^^^^REQUESTING ....', d);
               xInstance._data._activeCalls[d.callID] = d;
               //jes tom does not want it
               //TODO
@@ -320,7 +320,7 @@ class VertoService {
     };
 
     this._data.liveArray.onChange = (obj, args) => {
-      // console.log('liveArray.onChange', obj, args);
+      console.log('liveArray.onChange --- action: ' + args.action, obj, args);
 
       switch (args.action) {
         case 'bootObj':
@@ -386,6 +386,14 @@ class VertoService {
     //console.log('>>>>>', _verto.verto, this._data);
   }
 
+  muteMic(callerId){
+  		console.log('toggle MUTE', callerId);
+      if (_verto._data._activeCalls[callerId]) {
+        _verto._data._activeCalls[callerId].dtmf('0');
+      } else {
+        console.log('answer    NOT FOUND----------');
+      }
+  }
 
   getOptions(data) {
     const data1 = this._data;

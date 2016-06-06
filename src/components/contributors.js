@@ -3,10 +3,11 @@ import VertoBaseComponent from './vertobasecomponent';
 import Modal from 'react-modal';
 import App from './app';
 import ContributorsListItem from './contributorsListItem';
-import ContributorsData from '../config/contributorsData.js';
+//import ContributorsData from '../config/contributorsData.js';
 
 const propTypes = {
-  compStyle : React.PropTypes.object
+  compStyle : React.PropTypes.object,
+  contributorsData: React.PropTypes.array.isRequired
 };
 
 class Contributors extends VertoBaseComponent{
@@ -59,11 +60,10 @@ class Contributors extends VertoBaseComponent{
 
 
   render() {
-    //CD.map
-    const contributorsArray = ContributorsData;
-    //this is just for testing
-    //console.log(contributorsArray[0]);
-    //^^^^^^^^^^^^^^^^^^^^^^^^^^
+    console.log("^^^^^^^^^^^^^^^^^^", this.props.contributorsData);
+    let contList = (this.props.contributorsData).map((cont,index) => {
+
+    });
     return (
       <Modal isOpen={true} onRequestClose={()=>{
         console.log('closing');
@@ -75,7 +75,7 @@ class Contributors extends VertoBaseComponent{
           </h1>
         </div>
         <div>
-          <ContributorsListItem contr={contributorsArray[0]} index={0} />
+          <ContributorsListItem />
         </div>
       </Modal> );
   }

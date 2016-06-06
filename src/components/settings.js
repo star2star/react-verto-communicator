@@ -127,7 +127,7 @@ class Settings extends VertoBaseComponent {
   }
 
   buildSettingsContainer() {
-    console.log('xxxxxxxxxxxx', this.props.settingsData);
+    //console.log('xxxxxxxxxxxx', this.props.settingsData);
     return (
           <div className="menuContainer" style={{...this.getStyle('menu')}}>
             <div className="column1" style={{}}>

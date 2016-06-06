@@ -1,7 +1,6 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
-//import SvgIcons from './svgIcons';
-import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-intl';
+import {injectIntl, FormattedMessage} from 'react-intl';
 import Radium from 'radium';
 import Input from './input';
 
@@ -11,6 +10,12 @@ const propTypes = {
 };
 
 class Login extends VertoBaseComponent{
+  constructor(props) {
+    super(props);
+    this.state = {advanced: false, settings: this.props.settings };
+    //console.log('&&&', this.props.settings)
+  }
+
 
   getCompStyle() {
     return this.props.compStyle;
@@ -67,12 +72,6 @@ class Login extends VertoBaseComponent{
     };
 
     return (styles[styleName]);
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = {advanced: false, settings: this.props.settings };
-    //console.log('&&&', this.props.settings)
   }
 
   changingInput(field, value){
@@ -159,3 +158,4 @@ class Login extends VertoBaseComponent{
 
 Login.propTypes = propTypes;
 export default injectIntl(Radium(Login));
+//export default injectIntl(Login);
