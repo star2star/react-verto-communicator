@@ -4,7 +4,7 @@ import VertoBaseComponent from '../../components/vertobasecomponent';
 import { connect } from 'react-redux';
 //import ReactTooltip from 'react-tooltip';
 import VCStatus from '../../components/vcstatus';
-import { doSubmitLogin, doSubmitLogOut, doMakeCall, doHangUp, doAnswer, doMuteMic } from './action-creators';
+import { doSubmitLogin, doSubmitLogOut, doMakeCall, doHangUp, doAnswer, doMuteMic, doHold } from './action-creators';
 import Splash from '../../components/splash';
 import Login from '../../components/login';
 import Dialpad from '../../components/dialpad';
@@ -31,7 +31,7 @@ class Main extends VertoBaseComponent {
   }
 
   makeCall(number) {
-    console.log('calling ...', number, this.props.app);
+    //console.log('calling ...', number, this.props.app);
     this.props.dispatch(doMakeCall(number, this.props.app));
   }
 
@@ -43,13 +43,13 @@ class Main extends VertoBaseComponent {
 
     let incomingCall;
     if (this.props.auth.incomingCall) {
-      console.log('------- GOT CALL', this.props.auth.incomingCall);
+      //console.log('------- GOT CALL', this.props.auth.incomingCall);
       incomingCall = (<IncomingCall callData={this.props.auth.incomingCall} cbHangup={(d)=>{
-        console.log('hang up', d);
+        //console.log('hang up', d);
         this.props.dispatch(doHangUp(d.callID));
       }}
       cbAnswer={(d)=>{
-        console.log('Answering: ', d);
+        //console.log('Answering: ', d);
         this.props.dispatch(doAnswer(d.callID));
       }}  />);
     }
@@ -96,7 +96,7 @@ class Main extends VertoBaseComponent {
         }
         break;
       case 'bns':
-        console.log('BBBNNNNSSSS', this.props.auth);
+        //console.log('BBBNNNNSSSS', this.props.auth);
         splashObject.title = formatMessage({"id":"BROWSER_COMPATIBILITY", "defaultMessage":"Checking browser compatibility."});
         splashObject.errorObject = {
           header: formatMessage({"id":"ERRORS", "defaultMessage":"Errors"}),
@@ -124,7 +124,7 @@ class Main extends VertoBaseComponent {
 
               }}
               cbHold={(callId)=>{
-
+                this.props.dispatch(doHold(callId));
               }}
             />
           </div>

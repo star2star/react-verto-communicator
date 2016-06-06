@@ -22,7 +22,8 @@
     "react-redux": "^4.4.5",
     "react-router": "^2.4.1",
     "redux": "^3.5.2",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "volume-meter": "^2.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.9.0",
