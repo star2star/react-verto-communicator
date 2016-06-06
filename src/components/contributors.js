@@ -3,10 +3,11 @@ import VertoBaseComponent from './vertobasecomponent';
 import Modal from 'react-modal';
 import App from './app';
 import ContributorsListItem from './contributorsListItem';
-import ContributorsData from '../config/contributorsData.js';
+//import ContributorsData from '../config/contributorsData.js';
 
 const propTypes = {
-  compStyle : React.PropTypes.object
+  compStyle : React.PropTypes.object,
+  contributorsData: React.PropTypes.object
 };
 
 class Contributors extends VertoBaseComponent{
@@ -60,7 +61,7 @@ class Contributors extends VertoBaseComponent{
 
   render() {
     //CD.map
-    const contributorsArray = ContributorsData;
+    const contributorsArray = this.props.contributorsData;
     //this is just for testing
     //console.log(contributorsArray[0]);
     //^^^^^^^^^^^^^^^^^^^^^^^^^^

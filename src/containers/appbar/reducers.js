@@ -1,8 +1,12 @@
 import VideoConstants from '../../js/VideoConstants';
+import ContributorService from '../../js/contributorService';
 
 const app = (state, action)=>{
 
   if (typeof state === 'undefined') {
+    // Create ContributorService object
+    new ContributorService();
+
     //TODO ta Figure out what the default store will look like... it won't
     // be a direct copy of the 'local storage' that Verto originally used...
     // This is just here to get the 'store' started up
@@ -43,7 +47,8 @@ const app = (state, action)=>{
                 outgoingBandwidth: 'default',
                 incomingBandwidth: 'default',
                 bandwidth: VideoConstants.BAND_WIDTH,
-                bestFrameRate: VideoConstants.FRAME_RATE
+                bestFrameRate: VideoConstants.FRAME_RATE,
+                contributors: ContributorService.getContributors()
               },
 
               bandwidthInfo: {

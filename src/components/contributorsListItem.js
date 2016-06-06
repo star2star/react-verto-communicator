@@ -3,7 +3,8 @@ import VertoBaseComponent from './vertobasecomponent';
 
 
 const propTypes = {
-  compStyle: React.PropTypes.object
+  compStyle: React.PropTypes.object,
+  contr: React.PropTypes.object.isRequired
 };
 
 class ContributorsList extends VertoBaseComponent{
