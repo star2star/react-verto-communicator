@@ -76,7 +76,7 @@ const doResolutionRefresh = () => {
       console.log('doRefresh Resolution: ', status);
       if (status){
         const resolutionInstanceData = VertoService.getInstanceData();
-        console.log('------^^^^^^______', resolutionInstanceData);
+        //console.log('------^^^^^^______', resolutionInstanceData);
         dispatch(doUpdateSettings(resolutionInstanceData));
         dispatch(doValidation(4));
       } else {
@@ -204,6 +204,12 @@ const doHangUp = (callId) => {
     VertoService.getInstance().hangup(callId);
   }
 }
+const doMuteMic = (callId) => {
+  return dispatch =>{
+    VertoService.getInstance().muteMic(callId);
+  }
+}
+
 const doAnswer = (callId) => {
   return dispatch =>{
     VertoService.getInstance().answer(callId);
@@ -239,4 +245,4 @@ const doUpdateSettings = (aData) => {
 export { doValidation, doBrowserCheck,
   doSubmitLogin, doShowLogin, doVertoLogin, doSubmitLogOut, doLogOut,
   doMakeCall, doMakeCallError, doIncomingCall,
-  doingMakeCall, doHungUp, doHangUp, doAnswer };
+  doingMakeCall, doHungUp, doHangUp, doAnswer, doMuteMic };
