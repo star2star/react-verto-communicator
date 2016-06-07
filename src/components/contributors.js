@@ -35,6 +35,9 @@ class Contributors extends VertoBaseComponent{
           borderRadius: '2px',
           border: 'none',
           backgroundColor: '#fff'
+        },
+        overlay: {
+          zIndex: "1"
         }
       },
 
