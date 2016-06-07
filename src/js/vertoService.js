@@ -264,10 +264,11 @@ class VertoService {
         //});
       },
       onBroadcast: (v, conf, message) => {
-        console.log('>>> conf.onBroadcast:', arguments);
+        console.log('>>> conf.onBroadcast:', message, arguments);
         if (message.action == 'response') {
           // This is a response with the video layouts list.
           if (message['conf-command'] == 'list-videoLayouts') {
+            console.log('hmmmmmmm', message.responseData);
             var rdata = [];
 
             for (var i in message.responseData) {
@@ -299,7 +300,7 @@ class VertoService {
     });
 
     if (this._data.confRole == "moderator") {
-      console.log('>>> conf.listVideoLayouts();', conf.listVideoLayouts());
+      console.log('>>> conf.listVideoLayouts();', conf, conf.listVideoLayouts());
       conf.listVideoLayouts();
       conf.modCommand('canvasInfo');
     } else {

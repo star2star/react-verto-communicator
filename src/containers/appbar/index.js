@@ -19,7 +19,7 @@ import SettingsPreview from '../../components/SettingsPreview';
 import Contributors from '../../components/contributors';
 import { MenuIconSVG } from '../../components/svgIcons';
 import { injectIntl, FormattedMessage } from 'react-intl';
-
+import LastCall from '../../components/lastCall';
 
 
 // Need to close menu on resize so that if we pass media query limit then
@@ -383,11 +383,7 @@ class AppBar extends VertoBaseComponent {
     let lastCall;
 
     if (true && !this.state.showAltAppControls) {
-      lastCall = (
-        <div  className="lastCall" style={this.getStyle('lastCallStyles')}>
-          Last Call: (941) 867-5309
-        </div>
-      );
+      lastCall = (<LastCall lastNumber={this.props.lastNumber} /> );
     }
 
     // settings here
@@ -457,6 +453,7 @@ export default connect((state)=>{
     settings: state.app.settings,
     bandwidthInfo: state.app.bandwidthInfo,
     vcStatus: state.auth.vcStatus,
+    lastNumber: state.auth.lastCall,
     contributorsData: state.app.contributors
   });
 })(injectIntl(Radium(AppBar)));

@@ -62,11 +62,12 @@ const auth = (state, action)=>{
     case "CONFERENCE_DATA":
       return { ...state, conferenceCall: {users: action.data } };
     case 'CALL_HUNG_UP':
+      console.log('DDDDDD: ', action.data );
       if (state.callInfo){
         // check to see if it is the current call
         if (state.callInfo.callId == action.data.callID) {
           // yes it is so
-          const chu =  { ...state, showPage: 'loggedIn', lastCall: action.data.destination };
+          const chu =  { ...state, showPage: 'loggedIn', lastCall: action.data.params.destination_number };
           // remove destination
           delete chu.callInfo;
           return chu;
