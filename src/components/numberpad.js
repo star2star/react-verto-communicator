@@ -37,8 +37,8 @@ class Numberpad extends VertoBaseComponent {
         alignItems: 'flex-start',
         justifyContent: "space-around",
         flexGrow: 1,
-        marginRight: '-15px',
-        marginLeft: '-15px'
+        //marginRight: '-15px',
+        //marginLeft: '-15px'
       }
     };
     return (styles[styleName]);
