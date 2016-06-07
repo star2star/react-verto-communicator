@@ -1,12 +1,11 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
-import Radium from 'radium';
 
 const propTypes = {
   compStyle: React.PropTypes.object,
-  name: React.PropTypes.string,
-  email: React.PropTypes.string,
-  avatar: React.PropTypes.string
+  name: React.PropTypes.string.isRequired,
+  email: React.PropTypes.string.isRequired,
+  avatar: React.PropTypes.string.isRequired
 };
 
 class ContributorsList extends VertoBaseComponent{
@@ -26,7 +25,7 @@ class ContributorsList extends VertoBaseComponent{
               display: "flex",
               alignItems: "center",
               justifyContent: "space-around",
-              flexWrap: "wrap",
+              flexWrap: "wrap"
             },
 
             imageStyle: {
@@ -52,10 +51,10 @@ class ContributorsList extends VertoBaseComponent{
   render() {
     return (
       <div style={this.getStyle('totalStyle')}>
-          <span >
+          <span>
             <img src={this.props.avatar} style={this.getStyle('imageStyle')}/>
           </span>
-          <span style={this.getStyle('infoStyle')}>
+          <span style={this.getStyle('infoStyle')} >
             <span style={this.getStyle('nameStyle')}>
               {this.props.name} <br />
             </span>
@@ -69,4 +68,4 @@ class ContributorsList extends VertoBaseComponent{
 
 ContributorsList.propTypes = propTypes;
 
-export default Radium(ContributorsList);
+export default ContributorsList;

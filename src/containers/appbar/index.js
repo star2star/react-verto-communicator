@@ -15,7 +15,7 @@ import SettingsCheckbox from '../../components/settingsCheckbox.js';
 import { doSubmitLogOut } from '../main/action-creators';
 import App from '../../components/app';
 import About from '../../components/about';
-import SettingsPreview from '../../components/SettingsPreview';
+//import SettingsPreview from '../../components/SettingsPreview';
 import Contributors from '../../components/contributors';
 import { MenuIconSVG } from '../../components/svgIcons';
 import { injectIntl, FormattedMessage } from 'react-intl';

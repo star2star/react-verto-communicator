@@ -2,6 +2,7 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import SvgIcons from './svgIcons';
 import Radium from 'radium';
+import NumberItem from './numberitem';
 
 const propTypes = {
   compStyle : React.PropTypes.object,
@@ -9,58 +10,6 @@ const propTypes = {
   keyValue: React.PropTypes.string,
   keyString : React.PropTypes.string
 };
-
-class NumberItem extends VertoBaseComponent {
-  numberClicked(e){
-    this.props.cbClick(this.props.keyValue)
-  }
-  getCompStyle() {
-    return this.props.compStyle;
-  }
-
-  getDefaultStyle(styleName) {
-    const styles = {
-      container: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        flexDirection: 'column',
-        width: '33.33%',
-        backgroundColor: '#fff',
-        cursor: 'pointer',
-        //padding: '10px 0px'
-        margin: '0px',
-        paddingLeft: '15px',
-        paddingRight: '15px'
-      },
-      keyValue: {
-        padding: '10px 0px',
-        color: '#26ccda',
-        fontSize: '30px',
-        fontWeight: '300'
-      },
-      keyString: {
-        color: '#ccc',
-        fontSize: '11px'
-      }
-    };
-    return (styles[styleName]);
-  }
-
-
-  render(){
-
-    return (
-      <div
-          style={{...this.getStyle('container')}}
-          onClick={this.numberClicked.bind(this)}
-          tabindex="0">
-        <div style={{...this.getStyle('keyValue')}}>{this.props.keyValue}</div>
-        <div style={{...this.getStyle('keyString')}}>{this.props.keyString} </div>
-      </div>
-    );
-  }
-}
 
 class Numberpad extends VertoBaseComponent {
   constructor(props) {
