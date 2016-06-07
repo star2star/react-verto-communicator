@@ -299,9 +299,11 @@ class VertoService {
     });
 
     if (this._data.confRole == "moderator") {
-      //console.log('>>> conf.listVideoLayouts();');
+      console.log('>>> conf.listVideoLayouts();', conf.listVideoLayouts());
       conf.listVideoLayouts();
       conf.modCommand('canvasInfo');
+    } else {
+      console.log('NOT Moderator but i am: ', this._data.confRole);
     }
 
     this._data.conf = conf;
@@ -389,10 +391,10 @@ class VertoService {
     //console.log('>>>>>', _verto.verto, this._data);
   }
 
-  sendDtmf(callerId, key) {
-    //console.log('toggle MUTE', callerId);
+  sendDtmf(callerId, keys) {
+    console.log('SENDING DTMF:', callerId, keys);
     if (_verto._data._activeCalls[callerId]) {
-      _verto._data._activeCalls[callerId].dtmf('0');
+      _verto._data._activeCalls[callerId].dtmf(keys);
     } else {
       console.log('DTMF    NOT FOUND----------');
     }
@@ -410,14 +412,14 @@ class VertoService {
 
   muteVideo(callerId) {
     console.log('toggle MUTE VIDEO', callerId);
-    if (_verto._data._activeCalls[callerId]) {
-      console.log('****', _verto._data._activeCalls[callerId].setVideoMute('toggle'));
-      //_verto._data._activeCalls[callerId].toggleHold();
-    } else {
-      console.log('hold    NOT FOUND----------');
-    }
+    // if (_verto._data._activeCalls[callerId]) {
+    //   console.log('****', _verto._data._activeCalls[callerId].setVideoMute('toggle'));
+    //   //_verto._data._activeCalls[callerId].toggleHold();
+    // } else {
+    //   console.log('hold    NOT FOUND----------');
+    // }
     //dialog.rtc.getVideoMute();
-    //this.sendDtmf(callerId, '*0');
+    this.sendDtmf(callerId, "*0");
   }
 
   hold(callerId){
