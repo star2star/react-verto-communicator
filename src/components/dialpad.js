@@ -28,7 +28,7 @@ class Dialpad extends VertoBaseComponent {
         alignItems: "center",
         justifyContent: 'flex-start',
         flexDirection: "column",
-        width: "33.33vw",
+        maxWidth: "500px",
         boxShadow: '0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)'
       },
       header: {
@@ -62,9 +62,12 @@ class Dialpad extends VertoBaseComponent {
         height: "24px",
         fill: "#ccc"
       },
+      bodycont: {
+        width: '100%'
+      },
       callcont: {
         width: '100%',
-        //paddingTop: '15px',
+        paddingTop: '15px',
         paddingBottom: '15px',
         display: 'flex',
         justifyContent: 'center'
@@ -75,8 +78,8 @@ class Dialpad extends VertoBaseComponent {
         justifyContent: 'center',
         backgroundColor: "#4caf50",
         borderRadius: '50%',
-        width: '50px',
-        height: '50px',
+        width: '56px',
+        height: '56px',
         cursor: 'pointer'
       },
       call: {
