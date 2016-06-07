@@ -39,6 +39,15 @@ handleSelect() {
         display:'flex',
         paddingBottom: '10px',
         fontWeight: 'bold'
+      },
+      select: {
+        border: '0',
+        boxShadow:'none',
+        borderRadius: '0',
+        width: '350px',
+        fontSize: '.85rem;',
+        backgroundColor: 'rgba(0,0,0,0)',
+        color: '#FFF'
       }
     };
 
@@ -54,7 +63,7 @@ handleSelect() {
       <div style={{...this.getStyle('container')}}>
         <span style={{...this.getStyle('label')}}>{this.props.label}</span>
         <select
-            ref="select"
+            style={this.getStyle('select')}
             onChange={()=>this.handleSelect()}
         >
           {options}
