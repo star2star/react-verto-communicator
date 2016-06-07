@@ -473,6 +473,7 @@ class VertoService {
     _verto._data.conf.sendChat(message, "message");
   }
 
+
   answer(callerId){
     if (_verto._data._activeCalls[callerId]) {
       _verto._data._activeCalls[callerId].answer();
