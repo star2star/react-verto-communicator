@@ -99,7 +99,10 @@ class SettingsPreview extends VertoBaseComponent{
         container: {
           paddingTop: '10px',
           paddingBottom: '5px',
-          borderBottom: '1px solid #ccc'
+          borderBottom: '1px solid #ccc',
+          display: 'flex',
+          flex: 2,
+          flexDirection: 'column'
         },
         label: {
           display:'flex',
@@ -110,12 +113,10 @@ class SettingsPreview extends VertoBaseComponent{
           border: '0',
           boxShadow:'none',
           borderRadius: '0',
-          width: '300px',
+          //width: '300px',
           fontSize: '.85rem;',
           backgroundColor: 'rgba(0,0,0,0)',
-          color: 'black',
-          display: 'flex',
-          flex: 3
+          color: 'black'
         }
       },
       compVolMeterStyles: {
@@ -138,13 +139,13 @@ class SettingsPreview extends VertoBaseComponent{
         }
       },
       menuStyle: {
-        display: "flex",
-        width: '480px'
+        display: "flex"
+        //width: '480px'
       },
       buttonStyle: {
         backgroundColor: "#009688",
         display: 'flex',
-        width: '100px',
+        //width: '100px',
         flex: 1
       }
     };

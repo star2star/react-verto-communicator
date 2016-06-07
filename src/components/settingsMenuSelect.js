@@ -44,7 +44,7 @@ handleSelect() {
         border: '0',
         boxShadow:'none',
         borderRadius: '0',
-        width: '350px',
+        //width: '350px',
         fontSize: '.85rem;',
         backgroundColor: 'rgba(0,0,0,0)',
         color: '#FFF'
