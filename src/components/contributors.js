@@ -4,7 +4,6 @@ import Modal from 'react-modal';
 import App from './app';
 import ContributorsListItem from './contributorsListItem';
 import Radium from 'radium';
-//import ContributorsData from '../config/contributorsData.js';
 
 const propTypes = {
   compStyle : React.PropTypes.object,
@@ -39,13 +38,9 @@ class Contributors extends VertoBaseComponent{
         }
       },
 
-      body : {
-        //padding: '0px 24px 16px'
-      },
       header : {
         fontWeight: '300',
         fontSize: '24px'
-        //padding: '24px 24px 0px'
       }
     };
 
@@ -55,7 +50,7 @@ class Contributors extends VertoBaseComponent{
 
 
   render() {
-    console.log("^^^^^^^^^^^^^^^^^^", this.props.contributorsData);
+
     let contList = (this.props.contributorsData).map((cont,index) => {
       return(<ContributorsListItem key={index} name={cont.name} email={cont.email} avatar={cont.avatar} />);
     });
@@ -66,12 +61,12 @@ class Contributors extends VertoBaseComponent{
       }} style={{...this.getStyle('modal')}} >
         <div >
           <h1 style={{...this.getStyle('header')}}>
-              Contributors
+            Contributors
           </h1>
-          </div>
-          <div>
+        </div>
+        <div>
             {contList}
-          </div>
+        </div>
       </Modal> );
   }
 }

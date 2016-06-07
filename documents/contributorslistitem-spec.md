@@ -15,7 +15,9 @@ This component will be a 'pure' component.
 
 | Prop Name | Sample | Description |
 | ------------ | ------------- | ------------- |
-| contr | {name: "Matt" email:"himynameis@matt.com", image: ../image.png} | This prop is an object and is required. This object is a representation of a contributor. I will use this prop to return a contributor's name, email, and their picture.|
+| name | "Matt"| This prop is a string and is required. This string is a given contributor's name. |
+| email | "mynameis@matt.com" | This prop is a string and is required. This string is a given contributor's email.  |
+| avatar | "../../img/avatar/johnIcon.png" | This prop is a string and is required. This string the location of a contributor's avatar. |
 | compStyle | compStyle = {} | This prop is an object and is not required. This object sets the style for this component |
 
 ## b. Component State ##
