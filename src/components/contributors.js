@@ -3,6 +3,7 @@ import VertoBaseComponent from './vertobasecomponent';
 import Modal from 'react-modal';
 import App from './app';
 import ContributorsListItem from './contributorsListItem';
+import Radium from 'radium';
 //import ContributorsData from '../config/contributorsData.js';
 
 const propTypes = {
@@ -45,12 +46,6 @@ class Contributors extends VertoBaseComponent{
         fontWeight: '300',
         fontSize: '24px'
         //padding: '24px 24px 0px'
-      },
-      ul : {
-
-      },
-      li : {
-
       }
     };
 
@@ -83,4 +78,4 @@ class Contributors extends VertoBaseComponent{
 
 Contributors.propTypes = propTypes;
 
-export default Contributors;
+export default Radium(Contributors);
