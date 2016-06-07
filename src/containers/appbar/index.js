@@ -344,6 +344,8 @@ class AppBar extends VertoBaseComponent {
   //
   //   return rSettings;
   // }
+
+
   render() {
     //console.log('#### window theme style', window.theme);
     //console.log('this.props.settings', this.props.settings);
@@ -405,6 +407,7 @@ class AppBar extends VertoBaseComponent {
             {lastCall}
             <div style={!this.state.showAltAppControls ? {marginRight: '20px'}:{marginBottom:'10px'}}>
               <Settings  allowDisplayDetails={this.props.vcStatus != 'disconnected'}
+                  cbSubmitSetting = {(setting)=>{ console.log("app bar submit setting", setting);}}
                   cbToggleShowSettings={this.settings.bind(this)}
                   settingsData={this.props.settings}
                   cbPreviewSet={()=>{App.toggleModal((<SettingsPreview settingsData={this.props.settings} cbClose={App.toggleModal}/>));}}
