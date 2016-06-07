@@ -15,9 +15,13 @@ class SettingsMenuSelect extends VertoBaseComponent {
   }
 
 handleSelect() {
-  // this.setState({value: event.target.value});
-  console.log('handleSelect');
-  // this.props.cbSubmitSetting();
+//   let selObj = {};
+//
+//   selObj.key = this.refs.select.value.
+//
+//
+  console.log('######', this.refs.select.selectedIndex.value);
+  this.props.cbSubmitSetting(this.refs.select.value);
 }
 
   getCompStyle() {
@@ -43,7 +47,7 @@ handleSelect() {
 
   render() {
     const options=this.props.options.map((option, index)=>{
-      return (<option key={index} value={option}> {option.label} </option>);
+      return (<option key={index} value={option}>{option.label}</option>);
     });
 
     return (

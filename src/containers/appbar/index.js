@@ -10,8 +10,9 @@ import UserMenu from '../../components/userMenu';
 import MenuItem from '../../components/menuItem';
 import TagMenu from '../../components/tagMenu';
 import Settings from '../../components/settings';
-import SettingsMenuSelect from '../../components/settingsMenuSelect.js';
-import SettingsCheckbox from '../../components/settingsCheckbox.js';
+import SettingsMenuSelect from '../../components/settingsMenuSelect';
+import SettingsCheckbox from '../../components/settingsCheckbox';
+import SettingsPreview from '../../components/settingsPreview';
 import { doSubmitLogOut } from '../main/action-creators';
 import App from '../../components/app';
 import About from '../../components/about';
@@ -345,6 +346,8 @@ class AppBar extends VertoBaseComponent {
   //
   //   return rSettings;
   // }
+
+
   render() {
     //console.log('#### window theme style', window.theme);
     //console.log('this.props.settings', this.props.settings);
@@ -407,8 +410,12 @@ class AppBar extends VertoBaseComponent {
             <VCStatus status = {this.props.vcStatus} compStyle={!this.state.showAltAppControls ? {svgStyle:{marginRight: '20px'}}:{svgStyle:{marginBottom:'10px'}}}/>
             {lastCall}
             <div style={!this.state.showAltAppControls ? {marginRight: '20px'}:{marginBottom:'10px'}}>
-              <Settings  allowDisplayDetails={this.props.vcStatus != 'disconnected'} cbToggleShowSettings={this.settings.bind(this)}
-                  settingsData={this.props.settings} />
+              <Settings  allowDisplayDetails={this.props.vcStatus != 'disconnected'}
+                  cbSubmitSetting = {(setting)=>{ console.log("app bar submit setting", setting);}}
+                  cbToggleShowSettings={this.settings.bind(this)}
+                  settingsData={this.props.settings}
+                  cbPreviewSet={()=>{App.toggleModal((<SettingsPreview settingsData={this.props.settings} cbClose={App.toggleModal}/>));}}
+              />
             </div>
             <div style={!this.state.showAltAppControls ? {marginRight: '20px'}:{marginBottom:'10px'}}>
               <UserMenu allowDisplayDetails={this.props.vcStatus != 'disconnected'} compStyle={this.state.showAltAppControls ? this.getStyle("altUserMenu") : undefined}>
