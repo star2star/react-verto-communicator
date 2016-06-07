@@ -5,6 +5,13 @@ const doSubmitSettings = (data) => {
   };
 };
 
+const doUpdateSetting = (settingObj) => {
+  return {
+    type: 'APP_UPDATE_SINGLE_SETTING',
+    data: settingObj
+  }
+};
+
 const doGetSettings = (data) => {
   return {
     type: 'APP_GET_SETTINGS',

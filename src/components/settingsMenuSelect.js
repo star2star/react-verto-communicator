@@ -15,9 +15,13 @@ class SettingsMenuSelect extends VertoBaseComponent {
   }
 
 handleSelect() {
-  // this.setState({value: event.target.value});
-  console.log('handleSelect');
-  // this.props.cbSubmitSetting();
+//   let selObj = {};
+//
+//   selObj.key = this.refs.select.value.
+//
+//
+  console.log('######', this.refs.select.selectedIndex.value);
+  this.props.cbSubmitSetting(this.refs.select.value);
 }
 
   getCompStyle() {
@@ -35,6 +39,15 @@ handleSelect() {
         display:'flex',
         paddingBottom: '10px',
         fontWeight: 'bold'
+      },
+      select: {
+        border: '0',
+        boxShadow:'none',
+        borderRadius: '0',
+        //width: '350px',
+        fontSize: '.85rem;',
+        backgroundColor: 'rgba(0,0,0,0)',
+        color: '#FFF'
       }
     };
 
@@ -43,14 +56,14 @@ handleSelect() {
 
   render() {
     const options=this.props.options.map((option, index)=>{
-      return (<option key={index} value={option}> {option.label} </option>);
+      return (<option key={index} value={option}>{option.label}</option>);
     });
 
     return (
       <div style={{...this.getStyle('container')}}>
         <span style={{...this.getStyle('label')}}>{this.props.label}</span>
         <select
-            ref="select"
+            style={this.getStyle('select')}
             onChange={()=>this.handleSelect()}
         >
           {options}
