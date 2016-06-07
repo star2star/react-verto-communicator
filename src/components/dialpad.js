@@ -35,7 +35,7 @@ class Dialpad extends VertoBaseComponent {
         background: "#eee",
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        //justifyContent: 'space-between',
         backgroundColor: '#eee',
         //height: '100px',
         width: '100%',
@@ -48,6 +48,9 @@ class Dialpad extends VertoBaseComponent {
         height: "24px",
         fill: "green"
       },
+      span : {
+        width: '24px'
+      },
       input: {
         backgroundColor: 'transparent',
         color: '#4a4a4a',
@@ -59,7 +62,7 @@ class Dialpad extends VertoBaseComponent {
         fontSize: '40px'
       },
       back : {
-        display: this.state.inputFocused ?  'none' : 'block',
+        display: this.state.inputFocused ?  'none' : 'inline',
         width: "24px",
         height: "24px",
         fill: "#ccc",
@@ -145,7 +148,13 @@ class Dialpad extends VertoBaseComponent {
     return (
       <div style={{...this.getDefaultStyle('container')}}>
         <div style={{...this.getDefaultStyle('header')}}>
-          <CallHistoryIconSVG svgStyle={{...this.getDefaultStyle('callhist')}} />
+          <span
+              style={{...this.getStyle('span')}}
+              onClick={()=>{console.log('Hi Mom!')}}
+          >
+            <CallHistoryIconSVG
+              svgStyle={{...this.getDefaultStyle('callhist')}} />
+          </span>
           <input
               placeholder="Enter an extension"
               style={{...this.getDefaultStyle('input')}}
@@ -153,19 +162,20 @@ class Dialpad extends VertoBaseComponent {
               onChange={this.changingNumber.bind(this)}
               onFocus={()=>{
                 this.setState({...this.state,'inputFocused': true});
-                console.log('******************', this.state.inputFocused);
               }}
               onBlur={()=>{
                 this.setState({...this.state,'inputFocused': false});
-                console.log('******************', this.state.inputFocused);
               }}
           />
-          <span onClick={()=>{
-            const number = this.state.number;
-            const newNumber = number.slice(0, number.length - 1);
-            this.setState({...this.state,'number': newNumber });
-          }}>
-          <BackIconSVG svgStyle={{...this.getDefaultStyle('back')}}
+          <span
+              style={{...this.getStyle('span')}}
+              onClick={()=>{
+                const number = this.state.number;
+                const newNumber = number.slice(0, number.length - 1);
+                this.setState({...this.state,'number': newNumber });
+              }}
+          >
+            <BackIconSVG svgStyle={{...this.getDefaultStyle('back')}}
           />
           </span>
         </div>
