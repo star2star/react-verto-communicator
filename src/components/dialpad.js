@@ -37,7 +37,7 @@ class Dialpad extends VertoBaseComponent {
         alignItems: 'center',
         justifyContent: 'space-between',
         backgroundColor: '#eee',
-        height: '100px',
+        //height: '100px',
         width: '100%',
         padding: '15px',
         borderBottom: '2px solid #ccc'
