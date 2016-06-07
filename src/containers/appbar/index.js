@@ -15,11 +15,10 @@ import SettingsCheckbox from '../../components/settingsCheckbox.js';
 import { doSubmitLogOut } from '../main/action-creators';
 import App from '../../components/app';
 import About from '../../components/about';
-import SettingsPreview from '../../components/SettingsPreview';
 import Contributors from '../../components/contributors';
 import { MenuIconSVG } from '../../components/svgIcons';
 import { injectIntl, FormattedMessage } from 'react-intl';
-import LastCall from '../../components/lastCall';
+
 
 
 // Need to close menu on resize so that if we pass media query limit then
@@ -336,7 +335,7 @@ class AppBar extends VertoBaseComponent {
   //   if (this.state.showSettings) {
   //     rSettings = (
   //       <div style={this.getStyle('settingsStyles')}>
-  //           {settingsContainer}
+  //           
   //       </div>
   //     );
   //   }
@@ -383,7 +382,11 @@ class AppBar extends VertoBaseComponent {
     let lastCall;
 
     if (true && !this.state.showAltAppControls) {
-      lastCall = (<LastCall lastNumber={this.props.lastNumber} /> );
+      lastCall = (
+        <div  className="lastCall" style={this.getStyle('lastCallStyles')}>
+          Last Call: (941) 867-5309
+        </div>
+      );
     }
 
     // settings here
@@ -392,7 +395,7 @@ class AppBar extends VertoBaseComponent {
     // const settingsContainer = this.buildSettingsContainer();
 
     return (
-      <div style={{position: "absolute", left: "0px", right: "0px", top: "0px", zIndex: "1"}}>
+      <div style={{position: "absolute", left: "0px", right: "0px", top: "0px"}}>
         <div className="appbar" style={this.getStyle('appbarStyles')}>
           <span className="altMenu" style={this.getStyle("altMenuStyles")} onClick={this.handleAltMenuClick}>
             <MenuIconSVG svgStyle={this.getStyle("altMenuSvgStyles")} />
@@ -404,11 +407,8 @@ class AppBar extends VertoBaseComponent {
             <VCStatus status = {this.props.vcStatus} compStyle={!this.state.showAltAppControls ? {svgStyle:{marginRight: '20px'}}:{svgStyle:{marginBottom:'10px'}}}/>
             {lastCall}
             <div style={!this.state.showAltAppControls ? {marginRight: '20px'}:{marginBottom:'10px'}}>
-              <Settings  allowDisplayDetails={this.props.vcStatus != 'disconnected'}
-                  cbToggleShowSettings={this.settings.bind(this)}
-                  settingsData={this.props.settings}
-                  cbPreviewSet={()=>{App.toggleModal((<SettingsPreview settingsData={this.props.settings} cbClose={App.toggleModal}/>));}}
-              />
+              <Settings  allowDisplayDetails={this.props.vcStatus != 'disconnected'} cbToggleShowSettings={this.settings.bind(this)}
+                  settingsData={this.props.settings} />
             </div>
             <div style={!this.state.showAltAppControls ? {marginRight: '20px'}:{marginBottom:'10px'}}>
               <UserMenu allowDisplayDetails={this.props.vcStatus != 'disconnected'} compStyle={this.state.showAltAppControls ? this.getStyle("altUserMenu") : undefined}>
@@ -453,7 +453,6 @@ export default connect((state)=>{
     settings: state.app.settings,
     bandwidthInfo: state.app.bandwidthInfo,
     vcStatus: state.auth.vcStatus,
-    lastNumber: state.auth.lastCall,
     contributorsData: state.app.contributors
   });
 })(injectIntl(Radium(AppBar)));
