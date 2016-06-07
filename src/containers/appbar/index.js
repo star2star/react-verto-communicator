@@ -15,11 +15,12 @@ import SettingsCheckbox from '../../components/settingsCheckbox.js';
 import { doSubmitLogOut } from '../main/action-creators';
 import App from '../../components/app';
 import About from '../../components/about';
-import SettingsPreview from '../../components/SettingsPreview';
 import Contributors from '../../components/contributors';
 import { MenuIconSVG } from '../../components/svgIcons';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import LastCall from '../../components/lastCall';
+
+
 
 
 // Need to close menu on resize so that if we pass media query limit then
@@ -336,7 +337,7 @@ class AppBar extends VertoBaseComponent {
   //   if (this.state.showSettings) {
   //     rSettings = (
   //       <div style={this.getStyle('settingsStyles')}>
-  //           {settingsContainer}
+  //
   //       </div>
   //     );
   //   }
@@ -385,7 +386,9 @@ class AppBar extends VertoBaseComponent {
     let lastCall;
 
     if (true && !this.state.showAltAppControls) {
-      lastCall = (<LastCall lastNumber={this.props.lastNumber} /> );
+      lastCall = (
+        <LastCall lastNumber={this.props.lastNumber} />
+      );
     }
 
     // settings here
@@ -394,7 +397,7 @@ class AppBar extends VertoBaseComponent {
     // const settingsContainer = this.buildSettingsContainer();
 
     return (
-      <div style={{position: "absolute", left: "0px", right: "0px", top: "0px", zIndex: "1"}}>
+      <div style={{position: "absolute", left: "0px", right: "0px", top: "0px"}}>
         <div className="appbar" style={this.getStyle('appbarStyles')}>
           <span className="altMenu" style={this.getStyle("altMenuStyles")} onClick={this.handleAltMenuClick}>
             <MenuIconSVG svgStyle={this.getStyle("altMenuSvgStyles")} />

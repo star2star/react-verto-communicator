@@ -289,6 +289,7 @@ class VertoService {
             this._data.confLayouts = options;
           } else if (message['conf-command'] == 'canvasInfo') {
             this._data.canvasInfo = message.responseData;
+            console.log('..... canvasInfo ...', message );
             //TODO
             //$rootScope.$emit('conference.canvasInfo', message.responseData);
           } else {
@@ -300,9 +301,11 @@ class VertoService {
     });
 
     if (this._data.confRole == "moderator") {
-      console.log('>>> conf.listVideoLayouts();', conf, conf.listVideoLayouts());
-      conf.listVideoLayouts();
-      conf.modCommand('canvasInfo');
+      console.log('>>> conf.listVideoLayouts();', conf );
+      setTimeout(()=> {
+        console.log('sending listVideoLayout')
+        conf.listVideoLayouts();}, 4000);
+        conf.modCommand('canvasInfo');
     } else {
       console.log('NOT Moderator but i am: ', this._data.confRole);
     }

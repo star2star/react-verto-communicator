@@ -12,7 +12,7 @@ const propTypes = {
 class Dialpad extends VertoBaseComponent {
   constructor(props) {
     super(props);
-    this.state = {number: this.props.nbrToDial};
+    this.state = {number: this.props.nbrToDial, inputFocused: false};
   }
 
   getCompStyle() {
@@ -37,12 +37,13 @@ class Dialpad extends VertoBaseComponent {
         alignItems: 'center',
         justifyContent: 'space-between',
         backgroundColor: '#eee',
-        height: '100px',
+        //height: '100px',
         width: '100%',
         padding: '15px',
         borderBottom: '2px solid #ccc'
       },
       callhist : {
+        display: this.state.inputFocused ?  'none' : 'block',
         width: "24px",
         height: "24px",
         fill: "green"
@@ -58,9 +59,42 @@ class Dialpad extends VertoBaseComponent {
         fontSize: '40px'
       },
       back : {
+        display: this.state.inputFocused ?  'none' : 'block',
         width: "24px",
         height: "24px",
-        fill: "#ccc"
+        fill: "#ccc",
+        cursor: 'pointer'
+      },
+      bar: {
+        position: 'relative',
+        bottom: '2px',
+        padding: '0px 14px 0px 12px',
+        display: 'flex',
+        justifyContent: 'space-between',
+        content: '" "',
+        height: '2px',
+        borderWidth: '2px',
+        borderColor: '#ccc',
+        width: '101%',
+        backgroundColor: '#ccc'
+      },
+      left: {
+        content: '" "',
+        height: '2px',
+        position: 'absolute',
+        backgroundColor: '#009688',
+        transition : this.state.inputFocused ? 'left 1s' : 'left 0s',
+        left: this.state.inputFocused ?  '0%' : '50%',
+        right: '50%'
+      },
+      right: {
+        content: '" "',
+        height: '2px',
+        position: 'absolute',
+        backgroundColor: '#009688',
+        transition : this.state.inputFocused ? 'right 1s' : 'right 0s',
+        right: this.state.inputFocused ?  '0%' : '50%',
+        left: '50%'
       },
       bodycont: {
         width: '100%'
@@ -113,9 +147,19 @@ class Dialpad extends VertoBaseComponent {
         <div style={{...this.getDefaultStyle('header')}}>
           <CallHistoryIconSVG svgStyle={{...this.getDefaultStyle('callhist')}} />
           <input
-          placeholder="Enter an extension"
-          style={{...this.getDefaultStyle('input')}}
-          value={this.state.number} onChange={this.changingNumber.bind(this)}/>
+              placeholder="Enter an extension"
+              style={{...this.getDefaultStyle('input')}}
+              value={this.state.number}
+              onChange={this.changingNumber.bind(this)}
+              onFocus={()=>{
+                this.setState({...this.state,'inputFocused': true});
+                console.log('******************', this.state.inputFocused);
+              }}
+              onBlur={()=>{
+                this.setState({...this.state,'inputFocused': false});
+                console.log('******************', this.state.inputFocused);
+              }}
+          />
           <span onClick={()=>{
             const number = this.state.number;
             const newNumber = number.slice(0, number.length - 1);
@@ -125,9 +169,19 @@ class Dialpad extends VertoBaseComponent {
           />
           </span>
         </div>
+        <div style={{...this.getStyle('bar')}}>
+          <span className="left" style={{...this.getStyle('left')}}> &nbsp;</span>
+          <span className="right" style={{...this.getStyle('right')}}>&nbsp; </span>
+        </div>
         <Numberpad cbClick={this.dialNumber.bind(this)} />
-        <div style={{...this.getDefaultStyle('callcont')}}>
+        <div
+            onFocus={()=>{
+              this.setState({...this.state,'inputFocused': false});
+              console.log('******************', this.state.inputFocused);
+            }}
+            style={{...this.getDefaultStyle('callcont')}}>
           <div
+
               onClick={this.makeCall.bind(this)}
               style={{...this.getDefaultStyle('callbg')}} >
             <PhoneIconSVG svgStyle={{...this.getDefaultStyle('call')}} />
