@@ -68,6 +68,7 @@ class Dialpad extends VertoBaseComponent {
       bar: {
         position: 'relative',
         bottom: '2px',
+        padding: '0px 14px 0px 12px',
         display: 'flex',
         justifyContent: 'space-between',
         content: '" "',
