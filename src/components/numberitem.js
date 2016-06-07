@@ -37,8 +37,9 @@ class NumberItem extends VertoBaseComponent {
         paddingLeft: '15px',
         paddingRight: '15px',
         transition: 'box-shadow 2s ease',
+        outline: 'none',
         ':hover': {
-          boxShadow: '2px 10px 5px #ccc'
+          boxShadow: '2px 2px 5px #ddd'
         }
 
       },
