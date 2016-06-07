@@ -20,6 +20,7 @@ import Contributors from '../../components/contributors';
 import { MenuIconSVG } from '../../components/svgIcons';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import LastCall from '../../components/lastCall';
+import { doMakeCall } from '../main/action-creators';
 
 
 
@@ -388,7 +389,10 @@ class AppBar extends VertoBaseComponent {
 
     if (true && !this.state.showAltAppControls) {
       lastCall = (
-        <LastCall lastNumber={this.props.lastNumber} />
+        <LastCall lastNumber={this.props.lastNumber} cbClick={(number)=>{
+          console.log('<<<<<<<', number, this.props.settings)
+          this.props.dispatch(doMakeCall(number, this.props.app))
+        }} />
       );
     }
 
@@ -461,6 +465,7 @@ export default connect((state)=>{
     bandwidthInfo: state.app.bandwidthInfo,
     vcStatus: state.auth.vcStatus,
     lastNumber: state.auth.lastCall,
+    app: state.app,
     contributorsData: state.app.contributors,
     chatData: state.auth.conferenceCall && state.auth.conferenceCall.messages
   });
