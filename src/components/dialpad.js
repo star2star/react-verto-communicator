@@ -116,7 +116,14 @@ class Dialpad extends VertoBaseComponent {
           placeholder="Enter an extension"
           style={{...this.getDefaultStyle('input')}}
           value={this.state.number} onChange={this.changingNumber.bind(this)}/>
-          <BackIconSVG svgStyle={{...this.getDefaultStyle('back')}} />
+          <span onClick={()=>{
+            const number = this.state.number;
+            const newNumber = number.slice(0, number.length - 1);
+            this.setState({...this.state,'number': newNumber });
+          }}>
+          <BackIconSVG svgStyle={{...this.getDefaultStyle('back')}}
+          />
+          </span>
         </div>
         <Numberpad cbClick={this.dialNumber.bind(this)} />
         <div style={{...this.getDefaultStyle('callcont')}}>
