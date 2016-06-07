@@ -146,6 +146,8 @@ const doVertoLogin = (data) => {
   return dispatch => {
     //console.log('verto ....', data);
     //TODO figure this out if failed
+    window.VS = VertoService.getInstance();
+
     dispatch(doVertoLoginValid(data));
     dispatch(doSpeedTest());
 
@@ -259,8 +261,32 @@ const doUpdateSettings = (aData) => {
     "data": aData
   }
 }
+const doSendChat = (message) => {
+  return dispatch => {
+
+    VertoService.getInstance().sendConferenceChat(message);
+    dispatch(doingSendingChat());
+  };
+}
+
+const doReceiveChat = (from, message) => {
+  return dispatch =>{
+    console.log('received a chat msssgggg: ', from, message);
+    dispatch({
+      type: 'RECEIVED_CHAT_MESSAGE',
+      data: { from, message }
+    });
+  }
+}
+
+const doingSendingChat = () => {
+  return {
+    type: 'SENDING_CHAT_MESSAGE'
+  }
+}
 
 export { doValidation, doBrowserCheck,
   doSubmitLogin, doShowLogin, doVertoLogin, doSubmitLogOut, doLogOut,
   doMakeCall, doMakeCallError, doIncomingCall,
-  doingMakeCall, doHungUp, doHangUp, doAnswer, doMuteMic, doConferenceData, doHold, doMuteVideo };
+  doingMakeCall, doHungUp, doHangUp, doAnswer, doMuteMic, doConferenceData, doHold, doMuteVideo,
+  doSendChat, doReceiveChat, doingSendingChat };

@@ -1,4 +1,4 @@
-import {doLogOut, doVertoLogin, doMakeCallError, doHungUp, doingMakeCall, doIncomingCall, doConferenceData } from '../containers/main/action-creators';
+import {doLogOut, doVertoLogin, doMakeCallError, doHungUp, doingMakeCall, doIncomingCall, doConferenceData, doReceiveChat } from '../containers/main/action-creators';
 import VideoConstants from './VideoConstants';
 import md5 from 'md5';
 
@@ -19,7 +19,7 @@ class VertoService {
 
     _callbacks = {
       onMessage: (v, dialog, msg, params) => {
-        //console.debug('^^^^^^^ onMessage:', v, dialog, msg, params);
+        console.debug('^^^^^^^ onMessage:', v, dialog, msg, params);
 
         switch (msg) {
           case $.verto.enum.message.pvtEvent:
@@ -48,6 +48,7 @@ class VertoService {
           case $.verto.enum.message.info:
             var body = params.body;
             var from = params.from_msg_name || params.from;
+            console.debug('^^^^^^^ onMessage INFO :', body, from );
             //TODO
             // $rootScope.$emit('chat.newMessage', {
             //   from: from,
@@ -257,6 +258,8 @@ class VertoService {
       chatCallback: (v, e) => {
         var from = e.data.fromDisplay || e.data.from || "Unknown";
         var message = e.data.message || "";
+        console.log('chatCallback ..... ', from, message );
+        _dispatch(doReceiveChat(from, message));
         //TODO
         //$rootScope.$emit('chat.newMessage', {
         //  from: from,
@@ -463,6 +466,11 @@ class VertoService {
         iceServers: true,
         loginParams: data
       };
+  }
+
+  sendConferenceChat(message) {
+    console.log('sendConferenceChat: ', message);
+    _verto._data.conf.sendChat(message, "message");
   }
 
   answer(callerId){

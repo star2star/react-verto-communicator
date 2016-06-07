@@ -454,6 +454,7 @@ export default connect((state)=>{
     bandwidthInfo: state.app.bandwidthInfo,
     vcStatus: state.auth.vcStatus,
     lastNumber: state.auth.lastCall,
-    contributorsData: state.app.contributors
+    contributorsData: state.app.contributors,
+    chatData: state.auth.conferenceCall && state.auth.conferenceCall.messages
   });
 })(injectIntl(Radium(AppBar)));
