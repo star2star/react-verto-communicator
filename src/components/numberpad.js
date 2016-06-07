@@ -6,9 +6,7 @@ import NumberItem from './numberitem';
 
 const propTypes = {
   compStyle : React.PropTypes.object,
-  cbClick: React.PropTypes.func.isRequired,
-  keyValue: React.PropTypes.string,
-  keyString : React.PropTypes.string
+  cbClick: React.PropTypes.func.isRequired
 };
 
 class Numberpad extends VertoBaseComponent {
