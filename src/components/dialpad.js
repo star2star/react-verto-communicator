@@ -154,6 +154,10 @@ class Dialpad extends VertoBaseComponent {
                 this.setState({...this.state,'inputFocused': true});
                 console.log('******************', this.state.inputFocused);
               }}
+              onBlur={()=>{
+                this.setState({...this.state,'inputFocused': false});
+                console.log('******************', this.state.inputFocused);
+              }}
           />
           <span onClick={()=>{
             const number = this.state.number;
