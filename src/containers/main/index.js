@@ -85,7 +85,7 @@ class Main extends VertoBaseComponent {
       case 'loggedIn':
         loggedInfo = (
           <div>
-            <Dialpad cbCall={this.makeCall.bind(this)} nbrToDial="0" />
+            <Dialpad cbCall={this.makeCall.bind(this)} nbrToDial="" />
         </div>);
         break;
       case 'resolution_failed':
