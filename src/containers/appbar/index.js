@@ -18,6 +18,8 @@ import About from '../../components/about';
 import Contributors from '../../components/contributors';
 import { MenuIconSVG } from '../../components/svgIcons';
 import { injectIntl, FormattedMessage } from 'react-intl';
+import LastCall from '../../components/lastCall';
+
 
 
 
@@ -335,7 +337,7 @@ class AppBar extends VertoBaseComponent {
   //   if (this.state.showSettings) {
   //     rSettings = (
   //       <div style={this.getStyle('settingsStyles')}>
-  //           
+  //
   //       </div>
   //     );
   //   }
@@ -383,9 +385,7 @@ class AppBar extends VertoBaseComponent {
 
     if (true && !this.state.showAltAppControls) {
       lastCall = (
-        <div  className="lastCall" style={this.getStyle('lastCallStyles')}>
-          Last Call: (941) 867-5309
-        </div>
+        <LastCall lastNumber={this.props.lastNumber} />
       );
     }
 
@@ -453,6 +453,7 @@ export default connect((state)=>{
     settings: state.app.settings,
     bandwidthInfo: state.app.bandwidthInfo,
     vcStatus: state.auth.vcStatus,
+    lastNumber: state.auth.lastCall,
     contributorsData: state.app.contributors
   });
 })(injectIntl(Radium(AppBar)));
