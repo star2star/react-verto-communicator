@@ -6,7 +6,7 @@ import SettingsMenuSelect from './settingsMenuSelect.js';
 import vMeter from 'volume-meter';
 import VolumeMeter from './volumeMeter';
 // TODO replace with 'refresh' icon when available...
-import { SettingsIconSVG } from './svgIcons';
+import { RestoreIconSVG } from './svgIcons';
 
 const propTypes = {
   compStyle: React.PropTypes.object,
@@ -171,7 +171,7 @@ class SettingsPreview extends VertoBaseComponent{
               style={{...this.getStyle('button')}}
               onClick={this.submitRefresh.bind(this)}
             >
-            <SettingsIconSVG svgStyle={{height:"20px", width: "20px", fill: "#ccc"}}/>
+            <RestoreIconSVG svgStyle={{height:"20px", width: "20px", fill: "#ccc"}}/>
           </button>
           <button
               style={{...this.getStyle('button')}}
