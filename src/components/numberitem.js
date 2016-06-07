@@ -32,9 +32,9 @@ class NumberItem extends VertoBaseComponent {
         width: '33.33%',
         backgroundColor: '#fff',
         cursor: 'pointer',
-        padding: '10px 0px',
+        padding: '0px',
         margin: '5px',
-        padding: '0px 15px 15px 15px',
+        //padding: '0px 15px 15px 15px',
         transition: 'box-shadow .2s ease',
         outline: 'none',
         ':hover': {
