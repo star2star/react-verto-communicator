@@ -14,6 +14,7 @@ import SettingsMenuSelect from '../../components/settingsMenuSelect';
 import SettingsCheckbox from '../../components/settingsCheckbox';
 import SettingsPreview from '../../components/settingsPreview';
 import { doSubmitLogOut } from '../main/action-creators';
+import { doUpdateSetting } from './action-creators';
 import App from '../../components/app';
 import About from '../../components/about';
 import Contributors from '../../components/contributors';
@@ -418,7 +419,7 @@ class AppBar extends VertoBaseComponent {
             {lastCall}
             <div style={!this.state.showAltAppControls ? {marginRight: '20px'}:{marginBottom:'10px'}}>
               <Settings  allowDisplayDetails={this.props.vcStatus != 'disconnected'}
-                  cbSubmitSetting = {(setting)=>{ console.log("app bar submit setting", setting);}}
+                  cbSubmitSetting = {(setting)=>{ this.props.dispatch(doUpdateSetting(setting));}}
                   cbToggleShowSettings={this.settings.bind(this)}
                   settingsData={this.props.settings}
                   cbPreviewSet={()=>{App.toggleModal((<SettingsPreview settingsData={this.props.settings} cbClose={App.toggleModal}/>));}}

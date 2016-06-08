@@ -162,31 +162,31 @@ class Settings extends VertoBaseComponent {
               cbSubmitSetting={this.props.cbSubmitSetting}
               options={this.props.settingsData.videoDevices ? this.props.settingsData.videoDevices : []}
               label="Camera:"
-              selectedOption={{id:"selectedVideo", label:this.props.settingsData.selectedVideo && this.props.settingsData.selectedVideo.label}}
+              selectedOption={{id:"selectedVideo", data:this.props.settingsData.selectedVideo}}
           />
           <SettingsMenuSelect
-              cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+              cbSubmitSetting={this.props.cbSubmitSetting}
               options={this.props.settingsData.shareDevices ? this.props.settingsData.shareDevices : []}
               label="Share Device:"
-              selectedOption={{id:"selectedShare", label:this.props.settingsData.selectedShare && this.props.settingsData.selectedShare.label}}
+              selectedOption={{id:"selectedShare", data:this.props.settingsData.selectedShare}}
           />
           <SettingsMenuSelect
-              cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+              cbSubmitSetting={this.props.cbSubmitSetting}
               options={this.props.settingsData.audioDevices ? this.props.settingsData.audioDevices : []}
               label="Microphone:"
-              selectedOption={{id:"selectedAudio", label:this.props.settingsData.selectedAudio && this.props.settingsData.selectedAudio.label}}
+              selectedOption={{id:"selectedAudio", data:this.props.settingsData.selectedAudio}}
           />
           <SettingsMenuSelect
-              cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+              cbSubmitSetting={this.props.cbSubmitSetting}
               options={this.props.settingsData.speakerDevices ? this.props.settingsData.speakerDevices : []}
               label="Speaker:"
-              selectedOption={{id:"selectedSpeaker", label:this.props.settingsData.selectedSpeaker && this.props.settingsData.selectedSpeaker.label}}
+              selectedOption={{id:"selectedSpeaker", data:this.props.settingsData.selectedSpeaker}}
           />
           <SettingsMenuSelect
-              cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+              cbSubmitSetting={this.props.cbSubmitSetting}
               options={this.props.settingsData.bestFrameRate ? this.props.settingsData.bestFrameRate : []}
               label="Best Frame Rate:"
-              selectedOption={{id:"selectedBestFrameRate", label:this.props.settingsData.selectedBestFrameRate && this.props.settingsData.selectedBestFrameRate.label}}
+              selectedOption={{id:"selectedBestFrameRate", data:this.props.settingsData.selectedBestFrameRate}}
           />
           <div className="buttonContainer" style={{...this.getStyle('buttonContainer')}}>
             <button
@@ -240,10 +240,10 @@ class Settings extends VertoBaseComponent {
               label="Ask Before Recovering a Call"
           />
           <SettingsMenuSelect
-              cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+              cbSubmitSetting={this.props.cbSubmitSetting}
               options={this.props.settingsData.languages ? this.props.settingsData.languages : []}
               label="Language:"
-              selectedOption={{id:"language", label:this.props.settingsData.language && this.props.settingsData.language.label}}
+              selectedOption={{id:"language", data:this.props.settingsData.language}}
           />
           <span style={{...this.getStyle('headerLabel')}}>
             <FormattedMessage

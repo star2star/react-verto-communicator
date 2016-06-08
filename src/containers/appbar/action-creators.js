@@ -9,7 +9,7 @@ const doUpdateSetting = (settingObj) => {
   return {
     type: 'APP_UPDATE_SINGLE_SETTING',
     data: settingObj
-  }
+  };
 };
 
 const doGetSettings = (data) => {
@@ -19,4 +19,4 @@ const doGetSettings = (data) => {
   };
 };
 
-export { doSubmitSettings, doGetSettings };
+export { doSubmitSettings, doUpdateSetting, doGetSettings };
