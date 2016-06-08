@@ -99,12 +99,24 @@ class SettingsPreview extends VertoBaseComponent{
         container: {
           paddingTop: '10px',
           paddingBottom: '5px',
-          borderBottom: '1px solid #ccc'
+          borderBottom: '1px solid #ccc',
+          display: 'flex',
+          flex: 2,
+          flexDirection: 'column'
         },
         label: {
           display:'flex',
           paddingBottom: '10px',
           fontWeight: 'bold'
+        },
+        select: {
+          border: '0',
+          boxShadow:'none',
+          borderRadius: '0',
+          //width: '300px',
+          fontSize: '.85rem;',
+          backgroundColor: 'rgba(0,0,0,0)',
+          color: 'black'
         }
       },
       compVolMeterStyles: {
@@ -125,6 +137,16 @@ class SettingsPreview extends VertoBaseComponent{
         overlay: {
           zIndex: "1"
         }
+      },
+      menuStyle: {
+        display: "flex"
+        //width: '480px'
+      },
+      buttonStyle: {
+        backgroundColor: "#009688",
+        display: 'flex',
+        //width: '100px',
+        flex: 1
       }
     };
 
@@ -153,26 +175,28 @@ class SettingsPreview extends VertoBaseComponent{
           <video ref="localvideo" className="videoPreview" muted autoPlay>
           </video>
           <VolumeMeter volumeLevel={this.state.volume} compStyle={this.getStyle("compVolMeterStyles")}/>
-          <SettingsMenuSelect
-              compStyle={this.getStyle("compMenuStyles")}
-              cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
-              options={this.props.settingsData.videoDevices ? this.props.settingsData.videoDevices : []}
-              label="Camera:"
-              selectedOption={{id:"selectedVideo", label:this.props.settingsData.selectedVideo && this.props.settingsData.selectedVideo.label}}
-          />
-          <SettingsMenuSelect
-              compStyle={this.getStyle("compMenuStyles")}
-              cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
-              options={this.props.settingsData.audioDevices ? this.props.settingsData.audioDevices : []}
-              label="Microphone:"
-              selectedOption={{id:"selectedAudio", label:this.props.settingsData.selectedAudio && this.props.settingsData.selectedAudio.label}}
-          />
-          <button
-              style={{...this.getStyle('button')}}
-              onClick={this.submitRefresh.bind(this)}
-            >
-            <RestoreIconSVG svgStyle={{height:"20px", width: "20px", fill: "#ccc"}}/>
-          </button>
+          <div style={this.getStyle('menuStyle')}>
+            <SettingsMenuSelect
+                compStyle={this.getStyle("compMenuStyles")}
+                cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                options={this.props.settingsData.videoDevices ? this.props.settingsData.videoDevices : []}
+                label="Camera:"
+                selectedOption={{id:"selectedVideo", label:this.props.settingsData.selectedVideo && this.props.settingsData.selectedVideo.label}}
+            />
+            <SettingsMenuSelect
+                compStyle={this.getStyle("compMenuStyles")}
+                cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                options={this.props.settingsData.audioDevices ? this.props.settingsData.audioDevices : []}
+                label="Microphone:"
+                selectedOption={{id:"selectedAudio", label:this.props.settingsData.selectedAudio && this.props.settingsData.selectedAudio.label}}
+            />
+            <button
+                style={{...this.getStyle('buttonStyle')}}
+                onClick={this.submitRefresh.bind(this)}
+              >
+              <RestoreIconSVG svgStyle={{height:"20px", width: "20px", fill: "#ccc"}}/>
+            </button>
+          </div>
           <button
               style={{...this.getStyle('button')}}
               onClick={this.submitSave.bind(this)}

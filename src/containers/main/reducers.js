@@ -70,6 +70,7 @@ const auth = (state, action)=>{
           const chu =  { ...state, showPage: 'loggedIn', lastCall: action.data.params.destination_number };
           // remove destination
           delete chu.callInfo;
+          delete chu.conferenceCall;
           return chu;
         }
       }
@@ -88,7 +89,22 @@ const auth = (state, action)=>{
       //console.log('aaaaaaahhhhhh bbbbaaadddd', action.data);
       return state;
 
+    case 'RECEIVED_CHAT_MESSAGE':
+      const x = { ...state };
+      if (x.conferenceCall) {
+        // ok have conference
+        if (!x.conferenceCall.messages) {
 
+          // first message
+          x.conferenceCall.messages = [];
+        }
+        // now append it append
+        x.conferenceCall.messages = x.conferenceCall.messages.concat(action.data);
+        return x;
+      } else {
+        console.log('hmmm no conference on receive a chat message weird');
+      }
+      return state;
     default:
      return state;
     }

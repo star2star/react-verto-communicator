@@ -21,6 +21,7 @@ import Contributors from '../../components/contributors';
 import { MenuIconSVG } from '../../components/svgIcons';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import LastCall from '../../components/lastCall';
+import { doMakeCall } from '../main/action-creators';
 
 
 
@@ -388,9 +389,15 @@ class AppBar extends VertoBaseComponent {
     let lastCall;
 
     if (true && !this.state.showAltAppControls) {
-      lastCall = (
-        <LastCall lastNumber={this.props.lastNumber} />
-      );
+      if (this.props.auth.callInfo) {
+        lastCall = (<LastCall labelText= {"In Call:"} lastNumber={this.props.auth.callInfo.destination}  />);
+      }else if (this.props.lastNumber) {
+        lastCall = (<LastCall labelText= {"Last Call:"} lastNumber={this.props.lastNumber}  cbClick={(number)=>{
+          this.props.dispatch(doMakeCall(number, this.props.app))
+        }} />);
+      } else {
+        lastCall = (<LastCall labelText= {"No Call Yet"} />);
+      }
     }
 
     // settings here
@@ -462,6 +469,9 @@ export default connect((state)=>{
     bandwidthInfo: state.app.bandwidthInfo,
     vcStatus: state.auth.vcStatus,
     lastNumber: state.auth.lastCall,
-    contributorsData: state.app.contributors
+    app: state.app,
+    auth: state.auth,
+    contributorsData: state.app.contributors,
+    chatData: state.auth.conferenceCall && state.auth.conferenceCall.messages
   });
 })(injectIntl(Radium(AppBar)));
