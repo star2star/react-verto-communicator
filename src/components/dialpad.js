@@ -55,14 +55,13 @@ class Dialpad extends VertoBaseComponent {
       },
       input: {
         display: 'flex',
-        flex: 8,
-        backgroundColor: 'transparent',
+        backgroundColor: this.state.inputFocused ? '#eee' : 'transparent',
         color: '#4a4a4a',
         height: '75px',
-        padding: '0px 25px 0px 25px',
+        //padding: '0px 25px 0px 25px',
         border: 'none',
         outline: 'none',
-        fontSize: !this.state.number ? '1vw' : '1.5vw',
+        fontSize: '40px', //!this.state.number ? '1vw' : '1.5vw',
         '@media (max-width: 768px)': {
           fontSize: '1em'
         }
@@ -188,6 +187,7 @@ class Dialpad extends VertoBaseComponent {
                 this.setState({...this.state,'inputFocused': false});
               }}
           />
+
           <span
               style={{...this.getStyle('span')}}
               onClick={()=>{
