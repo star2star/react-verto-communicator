@@ -17,9 +17,10 @@ class VertoService {
 
     const xInstance = this;
 
+    window.v = this;
     _callbacks = {
       onMessage: (v, dialog, msg, params) => {
-        console.debug('^^^^^^^ onMessage:', v, dialog, msg, params);
+        //console.debug('^^^^^^^ onMessage:', v, dialog, msg, params);
 
         switch (msg) {
           case $.verto.enum.message.pvtEvent:
@@ -48,7 +49,7 @@ class VertoService {
           case $.verto.enum.message.info:
             var body = params.body;
             var from = params.from_msg_name || params.from;
-            console.debug('^^^^^^^ onMessage INFO :', body, from );
+            //console.debug('^^^^^^^ onMessage INFO :', body, from );
             //TODO
             // $rootScope.$emit('chat.newMessage', {
             //   from: from,
@@ -99,7 +100,7 @@ class VertoService {
               //display("Calling: " + d.cidString());
               //goto_page("incall");
               //console.log('^^^^^^trying .. calling', d);
-              _dispatch(doingMakeCall('trying', d.params.destination_number, d.callID));
+              _dispatch(doingMakeCall('trying', d.params.destination_number, d.callID, d.direction.name));
               break;
 
           case $.verto.enum.state.early:
@@ -125,7 +126,7 @@ class VertoService {
               } else {
               	//TODO
                 //Processor.starphone('answered', d.params);
-                _dispatch(doingMakeCall('active', (d.direction.name == 'outbound' ? d.params.destination_number : d.params.caller_id_number), d.callID));
+                _dispatch(doingMakeCall('active', (d.direction.name == 'outbound' ? d.params.destination_number : d.params.caller_id_number), d.callID, d.direction.name));
               }
 
               break;
@@ -258,8 +259,9 @@ class VertoService {
       chatCallback: (v, e) => {
         var from = e.data.fromDisplay || e.data.from || "Unknown";
         var message = e.data.message || "";
-        console.log('chatCallback ..... ', from, message );
-        _dispatch(doReceiveChat(from, message));
+        var callID = Object.keys(v.dialogs)[0];
+        //console.log('chatCallback ..... ', from, message );
+        _dispatch(doReceiveChat(callID, from, message));
         //TODO
         //$rootScope.$emit('chat.newMessage', {
         //  from: from,
@@ -267,11 +269,11 @@ class VertoService {
         //});
       },
       onBroadcast: (v, conf, message) => {
-        console.log('>>> conf.onBroadcast:', message, arguments);
+        //console.log('>>> conf.onBroadcast:', message, arguments);
         if (message.action == 'response') {
           // This is a response with the video layouts list.
           if (message['conf-command'] == 'list-videoLayouts') {
-            console.log('hmmmmmmm', message.responseData);
+            //console.log('hmmmmmmm', message.responseData);
             var rdata = [];
 
             for (var i in message.responseData) {
@@ -292,7 +294,7 @@ class VertoService {
             this._data.confLayouts = options;
           } else if (message['conf-command'] == 'canvasInfo') {
             this._data.canvasInfo = message.responseData;
-            console.log('..... canvasInfo ...', message );
+            //console.log('..... canvasInfo ...', message );
             //TODO
             //$rootScope.$emit('conference.canvasInfo', message.responseData);
           } else {
@@ -304,13 +306,13 @@ class VertoService {
     });
 
     if (this._data.confRole == "moderator") {
-      console.log('>>> conf.listVideoLayouts();', conf );
+      //console.log('>>> conf.listVideoLayouts();', conf );
       setTimeout(()=> {
-        console.log('sending listVideoLayout')
-        conf.listVideoLayouts();}, 4000);
+        //console.log('sending listVideoLayout')
+        conf.listVideoLayouts();}, 0);
         conf.modCommand('canvasInfo');
     } else {
-      console.log('NOT Moderator but i am: ', this._data.confRole);
+      //console.log('NOT Moderator but i am: ', this._data.confRole);
     }
 
     this._data.conf = conf;
@@ -330,7 +332,7 @@ class VertoService {
 
     this._data.liveArray.onChange = (obj, args) => {
       window.foo = obj;
-      //console.log('liveArray.onChange --- action: ' + args.action, obj, args);
+      //console.log('liveArray.onChange --- action: ' + args.action, Object.keys(obj.verto.dialogs)[0], obj, args);
 
       switch (args.action) {
         case 'bootObj':
@@ -363,7 +365,7 @@ class VertoService {
           //var member = [args.key, args.data];
           //TODO $rootScope.$emit('members.update', member);
           //break;
-          _dispatch(doConferenceData(obj.asArray()));
+          _dispatch(doConferenceData({callId: Object.keys(obj.verto.dialogs)[0], users: obj.asArray() }));
           break;
         default:
           console.log('NotImplemented', args.action);
@@ -399,7 +401,7 @@ class VertoService {
   }
 
   sendDtmf(callerId, keys) {
-    console.log('SENDING DTMF:', callerId, keys);
+    //console.log('SENDING DTMF:', callerId, keys);
     if (_verto._data._activeCalls[callerId]) {
       _verto._data._activeCalls[callerId].dtmf(keys);
     } else {
@@ -418,7 +420,7 @@ class VertoService {
   }
 
   muteVideo(callerId) {
-    console.log('toggle MUTE VIDEO', callerId);
+    //console.log('toggle MUTE VIDEO', callerId);
     // if (_verto._data._activeCalls[callerId]) {
     //   console.log('****', _verto._data._activeCalls[callerId].setVideoMute('toggle'));
     //   //_verto._data._activeCalls[callerId].toggleHold();
@@ -430,7 +432,7 @@ class VertoService {
   }
 
   hold(callerId){
-      console.log('toggle HOLD', callerId);
+      //console.log('toggle HOLD', callerId);
       if (_verto._data._activeCalls[callerId]) {
         _verto._data._activeCalls[callerId].toggleHold();
       } else {
@@ -469,7 +471,7 @@ class VertoService {
   }
 
   sendConferenceChat(message) {
-    console.log('sendConferenceChat: ', message);
+    //console.log('sendConferenceChat: ', message);
     _verto._data.conf.sendChat(message, "message");
   }
 
@@ -753,7 +755,7 @@ class VertoService {
 
       // put data back on object
 
-      console.log('DDDDDD', data);
+      //console.log('DDDDDD', data);
       // when done ... call here
       callback(status);
     });

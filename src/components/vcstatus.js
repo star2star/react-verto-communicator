@@ -3,7 +3,7 @@ import VertoBaseComponent from './vertobasecomponent';
 import { StatusIconSVG } from './svgIcons';
 
 const propTypes = {
-  status: React.PropTypes.oneOf(['connected','disconnected', 'connecting']).isRequired,
+  status: React.PropTypes.oneOf(['connected','disconnected', 'connecting', 'active']).isRequired,
   compStyle:   React.PropTypes.object
 };
 
@@ -42,6 +42,7 @@ class VCStatus extends VertoBaseComponent {
         fillColor = this.getStyle('disconnectedFill');
         break;
       case 'connecting':
+      case 'active':
         fillColor = this.getStyle('connectingFill');
         break;
       case 'connected':

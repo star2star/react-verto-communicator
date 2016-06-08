@@ -85,7 +85,7 @@ class Main extends VertoBaseComponent {
       case 'loggedIn':
         loggedInfo = (
           <div>
-            <Dialpad cbCall={this.makeCall.bind(this)} lastNumber={this.props.auth.lastCall} nbrToDial="" />
+            <Dialpad cbCall={this.makeCall.bind(this)} lastNumber={this.props.callInfo.lastNumber} nbrToDial="" />
         </div>);
         break;
       case 'resolution_failed':
@@ -111,9 +111,10 @@ class Main extends VertoBaseComponent {
         }
         break;
       case 'call_inprogress':
+        //console.log('jjj');
         loggedInfo = (
           <div>
-            <CallProgress callData={this.props.auth.callInfo}
+            <CallProgress callData={this.props.callInfo.activeCalls[this.props.callInfo.currentCallId]}
               cbHangup={(callId)=>{
                 this.props.dispatch(doHangUp(callId));
               }}
@@ -155,6 +156,7 @@ class Main extends VertoBaseComponent {
 export default connect((state)=>{
   return ({
     auth: state.auth,
-    app: state.app
+    app: state.app,
+    callInfo: state.callInfo
   });
 })(injectIntl(Main));
