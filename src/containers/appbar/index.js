@@ -18,7 +18,7 @@ import { doUpdateSetting } from './action-creators';
 import App from '../../components/app';
 import About from '../../components/about';
 import Contributors from '../../components/contributors';
-import { MenuIconSVG } from '../../components/svgIcons';
+import { MenuIconSVG, ChatIconSVG } from '../../components/svgIcons';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import LastCall from '../../components/lastCall';
 import { doMakeCall } from '../main/action-creators';
@@ -176,6 +176,13 @@ class AppBar extends VertoBaseComponent {
   }
 
   settings(displaySettings) {
+    // Close any open menus in the appbar
+    if (this.props.bandwidthInfo.outgoingBandwidth && this.props.bandwidthInfo.incomingBandwidth) {
+      NetworkStatusIndicator && NetworkStatusIndicator.closeNetworkStatus();
+    }
+    UserMenu.closeMenu();
+    TagMenu.closeMenu();
+    
     //console.log('toggle settings', displaySettings);
     this.setState({ ...this.state, showSettings: displaySettings });
   }
@@ -400,6 +407,28 @@ class AppBar extends VertoBaseComponent {
       }
     }
 
+    // toggle Chat control - only display if there is a conference in session...
+    // TODO find out where in store in progress conference is indicated
+    let toggleChat;
+
+    if (false) {
+      toggleChat = (
+        <div  style={!this.state.showAltAppControls ? {marginRight: '20px'}:{marginBottom:'10px'}}
+            onClick={()=>{
+                  // TODO add dispatch to toggle the slide out of memberlist/chat from right side...
+                  console.log('Toggle Chat Clicked in app bar');
+                }
+        }
+        >
+          <ChatIconSVG svgStyle={{height: "24px", width: "24px", fill: "#fff"}} />
+
+          </div>
+);
+    }
+
+
+
+
     // settings here
     //TODO define settings style for alt menu orientation
     // const settingsMenu = this.getSettingsMenu();
@@ -416,7 +445,9 @@ class AppBar extends VertoBaseComponent {
           <span className="appControls" style={acStyles}>
             {nsIndicator}
             <VCStatus status = {this.props.vcStatus} compStyle={!this.state.showAltAppControls ? {svgStyle:{marginRight: '20px'}}:{svgStyle:{marginBottom:'10px'}}}/>
+
             {lastCall}
+
             <div style={!this.state.showAltAppControls ? {marginRight: '20px'}:{marginBottom:'10px'}}>
               <Settings  allowDisplayDetails={this.props.vcStatus != 'disconnected'}
                   cbSubmitSetting = {(setting)=>{ this.props.dispatch(doUpdateSetting(setting));}}
@@ -425,6 +456,9 @@ class AppBar extends VertoBaseComponent {
                   cbPreviewSet={()=>{App.toggleModal((<SettingsPreview settingsData={this.props.settings} cbClose={App.toggleModal}/>));}}
               />
             </div>
+
+            {toggleChat}
+
             <div style={!this.state.showAltAppControls ? {marginRight: '20px'}:{marginBottom:'10px'}}>
               <UserMenu allowDisplayDetails={this.props.vcStatus != 'disconnected'} compStyle={this.state.showAltAppControls ? this.getStyle("altUserMenu") : undefined}>
                 <MenuItem label={<FormattedMessage id='OPEN_NEW_WINDOW' />}cbAction={()=>{

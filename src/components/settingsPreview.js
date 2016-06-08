@@ -99,7 +99,7 @@ class SettingsPreview extends VertoBaseComponent{
         container: {
           paddingTop: '10px',
           paddingBottom: '5px',
-          borderBottom: '1px solid #ccc',
+          //borderBottom: '1px solid #ccc',
           display: 'flex',
           flex: 2,
           flexDirection: 'column'
@@ -110,31 +110,36 @@ class SettingsPreview extends VertoBaseComponent{
           fontWeight: 'bold'
         },
         select: {
+          borderBottom: '1px solid #ccc',
           border: '0',
           boxShadow:'none',
           borderRadius: '0',
-          fontSize: '.85rem;',
+          fontSize: '.85rem',
           backgroundColor: 'rgba(0,0,0,0)',
-          color: 'black'
-        },
-        button: {
-          backgroundColor: "red"
+          color: 'black',
+          marginLeft: '8px'
+
         }
       },
       compVolMeterStyles: {
         volMeterStyles: {
           position: 'absolute',
-          top: '375px'
+          //top: '375px',
+          marginTop: '-130px',
+          marginLeft: '10px'
         }
       },
       modal : {
         content: {
+          boxShadow: '0px 27px 24px 0px rgba(0,0,0,.2), 0px 40px 77px 0px rgba(0,0,0,.22)',
           top: '50%',
           left: '50%',
           right: 'auto',
           bottom: 'auto',
           marginRight: '-50%',
-          transform: 'translate(-50%, -50%)'
+          transform: 'translate(-50%, -50%)',
+          width: '50%',
+          padding: '0 0 20px 0'
         },
         overlay: {
           zIndex: "1"
@@ -143,23 +148,45 @@ class SettingsPreview extends VertoBaseComponent{
       menuStyle: {
         display: "flex"
       },
-      buttonStyle: {
+      refreshStyle: {
         backgroundColor: "#009688",
         display: 'flex',
-        flex: 1,
-        justifyContent: 'center'
+        flex: 0.25,
+        justifyContent: 'center',
+        border: '0px',
+        marginTop: '25px',
+        marginBottom: '5px',
+        marginLeft: '10px',
+        padding: '0 20px 0 20px'
       },
        saveStyle: {
-        backgroundColor: "green",
+        backgroundColor: '#4CAF50',
         color: 'white',
-        paddingTop: '10px',
-        fontSize: '30px'
+        padding: '5px 25px 5px 25px',
+        border: '0px',
+        fontSize: '15px'
 
       },
         saveContainer: {
           display: 'flex',
           flex: 1,
-          justifyContent: 'center'
+          justifyContent: 'center',
+          paddingTop: '25px'
+        },
+        videoStyle: {
+          width: '100%',
+          height: '100%'
+        },
+        headerStyle: {
+          backgroundColor: '#0D47A1',
+          paddingTop: '10px',
+          color: 'white',
+          textAlign: 'center',
+          fontSize: '15px',
+          paddingBottom: '10px'
+        },
+        bodyStyle: {
+          padding: '15px'
         }
     };
 
@@ -182,45 +209,46 @@ class SettingsPreview extends VertoBaseComponent{
     return (
       <Modal isOpen onRequestClose={this.props.cbClose} style={this.getStyle('modal')}>
         <div style={this.getStyle("previewStyles")}>
-          <div className="previewHeading">
+          <div style={this.getStyle('headerStyle')}>
             <FormattedMessage id="TITLE_PREVIEW_SETTINGS" defaultMessage="Setup your camera and microphone settings" />
           </div>
-          <video ref="localvideo" className="videoPreview" muted autoPlay>
-          </video>
-          <VolumeMeter volumeLevel={this.state.volume} compStyle={this.getStyle("compVolMeterStyles")}/>
-          <div style={this.getStyle('menuStyle')}>
-            <SettingsMenuSelect
-                compStyle={this.getStyle("compMenuStyles")}
-                cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
-                options={this.props.settingsData.videoDevices ? this.props.settingsData.videoDevices : []}
-                label="Camera:"
-                selectedOption={{id:"selectedVideo", label:this.props.settingsData.selectedVideo && this.props.settingsData.selectedVideo.label}}
-            />
-            <SettingsMenuSelect
-                compStyle={this.getStyle("compMenuStyles")}
-                cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
-                options={this.props.settingsData.audioDevices ? this.props.settingsData.audioDevices : []}
-                label="Microphone:"
-                selectedOption={{id:"selectedAudio", label:this.props.settingsData.selectedAudio && this.props.settingsData.selectedAudio.label}}
-            />
-            <button
-                style={{...this.getStyle('buttonStyle')}}
-                onClick={this.submitRefresh.bind(this)}
-              >
-              <RestoreIconSVG svgStyle={{height:"20px", width: "20px", fill: "white"}}/>
-            </button>
-          </div>
-          <div style={{...this.getStyle('saveContainer')}}>
-            <button
-                style={{...this.getStyle('saveStyle')}}
-                onClick={this.submitSave.bind(this)}
-              >
-              <FormattedMessage
-                  id="SAVE"
-                  defaultMessage="save"
+            <div style={this.getStyle('bodyStyle')}>
+              <video style={{...this.getStyle('videoStyle')}} ref="localvideo" className="videoPreview" muted autoPlay> </video>
+              <VolumeMeter volumeLevel={this.state.volume} compStyle={this.getStyle("compVolMeterStyles")}/>
+              <div style={this.getStyle('menuStyle')}>
+                <SettingsMenuSelect
+                    compStyle={this.getStyle("compMenuStyles")}
+                    cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                    options={this.props.settingsData.videoDevices ? this.props.settingsData.videoDevices : []}
+                    label="Camera:"
+                    selectedOption={{id:"selectedVideo", label:this.props.settingsData.selectedVideo && this.props.settingsData.selectedVideo.label}}
                 />
-            </button>
-          </div>
+                <SettingsMenuSelect
+                    compStyle={this.getStyle("compMenuStyles")}
+                    cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                    options={this.props.settingsData.audioDevices ? this.props.settingsData.audioDevices : []}
+                    label="Microphone:"
+                    selectedOption={{id:"selectedAudio", label:this.props.settingsData.selectedAudio && this.props.settingsData.selectedAudio.label}}
+                />
+                <button
+                    style={{...this.getStyle('refreshStyle')}}
+                    onClick={this.submitRefresh.bind(this)}
+                  >
+                  <RestoreIconSVG svgStyle={{height:"20px", width: "20px", fill: "white"}}/>
+                </button>
+              </div>
+              <div style={{...this.getStyle('saveContainer')}}>
+                <button
+                    style={{...this.getStyle('saveStyle')}}
+                    onClick={this.submitSave.bind(this)}
+                  >
+                  <FormattedMessage
+                      id="SAVE"
+                      defaultMessage="save"
+                    />
+                </button>
+              </div>
+            </div>
         </div>
       </Modal> );
   }

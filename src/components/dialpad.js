@@ -1,7 +1,8 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import Numberpad from './numberpad';
-import { CallHistoryIconSVG, BackIconSVG, PhoneIconSVG } from './svgIcons';
+import { CallHistoryIconSVG, PhoneIconSVG, RemoveIconSVG, DeleteIconSVG } from './svgIcons';
+import Radium from 'radium';
 
 const propTypes = {
   compStyle : React.PropTypes.object,
@@ -13,7 +14,7 @@ const propTypes = {
 class Dialpad extends VertoBaseComponent {
   constructor(props) {
     super(props);
-    this.state = {number: this.props.nbrToDial, inputFocused: false};
+    this.state = {number: this.props.nbrToDial, inputFocused: false, lcDisplayed: false};
   }
 
   getCompStyle() {
@@ -25,15 +26,20 @@ class Dialpad extends VertoBaseComponent {
       container: {
         paddingLeft: '15px',
         paddingRight: '15px',
-        display: "flex",
+        display: 'flex',
         alignItems: "center",
         justifyContent: 'flex-start',
         flexDirection: "column",
         maxWidth: "500px",
+        '@media (max-width: 768px)': {
+          width: '90vw'
+        },
         boxShadow: '0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)'
       },
       header: {
-        background: "#eee",
+        //zIndex: '-1',
+        //position: 'relative',
+        //background: "#eee",
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -50,6 +56,27 @@ class Dialpad extends VertoBaseComponent {
       span : {
         width: '24px'
       },
+      // lastcall: {
+      //   display: /* this.state.redialing ? 'flex' : */'none',
+      //   zIndex: /* this.state.redialing ? 'auto' : */'-1',
+      //   position: 'absolute',
+      //   right: '500px',
+      //   padding: '0px 20px 0px 20px',
+      //   backgroundColor: '#fff',
+      //   borderRadius: '2px'
+      // },
+      // lctriangle: {
+      //   display: 'none',
+      //   content: '" "',
+      //   width: '0px',
+      //   height: '0px',
+      //   borderStyle: 'solid',
+      //   borderWidth: '8px 0px 8px 16px',
+      //   borderColor:  'transparent transparent transparent ' + '#fff',
+      //   position: 'absolute',
+      //   top: '10px',
+      //   right: '-8px'
+      // },
       input: {
         backgroundColor: 'transparent',
         color: '#4a4a4a',
@@ -57,7 +84,17 @@ class Dialpad extends VertoBaseComponent {
         padding: '10px',
         border: 'none',
         outline: 'none',
-        fontSize: '40px'
+        fontSize: '3em',
+        '@media (max-width: 768px)': {
+          fontSize: '1em'
+        }
+      },
+      remove : {
+        display: this.state.number ? 'block' : 'none',
+        width: "24px",
+        height: "24px",
+        fill: "#ccc",
+        cursor: 'pointer'
       },
       back : {
         width: "24px",
@@ -66,6 +103,7 @@ class Dialpad extends VertoBaseComponent {
         cursor: 'pointer'
       },
       bar: {
+        zIndex: this.state.inputFocused ? 'auto' : '-1',
         position: 'relative',
         bottom: '2px',
         padding: '0px 14px 0px 12px',
@@ -119,20 +157,25 @@ class Dialpad extends VertoBaseComponent {
       call: {
         width: "24px",
         height: "24px",
-        fill: "#fff"
-      }
+        fill: "#fff",
+        transformOrigin: '50% 50%'
+        }
 
     };
 
     return (styles[styleName]);
   }
 
-
   makeCall(){
     if(this.state.number) {
-      this.props.cbCall(this.state.number); // makes a call if there is a number entered.
+      // makes a call if there is a number entered.
+      this.props.cbCall(this.state.number);
     } else {
-      this.setState({...this.state, number: this.props.lastNumber }); // if there is NOT a number it gets the last number dialed.
+      // if there is NOT a number it gets the last number dialed.
+      this.setState({...this.state, number: this.props.lastNumber, redialing: true });
+      // setTimeout(()=>{
+      //   this.setState({...this.state, redialing: false});
+      // }, 5000);
     }
   }
 
@@ -185,7 +228,7 @@ class Dialpad extends VertoBaseComponent {
                 this.setState({...this.state,'number': newNumber });
               }}
           >
-            <BackIconSVG svgStyle={{...this.getDefaultStyle('back')}}
+            <DeleteIconSVG svgStyle={{...this.getDefaultStyle('back')}}
           />
           </span>
         </div>
@@ -197,14 +240,15 @@ class Dialpad extends VertoBaseComponent {
         <div
             onFocus={()=>{
               this.setState({...this.state,'inputFocused': false});
-              console.log('******************', this.state.inputFocused);
             }}
             style={{...this.getDefaultStyle('callcont')}}>
           <div
-
               onClick={this.makeCall.bind(this)}
               style={{...this.getDefaultStyle('callbg')}} >
-            <PhoneIconSVG svgStyle={{...this.getDefaultStyle('call')}} />
+            <PhoneIconSVG
+                svgStyle={{...this.getDefaultStyle('call')}}
+                svgTransform="rotate(15)"
+            />
           </div>
         </div>
       </div>);
@@ -213,4 +257,4 @@ class Dialpad extends VertoBaseComponent {
 
 Dialpad.propTypes = propTypes;
 
-export default Dialpad;
+export default Radium(Dialpad);
