@@ -220,24 +220,29 @@ class Settings extends VertoBaseComponent {
           />
           </span>
           <SettingsCheckbox
-              cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+              cbSubmitSetting={this.props.cbSubmitSetting}
               label="Use Video"
+              checkedOption={{name:'useVideo', value:this.props.settingsData.useVideo}}
           />
           <SettingsCheckbox
-              cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+              cbSubmitSetting={this.props.cbSubmitSetting}
               label="Stereo Audio"
+              checkedOption={{name:'useStereo', value:this.props.settingsData.useStereo}}
           />
           <SettingsCheckbox
-              cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+              cbSubmitSetting={this.props.cbSubmitSetting}
               label="Use STUN"
+              checkedOption={{name:'useSTUN', value:this.props.settingsData.useSTUN}}
           />
           <SettingsCheckbox
-              cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+              cbSubmitSetting={this.props.cbSubmitSetting}
               label="Scale Remote Video to Match Camera Resolution"
+              checkedOption={{name:'mirrorInput', value:this.props.settingsData.mirrorInput}}
           />
           <SettingsCheckbox
-              cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+              cbSubmitSetting={this.props.cbSubmitSetting}
               label="Ask Before Recovering a Call"
+              checkedOption={{name:'askRecoverCall', value:this.props.settingsData.askRecoverCall}}
           />
           <SettingsMenuSelect
               cbSubmitSetting={this.props.cbSubmitSetting}
@@ -252,16 +257,19 @@ class Settings extends VertoBaseComponent {
             />
           </span>
           <SettingsCheckbox
-              cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+              cbSubmitSetting={this.props.cbSubmitSetting}
               label="Echo Cancellation"
+              checkedOption={{name:'googEchoCancellation', value:this.props.settingsData.googEchoCancellation}}
           />
           <SettingsCheckbox
-              cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+              cbSubmitSetting={this.props.cbSubmitSetting}
               label="Noise Suppression"
+              checkedOption={{name:'googNoiseSuppression', value:this.props.settingsData.googNoiseSuppression}}
           />
           <SettingsCheckbox
-              cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+              cbSubmitSetting={this.props.cbSubmitSetting}
               label="Highpass Filter"
+              checkedOption={{name:'googHighpassFilter', value:this.props.settingsData.googHighpassFilter}}
           />
         </div>
         <div
@@ -275,12 +283,14 @@ class Settings extends VertoBaseComponent {
             />
           </span>
           <SettingsCheckbox
-              cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+              cbSubmitSetting={this.props.cbSubmitSetting}
               label="Automatically determine speed and resolution settings"
+              checkedOption={{name:'autoBand', value:this.props.settingsData.autoBand}}
           />
           <SettingsCheckbox
-              cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+              cbSubmitSetting={this.props.cbSubmitSetting}
               label="Recheck Bandwidth Before Each Outgoing Call"
+              checkedOption={{name:'testSpeedJoin', value:this.props.settingsData.testSpeedJoin}}
           />
           <div
               className="buttonContainer"
