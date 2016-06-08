@@ -13,7 +13,7 @@ const propTypes = {
 class Dialpad extends VertoBaseComponent {
   constructor(props) {
     super(props);
-    this.state = {number: this.props.nbrToDial, inputFocused: false};
+    this.state = {number: this.props.nbrToDial, inputFocused: false, lcDisplayed: false};
   }
 
   getCompStyle() {
@@ -50,6 +50,9 @@ class Dialpad extends VertoBaseComponent {
       span : {
         width: '24px'
       },
+      lastcall: {
+        display: this.state.lcDisplayed ? 'inline-block' : 'none'
+      },
       input: {
         backgroundColor: 'transparent',
         color: '#4a4a4a',
@@ -66,6 +69,7 @@ class Dialpad extends VertoBaseComponent {
         cursor: 'pointer'
       },
       bar: {
+        zIndex: this.state.inputFocused ? 'auto' : '-1',
         position: 'relative',
         bottom: '2px',
         padding: '0px 14px 0px 12px',
@@ -127,11 +131,16 @@ class Dialpad extends VertoBaseComponent {
     return (styles[styleName]);
   }
 
+  // displayLastCall(){
+  //   this.setState({...this.state, lcDisplayed: true});
+  //   console.log(this.state.lcDisplayed);
+  // }
 
   makeCall(){
     if(this.state.number) {
       this.props.cbCall(this.state.number); // makes a call if there is a number entered.
     } else {
+      //this.displayLastCall();
       this.setState({...this.state, number: this.props.lastNumber }); // if there is NOT a number it gets the last number dialed.
     }
   }
@@ -165,6 +174,7 @@ class Dialpad extends VertoBaseComponent {
             <CallHistoryIconSVG
               svgStyle={{...this.getDefaultStyle('callhist')}} />
           </span>
+          <span style={{...this.getDefaultStyle('lastcall')}}>Last Call:</span>
           <input
               placeholder="Enter an extension"
               style={{...this.getDefaultStyle('input')}}
@@ -177,6 +187,7 @@ class Dialpad extends VertoBaseComponent {
                 this.setState({...this.state,'inputFocused': false});
               }}
           />
+
           <span
               style={{...this.getStyle('span')}}
               onClick={()=>{
@@ -197,7 +208,6 @@ class Dialpad extends VertoBaseComponent {
         <div
             onFocus={()=>{
               this.setState({...this.state,'inputFocused': false});
-              console.log('******************', this.state.inputFocused);
             }}
             style={{...this.getDefaultStyle('callcont')}}>
           <div
