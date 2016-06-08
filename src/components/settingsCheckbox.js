@@ -3,6 +3,10 @@ import VertoBaseComponent from './vertobasecomponent.js';
 
 const propTypes = {
   cbSubmitSetting: React.PropTypes.func.isRequired,
+  checkedOption: React.PropTypes.shape({
+    name: React.PropTypes.string,
+    value: React.PropTypes.bool
+  }).isRequired,
   compStyle : React.PropTypes.object,
   label: React.PropTypes.string.isRequired
 };
@@ -10,15 +14,19 @@ const propTypes = {
 class SettingsCheckbox extends VertoBaseComponent {
   constructor(props) {
     super(props);
-    this.state = {isChecked: false};
 
     this.handleSelect = this.handleSelect.bind(this);
   }
 
 handleSelect() {
-    this.setState({isChecked: !this.state.isChecked});
+    // this.setState({isChecked: !this.state.isChecked});
   console.log('handleSelect');
   // this.props.cbSubmitSetting();
+
+let chkdObj = {};
+  chkdObj[this.props.checkedOption.name] = this.refs.checkMe.checked;
+  console.log('things-------', this.refs.checkMe.checked, chkdObj);
+  this.props.cbSubmitSetting(chkdObj);
 }
 
   getCompStyle() {
@@ -45,11 +53,12 @@ handleSelect() {
 
     return (
       <div style={{...this.getStyle('container')}}>
-      <input
-          type="checkbox"
-          checked={this.state.isChecked}
-          onChange={this.handleSelect}
-    />
+        <input
+            ref="checkMe"
+            type="checkbox"
+            onChange={()=>this.handleSelect()}
+            checked={this.props.checkedOption.value}
+        />
         <span style={{...this.getStyle('label')}}>{this.props.label}</span>
       </div>
     );
@@ -58,3 +67,9 @@ handleSelect() {
 
 SettingsCheckbox.propTypes = propTypes;
 export default SettingsCheckbox;
+// ----this is what is would look like in appbar/index.js:
+// <SettingsCheckbox
+//     checkedOption={{name:'useVideo', value:this.props.settings.useVideo}}
+//     cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+//     label="Use Video"
+// />

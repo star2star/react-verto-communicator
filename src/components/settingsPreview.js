@@ -157,14 +157,16 @@ class SettingsPreview extends VertoBaseComponent{
         marginTop: '25px',
         marginBottom: '5px',
         marginLeft: '10px',
-        padding: '0 20px 0 20px'
+        padding: '0 20px 0 20px',
+        cursor: 'pointer'
       },
        saveStyle: {
         backgroundColor: '#4CAF50',
         color: 'white',
         padding: '5px 25px 5px 25px',
         border: '0px',
-        fontSize: '15px'
+        fontSize: '15px',
+        cursor: 'pointer'
 
       },
         saveContainer: {
