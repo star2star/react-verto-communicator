@@ -1,7 +1,7 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import Numberpad from './numberpad';
-import { CallHistoryIconSVG, BackIconSVG, PhoneIconSVG, RemoveIconSVG } from './svgIcons';
+import { CallHistoryIconSVG, PhoneIconSVG, RemoveIconSVG, DeleteIconSVG } from './svgIcons';
 import Radium from 'radium';
 
 const propTypes = {
@@ -228,7 +228,7 @@ class Dialpad extends VertoBaseComponent {
                 this.setState({...this.state,'number': newNumber });
               }}
           >
-            <BackIconSVG svgStyle={{...this.getDefaultStyle('back')}}
+            <DeleteIconSVG svgStyle={{...this.getDefaultStyle('back')}}
           />
           </span>
         </div>
