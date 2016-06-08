@@ -20,7 +20,7 @@ handleSelect() {
   // get the selected option from the options array.  Use [0] to get the array
   // element only (should only be one).
   const selValue = this.props.options.filter((opt)=>{
-    console.log('theSelect', theSelect);
+    //console.log('theSelect', theSelect);
     return (opt.id == theSelect[theSelect.selectedIndex].value);
   })[0];
 
