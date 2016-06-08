@@ -43,7 +43,6 @@ class Dialpad extends VertoBaseComponent {
         borderBottom: '2px solid #ccc'
       },
       callhist : {
-        display: this.state.inputFocused ?  'none' : 'block',
         width: "24px",
         height: "24px",
         fill: "green"
@@ -54,7 +53,6 @@ class Dialpad extends VertoBaseComponent {
       input: {
         backgroundColor: 'transparent',
         color: '#4a4a4a',
-        //height: '100px',
         width: '80%',
         padding: '10px',
         border: 'none',
@@ -62,7 +60,6 @@ class Dialpad extends VertoBaseComponent {
         fontSize: '40px'
       },
       back : {
-        display: this.state.inputFocused ?  'none' : 'inline',
         width: "24px",
         height: "24px",
         fill: "#ccc",
