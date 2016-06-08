@@ -152,7 +152,14 @@ class Dialpad extends VertoBaseComponent {
 
 
     return (
-      <div style={{...this.getDefaultStyle('container')}}>
+      <div
+            style={{...this.getDefaultStyle('container')}}
+            onKeyPress={(e)=>{
+              if(e.which == 13 || e.keyCode == 13) {
+                this.makeCall();
+                return false;
+              }}}
+          >
         <div style={{...this.getDefaultStyle('header')}}>
           <span
               style={{...this.getStyle('span')}}
