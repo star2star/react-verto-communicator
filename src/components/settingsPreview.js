@@ -116,15 +116,14 @@ class SettingsPreview extends VertoBaseComponent{
           fontSize: '.85rem;',
           backgroundColor: 'rgba(0,0,0,0)',
           color: 'black'
-        },
-        button: {
-          backgroundColor: "red"
         }
       },
       compVolMeterStyles: {
         volMeterStyles: {
           position: 'absolute',
-          top: '375px'
+          //top: '375px',
+          marginTop: '-105px',
+          marginLeft: '10px'
         }
       },
       modal : {
@@ -134,7 +133,9 @@ class SettingsPreview extends VertoBaseComponent{
           right: 'auto',
           bottom: 'auto',
           marginRight: '-50%',
-          transform: 'translate(-50%, -50%)'
+          transform: 'translate(-50%, -50%)',
+          width: '50%',
+          padding: '0 0 20px 0'
         },
         overlay: {
           zIndex: "1"
@@ -143,23 +144,36 @@ class SettingsPreview extends VertoBaseComponent{
       menuStyle: {
         display: "flex"
       },
-      buttonStyle: {
+      refreshStyle: {
         backgroundColor: "#009688",
         display: 'flex',
         flex: 1,
         justifyContent: 'center'
       },
        saveStyle: {
-        backgroundColor: "green",
+        backgroundColor: '#4CAF50',
         color: 'white',
-        paddingTop: '10px',
-        fontSize: '30px'
+        padding: '5px 30px 5px 30px',
+        fontSize: '20px'
 
       },
         saveContainer: {
           display: 'flex',
           flex: 1,
-          justifyContent: 'center'
+          justifyContent: 'center',
+          paddingTop: '25px'
+        },
+        videoStyle: {
+          width: '100%',
+          height: '100%'
+        },
+        headerStyle: {
+          backgroundColor: '#0D47A1',
+          paddingTop: '10px',
+          color: 'white',
+          textAlign: 'center',
+          fontSize: '15px',
+          paddingBottom: '10px'
         }
     };
 
@@ -182,11 +196,10 @@ class SettingsPreview extends VertoBaseComponent{
     return (
       <Modal isOpen onRequestClose={this.props.cbClose} style={this.getStyle('modal')}>
         <div style={this.getStyle("previewStyles")}>
-          <div className="previewHeading">
+          <div style={this.getStyle('headerStyle')}>
             <FormattedMessage id="TITLE_PREVIEW_SETTINGS" defaultMessage="Setup your camera and microphone settings" />
           </div>
-          <video ref="localvideo" className="videoPreview" muted autoPlay>
-          </video>
+          <video style={{...this.getStyle('videoStyle')}} ref="localvideo" className="videoPreview" muted autoPlay> </video>
           <VolumeMeter volumeLevel={this.state.volume} compStyle={this.getStyle("compVolMeterStyles")}/>
           <div style={this.getStyle('menuStyle')}>
             <SettingsMenuSelect
@@ -204,7 +217,7 @@ class SettingsPreview extends VertoBaseComponent{
                 selectedOption={{id:"selectedAudio", label:this.props.settingsData.selectedAudio && this.props.settingsData.selectedAudio.label}}
             />
             <button
-                style={{...this.getStyle('buttonStyle')}}
+                style={{...this.getStyle('refreshStyle')}}
                 onClick={this.submitRefresh.bind(this)}
               >
               <RestoreIconSVG svgStyle={{height:"20px", width: "20px", fill: "white"}}/>
