@@ -14,14 +14,14 @@ const app = (state, action)=>{
                 selectedAudio: null,
                 selectedShare: null,
                 selectedSpeaker: null,
-                selectedBestFrameRate: "15",
+                selectedBestFrameRate: {id: "15", label: "15 FPS"},
                 useStereo: true,
                 useVideo: true,
                 useSTUN: true,
 
                 mirrorInput: false, // scale video
                 askRecoverCall: false, // ask before recovering
-                language: 'en',
+                language: {id: 'en', label: 'English'},
                 languages: [
                      {id: 'en', label: 'English'},
                      {id: 'it', label: 'Italiano'},
@@ -69,9 +69,7 @@ const app = (state, action)=>{
 
       console.log('******* ***** change setting action.data', action.data);
 
-      return state;
-
-      //return {...state, settings: {...state.settings, ...newSetting }}
+      return {...state, settings: {...state.settings, ...action.data }};
 
     default:
       return state;

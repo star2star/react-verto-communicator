@@ -15,13 +15,25 @@ class SettingsMenuSelect extends VertoBaseComponent {
   }
 
 handleSelect() {
-//   let selObj = {};
-//
-//   selObj.key = this.refs.select.value.
-//
-//
-  console.log('######', this.refs.select.selectedIndex.value);
-  this.props.cbSubmitSetting(this.refs.select.value);
+  const theSelect = this.refs.select;
+
+  // get the selected option from the options array.  Use [0] to get the array
+  // element only (should only be one).
+  const selValue = this.props.options.filter((opt)=>{
+    return (opt.id == theSelect[theSelect.selectedIndex].value);
+  })[0];
+
+
+  // The selectedOption prop has the structure that we need for the 'selected'
+  // value in the settings store.  Just replace the id and label values and
+  // return the structure to the callback function...
+  // The id is the name of the setting attribute to be set, and the data attribute
+  // is the value.
+  //TODO see if we really need the 'kind' field in some of the selectedoptions....
+
+  let selObj = {};
+  selObj[this.props.selectedOption.id] = {...this.props.selectedOption.data, ...selValue};
+  this.props.cbSubmitSetting(selObj);
 }
 
   getCompStyle() {
@@ -47,7 +59,7 @@ handleSelect() {
 
   render() {
     const options=this.props.options.map((option, index)=>{
-      return (<option key={index} value={option}>{option.label}</option>);
+        return (<option key={index} value={option.id}>{option.label}</option>);
     });
 
     return (
@@ -56,6 +68,7 @@ handleSelect() {
         <select
             ref="select"
             onChange={()=>this.handleSelect()}
+            value={this.props.selectedOption.data && this.props.selectedOption.data.id ? this.props.selectedOption.data.id : ''}
         >
           {options}
         </select>
