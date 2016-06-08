@@ -247,11 +247,11 @@ const doMakeCallError = (aErrorObject) =>{
     "data": aErrorObject
   }
 }
-const doingMakeCall = (status, dest, callId) => {
+const doingMakeCall = (status, dest, callId, direction) => {
   //console.log('doingMakeCall', dialog);
   return {
     "type": "CALLING",
-    "data": {status: status, destination: dest, callId: callId}
+    "data": {status: status, destination: dest, callId: callId, direction: direction}
   }
 };
 
@@ -269,12 +269,12 @@ const doSendChat = (message) => {
   };
 }
 
-const doReceiveChat = (from, message) => {
+const doReceiveChat = (callID, from, message) => {
   return dispatch =>{
-    console.log('received a chat msssgggg: ', from, message);
+    //console.log('received a chat msssgggg: ', callID, from, message);
     dispatch({
       type: 'RECEIVED_CHAT_MESSAGE',
-      data: { from, message }
+      data: { callID, from, message }
     });
   }
 }

@@ -24,96 +24,67 @@ class Dialpad extends VertoBaseComponent {
   getDefaultStyle(styleName) {
     const styles = {
       container: {
-        paddingLeft: '15px',
-        paddingRight: '15px',
         display: 'flex',
+        flex: 1,
         alignItems: "center",
         justifyContent: 'flex-start',
         flexDirection: "column",
         maxWidth: "500px",
         '@media (max-width: 768px)': {
-          width: '90vw'
+          //width: '90vw'
         },
         boxShadow: '0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)'
       },
       header: {
-        //zIndex: '-1',
-        //position: 'relative',
-        //background: "#eee",
         display: 'flex',
+        flex: 10,
         alignItems: 'center',
+        alignContent: 'stretch',
         justifyContent: 'space-between',
         backgroundColor: '#eee',
-        width: '100%',
         padding: '15px',
         borderBottom: '2px solid #ccc'
       },
+      span : {
+        flex: 1
+      },
       callhist : {
-        width: "24px",
+        width: "24px", // this is for svg styling
         height: "24px",
         fill: "green"
       },
-      span : {
-        width: '24px'
-      },
-      // lastcall: {
-      //   display: /* this.state.redialing ? 'flex' : */'none',
-      //   zIndex: /* this.state.redialing ? 'auto' : */'-1',
-      //   position: 'absolute',
-      //   right: '500px',
-      //   padding: '0px 20px 0px 20px',
-      //   backgroundColor: '#fff',
-      //   borderRadius: '2px'
-      // },
-      // lctriangle: {
-      //   display: 'none',
-      //   content: '" "',
-      //   width: '0px',
-      //   height: '0px',
-      //   borderStyle: 'solid',
-      //   borderWidth: '8px 0px 8px 16px',
-      //   borderColor:  'transparent transparent transparent ' + '#fff',
-      //   position: 'absolute',
-      //   top: '10px',
-      //   right: '-8px'
-      // },
       input: {
+        display: 'flex',
+        flex: 8,
         backgroundColor: 'transparent',
         color: '#4a4a4a',
-        width: '80%',
-        padding: '10px',
+        height: '75px',
+        padding: '0px 25px 0px 25px',
         border: 'none',
         outline: 'none',
-        fontSize: '3em',
+        fontSize: !this.state.number ? '1vw' : '1.5vw',
         '@media (max-width: 768px)': {
           fontSize: '1em'
         }
       },
-      remove : {
-        display: this.state.number ? 'block' : 'none',
-        width: "24px",
-        height: "24px",
-        fill: "#ccc",
-        cursor: 'pointer'
-      },
       back : {
-        width: "24px",
+        width: "24px", // this is for svg styling
         height: "24px",
         fill: "#ccc",
         cursor: 'pointer'
       },
       bar: {
+        flex: 10,
         zIndex: this.state.inputFocused ? 'auto' : '-1',
         position: 'relative',
         bottom: '2px',
-        padding: '0px 14px 0px 12px',
         display: 'flex',
         justifyContent: 'space-between',
         content: '" "',
         height: '2px',
         borderWidth: '2px',
         borderColor: '#ccc',
-        width: '101%',
+        width: '100%',
         backgroundColor: '#ccc'
       },
       left: {
@@ -134,11 +105,7 @@ class Dialpad extends VertoBaseComponent {
         right: this.state.inputFocused ?  '0%' : '50%',
         left: '50%'
       },
-      bodycont: {
-        width: '100%'
-      },
       callcont: {
-        width: '100%',
         paddingTop: '15px',
         paddingBottom: '15px',
         display: 'flex',
@@ -155,12 +122,10 @@ class Dialpad extends VertoBaseComponent {
         cursor: 'pointer'
       },
       call: {
-        width: "24px",
+        width: "24px", // this is for svg styles
         height: "24px",
-        fill: "#fff",
-        transformOrigin: '50% 50%'
+        fill: "#fff"
         }
-
     };
 
     return (styles[styleName]);
@@ -200,13 +165,16 @@ class Dialpad extends VertoBaseComponent {
                 return false;
               }}}
           >
-        <div style={{...this.getDefaultStyle('header')}}>
+        <div
+          style={{...this.getDefaultStyle('header')}}
+        >
           <span
               style={{...this.getStyle('span')}}
               onClick={()=>{}}
           >
             <CallHistoryIconSVG
-              svgStyle={{...this.getDefaultStyle('callhist')}} />
+              svgStyle={{...this.getDefaultStyle('callhist')}}
+            />
           </span>
           <input
               placeholder="Enter an extension"
@@ -228,13 +196,25 @@ class Dialpad extends VertoBaseComponent {
                 this.setState({...this.state,'number': newNumber });
               }}
           >
-            <DeleteIconSVG svgStyle={{...this.getDefaultStyle('back')}}
+          <DeleteIconSVG svgStyle={{...this.getDefaultStyle('back')}}
           />
           </span>
         </div>
-        <div style={{...this.getStyle('bar')}}>
-          <span className="left" style={{...this.getStyle('left')}}> &nbsp;</span>
-          <span className="right" style={{...this.getStyle('right')}}>&nbsp; </span>
+        <div
+            style={{...this.getStyle('bar')}}
+        >
+          <span
+              className="left"
+              style={{...this.getStyle('left')}}
+          >
+              &nbsp;
+          </span>
+          <span
+              className="right"
+              style={{...this.getStyle('right')}}
+          >
+            &nbsp;
+          </span>
         </div>
         <Numberpad cbClick={this.dialNumber.bind(this)} />
         <div
@@ -247,7 +227,7 @@ class Dialpad extends VertoBaseComponent {
               style={{...this.getDefaultStyle('callbg')}} >
             <PhoneIconSVG
                 svgStyle={{...this.getDefaultStyle('call')}}
-                svgTransform="rotate(15)"
+                //svgTransform={{rotate(15)}}
             />
           </div>
         </div>
