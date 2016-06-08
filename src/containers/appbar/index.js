@@ -396,7 +396,7 @@ class AppBar extends VertoBaseComponent {
           this.props.dispatch(doMakeCall(number, this.props.app))
         }} />);
       } else {
-        lastCall = (<LastCall labelText= {"No Call Yet"} />);
+        lastCall = (<LastCall labelText= {"No Call"} />);
       }
     }
 

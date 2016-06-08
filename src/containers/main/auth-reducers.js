@@ -13,10 +13,8 @@ const auth = (state, action)=>{
                 hostname: 'verto.star2starglobal.com',
                 websocketurl: 'wss://verto.star2starglobal.com:8082'
               },
-              sessionActive: false,
               sessionInfo: {
               },
-              showLogin: true,
               vcStatus: 'disconnected'
             };
   }
@@ -33,7 +31,7 @@ const auth = (state, action)=>{
     case 'AUTH_SUBMIT_LOGIN':
       return { ...state, showPage: 'logout', vcStatus: 'connecting'};
     case 'VERTO_LOGIN':
-      return { ...state, showPage: 'loggedIn', sessionInfo: action.data, vcStatus: 'connecting' };
+      return { ...state, showPage: 'loggedIn', vcStatus: 'active', sessionInfo: action.data };
     case 'NO_MEDIA':
       return { ...state, showPage: 'noMedia', vcStatus: 'disconnected' };
     case 'BNS':
