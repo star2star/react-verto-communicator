@@ -27,14 +27,16 @@ class VolumeMeter extends VertoBaseComponent{
         border: 'solid 1px #ccc',
         borderRadius: '6px',
         height: '10px',
-        width: '40px'
+        width: '40px',
+        marginTop: '5px'
       },
       segmentOnStyle: {
         border: 'solid 1px #ccc',
         borderRadius: '6px',
         height: '10px',
         width: '40px',
-        backgroundColor: '#ccc'
+        backgroundColor: '#ccc',
+        marginTop: '5px'
       },
       svgMicStyle: {
           width: '40px',

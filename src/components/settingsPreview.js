@@ -99,7 +99,7 @@ class SettingsPreview extends VertoBaseComponent{
         container: {
           paddingTop: '10px',
           paddingBottom: '5px',
-          borderBottom: '1px solid #ccc',
+          //borderBottom: '1px solid #ccc',
           display: 'flex',
           flex: 2,
           flexDirection: 'column'
@@ -110,24 +110,28 @@ class SettingsPreview extends VertoBaseComponent{
           fontWeight: 'bold'
         },
         select: {
+          borderBottom: '1px solid #ccc',
           border: '0',
           boxShadow:'none',
           borderRadius: '0',
-          fontSize: '.85rem;',
+          fontSize: '.85rem',
           backgroundColor: 'rgba(0,0,0,0)',
-          color: 'black'
+          color: 'black',
+          marginLeft: '8px'
+
         }
       },
       compVolMeterStyles: {
         volMeterStyles: {
           position: 'absolute',
           //top: '375px',
-          marginTop: '-105px',
+          marginTop: '-130px',
           marginLeft: '10px'
         }
       },
       modal : {
         content: {
+          boxShadow: '0px 27px 24px 0px rgba(0,0,0,.2), 0px 40px 77px 0px rgba(0,0,0,.22)',
           top: '50%',
           left: '50%',
           right: 'auto',
@@ -147,14 +151,20 @@ class SettingsPreview extends VertoBaseComponent{
       refreshStyle: {
         backgroundColor: "#009688",
         display: 'flex',
-        flex: 1,
-        justifyContent: 'center'
+        flex: 0.25,
+        justifyContent: 'center',
+        border: '0px',
+        marginTop: '25px',
+        marginBottom: '5px',
+        marginLeft: '10px',
+        padding: '0 20px 0 20px'
       },
        saveStyle: {
         backgroundColor: '#4CAF50',
         color: 'white',
-        padding: '5px 30px 5px 30px',
-        fontSize: '20px'
+        padding: '5px 25px 5px 25px',
+        border: '0px',
+        fontSize: '15px'
 
       },
         saveContainer: {
@@ -174,6 +184,9 @@ class SettingsPreview extends VertoBaseComponent{
           textAlign: 'center',
           fontSize: '15px',
           paddingBottom: '10px'
+        },
+        bodyStyle: {
+          padding: '15px'
         }
     };
 
@@ -199,41 +212,43 @@ class SettingsPreview extends VertoBaseComponent{
           <div style={this.getStyle('headerStyle')}>
             <FormattedMessage id="TITLE_PREVIEW_SETTINGS" defaultMessage="Setup your camera and microphone settings" />
           </div>
-          <video style={{...this.getStyle('videoStyle')}} ref="localvideo" className="videoPreview" muted autoPlay> </video>
-          <VolumeMeter volumeLevel={this.state.volume} compStyle={this.getStyle("compVolMeterStyles")}/>
-          <div style={this.getStyle('menuStyle')}>
-            <SettingsMenuSelect
-                compStyle={this.getStyle("compMenuStyles")}
-                cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
-                options={this.props.settingsData.videoDevices ? this.props.settingsData.videoDevices : []}
-                label="Camera:"
-                selectedOption={{id:"selectedVideo", label:this.props.settingsData.selectedVideo && this.props.settingsData.selectedVideo.label}}
-            />
-            <SettingsMenuSelect
-                compStyle={this.getStyle("compMenuStyles")}
-                cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
-                options={this.props.settingsData.audioDevices ? this.props.settingsData.audioDevices : []}
-                label="Microphone:"
-                selectedOption={{id:"selectedAudio", label:this.props.settingsData.selectedAudio && this.props.settingsData.selectedAudio.label}}
-            />
-            <button
-                style={{...this.getStyle('refreshStyle')}}
-                onClick={this.submitRefresh.bind(this)}
-              >
-              <RestoreIconSVG svgStyle={{height:"20px", width: "20px", fill: "white"}}/>
-            </button>
-          </div>
-          <div style={{...this.getStyle('saveContainer')}}>
-            <button
-                style={{...this.getStyle('saveStyle')}}
-                onClick={this.submitSave.bind(this)}
-              >
-              <FormattedMessage
-                  id="SAVE"
-                  defaultMessage="save"
+            <div style={this.getStyle('bodyStyle')}>
+              <video style={{...this.getStyle('videoStyle')}} ref="localvideo" className="videoPreview" muted autoPlay> </video>
+              <VolumeMeter volumeLevel={this.state.volume} compStyle={this.getStyle("compVolMeterStyles")}/>
+              <div style={this.getStyle('menuStyle')}>
+                <SettingsMenuSelect
+                    compStyle={this.getStyle("compMenuStyles")}
+                    cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                    options={this.props.settingsData.videoDevices ? this.props.settingsData.videoDevices : []}
+                    label="Camera:"
+                    selectedOption={{id:"selectedVideo", label:this.props.settingsData.selectedVideo && this.props.settingsData.selectedVideo.label}}
                 />
-            </button>
-          </div>
+                <SettingsMenuSelect
+                    compStyle={this.getStyle("compMenuStyles")}
+                    cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                    options={this.props.settingsData.audioDevices ? this.props.settingsData.audioDevices : []}
+                    label="Microphone:"
+                    selectedOption={{id:"selectedAudio", label:this.props.settingsData.selectedAudio && this.props.settingsData.selectedAudio.label}}
+                />
+                <button
+                    style={{...this.getStyle('refreshStyle')}}
+                    onClick={this.submitRefresh.bind(this)}
+                  >
+                  <RestoreIconSVG svgStyle={{height:"20px", width: "20px", fill: "white"}}/>
+                </button>
+              </div>
+              <div style={{...this.getStyle('saveContainer')}}>
+                <button
+                    style={{...this.getStyle('saveStyle')}}
+                    onClick={this.submitSave.bind(this)}
+                  >
+                  <FormattedMessage
+                      id="SAVE"
+                      defaultMessage="save"
+                    />
+                </button>
+              </div>
+            </div>
         </div>
       </Modal> );
   }
