@@ -131,7 +131,12 @@ class Dialpad extends VertoBaseComponent {
 
   makeCall(){
     //TODO validate
-    this.props.cbCall(this.state.number)
+      if(this.state.number) {
+      this.props.cbCall(this.state.number)
+    } else {
+      console.log('No number entered');
+
+    }
   }
 
   changingNumber(e){
@@ -144,12 +149,14 @@ class Dialpad extends VertoBaseComponent {
   }
 
   render() {
+
+
     return (
       <div style={{...this.getDefaultStyle('container')}}>
         <div style={{...this.getDefaultStyle('header')}}>
           <span
               style={{...this.getStyle('span')}}
-              onClick={()=>{console.log('Hi Mom!')}}
+              onClick={()=>{}}
           >
             <CallHistoryIconSVG
               svgStyle={{...this.getDefaultStyle('callhist')}} />
