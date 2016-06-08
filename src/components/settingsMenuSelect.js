@@ -20,6 +20,7 @@ handleSelect() {
   // get the selected option from the options array.  Use [0] to get the array
   // element only (should only be one).
   const selValue = this.props.options.filter((opt)=>{
+    console.log('theSelect', theSelect);
     return (opt.id == theSelect[theSelect.selectedIndex].value);
   })[0];
 
@@ -53,11 +54,11 @@ handleSelect() {
         fontWeight: 'bold'
       },
       select: {
-        border: '0',
+        border: 'none',
         boxShadow:'none',
-        borderRadius: '0',
+        //borderRadius: '0'
         //width: '350px',
-        fontSize: '.85rem;',
+        fontSize: '.85rem',
         backgroundColor: 'rgba(0,0,0,0)',
         color: '#FFF'
       }
@@ -75,6 +76,7 @@ handleSelect() {
       <div style={{...this.getStyle('container')}}>
         <span style={{...this.getStyle('label')}}>{this.props.label}</span>
         <select
+            ref="select"
             style={this.getStyle('select')}
             onChange={()=>this.handleSelect()}
             value={this.props.selectedOption.data && this.props.selectedOption.data.id ? this.props.selectedOption.data.id : ''}
