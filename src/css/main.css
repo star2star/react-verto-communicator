@@ -4,18 +4,3 @@ body {
 
   font-family: RobotoDraft,Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
-
-/* temporary links for routes */
-div div a {
-  margin-right: 10px;
-}
-/*settings select-menu styles*/
-/* select {
-  border: 0;
-  box-shadow:none;
-  border-radius: 0;
-  width: 350px;
-  font-size: .85rem;
-  background-color: rgba(0,0,0,0);
-  color: #FFF;
-}
