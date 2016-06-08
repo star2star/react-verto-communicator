@@ -113,10 +113,12 @@ class SettingsPreview extends VertoBaseComponent{
           border: '0',
           boxShadow:'none',
           borderRadius: '0',
-          //width: '300px',
           fontSize: '.85rem;',
           backgroundColor: 'rgba(0,0,0,0)',
           color: 'black'
+        },
+        button: {
+          backgroundColor: "red"
         }
       },
       compVolMeterStyles: {
@@ -140,14 +142,23 @@ class SettingsPreview extends VertoBaseComponent{
       },
       menuStyle: {
         display: "flex"
-        //width: '480px'
       },
       buttonStyle: {
         backgroundColor: "#009688",
         display: 'flex',
-        //width: '100px',
-        flex: 1
-      }
+        flex: 1,
+        justifyContent: 'center'
+      },
+       saveStyle: {
+        backgroundColor: "green",
+        color: 'white'
+
+      },
+        saveContainer: {
+          display: 'flex',
+          flex: 1,
+          justifyContent: 'center'
+        }
     };
 
     return (styles[styleName]);
@@ -194,19 +205,20 @@ class SettingsPreview extends VertoBaseComponent{
                 style={{...this.getStyle('buttonStyle')}}
                 onClick={this.submitRefresh.bind(this)}
               >
-              <RestoreIconSVG svgStyle={{height:"20px", width: "20px", fill: "#ccc"}}/>
+              <RestoreIconSVG svgStyle={{height:"20px", width: "20px", fill: "white"}}/>
             </button>
           </div>
-          <button
-              style={{...this.getStyle('button')}}
-              onClick={this.submitSave.bind(this)}
-            >
-            <FormattedMessage
-                id="SAVE"
-                defaultMessage="save"
-              />
-          </button>
-
+          <div style={{...this.getStyle('saveContainer')}}>
+            <button
+                style={{...this.getStyle('saveStyle')}}
+                onClick={this.submitSave.bind(this)}
+              >
+              <FormattedMessage
+                  id="SAVE"
+                  defaultMessage="save"
+                />
+            </button>
+          </div>
         </div>
       </Modal> );
   }

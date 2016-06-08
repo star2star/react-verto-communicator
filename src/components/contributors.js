@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import App from './app';
 import ContributorsListItem from './contributorsListItem';
 import Radium from 'radium';
+import { FormattedMessage } from 'react-intl';
 
 const propTypes = {
   compStyle : React.PropTypes.object,
@@ -64,7 +65,7 @@ class Contributors extends VertoBaseComponent{
       }} style={{...this.getStyle('modal')}} >
         <div >
           <h1 style={{...this.getStyle('header')}}>
-            Contributors
+            <FormattedMessage id="CONTRIBUTORS" defaultMessage="Contributors" />
           </h1>
         </div>
         <div>
