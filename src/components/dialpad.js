@@ -39,7 +39,7 @@ class Dialpad extends VertoBaseComponent {
       header: {
         //zIndex: '-1',
         //position: 'relative',
-        background: "#eee",
+        //background: "#eee",
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -56,27 +56,27 @@ class Dialpad extends VertoBaseComponent {
       span : {
         width: '24px'
       },
-      lastcall: {
-        display: /* this.state.redialing ? 'flex' : */'none',
-        zIndex: /* this.state.redialing ? 'auto' : */'-1',
-        position: 'absolute',
-        right: '500px',
-        padding: '0px 20px 0px 20px',
-        backgroundColor: '#fff',
-        borderRadius: '2px'
-      },
-      lctriangle: {
-        display: 'none',
-        content: '" "',
-        width: '0px',
-        height: '0px',
-        borderStyle: 'solid',
-        borderWidth: '8px 0px 8px 16px',
-        borderColor:  'transparent transparent transparent ' + '#fff',
-        position: 'absolute',
-        top: '10px',
-        right: '-8px'
-      },
+      // lastcall: {
+      //   display: /* this.state.redialing ? 'flex' : */'none',
+      //   zIndex: /* this.state.redialing ? 'auto' : */'-1',
+      //   position: 'absolute',
+      //   right: '500px',
+      //   padding: '0px 20px 0px 20px',
+      //   backgroundColor: '#fff',
+      //   borderRadius: '2px'
+      // },
+      // lctriangle: {
+      //   display: 'none',
+      //   content: '" "',
+      //   width: '0px',
+      //   height: '0px',
+      //   borderStyle: 'solid',
+      //   borderWidth: '8px 0px 8px 16px',
+      //   borderColor:  'transparent transparent transparent ' + '#fff',
+      //   position: 'absolute',
+      //   top: '10px',
+      //   right: '-8px'
+      // },
       input: {
         backgroundColor: 'transparent',
         color: '#4a4a4a',
@@ -157,8 +157,9 @@ class Dialpad extends VertoBaseComponent {
       call: {
         width: "24px",
         height: "24px",
-        fill: "#fff"
-      }
+        fill: "#fff",
+        transformOrigin: '50% 50%'
+        }
 
     };
 
@@ -172,9 +173,9 @@ class Dialpad extends VertoBaseComponent {
     } else {
       // if there is NOT a number it gets the last number dialed.
       this.setState({...this.state, number: this.props.lastNumber, redialing: true });
-      setTimeout(()=>{
-        this.setState({...this.state, redialing: false});
-      }, 5000);
+      // setTimeout(()=>{
+      //   this.setState({...this.state, redialing: false});
+      // }, 5000);
     }
   }
 
@@ -242,10 +243,12 @@ class Dialpad extends VertoBaseComponent {
             }}
             style={{...this.getDefaultStyle('callcont')}}>
           <div
-
               onClick={this.makeCall.bind(this)}
               style={{...this.getDefaultStyle('callbg')}} >
-            <PhoneIconSVG svgStyle={{...this.getDefaultStyle('call')}} />
+            <PhoneIconSVG
+                svgStyle={{...this.getDefaultStyle('call')}}
+                svgTransform="rotate(15)"
+            />
           </div>
         </div>
       </div>);
