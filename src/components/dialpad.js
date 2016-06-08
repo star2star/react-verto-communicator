@@ -6,7 +6,8 @@ import { CallHistoryIconSVG, BackIconSVG, PhoneIconSVG } from './svgIcons';
 const propTypes = {
   compStyle : React.PropTypes.object,
   cbCall: React.PropTypes.func.isRequired,
-  nbrToDial: React.PropTypes.string
+  nbrToDial: React.PropTypes.string,
+  lastNumber : React.PropTypes.string
 };
 
 class Dialpad extends VertoBaseComponent {
@@ -129,13 +130,12 @@ class Dialpad extends VertoBaseComponent {
     return (styles[styleName]);
   }
 
-  makeCall(){
-    //TODO validate
-      if(this.state.number) {
-      this.props.cbCall(this.state.number)
-    } else {
-      console.log('No number entered');
 
+  makeCall(){
+    if(this.state.number) {
+      this.props.cbCall(this.state.number); // makes a call if there is a number entered.
+    } else {
+      this.setState({...this.state, number: this.props.lastNumber }); // if there is NOT a number it gets the last number dialed.
     }
   }
 
