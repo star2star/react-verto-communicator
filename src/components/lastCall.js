@@ -4,6 +4,7 @@ import VertoBaseComponent from './vertobasecomponent';
 
 const propTypes = {
   lastNumber: React.PropTypes.string,
+  labelText: React.PropTypes.string,
   cbClick: React.PropTypes.func,
   compStyle:   React.PropTypes.object
 };
@@ -45,7 +46,7 @@ class LastCall extends VertoBaseComponent {
 
   render() {
      return (<div onClick={this.call}>
-              <span>{this.props.lastNumber? 'Last Call:':'No Calls Yet'}</span>
+              <span>{this.props.labelText}</span>
                 <span>{this.props.lastNumber? this.props.lastNumber :''}</span>
              </div>);
   }

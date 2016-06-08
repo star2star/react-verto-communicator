@@ -70,6 +70,7 @@ const auth = (state, action)=>{
           const chu =  { ...state, showPage: 'loggedIn', lastCall: action.data.params.destination_number };
           // remove destination
           delete chu.callInfo;
+          delete chu.conferenceCall;
           return chu;
         }
       }

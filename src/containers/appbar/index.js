@@ -388,12 +388,15 @@ class AppBar extends VertoBaseComponent {
     let lastCall;
 
     if (true && !this.state.showAltAppControls) {
-      lastCall = (
-        <LastCall lastNumber={this.props.lastNumber} cbClick={(number)=>{
-          console.log('<<<<<<<', number, this.props.settings)
+      if (this.props.auth.callInfo) {
+        lastCall = (<LastCall labelText= {"In Call:"} lastNumber={this.props.auth.callInfo.destination}  />);
+      }else if (this.props.lastNumber) {
+        lastCall = (<LastCall labelText= {"Last Call:"} lastNumber={this.props.lastNumber}  cbClick={(number)=>{
           this.props.dispatch(doMakeCall(number, this.props.app))
-        }} />
-      );
+        }} />);
+      } else {
+        lastCall = (<LastCall labelText= {"No Call Yet"} />);
+      }
     }
 
     // settings here
@@ -466,6 +469,7 @@ export default connect((state)=>{
     vcStatus: state.auth.vcStatus,
     lastNumber: state.auth.lastCall,
     app: state.app,
+    auth: state.auth,
     contributorsData: state.app.contributors,
     chatData: state.auth.conferenceCall && state.auth.conferenceCall.messages
   });
