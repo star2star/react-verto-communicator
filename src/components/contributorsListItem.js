@@ -25,7 +25,8 @@ class ContributorsList extends VertoBaseComponent{
               display: "flex",
               alignItems: "center",
               justifyContent: "space-around",
-              flexWrap: "wrap"
+              flexWrap: "wrap",
+              marginBottom: '20px'
             },
 
             imageStyle: {
@@ -36,7 +37,9 @@ class ContributorsList extends VertoBaseComponent{
               display: "flex",
               flexDirection: "column",
               justifyContent: "flex-start",
-              width: "50%"
+              width: "50%",
+              wordWrap: 'break-word',
+              minWidth: '165px'
             },
 
             nameStyle: {

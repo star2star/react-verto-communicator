@@ -151,7 +151,9 @@ class SettingsPreview extends VertoBaseComponent{
       },
        saveStyle: {
         backgroundColor: "green",
-        color: 'white'
+        color: 'white',
+        paddingTop: '10px',
+        fontSize: '30px'
 
       },
         saveContainer: {
