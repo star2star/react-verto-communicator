@@ -59,13 +59,14 @@ class NetworkStatusIndicator extends VertoBaseComponent {
       },
       menu: {
         position: 'absolute',
-        //zIndex: 1,
+        zIndex: 1,
         //minWidth: '250px',
         top: '40px',
         right: '20px',
         display: this.state.dropdownDisplayed ? 'flex' : 'none',
         flexDirection: 'column',
         //padding: '10px',
+        backgroundColor: '#fff',
         border: '1px solid #ccc',
         borderBottomLeftRadius: '4px',
         borderBottomRightRadius: '4px',
@@ -91,7 +92,6 @@ class NetworkStatusIndicator extends VertoBaseComponent {
         fontSize: '14px',
         fontWeight: 400,
         fontFamily: 'Helvetica',
-        backgroundColor: '#fff',
         padding: '5px',
         paddingLeft: '15px',
         paddingRight: '15px'
