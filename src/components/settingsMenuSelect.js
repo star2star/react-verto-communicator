@@ -48,18 +48,18 @@ handleSelect() {
         paddingBottom: '5px',
         borderBottom: '1px solid #FFF',
         display: 'flex',
-        flex: 2,
         flexDirection: 'column'
       },
       label: {
         display:'flex',
         paddingBottom: '10px',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontSize: '1.1rem'
       },
       select: {
         border: 'none',
         boxShadow:'none',
-        fontSize: '.85rem',
+        fontSize: '1rem',
         backgroundColor: 'rgba(0,0,0,0)',
         color: '#FFF'
       }
