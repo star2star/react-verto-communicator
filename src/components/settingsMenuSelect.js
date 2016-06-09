@@ -46,7 +46,10 @@ handleSelect() {
       container: {
         paddingTop: '10px',
         paddingBottom: '5px',
-        borderBottom: '1px solid #FFF'
+        borderBottom: '1px solid #FFF',
+        display: 'flex',
+        flex: 2,
+        flexDirection: 'column'
       },
       label: {
         display:'flex',
@@ -56,8 +59,6 @@ handleSelect() {
       select: {
         border: 'none',
         boxShadow:'none',
-        //borderRadius: '0'
-        //width: '350px',
         fontSize: '.85rem',
         backgroundColor: 'rgba(0,0,0,0)',
         color: '#FFF'
