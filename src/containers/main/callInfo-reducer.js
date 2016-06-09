@@ -28,7 +28,7 @@ const callInfo = (state, action)=>{
       //console.log('<<<<', state, action.data );
       // did i call in or is it incoming
       if (state.activeCalls[action.data.callId] ) {
-        oStateReturn.activeCalls[action.data.callId]["conferenceData"] = { ...oStateReturn.activeCalls[action.data.callId]["conferenceData"], ...action.data};
+        oStateReturn.activeCalls[action.data.callId]["conferenceData"] = { messages: [], ...oStateReturn.activeCalls[action.data.callId]["conferenceData"], ...action.data};
       }
 
       return oStateReturn;
