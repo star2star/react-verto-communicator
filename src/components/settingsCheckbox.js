@@ -19,7 +19,6 @@ class SettingsCheckbox extends VertoBaseComponent {
   }
 
 handleSelect() {
-    // this.setState({isChecked: !this.state.isChecked});
   console.log('handleSelect');
   // this.props.cbSubmitSetting();
 
