@@ -182,7 +182,7 @@ class AppBar extends VertoBaseComponent {
     }
     UserMenu.closeMenu();
     TagMenu.closeMenu();
-    
+
     //console.log('toggle settings', displaySettings);
     this.setState({ ...this.state, showSettings: displaySettings });
   }
@@ -435,7 +435,7 @@ class AppBar extends VertoBaseComponent {
     // const settingsContainer = this.buildSettingsContainer();
 
     return (
-      <div style={{position: "absolute", left: "0px", right: "0px", top: "0px"}}>
+      <div style={{position: "absolute", left: "0px", right: "0px", top: "0px", zIndex: "1"}}>
         <div className="appbar" style={this.getStyle('appbarStyles')}>
           <span className="altMenu" style={this.getStyle("altMenuStyles")} onClick={this.handleAltMenuClick}>
             <MenuIconSVG svgStyle={this.getStyle("altMenuSvgStyles")} />
