@@ -297,6 +297,6 @@ const doingSendingChat = () => {
 
 export { doValidation, doBrowserCheck,
   doSubmitLogin, doShowLogin, doVertoLogin, doSubmitLogOut, doLogOut,
-  doMakeCall, doMakeCallError, doIncomingCall,
+  doMakeCall, doMakeCallError, doIncomingCall, doSpeedTest,
   doingMakeCall, doHungUp, doHangUp, doAnswer, doMuteMic, doConferenceData, doHold, doMuteVideo, doCallHeld,
   doSendChat, doReceiveChat, doingSendingChat };

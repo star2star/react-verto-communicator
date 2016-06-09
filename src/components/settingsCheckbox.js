@@ -19,7 +19,6 @@ class SettingsCheckbox extends VertoBaseComponent {
   }
 
 handleSelect() {
-    // this.setState({isChecked: !this.state.isChecked});
   console.log('handleSelect');
   // this.props.cbSubmitSetting();
 
@@ -41,7 +40,7 @@ let chkdObj = {};
         // borderBottom: '1px solid #FFF'
       },
       label: {
-        fontSize:'.85rem',
+        fontSize:'1rem',
         paddingLeft: '10px'
       }
     };

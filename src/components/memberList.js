@@ -1,14 +1,14 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import ReactDOM from 'react-dom';
-import ChatMessageItem from './chatMessageItem';
+import MemberItem from './memberItem';
 
 const propTypes = {
-  chatItems : React.PropTypes.array,
+  members : React.PropTypes.array,
   compStyle : React.PropTypes.object
 };
 
-export default class ChatMessageList extends VertoBaseComponent {
+export default class MemberList extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {};
@@ -32,7 +32,7 @@ export default class ChatMessageList extends VertoBaseComponent {
 
   getDefaultStyle(styleName) {
     const styles = {
-      CMLStyles : {
+      MLStyles : {
         flex: 1,
         borderLeft: '1px solid #d1d1d1',
         backgroundColor: '#FAFAFA',
@@ -51,16 +51,16 @@ export default class ChatMessageList extends VertoBaseComponent {
 
   render(){
 
-    const messages = this.props.chatItems.map((msgObj, index)=>{
-      return (<ChatMessageItem key={index} message={msgObj} /> );
+    const members = this.props.members.map((mem, index)=>{
+      return (<MemberItem key={index} member={mem} /> );
     });
 
     return(
-        <div className="chatMsgList" style={this.getStyle('CMLStyles')}>
-          {messages}
+        <div className="memberList" style={this.getStyle('MLStyles')}>
+          {members}
         </div>
       );
   }
 }
 
-ChatMessageList.propTypes = propTypes;
+MemberList.propTypes = propTypes;

@@ -21,18 +21,9 @@ class LastCall extends VertoBaseComponent {
 
   getDefaultStyle(styleName) {
       const styles = {
-            svgStyle: {
-              width: '24px',
-              height: '24px'
-            },
-            disconnectedFill: {
-              fill: "#F45A5A"
-            },
-            connectingFill: {
-              fill: "#F7D965"
-            },
-            connectedFill: {
-              fill: "#4ACF55"
+            lastCallStyle: {
+              paddingLeft: '10px',
+              paddingRight: '20px'
             }
       };
       return (styles[styleName]);
@@ -45,9 +36,9 @@ class LastCall extends VertoBaseComponent {
   }
 
   render() {
-     return (<div onClick={this.call}>
+     return (<div onClick={this.call} className="container" >
               <span>{this.props.labelText}</span>
-                <span style={{marginRight:'20px'}}>{this.props.lastNumber? this.props.lastNumber :''}</span>
+                <span style={this.getStyle('lastCallStyle')}>{this.props.lastNumber? this.props.lastNumber :''}</span>
              </div>);
   }
 }
