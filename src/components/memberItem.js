@@ -3,7 +3,7 @@ import VertoBaseComponent from './vertobasecomponent';
 import {MicrophoneIconSVG, VideoIconSVG, MuteMicrophoneIconSVG, MuteVideoIconSVG} from './svgIcons';
 
 const propTypes = {
-  member : React.PropTypes.array
+  member : React.PropTypes.object.isRequired
 
 };
 
@@ -79,10 +79,10 @@ export default class MemberItem extends VertoBaseComponent {
 
     return (
       <div style={this.getStyle("memberStyles")}>
-        <img src={this.props.member[5].avatar} style={this.getStyle("avatarStyle")} />
+        <img src={this.props.member.avatar.avatar} style={this.getStyle("avatarStyle")} />
         <div className="userInfo" style={this.getStyle("userInfoStyle")}>
-          <span style={this.getStyle("nameStyle")}>{this.props.member[2]}</span>
-          <span style={this.getStyle("emailStyle")}>{this.props.member[5].email}</span>
+          <span style={this.getStyle("nameStyle")}>{this.props.member.name}</span>
+          <span style={this.getStyle("emailStyle")}>{this.props.member.avatar.email}</span>
           {floor}
         </div>
         {micStatus}
