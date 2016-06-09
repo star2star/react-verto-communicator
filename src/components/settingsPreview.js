@@ -1,7 +1,7 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import Modal from 'react-modal';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import SettingsMenuSelect from './settingsMenuSelect.js';
 import vMeter from 'volume-meter';
 import VolumeMeter from './volumeMeter';
@@ -207,6 +207,7 @@ class SettingsPreview extends VertoBaseComponent{
 
 
   render() {
+    const { formatMessage } = this.props.intl;
 
     return (
       <Modal isOpen onRequestClose={this.props.cbClose} style={this.getStyle('modal')}>
@@ -222,14 +223,14 @@ class SettingsPreview extends VertoBaseComponent{
                     compStyle={this.getStyle("compMenuStyles")}
                     cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
                     options={this.props.settingsData.videoDevices ? this.props.settingsData.videoDevices : []}
-                    label="Camera:"
+                    label={formatMessage({"id": "CAMERA_SETTINGS", "defaultMessage": "Camera:"})}
                     selectedOption={{id:"selectedVideo", label:this.props.settingsData.selectedVideo && this.props.settingsData.selectedVideo.label}}
                 />
                 <SettingsMenuSelect
                     compStyle={this.getStyle("compMenuStyles")}
                     cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
                     options={this.props.settingsData.audioDevices ? this.props.settingsData.audioDevices : []}
-                    label="Microphone:"
+                    label={formatMessage({"id": "MIC_SETTINGS", "defaultMessage": "Microphone:"})}
                     selectedOption={{id:"selectedAudio", label:this.props.settingsData.selectedAudio && this.props.settingsData.selectedAudio.label}}
                 />
                 <button
@@ -258,4 +259,4 @@ class SettingsPreview extends VertoBaseComponent{
 
 SettingsPreview.propTypes = propTypes;
 
-export default SettingsPreview;
+export default injectIntl(SettingsPreview);
