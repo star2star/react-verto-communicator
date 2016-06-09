@@ -257,7 +257,7 @@ class VertoService {
 
         const sentUser = e.data.from.substring(0, e.data.from.indexOf('@'));
         const currentUser = v.options.loginParams.user;
-        //console.log('chatCallback ..... ', e,v,sentUser, currentUser, sentUser == currentUser  );
+        console.log('chatCallback ..... ', e,v );
         _dispatch(doReceiveChat(callID, {callID, displayName, message, utc_timestamp: Date.now(), isMe: sentUser == currentUser , bgColor: this.getChatUserColor(sentUser) }));
       },
       onBroadcast: (v, conf, message) => {
@@ -314,13 +314,17 @@ class VertoService {
       //jes fixed this ... check on instance ..this._data.instance
       _verto.verto, pvtData.laChannel,
       pvtData.laName, {
+        userObj: {
+          a: 'j',
+          b: 1
+        },
         subParams: {
           callID: dialog ? dialog.callID : null
         }
       });
-    //window.LA = this._data.liveArray;
+    window.LA = this._data.liveArray;
 
-    //console.log('>>>>>> livearray: ', this._data, pvtData);
+    //console.log('>>>>>> livearray: ',  Object.keys(_verto.verto.dialogs)[0] );
 
     this._data.liveArray.onErr = (obj, args) => {
       console.log('liveArray.onErr', obj, args);
@@ -330,8 +334,8 @@ class VertoService {
       let users = {};
       obj.each((k)=>{
         const x = obj.get(k);
-        //console.log('********', x);
-        users[k] = { serno: x[0], email: x[1], name: x[2], codec: x[3], conferenceStatus: JSON.parse(x[4]), avatar: x[5] };
+        console.log('********', x);
+        users[k] = { serno: x[0], callerId: x[1], name: x[2], codec: x[3], conferenceStatus: JSON.parse(x[4]), avatar: x[5] };
       })
 
       return users;
