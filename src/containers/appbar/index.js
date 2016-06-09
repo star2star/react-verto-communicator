@@ -22,6 +22,7 @@ import { MenuIconSVG, ChatIconSVG } from '../../components/svgIcons';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import LastCall from '../../components/lastCall';
 import { doMakeCall } from '../main/action-creators';
+import { doSpeedTest } from '../main/action-creators';
 
 
 
@@ -403,7 +404,7 @@ class AppBar extends VertoBaseComponent {
           <div className="buttonContainer" style={{...this.getStyle('buttonContainer')}}>
               <button
                   style={{...this.getStyle('button')}}
-                  onClick={()=>{console.log('Check Network Speed Clicked');}}
+                  onClick={()=>{this.props.dispatch(doSpeedTest());}}
               >
                 <FormattedMessage
                     id="CHECK_NETWORK_SPEED"

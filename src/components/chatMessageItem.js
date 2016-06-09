@@ -1,6 +1,6 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
-import AvatarSVG from './svgIcons';
+import {AvatarSVG} from './svgIcons';
 import moment from 'moment';
 //import Radium from 'radium';
 
@@ -42,11 +42,11 @@ export default class ChatMessageItem extends VertoBaseComponent {
       },
       avStyle: {
         height: '20px',
-        // borderRadius: '50%',
+        borderRadius: '50%',
         width: '20px',
-        // alignSelf: 'top',
-        fill: '#ddd'
-        // padding: '10px'
+        alignSelf: 'top',
+        fill: '#ddd',
+        padding: '10px'
       },
       msgStyle: {
         marginLeft: '10px',
@@ -102,7 +102,7 @@ export default class ChatMessageItem extends VertoBaseComponent {
     if (!this.props.message.isMe) {
       return (
         <div style={this.getStyle("ChatMsgItem")}>
-          {/*<AvatarSVG svgStyle={this.getStyle("avStyle")}/>*/}
+          <AvatarSVG svgStyle={this.getStyle("avStyle")}/>
           <span style={{...this.getStyle("msgStyle"), backgroundColor:this.props.message.bgColor}}> {this.props.message.message}
             <span style={this.getStyle("triangleStyleLeft")}></span>
             <div style={this.getStyle("infoStyle")} > {this.props.message.displayName} &#8226; {timestamp}</div>
@@ -112,7 +112,7 @@ export default class ChatMessageItem extends VertoBaseComponent {
     } else {
       return (
         <div style={this.getStyle("ChatMsgItemRight")}>
-          {/*<AvatarSVG svgStyle={this.getStyle("avStyle")}/>*/}
+          <AvatarSVG svgStyle={this.getStyle("avStyle")}/>
           <span style={{...this.getStyle("msgStyle"), backgroundColor:this.props.message.bgColor}}>{this.props.message.message}
             <span style={this.getStyle("triangleStyleRight")}></span>
             <div style={this.getStyle("infoStyle")} >{this.props.message.displayName} &#8226; {timestamp}</div>

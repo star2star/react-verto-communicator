@@ -89,20 +89,23 @@ export default class ChatSession extends VertoBaseComponent {
     render(){
         console.log('#### chatDatain Chat SEssion', this.props.chatData);
       const chatTitle = "Chat History";
-
+      // ta - not using heading in this implementation
+      const chatHeading = (
+        <span style={this.getStyle("headerStyles")} >
+          <ChatIconSVG svgStyle={this.getStyle("chatIconStyle")} />
+          <span style={this.getStyle("chatDataViewStyle")} >
+              {chatTitle}
+          </span>
+          <ExtractIconSVG
+              svgStyle={this.getStyle("extractStyle")}
+              cbClick={()=>this.props.cbRemove(this.props.chatData.name)}
+          />
+        </span>
+      );
 
       return(
         <div style={this.getStyle("csStyles")} >
-          <span style={this.getStyle("headerStyles")} >
-            <ChatIconSVG svgStyle={this.getStyle("chatIconStyle")} />
-            <span style={this.getStyle("chatDataViewStyle")} >
-                {chatTitle}
-            </span>
-            <ExtractIconSVG
-                svgStyle={this.getStyle("extractStyle")}
-                cbClick={()=>this.props.cbRemove(this.props.chatData.name)}
-            />
-        </span>
+
           <ChatMessageList
               chatItems={this.props.chatData.messages}
               style={{CMLStyles: this.getStyle('CMLStyles')}}
