@@ -2,7 +2,7 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import Numberpad from './numberpad';
 import { CallHistoryIconSVG, PhoneIconSVG, RemoveIconSVG, DeleteIconSVG } from './svgIcons';
-import Radium from 'radium';
+import Radium  from 'radium';
 import CallHistory from './callHistory';
 
 const propTypes = {
