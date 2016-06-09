@@ -18,7 +18,17 @@ class CallHistory extends VertoBaseComponent {
 
   getDefaultStyle(styleName) {
     const styles = {
-
+      container: {
+        display: 'flex',
+        flex: 1,
+        alignItems: "center",
+        justifyContent: 'flex-start',
+        flexDirection: "column",
+        maxWidth: "500px",
+        boxShadow: '0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)',
+        backgroundColor: "green",
+        color: "yellow"
+      },
      };
 
     return (styles[styleName]);
@@ -27,7 +37,7 @@ class CallHistory extends VertoBaseComponent {
   render(){
 
     return (
-      <div style={{background: "green", color: "yellow"}}>
+      <div style={this.getStyle('container')}>
         <div>Call History</div>
         <div>
           Call History Items Go Here
