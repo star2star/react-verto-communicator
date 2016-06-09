@@ -10,9 +10,10 @@ import UserMenu from '../../components/userMenu';
 import MenuItem from '../../components/menuItem';
 import TagMenu from '../../components/tagMenu';
 import Settings from '../../components/settings';
-import SettingsMenuSelect from '../../components/settingsMenuSelect';
 import SettingsCheckbox from '../../components/settingsCheckbox';
+import SettingsMenuSelect from '../../components/settingsMenuSelect';
 import SettingsPreview from '../../components/settingsPreview';
+import { doSpeedTest } from '../main/action-creators';
 import { doSubmitLogOut } from '../main/action-creators';
 import { doUpdateSetting } from './action-creators';
 import App from '../../components/app';
@@ -22,9 +23,6 @@ import { MenuIconSVG, ChatIconSVG } from '../../components/svgIcons';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import LastCall from '../../components/lastCall';
 import { doMakeCall } from '../main/action-creators';
-import { doSpeedTest } from '../main/action-creators';
-
-
 
 
 // Need to close menu on resize so that if we pass media query limit then
@@ -392,19 +390,19 @@ class AppBar extends VertoBaseComponent {
               />
           </div>
             <SettingsCheckbox
-                cbSubmitSetting={(setting)=>{ this.props.dispatch(doUpdateSetting(setting));}}
+                cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
                 label="Automatically determine speed and resolution settings"
                 checkedOption={{name:'autoBand', value:this.props.settings.autoBand}}
             />
             <SettingsCheckbox
-                cbSubmitSetting={(setting)=>{ this.props.dispatch(doUpdateSetting(setting));}}
+                cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
                 label="Recheck Bandwidth Before Each Outgoing Call"
                 checkedOption={{name:'testSpeedJoin', value:this.props.settings.testSpeedJoin}}
             />
           <div className="buttonContainer" style={{...this.getStyle('buttonContainer')}}>
               <button
                   style={{...this.getStyle('button')}}
-                  onClick={()=>{this.props.dispatch(doSpeedTest());}}
+                  onClick={()=>{ this.props.dispatch(doSpeedTest());}}
               >
                 <FormattedMessage
                     id="CHECK_NETWORK_SPEED"
@@ -412,10 +410,9 @@ class AppBar extends VertoBaseComponent {
                 />
               </button>
                <div
-                   className='networksSpeedDisplay'
+                   className='networkSpeedDisplay'
                >
-                  <FormattedMessage id="BANDWIDTH_INFO_OUTGOING" /> {this.props.bandwidthInfo.outgoingBandwidth}
-                  <FormattedMessage id="BANDWIDTH_INFO_INCOMING" /> {this.props.bandwidthInfo.incomingBandwidth}
+
                 </div>
             </div>
           </div>
@@ -517,9 +514,10 @@ class AppBar extends VertoBaseComponent {
 
             <div style={!this.state.showAltAppControls ? {marginRight: '20px'}:{marginBottom:'10px'}}>
               <Settings  allowDisplayDetails={this.props.vcStatus != 'disconnected'}
-                  cbSubmitSetting = {(setting)=>{ this.props.dispatch(doUpdateSetting(setting));}}
+                  cbSubmitSetting = {(data)=>{this.props.dispatch(doUpdateSetting(data));}}
                   cbToggleShowSettings={this.settings.bind(this)}
                   settings={this.props.settings}
+                  onClick={()=>{this.props.dispatch(doSpeedTest());}}
                   cbPreviewSet={()=>{App.toggleModal((<SettingsPreview settings={this.props.settings} cbClose={App.toggleModal}/>));}}
               />
             </div>
