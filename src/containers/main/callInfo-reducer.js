@@ -36,7 +36,7 @@ const callInfo = (state, action)=>{
       // }
 
       if (state.activeCalls[action.data.callId] ) {
-        oStateReturn.activeCalls[action.data.callId]["conferenceData"] = { ...oStateReturn.activeCalls[action.data.callId]["conferenceData"], ...action.data};
+        oStateReturn.activeCalls[action.data.callId]["conferenceData"] = { messages: [], ...oStateReturn.activeCalls[action.data.callId]["conferenceData"], ...action.data};
       }
 
       return oStateReturn;
