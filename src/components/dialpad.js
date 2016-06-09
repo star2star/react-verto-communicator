@@ -172,6 +172,7 @@ class Dialpad extends VertoBaseComponent {
                 }}}
             >
           <div
+            className="header"
             style={{...this.getDefaultStyle('header')}}
           >
             <span
@@ -185,6 +186,7 @@ class Dialpad extends VertoBaseComponent {
               />
             </span>
             <input
+                className="input"
                 placeholder="Enter an extension"
                 style={{...this.getDefaultStyle('input')}}
                 value={this.state.number}
@@ -198,6 +200,7 @@ class Dialpad extends VertoBaseComponent {
             />
 
             <span
+                className="back"
                 style={{...this.getStyle('span')}}
                 onClick={()=>{
                   const number = this.state.number;
