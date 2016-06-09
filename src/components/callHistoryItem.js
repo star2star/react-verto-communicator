@@ -24,8 +24,8 @@ class CallHistoryItem extends VertoBaseComponent {
       container: {
         display: 'flex',
         color: '#4a4a4a',
-        marginTop: '20px',
-        marginBottom: '20px',
+        paddingTop: '10px',
+        paddingBottom: '10px',
         backgroundColor: '#fff',
         flex: 1,
         fontWeight: '300',
@@ -36,11 +36,16 @@ class CallHistoryItem extends VertoBaseComponent {
         boxShadow: '0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)'
       },
       top: {
+        paddingLeft: '20px',
+        flex: 9,
         display: 'flex',
         flexDirection: 'column',
         fontSize: '30px',
         color: '#26ccda',
         justifyContent: 'space-between'
+      },
+      dirCont : {
+        paddingRight: '20px'
       },
       dirSVG : {
         width: '30px',
@@ -48,12 +53,17 @@ class CallHistoryItem extends VertoBaseComponent {
         fill : '#009688'
       },
       menuCont : {
-        marginLeft: 'auto'
+        flex: 1,
+        paddingRight: '20px',
+        marginLeft: 'auto',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
       },
       timestamp : {
         marginTop: '15px',
         fontSize: '11px',
-        color: '#4a4a4a',
+        color: '#ccc'
       }
 
      };
@@ -65,13 +75,13 @@ class CallHistoryItem extends VertoBaseComponent {
 
     var renderedDirection;
     if(this.props.data.lastDirection == 'outgoing') {
-      renderedDirection = (<span className="outgoing">
+      renderedDirection = (<span className="incoming" style={{...this.getDefaultStyle('dirCont')}}>
         <UpArrowIconSVG
           svgStyle={{...this.getDefaultStyle('dirSVG')}}
         />
       </span>);
     } else {
-      renderedDirection = (<span className="incoming">
+      renderedDirection = (<span className="outgoing" style={{...this.getDefaultStyle('dirCont')}}>
         <DownArrowIconSVG
           svgStyle={{...this.getDefaultStyle('dirSVG')}}
         />
