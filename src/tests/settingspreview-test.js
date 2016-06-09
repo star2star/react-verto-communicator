@@ -33,10 +33,14 @@ describe('Default test for SettingsPreview', ()=>{
       vidQual:undefined
   };
 
-  AudioContext = new AudioContext();
 
   it ('Displays the volue meter', () => {
-    const wrapper = mount(<SettingsPreview settingsData={sampleSettingsData} cbClose={()=>{}} />);
+    const wrapper = mountWithIntl(<SettingsPreview settingsData={sampleSettingsData} cbClose={()=>{}} />);
+    expect(wrapper.find('VolumeMeter').length).toEqual(2);
+  });
+
+  it ('Displays the volue meter', () => {
+    const wrapper = shallowWithIntl(<SettingsPreview settingsData={sampleSettingsData} cbClose={()=>{}} />);
     expect(wrapper.find('VolumeMeter').length).toEqual(2);
   });
 
