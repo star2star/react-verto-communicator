@@ -22,7 +22,7 @@ const callInfo = (state, action)=>{
       }
       return oStateReturn;
     case "INCOMING_CALL":
-      oStateReturn.incomingCalls[action.daa.callId] = action.data;
+      oStateReturn.incomingCalls[action.data.callID] = action.data;
       return oStateReturn;
     case "CONFERENCE_DATA":
       //console.log('<<<<', state, action.data );
@@ -41,6 +41,9 @@ const callInfo = (state, action)=>{
           oStateReturn.currentCallId = undefined;
         }
         delete oStateReturn.activeCalls[action.data.callID];
+      }
+      if (state.incomingCalls[action.data.callID]) {
+        delete oStateReturn.incomingCalls[action.data.callID];
       }
 
       //console.log('aaaaaaahhhhhh bbbbaaadddd', action.data);

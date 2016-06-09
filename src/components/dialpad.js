@@ -4,6 +4,7 @@ import Numberpad from './numberpad';
 import { CallHistoryIconSVG, PhoneIconSVG, RemoveIconSVG, DeleteIconSVG } from './svgIcons';
 import Radium  from 'radium';
 import CallHistory from './callHistory';
+import CallHistoryService from '../js/callHistoryService';
 
 const propTypes = {
   compStyle : React.PropTypes.object,
@@ -157,7 +158,7 @@ class Dialpad extends VertoBaseComponent {
 
     if (this.state.showingCallHistory) {
       return (
-        <CallHistory history={[]} cbBack={()=>{
+        <CallHistory history={CallHistoryService.getInstance().getHistory()} cbBack={()=>{
           this.setState({ ...this.state, showingCallHistory: !this.state.showingCallHistory});
         }} />
       );

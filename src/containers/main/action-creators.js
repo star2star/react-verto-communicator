@@ -142,14 +142,18 @@ const doSubmitLogin = (data) => {
   };
 };
 // verto login callback
-const doVertoLogin = (data) => {
+const doVertoLogin = (success, data) => {
   return dispatch => {
     //console.log('verto ....', data);
-    //TODO figure this out if failed
-    window.VS = VertoService.getInstance();
+    if(success){
+      dispatch(doVertoLoginValid(data));
+      dispatch(doSpeedTest());
+    } else {
+      dispath({
+        type: "LOGIN_FAILED"
+      });
+    }
 
-    dispatch(doVertoLoginValid(data));
-    dispatch(doSpeedTest());
 
   }
 }
@@ -254,6 +258,12 @@ const doingMakeCall = (status, dest, callId, direction) => {
     "data": {status: status, destination: dest, callId: callId, direction: direction}
   }
 };
+const doCallHeld = (callID) =>{
+  return {
+    "type": "CALL_HELD",
+    "data": callID
+  }
+};
 
 const doUpdateSettings = (aData) => {
   return {
@@ -288,5 +298,5 @@ const doingSendingChat = () => {
 export { doValidation, doBrowserCheck,
   doSubmitLogin, doShowLogin, doVertoLogin, doSubmitLogOut, doLogOut,
   doMakeCall, doMakeCallError, doIncomingCall,
-  doingMakeCall, doHungUp, doHangUp, doAnswer, doMuteMic, doConferenceData, doHold, doMuteVideo,
+  doingMakeCall, doHungUp, doHangUp, doAnswer, doMuteMic, doConferenceData, doHold, doMuteVideo, doCallHeld,
   doSendChat, doReceiveChat, doingSendingChat };

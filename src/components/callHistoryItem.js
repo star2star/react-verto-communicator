@@ -1,14 +1,12 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
-import CallHistoryItem from './callHistoryItem';
 
 const propTypes = {
   compStyle : React.PropTypes.object,
-  history: React.PropTypes.array.isRequired,
-  cbBack: React.PropTypes.func.isRequired
+  data: React.PropTypes.object.isRequired
 };
 
-class CallHistory extends VertoBaseComponent {
+class CallHistoryItem extends VertoBaseComponent {
   constructor(props) {
     super(props);
 }
@@ -36,21 +34,17 @@ class CallHistory extends VertoBaseComponent {
   }
 
   render(){
+
     return (
       <div style={this.getStyle('container')}>
-        <div>Call History</div>
-        <div>
-          {this.props.history.map((i, index)=>{
-            return (
-              <CallHistoryItem key={index} data={i} />
-            );
-          })}
-        </div>
-        <div onClick={this.props.cbBack}>Back</div>
+        <span>{this.props.data.callerId}</span>
+        <span>{this.props.data.lastTimestamp}</span>
+        <span>{this.props.data.nbrCalls}</span>
+        <span>{this.props.data.lastDirection}</span>
       </div>);
   }
 
 }
 
-CallHistory.propTypes = propTypes;
-export default CallHistory;
+CallHistoryItem.propTypes = propTypes;
+export default CallHistoryItem;

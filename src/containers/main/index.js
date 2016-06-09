@@ -41,18 +41,18 @@ class Main extends VertoBaseComponent {
     let loggedInfo;
     const splashObject = { ...this.props.auth.splash };
 
-    let incomingCall;
-    if (this.props.auth.incomingCall) {
-      //console.log('------- GOT CALL', this.props.auth.incomingCall);
-      incomingCall = (<IncomingCall callData={this.props.auth.incomingCall} cbHangup={(d)=>{
-        //console.log('hang up', d);
+    const incomingCall = this.props.callInfo && Object.keys(this.props.callInfo.incomingCalls).map((callId)=>{
+      console.log('------- GOT CALL', this.props.callInfo.incomingCalls[callId]);
+      return (<IncomingCall key={callId} callData={this.props.callInfo.incomingCalls[callId]} cbHangup={(d)=>{
+        console.log('hang up', d);
         this.props.dispatch(doHangUp(d.callID));
       }}
       cbAnswer={(d)=>{
-        //console.log('Answering: ', d);
+        console.log('Answering: ', d);
         this.props.dispatch(doAnswer(d.callID));
       }}  />);
-    }
+    })
+
 
     switch (this.props.auth.showPage){
       case 'splash':

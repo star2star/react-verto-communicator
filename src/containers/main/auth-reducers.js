@@ -22,9 +22,11 @@ const auth = (state, action)=>{
     case "SHOW_LOGIN":
       return { ...state, showPage: 'login', vcStatus: 'disconnected' };
     case "LOGOUT":
-        return { ...state, showPage: 'logout', vcStatus: 'disconnected' }
+        return { ...state, showPage: 'logout', vcStatus: 'disconnected' };
     case 'AUTH_SUBMIT_LOGIN':
       return { ...state, showPage: 'logout', vcStatus: 'connecting'};
+    case "LOGIN_FAILED":
+      return { ...state, showPage: 'logout', vcStatus: 'disconnected' };
     case 'VERTO_LOGIN':
       return { ...state, showPage: 'loggedIn', vcStatus: 'active', sessionInfo: action.data };
     case 'NO_MEDIA':
