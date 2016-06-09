@@ -67,15 +67,8 @@ const callInfo = (state, action)=>{
           oStateReturn.activeCalls[action.data.callID].conferenceData.messages = [];
         }
 
-        //TODO  Build out chat messages object so it can be rendered nicely
-        // For now, just key all the proper data into it...
-        // displayName, isMe, bgColor, utc_timestamp,
-        console.log('#####action.data', action.data);
-        action.data = {...action.data, displayName: "DisplayName", isMe: false, bgColor: "#dee", utc_timestamp: action.data.timestamp };
-
-
         // now append it append
-        oStateReturn.activeCalls[action.data.callID].conferenceData.messages = oStateReturn.activeCalls[action.data.callID].conferenceData.messages.concat([action.data]);
+        oStateReturn.activeCalls[action.data.callID].conferenceData.messages = oStateReturn.activeCalls[action.data.callID].conferenceData.messages.concat(action.data);
         //console.log('<<<***** ', oStateReturn.activeCalls[action.data.callID]);
 
       } else {

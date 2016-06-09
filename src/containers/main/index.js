@@ -12,6 +12,7 @@ import {injectIntl} from 'react-intl';
 import CallProgress from '../../components/callprogress';
 import IncomingCall from '../../components/incomingcall';
 import ChatSession from '../../components/ChatSession';
+import Memberlist from '../../components/Memberlist';
 
 class Main extends VertoBaseComponent {
   constructor(props) {
@@ -159,6 +160,7 @@ class Main extends VertoBaseComponent {
                   cbSubmitMessage={(id,msg)=>{this.props.dispatch(doSendChat(msg));}}
                   chatData={confData}
               />
+              <Memberlist members={confData.users} admin={false}/>
             </div>
           );
         }
