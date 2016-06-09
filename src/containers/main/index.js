@@ -4,13 +4,14 @@ import VertoBaseComponent from '../../components/vertobasecomponent';
 import { connect } from 'react-redux';
 //import ReactTooltip from 'react-tooltip';
 import VCStatus from '../../components/vcstatus';
-import { doSubmitLogin, doSubmitLogOut, doMakeCall, doHangUp, doAnswer, doMuteMic, doHold, doMuteVideo } from './action-creators';
+import { doSubmitLogin, doSubmitLogOut, doMakeCall, doSendChat, doHangUp, doAnswer, doMuteMic, doHold, doMuteVideo } from './action-creators';
 import Splash from '../../components/splash';
 import Login from '../../components/login';
 import Dialpad from '../../components/dialpad';
 import {injectIntl} from 'react-intl';
 import CallProgress from '../../components/callprogress';
 import IncomingCall from '../../components/incomingcall';
+import ChatSession from '../../components/ChatSession';
 
 class Main extends VertoBaseComponent {
   constructor(props) {
@@ -20,6 +21,10 @@ class Main extends VertoBaseComponent {
   }
 
   componentWillMount() {
+  }
+
+  getCompStyle() {
+    return this.props.compStyle;
   }
 
   getDefaultStyle(styleName) {
@@ -39,6 +44,7 @@ class Main extends VertoBaseComponent {
     const { formatMessage } = this.props.intl;
 
     let loggedInfo;
+    let chatSideBar;
     const splashObject = { ...this.props.auth.splash };
 
     let incomingCall;
@@ -134,6 +140,29 @@ class Main extends VertoBaseComponent {
             />
           </div>
         );
+        // setup chat/memberlist here
+        // Extract conference data from currentCall (if it is a conference)
+        let confData;
+
+        if (this.props.callInfo.currentCallId) {
+          const activeCall = this.props.callInfo.activeCalls[this.props.callInfo.currentCallId];
+          confData = activeCall.conferenceData;
+        }
+
+        // Show chat sidebar only if confData has a value
+        console.log('#### conf data', confData);
+        if (confData) {
+          chatSideBar = (
+            <div className="sidebarWrapper" style={{width: '360px', backgroundColor: "#0dd"}}>
+              <ChatSession
+                  cbRemove={()=>{}}
+                  cbSubmitMessage={(id,msg)=>{this.props.dispatch(doSendChat(msg));}}
+                  chatData={confData}
+              />
+            </div>
+          );
+        }
+
         break;
       default:
         break;
@@ -144,12 +173,17 @@ class Main extends VertoBaseComponent {
       showSplash = (<Splash step={splashObject} title={intlTitle} />);
     }
     return (
-      <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
-        {incomingCall}
-        <video id="webcam" autoplay="autoplay"  style={{display:"none", width:"70%", height:"70%", objectFit:"inherit"}}></video>
-        {loggedInfo}
-        {showSplash}
-      </div>);
+      <div className="chatVideoWrapper" style={{display: 'flex'}}>
+        <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
+          {incomingCall}
+          <video id="webcam" autoplay="autoplay"  style={{display:"none", width:"70%", height:"70%", objectFit:"inherit"}}></video>
+          {loggedInfo}
+          {showSplash}
+        </div>
+        {chatSideBar}
+      </div>
+
+    );
   }
 }
 
