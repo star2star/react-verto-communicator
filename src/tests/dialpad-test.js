@@ -3,6 +3,8 @@ import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import sinon from 'sinon';
 import ReactDOM from 'react-dom';
+import {StyleRoot} from 'radium';
+
 import Dialpad from '../components/dialpad.js';
 
 jest.unmock('../components/dialpad.js');
@@ -15,7 +17,7 @@ const cbCall = function() {
 };
 
   it('displays a label', () => {
-    const wrapper = shallow(<Dialpad lastCall={lastCall}  nbrToDial={nbrToDial} cbCall={cbCall} />);
+    const wrapper = shallow(<StyleRoot><Dialpad lastCall={lastCall}  nbrToDial={nbrToDial} cbCall={cbCall} /></StyleRoot>);
     console.log('%%%%%%%%%%%%%%%%%%%%', wrapper.get(0).props.label);
   });
 
