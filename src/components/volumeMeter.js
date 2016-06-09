@@ -54,11 +54,11 @@ class VolumeMeter extends VertoBaseComponent{
     volSegArray = volSegArray.map((segment)=>{
       if (this.props.volumeLevel > (segment-1) * 20 +1) {
         return (
-          <div className="volSegment" key={segment} style={this.getStyle("segmentOnStyle")}></div>
+          <div id={segment} className="volSegment" key={segment} style={this.getStyle("segmentOnStyle")}></div>
         );
       } else {
         return (
-          <div className="volSegment" key={segment} style={this.getStyle("segmentOffStyle")}></div>
+          <div id={segment} className="volSegment" key={segment} style={this.getStyle("segmentOffStyle")}></div>
         );
       }
     });
