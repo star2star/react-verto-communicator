@@ -760,6 +760,7 @@
     };
 
     $.verto.liveArray = function(verto, context, name, config) {
+      console.log('LLLL:', config);
         var la = this;
         var lastSerno = 0;
         var binding = null;

@@ -22,7 +22,7 @@ class VertoService {
     window.v = this;
     _callbacks = {
       onMessage: (v, dialog, msg, params) => {
-        //console.debug('^^^^^^^ onMessage:', v, dialog, msg, params);
+        console.debug('^^^^^^^ onMessage:', v, dialog, msg, params);
 
         switch (msg) {
           case $.verto.enum.message.pvtEvent:
@@ -62,7 +62,7 @@ class VertoService {
 
           switch (d.state) {
               case $.verto.enum.state.ringing:
-                  console.log('^^^^^^ringing ... onDialogState display', d);
+                  //console.log('^^^^^^ringing ... onDialogState display', d);
 
                   xInstance._data._activeCalls[d.callID] = d;
 
@@ -93,7 +93,7 @@ class VertoService {
               //jes tell it is ringing
               //display("Calling: " + d.cidString());
               //goto_page("incall");
-              console.log('^^^^^^trying .. calling', d);
+              //console.log('^^^^^^trying .. calling', d);
               CallHistoryService.getInstance().add({
                 timestamp: Date.now(),
                 callerId: d.params.destination_number,
@@ -110,7 +110,7 @@ class VertoService {
               //jes tell them we are now talking
               //display("Talking to: " + d.cidString());
               //goto_page("incall");
-              console.log('^^^^^active ...:', d);
+              //console.log('^^^^^active ...:', d);
               d.params.isHeld = false;
               // ta- added to init isMuted attribute
               d.params.isMuted = false;
@@ -217,16 +217,48 @@ class VertoService {
     this._data.chattingWith = pvtData.chatID;
     this._data.confRole = pvtData.role;
     this._data.conferenceMemberID = pvtData.conferenceMemberID;
+
+
+    this.userColors = {};
+    this.lastColorIndex = -1;
+
+    this.getChatUserColor = (user) => {
+      // pre-defined color array
+      const colorArray =  new Array('#FFFFFF', '#e1e1e1', '#E0F1D8', '#CEFFEF', '#EFDACC', '#F6F5CE', '#E7DBEC', '#EAF4FE', '#FDEAEC', '#FDE3F7');
+      // have i assigned the user a color already
+      if (!this.userColors[user]) {
+        // nope so will get them a color
+        // am i at the length of the color array
+        if (this.lastColorIndex + 1 === colorArray.length ) {
+          // yep at max length so assigning to zero
+          this.lastColorIndex =0;
+        } else {
+          // incrementing
+          this.lastColorIndex = this.lastColorIndex + 1;
+        }
+        //populating on the user colors object
+        this.userColors[user] = colorArray[this.lastColorIndex];
+      }
+
+      //console.log('CCCC: ', this.userColors[user] );
+      // returning the user color from the user object
+      return this.userColors[user];
+    }
+
     var conf = new $.verto.conf(v, {
       dialog: dialog,
       hasVid: true, //TODO storage.data.useVideo,
       laData: pvtData,
       chatCallback: (v, e) => {
-        var from = e.data.fromDisplay || e.data.from || "Unknown";
+
+        var displayName = e.data.fromDisplay || e.data.from || "Unknown";
         var message = e.data.message || "";
         var callID = Object.keys(v.dialogs)[0];
-        //console.log('chatCallback ..... ', from, message );
-        _dispatch(doReceiveChat(callID, {callID, from, message, timestamp: Date.now() }));
+
+        const sentUser = e.data.from.substring(0, e.data.from.indexOf('@'));
+        const currentUser = v.options.loginParams.user;
+        //console.log('chatCallback ..... ', e,v,sentUser, currentUser, sentUser == currentUser  );
+        _dispatch(doReceiveChat(callID, {callID, displayName, message, utc_timestamp: Date.now(), isMe: sentUser == currentUser , bgColor: this.getChatUserColor(sentUser) }));
       },
       onBroadcast: (v, conf, message) => {
         //console.log('>>> conf.onBroadcast:', message, arguments);
@@ -254,12 +286,12 @@ class VertoService {
             this._data.confLayouts = options;
           } else if (message['conf-command'] == 'canvasInfo') {
             this._data.canvasInfo = message.responseData;
-            console.log('..... CANVASINFO ...', message );
+            //console.log('..... CANVASINFO ...', message );
             //TODO
             //$rootScope.$emit('conference.canvasInfo', message.responseData);
           } else {
             //TODO
-            console.log('..... ELSE ONBROADCAST ...', message );
+            //console.log('..... ELSE ONBROADCAST ...', message );
             //$rootScope.$emit('conference.broadcast', message);
           }
         }
@@ -277,7 +309,6 @@ class VertoService {
     }
 
     this._data.conf = conf;
-    window.CONF = conf;
 
     this._data.liveArray = new $.verto.liveArray(
       //jes fixed this ... check on instance ..this._data.instance
@@ -287,19 +318,35 @@ class VertoService {
           callID: dialog ? dialog.callID : null
         }
       });
+    //window.LA = this._data.liveArray;
 
-      console.log('>>>>>> livearray: ', this._data);
+    //console.log('>>>>>> livearray: ', this._data, pvtData);
 
     this._data.liveArray.onErr = (obj, args) => {
       console.log('liveArray.onErr', obj, args);
     };
 
+    this._data.liveArray.getUsers = (obj) => {
+      let users = {};
+      obj.each((k)=>{
+        const x = obj.get(k);
+        //console.log('********', x);
+        users[k] = { serno: x[0], email: x[1], name: x[2], codec: x[3], conferenceStatus: JSON.parse(x[4]), avatar: x[5] };
+      })
+
+      return users;
+    };
+
     this._data.liveArray.onChange = (obj, args) => {
-      window.foo = obj;
-      //console.log('liveArray.onChange --- action: ' + args.action, Object.keys(obj.verto.dialogs)[0], obj, args);
+      //window.foo = obj;
+      //console.log('liveArray.onChange --- action: %s',args.action,  obj, args);
 
       switch (args.action) {
         case 'bootObj':
+          // args.data.map((member)=>{
+          //   console.log('BBBB:', member[0], member[1]);
+          // });
+
           //TODO
           //$rootScope.$emit('members.boot', args.data);
           // args.data.forEach(function(member){
@@ -329,7 +376,8 @@ class VertoService {
           //var member = [args.key, args.data];
           //TODO $rootScope.$emit('members.update', member);
           //break;
-          _dispatch(doConferenceData({callId: Object.keys(obj.verto.dialogs)[0], users: obj.asArray() }));
+
+          _dispatch(doConferenceData({callId: Object.keys(obj.verto.dialogs)[0], users: obj.getUsers(obj) }));
           break;
         default:
           console.log('NotImplemented', args.action);
@@ -338,7 +386,7 @@ class VertoService {
   }
 
   stopConference() {
-    console.log('stopConference()', this, this._data );
+    //console.log('stopConference()', this, this._data );
     if (this._data.liveArray) {
       this._data.liveArray.destroy();
       //console.log('Has data.liveArray.');
