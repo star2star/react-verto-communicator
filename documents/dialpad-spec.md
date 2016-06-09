@@ -1,15 +1,9 @@
 # Component Name:  Dialpad   #
 # 1. Functional Description #
 
-
+The Dialpad is an area that displays the specific information and tools necessary for placing a ca
 
 # 3. Visual Design #  
-
-(REMOVE WHEN DONE)
-
-Images with callouts for size, colors, etc. and/or reference to a document containing the visual design specification for the component.  Extract from design documentation and paste here.
-
-Sample:
 
 ![Dialpad](./img/dialpad.png)
 
@@ -24,7 +18,7 @@ This component will be a 'pure' component.
 | nbrToDial | nbrToDial="8"| nbrToDial is an optional that takes a string. |
 | compStyle |  compStyle={} | compStyle is an object that defines styles for the dialpad component. |
 | cbCall | cbCall={()=>{}} |  cbCall is a required callback function. |
-
+| lastCall | lastCall="8"| lastCall is an optional prop that displays the last call dialed. |
 
 
 ## b. Component State ##
