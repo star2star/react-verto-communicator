@@ -41,7 +41,7 @@ let chkdObj = {};
         // borderBottom: '1px solid #FFF'
       },
       label: {
-        fontSize:'.85rem',
+        fontSize:'1rem',
         paddingLeft: '10px'
       }
     };

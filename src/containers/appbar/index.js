@@ -149,13 +149,14 @@ class AppBar extends VertoBaseComponent {
             top: '70px',
             left: '0px',
             minWidth:'375px',
+            // width: '100%',
             flex: '1 0 auto',
             display: this.state.showSettings ? 'flex' : 'none',
             flexDirection: 'row',
             // alignContent: 'center',
             alignItems: 'stretch',
             flexWrap: 'wrap',
-            justifyContent: 'space-between',
+            justifyContent: 'space-around',
             opacity: '.9',
             padding: '60px',
             backgroundColor: '#0A387F'
@@ -166,48 +167,49 @@ class AppBar extends VertoBaseComponent {
             paddingRight: '10px',
             fontFamily: 'sans-serif'
           },
-          // buttonContainer: {
-          //   display: 'flex',
-          //   flexDirection: 'column',
-          //   flex:1
-          // },
           column1: {
             display: 'flex',
             flexDirection: 'column',
             paddingRight: '40px',
-            flex:1
+            flex: '1'
           },
           column2: {
             paddingTop:'10px',
-            // display: 'flex',
+            display: 'flex',
             flexDirection: 'column',
             paddingRight: '40px',
-            flex:1
+            flex: '1'
           },
           column3: {
             paddingTop:'10px',
-            // display: 'flex',
+            display: 'flex',
             flexDirection: 'column',
-            flex:1
+            flex: '1'
           },
           headerLabel: {
             fontWeight: 'bold',
+            fontSize: '1.1rem',
             paddingBottom: '5px'
             //paddingLeft:'5px'
           },
           audioheaderLabel: {
             fontWeight: 'bold',
+            fontSize: '1.1rem',
             paddingTop: '15px',
             paddingBottom: '5px'
-
+          },
+          buttonContainer: {
+            display: 'flex',
+            flexDirection: 'column'
+            // flex: 1
           },
           button: {
             padding: '8px 30px',
             border: '0px',
             borderRadius: '3px',
-            fontSize: '.9rem',
+            fontSize: '1rem',
             fontWeight: '400',
-            margin: '25px 1px 10px 1px',
+            margin: '25px 0px 10px 0px',
             cursor: 'pointer',
             backgroundColor: '#FFF',
             color: '#0A387F',
@@ -291,6 +293,7 @@ class AppBar extends VertoBaseComponent {
                 label="Best Frame Rate:"
                 selectedOption={{id:"selectedBestFrameRate", data:this.props.settings.selectedBestFrameRate}}
             />
+            <div className="buttonContainer" style={{...this.getStyle('buttonContainer')}}>
               <button
                   style={{...this.getStyle('button')}}
                   onClick={()=>{App.toggleModal((<SettingsPreview settings={this.props.settings} cbClose={App.toggleModal}/>));}}
@@ -309,18 +312,18 @@ class AppBar extends VertoBaseComponent {
                     defaultMessage="Refresh Device List"
                 />
               </button>
-
+            </div>
           </div>
           <div
               className="column2"
               style={{...this.getStyle('column2')}}
           >
-            <span style={{...this.getStyle('headerLabel')}}>
+            <div style={{...this.getStyle('headerLabel')}}>
               <FormattedMessage
                   id="GENERAL_SETTINGS"
                   defaultMessage= "General settings:"
             />
-            </span>
+        </div>
             <SettingsCheckbox
                 cbSubmitSetting={this.props.cbSubmitSetting}
                 label="Use Video"
@@ -352,12 +355,12 @@ class AppBar extends VertoBaseComponent {
                 label="Language:"
                 selectedOption={{id:"language", data:this.props.settings.language}}
             />
-          <span style={{...this.getStyle('audioheaderLabel')}}>
+          <div style={{...this.getStyle('audioheaderLabel')}}>
               <FormattedMessage
                   id="AUDIO_SETTINGS"
                   defaultMessage= "Audio settings:"
               />
-            </span>
+          </div>
             <SettingsCheckbox
                 cbSubmitSetting={this.props.cbSubmitSetting}
                 label="Echo Cancellation"
@@ -378,12 +381,12 @@ class AppBar extends VertoBaseComponent {
               className="column3"
               style={{...this.getStyle('column3')}}
           >
-            <span style={{...this.getStyle('headerLabel')}}>
+            <div style={{...this.getStyle('headerLabel')}}>
               <FormattedMessage
                   id="VIDEO_SETTINGS"
                   defaultMessage= "Video settings:"
               />
-            </span>
+          </div>
             <SettingsCheckbox
                 cbSubmitSetting={this.props.cbSubmitSetting}
                 label="Automatically determine speed and resolution settings"
@@ -394,10 +397,7 @@ class AppBar extends VertoBaseComponent {
                 label="Recheck Bandwidth Before Each Outgoing Call"
                 checkedOption={{name:'testSpeedJoin', value:this.props.settings.testSpeedJoin}}
             />
-            <div
-                className="buttonContainer"
-                style={{...this.getStyle('buttonContainer')}}
-            >
+          <div className="buttonContainer" style={{...this.getStyle('buttonContainer')}}>
               <button
                   style={{...this.getStyle('button')}}
                   onClick={()=>{console.log('Check Network Speed Clicked');}}
