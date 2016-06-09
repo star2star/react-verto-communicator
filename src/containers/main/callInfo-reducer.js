@@ -27,6 +27,14 @@ const callInfo = (state, action)=>{
     case "CONFERENCE_DATA":
       //console.log('<<<<', state, action.data );
       // did i call in or is it incoming
+
+      // TODO ta - is this the right place for this?
+      // console.log('@@@@@@@@@  Init messages array', Object.keys(action.data) );
+      // if (Object.keys(action.data).filter((key)=>{return(key=="messages");}).length === 0) {
+      //   console.log('/\/\/\/\/\/\/  Init messages array', Object.keys(action.data));
+      //    action.data['messages']=[];
+      // }
+
       if (state.activeCalls[action.data.callId] ) {
         oStateReturn.activeCalls[action.data.callId]["conferenceData"] = { messages: [], ...oStateReturn.activeCalls[action.data.callId]["conferenceData"], ...action.data};
       }
@@ -58,6 +66,13 @@ const callInfo = (state, action)=>{
           // first message
           oStateReturn.activeCalls[action.data.callID].conferenceData.messages = [];
         }
+
+        //TODO  Build out chat messages object so it can be rendered nicely
+        // For now, just key all the proper data into it...
+        // displayName, isMe, bgColor, utc_timestamp,
+        console.log('#####action.data', action.data);
+        action.data = {...action.data, displayName: "DisplayName", isMe: false, bgColor: "#dee", utc_timestamp: action.data.timestamp };
+
 
         // now append it append
         oStateReturn.activeCalls[action.data.callID].conferenceData.messages = oStateReturn.activeCalls[action.data.callID].conferenceData.messages.concat([action.data]);

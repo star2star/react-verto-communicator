@@ -329,7 +329,7 @@ class VertoService {
           //var member = [args.key, args.data];
           //TODO $rootScope.$emit('members.update', member);
           //break;
-          _dispatch(doConferenceData({callId: Object.keys(obj.verto.dialogs)[0], users: obj.asArray() }));
+          _dispatch(doConferenceData({callId: Object.keys(obj.verto.dialogs)[0], messages: [], users: obj.asArray() }));
           break;
         default:
           console.log('NotImplemented', args.action);
