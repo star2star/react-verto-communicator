@@ -277,6 +277,7 @@ class VertoService {
     }
 
     this._data.conf = conf;
+    window.CONF = conf;
 
     this._data.liveArray = new $.verto.liveArray(
       //jes fixed this ... check on instance ..this._data.instance
