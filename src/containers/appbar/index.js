@@ -174,20 +174,20 @@ class AppBar extends VertoBaseComponent {
             display: 'flex',
             flexDirection: 'column',
             paddingRight: '40px',
-            flex: '1 auto'
+            flex: '1'
           },
           column2: {
             paddingTop:'10px',
             display: 'flex',
             flexDirection: 'column',
             paddingRight: '40px',
-            flex: '1 auto'
+            flex: '1'
           },
           column3: {
             paddingTop:'10px',
             display: 'flex',
             flexDirection: 'column',
-            flex: '1 auto'
+            flex: '1'
           },
           headerLabel: {
             fontWeight: 'bold',
