@@ -49,7 +49,7 @@ class Settings extends VertoBaseComponent {
         height: '16px',
         width: '20px',
         paddingBottom: '3px'
-      },
+      }
       // menu: {
       //   position: 'absolute',
       //   top: '70px',
@@ -311,7 +311,7 @@ class Settings extends VertoBaseComponent {
     // const settingsContainer = this.buildSettingsContainer();
     // console.log('settings render props: ', this.props.settingsData);
     return (
-      <div>
+      <div  style={this.getStyle("container")}>
         <span onClick={this.showMenu.bind(this)}  >
           <SettingsIconSVG svgStyle={{...this.getStyle('icon')}}  />
             {this.state.dropdownDisplayed ?
