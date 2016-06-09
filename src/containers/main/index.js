@@ -143,12 +143,7 @@ class Main extends VertoBaseComponent {
         );
         // setup chat/memberlist here
         // Extract conference data from currentCall (if it is a conference)
-        let confData;
-
-        if (this.props.callInfo.currentCallId) {
-          const activeCall = this.props.callInfo.activeCalls[this.props.callInfo.currentCallId];
-          confData = activeCall.conferenceData;
-        }
+        const confData = this.props.callInfo.activeCalls[this.props.callInfo.currentCallId].conferenceData;
 
         // Show chat sidebar only if confData has a value
         console.log('#### conf data', confData);
@@ -160,7 +155,7 @@ class Main extends VertoBaseComponent {
                   cbSubmitMessage={(id,msg)=>{this.props.dispatch(doSendChat(msg));}}
                   chatData={confData}
               />
-              <Memberlist members={confData.users} admin={false}/>
+              <Memberlist members={[ ...confData.users]} admin={false}/>
             </div>
           );
         }
