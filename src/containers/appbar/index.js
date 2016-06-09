@@ -213,7 +213,7 @@ class AppBar extends VertoBaseComponent {
             color: '#0A387F',
             textTransform: 'uppercase'
           }
-        };
+    };
 
     return (styles[styleName]);
   }
