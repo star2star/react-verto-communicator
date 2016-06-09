@@ -261,7 +261,7 @@ class VertoService {
         var message = e.data.message || "";
         var callID = Object.keys(v.dialogs)[0];
         //console.log('chatCallback ..... ', from, message );
-        _dispatch(doReceiveChat(callID, from, message));
+        _dispatch(doReceiveChat(callID, {callID, from, message, timestamp: Date.now() }));
         //TODO
         //$rootScope.$emit('chat.newMessage', {
         //  from: from,

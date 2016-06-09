@@ -269,12 +269,12 @@ const doSendChat = (message) => {
   };
 }
 
-const doReceiveChat = (callID, from, message) => {
+const doReceiveChat = (callID, messageObject) => {
   return dispatch =>{
     //console.log('received a chat msssgggg: ', callID, from, message);
     dispatch({
       type: 'RECEIVED_CHAT_MESSAGE',
-      data: { callID, from, message }
+      data: messageObject
     });
   }
 }

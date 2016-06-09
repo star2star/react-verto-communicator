@@ -2,7 +2,8 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import Numberpad from './numberpad';
 import { CallHistoryIconSVG, PhoneIconSVG, RemoveIconSVG, DeleteIconSVG } from './svgIcons';
-import Radium from 'radium';
+import Radium  from 'radium';
+import CallHistory from './callHistory';
 
 const propTypes = {
   compStyle : React.PropTypes.object,
@@ -14,7 +15,7 @@ const propTypes = {
 class Dialpad extends VertoBaseComponent {
   constructor(props) {
     super(props);
-    this.state = {number: this.props.nbrToDial, inputFocused: false, lcDisplayed: false};
+    this.state = {number: this.props.nbrToDial, inputFocused: false, lcDisplayed: false, showingCallHistory: false };
   }
 
   getCompStyle() {
@@ -154,84 +155,93 @@ class Dialpad extends VertoBaseComponent {
 
   render() {
 
-
-    return (
-      <div
-            style={{...this.getDefaultStyle('container')}}
-            onKeyPress={(e)=>{
-              if(e.which == 13 || e.keyCode == 13) {
-                this.makeCall();
-                return false;
-              }}}
-          >
+    if (this.state.showingCallHistory) {
+      return (
+        <CallHistory history={[]} cbBack={()=>{
+          this.setState({ ...this.state, showingCallHistory: !this.state.showingCallHistory});
+        }} />
+      );
+    } else {
+      return (
         <div
-          style={{...this.getDefaultStyle('header')}}
-        >
-          <span
-              style={{...this.getStyle('span')}}
-              onClick={()=>{}}
+              style={{...this.getDefaultStyle('container')}}
+              onKeyPress={(e)=>{
+                if(e.which == 13 || e.keyCode == 13) {
+                  this.makeCall();
+                  return false;
+                }}}
+            >
+          <div
+            style={{...this.getDefaultStyle('header')}}
           >
-            <CallHistoryIconSVG
-              svgStyle={{...this.getDefaultStyle('callhist')}}
+            <span
+                style={{...this.getStyle('span')}}
+                onClick={()=>{
+                  this.setState({ ...this.state, showingCallHistory: !this.state.showingCallHistory});
+                }}
+            >
+              <CallHistoryIconSVG
+                svgStyle={{...this.getDefaultStyle('callhist')}}
+              />
+            </span>
+            <input
+                placeholder="Enter an extension"
+                style={{...this.getDefaultStyle('input')}}
+                value={this.state.number}
+                onChange={this.changingNumber.bind(this)}
+                onFocus={()=>{
+                  this.setState({...this.state,'inputFocused': true});
+                }}
+                onBlur={()=>{
+                  this.setState({...this.state,'inputFocused': false});
+                }}
             />
-          </span>
-          <input
-              placeholder="Enter an extension"
-              style={{...this.getDefaultStyle('input')}}
-              value={this.state.number}
-              onChange={this.changingNumber.bind(this)}
+
+            <span
+                style={{...this.getStyle('span')}}
+                onClick={()=>{
+                  const number = this.state.number;
+                  const newNumber = number.slice(0, number.length - 1);
+                  this.setState({...this.state,'number': newNumber });
+                }}
+            >
+            <DeleteIconSVG svgStyle={{...this.getDefaultStyle('back')}}
+            />
+            </span>
+          </div>
+          <div
+              style={{...this.getStyle('bar')}}
+          >
+            <span
+                className="left"
+                style={{...this.getStyle('left')}}
+            >
+                &nbsp;
+            </span>
+            <span
+                className="right"
+                style={{...this.getStyle('right')}}
+            >
+              &nbsp;
+            </span>
+          </div>
+          <Numberpad cbClick={this.dialNumber.bind(this)} />
+          <div
               onFocus={()=>{
-                this.setState({...this.state,'inputFocused': true});
-              }}
-              onBlur={()=>{
                 this.setState({...this.state,'inputFocused': false});
               }}
-          />
-
-          <span
-              style={{...this.getStyle('span')}}
-              onClick={()=>{
-                const number = this.state.number;
-                const newNumber = number.slice(0, number.length - 1);
-                this.setState({...this.state,'number': newNumber });
-              }}
-          >
-          <DeleteIconSVG svgStyle={{...this.getDefaultStyle('back')}}
-          />
-          </span>
-        </div>
-        <div
-            style={{...this.getStyle('bar')}}
-        >
-          <span
-              className="left"
-              style={{...this.getStyle('left')}}
-          >
-              &nbsp;
-          </span>
-          <span
-              className="right"
-              style={{...this.getStyle('right')}}
-          >
-            &nbsp;
-          </span>
-        </div>
-        <Numberpad cbClick={this.dialNumber.bind(this)} />
-        <div
-            onFocus={()=>{
-              this.setState({...this.state,'inputFocused': false});
-            }}
-            style={{...this.getDefaultStyle('callcont')}}>
-          <div
-              onClick={this.makeCall.bind(this)}
-              style={{...this.getDefaultStyle('callbg')}} >
-            <PhoneIconSVG
-                svgStyle={{...this.getDefaultStyle('call')}}
-                //svgTransform={{rotate(15)}}
-            />
+              style={{...this.getDefaultStyle('callcont')}}>
+            <div
+                onClick={this.makeCall.bind(this)}
+                style={{...this.getDefaultStyle('callbg')}} >
+              <PhoneIconSVG
+                  svgStyle={{...this.getDefaultStyle('call')}}
+                  //svgTransform={{rotate(15)}}
+              />
+            </div>
           </div>
-        </div>
-      </div>);
+        </div>);
+    }
   }
 }
 
