@@ -149,16 +149,15 @@ class AppBar extends VertoBaseComponent {
             top: '70px',
             left: '0px',
             minWidth:'375px',
-            flex: 1,
-            // width: '100%',
+            flex: '1 0 auto',
             display: this.state.showSettings ? 'flex' : 'none',
             flexDirection: 'row',
-            alignContent: 'center',
-            alignItems: 'flex-start',
+            // alignContent: 'center',
+            alignItems: 'stretch',
             flexWrap: 'wrap',
-            justifyContent: 'space-around',
+            justifyContent: 'space-between',
             opacity: '.9',
-            paddingBottom: '20px',
+            padding: '60px',
             backgroundColor: '#0A387F'
           },
           li: {
@@ -167,35 +166,40 @@ class AppBar extends VertoBaseComponent {
             paddingRight: '10px',
             fontFamily: 'sans-serif'
           },
-          buttonContainer: {
-            display: 'flex',
-            flexDirection: 'column'
-            // flex:1
-          },
+          // buttonContainer: {
+          //   display: 'flex',
+          //   flexDirection: 'column',
+          //   flex:1
+          // },
           column1: {
             display: 'flex',
-            flexDirection: 'column'
-            // flex:1
+            flexDirection: 'column',
+            paddingRight: '40px',
+            flex:1
           },
           column2: {
-            marginTop:'10px',
-            display: 'flex',
+            paddingTop:'10px',
+            // display: 'flex',
             flexDirection: 'column',
-            marginLeft: '20px'
-            // flex:1
+            paddingRight: '40px',
+            flex:1
           },
           column3: {
-            marginTop:'10px',
-            display: 'flex',
+            paddingTop:'10px',
+            // display: 'flex',
             flexDirection: 'column',
-            marginLeft: '20px'
-            // flex:1
+            flex:1
           },
           headerLabel: {
             fontWeight: 'bold',
-            marginTop:'10px',
-            marginBottom: '5px'
+            paddingBottom: '5px'
             //paddingLeft:'5px'
+          },
+          audioheaderLabel: {
+            fontWeight: 'bold',
+            paddingTop: '15px',
+            paddingBottom: '5px'
+
           },
           button: {
             padding: '8px 30px',
@@ -209,7 +213,7 @@ class AppBar extends VertoBaseComponent {
             color: '#0A387F',
             textTransform: 'uppercase'
           }
-        };
+    };
 
     return (styles[styleName]);
   }
@@ -287,7 +291,6 @@ class AppBar extends VertoBaseComponent {
                 label="Best Frame Rate:"
                 selectedOption={{id:"selectedBestFrameRate", data:this.props.settings.selectedBestFrameRate}}
             />
-            <div className="buttonContainer" style={{...this.getStyle('buttonContainer')}}>
               <button
                   style={{...this.getStyle('button')}}
                   onClick={()=>{App.toggleModal((<SettingsPreview settingsData={this.props.settings} cbClose={App.toggleModal}/>));}}
@@ -306,7 +309,7 @@ class AppBar extends VertoBaseComponent {
                     defaultMessage="Refresh Device List"
                 />
               </button>
-            </div>
+
           </div>
           <div
               className="column2"
@@ -349,7 +352,7 @@ class AppBar extends VertoBaseComponent {
                 label="Language:"
                 selectedOption={{id:"language", data:this.props.settings.language}}
             />
-            <span style={{...this.getStyle('headerLabel')}}>
+          <span style={{...this.getStyle('audioheaderLabel')}}>
               <FormattedMessage
                   id="AUDIO_SETTINGS"
                   defaultMessage= "Audio settings:"

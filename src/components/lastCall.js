@@ -47,7 +47,7 @@ class LastCall extends VertoBaseComponent {
   render() {
      return (<div onClick={this.call}>
               <span>{this.props.labelText}</span>
-                <span>{this.props.lastNumber? this.props.lastNumber :''}</span>
+                <span style={{marginRight:'20px'}}>{this.props.lastNumber? this.props.lastNumber :''}</span>
              </div>);
   }
 }
