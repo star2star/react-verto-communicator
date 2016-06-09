@@ -1,6 +1,6 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
-//import moment from 'moment.js';
+import moment from 'moment';
 import { UpArrowIconSVG, DownArrowIconSVG, MenuIconSVG } from './svgIcons';
 import Radium from 'radium';
 import {injectIntl, formattedMessage } from 'react-intl';
@@ -73,6 +73,8 @@ class CallHistoryItem extends VertoBaseComponent {
 
   render(){
 
+    const renderedTS = moment(this.props.data.lastTimestamp).format('ddd MMM DD YYYY HH:mm:ss A');
+
     var renderedDirection;
     if(this.props.data.lastDirection == 'outgoing') {
       renderedDirection = (<span className="incoming" style={{...this.getDefaultStyle('dirCont')}}>
@@ -96,7 +98,7 @@ class CallHistoryItem extends VertoBaseComponent {
               {this.props.data.callerId} ({this.props.data.nbrCalls})
             </div>
             <div style={{...this.getDefaultStyle('timestamp')}}>
-              {this.props.data.lastTimestamp}
+              {renderedTS}
             </div>
         </div>
         <span style={{...this.getDefaultStyle('menuCont')}}>
