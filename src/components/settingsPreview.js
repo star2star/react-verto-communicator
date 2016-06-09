@@ -207,6 +207,7 @@ class SettingsPreview extends VertoBaseComponent{
 
 
   render() {
+    //console.log(this.state.volume);
     const { formatMessage } = this.props.intl;
 
     return (

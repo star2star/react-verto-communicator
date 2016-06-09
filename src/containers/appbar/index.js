@@ -250,7 +250,7 @@ class AppBar extends VertoBaseComponent {
   buildSettingsContainer() {
     // console.log('xxxxxxxxxxxx', this.props.settings);
     if (this.props.showSettings) {
-      undefined;
+      return(undefined);
     } else {
       return (
         <div
@@ -293,7 +293,7 @@ class AppBar extends VertoBaseComponent {
             />
               <button
                   style={{...this.getStyle('button')}}
-                  onClick={()=>{App.toggleModal((<SettingsPreview settings={this.props.settings} cbClose={App.toggleModal}/>));}}
+                  onClick={()=>{App.toggleModal((<SettingsPreview settingsData={this.props.settings} cbClose={App.toggleModal}/>));}}
               >
                 <FormattedMessage
                     id="PREVIEW_SETTINGS"
