@@ -50,7 +50,7 @@ export default class MemberList extends VertoBaseComponent {
 
 
   render(){
-
+    console.log('---- ', this.props.members);
     const members = this.props.members.map((mem, index)=>{
       return (<MemberItem key={index} member={mem} /> );
     });
