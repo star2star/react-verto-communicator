@@ -2686,8 +2686,7 @@
 		    devices.forEach(function(device) {
 			//console.log(device);
 
-			//console.log(device.kind + ": " + device.label +
-				    " id = " + device.deviceId);
+			//console.log(device.kind + ": " + device.label +  " id = " + device.deviceId);
 
 			if (device.kind === "videoinput") {
 			    vid.push({id: device.deviceId, kind: "video", label: device.label});
