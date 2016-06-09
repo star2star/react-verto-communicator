@@ -334,7 +334,7 @@ class VertoService {
       let users = {};
       obj.each((k)=>{
         const x = obj.get(k);
-        console.log('********', x);
+        //console.log('********', x);
         users[k] = { serno: x[0], callerId: x[1], name: x[2], codec: x[3], conferenceStatus: JSON.parse(x[4]), avatar: x[5] };
       })
 
