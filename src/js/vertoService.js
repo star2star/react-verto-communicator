@@ -22,7 +22,7 @@ class VertoService {
     window.v = this;
     _callbacks = {
       onMessage: (v, dialog, msg, params) => {
-        console.debug('^^^^^^^ onMessage:', v, dialog, msg, params);
+        //console.debug('^^^^^^^ onMessage:', v, dialog, msg, params);
 
         switch (msg) {
           case $.verto.enum.message.pvtEvent:
