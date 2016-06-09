@@ -25,8 +25,6 @@ import LastCall from '../../components/lastCall';
 import { doMakeCall } from '../main/action-creators';
 
 
-
-
 // Need to close menu on resize so that if we pass media query limit then
 // normal size menu will reappear...
 window.onresize=()=>{
