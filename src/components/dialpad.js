@@ -145,6 +145,8 @@ class Dialpad extends VertoBaseComponent {
     }
   }
 
+
+
   changingNumber(e){
     //TODO convert letter to numeric
     this.setState({ ...this.state, number: e.target.value });
@@ -153,6 +155,13 @@ class Dialpad extends VertoBaseComponent {
   dialNumber(k) {
     this.setState({ ...this.state, number: this.state.number + k });
   }
+
+
+  // eraseLastNumber(){
+  //   const number = this.state.number;
+  //   const newNumber = number.slice(0, number.length - 1);
+  //   this.setState({...this.state,'number': newNumber });
+  // }
 
   render() {
 
@@ -177,6 +186,7 @@ class Dialpad extends VertoBaseComponent {
             style={{...this.getDefaultStyle('header')}}
           >
             <span
+                className="callhist"
                 style={{...this.getStyle('span')}}
                 onClick={()=>{
                   this.setState({ ...this.state, showingCallHistory: !this.state.showingCallHistory});
@@ -208,6 +218,7 @@ class Dialpad extends VertoBaseComponent {
                   const newNumber = number.slice(0, number.length - 1);
                   this.setState({...this.state,'number': newNumber });
                 }}
+
             >
             <DeleteIconSVG svgStyle={{...this.getDefaultStyle('back')}}
             />
@@ -236,6 +247,7 @@ class Dialpad extends VertoBaseComponent {
               }}
               style={{...this.getDefaultStyle('callcont')}}>
             <div
+                className="dial"
                 onClick={this.makeCall.bind(this)}
                 style={{...this.getDefaultStyle('callbg')}} >
               <PhoneIconSVG
