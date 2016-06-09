@@ -5,7 +5,8 @@ import moment from 'moment';
 //import Radium from 'radium';
 
 const propTypes = {
-  message : React.PropTypes.object
+  message : React.PropTypes.object,
+  compStyle: React.PropTypes.object
 
 };
 
@@ -93,9 +94,6 @@ export default class ChatMessageItem extends VertoBaseComponent {
       }
     return styleReturn;
   }
-
-
-
 
   render(){
     console.log('&&&&&& chat message object', this.props.message);

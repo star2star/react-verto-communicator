@@ -10,7 +10,7 @@ const propTypes = {
   cbRemove : React.PropTypes.func,
   cbSubmitMessage: React.PropTypes.func,
   chatData : React.PropTypes.object,
-  style: React.PropTypes.object
+  compStyle: React.PropTypes.object
 };
 
 
