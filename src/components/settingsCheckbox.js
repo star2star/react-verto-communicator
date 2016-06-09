@@ -25,7 +25,7 @@ handleSelect() {
 
 let chkdObj = {};
   chkdObj[this.props.checkedOption.name] = this.refs.checkMe.checked;
-  console.log('things-------', this.refs.checkMe.checked, chkdObj);
+  // console.log('things-------', this.refs.checkMe.checked, chkdObj);
   this.props.cbSubmitSetting(chkdObj);
 }
 
@@ -67,9 +67,3 @@ let chkdObj = {};
 
 SettingsCheckbox.propTypes = propTypes;
 export default SettingsCheckbox;
-// ----this is what is would look like in appbar/index.js:
-// <SettingsCheckbox
-//     checkedOption={{name:'useVideo', value:this.props.settings.useVideo}}
-//     cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
-//     label="Use Video"
-// />
