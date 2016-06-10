@@ -268,7 +268,7 @@
     function mark_ready(verto, channel) {
         for (var j in verto.eventSUBS[channel]) {
             verto.eventSUBS[channel][j].ready = true;
-            console.log("subscribed to channel: " + channel);
+            //console.log("subscribed to channel: " + channel);
             if (verto.eventSUBS[channel][j].readyHandler) {
                 verto.eventSUBS[channel][j].readyHandler(verto, channel);
             }
@@ -389,7 +389,7 @@
             }
 
             for (var u in unsubChannels) {
-                console.log("Sending Unsubscribe for: ", u);
+                //console.log("Sending Unsubscribe for: ", u);
                 sendChannels.push(u);
             }
 
@@ -420,7 +420,7 @@
 
         for (i in verto.dialogs) {
             if (!x) {
-                console.log("purging dialogs");
+                //console.log("purging dialogs");
             }
             x++;
             verto.dialogs[i].setState($.verto.enum.state.purge);
@@ -428,7 +428,7 @@
 
         for (i in verto.eventSUBS) {
             if (verto.eventSUBS[i]) {
-                console.log("purging subscription: " + i);
+                //console.log("purging subscription: " + i);
                 delete verto.eventSUBS[i];
             }
         }
@@ -590,7 +590,7 @@
                         } else if (verto.callbacks.onEvent) {
                             verto.callbacks.onEvent(verto, data.params, sub.userData);
                         } else {
-                            console.log("EVENT:", data.params);
+                            //console.log("EVENT:", data.params);
                         }
                     }
                 }
@@ -602,12 +602,12 @@
                     verto.callbacks.onMessage(verto, null, $.verto.enum.message.info, data.params.msg);
                 }
                 //console.error(data);
-                console.debug("MESSAGE from: " + data.params.msg.from, data.params.msg.body);
+                //console.debug("MESSAGE from: " + data.params.msg.from, data.params.msg.body);
 
                 break;
 
             default:
-                console.error("INVALID METHOD OR NON-EXISTANT CALL REFERENCE IGNORED", data.method);
+                //console.error("INVALID METHOD OR NON-EXISTANT CALL REFERENCE IGNORED", data.method);
                 break;
             }
         }
@@ -760,7 +760,7 @@
     };
 
     $.verto.liveArray = function(verto, context, name, config) {
-      console.log('LLLL:', config);
+      //console.log('LLLL:', config);
         var la = this;
         var lastSerno = 0;
         var binding = null;
@@ -991,7 +991,7 @@
         };
 
         if (la.context) {
-          console.log('-----', la);
+          //console.log('-----', la);
             binding = la.verto.subscribe(la.context, {
                 handler: eventHandler,
                 userData: la,
@@ -1319,11 +1319,11 @@
             if (!this.params.hasVid) {
                 throw 'Conference has no video';
             }
-	    if (canvasID) {
-		this.modCommand("vid-layout", null, [layout, canvasID]);
-	    } else {
-		this.modCommand("vid-layout", null, layout);
-	    }
+      	    if (canvasID) {
+      		      this.modCommand("vid-layout", null, [layout, canvasID]);
+      	    } else {
+    		        this.modCommand("vid-layout", null, layout);
+      	    }
         };
 
         $.verto.conf.prototype.kick = function(memberID) {
@@ -1974,7 +1974,7 @@
         }
 
         RTCcallbacks.onICESDP = function(rtc) {
-            console.log("RECV " + rtc.type + " SDP", rtc.mediaData.SDP);
+            //console.log("RECV " + rtc.type + " SDP", rtc.mediaData.SDP);
 
 	    if (dialog.state == $.verto.enum.state.requesting || dialog.state == $.verto.enum.state.answering || dialog.state == $.verto.enum.state.active) {
 		location.reload();
@@ -2006,13 +2006,13 @@
         RTCcallbacks.onICE = function(rtc) {
             //console.log("cand", rtc.mediaData.candidate);
             if (rtc.type == "offer") {
-                console.log("offer", rtc.mediaData.candidate);
+                //console.log("offer", rtc.mediaData.candidate);
                 return;
             }
         };
 
         RTCcallbacks.onStream = function(rtc, stream) {
-            console.log("stream started");
+            //console.log("stream started");
         };
 
         RTCcallbacks.onError = function(e) {
@@ -2108,7 +2108,7 @@
 
 	    element.setSinkId(sinkId)
 		.then(function() {
-		    console.log("Dialog: " + dialog.callID + ' Success, audio output device attached: ' + sinkId);
+		    //console.log("Dialog: " + dialog.callID + ' Success, audio output device attached: ' + sinkId);
 		    if (callback) {
 			callback(true, devname, arg);
 		    }
@@ -2145,7 +2145,7 @@
             return false;
         }
 
-        console.log("Dialog " + dialog.callID + ": state change from " + dialog.state.name + " to " + state.name);
+        //console.log("Dialog " + dialog.callID + ": state change from " + dialog.state.name + " to " + state.name);
 
         dialog.lastState = dialog.state;
         dialog.state = state;
@@ -2478,16 +2478,16 @@
             dialog.setState($.verto.enum.state.active);
         } else {
             if (dialog.gotEarly) {
-                console.log("Dialog " + dialog.callID + " Got answer while still establishing early media, delaying...");
+                //console.log("Dialog " + dialog.callID + " Got answer while still establishing early media, delaying...");
             } else {
-                console.log("Dialog " + dialog.callID + " Answering Channel");
+                //console.log("Dialog " + dialog.callID + " Answering Channel");
                 dialog.rtc.answer(params.sdp, function() {
                     dialog.setState($.verto.enum.state.active);
                 }, function(e) {
                     console.error(e);
                     dialog.hangup();
                 });
-                console.log("Dialog " + dialog.callID + "ANSWER SDP", params.sdp);
+                //console.log("Dialog " + dialog.callID + "ANSWER SDP", params.sdp);
             }
         }
 
@@ -2537,18 +2537,18 @@
         dialog.gotEarly = true;
 
         dialog.rtc.answer(params.sdp, function() {
-            console.log("Dialog " + dialog.callID + "Establishing early media");
+            //console.log("Dialog " + dialog.callID + "Establishing early media");
             dialog.setState($.verto.enum.state.early);
 
             if (dialog.gotAnswer) {
-                console.log("Dialog " + dialog.callID + "Answering Channel");
+                //console.log("Dialog " + dialog.callID + "Answering Channel");
                 dialog.setState($.verto.enum.state.active);
             }
         }, function(e) {
             console.error(e);
             dialog.hangup();
         });
-        console.log("Dialog " + dialog.callID + "EARLY SDP", params.sdp);
+        //console.log("Dialog " + dialog.callID + "EARLY SDP", params.sdp);
     };
 
     $.verto.ENUM = function(s) {
@@ -2675,7 +2675,7 @@
 	    /* of course it's a totally different API CALL with different element names for the same exact thing */
 
 	    if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
-		console.log("enumerateDevices() not supported.");
+		//console.log("enumerateDevices() not supported.");
 		return;
 	    }
 
@@ -2684,10 +2684,9 @@
 	    navigator.mediaDevices.enumerateDevices()
 		.then(function(devices) {
 		    devices.forEach(function(device) {
-			console.log(device);
+			//console.log(device);
 
-			console.log(device.kind + ": " + device.label +
-				    " id = " + device.deviceId);
+			//console.log(device.kind + ": " + device.label +  " id = " + device.deviceId);
 
 			if (device.kind === "videoinput") {
 			    vid.push({id: device.deviceId, kind: "video", label: device.label});
@@ -2710,7 +2709,7 @@
 
 		})
 		.catch(function(err) {
-		    console.log(" Device Enumeration ERROR: " + err.name + ": " + err.message);
+		    //console.log(" Device Enumeration ERROR: " + err.name + ": " + err.message);
 		    runtime(false);
 		});
 	}

@@ -11,6 +11,8 @@ let _verto;
 
 
 
+
+
 //class
 class VertoService {
   constructor(){
@@ -22,13 +24,14 @@ class VertoService {
     window.v = this;
     _callbacks = {
       onMessage: (v, dialog, msg, params) => {
-        console.debug('^^^^^^^ onMessage:', v, dialog, msg, params);
+        //console.debug('^^^^^^^ onMessage:', v, dialog, msg, params);
 
         switch (msg) {
           case $.verto.enum.message.pvtEvent:
             if (params.pvtData) {
               switch (params.pvtData.action) {
                 case "conference-liveArray-join":
+
                   if (!params.pvtData.screenShare && !params.pvtData.videoOnly) {
                     //console.log("conference-liveArray-join");
                     xInstance.stopConference();
@@ -199,6 +202,7 @@ class VertoService {
     this.getOptions = this.getOptions.bind(this);
     this.stopConference = this.stopConference.bind(this);
     this.startConference = this.startConference.bind(this);
+    this.sendConferenceCommand = this.sendConferenceCommand.bind(this);
 
     VertoService.getInstance = VertoService.getInstance.bind(this);
     VertoService.login = VertoService.login.bind(this);
@@ -257,11 +261,11 @@ class VertoService {
 
         const sentUser = e.data.from.substring(0, e.data.from.indexOf('@'));
         const currentUser = v.options.loginParams.user;
-        //console.log('chatCallback ..... ', e,v,sentUser, currentUser, sentUser == currentUser  );
+        console.log('chatCallback ..... ', e,v );
         _dispatch(doReceiveChat(callID, {callID, displayName, message, utc_timestamp: Date.now(), isMe: sentUser == currentUser , bgColor: this.getChatUserColor(sentUser) }));
       },
       onBroadcast: (v, conf, message) => {
-        //console.log('>>> conf.onBroadcast:', message, arguments);
+        console.log('>>> conf.onBroadcast:', message, arguments);
         if (message.action == 'response') {
           // This is a response with the video layouts list.
           if (message['conf-command'] == 'list-videoLayouts') {
@@ -297,6 +301,7 @@ class VertoService {
         }
       }
     });
+    //window.CONF = conf;
 
     if (this._data.confRole == "moderator") {
       //console.log('>>> conf.listVideoLayouts();', conf );
@@ -314,13 +319,17 @@ class VertoService {
       //jes fixed this ... check on instance ..this._data.instance
       _verto.verto, pvtData.laChannel,
       pvtData.laName, {
+        userObj: {
+          a: 'j',
+          b: 1
+        },
         subParams: {
           callID: dialog ? dialog.callID : null
         }
       });
     //window.LA = this._data.liveArray;
 
-    //console.log('>>>>>> livearray: ', this._data, pvtData);
+    //console.log('>>>>>> livearray: ',  Object.keys(_verto.verto.dialogs)[0] );
 
     this._data.liveArray.onErr = (obj, args) => {
       console.log('liveArray.onErr', obj, args);
@@ -331,7 +340,7 @@ class VertoService {
       obj.each((k)=>{
         const x = obj.get(k);
         //console.log('********', x);
-        users[k] = { serno: x[0], email: x[1], name: x[2], codec: x[3], conferenceStatus: JSON.parse(x[4]), avatar: x[5] };
+        users[k] = { serno: x[0], callerId: x[1], name: x[2], codec: x[3], conferenceStatus: JSON.parse(x[4]), avatar: x[5] };
       })
 
       return users;
@@ -448,6 +457,27 @@ class VertoService {
       } else {
         console.log('hold    NOT FOUND----------');
       }
+  }
+
+  sendConferenceCommand(cmd, params) {
+
+    // if i am moderator allow
+    if (_verto && _verto._data && _verto._data.conf
+          && _verto._data.conf.params && _verto._data.conf.params.laData
+          && _verto._data.conf.params.laData.role == 'moderator') {
+          // validate cmd
+          if (Object.keys(VideoConstants.CONF_CMDS).indexOf(cmd.toUpperCase()) > -1) {
+            // valid command
+            _verto._data.conf[VideoConstants.CONF_CMDS[cmd.toUpperCase()]['functionName']].apply(_verto._data.conf, params);
+          }  else {
+              console.log('sendConferenceCommand: ERROR invalid Command: %s', cmd);
+          }
+    } else {
+      console.log('sendConferenceCommand: ERROR Not Moderator ... how did this happen');
+    }
+
+
+    // send
   }
 
   getOptions(data) {
