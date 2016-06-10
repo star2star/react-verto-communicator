@@ -11,8 +11,9 @@ import Dialpad from '../../components/dialpad';
 import {injectIntl} from 'react-intl';
 import CallProgress from '../../components/callprogress';
 import IncomingCall from '../../components/incomingcall';
-import ChatSession from '../../components/ChatSession';
-import Memberlist from '../../components/Memberlist';
+import ChatSession from '../../components/chatSession';
+import Memberlist from '../../components/memberlist';
+import TabbedContainer from '../../components/tabbedContainer'
 
 class Main extends VertoBaseComponent {
   constructor(props) {
@@ -148,15 +149,20 @@ class Main extends VertoBaseComponent {
 
         // Show chat sidebar only if confData has a value
         //console.log('#### conf data', confData);
+
+        // NOTE:  Child components MUST be in the same order that their labels
+        // are in the tabLabels array!!!!
         if (confData) {
           chatSideBar = (
             <div className="sidebarWrapper" style={{width: '360px', backgroundColor: "#0dd"}}>
-              <ChatSession
-                  cbRemove={()=>{}}
-                  cbSubmitMessage={(id,msg)=>{this.props.dispatch(doSendChat(msg));}}
-                  chatData={confData}
-              />
-              <Memberlist members={Object.keys(confData.users).map((k)=>confData.users[k])} admin={false}/>
+              <TabbedContainer tabLabels={["Members", "Chat"]}>
+                <Memberlist members={Object.keys(confData.users).map((k)=>confData.users[k])} admin={false}/>
+                <ChatSession
+                    cbRemove={()=>{}}
+                    cbSubmitMessage={(id,msg)=>{this.props.dispatch(doSendChat(msg));}}
+                    chatData={confData}
+                />
+              </TabbedContainer>
             </div>
           );
         }

@@ -2,7 +2,11 @@ let _instance;
 
 class CallHistoryService {
   constructor(){
-    this.history = {};
+    let lsHistory;
+    if (localStorage) {
+      lsHistory = JSON.parse(localStorage.getItem('history'));
+    }
+    this.history = { ...lsHistory };
   }
 
   add(objCallHistory){
@@ -11,9 +15,12 @@ class CallHistoryService {
       this.history[objCallHistory.callerId] = [];
     }
     this.history[objCallHistory.callerId] = [].concat(objCallHistory, this.history[objCallHistory.callerId]);
+    if (localStorage) {
+      localStorage.setItem('history', JSON.stringify(this.history));
+    }
   }
   getHistory(){
-    // converting object to array and sorting descending on lasttimestamp 
+    // converting object to array and sorting descending on lasttimestamp
     return Object.keys(this.history).map((callerId)=>{
       return {
         callerId: callerId,
