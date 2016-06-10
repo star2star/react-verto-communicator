@@ -79,7 +79,7 @@ export default class AdminControls extends VertoBaseComponent {
 
     return (
       <div style={{display: 'flex', backgroundColor: '#f3f3f3'}}>
-        <div style={{display: 'flex', flexDirection: 'column', flex: '1'}}>
+        <div style={{display: 'flex', flexDirection: 'column', flex: '1', border:'1px solid #e9e9e9'}}>
           <div className="generalSettings">
             <div style={this.getStyle("headingStyle")}>GENERAL</div>
             <div style={{display: 'flex'}}>
@@ -125,7 +125,7 @@ export default class AdminControls extends VertoBaseComponent {
             </div>
           </div>
         </div>
-        <div className="bannerSettings" style={{flex: '1'}}>
+        <div className="bannerSettings" style={{flex: '1', border:'1px solid #e9e9e9'}}>
           <div style={this.getStyle("headingStyle")}>BANNER</div>
           <div style={{display: 'flex', justifyContent: 'space-around'}}>
             <AdminControlItem type="StatusIconSVG" label="Set"
