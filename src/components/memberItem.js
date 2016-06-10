@@ -52,30 +52,25 @@ export default class MemberItem extends VertoBaseComponent {
   render(){
     //console.log('&&&&&& member object', this.props.member);
 
-    // TODO ta -  get the user status info in object format instead of string
-    // Setup up baed on the user status object (this.props.member[4])
-    // const micStatus = this.props.member[4]['audio']['muted'] ?
-    //         (<MuteMicrophoneIconSVG />):
-    //         (<MicrophoneIconSVG />);
-    //
-    // const videoStatus = this.props.member[4]['video']['muted'] ?
-    //         (<MuteVideoIconSVG />):
-    //         (<VideoIconSVG />);
-    //
-    // const floor = this.props.member[4]['audio']['floor'] ?
-    //         (<span style={this.getStyle("floorStyle")}>Floor</span>) :
-    //         undefined;
+    // Setup up based on the user status object
+    const micStatus = this.props.member.conferenceStatus.audio.muted ?
+            (<MuteMicrophoneIconSVG svgStyle={this.getStyle("svgStyle")}/>):
+            (<MicrophoneIconSVG  svgStyle={this.getStyle("svgStyle")}/>);
 
-    const micStatus = (<MicrophoneIconSVG svgStyle={this.getStyle("svgStyle")}/>);
+    const videoStatus = this.props.member.conferenceStatus.video.muted ?
+            (<MuteVideoIconSVG  svgStyle={this.getStyle("svgStyle")}/>):
+            (<VideoIconSVG  svgStyle={this.getStyle("svgStyle")}/>);
 
-    const videoStatus = (<VideoIconSVG svgStyle={this.getStyle("svgStyle")}/>);
-
-    const floor = (<span style={this.getStyle("floorStyle")}>Floor</span>);
+    const floor = this.props.member.conferenceStatus.audio.floor ?
+            (<span style={this.getStyle("floorStyle")}>Floor</span>) :
+            undefined;
 
     // TODO ta - if user is logged in as admin, then render the admin controls
     // when user is clicked.  Assume there will be a callback function that
     // takes in the userId (name or whatever) and the item clicked and then
     // does the appropriate dispatch to handle the action.
+
+
 
     return (
       <div style={this.getStyle("memberStyles")}>
