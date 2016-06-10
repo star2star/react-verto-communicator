@@ -50,7 +50,7 @@ export default class MemberItem extends VertoBaseComponent {
   }
 
   render(){
-    console.log('&&&&&& member object', this.props.member);
+    //console.log('&&&&&& member object', this.props.member);
 
     // TODO ta -  get the user status info in object format instead of string
     // Setup up baed on the user status object (this.props.member[4])

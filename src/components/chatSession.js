@@ -87,7 +87,7 @@ export default class ChatSession extends VertoBaseComponent {
   }
 
     render(){
-        console.log('#### chatDatain Chat SEssion', this.props.chatData);
+        //console.log('#### chatDatain Chat SEssion', this.props.chatData);
       const chatTitle = "Chat History";
       // ta - not using heading in this implementation
       const chatHeading = (
