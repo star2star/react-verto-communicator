@@ -340,7 +340,7 @@ class VertoService {
       obj.each((k)=>{
         const x = obj.get(k);
         //console.log('********', x);
-        users[k] = { serno: x[0], callerId: x[1], name: x[2], codec: x[3], conferenceStatus: JSON.parse(x[4]), avatar: x[5] };
+        users[k] = { memberId: x[0], callerId: x[1], name: x[2], codec: x[3], conferenceStatus: JSON.parse(x[4]), avatar: x[5] };
       })
 
       return users;
@@ -488,9 +488,9 @@ class VertoService {
         tag: "webcam",
         ringFile: null,
         deviceParams: {
-          useCamera:  this._data.selectedVideo.id,
-          useSpeak: this._data.selectedSpeaker.id,
-          useMic:  this._data.selectedAudio.id,
+          useCamera:  this._data.selectedVideo ? this._data.selectedVideo.id: undefined,
+          useSpeak: this._data.selectedSpeaker? this._data.selectedSpeaker.id: undefined,
+          useMic:  this._data.selectedAudio ? this._data.selectedAudio.id: undefined,
           onResCheck: VertoService.refreshVideoResolution
         },
         audioParams: {
