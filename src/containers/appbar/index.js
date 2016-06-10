@@ -398,7 +398,7 @@ showSpeeds(){
             <SettingsMenuSelect
                 cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
                 options={this.props.settings.languages ? this.props.settings.languages : []}
-                label={formatMessage({"id":"LANGUAGE", "defaultMessage":"LAnguage:"})}
+                label={formatMessage({"id":"LANGUAGE", "defaultMessage":"Language:"})}
                 selectedOption={{id:"language", data:this.props.settings.language}}
             />
           <div style={{...this.getStyle('audioheaderLabel')}}>
@@ -443,7 +443,7 @@ showSpeeds(){
                 label={formatMessage({"id":"RECHECK_BANDWIDTH", "defaultMessage":"Recheck bandwidth before each outgoing call"})}
                 checkedOption={{name:'testSpeedJoin', value:this.props.settings.testSpeedJoin}}
             />
-          <div className="buttonContainer" style={{...this.getStyle('buttonContainer')}}>
+            <div className="buttonContainer" style={{...this.getStyle('buttonContainer')}}>
               <button
                   style={{...this.getStyle('button')}}
                   onClick={()=>{this.props.dispatch(doSpeedTest());this.showSpeeds();}}
@@ -455,6 +455,18 @@ showSpeeds(){
               </button>
               {netSpeedDisplay}
             </div>
+            <SettingsMenuSelect
+                cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
+                options={this.props.settings.bandwidth ? this.props.settings.bandwidth : []}
+                label={formatMessage({"id":"MAX_INCOMING_BANDWIDTH", "defaultMessage":"Max incoming bandwidth:"})}
+                selectedOption={{id:"incomingBandwidth", data:this.props.settings.incomingBandwidth}}
+            />
+            <SettingsMenuSelect
+                cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
+                options={this.props.settings.bandwidth ? this.props.settings.bandwidth : []}
+                label={formatMessage({"id":"MAX_OUTGOING_BANDWIDTH", "defaultMessage":"Max outgoing bandwidth:"})}
+                selectedOption={{id:"outgoingBandwidth", data:this.props.settings.outgoingBandwidth}}
+            />
           </div>
         </div>
       );
