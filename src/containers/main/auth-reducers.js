@@ -1,6 +1,12 @@
 const auth = (state, action)=>{
 
   if (typeof state === 'undefined') {
+
+    let lsLoginSettings;
+
+    if (localStorage){
+      lsLoginSettings = JSON.parse(localStorage.getItem('loginSettings'));
+    }
     return  { loginSettings :{
                 name: 'James',
                 email: 'James@james.com',
@@ -12,7 +18,8 @@ const auth = (state, action)=>{
               },
               sessionInfo: {
               },
-              vcStatus: 'disconnected'
+              vcStatus: 'disconnected',
+              loginSettings: { ...lsLoginSettings }
             };
   }
 
@@ -24,7 +31,11 @@ const auth = (state, action)=>{
     case "LOGOUT":
         return { ...state, showPage: 'logout', vcStatus: 'disconnected' };
     case 'AUTH_SUBMIT_LOGIN':
-      return { ...state, showPage: 'logout', vcStatus: 'connecting'};
+      if (localStorage) {
+        //save it
+        localStorage.setItem('loginSettings', JSON.stringify(action.data))
+      }
+      return { ...state, showPage: 'logout', vcStatus: 'connecting', loginSettings: action.data };
     case "LOGIN_FAILED":
       return { ...state, showPage: 'logout', vcStatus: 'disconnected' };
     case 'VERTO_LOGIN':
