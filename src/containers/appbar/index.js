@@ -34,8 +34,9 @@ window.onresize=()=>{
 class AppBar extends VertoBaseComponent {
   constructor(props) {
     super(props);
-    this.state={showSettings: false, showAltAppControls: false };
+    this.state={showSettings: false, showAltAppControls: false, showSpeeds: false };
 
+    this.showSpeeds = this.showSpeeds.bind(this);
     this.handleAltMenuClick = this.handleAltMenuClick.bind(this);
     this.handleSubmitPreviewSettings = this.handleSubmitPreviewSettings.bind(this);
     AppBar.closeMenu = this.handleCloseMenu.bind(this);
@@ -258,6 +259,11 @@ class AppBar extends VertoBaseComponent {
     this.setState({ ...this.state, showSettings: displaySettings });
   }
 
+
+showSpeeds(){
+  this.setState({ ...this.state, showSpeeds: true});
+}
+
   handleSubmitPreviewSettings(settings) {
     // settings is an array of the settings in the SettingsPreview object
     //console.log('&&&&& Preview Settings to save:', settings);
@@ -270,9 +276,29 @@ class AppBar extends VertoBaseComponent {
   buildSettingsContainer() {
     const { formatMessage } = this.props.intl;
     // console.log('xxxxxxxxxxxx', this.props.settings);
+    let netSpeedDisplay;
+    if (this.state.showSpeeds === false) {
+      netSpeedDisplay= (<div></div>);
+    } else {
+    netSpeedDisplay = (
+      <div className='netSpeedContainer'>
+         <span style={{...this.getStyle('outgoingSpacing')}}>
+           <FormattedMessage
+               id="BANDWIDTH_INFO_OUTGOING"
+               defaultMessage="Outgoing:"
+           /> {this.props.bandwidthInfo.outgoingBandwidth}
+         </span>
+         <span style={{...this.getStyle('bandwidthSpacing')}}>
+           <FormattedMessage
+               id="BANDWIDTH_INFO_INCOMING"
+               defaultMessage="Incoming:"
+           /> {this.props.bandwidthInfo.incomingBandwidth}
+       </span>
+     </div>);}
+
 
     if (this.props.showSettings) {
-      return(undefined);
+      return (undefined);
     } else {
       return (
         <div
@@ -346,7 +372,7 @@ class AppBar extends VertoBaseComponent {
         </div>
             <SettingsCheckbox
                 cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
-                label="Use Video"
+                label={formatMessage({"id":"USE_VIDEO", "defaultMessage":"Use Video:"})}
                 checkedOption={{name:'useVideo', value:this.props.settings.useVideo}}
             />
             <SettingsCheckbox
@@ -420,27 +446,14 @@ class AppBar extends VertoBaseComponent {
           <div className="buttonContainer" style={{...this.getStyle('buttonContainer')}}>
               <button
                   style={{...this.getStyle('button')}}
-                  onClick={()=>{this.props.dispatch(doSpeedTest());}}
-              >
+                  onClick={()=>{this.props.dispatch(doSpeedTest());this.showSpeeds();}}
+                  >
                 <FormattedMessage
                     id="CHECK_NETWORK_SPEED"
                     defaultMessage="Check Network Speed"
                 />
               </button>
-              <div className='netSpeedDisplay'>
-                 <span style={{...this.getStyle('outgoingSpacing')}}>
-                   <FormattedMessage
-                       id="BANDWIDTH_INFO_OUTGOING"
-                       defaultMessage="Outgoing:"
-                   /> {}
-                 </span>
-                 <span style={{...this.getStyle('bandwidthSpacing')}}>
-                   <FormattedMessage
-                       id="BANDWIDTH_INFO_INCOMING"
-                       defaultMessage="Incoming:"
-                   /> {this.props.bandwidthInfo.incomingBandwidth}
-               </span>
-             </div>
+              {netSpeedDisplay}
             </div>
           </div>
         </div>
@@ -544,7 +557,7 @@ class AppBar extends VertoBaseComponent {
                   cbSubmitSetting = {(data)=>{this.props.dispatch(doUpdateSetting(data));}}
                   cbToggleShowSettings={this.settings.bind(this)}
                   settings={this.props.settings}
-                  onClick={()=>{this.props.dispatch(doSpeedTest());}}
+                  onClick={()=>{this.props.dispatch(doSpeedTest());this.showSpeeds}}
                   cbPreviewSet={()=>{App.toggleModal((<SettingsPreview settings={this.props.settings} cbClose={App.toggleModal}/>));}}
               />
             </div>
