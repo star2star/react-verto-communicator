@@ -479,7 +479,7 @@ class AppBar extends VertoBaseComponent {
     if (true && !this.state.showAltAppControls) {
       if (this.props.callInfo.currentCallId) {
         lastCall = (<LastCall labelText= {"In Call:"} lastNumber={this.props.callInfo.lastNumber}  />);
-      }else if (this.props.callInfo.lastNumber ) {
+      }else if (this.props.callInfo.lastNumber && this.props.auth.vcStatus == 'active' ) {
         lastCall = (<LastCall labelText= {"Last Call:"} lastNumber={this.props.callInfo.lastNumber}  cbClick={(number)=>{
           this.props.dispatch(doMakeCall(number, this.props.app));
         }} />);
