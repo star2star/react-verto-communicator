@@ -7,12 +7,16 @@ import {injectIntl, formattedMessage } from 'react-intl';
 
 const propTypes = {
   compStyle : React.PropTypes.object,
-  data: React.PropTypes.object.isRequired
+  data: React.PropTypes.object.isRequired,
+  cbClick : React.PropTypes.func
 };
 
 class CallHistoryItem extends VertoBaseComponent {
   constructor(props) {
     super(props);
+    this.state = { displayCallLi : false };
+
+    this.call = this.call.bind(this);
 }
 
   getCompStyle() {
@@ -71,8 +75,16 @@ class CallHistoryItem extends VertoBaseComponent {
     return (styles[styleName]);
   }
 
+  call() {
+    if (this.props.cbClick) {
+      this.props.cbClick(this.props.data.callerId);
+    }
+  }
+
   render(){
 
+
+    console.log(this.props.data);
     const renderedTS = moment(this.props.data.lastTimestamp).format('ddd MMM DD YYYY HH:mm:ss A');
 
     var renderedDirection;
@@ -92,7 +104,9 @@ class CallHistoryItem extends VertoBaseComponent {
 
     return (
       <div style={this.getStyle('container')}>
-        <div style={{...this.getDefaultStyle('top')}}>
+        <div
+            onClick={this.call}
+            style={{...this.getDefaultStyle('top')}}>
             <div>
               {renderedDirection}
               {this.props.data.callerId} ({this.props.data.nbrCalls})
