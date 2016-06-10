@@ -8,15 +8,16 @@ import {injectIntl, formattedMessage } from 'react-intl';
 const propTypes = {
   compStyle : React.PropTypes.object,
   data: React.PropTypes.object.isRequired,
-  cbClick : React.PropTypes.func
+  cbClick : React.PropTypes.func,
+  cbShowCalls : React.PropTypes.func
 };
 
 class CallHistoryItem extends VertoBaseComponent {
   constructor(props) {
     super(props);
-    this.state = { displayCallLi : false };
 
     this.call = this.call.bind(this);
+    this.showCalls = this.showCalls.bind(this);
 }
 
   getCompStyle() {
@@ -80,11 +81,14 @@ class CallHistoryItem extends VertoBaseComponent {
       this.props.cbClick(this.props.data.callerId);
     }
   }
+  showCalls() {
+    if (this.props.cbClick) {
+      this.props.cbShowCalls(this.props.data.callerId);
+    }
+  }
 
   render(){
 
-
-    console.log(this.props.data);
     const renderedTS = moment(this.props.data.lastTimestamp).format('ddd MMM DD YYYY HH:mm:ss A');
 
     var renderedDirection;
@@ -115,7 +119,9 @@ class CallHistoryItem extends VertoBaseComponent {
               {renderedTS}
             </div>
         </div>
-        <span style={{...this.getDefaultStyle('menuCont')}}>
+        <span
+            onClick={this.showCalls}
+            style={{...this.getDefaultStyle('menuCont')}}>
           <MenuIconSVG svgStyle={{...this.getStyle('dirSVG')}} />
         </span>
 
