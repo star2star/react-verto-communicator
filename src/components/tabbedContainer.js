@@ -57,6 +57,9 @@ export default class TabbedContainer extends VertoBaseComponent {
 
     const childToRender = React.Children.toArray(this.props.children)[this.state.activeTabIndex];
 
+    // TODO ta - if we have tab label as prop in children, can pull from there
+    // rather than as props for this component.... future?? maybe
+    // console.log('############### props from child', childToRender.props);
     return(
       <div className="tabbedContainerWrap">
         <div style={this.getStyle("mainStyles")} >

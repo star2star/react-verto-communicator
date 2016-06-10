@@ -151,7 +151,7 @@ class Main extends VertoBaseComponent {
         //console.log('#### conf data', confData);
 
         // NOTE:  Child components MUST be in the same order that their labels
-        // are in the tabLabels array!!!!
+        // are in the tabLabels array
         if (confData) {
           chatSideBar = (
             <div className="sidebarWrapper" style={{width: '360px', backgroundColor: "#0dd"}}>
@@ -178,7 +178,7 @@ class Main extends VertoBaseComponent {
     }
     return (
       <div className="chatVideoWrapper" style={{display: 'flex'}}>
-        <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
+        <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", flex:'1'}}>
           {incomingCall}
           <video id="webcam" autoplay="autoplay"  style={{display:"none", width:"70%", height:"70%", objectFit:"inherit"}}></video>
           {loggedInfo}

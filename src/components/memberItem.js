@@ -1,5 +1,6 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
+import AdminControls from './memberAdminControlPanel';
 import {MicrophoneIconSVG, VideoIconSVG, MuteMicrophoneIconSVG, MuteVideoIconSVG} from './svgIcons';
 
 const propTypes = {
@@ -10,7 +11,7 @@ const propTypes = {
 export default class MemberItem extends VertoBaseComponent {
   constructor(props){
     super(props);
-    this.state = {};
+    this.state = {showAdminControls: false};
   }
 
   getCompStyle() {
@@ -19,14 +20,17 @@ export default class MemberItem extends VertoBaseComponent {
 
   getDefaultStyle(styleName) {
     const styles = {
-      memberStyles: {
+      memberWrapStyle: {
           padding: '15px 10px 5px 10px',
+          //display: 'flex',
+          //justifyContent: 'flex-start',
+          //alignItems: 'flex-start'
+      },
+      memberStyle: {
+          //padding: '15px 10px 5px 10px',
           display: 'flex',
-          justifyContent: 'flex-start',
-          alignItems: 'flex-start',
-          fontFamily: 'Avenir-Book, sans-serif',
-          position: 'relative',
-          flex: 'auto'
+          justifyContent: 'space-between',
+          alignItems: 'flex-start'
       },
       avatarStyle: {
         height: '24px',
@@ -70,18 +74,28 @@ export default class MemberItem extends VertoBaseComponent {
     // takes in the userId (name or whatever) and the item clicked and then
     // does the appropriate dispatch to handle the action.
 
-
+    let adminControls;
+    if (this.state.showAdminControls) {
+      adminControls = (
+        <AdminControls member={this.props.member} />
+      );
+    }
 
     return (
-      <div style={this.getStyle("memberStyles")}>
+      <div style={this.getStyle("memberWrapStyle")}>
+      <div style={this.getStyle("memberStyle")}>
         <img src={this.props.member.avatar.avatar} style={this.getStyle("avatarStyle")} />
-        <div className="userInfo" style={this.getStyle("userInfoStyle")}>
+        <div className="userInfo" style={this.getStyle("userInfoStyle")}
+            onClick={()=>{this.setState({...this.state, showAdminControls: !this.state.showAdminControls});}}
+        >
           <span style={this.getStyle("nameStyle")}>{this.props.member.name}</span>
           <span style={this.getStyle("emailStyle")}>{this.props.member.avatar.email}</span>
           {floor}
         </div>
         {micStatus}
         {videoStatus}
+      </div>
+      {adminControls}
       </div>
     );
   }
