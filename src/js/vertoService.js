@@ -29,6 +29,7 @@ class VertoService {
             if (params.pvtData) {
               switch (params.pvtData.action) {
                 case "conference-liveArray-join":
+
                   if (!params.pvtData.screenShare && !params.pvtData.videoOnly) {
                     //console.log("conference-liveArray-join");
                     xInstance.stopConference();
@@ -261,7 +262,7 @@ class VertoService {
         _dispatch(doReceiveChat(callID, {callID, displayName, message, utc_timestamp: Date.now(), isMe: sentUser == currentUser , bgColor: this.getChatUserColor(sentUser) }));
       },
       onBroadcast: (v, conf, message) => {
-        //console.log('>>> conf.onBroadcast:', message, arguments);
+        console.log('>>> conf.onBroadcast:', message, arguments);
         if (message.action == 'response') {
           // This is a response with the video layouts list.
           if (message['conf-command'] == 'list-videoLayouts') {
@@ -297,6 +298,7 @@ class VertoService {
         }
       }
     });
+    window.X = conf;
 
     if (this._data.confRole == "moderator") {
       //console.log('>>> conf.listVideoLayouts();', conf );

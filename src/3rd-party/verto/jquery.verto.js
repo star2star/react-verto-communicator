@@ -1319,11 +1319,11 @@
             if (!this.params.hasVid) {
                 throw 'Conference has no video';
             }
-	    if (canvasID) {
-		this.modCommand("vid-layout", null, [layout, canvasID]);
-	    } else {
-		this.modCommand("vid-layout", null, layout);
-	    }
+      	    if (canvasID) {
+      		      this.modCommand("vid-layout", null, [layout, canvasID]);
+      	    } else {
+    		        this.modCommand("vid-layout", null, layout);
+      	    }
         };
 
         $.verto.conf.prototype.kick = function(memberID) {
