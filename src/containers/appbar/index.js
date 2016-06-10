@@ -259,11 +259,11 @@ class AppBar extends VertoBaseComponent {
     this.setState({ ...this.state, showSettings: displaySettings });
   }
 
-<<<<<<< HEAD
+
 showSpeeds(){
   this.setState({ ...this.state, showSpeeds: true});
 }
-=======
+
   handleSubmitPreviewSettings(settings) {
     // settings is an array of the settings in the SettingsPreview object
     //console.log('&&&&& Preview Settings to save:', settings);
@@ -272,7 +272,6 @@ showSpeeds(){
       this.props.dispatch(doUpdateSetting(s));
     });
   }
->>>>>>> b58655c0b15ce136d3d7cc19b23aa689452299d7
 
   buildSettingsContainer() {
     const { formatMessage } = this.props.intl;
