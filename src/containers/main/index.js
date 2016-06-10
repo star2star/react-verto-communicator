@@ -147,7 +147,7 @@ class Main extends VertoBaseComponent {
         window.conf = confData;
 
         // Show chat sidebar only if confData has a value
-        console.log('#### conf data', confData);
+        //console.log('#### conf data', confData);
         if (confData) {
           chatSideBar = (
             <div className="sidebarWrapper" style={{width: '360px', backgroundColor: "#0dd"}}>
