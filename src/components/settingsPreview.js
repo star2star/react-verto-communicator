@@ -5,20 +5,25 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import SettingsMenuSelect from './settingsMenuSelect.js';
 import vMeter from 'volume-meter';
 import VolumeMeter from './volumeMeter';
-// TODO replace with 'refresh' icon when available...
 import { RestoreIconSVG } from './svgIcons';
 
 const propTypes = {
   compStyle: React.PropTypes.object,
   cbClose: React.PropTypes.func.isRequired,
+  cbSubmitSettings: React.PropTypes.func.isRequired,
   settingsData: React.PropTypes.object.isRequired
 };
+
 class SettingsPreview extends VertoBaseComponent{
   constructor(props) {
     super(props);
-    this.state={volume: 0};
     this.streamObj={};
     this.audioContext = new AudioContext();
+    // initialize selectedVideo and selectedAudio state to the prop values, and
+    // volume to 0
+    this.state={selectedVideo: this.props.settingsData.selectedVideo,
+                selectedAudio: this.props.settingsData.selectedAudio,
+                volume: 0};
 
     this.handleMedia = this.handleMedia.bind(this);
     this.stopMedia = this.stopMedia.bind(this);
@@ -27,18 +32,35 @@ class SettingsPreview extends VertoBaseComponent{
   }
 
   componentDidMount(){
+    //console.log('this.props', this.props.settingsData);
+    this.setupMedia(this.state.selectedAudio, this.state.selectedVideo);
+  }
 
-    console.log('this.props', this.props.settingsData);
+  componentWillUnmount() {
+    // console.log('Unmounting Settings Preview');
+    this.audioContext.close();
+    this.stopMedia(this.streamObj);
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    if ((nextState.selectedVideo && this.state.selectedVideo.id != nextState.selectedVideo.id) ||
+        (nextState.selectedAudio && this.state.selectedAudio.id != nextState.selectedAudio.id)) {
+
+      this.setupMedia(nextState.selectedAudio, nextState.selectedVideo);
+    }
+  }
+
+  setupMedia(selAudio, selVideo) {
     let constraints = {
       mirrored: true,
       audio: {
-        optional: [{ sourceId: this.props.settingsData.selectedAudio.id }]
+        optional: [{ sourceId: selAudio.id }]
       }
     };
 
-    if (this.props.settingsData.selectedVideo.id !== 'none') {
+    if (selVideo.id !== 'none') {
       constraints.video = {
-        optional: [{ sourceId: this.props.settingsData.selectedVideo.id }]
+        optional: [{ sourceId: selVideo.id }]
       };
     }
     // console.log('CONSTRAINTS', constraints);
@@ -46,10 +68,6 @@ class SettingsPreview extends VertoBaseComponent{
     navigator.getUserMedia(constraints, this.handleMedia, function(err, data) {
         console.error('Error with getUserMedia', err, data);
           });
-  }
-
-  componentWillUnmount() {
-    this.stopMedia(this.streamObj);
   }
 
   stopMedia(stream) {
@@ -74,8 +92,6 @@ class SettingsPreview extends VertoBaseComponent{
     this.refs.localvideo.src = window.URL.createObjectURL(stream);
 
     const mediaStreamSource = this.audioContext.createMediaStreamSource(stream);
-    // meter = createAudioMeter(audioContext);
-
     const self = this;
     const meter = vMeter(self.audioContext, {tweenIn: 2, tweenOut: 6 }, function (volume) {
       //console.log('=======> volume', volume);
@@ -99,7 +115,6 @@ class SettingsPreview extends VertoBaseComponent{
         container: {
           paddingTop: '10px',
           paddingBottom: '5px',
-          //borderBottom: '1px solid #ccc',
           display: 'flex',
           flex: 2,
           flexDirection: 'column'
@@ -111,9 +126,9 @@ class SettingsPreview extends VertoBaseComponent{
         },
         select: {
           borderBottom: '1px solid #ccc',
-          border: '0',
+          border: '0px',
           boxShadow:'none',
-          borderRadius: '0',
+          borderRadius: '0px',
           fontSize: '.85rem',
           backgroundColor: 'rgba(0,0,0,0)',
           color: 'black',
@@ -124,7 +139,6 @@ class SettingsPreview extends VertoBaseComponent{
       compVolMeterStyles: {
         volMeterStyles: {
           position: 'absolute',
-          //top: '375px',
           marginTop: '-130px',
           marginLeft: '10px'
         }
@@ -139,7 +153,7 @@ class SettingsPreview extends VertoBaseComponent{
           marginRight: '-50%',
           transform: 'translate(-50%, -50%)',
           width: '50%',
-          padding: '0 0 20px 0'
+          padding: '0px 0px 20px 0px'
         },
         overlay: {
           zIndex: "1"
@@ -201,8 +215,22 @@ class SettingsPreview extends VertoBaseComponent{
   }
 
   submitSave() {
-    console.log('Clicked Save');
-    //TODO add call to callback function that will save changes to selected devices
+    if (this.streamObj) {
+      this.stopMedia(this.streamObj);
+    }
+    // only save settings if they have changed from this.props....
+    let settingsArray = [];
+    if (this.props.settingsData.selectedAudio.id != this.state.selectedAudio.id) {
+      settingsArray.push({selectedAudio: this.state.selectedAudio});
+    }
+    if (this.props.settingsData.selectedVideo.id != this.state.selectedVideo.id) {
+      settingsArray.push({selectedVideo: this.state.selectedVideo});
+    }
+
+    if ( settingsArray.length) {
+      this.props.cbSubmitSettings(settingsArray);
+    }
+    this.props.cbClose();
   }
 
 
@@ -222,17 +250,17 @@ class SettingsPreview extends VertoBaseComponent{
               <div style={this.getStyle('menuStyle')}>
                 <SettingsMenuSelect
                     compStyle={this.getStyle("compMenuStyles")}
-                    cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                    cbSubmitSetting={(data)=>{this.setState({...this.state, selectedVideo: data.selectedVideo});}}
                     options={this.props.settingsData.videoDevices ? this.props.settingsData.videoDevices : []}
                     label={formatMessage({"id": "CAMERA_SETTINGS", "defaultMessage": "Camera:"})}
-                    selectedOption={{id:"selectedVideo", label:this.props.settingsData.selectedVideo && this.props.settingsData.selectedVideo.label}}
+                    selectedOption={{id:"selectedVideo", data:this.state.selectedVideo}}
                 />
                 <SettingsMenuSelect
                     compStyle={this.getStyle("compMenuStyles")}
-                    cbSubmitSetting={(data)=>{console.log('settings submit callback', data);}}
+                    cbSubmitSetting={(data)=>{this.setState({...this.state, selectedAudio: data.selectedAudio});}}
                     options={this.props.settingsData.audioDevices ? this.props.settingsData.audioDevices : []}
                     label={formatMessage({"id": "MIC_SETTINGS", "defaultMessage": "Microphone:"})}
-                    selectedOption={{id:"selectedAudio", label:this.props.settingsData.selectedAudio && this.props.settingsData.selectedAudio.label}}
+                    selectedOption={{id:"selectedAudio", data:this.state.selectedAudio}}
                 />
                 <button
                     style={{...this.getStyle('refreshStyle')}}
