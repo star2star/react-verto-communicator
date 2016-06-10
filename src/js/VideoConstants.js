@@ -2,6 +2,28 @@ class VideoConstants {
   // empty class on purpose
 }
 
+VideoConstants.CONF_CMDS={
+  KICK: {name: 'kick', functionName: 'kick', parameters:['memberid'] },
+  VIDEOFLOOR: {name: 'videoFloor', functionName: 'videoFloor', parameters:['memberid'] },
+  TRANSFER: {name: 'transfer', functionName: 'transfer', parameters:['memberid', 'transferTo'] },
+  MUTEMIC: {name: 'muteMic', functionName: 'muteMic', parameters:['memberid' ] },
+  MUTEVIDEO: {name: 'muteVideo', functionName: 'muteVideo', parameters:['memberid'] },
+  VOLUMEUP: {name: 'volumeUp', functionName: 'volumeUp', parameters:['memberid'] },
+  VOLUMEDOW: {name: 'volumeDown', functionName: 'volumeDown', parameters:['memberid'] },
+  GAINUP: {name: 'gainUp', functionName: 'gainUp', parameters:['memberid'] },
+  GAINDOWN: {name: 'gainDown', functionName: 'gainDown', parameters:['memberid'] },
+  PRESENTER: {name: 'presenter', functionName: 'presenter', parameters:['memberid'] },
+  STOP: {name: 'stop', functionName: 'stop', parameters:['memberid'] },
+  STOPRECORDING: {name: 'stopRecording', functionName: 'stopRecord', parameters:['memberid'] },
+  BANNER: {name: 'banner', functionName: 'banner', parameters:['memberid', 'text'] },
+  RESETBANNER: {name: 'resetBanner', functionName: 'banner', parameters:['memberid' ] },
+  SETLAYOUT: {name: 'setLayout', functionName: 'setVideoLayout', parameters: ['layout', 'canvasId']},
+  PLAY: {name: 'play', functionName: 'play', parameters:['file'] },
+  RECORD: {name: 'record', functionName: 'record', parameters:['file'] },
+  SNAPSHOT: {name: 'snapshot', functionName: 'snapshot', parameters:['file'] },
+}
+
+
 VideoConstants.VIDEO_QUALITY_SOURCE = [
   {
     id: 'qvga',

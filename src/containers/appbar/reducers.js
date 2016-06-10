@@ -4,11 +4,12 @@ import ContributorService from '../../js/contributorService';
 const app = (state, action)=>{
 
   if (typeof state === 'undefined') {
-    // Create ContributorService object
+    let lsSettings;
 
-    //TODO ta Figure out what the default store will look like... it won't
-    // be a direct copy of the 'local storage' that Verto originally used...
-    // This is just here to get the 'store' started up
+    if (localStorage){
+      lsSettings = JSON.parse(localStorage.getItem('settings'));
+      console.log('sssss: ', lsSettings);
+    }
     return  { settings :{
                 selectedVideo: null,
                 selectedAudio: null,
@@ -46,7 +47,8 @@ const app = (state, action)=>{
                 outgoingBandwidth: 'default',
                 incomingBandwidth: 'default',
                 bandwidth: VideoConstants.BAND_WIDTH,
-                bestFrameRate: VideoConstants.FRAME_RATE
+                bestFrameRate: VideoConstants.FRAME_RATE,
+                ...lsSettings
               },
               contributors: ContributorService.getInstance().getContributors(),
               bandwidthInfo: {
@@ -63,13 +65,23 @@ const app = (state, action)=>{
       return { ...state, 'bandwidthInfo': action.data, settings: { ...state.settings, vidQual: action.data.vidQual, videoQuality: action.videoQuality } };
     case 'SETTINGS_UPDATE':
       //console.log("settings update JES: ", action.data);
-      return { ...state, settings: { ...state.settings, ...action.data, bandwidth: VideoConstants.BAND_WIDTH} };
+
+      const lSettings1 = { ...state.settings, ...action.data, bandwidth: VideoConstants.BAND_WIDTH};
+      if (localStorage) {
+        //save it
+        localStorage.setItem('settings', JSON.stringify(lSettings1));
+      }
+      return { ...state, settings: lSettings1 };
     case 'APP_UPDATE_SINGLE_SETTING':
       // update a single setting
 
-      console.log('******* ***** change setting action.data', action.data);
-
-      return {...state, settings: {...state.settings, ...action.data }};
+      //console.log('******* ***** change setting action.data', action.data);
+      const lSettings = {...state.settings, ...action.data };
+      if (localStorage) {
+        //save it
+        localStorage.setItem('settings', JSON.stringify(lSettings));
+      }
+      return {...state, settings: lSettings };
 
     default:
       return state;

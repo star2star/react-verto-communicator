@@ -47,21 +47,21 @@ export default class ChatInput extends VertoBaseComponent {
           borderRadius: '0px 0px 0px 5px'
       },
       inputSpacing: {
-          marginLeft: '10px',
-          marginRight: '10px',
-          paddingBottom: '5px',
+          //marginLeft: '10px',
+          //marginRight: '10px',
+          //paddingBottom: '5px',
           display:'flex',
           justifyContent:'stretch',
           flex: 1
       },
       inputStyle: {
           display: 'flex',
-          flex: .98,
+          flex: 1,
           fontFamily: 'Avenir-Medium, sans-serif',
           justifyContent: 'stretch',
           height: '30px',
           borderRadius: '5px',
-          paddingLeft: '10px',
+          //paddingLeft: '10px',
           color: '#4a4a4a',
           fontSize: '0.9rem',
           border: '1px solid #d5dde0'

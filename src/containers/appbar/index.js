@@ -262,6 +262,7 @@ class AppBar extends VertoBaseComponent {
   }
 
   buildSettingsContainer() {
+    const { formatMessage } = this.props.intl;
     // console.log('xxxxxxxxxxxx', this.props.settings);
     if (this.props.showSettings) {
       return(undefined);
@@ -278,31 +279,31 @@ class AppBar extends VertoBaseComponent {
             <SettingsMenuSelect
                 cbSubmitSetting={(setting)=>{ this.props.dispatch(doUpdateSetting(setting));}}
                 options={this.props.settings.videoDevices ? this.props.settings.videoDevices : []}
-                label="Camera:"
+                label={formatMessage({"id":"CAMERA_SETTINGS", "defaultMessage":"Camera:"})}
                 selectedOption={{id:"selectedVideo", data:this.props.settings.selectedVideo}}
             />
             <SettingsMenuSelect
                 cbSubmitSetting={(setting)=>{ this.props.dispatch(doUpdateSetting(setting));}}
                 options={this.props.settings.shareDevices ? this.props.settings.shareDevices : []}
-                label="Share Device:"
+                label={formatMessage({"id":"SHARE_DEVICE", "defaultMessage":"Share Device:"})}
                 selectedOption={{id:"selectedShare", data:this.props.settings.selectedShare}}
             />
             <SettingsMenuSelect
                 cbSubmitSetting={(setting)=>{ this.props.dispatch(doUpdateSetting(setting));}}
                 options={this.props.settings.audioDevices ? this.props.settings.audioDevices : []}
-                label="Microphone:"
+                label={formatMessage({"id":"MIC_SETTINGS", "defaultMessage":"Microphone:"})}
                 selectedOption={{id:"selectedAudio", data:this.props.settings.selectedAudio}}
             />
             <SettingsMenuSelect
                 cbSubmitSetting={(setting)=>{ this.props.dispatch(doUpdateSetting(setting));}}
                 options={this.props.settings.speakerDevices ? this.props.settings.speakerDevices : []}
-                label="Speaker:"
+                label={formatMessage({"id":"SPEAKER", "defaultMessage":"Speaker:"})}
                 selectedOption={{id:"selectedSpeaker", data:this.props.settings.selectedSpeaker}}
             />
             <SettingsMenuSelect
                 cbSubmitSetting={(setting)=>{ this.props.dispatch(doUpdateSetting(setting));}}
                 options={this.props.settings.bestFrameRate ? this.props.settings.bestFrameRate : []}
-                label="Best Frame Rate:"
+                label={formatMessage({"id":"BEST_FRAME_RATE", "defaultMessage":"Best Frame Rate:"})}
                 selectedOption={{id:"selectedBestFrameRate", data:this.props.settings.selectedBestFrameRate}}
             />
             <div className="buttonContainer" style={{...this.getStyle('buttonContainer')}}>
@@ -343,28 +344,28 @@ class AppBar extends VertoBaseComponent {
             />
             <SettingsCheckbox
                 cbSubmitSetting={(setting)=>{ this.props.dispatch(doUpdateSetting(setting));}}
-                label="Stereo Audio"
+                label={formatMessage({"id":"MIC_SETTINGS", "defaultMessage":"Stereo Audio:"})}
                 checkedOption={{name:'useStereo', value:this.props.settings.useStereo}}
             />
             <SettingsCheckbox
                 cbSubmitSetting={(setting)=>{ this.props.dispatch(doUpdateSetting(setting));}}
-                label="Use STUN"
+                label={formatMessage({"id":"USE_STUN", "defaultMessage":"Use STUN"})}
                 checkedOption={{name:'useSTUN', value:this.props.settings.useSTUN}}
             />
             <SettingsCheckbox
                 cbSubmitSetting={(setting)=>{ this.props.dispatch(doUpdateSetting(setting));}}
-                label="Scale Remote Video to Match Camera Resolution"
+                label={formatMessage({"id":"SCALE_VIDEO", "defaultMessage":"Scale Remote Video To Match Camera Resolution"})}
                 checkedOption={{name:'mirrorInput', value:this.props.settings.mirrorInput}}
             />
             <SettingsCheckbox
                 cbSubmitSetting={(setting)=>{ this.props.dispatch(doUpdateSetting(setting));}}
-                label="Ask Before Recovering a Call"
+                label={formatMessage({"id":"ASK_BEFORE_RECOVER", "defaultMessage":"Ask before recovering call"})}
                 checkedOption={{name:'askRecoverCall', value:this.props.settings.askRecoverCall}}
             />
             <SettingsMenuSelect
                 cbSubmitSetting={(setting)=>{ this.props.dispatch(doUpdateSetting(setting));}}
                 options={this.props.settings.languages ? this.props.settings.languages : []}
-                label="Language:"
+                label={formatMessage({"id":"LANGUAGE", "defaultMessage":"LAnguage:"})}
                 selectedOption={{id:"language", data:this.props.settings.language}}
             />
           <div style={{...this.getStyle('audioheaderLabel')}}>
@@ -375,17 +376,17 @@ class AppBar extends VertoBaseComponent {
           </div>
             <SettingsCheckbox
                 cbSubmitSetting={(setting)=>{ this.props.dispatch(doUpdateSetting(setting));}}
-                label="Echo Cancellation"
+                label={formatMessage({"id":"ECHO_CANCEL", "defaultMessage":"Echo Cancellation"})}
                 checkedOption={{name:'googEchoCancellation', value:this.props.settings.googEchoCancellation}}
             />
             <SettingsCheckbox
                 cbSubmitSetting={(setting)=>{ this.props.dispatch(doUpdateSetting(setting));}}
-                label="Noise Suppression"
+                label={formatMessage({"id":"NOISE_SUPPRESSION", "defaultMessage":"Noise Suppression"})}
                 checkedOption={{name:'googNoiseSuppression', value:this.props.settings.googNoiseSuppression}}
             />
             <SettingsCheckbox
                 cbSubmitSetting={(setting)=>{ this.props.dispatch(doUpdateSetting(setting));}}
-                label="Highpass Filter"
+                label={formatMessage({"id":"HIGHPASS_FILTER", "defaultMessage":"Highpass Filter"})}
                 checkedOption={{name:'googHighpassFilter', value:this.props.settings.googHighpassFilter}}
             />
           </div>
@@ -401,12 +402,12 @@ class AppBar extends VertoBaseComponent {
           </div>
             <SettingsCheckbox
                 cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
-                label="Automatically determine speed and resolution settings"
+                label={formatMessage({"id":"AUTO_SPEED_RES", "defaultMessage":"Automatically determine speed and resolution settings"})}
                 checkedOption={{name:'autoBand', value:this.props.settings.autoBand}}
             />
             <SettingsCheckbox
                 cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
-                label="Recheck Bandwidth Before Each Outgoing Call"
+                label={formatMessage({"id":"RECHECK_BANDWIDTH", "defaultMessage":"Recheck bandwidth before each outgoing call"})}
                 checkedOption={{name:'testSpeedJoin', value:this.props.settings.testSpeedJoin}}
             />
           <div className="buttonContainer" style={{...this.getStyle('buttonContainer')}}>

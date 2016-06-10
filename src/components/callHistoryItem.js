@@ -7,12 +7,17 @@ import {injectIntl, formattedMessage } from 'react-intl';
 
 const propTypes = {
   compStyle : React.PropTypes.object,
-  data: React.PropTypes.object.isRequired
+  data: React.PropTypes.object.isRequired,
+  cbClick : React.PropTypes.func,
+  cbShowCalls : React.PropTypes.func
 };
 
 class CallHistoryItem extends VertoBaseComponent {
   constructor(props) {
     super(props);
+
+    this.call = this.call.bind(this);
+    this.showCalls = this.showCalls.bind(this);
 }
 
   getCompStyle() {
@@ -71,6 +76,17 @@ class CallHistoryItem extends VertoBaseComponent {
     return (styles[styleName]);
   }
 
+  call() {
+    if (this.props.cbClick) {
+      this.props.cbClick(this.props.data.callerId);
+    }
+  }
+  showCalls() {
+    if (this.props.cbClick) {
+      this.props.cbShowCalls(this.props.data.callerId);
+    }
+  }
+
   render(){
 
     const renderedTS = moment(this.props.data.lastTimestamp).format('ddd MMM DD YYYY HH:mm:ss A');
@@ -92,7 +108,9 @@ class CallHistoryItem extends VertoBaseComponent {
 
     return (
       <div style={this.getStyle('container')}>
-        <div style={{...this.getDefaultStyle('top')}}>
+        <div
+            onClick={this.call}
+            style={{...this.getDefaultStyle('top')}}>
             <div>
               {renderedDirection}
               {this.props.data.callerId} ({this.props.data.nbrCalls})
@@ -101,7 +119,9 @@ class CallHistoryItem extends VertoBaseComponent {
               {renderedTS}
             </div>
         </div>
-        <span style={{...this.getDefaultStyle('menuCont')}}>
+        <span
+            onClick={this.showCalls}
+            style={{...this.getDefaultStyle('menuCont')}}>
           <MenuIconSVG svgStyle={{...this.getStyle('dirSVG')}} />
         </span>
 
