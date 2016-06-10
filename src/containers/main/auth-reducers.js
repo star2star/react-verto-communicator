@@ -14,12 +14,12 @@ const auth = (state, action)=>{
                 password: 'Starvert0',
                 callerid: 'James',
                 hostname: 'verto.star2starglobal.com',
-                websocketurl: 'wss://verto.star2starglobal.com:8082'
+                websocketurl: 'wss://verto.star2starglobal.com:8082',
+                ...lsLoginSettings
               },
               sessionInfo: {
               },
-              vcStatus: 'disconnected',
-              loginSettings: { ...lsLoginSettings }
+              vcStatus: 'disconnected'
             };
   }
 
