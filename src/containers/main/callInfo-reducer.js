@@ -1,8 +1,16 @@
+import CallHistoryService from '../../js/callHistoryService';
+
 const callInfo = (state, action)=>{
 
   if (typeof state === 'undefined') {
+    const h = CallHistoryService.getInstance().getHistory();
+    let lastNumber;
+    if (h && h.length > 0){
+      lastNumber = h[0].callerId;
+    }
+
     return  {
-              lastNumber: undefined,
+              lastNumber: lastNumber,
               currentCallId: undefined,
               incomingCalls: {},
               activeCalls: {}
