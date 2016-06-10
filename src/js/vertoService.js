@@ -11,6 +11,8 @@ let _verto;
 
 
 
+
+
 //class
 class VertoService {
   constructor(){
@@ -200,6 +202,7 @@ class VertoService {
     this.getOptions = this.getOptions.bind(this);
     this.stopConference = this.stopConference.bind(this);
     this.startConference = this.startConference.bind(this);
+    this.sendConferenceCommand = this.sendConferenceCommand.bind(this);
 
     VertoService.getInstance = VertoService.getInstance.bind(this);
     VertoService.login = VertoService.login.bind(this);
@@ -298,7 +301,7 @@ class VertoService {
         }
       }
     });
-    window.X = conf;
+    //window.CONF = conf;
 
     if (this._data.confRole == "moderator") {
       //console.log('>>> conf.listVideoLayouts();', conf );
@@ -324,7 +327,7 @@ class VertoService {
           callID: dialog ? dialog.callID : null
         }
       });
-    window.LA = this._data.liveArray;
+    //window.LA = this._data.liveArray;
 
     //console.log('>>>>>> livearray: ',  Object.keys(_verto.verto.dialogs)[0] );
 
@@ -454,6 +457,27 @@ class VertoService {
       } else {
         console.log('hold    NOT FOUND----------');
       }
+  }
+
+  sendConferenceCommand(cmd, params) {
+
+    // if i am moderator allow
+    if (_verto && _verto._data && _verto._data.conf
+          && _verto._data.conf.params && _verto._data.conf.params.laData
+          && _verto._data.conf.params.laData.role == 'moderator') {
+          // validate cmd
+          if (Object.keys(VideoConstants.CONF_CMDS).indexOf(cmd.toUpperCase()) > -1) {
+            // valid command
+            _verto._data.conf[VideoConstants.CONF_CMDS[cmd.toUpperCase()]['functionName']].apply(_verto._data.conf, params);
+          }  else {
+              console.log('sendConferenceCommand: ERROR invalid Command: %s', cmd);
+          }
+    } else {
+      console.log('sendConferenceCommand: ERROR Not Moderator ... how did this happen');
+    }
+
+
+    // send
   }
 
   getOptions(data) {
