@@ -13,8 +13,8 @@ const auth = (state, action)=>{
                 user: '1010',
                 password: 'Starvert0',
                 callerid: 'James',
-                hostname: 'verto.star2starglobal.com',
-                websocketurl: 'wss://verto.star2starglobal.com:8082',
+                hostname: 'www.star2starglobal.com',
+                websocketurl: 'wss://www.star2starglobal.com:8082',
                 ...lsLoginSettings
               },
               sessionInfo: {
