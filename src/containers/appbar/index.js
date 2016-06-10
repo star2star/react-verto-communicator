@@ -38,6 +38,7 @@ class AppBar extends VertoBaseComponent {
 
     this.showSpeeds = this.showSpeeds.bind(this);
     this.handleAltMenuClick = this.handleAltMenuClick.bind(this);
+    this.handleSubmitPreviewSettings = this.handleSubmitPreviewSettings.bind(this);
     AppBar.closeMenu = this.handleCloseMenu.bind(this);
   }
 
@@ -258,9 +259,20 @@ class AppBar extends VertoBaseComponent {
     this.setState({ ...this.state, showSettings: displaySettings });
   }
 
+<<<<<<< HEAD
 showSpeeds(){
   this.setState({ ...this.state, showSpeeds: true});
 }
+=======
+  handleSubmitPreviewSettings(settings) {
+    // settings is an array of the settings in the SettingsPreview object
+    //console.log('&&&&& Preview Settings to save:', settings);
+    settings.map((s)=>{
+      // for each setting s, update the store
+      this.props.dispatch(doUpdateSetting(s));
+    });
+  }
+>>>>>>> b58655c0b15ce136d3d7cc19b23aa689452299d7
 
   buildSettingsContainer() {
     const { formatMessage } = this.props.intl;
@@ -331,7 +343,7 @@ showSpeeds(){
             <div className="buttonContainer" style={{...this.getStyle('buttonContainer')}}>
               <button
                   style={{...this.getStyle('button')}}
-                  onClick={()=>{App.toggleModal((<SettingsPreview settingsData={this.props.settings} cbClose={App.toggleModal}/>));}}
+                  onClick={()=>{App.toggleModal((<SettingsPreview settingsData={this.props.settings} cbClose={App.toggleModal} cbSubmitSettings={this.handleSubmitPreviewSettings}/>));}}
               >
                 <FormattedMessage
                     id="PREVIEW_SETTINGS"

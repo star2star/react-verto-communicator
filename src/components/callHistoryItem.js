@@ -2,7 +2,7 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import moment from 'moment';
 import { UpArrowIconSVG, DownArrowIconSVG, MenuIconSVG } from './svgIcons';
-import Radium from 'radium';
+//import Radium from 'radium';
 import {injectIntl, formattedMessage } from 'react-intl';
 
 const propTypes = {
@@ -109,17 +109,26 @@ class CallHistoryItem extends VertoBaseComponent {
     return (
       <div style={this.getStyle('container')}>
         <div
+            className="top"
             onClick={this.call}
             style={{...this.getDefaultStyle('top')}}>
-            <div>
+            <div className="info">
               {renderedDirection}
-              {this.props.data.callerId} ({this.props.data.nbrCalls})
+              <span className="callerId">
+                {this.props.data.callerId}
+              </span>
+                (<span className="nbrCalls">
+                  {this.props.data.nbrCalls}
+                </span>)
             </div>
-            <div style={{...this.getDefaultStyle('timestamp')}}>
+            <div
+              className="timestamp"
+              style={{...this.getDefaultStyle('timestamp')}}>
               {renderedTS}
             </div>
         </div>
         <span
+            className="menuCont"
             onClick={this.showCalls}
             style={{...this.getDefaultStyle('menuCont')}}>
           <MenuIconSVG svgStyle={{...this.getStyle('dirSVG')}} />
