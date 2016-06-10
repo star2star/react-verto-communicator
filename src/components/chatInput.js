@@ -42,9 +42,10 @@ export default class ChatInput extends VertoBaseComponent {
           justifyContent: 'center',
           backgroundColor: '#f7f8fb',
           // border: '1px solid #d1d1d1',
-          borderTop: '1px solid #d1d1d1',
+          //borderTop: '1px solid #d1d1d1',
           borderRight: '0px',
-          borderRadius: '0px 0px 0px 5px'
+          outline: 'none'
+          //borderRadius: '0px 0px 0px 5px'
       },
       inputSpacing: {
           //marginLeft: '10px',
@@ -60,11 +61,14 @@ export default class ChatInput extends VertoBaseComponent {
           fontFamily: 'Avenir-Medium, sans-serif',
           justifyContent: 'stretch',
           height: '30px',
-          borderRadius: '5px',
+          //borderRadius: '5px',
           //paddingLeft: '10px',
           color: '#4a4a4a',
           fontSize: '0.9rem',
-          border: '1px solid #d5dde0'
+          outline: 'none',
+          border: '1px solid #d5dde0',
+          marginLeft: '3px',
+          marginRight: '3px'
       }
     };
 
@@ -81,13 +85,11 @@ export default class ChatInput extends VertoBaseComponent {
           style={this.getStyle("ChatInpStyle")}
           ref="inputtext"
       >
-      <div style={this.getStyle("inputSpacing")}>
         <input
             style={this.getStyle("inputStyle")}
             ref="msgInput"
             type="text" onKeyPress={this.handleKeyPress.bind(this)} placeholder="Type your message..."
         />
-      </div>
       </div>
     );
   }
