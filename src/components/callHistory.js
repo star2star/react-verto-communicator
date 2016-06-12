@@ -22,14 +22,25 @@ class CallHistory extends VertoBaseComponent {
       container: {
         display: 'flex',
         flex: 1,
-        alignItems: "center",
+        alignItems: "flex-start",
+        borderRadius: '3px',
         justifyContent: 'flex-start',
         flexDirection: "column",
         maxWidth: "500px",
         boxShadow: '0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)',
-        backgroundColor: "green",
-        color: "yellow"
+        color: "#4a4a4a"
       },
+      header: {
+        display: 'flex',
+        width: '100%',
+        borderTopLeftRadius: '3px',
+        borderTopRightRadius: '3px',
+        alignItems: 'center',
+        justifyContent: 'stretch',
+        fontWeight: 300,
+        height: '40px',
+        backgroundColor: '#eee'
+      }
      };
 
     return (styles[styleName]);
@@ -37,9 +48,20 @@ class CallHistory extends VertoBaseComponent {
 
   render(){
     return (
-      <div style={this.getStyle('container')}>
-        <div>Call History</div>
-        <div>
+      <div
+          className="container"
+          style={this.getStyle('container')}
+      >
+        <div
+            className="header"
+            style={{...this.getDefaultStyle('header')}}
+        >
+            Call History
+        </div>
+        <div
+          className="body"
+          style={{...this.getDefaultStyle('body')}}
+        >
           {this.props.history.map((i, index)=>{
             return (
               <CallHistoryItem key={index} data={i} />
