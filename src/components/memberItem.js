@@ -1,7 +1,7 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import AdminControls from './memberAdminControlPanel';
-import {MicrophoneIconSVG, VideoIconSVG, MuteMicrophoneIconSVG, MuteVideoIconSVG} from './svgIcons';
+import {MicrophoneIconSVG, VideoIconSVG, MuteMicrophoneIconSVG, MuteVideoIconSVG, KickIconSVG, FullScreenIconSVG} from './svgIcons';
 
 const propTypes = {
   member : React.PropTypes.object.isRequired
@@ -40,6 +40,10 @@ export default class MemberItem extends VertoBaseComponent {
         height: '20px',
         fill: '#65ac43'
       },
+      floorLockStyle: {
+        height: '10px',
+        fill: '#888'
+      },
       userInfoStyle: {
         display: 'flex',
         flexDirection: 'column'
@@ -65,8 +69,30 @@ export default class MemberItem extends VertoBaseComponent {
             (<MuteVideoIconSVG  svgStyle={this.getStyle("svgStyle")}/>):
             (<VideoIconSVG  svgStyle={this.getStyle("svgStyle")}/>);
 
+    let presenterStatus;
+    let presenter;
+    if (true) { //TODO add test here to see if in conference as admin
+      if (this.props.member.conferenceStatus.screenShare) {
+        // Only show the presenter icon if admin and in screen share mode
+        // TODO replace with 'presenter toggle icon'
+        presenterStatus = (<FullScreenIconSVG svgStyle={{...this.getStyle("svgStyle"), fill: "#454545"}}/>);
+        presenter = (<span style={this.getStyle("presenterBadgeStyle")}>Presenter</span>);
+      } else {
+        // TODO replace with 'presenter toggle icon toggled off'
+        presenterStatus = (<FullScreenIconSVG svgStyle={{...this.getStyle("svgStyle"), fill: "#c5c5c5"}}/>);
+      }
+
+    }
+    const floorLocked = this.props.member.conferenceStatus.video.floorLocked ?
+            (<KickIconSVG svgStyle={this.getStyle("floorLockStyle")}/>) :
+            undefined;
+
     const floor = this.props.member.conferenceStatus.audio.floor ?
-            (<span style={this.getStyle("floorStyle")}>Floor</span>) :
+            (<span style={this.getStyle("floorBadgeStyle")}>{floorLocked} Floor</span>) :
+            undefined;
+
+    const screenShare = this.props.member.conferenceStatus.screenShare ?
+            (<span style={this.getStyle("screenShareBadgeStyle")}>Screen Share</span>) :
             undefined;
 
     // TODO ta - if user is logged in as admin, then render the admin controls
@@ -91,9 +117,12 @@ export default class MemberItem extends VertoBaseComponent {
           <span style={this.getStyle("nameStyle")}>{this.props.member.name}</span>
           <span style={this.getStyle("emailStyle")}>{this.props.member.avatar.email}</span>
           {floor}
+          {screenShare}
+          {presenter}
         </div>
         {micStatus}
         {videoStatus}
+        {presenterStatus}
       </div>
       {adminControls}
       </div>
