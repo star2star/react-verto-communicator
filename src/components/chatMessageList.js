@@ -13,12 +13,7 @@ export default class ChatMessageList extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {};
-    console.log('ChatMessageList chatItems prop', this.props.chatItems);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log('ChatMessageList chatItems nextProps', nextProps.chatItems);
-
+    //console.log('ChatMessageList chatItems prop', this.props.chatItems);
   }
 
   componentDidUpdate() {

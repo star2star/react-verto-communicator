@@ -22,11 +22,6 @@ export default class ChatSession extends VertoBaseComponent {
     console.log('Chat Session props Chat Data', this.props.chatData);
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log('Chat Session nextPropsprops Chat Data', nextProps.chatData);
-
-  }
-
   getCompStyle() {
     return this.props.compStyle;
   }

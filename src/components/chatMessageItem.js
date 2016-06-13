@@ -15,10 +15,6 @@ export default class ChatMessageItem extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {};
-
-    // setup the avatar
-    console.log('&&&&& ChatMessageItem message prop', this.props.message);
-
   }
 
   getCompStyle() {
@@ -114,7 +110,7 @@ export default class ChatMessageItem extends VertoBaseComponent {
     let avatar = (<AvatarSVG svgStyle={this.getStyle("avStyle")}/>);
 
     if (this.props.avatarUrl != undefined) {
-      avatar = (<img src={this.props.avatarUrl} style={this.getStyle("avImgStyle")}/>)
+      avatar = (<img src={this.props.avatarUrl} style={this.getStyle("avImgStyle")}/>);
     }
 
 
