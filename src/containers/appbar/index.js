@@ -196,6 +196,11 @@ class AppBar extends VertoBaseComponent {
             paddingBottom: '5px'
             //paddingLeft:'5px'
           },
+          langStyle: {
+            container: {
+              paddingTop: '18px'
+          }
+        },
           audioheaderLabel: {
             fontWeight: 'bold',
             fontSize: '1rem',
@@ -339,13 +344,13 @@ showSpeeds(){
         <SettingsMenuSelect
             cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
             options={this.props.settings.bandwidth ? this.props.settings.bandwidth : []}
-            label={formatMessage({"id":"MAX_INCOMING_BANDWIDTH", "defaultMessage":"Max incoming bandwidth:"})}
+            label={formatMessage({"id":"MAX_INCOMING_BANDWIDTH", "defaultMessage":"Max Incoming Bandwidth:"})}
             selectedOption={{id:"incomingBandwidth", data:this.props.settings.incomingBandwidth}}
         />
         <SettingsMenuSelect
             cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
             options={this.props.settings.bandwidth ? this.props.settings.bandwidth : []}
-            label={formatMessage({"id":"MAX_OUTGOING_BANDWIDTH", "defaultMessage":"Max outgoing bandwidth:"})}
+            label={formatMessage({"id":"MAX_OUTGOING_BANDWIDTH", "defaultMessage":"Max Outgoing Bandwidth:"})}
             selectedOption={{id:"outgoingBandwidth", data:this.props.settings.outgoingBandwidth}}
         />
     </div>);
@@ -354,7 +359,7 @@ showSpeeds(){
       <div>
         <SettingsCheckbox
             cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
-            label={formatMessage({"id":"RECHECK_BANDWIDTH", "defaultMessage":"Recheck bandwidth before each outgoing call"})}
+            label={formatMessage({"id":"RECHECK_BANDWIDTH", "defaultMessage":"Recheck Bandwidth Before Each Outgoing Call"})}
             checkedOption={{name:'testSpeedJoin', value:this.props.settings.testSpeedJoin}}
         />
         <div className="buttonContainer" style={{...this.getStyle('buttonContainer')}}>
@@ -460,7 +465,7 @@ showSpeeds(){
             />
             <SettingsCheckbox
                 cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
-                label={formatMessage({"id":"ASK_BEFORE_RECOVER", "defaultMessage":"Ask before recovering call"})}
+                label={formatMessage({"id":"ASK_BEFORE_RECOVER", "defaultMessage":"Ask Before Recovering Call"})}
                 checkedOption={{name:'askRecoverCall', value:this.props.settings.askRecoverCall}}
             />
             <SettingsMenuSelect
@@ -468,6 +473,7 @@ showSpeeds(){
                 options={this.props.settings.languages ? this.props.settings.languages : []}
                 label={formatMessage({"id":"LANGUAGE", "defaultMessage":"Language:"})}
                 selectedOption={{id:"language", data:this.props.settings.language}}
+                compStyle={{...this.getStyle('langStyle')}}
             />
           <div style={{...this.getStyle('audioheaderLabel')}}>
               <FormattedMessage
@@ -503,7 +509,7 @@ showSpeeds(){
           </div>
             <SettingsCheckbox
                 cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
-                label={formatMessage({"id":"AUTO_SPEED_RES", "defaultMessage":"Automatically determine speed and resolution settings"})}
+                label={formatMessage({"id":"AUTO_SPEED_RES", "defaultMessage":"Automatically Determine Speed and Resolution Settings"})}
                 checkedOption={{name:'autoBand', value:this.props.settings.autoBand}}
             />
               {vidSettingsAltDisplay}

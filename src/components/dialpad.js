@@ -28,8 +28,8 @@ class Dialpad extends VertoBaseComponent {
       container: {
         display: 'flex',
         flex: 1,
-        alignItems: "center",
-        justifyContent: 'flex-start',
+        // alignItems: "center",
+        // justifyContent: 'flex-start',
         flexDirection: "column",
         maxWidth: "500px",
         '@media (max-width: 768px)': {
@@ -39,7 +39,7 @@ class Dialpad extends VertoBaseComponent {
       },
       header: {
         display: 'flex',
-        flex: 10,
+        flex: 1,
         alignItems: 'center',
         alignContent: 'stretch',
         justifyContent: 'space-between',
@@ -60,7 +60,8 @@ class Dialpad extends VertoBaseComponent {
         backgroundColor: this.state.inputFocused ? '#eee' : 'transparent',
         color: '#4a4a4a',
         height: '75px',
-        //padding: '0px 25px 0px 25px',
+        // marginLeft: '10px',
+        fontWeight: '300',
         border: 'none',
         outline: 'none',
         fontSize: '40px', //!this.state.number ? '1vw' : '1.5vw',
@@ -174,16 +175,16 @@ class Dialpad extends VertoBaseComponent {
     } else {
       return (
         <div
-              style={{...this.getDefaultStyle('container')}}
-              onKeyPress={(e)=>{
+            style={{...this.getDefaultStyle('container')}}
+            onKeyPress={(e)=>{
                 if(e.which == 13 || e.keyCode == 13) {
                   this.makeCall();
                   return false;
                 }}}
             >
           <div
-            className="header"
-            style={{...this.getDefaultStyle('header')}}
+              className="header"
+              style={{...this.getDefaultStyle('header')}}
           >
             <span
                 className="callhist"
@@ -193,7 +194,7 @@ class Dialpad extends VertoBaseComponent {
                 }}
             >
               <CallHistoryIconSVG
-                svgStyle={{...this.getDefaultStyle('callhist')}}
+                  svgStyle={{...this.getDefaultStyle('callhist')}}
               />
             </span>
             <input
