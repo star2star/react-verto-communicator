@@ -16,7 +16,7 @@ class CallHistory extends VertoBaseComponent {
     super(props);
     this.state = { callDetailDisplayed : false};
 
-    //CallHistory.showCallDetails = this.showCallDetails.bind(this);
+    //CallHistory.getCallDetails = this.getCallDetails.bind(this);
 }
 
   getCompStyle() {
@@ -60,7 +60,74 @@ class CallHistory extends VertoBaseComponent {
   }
 
   render(){
+    // regular state list items
+    const listitems = this.props.history.map((i, index)=>{
+      return(
+        <CallHistoryItem key={index} data={i} cbShowCalls={()=>{
+          //console.log(i.callerId);
+          this.setState({...this.state, 'callDetailDisplayed' : true});
+        }}
+        />);
+    });
 
+    // details only (outgoing/incoming and timestamp)
+    const self = this;
+    const detailData = CallHistoryService.getInstance().getHistoryDetail(404);
+    const details = detailData.map(function(i, key){
+      let renderedDirection;
+      if(i.direction == 'outgoing') {
+        renderedDirection = (
+          <span className="incoming" >
+            <UpArrowIconSVG svgStyle={{fill: '#009688', width: '24px', height: '24px'}}/>
+          </span>);
+      } else {
+        renderedDirection = (
+          <span className="outgoing">
+            <DownArrowIconSVG svgStyle={{fill: '#009688', width: '24px', height: '24px'}} />
+          </span>);
+      }
+
+      const formattedTimestamp = moment(i.timestamp).format('ddd MMM DD YYYY HH:mm:ss A');
+
+      return (
+        <div
+            className="details"
+            key={key}
+            style={{...self.getDefaultStyle('details')}}
+        >
+          {renderedDirection}
+          {formattedTimestamp}
+        </div>
+      );
+    });
+
+    // callDetail state area (the whole container)
+    const callDetailState = (
+      <div
+          className="container"
+          style={this.getStyle('container')}
+      >
+        <div
+            className="header"
+            style={{...this.getDefaultStyle('header')}}
+        >
+            Call History
+        </div>
+        <div
+            className="body"
+            style={{...this.getDefaultStyle('body')}}
+        >
+          <div>
+            {details}
+          </div>
+        </div>
+        <div onClick={this.props.cbBack}>
+          Back
+        </div>
+      </div>
+    );
+
+    // default state
     const defaultState = (
       <div
           className="container"
@@ -76,61 +143,10 @@ class CallHistory extends VertoBaseComponent {
           className="body"
           style={{...this.getDefaultStyle('body')}}
         >
-          {this.props.history.map((i, index)=>{
-            return (
-              <CallHistoryItem key={index} data={i}
-              />
-            );
-          })}
+          {listitems}
         </div>
         <div onClick={this.props.cbBack}>Back</div>
       </div>);
-
-      const self = this;
-      const detailData = CallHistoryService.getInstance().getHistoryDetail(404);
-      const details = detailData.map(function(i, key){
-        let renderedDirection;
-        if(i.direction == 'outgoing') {
-          renderedDirection = (<span className="incoming" >
-            <UpArrowIconSVG svgStyle={{fill: '#009688', width: '24px', height: '24px'}}/>
-          </span>);
-        } else {
-          renderedDirection = (<span className="outgoing">
-            <DownArrowIconSVG svgStyle={{fill: '#009688', width: '24px', height: '24px'}} />
-          </span>);
-        }
-        const formattedTimestamp = moment(i.timestamp).format('ddd MMM DD YYYY HH:mm:ss A');
-        return (
-          <div className="details"key={key} style={{...self.getDefaultStyle('details')}}>
-            {renderedDirection}
-            {formattedTimestamp}
-          </div>);
-      });
-
-      const callDetailState = (
-        <div
-            className="container"
-            style={this.getStyle('container')}
-        >
-          <div
-              className="header"
-              style={{...this.getDefaultStyle('header')}}
-          >
-              Call History
-          </div>
-          <div
-            className="body"
-            style={{...this.getDefaultStyle('body')}}
-          >
-            <div>
-              {details}
-            </div>
-          </div>
-          <div onClick={this.props.cbBack}>
-            Back
-          </div>
-        </div>
-      );
 
       const renderedState = this.state.callDetailDisplayed ? callDetailState : defaultState ;
 
