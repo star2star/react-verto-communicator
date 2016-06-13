@@ -220,7 +220,8 @@ class AppBar extends VertoBaseComponent {
             textTransform: 'uppercase'
           },
           netSpeedContainer: {
-            alignSelf: 'center', //keeps speed displays centered under the button
+            display: 'flex',
+            justifyContent: 'center',
             alignItems: 'center'
           },
           outgoingSpacing: {
@@ -280,11 +281,31 @@ showSpeeds(){
   buildSettingsContainer() {
     const { formatMessage } = this.props.intl;
     // console.log('xxxxxxxxxxxx', this.props.settings);
-  let useVidDisplay;
+    let netSpeedDisplay;
+    if (this.state.showSpeeds === false) {
+      netSpeedDisplay = (<div></div>);
+    } else {
+      netSpeedDisplay = (
+        <div className='netSpeedContainer' style={{...this.getStyle('netSpeedContainer')}}>
+         <span style={{...this.getStyle('outgoingSpacing')}}>
+           <FormattedMessage
+               id="BANDWIDTH_INFO_OUTGOING"
+               defaultMessage="Outgoing:"
+           /> {this.props.bandwidthInfo.outgoingBandwidth}
+         </span>
+         <span style={{...this.getStyle('bandwidthSpacing')}}>
+           <FormattedMessage
+               id="BANDWIDTH_INFO_INCOMING"
+               defaultMessage="Incoming:"
+           /> {this.props.bandwidthInfo.incomingBandwidth}
+       </span>
+     </div>);}
+
+  let useVideoAltDisplay;
   if (this.props.settings.useVideo === false) {
-    useVidDisplay= (<div></div>);
+    useVideoAltDisplay = (<div></div>);
   } else {
-    useVidDisplay = (
+    useVideoAltDisplay = (
       <div>
         <SettingsMenuSelect
             cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
@@ -300,26 +321,44 @@ showSpeeds(){
         />
       </div>);}
 
-    let netSpeedDisplay;
-    if (this.state.showSpeeds === false) {
-      netSpeedDisplay= (<div></div>);
-    } else {
-    netSpeedDisplay = (
-      <div className='netSpeedContainer' style={{...this.getStyle('netSpeedContainer')}}>
-         <span style={{...this.getStyle('outgoingSpacing')}}>
-           <FormattedMessage
-               id="BANDWIDTH_INFO_OUTGOING"
-               defaultMessage="Outgoing:"
-           /> {this.props.bandwidthInfo.outgoingBandwidth}
-         </span>
-         <span style={{...this.getStyle('bandwidthSpacing')}}>
-           <FormattedMessage
-               id="BANDWIDTH_INFO_INCOMING"
-               defaultMessage="Incoming:"
-           /> {this.props.bandwidthInfo.incomingBandwidth}
-       </span>
-     </div>);}
-
+  let vidSettingsAltDisplay;
+  if (this.props.settings.autoBand === false) {
+    vidSettingsAltDisplay = (
+      <div>
+        <SettingsMenuSelect
+            cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
+            options={this.props.settings.bandwidth ? this.props.settings.bandwidth : []}
+            label={formatMessage({"id":"MAX_INCOMING_BANDWIDTH", "defaultMessage":"Max incoming bandwidth:"})}
+            selectedOption={{id:"incomingBandwidth", data:this.props.settings.incomingBandwidth}}
+        />
+        <SettingsMenuSelect
+            cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
+            options={this.props.settings.bandwidth ? this.props.settings.bandwidth : []}
+            label={formatMessage({"id":"MAX_OUTGOING_BANDWIDTH", "defaultMessage":"Max outgoing bandwidth:"})}
+            selectedOption={{id:"outgoingBandwidth", data:this.props.settings.outgoingBandwidth}}
+        />
+    </div>);
+  } else {
+    vidSettingsAltDisplay = (
+      <div>
+        <SettingsCheckbox
+            cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
+            label={formatMessage({"id":"RECHECK_BANDWIDTH", "defaultMessage":"Recheck bandwidth before each outgoing call"})}
+            checkedOption={{name:'testSpeedJoin', value:this.props.settings.testSpeedJoin}}
+        />
+        <div className="buttonContainer" style={{...this.getStyle('buttonContainer')}}>
+          <button
+              style={{...this.getStyle('button')}}
+              onClick={()=>{this.props.dispatch(doSpeedTest());this.showSpeeds();}}
+              >
+            <FormattedMessage
+                id="CHECK_NETWORK_SPEED"
+                defaultMessage="Check Network Speed"
+            />
+          </button>
+        </div>
+        {netSpeedDisplay}
+      </div>);}
 
     if (this.props.showSettings) {
       return (undefined);
@@ -333,7 +372,7 @@ showSpeeds(){
               className="column1"
               style={{...this.getStyle('column1')}}
           >
-            {useVidDisplay}
+            {useVideoAltDisplay}
             <SettingsMenuSelect
                 cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
                 options={this.props.settings.audioDevices ? this.props.settings.audioDevices : []}
@@ -355,7 +394,12 @@ showSpeeds(){
             <div className="buttonContainer" style={{...this.getStyle('buttonContainer')}}>
               <button
                   style={{...this.getStyle('button')}}
-                  onClick={()=>{App.toggleModal((<SettingsPreview settingsData={this.props.settings} cbClose={App.toggleModal} cbSubmitSettings={this.handleSubmitPreviewSettings}/>));}}
+                  onClick={()=>{
+                    App.toggleModal((
+                      <SettingsPreview
+                          settingsData={this.props.settings}
+                          cbClose={App.toggleModal} cbSubmitSettings={this.handleSubmitPreviewSettings}
+                      />));}}
               >
                 <FormattedMessage
                     id="PREVIEW_SETTINGS"
@@ -451,35 +495,7 @@ showSpeeds(){
                 label={formatMessage({"id":"AUTO_SPEED_RES", "defaultMessage":"Automatically determine speed and resolution settings"})}
                 checkedOption={{name:'autoBand', value:this.props.settings.autoBand}}
             />
-            <SettingsCheckbox
-                cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
-                label={formatMessage({"id":"RECHECK_BANDWIDTH", "defaultMessage":"Recheck bandwidth before each outgoing call"})}
-                checkedOption={{name:'testSpeedJoin', value:this.props.settings.testSpeedJoin}}
-            />
-            <div className="buttonContainer" style={{...this.getStyle('buttonContainer')}}>
-              <button
-                  style={{...this.getStyle('button')}}
-                  onClick={()=>{this.props.dispatch(doSpeedTest());this.showSpeeds();}}
-                  >
-                <FormattedMessage
-                    id="CHECK_NETWORK_SPEED"
-                    defaultMessage="Check Network Speed"
-                />
-              </button>
-              {netSpeedDisplay}
-            </div>
-            <SettingsMenuSelect
-                cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
-                options={this.props.settings.bandwidth ? this.props.settings.bandwidth : []}
-                label={formatMessage({"id":"MAX_INCOMING_BANDWIDTH", "defaultMessage":"Max incoming bandwidth:"})}
-                selectedOption={{id:"incomingBandwidth", data:this.props.settings.incomingBandwidth}}
-            />
-            <SettingsMenuSelect
-                cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
-                options={this.props.settings.bandwidth ? this.props.settings.bandwidth : []}
-                label={formatMessage({"id":"MAX_OUTGOING_BANDWIDTH", "defaultMessage":"Max outgoing bandwidth:"})}
-                selectedOption={{id:"outgoingBandwidth", data:this.props.settings.outgoingBandwidth}}
-            />
+              {vidSettingsAltDisplay}
           </div>
         </div>
       );
