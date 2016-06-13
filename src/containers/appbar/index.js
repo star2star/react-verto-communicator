@@ -158,7 +158,7 @@ class AppBar extends VertoBaseComponent {
             flexWrap: 'wrap',
             justifyContent: 'space-around',
             opacity: '.9',
-            padding: '60px',
+            padding: '25px 80px 25px 80px',
             backgroundColor: '#0A387F',
             maxHeight: '600px',
             overflow: 'auto'
@@ -203,9 +203,9 @@ class AppBar extends VertoBaseComponent {
           },
           buttonContainer: {
             display: 'flex',
-            flexDirection: 'column',
+            flexDirection: 'column'
             // alignItems: 'flex-start', //buttons fill container or not?
-            flex: '1'
+            // flex: '1'
           },
           button: {
             padding: '8px 30px',
@@ -218,6 +218,10 @@ class AppBar extends VertoBaseComponent {
             backgroundColor: '#FFF',
             color: '#0A387F',
             textTransform: 'uppercase'
+          },
+          netSpeedContainer: {
+            alignSelf: 'center', //keeps speed displays centered under the button
+            alignItems: 'center'
           },
           outgoingSpacing: {
             padding: '5px'
@@ -281,7 +285,7 @@ showSpeeds(){
       netSpeedDisplay= (<div></div>);
     } else {
     netSpeedDisplay = (
-      <div className='netSpeedContainer'>
+      <div className='netSpeedContainer' style={{...this.getStyle('netSpeedContainer')}}>
          <span style={{...this.getStyle('outgoingSpacing')}}>
            <FormattedMessage
                id="BANDWIDTH_INFO_OUTGOING"
@@ -455,7 +459,6 @@ showSpeeds(){
               </button>
               {netSpeedDisplay}
             </div>
-
             <SettingsMenuSelect
                 cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
                 options={this.props.settings.bandwidth ? this.props.settings.bandwidth : []}
