@@ -19,7 +19,7 @@ export default class ChatSession extends VertoBaseComponent {
     super(props);
     this.state = {};
 
-    console.log('Chat Session go Chat Data', this.props.chatData);
+    console.log('Chat Session props Chat Data', this.props.chatData);
   }
 
   getCompStyle() {
@@ -108,6 +108,7 @@ export default class ChatSession extends VertoBaseComponent {
 
           <ChatMessageList
               chatItems={this.props.chatData.messages}
+              chatUsers={this.props.chatData.users}
               style={{CMLStyles: this.getStyle('CMLStyles')}}
           />
           <ChatInput

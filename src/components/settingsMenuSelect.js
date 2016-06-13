@@ -54,12 +54,12 @@ handleSelect() {
         display:'flex',
         paddingBottom: '10px',
         fontWeight: 'bold',
-        fontSize: '1.1rem'
+        fontSize: '1rem'
       },
       select: {
         border: 'none',
         boxShadow:'none',
-        fontSize: '1rem',
+        fontSize: '.9rem',
         backgroundColor: 'rgba(0,0,0,0)',
         color: '#FFF'
       }

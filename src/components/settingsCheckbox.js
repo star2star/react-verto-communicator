@@ -40,7 +40,7 @@ let chkdObj = {};
         // borderBottom: '1px solid #FFF'
       },
       label: {
-        fontSize:'1rem',
+        fontSize:'.9rem',
         paddingLeft: '10px'
       }
     };

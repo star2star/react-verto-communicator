@@ -6,7 +6,7 @@ This component is placed at the bottom of the chat area. This component gives ea
 
 # 2. Visual Design #  
 
-![An exanple of a chat input field , taken from the 'original' verto ](https://raw.githubusercontent.com/star2star/react-verto-communicator/master/documents/img/chatinput-img.png)
+![An exanple of a chat message, taken from the 'original' verto ](https://raw.githubusercontent.com/star2star/react-verto-communicator/master/documents/img/chatmessageitem-img.png)
 
 # 3. Component Type #
 
