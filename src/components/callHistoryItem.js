@@ -129,7 +129,7 @@ class CallHistoryItem extends VertoBaseComponent {
         </div>
         <span
             className="menuCont"
-            onClick={this.showCalls}
+            onClick={this.props.cbShowCalls}
             style={{...this.getDefaultStyle('menuCont')}}>
           <MenuIconSVG svgStyle={{...this.getStyle('dirSVG')}} />
         </span>

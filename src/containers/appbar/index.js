@@ -626,9 +626,6 @@ showSpeeds(){
                 <MenuItem label={<FormattedMessage id='OPEN_NEW_WINDOW' />}cbAction={()=>{
                   window.open(location.href);
                 }} />
-                <MenuItem label={<FormattedMessage id='CHANGE_LOGIN_INFO' />} cbAction={()=>{
-                  this.props.dispatch(doSubmitLogOut());
-                }} />
                 <MenuItem label={<FormattedMessage id='LOGOUT' />} cbAction={()=>{
                   this.props.dispatch(doSubmitLogOut());
                 }} />

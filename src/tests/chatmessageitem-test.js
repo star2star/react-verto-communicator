@@ -18,7 +18,7 @@ describe('Default test for ChatMessageItem', ()=>{
     callID: "1f898d4d-07dd-0988-0436-d65298735c0e",
     displayName: "Cory",
     isMe: true,
-    message:"iji",
+    message:"Hi",
     utc_timestamp: 1465846699477
   };
 
@@ -27,5 +27,12 @@ describe('Default test for ChatMessageItem', ()=>{
     //console.log(wrapper.childAt(1).childAt(2).props().children[2]);
     expect(wrapper.childAt(1).childAt(2).props().children[2]).toEqual('Today at 3:38 PM');
   });
+
+  it('renders the correct username ', () => {
+    const wrapper = shallow(<ChatMessageItem message={sampleData} />);
+    //console.log(wrapper.childAt(1).childAt(2).props().children[2]);
+    expect(wrapper.childAt(1).childAt(2).props().children[0]).toEqual('Cory');
+  });
+
 
 });
