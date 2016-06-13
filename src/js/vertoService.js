@@ -267,6 +267,7 @@ class VertoService {
       },
       onBroadcast: (v, conf, message) => {
         console.log('>>> conf.onBroadcast:', message, arguments);
+
         if (message.action == 'response') {
           // This is a response with the video layouts list.
           if (message['conf-command'] == 'list-videoLayouts') {
@@ -291,14 +292,33 @@ class VertoService {
             this._data.confLayouts = options;
           } else if (message['conf-command'] == 'canvasInfo') {
             this._data.canvasInfo = message.responseData;
-            console.log('..... CANVASINFO ...', message, v );
+            //console.log('..... CANVASINFO ...', message, v );
             //console.log('&&&&&& MULT: CCCC: ',  this._data.conf.params.laData.canvasCount > 1);
-            //_dispatch(doConferenceData({callId: Object.keys(v.dialogs)[0], }));
-            //TODO
-            //$rootScope.$emit('conference.canvasInfo', message.responseData);
+            if (this._data.confLayoutsData && message.responseData[0]) {
+              this._data.confLayoutsData.filter(l=>l.name === message.responseData[0].layoutName).map((mLayout)=>{
+                // found it so
+                _dispatch(doConferenceData({callId: Object.keys(v.dialogs)[0], hasMultipleCanvases: message.responseData > 1, allowPresenter: mLayout.resIDS && mLayout.resIDS.length > 0 }));
+              });
+            };
+          } else if (message['conf-command'].indexOf('vid-layout') ) {
+            // video layout changed
+            const newLayout = message['conf-command'].split(' ')[2];
+            // find new layout
+            //console.log('..... VID LAYOUT CHANGING ...', message, newLayout );
+            if (this._data.confLayoutsData && newLayout ) {
+              //debugger;
+              this._data.canvasInfo = [];
+              this._data.confLayoutsData.filter(l=>l.name == newLayout).map((mLayout)=>{
+                // found it so
+
+                this._data.canvasInfo = [].concat(mLayout);
+                _dispatch(doConferenceData({callId: Object.keys(v.dialogs)[0], allowPresenter: mLayout.resIDS && mLayout.resIDS.length > 0 }));
+              });
+
+            };
           } else {
             //TODO
-            console.log('..... ELSE ONBROADCAST ...', message );
+            //console.log('..... ELSE ONBROADCAST ...', message );
             //$rootScope.$emit('conference.broadcast', message);
           }
         }
@@ -310,8 +330,10 @@ class VertoService {
       //console.log('>>> conf.listVideoLayouts();', conf );
       setTimeout(()=> {
         //console.log('sending listVideoLayout')
-        conf.listVideoLayouts();}, 0);
+        conf.listVideoLayouts();
         conf.modCommand('canvasInfo');
+      }, 0);
+
     } else {
       //console.log('NOT Moderator but i am: ', this._data.confRole);
     }
@@ -347,7 +369,7 @@ class VertoService {
 
     this._data.liveArray.onChange = (obj, args) => {
       //window.foo = obj;
-      //console.log('liveArray.onChange --- action: %s',args.action,  obj, args);
+      console.log('liveArray.onChange --- action: %s',args.action,  obj, args);
 
       switch (args.action) {
         case 'bootObj':
@@ -383,8 +405,7 @@ class VertoService {
           //var member = [args.key, args.data];
           //TODO $rootScope.$emit('members.update', member);
           //break;
-          console.log('>>>>>>>>>>>', this._data.conf.params.laData.canvasCount > 1 )
-          _dispatch(doConferenceData({callId: Object.keys(obj.verto.dialogs)[0], allowPresenter: false, hasMultipleCanvases: this._data.conf.params.laData.canvasCount > 1, currentRole: this._data.conf.params.laData.role, users: obj.getUsers(obj) }));
+          _dispatch(doConferenceData({callId: Object.keys(obj.verto.dialogs)[0], hasMultipleCanvases: this._data.conf.params.laData.canvasCount > 1, currentRole: this._data.conf.params.laData.role, users: obj.getUsers(obj) }));
           break;
         default:
           console.log('NotImplemented', args.action);
