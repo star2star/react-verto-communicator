@@ -191,13 +191,13 @@ class AppBar extends VertoBaseComponent {
           },
           headerLabel: {
             fontWeight: 'bold',
-            fontSize: '1.1rem',
+            fontSize: '1rem',
             paddingBottom: '5px'
             //paddingLeft:'5px'
           },
           audioheaderLabel: {
             fontWeight: 'bold',
-            fontSize: '1.1rem',
+            fontSize: '1rem',
             paddingTop: '15px',
             paddingBottom: '5px'
           },
@@ -455,6 +455,7 @@ showSpeeds(){
               </button>
               {netSpeedDisplay}
             </div>
+
             <SettingsMenuSelect
                 cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
                 options={this.props.settings.bandwidth ? this.props.settings.bandwidth : []}
@@ -569,7 +570,7 @@ showSpeeds(){
                   cbSubmitSetting = {(data)=>{this.props.dispatch(doUpdateSetting(data));}}
                   cbToggleShowSettings={this.settings.bind(this)}
                   settings={this.props.settings}
-                  onClick={()=>{this.props.dispatch(doSpeedTest());this.showSpeeds}}
+                  onClick={()=>{this.props.dispatch(doSpeedTest());this.showSpeeds;}}
                   cbPreviewSet={()=>{App.toggleModal((<SettingsPreview settings={this.props.settings} cbClose={App.toggleModal}/>));}}
               />
             </div>
