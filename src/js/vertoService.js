@@ -291,7 +291,9 @@ class VertoService {
             this._data.confLayouts = options;
           } else if (message['conf-command'] == 'canvasInfo') {
             this._data.canvasInfo = message.responseData;
-            console.log('..... CANVASINFO ...', message );
+            console.log('..... CANVASINFO ...', message, v );
+            //console.log('&&&&&& MULT: CCCC: ',  this._data.conf.params.laData.canvasCount > 1);
+            //_dispatch(doConferenceData({callId: Object.keys(v.dialogs)[0], }));
             //TODO
             //$rootScope.$emit('conference.canvasInfo', message.responseData);
           } else {
@@ -320,10 +322,6 @@ class VertoService {
       //jes fixed this ... check on instance ..this._data.instance
       _verto.verto, pvtData.laChannel,
       pvtData.laName, {
-        userObj: {
-          a: 'j',
-          b: 1
-        },
         subParams: {
           callID: dialog ? dialog.callID : null
         }
@@ -356,7 +354,6 @@ class VertoService {
           // args.data.map((member)=>{
           //   console.log('BBBB:', member[0], member[1]);
           // });
-
           //TODO
           //$rootScope.$emit('members.boot', args.data);
           // args.data.forEach(function(member){
@@ -386,8 +383,8 @@ class VertoService {
           //var member = [args.key, args.data];
           //TODO $rootScope.$emit('members.update', member);
           //break;
-
-          _dispatch(doConferenceData({callId: Object.keys(obj.verto.dialogs)[0], currentRole: this._data.conf.params.laData.role, users: obj.getUsers(obj) }));
+          console.log('>>>>>>>>>>>', this._data.conf.params.laData.canvasCount > 1 )
+          _dispatch(doConferenceData({callId: Object.keys(obj.verto.dialogs)[0], hasMultipleCanvases: this._data.conf.params.laData.canvasCount > 1, currentRole: this._data.conf.params.laData.role, users: obj.getUsers(obj) }));
           break;
         default:
           console.log('NotImplemented', args.action);
