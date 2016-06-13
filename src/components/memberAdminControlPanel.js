@@ -1,6 +1,6 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
-import AdminControlItem from './memberAdminControlItem';
+import ControlItem from './controlItem';
 // import {
 //   KickIconSVG,  // kick
 //   FullScreenIconSVG, // floor
@@ -58,21 +58,21 @@ export default class AdminControls extends VertoBaseComponent {
     // Setup up baed on the user status object (this.props.member[4])
     // Setup up based on the user status object
     const micStatus = this.props.member.conferenceStatus.audio.muted ?
-            (<AdminControlItem type="MuteMicrophoneIconSVG" label="UNMUTE"
+            (<ControlItem type="MuteMicrophoneIconSVG" label="UNMUTE"
                 compStyle={this.getStyle("controlIconStyle")}
                 cbClick={()=>{console.log('UNMUTE Mic');}}
             />) :
-            (<AdminControlItem type="MicrophoneIconSVG" label="MUTE"
+            (<ControlItem type="MicrophoneIconSVG" label="MUTE"
                 compStyle={this.getStyle("controlIconStyle")}
                 cbClick={()=>{console.log('MUTE Mic');}}
             />);
 
     const videoStatus = this.props.member.conferenceStatus.video.muted ?
-            (<AdminControlItem type="MuteVideoIconSVG" label="UNMUTE"
+            (<ControlItem type="MuteVideoIconSVG" label="UNMUTE"
                 compStyle={this.getStyle("controlIconStyle")}
                 cbClick={()=>{console.log('UNMUTE Video');}}
             />) :
-            (<AdminControlItem type="VideoIconSVG" label="MUTE"
+            (<ControlItem type="VideoIconSVG" label="MUTE"
                 compStyle={this.getStyle("controlIconStyle")}
                 cbClick={()=>{console.log('MUTE Video');}}
             />);
@@ -83,15 +83,15 @@ export default class AdminControls extends VertoBaseComponent {
           <div className="generalSettings">
             <div style={this.getStyle("headingStyle")}>GENERAL</div>
             <div style={{display: 'flex'}}>
-              <AdminControlItem type="KickIconSVG" label="KICK"
+              <ControlItem type="KickIconSVG" label="KICK"
                   compStyle={this.getStyle("controlIconStyle")}
                   cbClick={()=>{console.log('KICK');}}
               />
-              <AdminControlItem type="FullScreenIconSVG" label="FLOOR"
+              <ControlItem type="FullScreenIconSVG" label="FLOOR"
                   compStyle={this.getStyle("controlIconStyle")}
                   cbClick={()=>{console.log('FLOOR');}}
               />
-              <AdminControlItem type="UpArrowIconSVG" label="TRANSFER"
+              <ControlItem type="UpArrowIconSVG" label="TRANSFER"
                   compStyle={this.getStyle("controlIconStyle")}
                   cbClick={()=>{console.log('TRANSFER');}}
               />
@@ -102,22 +102,22 @@ export default class AdminControls extends VertoBaseComponent {
             <div style={{display: 'flex', justifyContent: 'space-around'}}>
               <div className="avRightCol" style={{display:'flex', flexDirection:'column'}}>
                 {micStatus}
-                <AdminControlItem type="VolumeDownIconSVG" label="Vol-"
+                <ControlItem type="VolumeDownIconSVG" label="Vol-"
                     compStyle={this.getStyle("controlIconStyle")}
                     cbClick={()=>{console.log('Vol-');}}
                 />
-                <AdminControlItem type="VolumeDownIconSVG" label="Gain-"
+                <ControlItem type="VolumeDownIconSVG" label="Gain-"
                     compStyle={this.getStyle("controlIconStyle")}
                     cbClick={()=>{console.log('Gain-');}}
                 />
               </div>
               <div className="avLeftCol" style={{display:'flex', flexDirection:'column'}}>
                 {videoStatus}
-                <AdminControlItem type="VolumeUpIconSVG" label="Vol+"
+                <ControlItem type="VolumeUpIconSVG" label="Vol+"
                     compStyle={this.getStyle("controlIconStyle")}
                     cbClick={()=>{console.log('Vol+');}}
                 />
-                <AdminControlItem type="VolumeUpIconSVG" label="Gain+"
+                <ControlItem type="VolumeUpIconSVG" label="Gain+"
                     compStyle={this.getStyle("controlIconStyle")}
                     cbClick={()=>{console.log('Gain+');}}
                 />
@@ -128,13 +128,60 @@ export default class AdminControls extends VertoBaseComponent {
         <div className="bannerSettings" style={{flex: '1', border:'1px solid #e9e9e9'}}>
           <div style={this.getStyle("headingStyle")}>BANNER</div>
           <div style={{display: 'flex', justifyContent: 'space-around'}}>
-            <AdminControlItem type="StatusIconSVG" label="Set"
+            <ControlItem type="StatusIconSVG" label="Set"
                 compStyle={this.getStyle("controlIconStyle")}
                 cbClick={()=>{console.log('Set');}}
-            /><AdminControlItem type="RemoveIconSVG" label="Reset"
+            /><ControlItem type="RemoveIconSVG" label="Reset"
                 compStyle={this.getStyle("controlIconStyle")}
                 cbClick={()=>{console.log('Reset');}}
             />
+          </div>
+          <div className="canvasSettings">
+            <div style={this.getStyle("headingStyle")}>LAYER POSITION</div>
+            <div style={{display: 'flex'}}>
+              <ControlItem type="KickIconSVG" label="SET"
+                  compStyle={this.getStyle("controlIconStyle")}
+                  cbClick={()=>{console.log('Set Layer Position');}}
+              />
+              <ControlItem type="KickIconSVG" label="NEXT"
+                  compStyle={this.getStyle("controlIconStyle")}
+                  cbClick={()=>{console.log('Next Layer Position');}}
+              />
+              <ControlItem type="KickIconSVG" label="PREVIOUS"
+                  compStyle={this.getStyle("controlIconStyle")}
+                  cbClick={()=>{console.log('Prev Layer Position');}}
+              />
+            </div>
+            <div style={this.getStyle("headingStyle")}>WATCHING CANVAS</div>
+            <div style={{display: 'flex'}}>
+              <ControlItem type="KickIconSVG" label="SET"
+                  compStyle={this.getStyle("controlIconStyle")}
+                  cbClick={()=>{console.log('Set Watching Canvas');}}
+              />
+              <ControlItem type="KickIconSVG" label="NEXT"
+                  compStyle={this.getStyle("controlIconStyle")}
+                  cbClick={()=>{console.log('Next Watching Canvas');}}
+              />
+              <ControlItem type="KickIconSVG" label="PREVIOUS"
+                  compStyle={this.getStyle("controlIconStyle")}
+                  cbClick={()=>{console.log('Prev Watching Canvas');}}
+              />
+            </div>
+            <div style={this.getStyle("headingStyle")}>INPUT CANVAS</div>
+            <div style={{display: 'flex'}}>
+              <ControlItem type="KickIconSVG" label="SET"
+                  compStyle={this.getStyle("controlIconStyle")}
+                  cbClick={()=>{console.log('Set Input Canvas');}}
+              />
+              <ControlItem type="KickIconSVG" label="NEXT"
+                  compStyle={this.getStyle("controlIconStyle")}
+                  cbClick={()=>{console.log('Next Input Canvas');}}
+              />
+              <ControlItem type="KickIconSVG" label="PREVIOUS"
+                  compStyle={this.getStyle("controlIconStyle")}
+                  cbClick={()=>{console.log('Prev Input Canvas');}}
+              />
+            </div>
           </div>
         </div>
       </div>

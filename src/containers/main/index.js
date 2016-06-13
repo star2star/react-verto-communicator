@@ -20,6 +20,8 @@ class Main extends VertoBaseComponent {
     super(props);
 
     this.state={};
+
+    this.handleControlClick = this.handleControlClick.bind(this);
   }
 
   componentWillMount() {
@@ -40,6 +42,21 @@ class Main extends VertoBaseComponent {
   makeCall(number) {
     //console.log('calling ...', number, this.props.app);
     this.props.dispatch(doMakeCall(number, this.props.app));
+  }
+
+  handleControlClick(memberId, controlId) {
+    // based on the controlId, call the appropriate dispatch
+    switch (controlId) {
+      case 'audioMute':
+        this.props.dispatch(doMuteMic(callId));
+        break;
+      case 'videoMute':
+        this.props.dispatch(doMuteVideo(callId));
+        break;
+
+      default:
+        console.warn('ControlId not handled in handleControlClick', controlId);
+    }
   }
 
   render() {
@@ -156,7 +173,14 @@ class Main extends VertoBaseComponent {
           chatSideBar = (
             <div className="sidebarWrapper" style={{width: '360px'}}>
               <TabbedContainer tabLabels={["Members", "Chat"]}>
-                <Memberlist members={Object.keys(confData.users).map((k)=>confData.users[k])} admin={false}/>
+                <Memberlist members={Object.keys(confData.users).map(
+                  (k)=>{
+                      return ({...confData.users[k], callId: k });
+                    }
+                  )}
+                    admin={false}
+                    cbControlClick={(callId, controlId)=>{this.handleControlClick(callId, controlId);}}
+                />
                 <ChatSession
                     cbRemove={()=>{}}
                     cbSubmitMessage={(id,msg)=>{this.props.dispatch(doSendChat(msg));}}

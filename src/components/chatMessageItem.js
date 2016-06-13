@@ -42,16 +42,16 @@ export default class ChatMessageItem extends VertoBaseComponent {
         flex: 'auto'
       },
       avStyle: {
-        height: '48px',
-        width: '48px',
+        height: '40px',
+        width: '40px',
         borderRadius: '50%',
         alignSelf: 'top',
         fill: '#ddd',
         backgroundColor: '#444'
       },
       avImgStyle: {
-        height: '48px',
-        width: '48px',
+        height: '40px',
+        width: '40px',
         borderRadius: '50%'
       },
       msgStyle: {

@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import MemberItem from './memberItem';
 
 const propTypes = {
+  cbControlClick : React.PropTypes.func.isRequired,
   members : React.PropTypes.array,
   compStyle : React.PropTypes.object
 };
@@ -50,9 +51,10 @@ export default class MemberList extends VertoBaseComponent {
 
 
   render(){
-    //console.log('---- ', this.props.members);
+    console.log('---- ', this.props.members);
     const members = this.props.members.map((mem, index)=>{
-      return (<MemberItem key={index} member={mem} /> );
+      return (<MemberItem key={index} member={mem} 
+                  cbControlClick={this.props.cbControlClick}/> );
     });
 
     return(

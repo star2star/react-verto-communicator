@@ -139,7 +139,8 @@ class AppBar extends VertoBaseComponent {
               top: '70px',
               left: '0px',
               paddingLeft: '5px',
-              backgroundColor: '#0544a4'
+              backgroundColor: '#0544a4',
+              zIndex: '1'
             }
           },
           lastCallStyles: {
