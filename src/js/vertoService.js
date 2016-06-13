@@ -384,7 +384,7 @@ class VertoService {
           //TODO $rootScope.$emit('members.update', member);
           //break;
           console.log('>>>>>>>>>>>', this._data.conf.params.laData.canvasCount > 1 )
-          _dispatch(doConferenceData({callId: Object.keys(obj.verto.dialogs)[0], hasMultipleCanvases: this._data.conf.params.laData.canvasCount > 1, currentRole: this._data.conf.params.laData.role, users: obj.getUsers(obj) }));
+          _dispatch(doConferenceData({callId: Object.keys(obj.verto.dialogs)[0], allowPresenter: false, hasMultipleCanvases: this._data.conf.params.laData.canvasCount > 1, currentRole: this._data.conf.params.laData.role, users: obj.getUsers(obj) }));
           break;
         default:
           console.log('NotImplemented', args.action);
