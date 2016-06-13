@@ -5,15 +5,8 @@ This component creates the list list of all the chat messages. It also provides 
 
 # 2. Visual Design #  
 
-(REMOVE WHEN DONE)
+![A breakdown of how this component looks](https://github.com/star2star/react-verto-communicator/blob/master/documents/img/chatmessagelist-test.png)
 
-Images with callouts for size, colors, etc. and/or reference to a document containing the visual design specification for the component.  Extract from design documentation and paste here.
-
-Sample:
-
-![A breakdown of how this component looks](https://raw.githubusercontent.com/star2star/react-verto-communicator/master/documents/img/Template-Image.png)
-
-(REMOVE)
 
 # 4. Component Type #
 
