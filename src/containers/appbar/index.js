@@ -280,6 +280,26 @@ showSpeeds(){
   buildSettingsContainer() {
     const { formatMessage } = this.props.intl;
     // console.log('xxxxxxxxxxxx', this.props.settings);
+  let useVidDisplay;
+  if (this.props.settings.useVideo === false) {
+    useVidDisplay= (<div></div>);
+  } else {
+    useVidDisplay = (
+      <div>
+        <SettingsMenuSelect
+            cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
+            options={this.props.settings.videoDevices ? this.props.settings.videoDevices : []}
+            label={formatMessage({"id":"CAMERA_SETTINGS", "defaultMessage":"Camera:"})}
+            selectedOption={{id:"selectedVideo", data:this.props.settings.selectedVideo}}
+        />
+        <SettingsMenuSelect
+            cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
+            options={this.props.settings.shareDevices ? this.props.settings.shareDevices : []}
+            label={formatMessage({"id":"SHARE_DEVICE", "defaultMessage":"Share Device:"})}
+            selectedOption={{id:"selectedShare", data:this.props.settings.selectedShare}}
+        />
+      </div>);}
+
     let netSpeedDisplay;
     if (this.state.showSpeeds === false) {
       netSpeedDisplay= (<div></div>);
@@ -313,18 +333,7 @@ showSpeeds(){
               className="column1"
               style={{...this.getStyle('column1')}}
           >
-            <SettingsMenuSelect
-                cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
-                options={this.props.settings.videoDevices ? this.props.settings.videoDevices : []}
-                label={formatMessage({"id":"CAMERA_SETTINGS", "defaultMessage":"Camera:"})}
-                selectedOption={{id:"selectedVideo", data:this.props.settings.selectedVideo}}
-            />
-            <SettingsMenuSelect
-                cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
-                options={this.props.settings.shareDevices ? this.props.settings.shareDevices : []}
-                label={formatMessage({"id":"SHARE_DEVICE", "defaultMessage":"Share Device:"})}
-                selectedOption={{id:"selectedShare", data:this.props.settings.selectedShare}}
-            />
+            {useVidDisplay}
             <SettingsMenuSelect
                 cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
                 options={this.props.settings.audioDevices ? this.props.settings.audioDevices : []}
