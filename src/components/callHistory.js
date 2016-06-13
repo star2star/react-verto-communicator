@@ -14,7 +14,7 @@ const propTypes = {
 class CallHistory extends VertoBaseComponent {
   constructor(props) {
     super(props);
-    this.state = { callDetailDisplayed : false};
+    this.state = { callDetailDisplayed : false, callItem: ''};
 
     //CallHistory.getCallDetails = this.getCallDetails.bind(this);
 }
@@ -60,45 +60,52 @@ class CallHistory extends VertoBaseComponent {
   }
 
   render(){
+
+    const self = this;
+    let details;
+    const getDetails = function(callerId) {
+      if(self.state.callDetailDisplayed) {
+      //console.log(callerId);
+      const detailData = CallHistoryService.getInstance().getHistoryDetail(callerId);
+      details = detailData.map(function(i, key){
+        let renderedDirection;
+        if(i.direction == 'outgoing') {
+          renderedDirection = (
+            <span className="incoming" >
+              <UpArrowIconSVG svgStyle={{fill: '#009688', width: '24px', height: '24px'}}/>
+            </span>);
+        } else {
+          renderedDirection = (
+            <span className="outgoing">
+              <DownArrowIconSVG svgStyle={{fill: '#009688', width: '24px', height: '24px'}} />
+            </span>);
+        }
+
+        const formattedTimestamp = moment(i.timestamp).format('ddd MMM DD YYYY HH:mm:ss A');
+
+        return (
+          <div
+              className="details"
+              key={key}
+              style={{...self.getDefaultStyle('details')}}
+          >
+            {renderedDirection}
+            {formattedTimestamp}
+          </div>
+        );
+      });
+    }
+
+    };
+
     // regular state list items
     const listitems = this.props.history.map((i, index)=>{
       return(
         <CallHistoryItem key={index} data={i} cbShowCalls={()=>{
-          //console.log(i.callerId);
           this.setState({...this.state, 'callDetailDisplayed' : true});
+          getDetails(i.callerId);
         }}
         />);
-    });
-
-    // details only (outgoing/incoming and timestamp)
-    const self = this;
-    const detailData = CallHistoryService.getInstance().getHistoryDetail(404);
-    const details = detailData.map(function(i, key){
-      let renderedDirection;
-      if(i.direction == 'outgoing') {
-        renderedDirection = (
-          <span className="incoming" >
-            <UpArrowIconSVG svgStyle={{fill: '#009688', width: '24px', height: '24px'}}/>
-          </span>);
-      } else {
-        renderedDirection = (
-          <span className="outgoing">
-            <DownArrowIconSVG svgStyle={{fill: '#009688', width: '24px', height: '24px'}} />
-          </span>);
-      }
-
-      const formattedTimestamp = moment(i.timestamp).format('ddd MMM DD YYYY HH:mm:ss A');
-
-      return (
-        <div
-            className="details"
-            key={key}
-            style={{...self.getDefaultStyle('details')}}
-        >
-          {renderedDirection}
-          {formattedTimestamp}
-        </div>
-      );
     });
 
     // callDetail state area (the whole container)
