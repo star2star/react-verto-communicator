@@ -420,12 +420,24 @@ class VertoService {
       //console.log('Has data.liveArray.');
       //TODO $rootScope.$emit('members.clear');
       this._data.liveArray = null;
+      delete this._data.liveArray;
     }
 
     if (this._data.conf) {
       this._data.conf.destroy();
       this._data.conf = null;
+      delete this._data.conf;
+      delete this._data.canvasInfo;
+      delete this._data.chattingWith;
+      delete this._data.confRole;
+      delete this._data.confLayouts;
+      delete this._data.conferenceMemberID;
+      delete this._data.confLayoutsData;
     }
+
+
+
+
   }
 
 
