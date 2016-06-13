@@ -36,7 +36,7 @@ class Contributors extends VertoBaseComponent{
           borderRadius: '2px',
           border: 'none',
           backgroundColor: '#fff',
-          maxHeight: '740px',
+          maxHeight: '540px',
           overlay: 'auto'
         },
         overlay: {
