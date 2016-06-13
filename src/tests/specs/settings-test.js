@@ -3,10 +3,11 @@ import { shallow, mount, render } from 'enzyme';
 import sinon from 'sinon';
 import ReactDOM from 'react-dom';
 //import TestUtils from 'react-addons-test-utils';
-
-import SettingsMenuSelect from '../components/Settings.js';
+import { mountWithIntl, shallowWithIntl } from '../helpers/intl-enzyme-test-helper.js';
+import Settings from '../components/Settings.js';
 
  jest.unmock('../components/Settings.js');
+ jest.unmock('../helpers/intl-enzyme-test-helper.js');
 
 describe('Settings Component', ()=>{
 
@@ -37,7 +38,7 @@ const cbSubmitSetting=()=>{console.log('called')};
 it('renders one select tag', () => {
   //expect(true).toBe(true);
    const wrapper = shallow(
-     <Settings settingsData={sampleSettingsDataple} cbSubmitSetting={cbSubmitSetting} />);
+     <Settings settingsData={sampleSettingsData} cbSubmitSetting={cbSubmitSetting} />);
    expect(wrapper.find('select').length).toEqual(1);
  });
 
