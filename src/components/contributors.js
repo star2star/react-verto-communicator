@@ -35,7 +35,9 @@ class Contributors extends VertoBaseComponent{
           boxShadow: '0px 27px 24px 0px rgba(0,0,0,.2), 0px 40px 77px 0px rgba(0,0,0,.22)',
           borderRadius: '2px',
           border: 'none',
-          backgroundColor: '#fff'
+          backgroundColor: '#fff',
+          maxHeight: '740px',
+          overlay: 'auto'
         },
         overlay: {
           zIndex: "1"

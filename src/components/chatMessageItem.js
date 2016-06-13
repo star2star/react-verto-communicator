@@ -106,7 +106,7 @@ export default class ChatMessageItem extends VertoBaseComponent {
   }
 
   render(){
-    // console.log('&&&&&& chat message object', this.props.message);
+    console.log('&&&&&& chat message object', this.props.message);
     const timestamp = moment(this.props.message.utc_timestamp).calendar();
 
     // if this.props.avatarUrl is not undefined, use it for chat avatar, otherwise
