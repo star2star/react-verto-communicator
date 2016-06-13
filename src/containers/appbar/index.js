@@ -281,6 +281,8 @@ showSpeeds(){
   buildSettingsContainer() {
     const { formatMessage } = this.props.intl;
     // console.log('xxxxxxxxxxxx', this.props.settings);
+
+    //network speed displays under "Check Netwok Speed" button
     let netSpeedDisplay;
     if (this.state.showSpeeds === false) {
       netSpeedDisplay = (<div></div>);
@@ -301,6 +303,7 @@ showSpeeds(){
        </span>
      </div>);}
 
+//column1 alternate menu
   let useVideoAltDisplay;
   if (this.props.settings.useVideo === false) {
     useVideoAltDisplay = (<div></div>);
@@ -321,10 +324,17 @@ showSpeeds(){
         />
       </div>);}
 
+//column3 alternate menu
   let vidSettingsAltDisplay;
   if (this.props.settings.autoBand === false) {
     vidSettingsAltDisplay = (
       <div>
+        <SettingsMenuSelect
+            cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
+            options={this.props.settings.videoQuality ? this.props.settings.videoQuality : []}
+            label={formatMessage({"id":"VIDEO_QUALITY", "defaultMessage":"Video Quality:"})}
+            selectedOption={{id:"vidQual", data:this.props.settings.vidQual}}
+        />
         <SettingsMenuSelect
             cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
             options={this.props.settings.bandwidth ? this.props.settings.bandwidth : []}
