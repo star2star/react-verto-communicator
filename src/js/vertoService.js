@@ -201,6 +201,7 @@ class VertoService {
     this.login = this.login.bind(this);
     this.getOptions = this.getOptions.bind(this);
     this.stopConference = this.stopConference.bind(this);
+    this.hasPresenterOption = this.hasPresenterOption.bind(this);
     this.startConference = this.startConference.bind(this);
     this.sendConferenceCommand = this.sendConferenceCommand.bind(this);
 
@@ -269,7 +270,7 @@ class VertoService {
         if (message.action == 'response') {
           // This is a response with the video layouts list.
           if (message['conf-command'] == 'list-videoLayouts') {
-            //console.log('hmmmmmmm', message.responseData);
+            console.log('hmmmmmmm', message.responseData);
             var rdata = [];
 
             for (var i in message.responseData) {
@@ -290,12 +291,12 @@ class VertoService {
             this._data.confLayouts = options;
           } else if (message['conf-command'] == 'canvasInfo') {
             this._data.canvasInfo = message.responseData;
-            //console.log('..... CANVASINFO ...', message );
+            console.log('..... CANVASINFO ...', message );
             //TODO
             //$rootScope.$emit('conference.canvasInfo', message.responseData);
           } else {
             //TODO
-            //console.log('..... ELSE ONBROADCAST ...', message );
+            console.log('..... ELSE ONBROADCAST ...', message );
             //$rootScope.$emit('conference.broadcast', message);
           }
         }
@@ -386,7 +387,7 @@ class VertoService {
           //TODO $rootScope.$emit('members.update', member);
           //break;
 
-          _dispatch(doConferenceData({callId: Object.keys(obj.verto.dialogs)[0], users: obj.getUsers(obj) }));
+          _dispatch(doConferenceData({callId: Object.keys(obj.verto.dialogs)[0], currentRole: this._data.conf.params.laData.role, users: obj.getUsers(obj) }));
           break;
         default:
           console.log('NotImplemented', args.action);
@@ -475,9 +476,21 @@ class VertoService {
     } else {
       console.log('sendConferenceCommand: ERROR Not Moderator ... how did this happen');
     }
+  }
 
+  hasPresenterOption(layoutName){
+    let bReturn = false;
+    if (this._data.confLayoutsData){
+        // ok have conference layouts so can proceed
+        const confLayout = this._data.confLayoutsData.filter(c=>c.name === layoutName);
+        if (confLayout.length > 0) {
+          // we have found the conference so using first one
+          // if the resIDS array is greater than 0 then we have presenters
+          bReturn = confLayout[0].resIDS.length > 0;
+        }
+    }
 
-    // send
+    return bReturn;
   }
 
   getOptions(data) {
