@@ -4,7 +4,7 @@ import VertoBaseComponent from '../../components/vertobasecomponent';
 import { connect } from 'react-redux';
 //import ReactTooltip from 'react-tooltip';
 import VCStatus from '../../components/vcstatus';
-import { doSubmitLogin, doSubmitLogOut, doMakeCall, doSendChat, doHangUp, doAnswer, doMuteMic, doHold, doMuteVideo } from './action-creators';
+import { doSubmitLogin, doSubmitLogOut, doMakeCall, doSendChat, doHangUp, doAnswer, doMuteMic, doHold, doMuteVideo, doSendConfCommand } from './action-creators';
 import Splash from '../../components/splash';
 import Login from '../../components/login';
 import Dialpad from '../../components/dialpad';
@@ -44,19 +44,10 @@ class Main extends VertoBaseComponent {
     this.props.dispatch(doMakeCall(number, this.props.app));
   }
 
-  handleControlClick(memberId, controlId) {
+  handleControlClick(controlId, params) {
     // based on the controlId, call the appropriate dispatch
-    switch (controlId) {
-      case 'audioMute':
-        this.props.dispatch(doMuteMic(callId));
-        break;
-      case 'videoMute':
-        this.props.dispatch(doMuteVideo(callId));
-        break;
-
-      default:
-        console.warn('ControlId not handled in handleControlClick', controlId);
-    }
+    console.log('@@@@@@@@@@@ control click', controlId, params);
+    this.props.dispatch(doSendConfCommand(controlId, params));
   }
 
   render() {
@@ -178,7 +169,9 @@ class Main extends VertoBaseComponent {
                       return ({...confData.users[k], callId: k });
                     }
                   )}
-                    admin={false}
+                    isModerator={confData.currentRole == "moderator"}
+                    allowPresenter={confData.allowPresenter}
+                    hasMultipleCanvases={confData.hasMultipleCanvases}
                     cbControlClick={(callId, controlId)=>{this.handleControlClick(callId, controlId);}}
                 />
                 <ChatSession

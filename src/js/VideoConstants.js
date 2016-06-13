@@ -9,7 +9,7 @@ VideoConstants.CONF_CMDS={
   MUTEMIC: {name: 'muteMic', functionName: 'muteMic', parameters:['memberid' ] },
   MUTEVIDEO: {name: 'muteVideo', functionName: 'muteVideo', parameters:['memberid'] },
   VOLUMEUP: {name: 'volumeUp', functionName: 'volumeUp', parameters:['memberid'] },
-  VOLUMEDOW: {name: 'volumeDown', functionName: 'volumeDown', parameters:['memberid'] },
+  VOLUMEDOWN: {name: 'volumeDown', functionName: 'volumeDown', parameters:['memberid'] },
   GAINUP: {name: 'gainUp', functionName: 'gainUp', parameters:['memberid'] },
   GAINDOWN: {name: 'gainDown', functionName: 'gainDown', parameters:['memberid'] },
   PRESENTER: {name: 'presenter', functionName: 'presenter', parameters:['memberid'] },

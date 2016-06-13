@@ -6,6 +6,11 @@ import {MicrophoneIconSVG, VideoIconSVG, MuteMicrophoneIconSVG, MuteVideoIconSVG
 
 const propTypes = {
   cbControlClick : React.PropTypes.func.isRequired,
+  controlSettings : React.PropTypes.shape({
+    moderator: React.PropTypes.bool,
+    multCanvas: React.PropTypes.bool,
+    allowPresenter: React.PropTypes.bool
+  }),
   member : React.PropTypes.object.isRequired
 
 };
@@ -43,6 +48,12 @@ export default class MemberItem extends VertoBaseComponent {
         height: '20px',
         fill: '#65ac43'
       },
+      controlIconStyle: {
+        svgStyle: {
+          height: '20px',
+          fill: '#65ac43'
+        }
+      },
       floorLockStyle: {
         height: '10px',
         fill: '#888'
@@ -61,7 +72,7 @@ export default class MemberItem extends VertoBaseComponent {
   }
 
   render(){
-    console.log('&&&&&& member object', this.props.member);
+    console.log('&&&&&& member object', this.props.member, this.props.controlSettings);
 
     // Setup up mic and video status/controls
     let micStatus = this.props.member.conferenceStatus.audio.muted ?
@@ -72,47 +83,51 @@ export default class MemberItem extends VertoBaseComponent {
             (<MuteVideoIconSVG  svgStyle={this.getStyle("svgStyle")}/>):
             (<VideoIconSVG  svgStyle={this.getStyle("svgStyle")}/>);
 
-    if (true) { // TODO add test to see if we are admin
+    if (this.props.controlSettings.moderator) {
       // since we are in admin mode, redefine audio and video status indicators to
       // be controlStyle
+
       micStatus = this.props.member.conferenceStatus.audio.muted ?
-              (<ControlItem type="MuteMicrophoneIconSVG" label="UNMUTE"
+              (<ControlItem type="MuteMicrophoneIconSVG"
                   compStyle={this.getStyle("controlIconStyle")}
-                  cbClick={()=>{this.props.cbControlClick(this.props.member.callId, "audioMute");}}
+                  cbActionClick={()=>{this.props.cbControlClick("MUTEMIC", [this.props.member.memberId]);}}
               />) :
-              (<ControlItem type="MicrophoneIconSVG" label="MUTE"
+              (<ControlItem type="MicrophoneIconSVG"
                   compStyle={this.getStyle("controlIconStyle")}
-                  cbClick={()=>{this.props.cbControlClick(this.props.member.callId, "audioMute");}}
+                  cbActionClick={()=>{this.props.cbControlClick("MUTEMIC", [this.props.member.memberId]);}}
               />);
 
       videoStatus = this.props.member.conferenceStatus.video.muted ?
-              (<ControlItem type="MuteVideoIconSVG" label="UNMUTE"
+              (<ControlItem type="MuteVideoIconSVG"
                   compStyle={this.getStyle("controlIconStyle")}
-                  cbClick={()=>{this.props.cbControlClick(this.props.member.callId, "videoMute");}}
+                  cbActionClick={()=>{this.props.cbControlClick("MUTEVIDEO", [this.props.member.memberId]);}}
               />) :
-              (<ControlItem type="VideoIconSVG" label="MUTE"
+              (<ControlItem type="VideoIconSVG"
                   compStyle={this.getStyle("controlIconStyle")}
-                  cbClick={()=>{this.props.cbControlClick(this.props.member.callId, "videoMute");}}
+                  cbActionClick={()=>{this.props.cbControlClick("MUTEVIDEO", [this.props.member.memberId]);}}
               />);
     }
 
     let presenterStatus;
     let presenter;
     let adminControls;
-    if (true) { //TODO add test here to see if in conference as admin
+    if (this.props.controlSettings.moderator) {
       // Setup all the stuff specific to logged in user being admin
 
-      if (true) { // TODO add test for presenter video mode
-        // Only show the presenter icon if admin and in screen share mode
+      if (this.props.controlSettings.allowPresenter) {
+        // Only show the presenter icon if moderator and can allowPresenter
         if (this.props.member.conferenceStatus.video.reservationID == 'presenter') {
           // TODO replace with 'presenter toggle icon'
-          presenterStatus = (<FullScreenIconSVG svgStyle={{...this.getStyle("svgStyle"), fill: "#454545"}}/>);
+          presenterStatus = (<FullScreenIconSVG svgStyle={{...this.getStyle("svgStyle"), fill: "#454545", cursor: "pointer"}}/>);
           // set the presenter 'badge'
           presenter = (<span style={this.getStyle("presenterBadgeStyle")}>Presenter</span>);
         } else {
           // TODO replace with 'presenter toggle icon toggled off'
-          presenterStatus = (<FullScreenIconSVG svgStyle={{...this.getStyle("svgStyle"), fill: "#c5c5c5"}}/>);
+          presenterStatus = (<FullScreenIconSVG svgStyle={{...this.getStyle("svgStyle"), fill: "#c5c5c5", cursor: "pointer"}}/>);
         }
+      } else {
+        // just show the icon as 'disabled'
+        presenterStatus = (<FullScreenIconSVG svgStyle={{...this.getStyle("svgStyle"), fill: "#c5c5c5"}}/>);
       }
 
       if (this.state.showAdminControls) {

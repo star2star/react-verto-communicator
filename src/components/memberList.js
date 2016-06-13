@@ -4,8 +4,11 @@ import ReactDOM from 'react-dom';
 import MemberItem from './memberItem';
 
 const propTypes = {
+  allowPresenter : React.PropTypes.bool,
   cbControlClick : React.PropTypes.func.isRequired,
+  hasMultipleCanvases : React.PropTypes.bool,
   members : React.PropTypes.array,
+  isModerator: React.PropTypes.bool,
   compStyle : React.PropTypes.object
 };
 
@@ -53,8 +56,9 @@ export default class MemberList extends VertoBaseComponent {
   render(){
     console.log('---- ', this.props.members);
     const members = this.props.members.map((mem, index)=>{
-      return (<MemberItem key={index} member={mem} 
-                  cbControlClick={this.props.cbControlClick}/> );
+      return (<MemberItem key={index} member={mem}
+          controlSettings={{moderator: this.props.isModerator, multCanvas: this.props.hasMultipleCanvases, allowPresenter: this.props.allowPresenter}}
+          cbControlClick={this.props.cbControlClick}/> );
     });
 
     return(
