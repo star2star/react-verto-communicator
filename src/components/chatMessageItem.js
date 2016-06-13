@@ -5,6 +5,7 @@ import moment from 'moment';
 //import Radium from 'radium';
 
 const propTypes = {
+  avatarUrl : React.PropTypes.string,
   message : React.PropTypes.object,
   compStyle: React.PropTypes.object
 
@@ -14,6 +15,10 @@ export default class ChatMessageItem extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {};
+
+    // setup the avatar
+    console.log('&&&&& ChatMessageItem message prop', this.props.message);
+
   }
 
   getCompStyle() {
@@ -41,12 +46,17 @@ export default class ChatMessageItem extends VertoBaseComponent {
         flex: 'auto'
       },
       avStyle: {
-        height: '20px',
+        height: '48px',
+        width: '48px',
         borderRadius: '50%',
-        width: '20px',
         alignSelf: 'top',
         fill: '#ddd',
-        padding: '10px'
+        backgroundColor: '#444'
+      },
+      avImgStyle: {
+        height: '48px',
+        width: '48px',
+        borderRadius: '50%'
       },
       msgStyle: {
         marginLeft: '10px',
@@ -99,10 +109,19 @@ export default class ChatMessageItem extends VertoBaseComponent {
     // console.log('&&&&&& chat message object', this.props.message);
     const timestamp = moment(this.props.message.utc_timestamp).calendar();
 
+    // if this.props.avatarUrl is not undefined, use it for chat avatar, otherwise
+    // use the avatar svgStyle
+    let avatar = (<AvatarSVG svgStyle={this.getStyle("avStyle")}/>);
+
+    if (this.props.avatarUrl != undefined) {
+      avatar = (<img src={this.props.avatarUrl} style={this.getStyle("avImgStyle")}/>)
+    }
+
+
     if (!this.props.message.isMe) {
       return (
         <div style={this.getStyle("ChatMsgItem")}>
-          <AvatarSVG svgStyle={this.getStyle("avStyle")}/>
+          {avatar}
           <span style={{...this.getStyle("msgStyle"), backgroundColor:this.props.message.bgColor}}> {this.props.message.message}
             <span style={this.getStyle("triangleStyleLeft")}></span>
             <div style={this.getStyle("infoStyle")} > {this.props.message.displayName} &#8226; {timestamp}</div>
@@ -112,7 +131,7 @@ export default class ChatMessageItem extends VertoBaseComponent {
     } else {
       return (
         <div style={this.getStyle("ChatMsgItemRight")}>
-          <AvatarSVG svgStyle={this.getStyle("avStyle")}/>
+          {avatar}
           <span style={{...this.getStyle("msgStyle"), backgroundColor:this.props.message.bgColor}}>{this.props.message.message}
             <span style={this.getStyle("triangleStyleRight")}></span>
             <div style={this.getStyle("infoStyle")} >{this.props.message.displayName} &#8226; {timestamp}</div>

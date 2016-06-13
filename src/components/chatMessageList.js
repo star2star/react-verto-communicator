@@ -5,6 +5,7 @@ import ChatMessageItem from './chatMessageItem';
 
 const propTypes = {
   chatItems : React.PropTypes.array,
+  chatUsers : React.PropTypes.object,
   compStyle : React.PropTypes.object
 };
 
@@ -12,6 +13,12 @@ export default class ChatMessageList extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {};
+    console.log('ChatMessageList chatItems prop', this.props.chatItems);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('ChatMessageList chatItems nextProps', nextProps.chatItems);
+
   }
 
   componentDidUpdate() {
@@ -47,12 +54,32 @@ export default class ChatMessageList extends VertoBaseComponent {
     return styleReturn;
   }
 
+  getAvatar(displayName) {
+    // get the avatar url from gravatar if it exists and if the user displayName
+    // is unique.  Don't want to pull the wrong avatar.
+    const displayNameArray = Object.keys(this.props.chatUsers).map((callId)=>{
+            return( {displayName: this.props.chatUsers[callId].name,
+                     avatarUrl: this.props.chatUsers[callId].avatar.avatar}
+              );
+            }).filter((user)=>{
+                return(displayName == user.displayName);
+          });
+
+    if (displayNameArray.length > 1) {
+      return (undefined);
+    } else {
+      return (displayNameArray[0].avatarUrl);
+    }
+  }
 
 
   render(){
 
+
     const messages = this.props.chatItems.map((msgObj, index)=>{
-      return (<ChatMessageItem key={index} message={msgObj} /> );
+      const avatarUrl = this.getAvatar(msgObj.displayName);
+
+      return (<ChatMessageItem key={index} avatarUrl={avatarUrl} message={msgObj} /> );
     });
 
     return(

@@ -551,7 +551,7 @@ class VertoService {
       mirrorInput: settings.settings.mirrorInput, //storage.data.mirrorInput,
       userVariables: {
         email :  _verto.verto.options.loginParams.email, //storage.data.email,
-        avatar:  "http://gravatar.com/avatar/" + md5(_verto.verto.options.loginParams.email) + ".png?s=600"    // "http://gravatar.com/avatar/" + md5(storage.data.email) + ".png?s=600"
+        avatar:  "http://gravatar.com/avatar/" + md5(_verto.verto.options.loginParams.email) + ".png?s=75"    // "http://gravatar.com/avatar/" + md5(storage.data.email) + ".png?s=600"
       }
     };
 
