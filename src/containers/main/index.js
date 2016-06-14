@@ -165,7 +165,7 @@ class Main extends VertoBaseComponent {
         // are in the tabLabels array
         if (confData) {
           chatSideBar = (
-            <div className="sidebarWrapper" style={{width: '360px'}}>
+            <div className="sidebarWrapper" style={{width: '360px', height: '100%'}}>
               <TabbedContainer tabLabels={["Members", "Chat"]}>
                 <Memberlist members={Object.keys(confData.users).map(
                   (k)=>{

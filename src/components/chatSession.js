@@ -34,7 +34,6 @@ export default class ChatSession extends VertoBaseComponent {
         flexDirection: 'column',
         justifyContent: 'stretch',
         flex: 1
-        //height: '370px'
       },
 
       headerStyles : {

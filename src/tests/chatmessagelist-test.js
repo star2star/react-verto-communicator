@@ -40,7 +40,7 @@ describe('Default test for ChatMessageList', ()=>{
     const wrapper = shallow(<ChatMessageList chatUsers={usersSample} chatItems={itemsSample} />);
     expect(wrapper.childAt(1).childAt(2).props().children[2]).toEqual('Today at 3:38 PM');
   });
-*/
+
 
 
 
