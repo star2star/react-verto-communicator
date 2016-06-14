@@ -46,7 +46,7 @@ class Main extends VertoBaseComponent {
 
   handleControlClick(controlId, params) {
     // based on the controlId, call the appropriate dispatch
-    console.log('@@@@@@@@@@@ control click', controlId, params);
+    //console.log('@@@@@@@@@@@ control click', controlId, params);
     this.props.dispatch(doSendConfCommand(controlId, params));
   }
 

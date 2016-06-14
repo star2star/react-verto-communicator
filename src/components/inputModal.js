@@ -59,7 +59,7 @@ class InputModal extends VertoBaseComponent {
   changingInput(field, value){
     //TODO - at some point rework Input component so that it is as generic as
     // its name implies
-    console.log('CHANGING DEST INPUT', value);
+
     // we don't care about the field since there is only one here right now...
     this.setState({...this.state, inputVal: value});
 

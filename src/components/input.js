@@ -7,7 +7,7 @@ const propTypes = {
   label : React.PropTypes.string,
   type : React.PropTypes.string,
   placeholder : React.PropTypes.string,
-  value : React.PropTypes.string,
+  value : React.PropTypes.string
   //tabIndex : React.PropTypes.string
 };
 
