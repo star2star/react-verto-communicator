@@ -6,7 +6,7 @@ CaretUpIconSVG,
 CaretDownIconSVG } from './svgIcons';
 
 const propTypes = {
-  cbDeviceList: React.PropTypes.func.isRequired,
+  cbDeviceList: React.PropTypes.func,
   cbPreviewSet: React.PropTypes.func.isRequired,
   cbSubmitSetting: React.PropTypes.func.isRequired,
   cbToggleShowSettings: React.PropTypes.func.isRequired,

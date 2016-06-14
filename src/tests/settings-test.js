@@ -32,13 +32,13 @@ describe('Settings Component', ()=>{
   };
 
 
-const cbSubmitSetting=()=>{console.log('Submitcalled');};
-const cbPreviewSet=()=>{console.log('Previewcalled');};
-const cbDeviceList=()=>{console.log('Devicecalled');};
-const cbToggleShowSettings=()=>{console.log('ShowSettingscalled');};
+const cbSubmitSetting=sinon.spy();
+const cbPreviewSet=sinon.spy();
+const cbDeviceList=sinon.spy();
+const cbToggleShowSettings=sinon.spy();
 
 
-it('renders a div', () => {
+it('renders container div', () => {
   //expect(true).toBe(true);
    const wrapper = shallow(
      <Settings
@@ -50,7 +50,7 @@ it('renders a div', () => {
    expect(wrapper.find('div').length).toEqual(1);
  });
 
- it('uses the settingsCheckbox component', ()=> {
+  it('renders CaretUpIconSVG if displayDropdown is true', () => {
    const wrapper = mount(
      <Settings
          cbSubmitSetting={cbSubmitSetting}
@@ -58,8 +58,33 @@ it('renders a div', () => {
          cbDeviceList={cbDeviceList}
          cbToggleShowSettings={cbToggleShowSettings}
      />);
-   expect(wrapper.find('SettingsCheckbox').props().statusTitle).toEqual(1);
- });
+     wrapper.setState({ dropdownDisplayed: true});
+     expect(wrapper.find('CaretUpIconSVG').length).toEqual(1);
+   });
 
+   it('renders CaretDownIconSVG if displayDropdown is true', () => {
+     const wrapper = mount(
+       <Settings
+           cbSubmitSetting={cbSubmitSetting}
+           cbPreviewSet={cbPreviewSet}
+           cbDeviceList={cbDeviceList}
+           cbToggleShowSettings={cbToggleShowSettings}
+     />);
+     wrapper.setState({ dropdownDisplayed: false});
+     expect(wrapper.find('CaretDownIconSVG').length).toEqual(1);
+   });
+
+   it('renders fill: if displayDropdown is true', () => {
+     const wrapper = shallow(
+       <Settings
+           cbSubmitSetting={cbSubmitSetting}
+           cbPreviewSet={cbPreviewSet}
+           cbDeviceList={cbDeviceList}
+           cbToggleShowSettings={cbToggleShowSettings}
+     />);
+     wrapper.setState({ dropdownDisplayed: true});
+     console.log(wrapper.childAt(2).props().style.fill);
+     expect(wrapper.childAt(2).props().style.fill).toEqual('#fff');
+   });
 
 });
