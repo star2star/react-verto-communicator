@@ -105,7 +105,7 @@ class CallHistory extends VertoBaseComponent {
             key={index}
             data={i}
             cbClick={()=>{
-              console.log('sup bitch', i.callerId);
+              console.log(i.callerId);
               this.props.cbCall(i.callerId);
             }}
             cbShowCalls={()=>{
