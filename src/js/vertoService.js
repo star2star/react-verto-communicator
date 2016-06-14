@@ -65,30 +65,33 @@ class VertoService {
 
           switch (d.state) {
               case $.verto.enum.state.ringing:
-                  //console.log('^^^^^^ringing ... onDialogState display', d);
+                  console.log('^^^^^^ringing ... onDialogState display', d, d.params.screenShare);
 
                   xInstance._data._activeCalls[d.callID] = d;
 
                   //console.log('#### s2sVerto.activeCalls.length', s2sVerto.activeCalls.length);
                   //console.log('#### s2sVerto.maxActiveCalls', s2sVerto.maxActiveCalls);
 
-                  CallHistoryService.getInstance().add({
-                    timestamp: Date.now(),
-                    callerId: d.params.caller_id_number,
-                    direction: d.params.direction
-                  });
+                  if (!d.params.screenShare)
+                  {
+                    CallHistoryService.getInstance().add({
+                      timestamp: Date.now(),
+                      callerId: d.params.caller_id_number,
+                      direction: d.params.direction
+                    });
 
-                	if (Object.keys(xInstance._data._activeCalls).length > xInstance._data._maxActiveCalls) {
-                		d.hangup();
-                	} else {
-                		d.params.direction = d.direction.name;
-                    // update parames
-                    d.params.caller_id_ext = parseInt(d.params.caller_id_number);
+                    if (Object.keys(xInstance._data._activeCalls).length > xInstance._data._maxActiveCalls) {
+                      d.hangup();
+                    } else {
+                      d.params.direction = d.direction.name;
+                      // update parames
+                      d.params.caller_id_ext = parseInt(d.params.caller_id_number);
 
-                		//jes inbound call
-                		//Processor.starphone('inboundCall', d.params);
-                    _dispatch(doIncomingCall(d));
-                	}
+                      //jes inbound call
+                      //Processor.starphone('inboundCall', d.params);
+                      _dispatch(doIncomingCall(d));
+                    }
+                  }
 
                   break;
 
@@ -96,13 +99,16 @@ class VertoService {
               //jes tell it is ringing
               //display("Calling: " + d.cidString());
               //goto_page("incall");
-              //console.log('^^^^^^trying .. calling', d);
-              CallHistoryService.getInstance().add({
-                timestamp: Date.now(),
-                callerId: d.params.destination_number,
-                direction: d.params.direction
-              });
-              _dispatch(doingMakeCall('trying', d.params.destination_number, d.callID, d.direction.name));
+              console.log('^^^^^^trying .. calling', d,d.params.screenShare);
+              if (!d.params.screenShare){
+                CallHistoryService.getInstance().add({
+                  timestamp: Date.now(),
+                  callerId: d.params.destination_number,
+                  direction: d.params.direction
+                });
+                _dispatch(doingMakeCall('trying', d.params.destination_number, d.callID, d.direction.name));
+              }
+
               break;
 
           case $.verto.enum.state.early:
@@ -113,27 +119,31 @@ class VertoService {
               //jes tell them we are now talking
               //display("Talking to: " + d.cidString());
               //goto_page("incall");
-              //console.log('^^^^^active ...:', d);
-              d.params.isHeld = false;
-              // ta- added to init isMuted attribute
-              d.params.isMuted = false;
-              //console.log('active call s2sverto: ', d.immediateTransfer, d.immediateTransferURI);
-              if (d.immediateTransfer && d.immediateTransferURI) {
-              	//code
+              console.log('^^^^^active ...:', d, d.params.screenShare);
+              if (!d.params.screenShare){
+                d.params.isHeld = false;
+                // ta- added to init isMuted attribute
+                d.params.isMuted = false;
+                //console.log('active call s2sverto: ', d.immediateTransfer, d.immediateTransferURI);
+                if (d.immediateTransfer && d.immediateTransferURI) {
+                  //code
 
-              	d.transfer(d.immediateTransferURI);
-              	delete d.immediateTransfer;
-              	delete d.immediateTransferURI;
-              } else {
-                //Processor.starphone('answered', d.params);
-                _dispatch(doingMakeCall('active', (d.direction.name == 'outbound' ? d.params.destination_number : d.params.caller_id_number), d.callID, d.direction.name));
+                  d.transfer(d.immediateTransferURI);
+                  delete d.immediateTransfer;
+                  delete d.immediateTransferURI;
+                } else {
+                  //Processor.starphone('answered', d.params);
+                  _dispatch(doingMakeCall('active', (d.direction.name == 'outbound' ? d.params.destination_number : d.params.caller_id_number), d.callID, d.direction.name));
+                }
               }
+
 
               break;
 
           case $.verto.enum.state.hangup:
               //jes tell we are hanging up
               //console.log('^^^^^^^^^hangup event', d);
+
               if (xInstance._data._activeCalls[d.callID]) {
                   delete xInstance._data._activeCalls[d.callID];
               } else {
@@ -147,15 +157,27 @@ class VertoService {
               //console.debug('Destroying: ' + d.cause);
               if (d.params.screenShare) {
                 //TODO cleanShareCall(xInstance);
+                xInstance._data.shareCall = null;
+                delete xInstance._data.shareCall;
+                xInstance._data.callState = 'active';
+                VertoService.refreshDevices(()=>{
+                  console.log('refresh from destroy ...')
+                });
               } else {
+                // if (xInstance._data.shareCall) {
+                //   xInstance._data.shareCall.hangup();
+                //   xInstance._data.shareCall = null;
+                //   delete xInstance._data.shareCall;
+                // }
                 xInstance.stopConference();
+                _dispatch(doHungUp(d));
                 //TODO
                 // if (!xInstance.reloaded) {
                 //   cleanCall();
                 // }
               }
 
-              _dispatch(doHungUp(d));
+
               break;
 
           case $.verto.enum.state.held:
@@ -166,7 +188,7 @@ class VertoService {
               break;
 
           case $.verto.enum.state.requesting:
-              //console.log('^^^^^^^REQUESTING ....', d);
+              console.log('^^^^^^^REQUESTING ....', d);
               xInstance._data._activeCalls[d.callID] = d;
               //jes tom does not want it
               //TODO
@@ -563,13 +585,11 @@ class VertoService {
 
 //jes
   shareScreen(settings) {
-    debugger;
     console.log('share screen video');
 
     var that = this;
 
     getScreenId(function (error, sourceId, screen_constraints){
-      debugger;
       if(error) {
         console.log('EEEEERRRR: ', error);
         //$rootScope.$emit('ScreenShareExtensionStatus', error);
@@ -600,7 +620,6 @@ class VertoService {
         if(stream) {
           var StreamTrack = stream.getVideoTracks()[0];
           StreamTrack.addEventListener('ended', ()=>{
-            debugger;
             if(that._data.shareCall) {
               that.screenshareHangup.bind(that)();
               console.log("screenshare ended");
@@ -649,6 +668,10 @@ class VertoService {
 
   hangup(callerId){
     if (_verto._data._activeCalls[callerId]) {
+      if (_verto._data.shareCall) {
+        alert('sharing so aborting');
+        return;
+      }
       _verto.verto.hangup(callerId);
     } else {
       console.log('hangup NOT FOUND----------');
