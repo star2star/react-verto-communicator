@@ -66,11 +66,6 @@ class About extends VertoBaseComponent{
            <span> {this.props.version} </span>
           </div>
 
-          <div style={this.getStyle('gitRevStyle')}>
-            <FormattedMessage id='GIT_REV' defaultMessage="Git Rev" />
-            <span> {this.props.gitRev} </span>
-          </div>
-
           <div>
             <FormattedMessage id='POWERED_BY' defaultMessage="Powered By: " />
             <img src={poweredBy} />
