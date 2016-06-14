@@ -1,5 +1,6 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
+import UserVideoControls from './vidControlsUser';
 import {AvatarSVG, DialPadIconSVG, MicrophoneIconSVG, PauseIconSVG, MuteMicrophoneIconSVG, PhoneIconSVG, VideoIconSVG } from './svgIcons';
 
  const propTypes = {
@@ -8,7 +9,10 @@ import {AvatarSVG, DialPadIconSVG, MicrophoneIconSVG, PauseIconSVG, MuteMicropho
    cbHold:  React.PropTypes.func.isRequired,
    cbDTMF:  React.PropTypes.func.isRequired,
    cbMute:  React.PropTypes.func.isRequired,
-   compStyle : React.PropTypes.object
+   compStyle : React.PropTypes.object,
+   userConfStatus : React.PropTypes.object,
+   speakerDevices: React.PropTypes.array,
+   selectedSpeaker: React.PropTypes.object
 };
 
 class CallProgress extends VertoBaseComponent {
@@ -19,7 +23,7 @@ class CallProgress extends VertoBaseComponent {
               var c = c || '0';
               while (s.length < len) s = c+s;
               return s;
-            }
+            };
     }
 
     componentWillReceiveProps(nextProp){
@@ -33,7 +37,7 @@ class CallProgress extends VertoBaseComponent {
           const minutes = Math.floor( (xTimer - (hours * 1000 * 60 * 60))  / (1000* 60));
           const seconds = Math.floor( (xTimer - (hours * 1000 * 60 * 60) - (minutes * 1000 * 60 ))  / 1000);
           //console.log('xxxTIMER: ', xTimer, hours, minutes, seconds);
-          const yTimer = this.padLeft(hours+"", 2)+':'+ this.padLeft(minutes+"", 2)+':'+ this.padLeft(seconds+"", 2)
+          const yTimer = this.padLeft(hours+"", 2)+':'+ this.padLeft(minutes+"", 2)+':'+ this.padLeft(seconds+"", 2);
           this.setState({ ...this.state, timer: yTimer });
         }, 1000);
 
@@ -68,8 +72,16 @@ class CallProgress extends VertoBaseComponent {
               <AvatarSVG svgStyle={{width: "100px", height: "100px", fillColor: "white"}} />
               <div style={{flexDirection: "column", display:"flex"}} >
                 <div>{this.props.callData.destination}</div>
-                <div>{this.state.status == 'active'? this.state.timer: 'Connecting ...' }</div>
+                <div>{this.state.status == 'active'? this.state.timer: 'Connecting ...'}</div>
               </div>
+              <UserVideoControls
+                  cbMicMute={()=>{this.props.cbMute(this.props.callData.callId, 'mic');}}
+                  cbVideoMute={()=>{this.props.cbMute(this.props.callData.callId, 'video');}}
+                  cbToggleFullScreen={()=>{console.log('ToggleFullScreen Clicked');}}
+                  cbScreenShare={()=>{console.log('Screen Share Clicked');}}
+                  cbToggleChat={()=>{console.log('ToggleChat Clicked');}}
+                  userConfStatus={this.props.userConfStatus}
+              />
             </div>
             <div style={{backgroundColor: "green"}}>
               <DialPadIconSVG svgStyle={{width: "20px", height: "20px", fillColor: "white"}} />

@@ -128,32 +128,37 @@ class Main extends VertoBaseComponent {
         break;
       case 'call_inprogress':
         //console.log('jjj');
-        loggedInfo = (
-          <div>
-            <CallProgress callData={this.props.callInfo.activeCalls[this.props.callInfo.currentCallId]}
-              cbHangup={(callId)=>{
-                this.props.dispatch(doHangUp(callId));
-              }}
-              cbMute ={(callId, mutedDevice='mic' )=>{
-                if (mutedDevice === 'mic'){
-                  this.props.dispatch(doMuteMic(callId));
-                } else {
-                  this.props.dispatch(doMuteVideo(callId));
-                }
-              }}
-              cbDTMF={(callId, key)=>{
-
-              }}
-              cbHold={(callId)=>{
-                this.props.dispatch(doHold(callId));
-              }}
-            />
-          </div>
-        );
-        // setup chat/memberlist here
         // Extract conference data from currentCall (if it is a conference)
         const confData = this.props.callInfo.activeCalls[this.props.callInfo.currentCallId].conferenceData;
         window.conf = confData;
+        if (confData) {
+          loggedInfo = (
+            <div>
+              <CallProgress callData={this.props.callInfo.activeCalls[this.props.callInfo.currentCallId]}
+                  cbHangup={(callId)=>{
+                    this.props.dispatch(doHangUp(callId));
+                  }}
+                  cbMute ={(callId, mutedDevice='mic' )=>{
+                    if (mutedDevice === 'mic'){
+                      this.props.dispatch(doMuteMic(callId));
+                    } else {
+                      this.props.dispatch(doMuteVideo(callId));
+                    }
+                  }}
+                  cbDTMF={(callId, key)=>{
+
+                  }}
+                  cbHold={(callId)=>{
+                    this.props.dispatch(doHold(callId));
+                  }}
+                  userConfStatus={confData.users[confData.callId].conferenceStatus}
+              />
+            </div>
+          );
+
+        }
+        // setup chat/memberlist here
+
 
         // Show chat sidebar only if confData has a value
         //console.log('#### conf data', confData);

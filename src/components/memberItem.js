@@ -2,7 +2,7 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import AdminControls from './memberAdminControlPanel';
 import ControlItem from './controlItem';
-import {MicrophoneIconSVG, VideoIconSVG, MuteMicrophoneIconSVG, MuteVideoIconSVG, KickIconSVG, FullScreenIconSVG} from './svgIcons';
+import {MicrophoneIconSVG, VideoIconSVG, PresenterIconSVG, MuteMicrophoneIconSVG, MuteVideoIconSVG, KickIconSVG, FullScreenIconSVG} from './svgIcons';
 
 const propTypes = {
   cbControlClick : React.PropTypes.func.isRequired,
@@ -118,16 +118,16 @@ export default class MemberItem extends VertoBaseComponent {
         // Only show the presenter icon if moderator and can allowPresenter
         if (this.props.member.conferenceStatus.video.reservationID == 'presenter') {
           // TODO replace with 'presenter toggle icon'
-          presenterStatus = (<FullScreenIconSVG svgStyle={{...this.getStyle("svgStyle"), fill: "#454545", cursor: "pointer"}}/>);
+          presenterStatus = (<PresenterIconSVG svgStyle={{...this.getStyle("svgStyle"), fill: "#454545", cursor: "pointer"}}/>);
           // set the presenter 'badge'
           presenter = (<span style={this.getStyle("presenterBadgeStyle")}>Presenter</span>);
         } else {
           // TODO replace with 'presenter toggle icon toggled off'
-          presenterStatus = (<FullScreenIconSVG svgStyle={{...this.getStyle("svgStyle"), fill: "#c5c5c5", cursor: "pointer"}}/>);
+          presenterStatus = (<PresenterIconSVG svgStyle={{...this.getStyle("svgStyle"), fill: "#c5c5c5", cursor: "pointer"}}/>);
         }
       } else {
         // just show the icon as 'disabled'
-        presenterStatus = (<FullScreenIconSVG svgStyle={{...this.getStyle("svgStyle"), fill: "#c5c5c5"}}/>);
+        presenterStatus = (<PresenterIconSVG svgStyle={{...this.getStyle("svgStyle"), fill: "#c5c5c5"}}/>);
       }
 
       if (this.state.showAdminControls) {

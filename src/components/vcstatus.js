@@ -1,5 +1,6 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
+import ReactTooltip from 'react-tooltip';
 import { StatusIconSVG } from './svgIcons';
 
 const propTypes = {
@@ -53,7 +54,9 @@ class VCStatus extends VertoBaseComponent {
         break;
       }
 
-     return (< StatusIconSVG title="TEST TEST TEST" svgStyle = {{...this.getStyle('svgStyle'), ...fillColor}} />);
+     return (
+       < StatusIconSVG svgStyle = {{...this.getStyle('svgStyle'), ...fillColor}} />
+     );
   }
 }
 
