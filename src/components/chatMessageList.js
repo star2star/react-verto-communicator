@@ -69,6 +69,7 @@ export default class ChatMessageList extends VertoBaseComponent {
 
 
   render(){
+    console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^", this.props.chatUsers);
     const messages = this.props.chatItems.map((msgObj, index)=>{
       const avatarUrl = this.getAvatar(msgObj.displayName);
 
