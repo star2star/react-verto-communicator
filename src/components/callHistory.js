@@ -36,7 +36,7 @@ class CallHistory extends VertoBaseComponent {
         minWidth: '375px',
         maxWidth: "500px",
         maxHeight: '500px',
-        overflowY: 'scroll',
+        overflowY: 'auto',
         boxShadow: '0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)',
         color: "#4a4a4a"
       },
