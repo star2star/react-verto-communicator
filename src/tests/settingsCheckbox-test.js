@@ -12,6 +12,7 @@ describe('settingsCheckbox Component', ()=>{
 
 const label="Use Video";
 const checkedOption={name:"useVideo", value: true};
+const uncheckedOption={name:"useVideo", value: false};
 const cbSubmitSetting=sinon.spy();
 
 it('renders a input tag', () => {
@@ -88,7 +89,17 @@ it('renders a input tag', () => {
            expect(wrapper.props().checkedOption.value).toEqual(true);
          });
 
-         it('should equal checkedOption name ', function () {
+         it('checkedOption value should render false', function () {
+             const wrapper = mount(
+               <SettingsCheckbox
+                   checkedOption={uncheckedOption}
+                   cbSubmitSetting={cbSubmitSetting}
+                   label={label}
+                />);
+             expect(wrapper.props().checkedOption.value).toEqual(false);
+           });
+
+         it('renders checkedOption name ', function () {
              const wrapper = mount(
                <SettingsCheckbox
                    checkedOption={checkedOption}
