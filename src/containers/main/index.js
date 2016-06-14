@@ -13,7 +13,7 @@ import CallProgress from '../../components/callprogress';
 import IncomingCall from '../../components/incomingcall';
 import ChatSession from '../../components/chatSession';
 import Memberlist from '../../components/memberlist';
-import TabbedContainer from '../../components/tabbedContainer'
+import TabbedContainer from '../../components/tabbedContainer';
 
 class Main extends VertoBaseComponent {
   constructor(props) {
@@ -166,13 +166,13 @@ class Main extends VertoBaseComponent {
               <TabbedContainer tabLabels={["Members", "Chat"]}>
                 <Memberlist members={Object.keys(confData.users).map(
                   (k)=>{
-                      return ({...confData.users[k], callId: k });
+                      return ({...confData.users[k]});
                     }
                   )}
                     isModerator={confData.currentRole == "moderator"}
                     allowPresenter={confData.allowPresenter}
                     hasMultipleCanvases={confData.hasMultipleCanvases}
-                    cbControlClick={(callId, controlId)=>{this.handleControlClick(callId, controlId);}}
+                    cbControlClick={(callId, params)=>{this.handleControlClick(callId, params);}}
                 />
                 <ChatSession
                     cbRemove={()=>{}}
