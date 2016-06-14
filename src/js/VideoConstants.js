@@ -16,7 +16,7 @@ VideoConstants.CONF_CMDS={
   STOP: {name: 'stop', functionName: 'stop', parameters:['memberid'] },
   STOPRECORDING: {name: 'stopRecording', functionName: 'stopRecord', parameters:['memberid'] },
   BANNER: {name: 'banner', functionName: 'banner', parameters:['memberid', 'text'] },
-  RESETBANNER: {name: 'resetBanner', functionName: 'banner', parameters:['memberid', 'const:reset' ] },
+  RESETBANNER: {name: 'resetBanner', functionName: 'banner', parameters:['memberid','const:reset' ] },
   SETLAYOUT: {name: 'setLayout', functionName: 'setVideoLayout', parameters: ['layout', 'canvasId']},
   SETLAYER: {name: 'setLayer', functionName: 'modCommand', parameters: ['const:vid-layer', 'memberid', 'layoutPositionNbrString']},
   NEXTLAYER: {name: 'nextLayer', functionName: 'modCommand', parameters: ['const:vid-layer', 'memberid', 'const:next']},
