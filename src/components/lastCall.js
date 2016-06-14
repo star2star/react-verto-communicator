@@ -24,6 +24,9 @@ class LastCall extends VertoBaseComponent {
             lastCallStyle: {
               paddingLeft: '10px',
               paddingRight: '20px'
+            },
+            container: {
+              cursor: (this.props.cbClick ? 'pointer':'auto')
             }
       };
       return (styles[styleName]);
@@ -36,7 +39,10 @@ class LastCall extends VertoBaseComponent {
   }
 
   render() {
-     return (<div onClick={this.call} className="container" >
+
+
+
+     return (<div onClick={this.call} style={this.getStyle('container')}>
               <span>{this.props.labelText}</span>
                 <span style={this.getStyle('lastCallStyle')}>{this.props.lastNumber? this.props.lastNumber :''}</span>
              </div>);

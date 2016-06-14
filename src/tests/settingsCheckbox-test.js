@@ -12,9 +12,9 @@ describe('settingsCheckbox Component', ()=>{
 
 const label="Use Video";
 
-const checkedOption={name:"useVideo", value:"true"};
+const checkedOption={name:"useVideo", value: true};
 
-const cbSubmitSetting=()=>{console.log('called')};
+const cbSubmitSetting=sinon.spy();
 
 it('renders a input tag', () => {
   //expect(true).toBe(true);
@@ -32,16 +32,18 @@ it('renders a input tag', () => {
 
   it('renders a span', () => {
     // expect(true).toBe(true);
-     const wrapper = shallow(
+     const wrapper = mount(
         <SettingsCheckbox checkedOption={checkedOption} cbSubmitSetting={cbSubmitSetting} label={label} />);
      expect(wrapper.find('span').length).toEqual(1);
    });
 
    it('renders a label', () => {
      // expect(true).toBe(true);
-      const wrapper = shallow(
+      const wrapper = mount(
           <SettingsCheckbox checkedOption={checkedOption} cbSubmitSetting={cbSubmitSetting} label={label} />);
-      expect(wrapper.props().label).toEqual(label);
+      expect(wrapper.props().label).toEqual("Use Video");
    });
+
+
 
 });
