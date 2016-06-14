@@ -16,7 +16,6 @@ class CallHistory extends VertoBaseComponent {
     super(props);
     this.state = { callDetailDisplayed : false, callItem: ''};
 
-    //CallHistory.getCallDetails = this.getCallDetails.bind(this);
 }
 
   getCompStyle() {
@@ -59,51 +58,55 @@ class CallHistory extends VertoBaseComponent {
     return (styles[styleName]);
   }
 
+
+  getCallerId(callerId){
+    return callerId;
+  }
+
   render(){
 
-    const self = this;
-    let details;
-    const getDetails = function(callerId) {
-      if(self.state.callDetailDisplayed) {
-      //console.log(callerId);
-      const detailData = CallHistoryService.getInstance().getHistoryDetail(callerId);
-      details = detailData.map(function(i, key){
-        let renderedDirection;
-        if(i.direction == 'outgoing') {
-          renderedDirection = (
-            <span className="incoming" >
-              <UpArrowIconSVG svgStyle={{fill: '#009688', width: '24px', height: '24px'}}/>
-            </span>);
-        } else {
-          renderedDirection = (
-            <span className="outgoing">
-              <DownArrowIconSVG svgStyle={{fill: '#009688', width: '24px', height: '24px'}} />
-            </span>);
-        }
+    const self = this; // Because 'this' inside of function does not work.
+    let details; // declaring 'details' outside of function so it can be recognized elsewhere
+    if(this.state.callDetailDisplayed) { // if the state of callDetailDisplayed is true
+    var callerId = this.getCallerId(); // callerId is equal to the return value of method
+    //console.log(callerId); // fakeout!....it's undefined.
+    const detailData = CallHistoryService.getInstance().getHistoryDetail(callerId); // this is the service method that returns a list of all my doodads. It has an argument of callerId which is currently undefined....
+    details = detailData.map(function(i, key){ // mapping over doodads and assigning it to 'details' because details is a bad boss and everyone recognizes it
+      let renderedDirection; // declaring 'renderedDirection' variable which will store svgs based on the value of the direction property.
+      if(i.direction == 'outgoing') { // if 'outgoing' it renders an up arrow svg
+        renderedDirection = (
+          <span className="outgoing" >
+            <UpArrowIconSVG svgStyle={{fill: '#009688', width: '24px', height: '24px'}}/>
+          </span>);
+      } else {
+        renderedDirection = ( // if 'incoming' it renders a down arrow svg
+          <span className="incoming">
+            <DownArrowIconSVG svgStyle={{fill: '#009688', width: '24px', height: '24px'}} />
+          </span>);
+      }
 
-        const formattedTimestamp = moment(i.timestamp).format('ddd MMM DD YYYY HH:mm:ss A');
+      const formattedTimestamp = moment(i.timestamp).format('ddd MMM DD YYYY HH:mm:ss A'); // fancy formatted message courtesy of moment.js
 
-        return (
-          <div
-              className="details"
-              key={key}
-              style={{...self.getDefaultStyle('details')}}
-          >
-            {renderedDirection}
-            {formattedTimestamp}
-          </div>
-        );
-      });
-    }
+      return ( // end result is a simple div with the resulting direction svg and formatted timestamp.
+        <div
+            className="details"
+            key={key}
+            style={{...self.getDefaultStyle('details')}}
+        >
+          {renderedDirection}
+          {formattedTimestamp}
+        </div>
+      );
+    });
+  }
 
-    };
-
-    // regular state list items
+    // regular state list items renders an arrow svg, ext, number of calls, timestamp, and a menu svg
     const listitems = this.props.history.map((i, index)=>{
       return(
         <CallHistoryItem key={index} data={i} cbShowCalls={()=>{
+          this.getCallerId(i.callerId);
+          //this.setState({...this.state, 'callItem': i.callId});
           this.setState({...this.state, 'callDetailDisplayed' : true});
-          getDetails(i.callerId);
         }}
         />);
     });
@@ -134,7 +137,7 @@ class CallHistory extends VertoBaseComponent {
       </div>
     );
 
-    // default state
+    // default state (whole container)
     const defaultState = (
       <div
           className="container"
