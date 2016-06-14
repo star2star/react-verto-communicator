@@ -4,7 +4,7 @@ import VertoBaseComponent from '../../components/vertobasecomponent';
 import { connect } from 'react-redux';
 //import ReactTooltip from 'react-tooltip';
 import VCStatus from '../../components/vcstatus';
-import { doSubmitLogin, doSubmitLogOut, doMakeCall, doSendChat, doHangUp, doAnswer, doMuteMic, doHold, doMuteVideo, doSendConfCommand } from './action-creators';
+import { doSubmitLogin, doSubmitLogOut, doMakeCall, doSendChat, doHangUp, doAnswer, doMuteMic, doHold, doMuteVideo, doSendConfCommand, doShareScreen } from './action-creators';
 import Splash from '../../components/splash';
 import Login from '../../components/login';
 import Dialpad from '../../components/dialpad';
@@ -147,13 +147,16 @@ class Main extends VertoBaseComponent {
               cbHold={(callId)=>{
                 this.props.dispatch(doHold(callId));
               }}
+              cbShare={()=>{
+                this.props.dispatch(doShareScreen(this.props.app));
+              }}
             />
           </div>
         );
         // setup chat/memberlist here
         // Extract conference data from currentCall (if it is a conference)
         const confData = this.props.callInfo.activeCalls[this.props.callInfo.currentCallId].conferenceData;
-        window.conf = confData;
+        //window.conf = confData;
 
         // Show chat sidebar only if confData has a value
         //console.log('#### conf data', confData);

@@ -205,6 +205,15 @@ const doMakeCall = (aPhoneNumber, appSettings) => {
     dispatch(doingMakeCall('trying', aPhoneNumber, callID));
   };
 };
+const doShareScreen = (appSettings) => {
+  return dispatch => {
+
+    VertoService.getInstance().shareScreen(appSettings);
+    dispatch({
+      "type": "ATTEMPTING_SHARING_SCREEN"
+    });
+  };
+};
 
 const doHangUp = (callId) => {
   return dispatch =>{
@@ -304,6 +313,6 @@ const doingSendingChat = () => {
 
 export { doValidation, doBrowserCheck,
   doSubmitLogin, doShowLogin, doVertoLogin, doSubmitLogOut, doLogOut,
-  doMakeCall, doMakeCallError, doIncomingCall, doSpeedTest,
+  doMakeCall, doMakeCallError, doIncomingCall, doSpeedTest, doShareScreen, 
   doingMakeCall, doHungUp, doHangUp, doAnswer, doMuteMic, doConferenceData, doHold, doMuteVideo, doCallHeld,
   doSendChat, doReceiveChat, doingSendingChat,doSendConfCommand };
