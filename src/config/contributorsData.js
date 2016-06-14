@@ -17,12 +17,12 @@ const contributors = [
     "email": "knichols@star2star.com"
   },
   {
-    "name":  "Cory Schimmoeller",
-    "email": "cschimmoeller@star2star.com"
-  },
-  {
     "name": "Brian Hinton",
     "email": "bhinton@star2star.com"
+  },
+  {
+    "name":  "Cory Schimmoeller",
+    "email": "cschimmoeller@star2star.com"
   }
 ];
 
