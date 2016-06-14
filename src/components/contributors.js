@@ -65,7 +65,7 @@ class Contributors extends VertoBaseComponent{
     });
     return (
       <Modal isOpen={true} onRequestClose={()=>{
-        console.log('closing');
+        // console.log('closing');
         App.toggleModal();
       }} style={{...this.getStyle('modal')}} >
         <div >

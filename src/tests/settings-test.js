@@ -6,7 +6,6 @@ import { mountWithIntl, shallowWithIntl } from '../helpers/intl-enzyme-test-help
 import Settings from '../components/Settings.js';
 
  jest.unmock('../components/Settings.js');
- jest.unmock('../helpers/intl-enzyme-test-helper.js');
 
 describe('Settings Component', ()=>{
 
@@ -32,21 +31,35 @@ describe('Settings Component', ()=>{
       vidQual:undefined
   };
 
-const cbSubmitSetting=()=>{console.log('called')};
 
-it('renders one select tag', () => {
+const cbSubmitSetting=()=>{console.log('Submitcalled');};
+const cbPreviewSet=()=>{console.log('Previewcalled');};
+const cbDeviceList=()=>{console.log('Devicecalled');};
+const cbToggleShowSettings=()=>{console.log('ShowSettingscalled');};
+
+
+it('renders a div', () => {
   //expect(true).toBe(true);
    const wrapper = shallow(
-     <Settings settingsData={sampleSettingsData} cbSubmitSetting={cbSubmitSetting} />);
-   expect(wrapper.find('select').length).toEqual(1);
+     <Settings
+         cbSubmitSetting={cbSubmitSetting}
+         cbPreviewSet={cbPreviewSet}
+         cbDeviceList={cbDeviceList}
+         cbToggleShowSettings={cbToggleShowSettings}
+       />);
+   expect(wrapper.find('div').length).toEqual(1);
  });
 
- it('renders two options', () => {
-   //expect(true).toBe(true);
-    const wrapper = shallow(
-      <Settings options={options} label={label} selectedOption={selectedOption} cbSubmitSetting={cbSubmitSetting} />);
-    expect(wrapper.find('option').length).toEqual(2);
-  });
+ it('uses the settingsCheckbox component', ()=> {
+   const wrapper = mount(
+     <Settings
+         cbSubmitSetting={cbSubmitSetting}
+         cbPreviewSet={cbPreviewSet}
+         cbDeviceList={cbDeviceList}
+         cbToggleShowSettings={cbToggleShowSettings}
+     />);
+   expect(wrapper.find('SettingsCheckbox').props().statusTitle).toEqual(1);
+ });
 
 
 });

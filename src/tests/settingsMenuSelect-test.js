@@ -2,22 +2,16 @@ import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import sinon from 'sinon';
 import ReactDOM from 'react-dom';
-//import TestUtils from 'react-addons-test-utils';
-
 import SettingsMenuSelect from '../components/settingsMenuSelect.js';
 
  jest.unmock('../components/settingsMenuSelect.js');
 
 describe('settingsMenuSelect Component', ()=>{
 
-
 const options=[{id:"none", label:"No Camera"}, {id: "1234", label:"FaceTime HD Camera"}];
-
 const label="Camera:";
-
 const selectedOption={id:"selectedVideo", label:"FaceTime HD Camera"};
-
-const cbSubmitSetting=()=>{console.log('called')};
+const cbSubmitSetting=()=>{console.log('called');};
 
 it('renders one select tag', () => {
   //expect(true).toBe(true);
