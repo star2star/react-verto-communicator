@@ -561,6 +561,92 @@ class VertoService {
     }
   }
 
+//jes
+  shareScreen(settings) {
+    debugger;
+    console.log('share screen video');
+
+    var that = this;
+
+    getScreenId(function (error, sourceId, screen_constraints){
+      debugger;
+      if(error) {
+        console.log('EEEEERRRR: ', error);
+        //$rootScope.$emit('ScreenShareExtensionStatus', error);
+        return;
+      }
+      const destination = that._data.conf ? that._data.conf.params.laData.laName : ''; //TODO figure out on direct call ... else
+
+      const call = _verto.verto.newCall({
+        destination_number: destination + '-screen',
+        caller_id_name: _verto.verto.options.loginParams.name + ' (Screen)',
+        caller_id_number: (_verto.verto.options.loginParams.callerid ? _verto.verto.options.loginParams.callerid  : _verto.verto.options.loginParams.email )+ ' (Screen)',
+        outgoingBandwidth: settings.settings.outgoingBandwidth,
+        incomingBandwidth:  settings.settings.incomingBandwidth,
+        videoParams: screen_constraints.video.mandatory, //coming from function call
+        useVideo:  settings.settings.useVideo,
+        screenShare: true,
+        dedEnc: settings.settings.useDedenc,
+        mirrorInput: settings.settings.mirrorInput,
+        userVariables: {
+          email : _verto.verto.options.loginParams.email,
+          avatar: "http://gravatar.com/avatar/" + md5(_verto.verto.options.loginParams.email,) + ".png?s=600"
+        }
+      });
+
+
+      // Override onStream callback in $.FSRTC instance
+      call.rtc.options.callbacks.onStream = function (rtc, stream) {
+        if(stream) {
+          var StreamTrack = stream.getVideoTracks()[0];
+          StreamTrack.addEventListener('ended', ()=>{
+            debugger;
+            if(that._data.shareCall) {
+              that.screenshareHangup.bind(that)();
+              console.log("screenshare ended");
+            }
+          });
+        }
+
+        console.log("screenshare started");
+      };
+
+      that._data.shareCall = call;
+
+      console.log('shareCall', that._data.shareCall );
+
+      // JES dont know why we are doing this so i am commenting out
+      // this._data.mutedMic = false;
+      // this._data.mutedVideo = false;
+
+      VertoService.refreshDevices(()=>{
+        console.log('screeen sharing refresh devices callback ')
+      });
+
+    });
+
+  }
+
+  screenshareHangup() {
+    if (!this._data.shareCall) {
+      console.debug('There is no call to hangup.');
+      return false;
+    }
+
+    console.log('shareCall End', this._data.shareCall);
+    this._data.shareCall.hangup();
+
+    console.debug('The screencall was hangup.');
+
+    // jes added because I want to keep _data clean
+    delete this._data.shareCall;
+  }
+
+
+
+
+
+
   hangup(callerId){
     if (_verto._data._activeCalls[callerId]) {
       _verto.verto.hangup(callerId);
