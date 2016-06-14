@@ -4,7 +4,7 @@ import VertoBaseComponent from '../../components/vertobasecomponent';
 import { connect } from 'react-redux';
 //import ReactTooltip from 'react-tooltip';
 import VCStatus from '../../components/vcstatus';
-import { doSubmitLogin, doSubmitLogOut, doMakeCall, doSendChat, doHangUp, doAnswer, doMuteMic, doHold, doMuteVideo, doSendConfCommand } from './action-creators';
+import { doSubmitLogin, doSubmitLogOut, doMakeCall, doSendChat, doHangUp, doAnswer, doMuteMic, doHold, doMuteVideo, doSendConfCommand, doShareScreen } from './action-creators';
 import Splash from '../../components/splash';
 import Login from '../../components/login';
 import Dialpad from '../../components/dialpad';
@@ -151,6 +151,9 @@ class Main extends VertoBaseComponent {
                   cbHold={(callId)=>{
                     this.props.dispatch(doHold(callId));
                   }}
+                  cbShare={()=>{
+                    this.props.dispatch(doShareScreen(this.props.app));
+                  }}
                   userConfStatus={confData.users[confData.callId].conferenceStatus}
               />
             </div>
@@ -159,7 +162,6 @@ class Main extends VertoBaseComponent {
         }
         // setup chat/memberlist here
 
-
         // Show chat sidebar only if confData has a value
         //console.log('#### conf data', confData);
 
@@ -167,7 +169,7 @@ class Main extends VertoBaseComponent {
         // are in the tabLabels array
         if (confData) {
           chatSideBar = (
-            <div className="sidebarWrapper" style={{width: '360px'}}>
+            <div className="sidebarWrapper" style={{width: '360px', height: '100%'}}>
               <TabbedContainer tabLabels={["Members", "Chat"]}>
                 <Memberlist members={Object.keys(confData.users).map(
                   (k)=>{

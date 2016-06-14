@@ -1,7 +1,7 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import UserVideoControls from './vidControlsUser';
-import {AvatarSVG, DialPadIconSVG, MicrophoneIconSVG, PauseIconSVG, MuteMicrophoneIconSVG, PhoneIconSVG, VideoIconSVG } from './svgIcons';
+import {ShareScreenIconSVG, AvatarSVG, DialPadIconSVG, MicrophoneIconSVG, PauseIconSVG, MuteMicrophoneIconSVG, PhoneIconSVG, VideoIconSVG } from './svgIcons';
 
  const propTypes = {
    callData : React.PropTypes.object.isRequired,
@@ -9,10 +9,8 @@ import {AvatarSVG, DialPadIconSVG, MicrophoneIconSVG, PauseIconSVG, MuteMicropho
    cbHold:  React.PropTypes.func.isRequired,
    cbDTMF:  React.PropTypes.func.isRequired,
    cbMute:  React.PropTypes.func.isRequired,
-   compStyle : React.PropTypes.object,
    userConfStatus : React.PropTypes.object,
-   speakerDevices: React.PropTypes.array,
-   selectedSpeaker: React.PropTypes.object
+   cbShare: React.PropTypes.func.isRequired
 };
 
 class CallProgress extends VertoBaseComponent {
@@ -104,6 +102,14 @@ class CallProgress extends VertoBaseComponent {
               }}>
                 <PauseIconSVG svgStyle={{width: "20px", height: "20px", fillColor: "white"}} />
               </span>
+              <span onClick={()=>{
+                //console.log('hangup clicked: ', this.props);
+                this.props.cbShare(this.props.callData.callId);
+              }}>
+                <ShareScreenIconSVG svgStyle={{width: "20px", height: "20px", fillColor: "white"}} />
+              </span>
+
+
               <span onClick={()=>{
                 //console.log('hangup clicked: ', this.props);
                 this.props.cbHangup(this.props.callData.callId);

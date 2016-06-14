@@ -38,7 +38,8 @@ export default class ChatMessageList extends VertoBaseComponent {
         flex: 1,
         borderLeft: '1px solid #d1d1d1',
         backgroundColor: '#FAFAFA',
-        overflowY: 'auto'
+        overflowY: 'auto',
+        height: "95%"
       }
     };
 
@@ -69,6 +70,7 @@ export default class ChatMessageList extends VertoBaseComponent {
 
 
   render(){
+    //console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^", this.props.chatUsers);
     const messages = this.props.chatItems.map((msgObj, index)=>{
       const avatarUrl = this.getAvatar(msgObj.displayName);
 

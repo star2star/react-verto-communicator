@@ -134,8 +134,10 @@ class Dialpad extends VertoBaseComponent {
   }
 
   makeCall(){
+    console.log('***********',this.state.number);
     if(this.state.number) {
       // makes a call if there is a number entered.
+
       this.props.cbCall(this.state.number);
     } else {
       // if there is NOT a number it gets the last number dialed.
@@ -168,7 +170,15 @@ class Dialpad extends VertoBaseComponent {
 
     if (this.state.showingCallHistory) {
       return (
-        <CallHistory history={CallHistoryService.getInstance().getHistory()} cbBack={()=>{
+        <CallHistory
+        history={CallHistoryService.getInstance().getHistory()}
+        cbCall={(num)=>{
+          console.log('**********', num);
+          this.setState({...this.state, showingCallHistory: !this.state.showingCallHistory, number : num});
+          setTimeout(()=>this.makeCall(),0);
+
+        }}
+        cbBack={()=>{
           this.setState({ ...this.state, showingCallHistory: !this.state.showingCallHistory});
         }} />
       );
