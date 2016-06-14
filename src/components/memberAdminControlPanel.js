@@ -206,7 +206,7 @@ export default class AdminControls extends VertoBaseComponent {
             />
             <ControlItem type="RemoveIconSVG" label="Reset"
                 compStyle={this.getStyle("controlIconStyle")}
-                cbActionClick={()=>{this.props.cbControlClick("RESETBANNER", [this.props.member.memberId]);}}
+                cbActionClick={()=>{this.props.cbControlClick("RESETBANNER", [this.props.member.memberId, 'reset']);}}
             />
           </div>
           <div className="canvasSettings">
