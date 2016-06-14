@@ -1,32 +1,28 @@
 'use strict';
 const contributors = [
   {
-    "name":  "Jonatas Oliveira",
-    "email": "jonatas@evolux.net.br"
+    "name":  "James Schimmoeller",
+    "email": "jschimmoeller@star2star.com"
   },
   {
-    "name":  "Ítalo Rossi",
-    "email": "italo@evolux.net.br"
+    "name":  "Tom Athens",
+    "email": "tathens@star2star.com"
   },
   {
-    "name":  "Stefan Yohansson",
-    "email": "stefan@evolux.net.br"
+    "name":  "Duncan Neal",
+    "email": "dneal@star2star.com"
   },
   {
-    "name":  "Victor Torres",
-    "email": "victor@evolux.net.br"
+    "name":  "KC Nichols",
+    "email": "knichols@star2star.com"
   },
   {
-    "name":  "João Mesquita",
-    "email": "jmesquita@indicium.com.ar"
+    "name": "Brian Hinton",
+    "email": "bhinton@star2star.com"
   },
   {
-    "name":  "Ken Rice",
-    "email": "krice@freeswitch.org"
-  },
-  {
-    "name":  "Brian West",
-    "email": "brian@freeswitch.org"
+    "name":  "Cory Schimmoeller",
+    "email": "cschimmoeller@star2star.com"
   }
 ];
 

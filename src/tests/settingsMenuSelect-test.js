@@ -16,16 +16,35 @@ const cbSubmitSetting=()=>{console.log('called');};
 it('renders one select tag', () => {
   //expect(true).toBe(true);
    const wrapper = shallow(
-     <SettingsMenuSelect options={options} label={label} selectedOption={selectedOption} cbSubmitSetting={cbSubmitSetting} />);
+     <SettingsMenuSelect
+         options={options}
+         label={label}
+         selectedOption={selectedOption}
+         cbSubmitSetting={cbSubmitSetting}
+     />);
    expect(wrapper.find('select').length).toEqual(1);
  });
 
  it('renders two options', () => {
    //expect(true).toBe(true);
     const wrapper = shallow(
-      <SettingsMenuSelect options={options} label={label} selectedOption={selectedOption} cbSubmitSetting={cbSubmitSetting} />);
-    expect(wrapper.find('option').length).toEqual(2);
+      <SettingsMenuSelect
+          options={options}
+          label={label}
+          selectedOption={selectedOption}
+          cbSubmitSetting={cbSubmitSetting}
+      />);    expect(wrapper.find('option').length).toEqual(2);
   });
 
+  it('cbSubmitSetting callback fires', function () {
+      const wrapper = shallow(
+        <SettingsMenuSelect
+            options={options}
+            label={label}
+            selectedOption={selectedOption}
+            cbSubmitSetting={cbSubmitSetting}
+        />);
+      expect(cbSubmitSetting.calledOnce);
+    });
 
 });

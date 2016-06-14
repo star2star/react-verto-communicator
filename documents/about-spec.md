@@ -17,7 +17,6 @@ This component will be a 'pure' component.
 | ------------ | ------------- | ------------- |
 | versionNumber | " 0.1.0 " | This prop is a string and is not required. This is what will display directly underneath the project's logo. This tells the user what version of the program they are on.|
 | compStyle | compStyle = {} | This prop is an object and is not required. This object sets the style for this component |
-| gitRev | "6796bff" | This prop is a string and is not required. The contents of this object are used to print out what revision number the project is on. |
 
 ## b. Component State ##
 
