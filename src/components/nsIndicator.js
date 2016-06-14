@@ -11,9 +11,10 @@ import { FormattedMessage } from 'react-intl';
 
 
 const propTypes = {
-  networkData : React.PropTypes.object.isRequired,
   allowDisplayDetails : React.PropTypes.bool,
-  compStyle : React.PropTypes.object
+  cbClick : React.PropTypes.func,
+  compStyle : React.PropTypes.object,
+  networkData : React.PropTypes.object.isRequired
 };
 
 const defaultProps = {
@@ -107,7 +108,7 @@ class NetworkStatusIndicator extends VertoBaseComponent {
   }
 
   closeDisplay() {
-    console.log('$$$$$$ Close NetworkStatusIndicator!!!!');
+    //console.log('$$$$$$ Close NetworkStatusIndicator!!!!');
     this.setState({...this.state,'dropdownDisplayed': false});
   }
 
@@ -143,6 +144,7 @@ class NetworkStatusIndicator extends VertoBaseComponent {
       <div
           networkData={this.networkData}
           style={this.getStyle('iconsContainer')}
+          onClick={this.props.cbClick}
       >
         {icon}
         {caret}
@@ -156,20 +158,17 @@ class NetworkStatusIndicator extends VertoBaseComponent {
             <FormattedMessage id="BANDWIDTH_INFO" />
         </div>
         <div
-            onClick={this.props.cbMenuClick}
             style={this.getStyle('li')}
             className="upkpbs"
         >
           <FormattedMessage id="BANDWIDTH_INFO_OUTGOING" /> {this.props.networkData.upkpbs}
         </div>
         <div
-            onClick={this.props.cbMenuClick}
             style={this.getStyle('li')}
         >
           <FormattedMessage id="BANDWIDTH_INFO_INCOMING" /> {this.props.networkData.downkpbs}
         </div>
         <div
-            onClick={this.props.cbMenuClick}
             style={this.getStyle('li')}
         >
             <FormattedMessage id="BANDWIDTH_INFO_VIDEO_RES" /> {this.props.networkData.vidQual}

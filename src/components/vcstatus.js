@@ -53,7 +53,7 @@ class VCStatus extends VertoBaseComponent {
         break;
       }
 
-     return (< StatusIconSVG svgStyle = {{...this.getStyle('svgStyle'), ...fillColor}} />);
+     return (< StatusIconSVG title="TEST TEST TEST" svgStyle = {{...this.getStyle('svgStyle'), ...fillColor}} />);
   }
 }
 

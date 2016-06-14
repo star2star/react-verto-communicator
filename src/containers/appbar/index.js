@@ -24,7 +24,6 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import LastCall from '../../components/lastCall';
 import { doMakeCall } from '../main/action-creators';
 
-
 // Need to close menu on resize so that if we pass media query limit then
 // normal size menu will reappear...
 window.onresize=()=>{
@@ -38,6 +37,7 @@ class AppBar extends VertoBaseComponent {
 
     this.showSpeeds = this.showSpeeds.bind(this);
     this.handleAltMenuClick = this.handleAltMenuClick.bind(this);
+    this.handleCloseDropdowns = this.handleCloseDropdowns.bind(this);
     this.handleSubmitPreviewSettings = this.handleSubmitPreviewSettings.bind(this);
     AppBar.closeMenu = this.handleCloseMenu.bind(this);
   }
@@ -242,15 +242,19 @@ class AppBar extends VertoBaseComponent {
   }
 
   handleAltMenuClick(){
-    console.log('Alt Menu Clicked');
+    //console.log('Alt Menu Clicked');
+    this.handleCloseDropdowns();
+
+    this.setState({...this.state, showAltAppControls: !this.state.showAltAppControls });
+  }
+
+  handleCloseDropdowns() {
     // close any open 'menus'
     if (this.props.bandwidthInfo.outgoingBandwidth && this.props.bandwidthInfo.incomingBandwidth) {
       NetworkStatusIndicator && NetworkStatusIndicator.closeNetworkStatus();
     }
     UserMenu.closeMenu();
     TagMenu.closeMenu();
-
-    this.setState({...this.state, showAltAppControls: !this.state.showAltAppControls });
   }
 
   handleCloseMenu(){
@@ -544,6 +548,7 @@ showSpeeds(){
       nsIndicator = (
         <NetworkStatusIndicator
             compStyle={this.state.showAltAppControls ? this.getStyle("altNsiCompStyle") : this.getStyle("nsiCompStyle")}
+            cbClick={this.handleCloseDropdowns}
             networkData={{upkpbs: this.props.bandwidthInfo.outgoingBandwidth,
                           downkpbs: this.props.bandwidthInfo.incomingBandwidth,
                           vidQual: vidQual}}
@@ -623,7 +628,10 @@ showSpeeds(){
             {toggleChat}
 
             <div style={!this.state.showAltAppControls ? {marginRight: '20px'}:{marginBottom:'10px'}}>
-              <UserMenu allowDisplayDetails={this.props.vcStatus != 'disconnected'} compStyle={this.state.showAltAppControls ? this.getStyle("altUserMenu") : undefined}>
+              <UserMenu allowDisplayDetails={this.props.vcStatus != 'disconnected'}
+                  compStyle={this.state.showAltAppControls ? this.getStyle("altUserMenu") : undefined}
+                  cbClick={this.handleCloseDropdowns}
+              >
                 <MenuItem label={<FormattedMessage id='OPEN_NEW_WINDOW' />}cbAction={()=>{
                   window.open(location.href);
                 }} />
@@ -634,7 +642,10 @@ showSpeeds(){
 
             </div>
             <div style={!this.state.showAltAppControls ? {marginRight: '20px'}:{marginBottom:'10px', position:'relative'}}>
-              <TagMenu allowDisplayDetails="true" compStyle={this.state.showAltAppControls ? this.getStyle("altTagMenu") : undefined}>
+              <TagMenu allowDisplayDetails="true"
+                  compStyle={this.state.showAltAppControls ? this.getStyle("altTagMenu") : undefined}
+                  cbClick={this.handleCloseDropdowns}
+              >
                 <MenuItem label={formatMessage({"id":"ABOUT", "defaultMessage":"About"})} cbAction={()=>{
                   // TODO ta need to pass version and gitRev in to the About component
                   App.toggleModal((<About version="0.2.0" gitRev="xxxxx" cbClose={App.toggleModal}/>));
