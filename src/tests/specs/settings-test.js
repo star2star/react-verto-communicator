@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import sinon from 'sinon';
 import ReactDOM from 'react-dom';
-//import TestUtils from 'react-addons-test-utils';
 import { mountWithIntl, shallowWithIntl } from '../helpers/intl-enzyme-test-helper.js';
 import Settings from '../components/Settings.js';
 

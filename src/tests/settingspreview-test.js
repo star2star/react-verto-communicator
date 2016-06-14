@@ -34,12 +34,12 @@ describe('Default test for SettingsPreview', ()=>{
   };
 
 
-  it ('Displays the volue meter', () => {
+  it ('Displays the volume meter', () => {
     const wrapper = mountWithIntl(<SettingsPreview settingsData={sampleSettingsData} cbClose={()=>{}} />);
     expect(wrapper.find('VolumeMeter').length).toEqual(2);
   });
 
-  it ('Displays the volue meter', () => {
+  it ('Displays the volume meter', () => {
     const wrapper = shallowWithIntl(<SettingsPreview settingsData={sampleSettingsData} cbClose={()=>{}} />);
     expect(wrapper.find('VolumeMeter').length).toEqual(2);
   });

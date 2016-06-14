@@ -35,18 +35,21 @@ class Contributors extends VertoBaseComponent{
           boxShadow: '0px 27px 24px 0px rgba(0,0,0,.2), 0px 40px 77px 0px rgba(0,0,0,.22)',
           borderRadius: '2px',
           border: 'none',
-          backgroundColor: '#fff',
-          maxHeight: '540px',
-          overlay: 'auto'
+          backgroundColor: '#fff'
         },
         overlay: {
           zIndex: "1"
         }
       },
-
       header : {
         fontWeight: '300',
-        fontSize: '24px'
+        fontSize: '24px',
+        display: 'flex',
+        justifyContent: 'center'
+      },
+      scrollContent: {
+        maxHeight: '540px',
+        overflow: 'auto'
       }
     };
 
@@ -70,7 +73,7 @@ class Contributors extends VertoBaseComponent{
             <FormattedMessage id="CONTRIBUTORS" defaultMessage="Contributors" />
           </h1>
         </div>
-        <div>
+        <div style={{...this.getStyle('scrollContent')}}>
             {contList}
         </div>
       </Modal> );
