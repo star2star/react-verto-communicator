@@ -297,25 +297,26 @@ class VertoService {
             if (this._data.confLayoutsData && message.responseData[0]) {
               this._data.confLayoutsData.filter(l=>l.name === message.responseData[0].layoutName).map((mLayout)=>{
                 // found it so
-                _dispatch(doConferenceData({callId: Object.keys(v.dialogs)[0], hasMultipleCanvases: message.responseData > 1, allowPresenter: mLayout.resIDS && mLayout.resIDS.length > 0 }));
+                _dispatch(doConferenceData({callId: Object.keys(v.dialogs)[0],  videoLayout: this._data.canvasInfo, hasMultipleCanvases: message.responseData > 1, allowPresenter: mLayout.resIDS && mLayout.resIDS.length > 0 }));
               });
             };
           } else if (message['conf-command'].indexOf('vid-layout') ) {
             // video layout changed
-            const newLayout = message['conf-command'].split(' ')[2];
-            // find new layout
-            //console.log('..... VID LAYOUT CHANGING ...', message, newLayout );
-            if (this._data.confLayoutsData && newLayout ) {
-              //debugger;
-              this._data.canvasInfo = [];
-              this._data.confLayoutsData.filter(l=>l.name == newLayout).map((mLayout)=>{
-                // found it so
-
-                this._data.canvasInfo = [].concat(mLayout);
-                _dispatch(doConferenceData({callId: Object.keys(v.dialogs)[0], allowPresenter: mLayout.resIDS && mLayout.resIDS.length > 0 }));
-              });
-
-            };
+            this._data.conf.modCommand('canvasInfo');
+            // const newLayout = message['conf-command'].split(' ')[2];
+            // // find new layout
+            // //console.log('..... VID LAYOUT CHANGING ...', message, newLayout );
+            // if (this._data.confLayoutsData && newLayout ) {
+            //   //debugger;
+            //   this._data.canvasInfo = [];
+            //   this._data.confLayoutsData.filter(l=>l.name == newLayout).map((mLayout)=>{
+            //     // found it so
+            //
+            //     this._data.canvasInfo = [].concat(mLayout);
+            //     _dispatch(doConferenceData({callId: Object.keys(v.dialogs)[0], videoLayout: this._data.canvasInfo, allowPresenter: mLayout.resIDS && mLayout.resIDS.length > 0 }));
+            //   });
+            //
+            // };
           } else {
             //TODO
             //console.log('..... ELSE ONBROADCAST ...', message );
