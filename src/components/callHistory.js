@@ -8,7 +8,8 @@ import moment from 'moment';
 const propTypes = {
   compStyle : React.PropTypes.object,
   history: React.PropTypes.array,
-  cbBack: React.PropTypes.func.isRequired
+  cbBack: React.PropTypes.func.isRequired,
+  callerId : React.PropTypes.string
 };
 
 class CallHistory extends VertoBaseComponent {
@@ -59,21 +60,15 @@ class CallHistory extends VertoBaseComponent {
   }
 
 
-  getCallerId(callerId){
-    return callerId;
-  }
-
   render(){
 
-    const self = this; // Because 'this' inside of function does not work.
-    let details; // declaring 'details' outside of function so it can be recognized elsewhere
-    if(this.state.callDetailDisplayed) { // if the state of callDetailDisplayed is true
-    var callerId = this.getCallerId(); // callerId is equal to the return value of method
-    //console.log(callerId); // fakeout!....it's undefined.
-    const detailData = CallHistoryService.getInstance().getHistoryDetail(callerId); // this is the service method that returns a list of all my doodads. It has an argument of callerId which is currently undefined....
-    details = detailData.map(function(i, key){ // mapping over doodads and assigning it to 'details' because details is a bad boss and everyone recognizes it
-      let renderedDirection; // declaring 'renderedDirection' variable which will store svgs based on the value of the direction property.
-      if(i.direction == 'outgoing') { // if 'outgoing' it renders an up arrow svg
+    const self = this;
+    let details;
+    if(this.state.callDetailDisplayed) {
+    const detailData = CallHistoryService.getInstance().getHistoryDetail(this.callerId);
+    details = detailData.map(function(i, key){
+      let renderedDirection;
+      if(i.direction == 'outgoing') {
         renderedDirection = (
           <span className="outgoing" >
             <UpArrowIconSVG svgStyle={{fill: '#009688', width: '24px', height: '24px'}}/>
@@ -85,9 +80,9 @@ class CallHistory extends VertoBaseComponent {
           </span>);
       }
 
-      const formattedTimestamp = moment(i.timestamp).format('ddd MMM DD YYYY HH:mm:ss A'); // fancy formatted message courtesy of moment.js
+      const formattedTimestamp = moment(i.timestamp).format('ddd MMM DD YYYY HH:mm:ss A');
 
-      return ( // end result is a simple div with the resulting direction svg and formatted timestamp.
+      return (
         <div
             className="details"
             key={key}
@@ -103,9 +98,14 @@ class CallHistory extends VertoBaseComponent {
     // regular state list items renders an arrow svg, ext, number of calls, timestamp, and a menu svg
     const listitems = this.props.history.map((i, index)=>{
       return(
-        <CallHistoryItem key={index} data={i} cbShowCalls={()=>{
-          this.getCallerId(i.callerId);
+        <CallHistoryItem
+            callerId={i.callerId}
+            key={index}
+            data={i}
+            cbShowCalls={()=>{
+          console.log(i.callerId);
           //this.setState({...this.state, 'callItem': i.callId});
+          this.callerId = i.callerId;
           this.setState({...this.state, 'callDetailDisplayed' : true});
         }}
         />);
