@@ -6,6 +6,7 @@ CaretUpIconSVG,
 CaretDownIconSVG } from './svgIcons';
 
 const propTypes = {
+  cbClick : React.PropTypes.func,
   compStyle : React.PropTypes.object
 };
 
@@ -69,6 +70,7 @@ class TagMenu extends VertoBaseComponent {
 
   toggleMenu() {
     if (this.props.allowDisplayDetails) {
+      this.props.cbClick();
       this.setState({...this.state, dropdownDisplayed: !this.state.dropdownDisplayed});
     }
   }

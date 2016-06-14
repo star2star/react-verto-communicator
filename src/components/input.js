@@ -2,11 +2,12 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 
 const propTypes = {
+  cbChanging : React.PropTypes.func,
   compStyle : React.PropTypes.object,
   label : React.PropTypes.string,
   type : React.PropTypes.string,
   placeholder : React.PropTypes.string,
-  value : React.PropTypes.string,
+  value : React.PropTypes.string
   //tabIndex : React.PropTypes.string
 };
 

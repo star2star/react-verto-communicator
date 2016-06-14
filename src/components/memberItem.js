@@ -72,7 +72,7 @@ export default class MemberItem extends VertoBaseComponent {
   }
 
   render(){
-    console.log('&&&&&& member object', this.props.member, this.props.controlSettings);
+    //console.log('&&&&&& member object', this.props.member, this.props.controlSettings);
 
     // Setup up mic and video status/controls
     let micStatus = this.props.member.conferenceStatus.audio.muted ?
@@ -132,7 +132,7 @@ export default class MemberItem extends VertoBaseComponent {
 
       if (this.state.showAdminControls) {
         adminControls = (
-          <AdminControls member={this.props.member} />
+          <AdminControls member={this.props.member} multCanvas={this.props.controlSettings.multCanvas} cbControlClick={this.props.cbControlClick}/>
         );
       }
     }
