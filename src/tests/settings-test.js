@@ -6,30 +6,31 @@ import { mountWithIntl, shallowWithIntl } from '../helpers/intl-enzyme-test-help
 import Settings from '../components/Settings.js';
 
  jest.unmock('../components/Settings.js');
+ jest.unmock('../components/svgIcons.js');
 
 describe('Settings Component', ()=>{
 
-  const sampleSettingsData = {
-      askRecoverCall: false,
-      autoBand: true,
-      bestFrameRate: { id:"15", label:"15 FPS" },
-      googEchoCancellation: true,
-      googNoiseSuppression: true,
-      incomingBandwidth: "default",
-      language:"en",
-      languages: {id:"en", name:"English"},
-      mirrorInput: false, outgoingBandwidth: "default",
-      selectedAudio: [],
-      selectedBestFrameRate: [],
-      selectedShare: [],
-      selectedSpeaker: [],
-      selectedVideo: [],
-      testSpeedJoin: true,
-      useDedence: false,
-      useSTUN: true,
-      useStereo: true,
-      vidQual:undefined
-  };
+  // const sampleSettingsData = {
+  //     askRecoverCall: false,
+  //     autoBand: true,
+  //     bestFrameRate: { id:"15", label:"15 FPS" },
+  //     googEchoCancellation: true,
+  //     googNoiseSuppression: true,
+  //     incomingBandwidth: "default",
+  //     language:"en",
+  //     languages: {id:"en", name:"English"},
+  //     mirrorInput: false, outgoingBandwidth: "default",
+  //     selectedAudio: [],
+  //     selectedBestFrameRate: [],
+  //     selectedShare: [],
+  //     selectedSpeaker: [],
+  //     selectedVideo: [],
+  //     testSpeedJoin: true,
+  //     useDedence: false,
+  //     useSTUN: true,
+  //     useStereo: true,
+  //     vidQual:undefined
+  // };
 
 
 const cbSubmitSetting=sinon.spy();
@@ -74,17 +75,49 @@ it('renders container div', () => {
      expect(wrapper.find('CaretDownIconSVG').length).toEqual(1);
    });
 
-  //  it('renders fill: if allowDisplayDetails is true', () => {
-  //    const wrapper = mount(
-  //      <Settings
-  //          cbSubmitSetting={cbSubmitSetting}
-  //          cbPreviewSet={cbPreviewSet}
-  //          cbDeviceList={cbDeviceList}
-  //          cbToggleShowSettings={cbToggleShowSettings}
-  //    />);
-  //    wrapper.setState({ allowDisplayDetails: true});
-  //   //  console.log('---------------',wrapper.childAt(2).props().style.fill);
-  //    expect(wrapper.childAt(3).props().style.fill).toEqual('#fff');
-  //  });
+
+    it('cbSubmitSetting callback fires', function () {
+        const wrapper = shallow(
+          <Settings
+              cbSubmitSetting={cbSubmitSetting}
+              cbPreviewSet={cbPreviewSet}
+              cbDeviceList={cbDeviceList}
+              cbToggleShowSettings={cbToggleShowSettings}
+        />);
+        expect(cbSubmitSetting.calledOnce);
+      });
+
+      it('cbPreviewSet callback fires', function () {
+          const wrapper = shallow(
+            <Settings
+                cbSubmitSetting={cbSubmitSetting}
+                cbPreviewSet={cbPreviewSet}
+                cbDeviceList={cbDeviceList}
+                cbToggleShowSettings={cbToggleShowSettings}
+          />);
+          expect(cbPreviewSet.calledOnce);
+        });
+
+      it('cbDeviceList callback fires', function () {
+          const wrapper = shallow(
+            <Settings
+                cbSubmitSetting={cbSubmitSetting}
+                cbPreviewSet={cbPreviewSet}
+                cbDeviceList={cbDeviceList}
+                cbToggleShowSettings={cbToggleShowSettings}
+          />);
+          expect(cbDeviceList.calledOnce);
+        });
+
+      it('cbToggleShowSettings callback fires', function () {
+          const wrapper = shallow(
+            <Settings
+                cbSubmitSetting={cbSubmitSetting}
+                cbPreviewSet={cbPreviewSet}
+                cbDeviceList={cbDeviceList}
+                cbToggleShowSettings={cbToggleShowSettings}
+          />);
+          expect(cbToggleShowSettings.calledOnce);
+        });
 
 });
