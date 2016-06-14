@@ -7,7 +7,8 @@ import moment from 'moment';
 
 const propTypes = {
   compStyle : React.PropTypes.object,
-  history: React.PropTypes.array,
+  history : React.PropTypes.array,
+  cbCall : React.PropTypes.func,
   cbBack: React.PropTypes.func.isRequired,
   callerId : React.PropTypes.string
 };
@@ -34,11 +35,13 @@ class CallHistory extends VertoBaseComponent {
         flexDirection: "column",
         minWidth: '375px',
         maxWidth: "500px",
+        maxHeight: '500px',
+        overflowY: 'scroll',
         boxShadow: '0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)',
         color: "#4a4a4a"
       },
       header: {
-        display: 'flex',
+        //display: 'flex',
         width: '100%',
         borderTopLeftRadius: '3px',
         borderTopRightRadius: '3px',
@@ -99,15 +102,16 @@ class CallHistory extends VertoBaseComponent {
     const listitems = this.props.history.map((i, index)=>{
       return(
         <CallHistoryItem
-            callerId={i.callerId}
             key={index}
             data={i}
+            cbClick={()=>{
+              console.log('sup bitch', i.callerId);
+              this.props.cbCall(i.callerId);
+            }}
             cbShowCalls={()=>{
-          console.log(i.callerId);
-          //this.setState({...this.state, 'callItem': i.callId});
-          this.callerId = i.callerId;
-          this.setState({...this.state, 'callDetailDisplayed' : true});
-        }}
+              this.callerId = i.callerId;
+              this.setState({...this.state, 'callDetailDisplayed' : true});
+            }}
         />);
     });
 
