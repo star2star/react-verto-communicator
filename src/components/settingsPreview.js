@@ -116,7 +116,7 @@ class SettingsPreview extends VertoBaseComponent{
           paddingTop: '10px',
           paddingBottom: '5px',
           display: 'flex',
-          flex: 2,
+          flex: 1,
           flexDirection: 'column'
         },
         label: {
@@ -132,7 +132,9 @@ class SettingsPreview extends VertoBaseComponent{
           fontSize: '.85rem',
           backgroundColor: 'rgba(0,0,0,0)',
           color: 'black',
-          marginLeft: '8px'
+          marginLeft: '8px',
+          display: 'flex',
+          flexWrap: 'wrap'
 
         }
       },
@@ -160,7 +162,9 @@ class SettingsPreview extends VertoBaseComponent{
         }
       },
       menuStyle: {
-        display: "flex"
+        display: "flex",
+        flexDirection: 'row',
+        flexWrap: 'wrap'
       },
       refreshStyle: {
         backgroundColor: "#009688",
@@ -172,7 +176,8 @@ class SettingsPreview extends VertoBaseComponent{
         marginBottom: '5px',
         marginLeft: '10px',
         padding: '0 20px 0 20px',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        flexWrap: 'wrap'
       },
        saveStyle: {
         backgroundColor: '#4CAF50',
