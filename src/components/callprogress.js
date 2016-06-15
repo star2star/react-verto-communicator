@@ -94,8 +94,7 @@ class CallProgress extends VertoBaseComponent {
                 <UserVideoControls
                     cbMicMute={()=>{this.props.cbMute(this.props.callData.callId, 'mic');}}
                     cbVideoMute={()=>{this.props.cbMute(this.props.callData.callId, 'video');}}
-                    cbToggleFullScreen={()=>{console.log('ToggleFullScreen Clicked');}}
-                    cbScreenShare={()=>{console.log('Screen Share Clicked');}}
+                    cbScreenShare={this.props.cbShare}
                     cbToggleChat={()=>{console.log('ToggleChat Clicked');}}
                     userConfStatus={this.props.userConfStatus}
                 />

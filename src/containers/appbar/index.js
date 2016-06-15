@@ -147,7 +147,7 @@ class AppBar extends VertoBaseComponent {
           },
           menu: {
             position: 'absolute',
-            top: '65px',
+            top: '64px',
             left: '0px',
             right: '0px',
             // minWidth:'375px',
