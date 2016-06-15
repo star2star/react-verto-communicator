@@ -83,6 +83,12 @@ const callInfo = (state, action)=>{
         console.log('hmmm no conference on receive a chat message weird');
       }
       return oStateReturn;
+
+    case 'CLEARING_HISTORY':
+      console.log('Clearing history in callInfo-reducer hopefully');
+      CallHistoryService.getInstance().clear();
+      return oStateReturn;
+
     default:
      return oStateReturn;
     }
