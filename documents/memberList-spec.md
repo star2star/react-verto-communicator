@@ -17,10 +17,11 @@ This component will be a 'pure' component.
 
 | Prop Name | Sample | Description |
 | ------------ | ------------- | ------------- |
-| allowPresenter |  allowPresenter={true} | Boolean. Not required. This prop toggles presenter |
+| allowPresenter |  allowPresenter = { true } | Boolean. Not required. This prop toggles presenter |
 | compStyle | compStyle = {} | This prop provides style for the the member list. |
-| hasMultipleCanvases |  hasMultipleCanvases={true} | Boolean. Not required. This prop toggles multiple canvases |
+| hasMultipleCanvases |  hasMultipleCanvases = { true } | Boolean. Not required. This prop toggles multiple canvases |
 | members | members = [] | Array. Not required. Contains list of current members |
+| isModerator | isModerator = { true }  | Boolean. Not required. This prop toggles  moderator status. |
 
 
 ## b. Component State ##
