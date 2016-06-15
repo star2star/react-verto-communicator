@@ -591,7 +591,7 @@ class VertoService {
 
     getScreenId(function (error, sourceId, screen_constraints){
       if(error) {
-        console.log('EEEEERRRR: ', error);
+        //TODO Fix this 
         //$rootScope.$emit('ScreenShareExtensionStatus', error);
         return;
       }
