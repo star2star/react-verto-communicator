@@ -7,12 +7,12 @@ SignalFullIconSVG,
 SignalLowIconSVG,
 CaretUpIconSVG,
 CaretDownIconSVG } from './svgIcons';
-import { FormattedMessage } from 'react-intl';
-
+import { injectIntl, FormattedMessage } from 'react-intl';
+import ToolTip from './tooltip';
+import ReactDOMServer  from 'react-dom/server';
 
 const propTypes = {
   allowDisplayDetails : React.PropTypes.bool,
-  cbClick : React.PropTypes.func,
   compStyle : React.PropTypes.object,
   networkData : React.PropTypes.object.isRequired
 };
@@ -24,12 +24,6 @@ const defaultProps = {
 class NetworkStatusIndicator extends VertoBaseComponent {
   constructor(props) {
     super(props);
-    this.state = {'dropdownDisplayed': false};
-
-    this.toggleDisplay = this.toggleDisplay.bind(this);
-
-    NetworkStatusIndicator.toggleNetworkStatus = this.toggleDisplay.bind(this);
-    NetworkStatusIndicator.closeNetworkStatus = this.closeDisplay.bind(this);
   }
 
   getCompStyle() {
@@ -38,40 +32,9 @@ class NetworkStatusIndicator extends VertoBaseComponent {
 
   getDefaultStyle(styleName) {
     const styles = {
-      container: {
-        display: 'flex',
-        position: 'relative',
-        alignItems: 'center'
-      },
-      iconsContainer: {
-        display: 'flex',
-        position: 'relative',
-        alignItems: 'center'
-      },
       icon: {
         height: '24px',
         width: '24px'
-      },
-      caret: {
-        fill: '#fff',
-        flexGrow: 1,
-        height: '17px',
-        width: '19px'
-      },
-      menu: {
-        position: 'absolute',
-        zIndex: 1,
-        //minWidth: '250px',
-        top: '40px',
-        right: '20px',
-        display: this.state.dropdownDisplayed ? 'flex' : 'none',
-        flexDirection: 'column',
-        //padding: '10px',
-        backgroundColor: '#fff',
-        border: '1px solid #ccc',
-        borderBottomLeftRadius: '4px',
-        borderBottomRightRadius: '4px',
-        boxShadow: '0 2px 5px 0 rgba(0,0,0,.25)'
       },
       header: {
         display: 'flex',
@@ -103,16 +66,8 @@ class NetworkStatusIndicator extends VertoBaseComponent {
     return (styles[styleName]);
   }
 
-  toggleDisplay() {
-    this.setState({...this.state,'dropdownDisplayed': !this.state.dropdownDisplayed});
-  }
-
-  closeDisplay() {
-    //console.log('$$$$$$ Close NetworkStatusIndicator!!!!');
-    this.setState({...this.state,'dropdownDisplayed': false});
-  }
-
   render() {
+    const { formatMessage } = this.props.intl;
 
     //console.log('&&&&&&&&&&&&& this.props.compStyle', this.props.compStyle);
 
@@ -137,67 +92,38 @@ class NetworkStatusIndicator extends VertoBaseComponent {
             icon = (<SignalLowIconSVG svgStyle={{...this.getStyle('icon'), fill: 'red'}} />);
     }
 
-    const caret = this.state.dropdownDisplayed ? (<CaretUpIconSVG svgStyle={this.getStyle('caret')}/>)
-    : (<CaretDownIconSVG svgStyle={this.getStyle('caret')}/>);
-
-    const iconsContainer = (
-      <div
-          networkData={this.networkData}
-          style={this.getStyle('iconsContainer')}
-          onClick={this.props.cbClick}
-      >
-        {icon}
-        {caret}
-      </div>
-    );
-
-    const menuContainer = (
-
-      <div className="menuContainer" style={this.getStyle('menu')} >
+    const toolTipMessage =(
+      <span>
         <div style={this.getStyle('header')} >
-            <FormattedMessage id="BANDWIDTH_INFO" />
-        </div>
-        <div
-            style={this.getStyle('li')}
-            className="upkpbs"
-        >
-          <FormattedMessage id="BANDWIDTH_INFO_OUTGOING" /> {this.props.networkData.upkpbs}
+            {formatMessage({"id":"BANDWIDTH_INFO", "defaultMessage":"Bandwidth Info"})}
         </div>
         <div
             style={this.getStyle('li')}
         >
-          <FormattedMessage id="BANDWIDTH_INFO_INCOMING" /> {this.props.networkData.downkpbs}
+          {formatMessage({"id":"BANDWIDTH_INFO_OUTGOING", "defaultMessage":"Bandwidth Info"})} {this.props.networkData.upkpbs}
         </div>
         <div
             style={this.getStyle('li')}
         >
-            <FormattedMessage id="BANDWIDTH_INFO_VIDEO_RES" /> {this.props.networkData.vidQual}
+          {formatMessage({"id":"BANDWIDTH_INFO_INCOMING", "defaultMessage":"Bandwidth Info"})} {this.props.networkData.downkpbs}
         </div>
-      </div>
+        <div
+            style={this.getStyle('li')}
+        >
+            {formatMessage({"id":"BANDWIDTH_INFO_VIDEO_RES", "defaultMessage":"Bandwidth Info"})} {this.props.networkData.vidQual}
+        </div>
+        </span>
     );
 
-    let nsi;
-    if(this.props.allowDisplayDetails) {
-      nsi =
-        (<div
-            style={this.getStyle('container')}
-            onClick={
-              this.toggleDisplay
-            }
-         >
-          {iconsContainer}
-          {menuContainer}
-        </div>);
+    if (this.props.allowDisplayDetails) {
+      return  (<ToolTip place="bottom" name="nsi" msg={toolTipMessage}>{icon}</ToolTip>) ;
     } else {
-      return icon;
+      return (icon);
     }
 
-    return (
-      nsi
-    );
   }
 }
 
 NetworkStatusIndicator.propTypes = propTypes;
 NetworkStatusIndicator.defaultProps = defaultProps;
-export default NetworkStatusIndicator;
+export default injectIntl(NetworkStatusIndicator);
