@@ -19,8 +19,8 @@ This is a ‘pure' component.
 
 | Prop Name | Sample | Description |
 | ------------ | ------------- | ------------- |
-| selectedOption | selectedOption={id:"selectedVideo", label:"FaceTime HD Camera"} | An object. Required. Contains the selected data for a setting select field.
-| compStyle |  _NOTE styles are in JSX, not CSX_ {   container: {display: 'flex', position: 'relative'},  inputStyle {fontSize: '1rem'} }m | Optional prop. If value is provided, then it will render new styles, if not it will render default styling. |
+| checkedOption: <br> name: React.PropTypes.string, value: React.PropTypes.bool |checkedOption={name:"useVideo", value:this.props.settings.useVideo} | An object. Required. Contains the data for a setting checkbox field.
+| compStyle |  _NOTE styles are in JSX, not CSX_ { container: {display: 'flex', position: 'relative'},  inputStyle {fontSize: '1rem'} } | Optional prop. If value is provided, then it will render new styles, if not it will render default styling. |
 | cbSubmitSetting | Function implemented and bound to a higher-order parent container of this component | Function. Required. This prop is invoked when a setting is changed by either selecting a menu item or checking a box. |
 
 
@@ -41,7 +41,7 @@ This component is a pure component and it will maintain it’s own state.
 
 The component to be developed requires the following components:
 
-- vertobasecomponent
+- VertoBaseComponent
 - svgIcons
 
 # 5. Unit Testing Requirement #

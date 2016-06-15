@@ -1,10 +1,11 @@
 # Component Name:  MemberItem  #
 # 1. Functional Description #
 
-This component creates the visual representation of a member item inside the communicator.
+This component creates the member item for a video session. It is a rectangular display showing user avatar, name, email, and 2 icons (microphone & video). The icons are clicked to mute/unmute audio and/or video. Badges will appear across the bottom to indicate when the user has the Floor, when the Floor is locked,  when Screen Share is enabled, and Presenter Status.
 
 # 2. Visual Design #  
-
+TODO: add badge images
+*****
 ![A visual example of MemberList](img/memberItem-img.png)
 
 # 3. Component Type #
@@ -15,8 +16,9 @@ This component will be a 'pure' component.
 
 | Prop Name | Sample | Description |
 | ------------ | ------------- | ------------- |
-| message | message = {} | This prop is an object and is not required. This object contains the information necessary to print out the full chat message. |
-| compStyle |  compStyle={} | This prop is an object and it styles the chat message item component.  |
+| cbControlClick |  Function implemented and bound to a higher-order parent container of this component | Function. Required. This prop is invoked when a control is used by clicking a control icon. |
+| controlSettings: moderator: React.PropTypes.bool, multCanvas: React.PropTypes.bool, allowPresenter: React.PropTypes.bool |      | Object. Required. Contains the data for the control settings. 
+| member | member={} | Object. Required. Contains all necessary member data. |
 
 
 ## b. Component State ##
@@ -35,5 +37,6 @@ his component is NOT a context-aware component
 - SvgIcons
 
 # 6. Unit Testing Requirement #
+Tests for this component are located at:
 
-Tests can be found in src/tests.
+        src/tests/memberItem-test.js
