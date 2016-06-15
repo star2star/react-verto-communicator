@@ -39,7 +39,7 @@ export default class ChatMessageList extends VertoBaseComponent {
         borderLeft: '1px solid #d1d1d1',
         backgroundColor: '#FAFAFA',
         overflowY: 'auto',
-        height: "95%"
+        //height: "95%"
       }
     };
 

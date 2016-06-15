@@ -8,6 +8,7 @@ import moment from 'moment';
 const propTypes = {
   compStyle : React.PropTypes.object,
   history : React.PropTypes.array,
+  cbClearHistory : React.PropTypes.func,
   cbCall : React.PropTypes.func,
   cbBack: React.PropTypes.func.isRequired,
   callerId : React.PropTypes.string
@@ -191,10 +192,7 @@ class CallHistory extends VertoBaseComponent {
               <span
                 className="rmvHistory"
                 style={{...this.getDefaultStyle('rmvHistory')}}
-                onClick={()=>{
-                  // var h = [];
-                  // this.props.history = h;
-                }}
+                onClick={this.props.cbClearHistory}
               >
               Remove History
               </span>

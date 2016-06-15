@@ -22,11 +22,28 @@ class App extends VertoBaseComponent {
     }
 
     this.setState({ ...this.state, isModalOpen: !this.state.isModalOpen });
-
   }
+
+  getCompStyle() {
+    return this.props.compStyle;
+  }
+
+  getDefaultStyle(styleName) {
+    const styles = {
+      appStyles: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        height: '100vh' // want to fill the whole screen height
+      }
+    };
+
+    return (styles[styleName]);
+  }
+
   render(){
     return (
-      <div>
+      <div style={this.getStyle("appStyles")}>
         <AppBar />
         <Main />
         {this.modal}

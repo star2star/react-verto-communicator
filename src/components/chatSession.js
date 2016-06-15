@@ -33,7 +33,8 @@ export default class ChatSession extends VertoBaseComponent {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'stretch',
-        flex: 1
+        overflow: 'hidden',
+        height: '100%'  // fill the container height
       },
 
       headerStyles : {
@@ -103,7 +104,7 @@ export default class ChatSession extends VertoBaseComponent {
       );
 
       return(
-        <div style={this.getStyle("csStyles")} >
+        <div className="chatSession" style={this.getStyle("csStyles")} >
 
           <ChatMessageList
               chatItems={this.props.chatData.messages}

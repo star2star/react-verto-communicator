@@ -40,6 +40,7 @@ export default class MemberList extends VertoBaseComponent {
         flex: 1,
         borderLeft: '1px solid #d1d1d1',
         backgroundColor: '#FAFAFA',
+        maxHeight: '100%', // need this so list will scroll on overflow...
         overflowY: 'auto'
       }
     };
@@ -63,7 +64,7 @@ export default class MemberList extends VertoBaseComponent {
 
     return(
         <div className="memberList" style={this.getStyle('MLStyles')}>
-          {members}
+        {members}
         </div>
       );
   }
