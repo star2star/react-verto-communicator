@@ -5,7 +5,7 @@ This component creates the visual representation of a member item inside the com
 
 # 2. Visual Design #  
 
-![An example of a chat input field , taken from the 'original' verto ](https://raw.githubusercontent.com/star2star/react-verto-communicator/master/documents/img/chatmessageitem-img.png)
+![A visual example of MemberList](img/memberItem-img.png)
 
 # 3. Component Type #
 
