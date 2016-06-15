@@ -65,10 +65,24 @@ class CallHistory extends VertoBaseComponent {
         height: '40px',
         backgroundColor: '#eee'
       },
+      headerSvgs : {
+        cursor: 'pointer',
+        fill: "#4a4a4a",
+        width: '24px',
+        height: '24px'
+      },
       rmvHistory : {
         marginLeft: 'auto',
         cursor: 'pointer'
       },
+      body : {
+      minHeight: '375px',
+      minWidth: '375px',
+      maxWidth: "500px",
+      maxHeight: '500px',
+      overflowY: 'auto',
+      overflowX: 'hidden'
+    },
       details: {
         display: 'flex',
         alignItems: 'center',
@@ -150,13 +164,22 @@ class CallHistory extends VertoBaseComponent {
                   onClick={()=>{
                     this.setState({...this.state, 'callDetailDisplayed': false});
                   }}>
-                  <BackArrowIconSVG svgStyle={{fill: "#4a4a4a", width: '24px', height: '24px'}} />
+                  <BackArrowIconSVG svgStyle={{...this.getDefaultStyle('headerSvgs')}} />
               </span>
               Call History
+              <span
+                  className="rmvHistory"
+                  style={{...this.getDefaultStyle('rmvHistory')}}
+                  onClick={this.props.cbClearHistory}
+                  tabIndex="0"
+              >
+                  Remove History
+              </span>
           </div>
         </div>
         <div
             className="body"
+            tabIndex="0"
             style={{...this.getDefaultStyle('body')}}
         >
           <div>
@@ -180,8 +203,11 @@ class CallHistory extends VertoBaseComponent {
               className="header"
               style={{...this.getDefaultStyle('header')}}
           >
-              <span onClick={this.props.cbBack}>
-                  <RemoveIconSVG svgStyle={{fill: "#4a4a4a", width: '24px', height: '24px'}} />
+              <span
+                  onClick={this.props.cbBack}
+                  tabIndex="0"
+              >
+                  <RemoveIconSVG svgStyle={{...this.getDefaultStyle('headerSvgs')}} />
               </span>
               <span
                   className="title"
@@ -190,16 +216,18 @@ class CallHistory extends VertoBaseComponent {
                   Call History
               </span>
               <span
-                className="rmvHistory"
-                style={{...this.getDefaultStyle('rmvHistory')}}
-                onClick={this.props.cbClearHistory}
+                  className="rmvHistory"
+                  style={{...this.getDefaultStyle('rmvHistory')}}
+                  onClick={this.props.cbClearHistory}
+                  tabIndex="0"
               >
-              Remove History
+                  Remove History
               </span>
           </div>
         </div>
         <div
           className="body"
+          tabIndex="0"
           style={{...this.getDefaultStyle('body')}}
         >
           {listitems}
