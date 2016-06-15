@@ -41,7 +41,7 @@ export default class AdminControls extends VertoBaseComponent {
           height: '30px',
           width: '30px',
           fill: 'gray',
-          paddingTop: '20px'
+          paddingTop: '10px'
         }
       },
 
@@ -50,24 +50,34 @@ export default class AdminControls extends VertoBaseComponent {
         display: 'flex',
         justifyContent: 'center',
         fontSize: '10px',
-        fill: '#444'
+        fill: '#444',
+        paddingBottom: '5px',
+        paddingTop: '5px'
       },
 
       generalStyle:{
+        display: 'flex',
+        justifyContent: 'space-around',
+        paddingBottom: '10px'
+      },
+
+      bannerStyle: {
+        paddingBottom: '10px',
         display: 'flex',
         justifyContent: 'space-around'
       },
 
       multiCanvasStyle:{
         display: 'flex',
-        justifyContent: 'space-between',
-        paddingBottom: '5px'
+        justifyContent: 'space-around',
+        paddingBottom: '10px'
       },
 
       canvasStyle: {
         display: 'flex',
-        justifyContent: 'space-between',
-        flexDirection: 'row'
+        justifyContent: 'space-around',
+        flexDirection: 'row',
+        paddingBottom: '10px'
 
       }
     };
@@ -212,7 +222,7 @@ export default class AdminControls extends VertoBaseComponent {
         </div>
         <div className="bannerSettings" style={{flex: '1', border:'1px solid #e9e9e9'}}>
           <div style={this.getStyle("headingStyle")}>BANNER</div>
-          <div style={{display: 'flex', justifyContent: 'space-around'}}>
+          <div style={this.getStyle("bannerStyle")}>
             <ControlItem type="StatusIconSVG" label="Set"
                 compStyle={this.getStyle("controlIconStyle")}
                 cbActionClick={()=>{
