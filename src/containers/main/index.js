@@ -75,7 +75,7 @@ class Main extends VertoBaseComponent {
         console.log('Answering: ', d);
         this.props.dispatch(doAnswer(d.callID));
       }}  />);
-    })
+    });
 
 
     switch (this.props.auth.showPage){
@@ -117,7 +117,7 @@ class Main extends VertoBaseComponent {
         splashObject.errorObject = {
           header: formatMessage({"id":"ERRORS", "defaultMessage":"Errors"}),
           body: formatMessage({"id":"ERROR_PERMISSION_MEDIA", "defaultMessage":"Error: internal error checking resolution"})
-        }
+        };
         break;
       case 'bns':
         //console.log('BBBNNNNSSSS', this.props.auth);
@@ -125,14 +125,14 @@ class Main extends VertoBaseComponent {
         splashObject.errorObject = {
           header: formatMessage({"id":"ERRORS", "defaultMessage":"Errors"}),
           body: formatMessage({"id":"BROWSER_WITHOUT_WEBRTC", "defaultMessage":"Error: browser doesn't support WebRTC"})
-        }
+        };
         break;
       case 'noMedia':
         splashObject.title = formatMessage({"id":"CHECK_PERMISSION_MEDIA", "defaultMessage":"Checking media permissions"});
         splashObject.errorObject = {
           header: formatMessage({"id":"ERRORS", "defaultMessage":"Errors"}),
           body: formatMessage({"id":"ERROR_PERMISSION_MEDIA", "defaultMessage":"Error: Media Permission Denied"})
-        }
+        };
         break;
       case 'call_inprogress':
         //console.log('jjj');
