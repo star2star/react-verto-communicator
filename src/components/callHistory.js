@@ -187,7 +187,7 @@ class CallHistory extends VertoBaseComponent {
               >
                   <BackArrowIconSVG svgStyle={{...this.getDefaultStyle('headerSvgs')}} />
               </span>
-              Call History
+              {this.callerId}
               <span
                   className="rmvHistory"
                   style={{...this.getDefaultStyle('rmvHistory')}}
