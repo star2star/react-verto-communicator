@@ -248,10 +248,6 @@ class AppBar extends VertoBaseComponent {
   }
 
   handleCloseDropdowns() {
-    // close any open 'menus'
-    if (this.props.bandwidthInfo.outgoingBandwidth && this.props.bandwidthInfo.incomingBandwidth) {
-      NetworkStatusIndicator && NetworkStatusIndicator.closeNetworkStatus();
-    }
     UserMenu.closeMenu();
     TagMenu.closeMenu();
   }
@@ -263,9 +259,6 @@ class AppBar extends VertoBaseComponent {
 
   settings(displaySettings) {
     // Close any open menus in the appbar
-    if (this.props.bandwidthInfo.outgoingBandwidth && this.props.bandwidthInfo.incomingBandwidth) {
-      NetworkStatusIndicator && NetworkStatusIndicator.closeNetworkStatus();
-    }
     UserMenu.closeMenu();
     TagMenu.closeMenu();
 
@@ -547,7 +540,6 @@ showSpeeds(){
       nsIndicator = (
         <NetworkStatusIndicator
             compStyle={this.state.showAltAppControls ? this.getStyle("altNsiCompStyle") : this.getStyle("nsiCompStyle")}
-            cbClick={this.handleCloseDropdowns}
             networkData={{upkpbs: this.props.bandwidthInfo.outgoingBandwidth,
                           downkpbs: this.props.bandwidthInfo.incomingBandwidth,
                           vidQual: vidQual}}
@@ -609,7 +601,7 @@ showSpeeds(){
           <span className="appName" style={this.getStyle("appNameStyles")}>{appName}</span>
 
           <span className="appControls" style={acStyles}>
-            {nsIndicator}
+            <span style={{marginRight: "10px" }}>{nsIndicator}</span>
             <VCStatus status = {this.props.vcStatus} compStyle={!this.state.showAltAppControls ? {svgStyle:{marginRight: '20px'}}:{svgStyle:{marginBottom:'10px'}}}/>
             {lastCall}
 

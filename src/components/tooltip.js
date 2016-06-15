@@ -1,11 +1,14 @@
 import React from 'react';
 import { Tooltip, Origin } from 'redux-tooltip';
 import VertoBaseComponent from './vertobasecomponent';
+import { FormattedMessage } from 'react-intl';
 
 const propTypes = {
   place: React.PropTypes.string.isRequired,
   name: React.PropTypes.string.isRequired,
-  msg: React.PropTypes.string.isRequired,
+  msg: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.object ]).isRequired,
   compStyle: React.PropTypes.object
 };
 
