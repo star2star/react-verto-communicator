@@ -17,9 +17,11 @@ This component will be a 'pure' component.
 
 | Prop Name | Sample | Description |
 | ------------ | ------------- | ------------- |
-| |  = {} | This prop is an object and is not required. This prop contains the information for each message in the chat. |
-| compStyle | compStyle = {} | This prop provides style for the the chat list. |
-|  |   = {} | This prop is an object and is not required. This object contains the names of all the users who are currently in a particular chat session |
+| allowPresenter |  allowPresenter = { true } | Boolean. Not required. This prop toggles presenter |
+| compStyle | compStyle = {} | This prop provides style for the the member list. |
+| hasMultipleCanvases |  hasMultipleCanvases = { true } | Boolean. Not required. This prop toggles multiple canvases |
+| members | members = [] | Array. Not required. Contains list of current members |
+| isModerator | isModerator = { true }  | Boolean. Not required. This prop toggles  moderator status. |
 
 
 ## b. Component State ##
@@ -33,8 +35,9 @@ This component will be a 'pure' component.
 # 4. Reference Components #
 
 - VertoBaseComponent
-- MemberIte
+- MemberItem
 
 # 6. Unit Testing Requirement #
+Tests for this component are located at:
 
-tests can be found in src/tests
+        src/tests/memberList-test.js
