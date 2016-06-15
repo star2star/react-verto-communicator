@@ -2,7 +2,15 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import AdminControls from './memberAdminControlPanel';
 import ControlItem from './controlItem';
-import {MicrophoneIconSVG, VideoIconSVG, PresenterIconSVG, MuteMicrophoneIconSVG, MuteVideoIconSVG, KickIconSVG, FullScreenIconSVG} from './svgIcons';
+import {
+  MicrophoneIconSVG,
+  VideoIconSVG,
+  PresenterIconSVG,
+  MuteMicrophoneIconSVG,
+  MuteVideoIconSVG,
+  FullScreenIconSVG,
+  LockIconSVG
+} from './svgIcons';
 
 const propTypes = {
   cbControlClick : React.PropTypes.func.isRequired,
@@ -72,9 +80,27 @@ export default class MemberItem extends VertoBaseComponent {
           paddingRight: '10px'
         }
       },
+      floorBadgeStyle: {
+        backgroundColor: '#1194f6',
+        color: '#fff',
+        fontSize: '.8rem',
+        padding: '1px 3px'
+      },
       floorLockStyle: {
         height: '10px',
-        fill: '#888'
+        fill: '#fff'
+      },
+      lockFloorBadgeStyle: {
+        backgroundColor: '#f45a5a',
+        color: '#fff',
+        fontSize: '.8rem',
+        padding: '1px 3px'
+      },
+      presenterBadgeStyle: {
+        backgroundColor: '#1194f6',
+        color: '#fff',
+        fontSize: '.8rem',
+        padding: '1px 3px'
       }
     };
 
@@ -146,17 +172,18 @@ export default class MemberItem extends VertoBaseComponent {
 
       if (this.state.showAdminControls) {
         adminControls = (
-          <AdminControls member={this.props.member} multCanvas={this.props.controlSettings.multCanvas} cbControlClick={this.props.cbControlClick}/>
+          //<AdminControls member={this.props.member} multCanvas={this.props.controlSettings.multCanvas} cbControlClick={this.props.cbControlClick}/>
+          <AdminControls member={this.props.member} multCanvas={true} cbControlClick={this.props.cbControlClick}/>
         );
       }
     }
 
     const floorLocked = this.props.member.conferenceStatus.video.floorLocked ?
-            (<KickIconSVG svgStyle={this.getStyle("floorLockStyle")}/>) :
+            (<span style={this.getStyle("lockFloorBadgeStyle")}><LockIconSVG svgStyle={this.getStyle("floorLockStyle")}/> Floor</span>) :
             undefined;
 
     const floor = this.props.member.conferenceStatus.audio.floor ?
-            (<span style={this.getStyle("floorBadgeStyle")}>{floorLocked} Floor</span>) :
+            (<span style={this.getStyle("floorBadgeStyle")}>Floor</span>) :
             undefined;
 
     const screenShare = this.props.member.conferenceStatus.video.screenShare ?
@@ -175,6 +202,7 @@ export default class MemberItem extends VertoBaseComponent {
           <span style={this.getStyle("emailStyle")}>{this.props.member.avatar.email}</span>
           <span>
             {floor}
+            {floorLocked}
             {screenShare}
             {presenter}
           </span>

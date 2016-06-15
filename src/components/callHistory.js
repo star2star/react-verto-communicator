@@ -30,7 +30,8 @@ class CallHistory extends VertoBaseComponent {
       container: {
         display: 'flex',
         flex: 1,
-        alignItems: "flex-start",
+        alignItems: 'flex-start',
+        alignContent: 'stretch',
         borderRadius: '3px',
         justifyContent: 'flex-start',
         flexDirection: "column",
@@ -43,18 +44,18 @@ class CallHistory extends VertoBaseComponent {
         boxShadow: '0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)',
         color: "#4a4a4a"
       },
-      headerCont : {
-        display: 'block',
-        //flex: '1 100%',
-        //width: '100%', // this is a bad bad no no
-        //flex: 'auto',
-        minWidth: '375px' // i'm not sure if this is ok...
-        //justifyContent: 'stretch'
-      },
+      // headerCont : {
+      //   display: 'flex',
+      //   flex: '1 100%',
+      //   width: '100%', // this is a bad bad no no
+      //   flex: 'auto',
+      //   minWidth: '375px' // i'm not sure if this is ok...
+      //   //justifyContent: 'stretch'
+      // },
       header: {
         display: 'flex',
-        //flex: 1,
-        //minWidth: '375px',
+        flex: 1,
+        minWidth: '375px',
         alignItems: 'center',
         paddingLeft: '5px',
         paddingRight: '15px',
@@ -76,16 +77,19 @@ class CallHistory extends VertoBaseComponent {
         cursor: 'pointer'
       },
       body : {
-      minHeight: '375px',
-      minWidth: '375px',
-      maxWidth: "500px",
-      maxHeight: '500px',
-      overflowY: 'auto',
-      overflowX: 'hidden'
+        minHeight: '375px',
+        minWidth: '375px',
+        maxWidth: "500px",
+        maxHeight: '500px',
+        overflowY: 'auto',
+        overflowX: 'hidden',
+        padding: '10px'
     },
       details: {
         display: 'flex',
+        minWidth: '375px',
         alignItems: 'center',
+        //justifyContent: 'center',
         color: '#ccc',
         fontSize: '12px'
       },
@@ -108,11 +112,11 @@ class CallHistory extends VertoBaseComponent {
     const self = this; // so I can use inside of map
     let details; // declaring details variable
     if(this.props.history.length > 0){ // if history array is greater than zero
-      if(this.state.callDetailDisplayed) {
+      if(this.state.callDetailDisplayed) { // detail state is true
         const detailData = CallHistoryService.getInstance().getHistoryDetail(this.callerId);
-        details = detailData.map(function(i, key){
-          let renderedDirection;
-          if(i.direction == 'outgoing') {
+        details = detailData.map(function(i, key){ // mapping over detailData and assigning it to details
+          let renderedDirection; // svg fun
+          if(i.direction == 'outgoing') { // if 'outgoing' it renders an up arrow svg
             renderedDirection = (
               <span className="outgoing" >
                 <UpArrowIconSVG svgStyle={{fill: '#009688', width: '24px', height: '24px'}}/>
@@ -126,7 +130,7 @@ class CallHistory extends VertoBaseComponent {
 
           const formattedTimestamp = moment(i.timestamp).format('ddd MMM DD YYYY HH:mm:ss A');
 
-          return (
+          return ( //after all that it returns a simple div with the correlating svg and formatted timestamp
             <div
                 className="details"
                 key={key}
@@ -136,15 +140,15 @@ class CallHistory extends VertoBaseComponent {
               {formattedTimestamp}
             </div>
           );
-      });
+      }); // end of map function
     } else {
         details = (<div
               className="noCallDetails"
               style={{...self.getDefaultStyle('noCallDetails')}}
           >
-            <div>
+            <span>
               No calls to show.
-            </div>
+            </span>
         </div>
       );
     }
@@ -173,39 +177,33 @@ class CallHistory extends VertoBaseComponent {
           style={this.getStyle('container')}
       >
         <div
-            className="headerCont"
-            style={{...this.getDefaultStyle('headerCont')}}
+            className="header"
+            style={{...this.getDefaultStyle('header')}}
         >
-          <div
-              className="header"
-              style={{...this.getDefaultStyle('header')}}
-          >
-              <span
-                  onClick={()=>{
-                    this.setState({...this.state, 'callDetailDisplayed': false});
-                  }}
-              >
-                  <BackArrowIconSVG svgStyle={{...this.getDefaultStyle('headerSvgs')}} />
-              </span>
-              {this.callerId}
-              <span
-                  className="rmvHistory"
-                  style={{...this.getDefaultStyle('rmvHistory')}}
-                  onClick={this.props.cbClearHistory}
-                  tabIndex="0"
-              >
-                  Remove History
-              </span>
-          </div>
+            <span
+                onClick={()=>{
+                  this.setState({...this.state, 'callDetailDisplayed': false});
+                }}
+            >
+                <BackArrowIconSVG svgStyle={{...this.getDefaultStyle('headerSvgs')}} />
+            </span>
+            {this.callerId}
+            <span
+                className="rmvHistory"
+                style={{...this.getDefaultStyle('rmvHistory')}}
+                onClick={this.props.cbClearHistory}
+                tabIndex="0"
+            >
+                Remove History
+            </span>
         </div>
         <div
             className="body"
             tabIndex="0"
             style={{...this.getDefaultStyle('body')}}
         >
-          <div>
             {details}
-          </div>
+
         </div>
       </div>
     );
