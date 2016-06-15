@@ -112,11 +112,11 @@ class CallHistory extends VertoBaseComponent {
     const self = this; // so I can use inside of map
     let details; // declaring details variable
     if(this.props.history.length > 0){ // if history array is greater than zero
-      if(this.state.callDetailDisplayed) {
+      if(this.state.callDetailDisplayed) { // detail state is true
         const detailData = CallHistoryService.getInstance().getHistoryDetail(this.callerId);
-        details = detailData.map(function(i, key){
-          let renderedDirection;
-          if(i.direction == 'outgoing') {
+        details = detailData.map(function(i, key){ // mapping over detailData and assigning it to details
+          let renderedDirection; // svg fun
+          if(i.direction == 'outgoing') { // if 'outgoing' it renders an up arrow svg
             renderedDirection = (
               <span className="outgoing" >
                 <UpArrowIconSVG svgStyle={{fill: '#009688', width: '24px', height: '24px'}}/>
@@ -130,7 +130,7 @@ class CallHistory extends VertoBaseComponent {
 
           const formattedTimestamp = moment(i.timestamp).format('ddd MMM DD YYYY HH:mm:ss A');
 
-          return (
+          return ( //after all that it returns a simple div with the correlating svg and formatted timestamp
             <div
                 className="details"
                 key={key}
@@ -140,15 +140,15 @@ class CallHistory extends VertoBaseComponent {
               {formattedTimestamp}
             </div>
           );
-      });
+      }); // end of map function
     } else {
         details = (<div
               className="noCallDetails"
               style={{...self.getDefaultStyle('noCallDetails')}}
           >
-            <div>
+            <span>
               No calls to show.
-            </div>
+            </span>
         </div>
       );
     }
