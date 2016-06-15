@@ -47,6 +47,30 @@ export default class UserVideoControls extends VertoBaseComponent {
 
   handleToggleFullScreen() {
     console.log('Handle Toggle Full Screen');
+
+    const elem = document.getElementById("chatVideoWrapper");
+    if (!document.fullscreenElement && !document.mozFullScreenElement &&
+      !document.webkitFullscreenElement && !document.msFullscreenElement) {
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen();
+      } else if (elem.mozRequestFullScreen) {
+        elem.mozRequestFullScreen();
+      } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      }
+    }
   }
 
   render(){
@@ -72,18 +96,18 @@ export default class UserVideoControls extends VertoBaseComponent {
                 cbActionClick={this.props.cbVideoMute}
             />);
 
-    const screenStatus = document.webkitIsFullScreen ?
+    const screenStatus = document.webkitIsFullScreen || document.mozFulScreen ?
             (<ControlItem type="RestoreIconSVG"
                 compStyle={this.getStyle("controlIconStyle")}
-                cbActionClick={this.props.cbToggleFullScreen}
+                cbActionClick={this.handleToggleFullScreen}
             />) :
             (<ControlItem type="FullScreenIconSVG"
                 compStyle={this.getStyle("controlIconStyle")}
-                cbActionClick={this.props.cbToggleFullScreen}
+                cbActionClick={this.handleToggleFullScreen}
             />);
 
 
-    // Build out the admin control panel
+    // Build out the user controls
     return (
       <div style={{display: 'flex'}}>
         {micStatus}

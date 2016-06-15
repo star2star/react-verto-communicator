@@ -4,7 +4,20 @@ import VertoBaseComponent from '../../components/vertobasecomponent';
 import { connect } from 'react-redux';
 //import ReactTooltip from 'react-tooltip';
 import VCStatus from '../../components/vcstatus';
-import { doSubmitLogin, doSubmitLogOut, doMakeCall, doSendChat, doHangUp, doAnswer, doMuteMic, doHold, doMuteVideo, doSendConfCommand, doShareScreen, doClearHistory } from './action-creators';
+import {
+    doSubmitLogin,
+    doSubmitLogOut,
+    doMakeCall,
+    doSendChat,
+    doHangUp,
+    doAnswer,
+    doMuteMic,
+    doHold,
+    doMuteVideo,
+    doSendConfCommand,
+    doShareScreen,
+    doClearHistory }
+from './action-creators';
 import Splash from '../../components/splash';
 import Login from '../../components/login';
 import Dialpad from '../../components/dialpad';
@@ -77,9 +90,9 @@ class Main extends VertoBaseComponent {
         console.log('hang up', d);
         this.props.dispatch(doHangUp(d.callID));
       }}
-      cbAnswer={(d)=>{
-        console.log('Answering: ', d);
-        this.props.dispatch(doAnswer(d.callID));
+          cbAnswer={(d)=>{
+          console.log('Answering: ', d);
+          this.props.dispatch(doAnswer(d.callID));
       }}  />);
     });
 
@@ -144,9 +157,9 @@ class Main extends VertoBaseComponent {
         //console.log('jjj');
         // Extract conference data from currentCall (if it is a conference)
         {
-          const confData = this.props.callInfo.activeCalls[this.props.callInfo.currentCallId].conferenceData;
-          window.conf = confData;
-          if (confData) {
+          //const confData = this.props.callInfo.activeCalls[this.props.callInfo.currentCallId].conferenceData;
+          window.conf = this.props.confData;
+          if (this.props.confData) {
             loggedInfo = (
               <div>
                 <CallProgress callData={this.props.callInfo.activeCalls[this.props.callInfo.currentCallId]}
@@ -169,7 +182,8 @@ class Main extends VertoBaseComponent {
                     cbShare={()=>{
                       this.props.dispatch(doShareScreen(this.props.app));
                     }}
-                    userConfStatus={confData.users[confData.callId].conferenceStatus}
+                    isModerator={this.props.confData.currentRole == 'moderator'}
+                    userConfStatus={this.props.confData.users[this.props.confData.callId].conferenceStatus}
                 />
               </div>
             );
@@ -182,24 +196,24 @@ class Main extends VertoBaseComponent {
 
           // NOTE:  Child components MUST be in the same order that their labels
           // are in the tabLabels array
-          if (confData) {
+          if (this.props.confData) {
             chatSideBar = (
               <div className="sidebarWrapper" style={{flex:'0 0 360px', height: '100%'}}>
                 <TabbedContainer tabLabels={["Members", "Chat"]}>
-                  <Memberlist members={Object.keys(confData.users).map(
+                  <Memberlist members={Object.keys(this.props.confData.users).map(
                     (k)=>{
-                        return ({...confData.users[k]});
+                        return ({...this.props.confData.users[k]});
                       }
                     )}
-                      isModerator={confData.currentRole == "moderator"}
-                      allowPresenter={confData.allowPresenter}
-                      hasMultipleCanvases={confData.hasMultipleCanvases}
+                      isModerator={this.props.confData.currentRole == "moderator"}
+                      allowPresenter={this.props.confData.allowPresenter}
+                      hasMultipleCanvases={this.props.confData.hasMultipleCanvases}
                       cbControlClick={(callId, params)=>{this.handleControlClick(callId, params);}}
                   />
                   <ChatSession
                       cbRemove={()=>{}}
                       cbSubmitMessage={(id,msg)=>{this.props.dispatch(doSendChat(msg));}}
-                      chatData={confData}
+                      chatData={this.props.confData}
                   />
                 </TabbedContainer>
               </div>
@@ -216,7 +230,7 @@ class Main extends VertoBaseComponent {
       showSplash = (<Splash step={splashObject} title={intlTitle} style={{margin: 'auto'}}/>);
     }
     return (
-      <div className="chatVideoWrapper" style={{display: 'flex', height: '100%'}}>
+      <div id="chatVideoWrapper" style={{display: 'flex', height: '100%'}}>
         <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", flex:'1'}}>
           {incomingCall}
 
@@ -236,6 +250,7 @@ export default connect((state)=>{
   return ({
     auth: state.auth,
     app: state.app,
-    callInfo: state.callInfo
+    callInfo: state.callInfo,
+    confData: state.callInfo.currentCallId ? state.callInfo.activeCalls[state.callInfo.currentCallId].conferenceData : undefined
   });
 })(injectIntl(Main));
