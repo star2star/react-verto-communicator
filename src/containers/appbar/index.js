@@ -603,7 +603,7 @@ showSpeeds(){
     const settingsContainer = this.buildSettingsContainer();
 
     return (
-      <div style={{position: "absolute", left: "0px", right: "0px", top: "0px", zIndex: "1"}}>
+
         <div className="appbar" style={this.getStyle('appbarStyles')}>
           <span className="altMenu" style={this.getStyle("altMenuStyles")} onClick={this.handleAltMenuClick}>
             <MenuIconSVG svgStyle={this.getStyle("altMenuSvgStyles")} />
@@ -667,7 +667,7 @@ showSpeeds(){
           {settingsContainer}
 
         </div>
-      </div>
+      
     );
   }
 }
