@@ -58,7 +58,11 @@ export default class MemberList extends VertoBaseComponent {
     //console.log('---- ', this.props.members);
     const members = this.props.members.map((mem, index)=>{
       return (<MemberItem key={index} member={mem}
-          controlSettings={{moderator: this.props.isModerator, multCanvas: this.props.hasMultipleCanvases, allowPresenter: this.props.allowPresenter}}
+          controlSettings={{
+            moderator: this.props.isModerator,
+            multCanvas: this.props.hasMultipleCanvases,
+            allowPresenter: this.props.allowPresenter
+          }}
           cbControlClick={this.props.cbControlClick}/> );
     });
 
