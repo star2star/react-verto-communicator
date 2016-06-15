@@ -4,7 +4,7 @@ import VertoBaseComponent from '../../components/vertobasecomponent';
 import { connect } from 'react-redux';
 //import ReactTooltip from 'react-tooltip';
 import VCStatus from '../../components/vcstatus';
-import { doSubmitLogin, doSubmitLogOut, doMakeCall, doSendChat, doHangUp, doAnswer, doMuteMic, doHold, doMuteVideo, doSendConfCommand, doShareScreen } from './action-creators';
+import { doSubmitLogin, doSubmitLogOut, doMakeCall, doSendChat, doHangUp, doAnswer, doMuteMic, doHold, doMuteVideo, doSendConfCommand, doShareScreen, doClearHistory } from './action-creators';
 import Splash from '../../components/splash';
 import Login from '../../components/login';
 import Dialpad from '../../components/dialpad';
@@ -22,6 +22,7 @@ class Main extends VertoBaseComponent {
     this.state={};
 
     this.handleControlClick = this.handleControlClick.bind(this);
+    this.handleClearHistory = this.handleClearHistory.bind(this);
   }
 
   componentWillMount() {
@@ -48,6 +49,11 @@ class Main extends VertoBaseComponent {
     // based on the controlId, call the appropriate dispatch
     //console.log('@@@@@@@@@@@ control click', controlId, params);
     this.props.dispatch(doSendConfCommand(controlId, params));
+  }
+
+  handleClearHistory(){
+    console.log('at handleClearHistory()');
+    this.props.dispatch(doClearHistory());
   }
 
   render() {
@@ -101,7 +107,7 @@ class Main extends VertoBaseComponent {
       case 'loggedIn':
         loggedInfo = (
           <div>
-            <Dialpad cbCall={this.makeCall.bind(this)} lastNumber={this.props.callInfo.lastNumber} nbrToDial="" />
+            <Dialpad cbCall={this.makeCall.bind(this)} cbClearHistory={this.handleClearHistory} lastNumber={this.props.callInfo.lastNumber} nbrToDial="" />
         </div>);
         break;
       case 'resolution_failed':
