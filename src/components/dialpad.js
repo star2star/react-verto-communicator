@@ -172,6 +172,7 @@ class Dialpad extends VertoBaseComponent {
       return (
         <CallHistory
         history={CallHistoryService.getInstance().getHistory()}
+        cbClearHistory={this.props.cbClearHistory}
         cbCall={(num)=>{
           console.log('**********', num);
           this.setState({...this.state, showingCallHistory: !this.state.showingCallHistory, number : num});
