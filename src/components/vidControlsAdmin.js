@@ -10,8 +10,7 @@ const propTypes = {
   cbRecord : React.PropTypes.func.isRequired,
   cbStopRecord : React.PropTypes.func.isRequired,
   cbSnapshot : React.PropTypes.func.isRequired,
-  cbSetVideoMode : React.PropTypes.func.isRequired,
-  userConfStatus: React.PropTypes.object.isRequired
+  cbSetVideoMode : React.PropTypes.func.isRequired
 
 };
 

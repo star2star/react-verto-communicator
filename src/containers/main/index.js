@@ -32,10 +32,11 @@ class Main extends VertoBaseComponent {
   constructor(props) {
     super(props);
 
-    this.state={};
+    this.state={showChat: true};
 
     this.handleControlClick = this.handleControlClick.bind(this);
     this.handleClearHistory = this.handleClearHistory.bind(this);
+    this.handleToggleChat = this.handleToggleChat.bind(this);
   }
 
   componentWillMount() {
@@ -53,6 +54,16 @@ class Main extends VertoBaseComponent {
         justifyContent: 'flex-start',
         alignItems: 'flex-start'
       },
+      sidebarWrapStyles: {
+        flex:'0 0 360px',
+        height: '100%',
+        transition: 'width 0.3s ease-out'
+      },
+      sidebarWrapHideStyles: {
+        width: '0px',
+        transition: 'width 0.3s ease-in'
+      },
+
       loggedInfoStyles: {
         margin: 'auto'
       }
@@ -75,6 +86,11 @@ class Main extends VertoBaseComponent {
   handleClearHistory(){
     console.log('at handleClearHistory()');
     this.props.dispatch(doClearHistory());
+  }
+
+  handleToggleChat(){
+    console.log('##### Toggling chat???')
+    this.setState({...this.state, showChat: !this.state.showChat});
   }
 
   render() {
@@ -182,8 +198,11 @@ class Main extends VertoBaseComponent {
                     cbShare={()=>{
                       this.props.dispatch(doShareScreen(this.props.app));
                     }}
+                    cbToggleChat={this.handleToggleChat}
                     isModerator={this.props.confData.currentRole == 'moderator'}
-                    userConfStatus={this.props.confData.users[this.props.confData.callId].conferenceStatus}
+                    userConfStatus={this.props.confData.users[this.props.confData.callId]? this.props.confData.users[this.props.confData.callId].conferenceStatus:
+                            {}
+                          }
                 />
               </div>
             );
@@ -198,7 +217,11 @@ class Main extends VertoBaseComponent {
           // are in the tabLabels array
           if (this.props.confData) {
             chatSideBar = (
-              <div className="sidebarWrapper" style={{flex:'0 0 360px', height: '100%'}}>
+              <div className="sidebarWrapper"
+                  style={this.state.showChat ?
+                          this.getStyle("sidebarWrapStyles"):
+                          this.getStyle("sidebarWrapHideStyles")}
+              >
                 <TabbedContainer tabLabels={["Members", "Chat"]}>
                   <Memberlist members={Object.keys(this.props.confData.users).map(
                     (k)=>{

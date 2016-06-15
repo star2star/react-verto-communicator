@@ -10,6 +10,7 @@ import {ShareScreenIconSVG, AvatarSVG, DialPadIconSVG, MicrophoneIconSVG, PauseI
    cbHold:  React.PropTypes.func.isRequired,
    cbDTMF:  React.PropTypes.func.isRequired,
    cbMute:  React.PropTypes.func.isRequired,
+   cbToggleChat: React.PropTypes.func.isRequired,
    userConfStatus : React.PropTypes.object,
    cbShare: React.PropTypes.func.isRequired
 };
@@ -95,7 +96,7 @@ class CallProgress extends VertoBaseComponent {
                     cbMicMute={()=>{this.props.cbMute(this.props.callData.callId, 'mic');}}
                     cbVideoMute={()=>{this.props.cbMute(this.props.callData.callId, 'video');}}
                     cbScreenShare={this.props.cbShare}
-                    cbToggleChat={()=>{console.log('ToggleChat Clicked');}}
+                    cbToggleChat={()=>{console.log('Toggling chat in callProgress?'); this.props.cbToggleChat();}}
                     userConfStatus={this.props.userConfStatus}
                 />
               </div>
