@@ -85,8 +85,7 @@ const callInfo = (state, action)=>{
       return oStateReturn;
 
     case 'CLEARING_HISTORY':
-      console.log('Clearing history in callInfo-reducer hopefully');
-      CallHistoryService.getInstance().clear();
+      CallHistoryService.getInstance().clearHistory();
       return oStateReturn;
 
     default:
