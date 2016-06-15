@@ -39,7 +39,16 @@ export default class TabbedContainer extends VertoBaseComponent {
         height: '100%' // Set up height of wrapper
       },
       tabStyles: {
-        flex: '1'
+        flex: '1',
+        display: 'flex',
+        color: '#9b9b9b',
+        flexDirection: 'row',
+        textTransform: 'uppercase',
+        fontWeight: '500',
+        paddingLeft: '20px',
+        paddingTop: '5px',
+        justifyContent: 'center'
+
       },
       containerStyles: {
         flex: '1', // this flex item will grow/shrink within tabbedContainerWrap column
@@ -59,7 +68,7 @@ export default class TabbedContainer extends VertoBaseComponent {
     const tabs = this.props.tabLabels.map((label, index)=>{
       let theStyle=this.getStyle("tabStyles");
       if (index == this.state.activeTabIndex) {
-        theStyle = {...theStyle, borderBottom: "4px solid #1194f6"};
+        theStyle = {...theStyle, color: "#1194f6", borderBottom: "2px solid #1194f6"};
       }
       return(
         <div key={index} style={theStyle} onClick={()=>{this.handleTabClick(index);}}>{label}</div>
