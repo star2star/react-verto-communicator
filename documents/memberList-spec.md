@@ -5,7 +5,7 @@ This component creates the list of member items.
 
 # 2. Visual Design #  
 
-![A sample of a chat session](https://raw.githubusercontent.com/star2star/react-verto-communicator/master/documents/img/chatmessagelist-img.png)
+![A visual example of MemberList](img/memberList-img.png)
 
 
 # 3. Component Type #
@@ -33,7 +33,7 @@ This component will be a 'pure' component.
 # 4. Reference Components #
 
 - VertoBaseComponent
-- 
+- MemberIte
 
 # 6. Unit Testing Requirement #
 
