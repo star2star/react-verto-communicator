@@ -33,8 +33,16 @@ class Main extends VertoBaseComponent {
 
   getDefaultStyle(styleName) {
     const styles = {
+      chatVidWrapStyles : {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start'
+      }
 
-        };
+
+
+    };
 
     return (styles[styleName]);
   }
@@ -169,7 +177,7 @@ class Main extends VertoBaseComponent {
         // are in the tabLabels array
         if (confData) {
           chatSideBar = (
-            <div className="sidebarWrapper" style={{width: '360px', height: '100%'}}>
+            <div className="sidebarWrapper" style={{flex:'0 0 360px', height: '100%'}}>
               <TabbedContainer tabLabels={["Members", "Chat"]}>
                 <Memberlist members={Object.keys(confData.users).map(
                   (k)=>{
@@ -201,10 +209,12 @@ class Main extends VertoBaseComponent {
       showSplash = (<Splash step={splashObject} title={intlTitle} />);
     }
     return (
-      <div className="chatVideoWrapper" style={{display: 'flex'}}>
-        <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", flex:'1'}}>
+      <div className="chatVideoWrapper" style={{display: 'flex', height: '100%'}}>
+        <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", flex:'1'}}>
           {incomingCall}
-          <video id="webcam" autoplay="autoplay"  style={{display:"none", width:"70%", height:"70%", objectFit:"inherit"}}></video>
+
+            <video id="webcam" autoPlay="autoplay"  style={{display:"none", maxWidth:"100%", objectFit:"inherit"}}></video>
+
           {loggedInfo}
           {showSplash}
         </div>

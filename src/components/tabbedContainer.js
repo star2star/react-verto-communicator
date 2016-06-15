@@ -29,10 +29,21 @@ export default class TabbedContainer extends VertoBaseComponent {
       mainStyles: {
         display: 'flex',
         justifyContent: 'center',
-        alignContent: 'center'
+        alignContent: 'center',
+        flex: '0 0 36px'  // keep this at constant height as flex item within tabbedContainerWrap column
+      },
+      wrapStyles: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        height: '100%' // Set up height of wrapper
       },
       tabStyles: {
         flex: '1'
+      },
+      containerStyles: {
+        flex: '1', // this flex item will grow/shrink within tabbedContainerWrap column
+        overflow: 'hidden' // need this so that the chat list and memberlist will scroll on overflow
       }
 
     };
@@ -61,11 +72,13 @@ export default class TabbedContainer extends VertoBaseComponent {
     // rather than as props for this component.... future?? maybe
     // console.log('############### props from child', childToRender.props);
     return(
-      <div className="tabbedContainerWrap">
+      <div className="tabbedContainerWrap" style={this.getStyle("wrapStyles")}>
         <div style={this.getStyle("mainStyles")} >
           {tabs}
         </div>
-        {childToRender}
+        <div className="selTabContainer" style={this.getStyle("containerStyles")}>
+          {childToRender}
+        </div>
       </div>
     );
 
