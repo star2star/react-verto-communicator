@@ -16,8 +16,8 @@ This component will be a 'pure' component.
 
 | Prop Name | Sample | Description |
 | ------------ | ------------- | ------------- |
-| cbControlClick |  Function implemented and bound to a higher-order parent container of this component | Function. Required. This prop is invoked when a control is used by clicking a control icon. |
-| controlSettings: moderator: React.PropTypes.bool, multCanvas: React.PropTypes.bool, allowPresenter: React.PropTypes.bool |      | Object. Required. Contains the data for the control settings. 
+| cbControlClick |  Function implemented and bound to a higher-order parent container of this component. | Function. Required. This prop is invoked when a control is used by clicking a control icon. |
+| controlSettings: moderator: React.PropTypes.bool, multCanvas: React.PropTypes.bool, allowPresenter: React.PropTypes.bool |  isModerator={confData.currentRole == "moderator"} allowPresenter={true} hasMultipleCanvases={false} | Object. Required. Contains the data for the control settings.
 | member | member={} | Object. Required. Contains all necessary member data. |
 
 
