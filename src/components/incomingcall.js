@@ -31,7 +31,7 @@ class IncomingCall extends VertoBaseComponent {
       console.log('CP: ', this.props.callData);
 
       return (
-          <div style={{flexDirection: "column", display:"flex"}}>
+          <div style={{flexDirection: "column", display:"flex", margin: "auto"}}>
             <div style={{flexDirection: "row", display:"flex"}}>
               <AvatarSVG svgStyle={{width: "100px", height: "100px", fill: "black"}} />
               <div style={{flexDirection: "column", display:"flex"}} >

@@ -34,6 +34,7 @@ class Splash extends VertoBaseComponent {
         paddingBottom: "20px",
         alignItems: "center",
         width: "600px",
+        margin: "auto", // for centering in viewport
         background: "#FFFFFF",
         color: '#282828',
         boxShadow: ' 0px 2px 2.5px #D3D3D3, -2.5px 2px 3.75px #D3D3D3, 2.5px 2px 3.75px #D3D3D3',
