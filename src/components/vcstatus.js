@@ -1,7 +1,8 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
-import ReactTooltip from 'react-tooltip';
 import { StatusIconSVG } from './svgIcons';
+import ToolTip from './tooltip';
+
 
 const propTypes = {
   status: React.PropTypes.oneOf(['connected','disconnected', 'connecting', 'active']).isRequired,
@@ -54,8 +55,13 @@ class VCStatus extends VertoBaseComponent {
         break;
       }
 
+    //TODO internationalize  
+    const theMsg="Communication Status: "+this.props.status;
+
      return (
-       < StatusIconSVG svgStyle = {{...this.getStyle('svgStyle'), ...fillColor}} />
+        <ToolTip name="vcStatus" place="bottom" msg={theMsg}>
+          < StatusIconSVG svgStyle = {{...this.getStyle('svgStyle'), ...fillColor}} />
+        </ToolTip>
      );
   }
 }

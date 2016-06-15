@@ -4,7 +4,6 @@ import Radium from 'radium';
 import { connect } from 'react-redux';
 import WhiteLabel from '../../js/whitelabel.js';
 import ReactTooltip from 'react-tooltip';
-//import ReactTooltip from 'react-tooltip';
 import VCStatus from '../../components/vcstatus';
 import NetworkStatusIndicator from '../../components/nsindicator';
 import UserMenu from '../../components/userMenu';
@@ -603,7 +602,7 @@ showSpeeds(){
     const settingsContainer = this.buildSettingsContainer();
 
     return (
-      <div style={{position: "absolute", left: "0px", right: "0px", top: "0px", zIndex: "1"}}>
+
         <div className="appbar" style={this.getStyle('appbarStyles')}>
           <span className="altMenu" style={this.getStyle("altMenuStyles")} onClick={this.handleAltMenuClick}>
             <MenuIconSVG svgStyle={this.getStyle("altMenuSvgStyles")} />
@@ -612,10 +611,7 @@ showSpeeds(){
 
           <span className="appControls" style={acStyles}>
             {nsIndicator}
-            <span data-tip="Communicator Status">
-              <VCStatus status = {this.props.vcStatus} compStyle={!this.state.showAltAppControls ? {svgStyle:{marginRight: '20px'}}:{svgStyle:{marginBottom:'10px'}}}/>
-            </span>
-            <ReactTooltip place="bottom" type="dark" effect="solid"/>
+            <VCStatus status = {this.props.vcStatus} compStyle={!this.state.showAltAppControls ? {svgStyle:{marginRight: '20px'}}:{svgStyle:{marginBottom:'10px'}}}/>
             {lastCall}
 
             <div style={!this.state.showAltAppControls ? {marginRight: '20px'}:{marginBottom:'10px'}}>
@@ -667,7 +663,7 @@ showSpeeds(){
           {settingsContainer}
 
         </div>
-      </div>
+      
     );
   }
 }

@@ -29,10 +29,6 @@ This is a ‘pure' component.
 
 ## c .Component Events ##
 
-If the component needs to react to events (clicks, key presses, etc.) then those events should be listed here along with the action that should be taken:
-
-Sample:
-
 | Event | Action(s) |
 | ------------ | ------------- |
 | onChange | call cbSubmitSetting() |
