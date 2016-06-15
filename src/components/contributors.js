@@ -48,7 +48,7 @@ class Contributors extends VertoBaseComponent{
         justifyContent: 'center'
       },
       scrollContent: {
-        maxHeight: '540px',
+        maxHeight: '540px', //list will scroll on overflow
         overflow: 'auto'
       }
     };

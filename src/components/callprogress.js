@@ -1,6 +1,7 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import UserVideoControls from './vidControlsUser';
+import AdminVideoControls from './vidControlsAdmin';
 import {ShareScreenIconSVG, AvatarSVG, DialPadIconSVG, MicrophoneIconSVG, PauseIconSVG, MuteMicrophoneIconSVG, PhoneIconSVG, VideoIconSVG } from './svgIcons';
 
  const propTypes = {
@@ -56,6 +57,10 @@ class CallProgress extends VertoBaseComponent {
 
     getDefaultStyle(styleName) {
       const styles = {
+        vidControlStyles: {
+          display: 'flex',
+          flexDirection: 'column'
+        }
       };
 
       return (styles[styleName]);
@@ -63,6 +68,18 @@ class CallProgress extends VertoBaseComponent {
 
     render() {
       //console.log('<<<<<< CP: ', this.props.callData, this.state );
+      const adminControls = this.props.isModerator ?
+              (<AdminVideoControls
+                  cbPlay={()=>{console.log('Play Clicked');}}
+                  cbStop={()=>{console.log('Stop Clicked');}}
+                  cbRecord={()=>{console.log('Record Clicked');}}
+                  cbStopRecord={()=>{console.log('Stop Record Clicked');}}
+                  cbSnapshot={()=>{console.log('Snapshot Clicked');}}
+                  cbSetVideoMode={()=>{console.log('Set Video Mode Clicked');}}
+                />
+              ) :
+              undefined;
+
 
       return (
           <div style={{flexDirection: "column", display:"flex"}}>
@@ -72,14 +89,17 @@ class CallProgress extends VertoBaseComponent {
                 <div>{this.props.callData.destination}</div>
                 <div>{this.state.status == 'active'? this.state.timer: 'Connecting ...'}</div>
               </div>
-              <UserVideoControls
-                  cbMicMute={()=>{this.props.cbMute(this.props.callData.callId, 'mic');}}
-                  cbVideoMute={()=>{this.props.cbMute(this.props.callData.callId, 'video');}}
-                  cbToggleFullScreen={()=>{console.log('ToggleFullScreen Clicked');}}
-                  cbScreenShare={()=>{console.log('Screen Share Clicked');}}
-                  cbToggleChat={()=>{console.log('ToggleChat Clicked');}}
-                  userConfStatus={this.props.userConfStatus}
-              />
+              <div className="vidControls" style={this.getStyle("vidControlStyles")}>
+                {adminControls}
+                <UserVideoControls
+                    cbMicMute={()=>{this.props.cbMute(this.props.callData.callId, 'mic');}}
+                    cbVideoMute={()=>{this.props.cbMute(this.props.callData.callId, 'video');}}
+                    cbToggleFullScreen={()=>{console.log('ToggleFullScreen Clicked');}}
+                    cbScreenShare={()=>{console.log('Screen Share Clicked');}}
+                    cbToggleChat={()=>{console.log('ToggleChat Clicked');}}
+                    userConfStatus={this.props.userConfStatus}
+                />
+              </div>
             </div>
             <div style={{backgroundColor: "green"}}>
               <DialPadIconSVG svgStyle={{width: "20px", height: "20px", fillColor: "white"}} />

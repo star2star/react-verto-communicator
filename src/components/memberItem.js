@@ -36,31 +36,57 @@ export default class MemberItem extends VertoBaseComponent {
       memberStyle: {
           //padding: '15px 10px 5px 10px',
           display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'flex-start'
+          justifyContent: 'space-between'
+          // alignItems: 'flex-start'
       },
       avatarStyle: {
         height: '40px',
         width: '40px',
         borderRadius: '50%'
       },
+      userInfoStyle: {
+        display: 'flex',
+        flexDirection: 'column'
+      },
+      nameStyle: {
+        color: '#393939',
+        paddingBottom: '5px'
+      },
+      emailStyle: {
+        fontSize:'.75rem',
+        color: '#9b9b9b'
+      },
+      avStatusStyle: {
+        display: 'flex',
+        alignItems: 'center',
+        paddingRight: '10px'
+      },
       svgStyle: {
-        height: '20px',
+        height: '24px',
         fill: '#65ac43'
       },
       controlIconStyle: {
         svgStyle: {
-          height: '20px',
-          fill: '#65ac43'
+          height: '24px',
+          fill: '#65ac43',
+          paddingRight: '10px'
         }
+      },
+      floorBadgeStyle: {
+        backgroundColor: '#1194f6',
+        color: '#fff',
+        fontSize: '.8rem',
+        padding: '1px 3px'
       },
       floorLockStyle: {
         height: '10px',
         fill: '#888'
       },
-      userInfoStyle: {
-        display: 'flex',
-        flexDirection: 'column'
+      presenterBadgeStyle: {
+        backgroundColor: '#1194f6',
+        color: '#fff',
+        fontSize: '.8rem',
+        padding: '1px 3px'
       }
     };
 
@@ -160,13 +186,17 @@ export default class MemberItem extends VertoBaseComponent {
         >
           <span style={this.getStyle("nameStyle")}>{this.props.member.name}</span>
           <span style={this.getStyle("emailStyle")}>{this.props.member.avatar.email}</span>
-          {floor}
-          {screenShare}
-          {presenter}
+          <span>
+            {floor}
+            {screenShare}
+            {presenter}
+          </span>
         </div>
-        {micStatus}
-        {videoStatus}
-        {presenterStatus}
+        <span style={this.getStyle("avStatusStyle")}>
+          {micStatus}
+          {videoStatus}
+          {presenterStatus}
+        </span>
       </div>
       {adminControls}
       </div>

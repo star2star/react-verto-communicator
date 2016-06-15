@@ -37,8 +37,7 @@ class CallHistoryItem extends VertoBaseComponent {
         minWidth: '375px',
         alignItems: "center",
         cursor: 'pointer',
-        maxWidth: "500px",
-        boxShadow: '0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)'
+        maxWidth: "500px"
       },
       top: {
         paddingLeft: '20px',
@@ -107,8 +106,11 @@ class CallHistoryItem extends VertoBaseComponent {
     }
 
     return (
-      <div style={this.getStyle('container')}>
+      <div
+        tabIndex="0"
+        style={this.getStyle('container')}>
         <div
+            tabIndex="0"
             className="top"
             onClick={this.call}
             style={{...this.getDefaultStyle('top')}}>
@@ -128,6 +130,7 @@ class CallHistoryItem extends VertoBaseComponent {
             </div>
         </div>
         <span
+            tabIndex="0"
             className="menuCont"
             onClick={this.props.cbShowCalls}
             style={{...this.getDefaultStyle('menuCont')}}>

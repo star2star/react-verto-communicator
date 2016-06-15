@@ -4,7 +4,20 @@ import VertoBaseComponent from '../../components/vertobasecomponent';
 import { connect } from 'react-redux';
 //import ReactTooltip from 'react-tooltip';
 import VCStatus from '../../components/vcstatus';
-import { doSubmitLogin, doSubmitLogOut, doMakeCall, doSendChat, doHangUp, doAnswer, doMuteMic, doHold, doMuteVideo, doSendConfCommand, doShareScreen } from './action-creators';
+import {
+    doSubmitLogin,
+    doSubmitLogOut,
+    doMakeCall,
+    doSendChat,
+    doHangUp,
+    doAnswer,
+    doMuteMic,
+    doHold,
+    doMuteVideo,
+    doSendConfCommand,
+    doShareScreen,
+    doClearHistory }
+from './action-creators';
 import Splash from '../../components/splash';
 import Login from '../../components/login';
 import Dialpad from '../../components/dialpad';
@@ -22,6 +35,7 @@ class Main extends VertoBaseComponent {
     this.state={};
 
     this.handleControlClick = this.handleControlClick.bind(this);
+    this.handleClearHistory = this.handleClearHistory.bind(this);
   }
 
   componentWillMount() {
@@ -38,10 +52,10 @@ class Main extends VertoBaseComponent {
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'flex-start'
+      },
+      loggedInfoStyles: {
+        margin: 'auto'
       }
-
-
-
     };
 
     return (styles[styleName]);
@@ -58,6 +72,11 @@ class Main extends VertoBaseComponent {
     this.props.dispatch(doSendConfCommand(controlId, params));
   }
 
+  handleClearHistory(){
+    console.log('at handleClearHistory()');
+    this.props.dispatch(doClearHistory());
+  }
+
   render() {
     const { formatMessage } = this.props.intl;
 
@@ -71,9 +90,9 @@ class Main extends VertoBaseComponent {
         console.log('hang up', d);
         this.props.dispatch(doHangUp(d.callID));
       }}
-      cbAnswer={(d)=>{
-        console.log('Answering: ', d);
-        this.props.dispatch(doAnswer(d.callID));
+          cbAnswer={(d)=>{
+          console.log('Answering: ', d);
+          this.props.dispatch(doAnswer(d.callID));
       }}  />);
     });
 
@@ -96,7 +115,7 @@ class Main extends VertoBaseComponent {
       case 'login':
       case 'logout':
         loggedInfo = (
-          <div>
+          <div style={this.getStyle("loggedInfoStyles")}>
             <Login cbClick={(data)=>{
               // fix websocket url
               this.props.dispatch(doSubmitLogin({ ...data, wsURL: data.websocketurl }));
@@ -108,8 +127,8 @@ class Main extends VertoBaseComponent {
         break;
       case 'loggedIn':
         loggedInfo = (
-          <div>
-            <Dialpad cbCall={this.makeCall.bind(this)} lastNumber={this.props.callInfo.lastNumber} nbrToDial="" />
+          <div style={this.getStyle("loggedInfoStyles")}>
+            <Dialpad cbCall={this.makeCall.bind(this)} cbClearHistory={this.handleClearHistory} lastNumber={this.props.callInfo.lastNumber} nbrToDial="" />
         </div>);
         break;
       case 'resolution_failed':
@@ -137,68 +156,70 @@ class Main extends VertoBaseComponent {
       case 'call_inprogress':
         //console.log('jjj');
         // Extract conference data from currentCall (if it is a conference)
-        const confData = this.props.callInfo.activeCalls[this.props.callInfo.currentCallId].conferenceData;
-        window.conf = confData;
-        if (confData) {
-          loggedInfo = (
-            <div>
-              <CallProgress callData={this.props.callInfo.activeCalls[this.props.callInfo.currentCallId]}
-                  cbHangup={(callId)=>{
-                    this.props.dispatch(doHangUp(callId));
-                  }}
-                  cbMute ={(callId, mutedDevice='mic' )=>{
-                    if (mutedDevice === 'mic'){
-                      this.props.dispatch(doMuteMic(callId));
-                    } else {
-                      this.props.dispatch(doMuteVideo(callId));
-                    }
-                  }}
-                  cbDTMF={(callId, key)=>{
+        {
+          //const confData = this.props.callInfo.activeCalls[this.props.callInfo.currentCallId].conferenceData;
+          window.conf = this.props.confData;
+          if (this.props.confData) {
+            loggedInfo = (
+              <div>
+                <CallProgress callData={this.props.callInfo.activeCalls[this.props.callInfo.currentCallId]}
+                    cbHangup={(callId)=>{
+                      this.props.dispatch(doHangUp(callId));
+                    }}
+                    cbMute ={(callId, mutedDevice='mic' )=>{
+                      if (mutedDevice === 'mic'){
+                        this.props.dispatch(doMuteMic(callId));
+                      } else {
+                        this.props.dispatch(doMuteVideo(callId));
+                      }
+                    }}
+                    cbDTMF={(callId, key)=>{
 
-                  }}
-                  cbHold={(callId)=>{
-                    this.props.dispatch(doHold(callId));
-                  }}
-                  cbShare={()=>{
-                    this.props.dispatch(doShareScreen(this.props.app));
-                  }}
-                  userConfStatus={confData.users[confData.callId].conferenceStatus}
-              />
-            </div>
-          );
-
-        }
-        // setup chat/memberlist here
-
-        // Show chat sidebar only if confData has a value
-        //console.log('#### conf data', confData);
-
-        // NOTE:  Child components MUST be in the same order that their labels
-        // are in the tabLabels array
-        if (confData) {
-          chatSideBar = (
-            <div className="sidebarWrapper" style={{flex:'0 0 360px', height: '100%'}}>
-              <TabbedContainer tabLabels={["Members", "Chat"]}>
-                <Memberlist members={Object.keys(confData.users).map(
-                  (k)=>{
-                      return ({...confData.users[k]});
-                    }
-                  )}
-                    isModerator={confData.currentRole == "moderator"}
-                    allowPresenter={confData.allowPresenter}
-                    hasMultipleCanvases={confData.hasMultipleCanvases}
-                    cbControlClick={(callId, params)=>{this.handleControlClick(callId, params);}}
+                    }}
+                    cbHold={(callId)=>{
+                      this.props.dispatch(doHold(callId));
+                    }}
+                    cbShare={()=>{
+                      this.props.dispatch(doShareScreen(this.props.app));
+                    }}
+                    isModerator={this.props.confData.currentRole == 'moderator'}
+                    userConfStatus={this.props.confData.users[this.props.confData.callId].conferenceStatus}
                 />
-                <ChatSession
-                    cbRemove={()=>{}}
-                    cbSubmitMessage={(id,msg)=>{this.props.dispatch(doSendChat(msg));}}
-                    chatData={confData}
-                />
-              </TabbedContainer>
-            </div>
-          );
-        }
+              </div>
+            );
 
+          }
+          // setup chat/memberlist here
+
+          // Show chat sidebar only if confData has a value
+          //console.log('#### conf data', confData);
+
+          // NOTE:  Child components MUST be in the same order that their labels
+          // are in the tabLabels array
+          if (this.props.confData) {
+            chatSideBar = (
+              <div className="sidebarWrapper" style={{flex:'0 0 360px', height: '100%'}}>
+                <TabbedContainer tabLabels={["Members", "Chat"]}>
+                  <Memberlist members={Object.keys(this.props.confData.users).map(
+                    (k)=>{
+                        return ({...this.props.confData.users[k]});
+                      }
+                    )}
+                      isModerator={this.props.confData.currentRole == "moderator"}
+                      allowPresenter={this.props.confData.allowPresenter}
+                      hasMultipleCanvases={this.props.confData.hasMultipleCanvases}
+                      cbControlClick={(callId, params)=>{this.handleControlClick(callId, params);}}
+                  />
+                  <ChatSession
+                      cbRemove={()=>{}}
+                      cbSubmitMessage={(id,msg)=>{this.props.dispatch(doSendChat(msg));}}
+                      chatData={this.props.confData}
+                  />
+                </TabbedContainer>
+              </div>
+            );
+          }
+        }
         break;
       default:
         break;
@@ -206,10 +227,10 @@ class Main extends VertoBaseComponent {
     let showSplash;
     if (this.props.auth.splash && this.props.auth.splash.current != this.props.auth.splash.number) {
       const intlTitle = formatMessage({"id": "LOADING", "defaultMessage": "Loading"});
-      showSplash = (<Splash step={splashObject} title={intlTitle} />);
+      showSplash = (<Splash step={splashObject} title={intlTitle} style={{margin: 'auto'}}/>);
     }
     return (
-      <div className="chatVideoWrapper" style={{display: 'flex', height: '100%'}}>
+      <div id="chatVideoWrapper" style={{display: 'flex', height: '100%'}}>
         <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", flex:'1'}}>
           {incomingCall}
 
@@ -229,6 +250,7 @@ export default connect((state)=>{
   return ({
     auth: state.auth,
     app: state.app,
-    callInfo: state.callInfo
+    callInfo: state.callInfo,
+    confData: state.callInfo.currentCallId ? state.callInfo.activeCalls[state.callInfo.currentCallId].conferenceData : undefined
   });
 })(injectIntl(Main));

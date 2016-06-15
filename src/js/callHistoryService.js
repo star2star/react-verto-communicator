@@ -19,6 +19,10 @@ class CallHistoryService {
       localStorage.setItem('history', JSON.stringify(this.history));
     }
   }
+  clearHistory(){
+    console.log('clear method running hopefully');
+    this.history = {};
+  }
   getHistory(){
     // converting object to array and sorting descending on lasttimestamp
     return Object.keys(this.history).map((callerId)=>{

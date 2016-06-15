@@ -3,7 +3,6 @@ import VertoBaseComponent from '../../components/vertobasecomponent';
 import Radium from 'radium';
 import { connect } from 'react-redux';
 import WhiteLabel from '../../js/whitelabel.js';
-import ReactTooltip from 'react-tooltip';
 import VCStatus from '../../components/vcstatus';
 import NetworkStatusIndicator from '../../components/nsindicator';
 import UserMenu from '../../components/userMenu';
@@ -148,7 +147,7 @@ class AppBar extends VertoBaseComponent {
           },
           menu: {
             position: 'absolute',
-            top: '70px',
+            top: '65px',
             left: '0px',
             right: '0px',
             // minWidth:'375px',
@@ -663,7 +662,7 @@ showSpeeds(){
           {settingsContainer}
 
         </div>
-      
+
     );
   }
 }
