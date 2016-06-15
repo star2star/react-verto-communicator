@@ -38,12 +38,36 @@ export default class AdminControls extends VertoBaseComponent {
     const styles = {
       controlIconStyle: {
         svgStyle: {
-          height: '20px',
-          fill: '#65ac43'
+          height: '30px',
+          width: '30px',
+          fill: 'gray',
+          paddingTop: '20px'
         }
       },
+
       headingStyle:{
-        backgroundColor: '#e9e9e9'
+        backgroundColor: '#e9e9e9',
+        display: 'flex',
+        justifyContent: 'center',
+        fontSize: '10px',
+        fill: '#444'
+      },
+
+      generalStyle:{
+        display: 'flex',
+        justifyContent: 'space-around'
+      },
+
+      multiCanvasStyle:{
+        display: 'flex',
+        justifyContent: 'space-between',
+        paddingBottom: '5px'
+      },
+
+      canvasStyle: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        flexDirection: 'row'
 
       }
     };
@@ -56,6 +80,7 @@ export default class AdminControls extends VertoBaseComponent {
   }
 
   render(){
+    //this.props.multCanvas == true;
     //console.log('&&&&&& member object', this.props.member);
 
     // TODO - ta - Finish up Transfer component to handle transfer click
@@ -92,31 +117,31 @@ export default class AdminControls extends VertoBaseComponent {
               (
                 <div className="multCanvasControls">
                   <div style={this.getStyle("headingStyle")}>WATCHING CANVAS</div>
-                  <div style={{display: 'flex'}}>
-                    <ControlItem type="KickIconSVG" label="SET"
+                  <div style={this.getStyle("multiCanvasStyle")}>
+                    <ControlItem type="SetIconSVG" label="SET"
                         compStyle={this.getStyle("controlIconStyle")}
                         cbActionClick={()=>{console.log('Set Watching Canvas');}}
                     />
-                    <ControlItem type="KickIconSVG" label="NEXT"
+                    <ControlItem type="NextIconSVG" label="NEXT"
                         compStyle={this.getStyle("controlIconStyle")}
                         cbActionClick={()=>{console.log('Next Watching Canvas');}}
                     />
-                    <ControlItem type="KickIconSVG" label="PREVIOUS"
+                    <ControlItem type="PreviousIconSVG" label="PREVIOUS"
                         compStyle={this.getStyle("controlIconStyle")}
                         cbActionClick={()=>{console.log('Prev Watching Canvas');}}
                     />
                   </div>
                   <div style={this.getStyle("headingStyle")}>INPUT CANVAS</div>
-                  <div style={{display: 'flex'}}>
-                    <ControlItem type="KickIconSVG" label="SET"
+                  <div style={this.getStyle("multiCanvasStyle")}>
+                    <ControlItem type="SetIconSVG" label="SET"
                         compStyle={this.getStyle("controlIconStyle")}
                         cbActionClick={()=>{console.log('Set Input Canvas');}}
                     />
-                    <ControlItem type="KickIconSVG" label="NEXT"
+                    <ControlItem type="NextIconSVG" label="NEXT"
                         compStyle={this.getStyle("controlIconStyle")}
                         cbActionClick={()=>{console.log('Next Input Canvas');}}
                     />
-                    <ControlItem type="KickIconSVG" label="PREVIOUS"
+                    <ControlItem type="PreviousIconSVG" label="PREVIOUS"
                         compStyle={this.getStyle("controlIconStyle")}
                         cbActionClick={()=>{console.log('Prev Input Canvas');}}
                     />
@@ -130,7 +155,7 @@ export default class AdminControls extends VertoBaseComponent {
         <div style={{display: 'flex', flexDirection: 'column', flex: '1', border:'1px solid #e9e9e9'}}>
           <div className="generalSettings">
             <div style={this.getStyle("headingStyle")}>GENERAL</div>
-            <div style={{display: 'flex'}}>
+            <div style={this.getStyle("generalStyle")}>
               <ControlItem type="KickIconSVG" label="KICK"
                   compStyle={this.getStyle("controlIconStyle")}
                   cbActionClick={()=>{this.props.cbControlClick("KICK", [this.props.member.memberId]);}}
@@ -162,22 +187,22 @@ export default class AdminControls extends VertoBaseComponent {
             <div style={{display: 'flex', justifyContent: 'space-around'}}>
               <div className="avRightCol" style={{display:'flex', flexDirection:'column'}}>
                 {micStatus}
-                <ControlItem type="VolumeDownIconSVG" label="Vol-"
+                <ControlItem type="VolumeDownIconSVG" label="VOL-"
                     compStyle={this.getStyle("controlIconStyle")}
                     cbActionClick={()=>{this.props.cbControlClick("VOLUMEDOWN", [this.props.member.memberId]);}}
                 />
-                <ControlItem type="VolumeDownIconSVG" label="Gain-"
+                <ControlItem type="VolumeDownIconSVG" label="GAIN-"
                     compStyle={this.getStyle("controlIconStyle")}
                     cbActionClick={()=>{this.props.cbControlClick("GAINDOWN", [this.props.member.memberId]);}}
                 />
               </div>
               <div className="avLeftCol" style={{display:'flex', flexDirection:'column'}}>
                 {videoStatus}
-                <ControlItem type="VolumeUpIconSVG" label="Vol+"
+                <ControlItem type="VolumeUpIconSVG" label="VOL+"
                     compStyle={this.getStyle("controlIconStyle")}
                     cbActionClick={()=>{this.props.cbControlClick("VOLUMEUP", [this.props.member.memberId]);}}
                 />
-                <ControlItem type="VolumeUpIconSVG" label="Gain+"
+                <ControlItem type="VolumeUpIconSVG" label="GAIN+"
                     compStyle={this.getStyle("controlIconStyle")}
                     cbActionClick={()=>{this.props.cbControlClick("GAINUP", [this.props.member.memberId]);}}
                 />
@@ -211,8 +236,8 @@ export default class AdminControls extends VertoBaseComponent {
           </div>
           <div className="canvasSettings">
             <div style={this.getStyle("headingStyle")}>CANVAS</div>
-            <div style={{display: 'flex'}}>
-              <ControlItem type="KickIconSVG" label="SET"
+            <div style={this.getStyle("canvasStyle")}>
+              <ControlItem type="SetIconSVG" label="SET"
                   compStyle={this.getStyle("controlIconStyle")}
                   cbActionClick={()=>{
                     App.toggleModal((
@@ -227,11 +252,11 @@ export default class AdminControls extends VertoBaseComponent {
                       />));
                   }}
               />
-              <ControlItem type="KickIconSVG" label="NEXT"
+              <ControlItem type="NextIconSVG" label="NEXT"
                   compStyle={this.getStyle("controlIconStyle")}
                   cbActionClick={()=>{this.props.cbControlClick("NEXTLAYER", ['vid-layer', this.props.member.memberId, 'next']);}}
               />
-              <ControlItem type="KickIconSVG" label="PREVIOUS"
+              <ControlItem type="PreviousIconSVG" label="PREVIOUS"
                   compStyle={this.getStyle("controlIconStyle")}
                   cbActionClick={()=>{this.props.cbControlClick("PREVLAYER", ['vid-layer', this.props.member.memberId, 'prev']);}}
               />
