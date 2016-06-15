@@ -28,7 +28,8 @@ class Action extends VertoBaseComponent {
         cursor: 'pointer',
         fontSize: '10px',
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        alignItems: 'center'
       },
       svgStyle: {
         height: '20px',
@@ -51,31 +52,22 @@ class Action extends VertoBaseComponent {
       DynamicIcon = icons[this.props.type];
     }
     // console.log('---->',DynamicIcon);
-      if (this.props.cbActionClick) {
-        return (
-          <span style={this.getStyle("controlStyle")}
-              onClick={()=>{this.props.cbActionClick();}}
-          >
-            <DynamicIcon
-                svgStyle={this.getStyle("svgStyle")}
-            />
-            <span style={this.getStyle("labelStyle")}>
-              {this.props.label}
-            </span>
-          </span>
-        );
-      } else {
-        return(
-          <span style={this.getStyle("controlStyle")}>
-            <DynamicIcon
-                svgStyle={this.getStyle("svgStyle")}
-            />
-            <span style={this.getStyle("labelStyle")}>
-              {this.props.label}
-            </span>
-          </span>
-      );
-    }
+    return (
+      <span style={this.getStyle("controlStyle")}
+            onClick={()=>{
+              if (this.props.cbActionClick) {
+                this.props.cbActionClick();
+              }
+           }}
+      >
+        <DynamicIcon
+            svgStyle={this.getStyle("svgStyle")}
+        />
+        <span style={this.getStyle("labelStyle")}>
+          {this.props.label}
+        </span>
+      </span>
+    );
   }
 }
 

@@ -172,7 +172,8 @@ export default class MemberItem extends VertoBaseComponent {
 
       if (this.state.showAdminControls) {
         adminControls = (
-          <AdminControls member={this.props.member} multCanvas={this.props.controlSettings.multCanvas} cbControlClick={this.props.cbControlClick}/>
+          //<AdminControls member={this.props.member} multCanvas={this.props.controlSettings.multCanvas} cbControlClick={this.props.cbControlClick}/>
+          <AdminControls member={this.props.member} multCanvas={true} cbControlClick={this.props.cbControlClick}/>
         );
       }
     }
