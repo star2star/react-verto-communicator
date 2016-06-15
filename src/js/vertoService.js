@@ -312,6 +312,7 @@ class VertoService {
             });
             this._data.confLayoutsData = message.responseData;
             this._data.confLayouts = options;
+            _dispatch(doConferenceData({callId: Object.keys(v.dialogs)[0], layouts: this._data.confLayouts }));
           } else if (message['conf-command'] == 'canvasInfo') {
             this._data.canvasInfo = message.responseData;
             //console.log('..... CANVASINFO ...', message, v );
@@ -591,7 +592,7 @@ class VertoService {
 
     getScreenId(function (error, sourceId, screen_constraints){
       if(error) {
-        //TODO Fix this 
+        //TODO Fix this
         //$rootScope.$emit('ScreenShareExtensionStatus', error);
         return;
       }
