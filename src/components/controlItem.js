@@ -54,7 +54,7 @@ class Action extends VertoBaseComponent {
       if (this.props.cbActionClick) {
         return (
           <span style={this.getStyle("controlStyle")}
-                onClick={()=>{this.props.cbActionClick();}}
+              onClick={()=>{this.props.cbActionClick();}}
           >
             <DynamicIcon
                 svgStyle={this.getStyle("svgStyle")}
