@@ -55,14 +55,8 @@ class VCStatus extends VertoBaseComponent {
         break;
       }
 
-      //const theMsg="Communication Status: "+this.props.status;
-
-      const theMsg=(<span>
-        <span>Communication Status: </span>
-        {this.props.status}
-        <hr />
-        <span style={{backgroundColor: 'green'}}>Hello World</span>
-        </span>);
+    //TODO internationalize  
+    const theMsg="Communication Status: "+this.props.status;
 
      return (
         <ToolTip name="vcStatus" place="bottom" msg={theMsg}>
