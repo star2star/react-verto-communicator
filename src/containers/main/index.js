@@ -4,7 +4,20 @@ import VertoBaseComponent from '../../components/vertobasecomponent';
 import { connect } from 'react-redux';
 //import ReactTooltip from 'react-tooltip';
 import VCStatus from '../../components/vcstatus';
-import { doSubmitLogin, doSubmitLogOut, doMakeCall, doSendChat, doHangUp, doAnswer, doMuteMic, doHold, doMuteVideo, doSendConfCommand, doShareScreen, doClearHistory } from './action-creators';
+import {
+    doSubmitLogin,
+    doSubmitLogOut,
+    doMakeCall,
+    doSendChat,
+    doHangUp,
+    doAnswer,
+    doMuteMic,
+    doHold,
+    doMuteVideo,
+    doSendConfCommand,
+    doShareScreen,
+    doClearHistory }
+from './action-creators';
 import Splash from '../../components/splash';
 import Login from '../../components/login';
 import Dialpad from '../../components/dialpad';
@@ -77,9 +90,9 @@ class Main extends VertoBaseComponent {
         console.log('hang up', d);
         this.props.dispatch(doHangUp(d.callID));
       }}
-      cbAnswer={(d)=>{
-        console.log('Answering: ', d);
-        this.props.dispatch(doAnswer(d.callID));
+          cbAnswer={(d)=>{
+          console.log('Answering: ', d);
+          this.props.dispatch(doAnswer(d.callID));
       }}  />);
     });
 
