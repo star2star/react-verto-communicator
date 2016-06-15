@@ -30,7 +30,8 @@ class CallHistory extends VertoBaseComponent {
       container: {
         display: 'flex',
         flex: 1,
-        alignItems: "flex-start",
+        alignItems: 'flex-start',
+        alignContent: 'stretch',
         borderRadius: '3px',
         justifyContent: 'flex-start',
         flexDirection: "column",
@@ -43,18 +44,18 @@ class CallHistory extends VertoBaseComponent {
         boxShadow: '0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)',
         color: "#4a4a4a"
       },
-      headerCont : {
-        display: 'block',
-        //flex: '1 100%',
-        //width: '100%', // this is a bad bad no no
-        //flex: 'auto',
-        minWidth: '375px' // i'm not sure if this is ok...
-        //justifyContent: 'stretch'
-      },
+      // headerCont : {
+      //   display: 'flex',
+      //   flex: '1 100%',
+      //   width: '100%', // this is a bad bad no no
+      //   flex: 'auto',
+      //   minWidth: '375px' // i'm not sure if this is ok...
+      //   //justifyContent: 'stretch'
+      // },
       header: {
         display: 'flex',
-        //flex: 1,
-        //minWidth: '375px',
+        flex: 1,
+        minWidth: '375px',
         alignItems: 'center',
         paddingLeft: '5px',
         paddingRight: '15px',
@@ -76,16 +77,19 @@ class CallHistory extends VertoBaseComponent {
         cursor: 'pointer'
       },
       body : {
-      minHeight: '375px',
-      minWidth: '375px',
-      maxWidth: "500px",
-      maxHeight: '500px',
-      overflowY: 'auto',
-      overflowX: 'hidden'
+        minHeight: '375px',
+        minWidth: '375px',
+        maxWidth: "500px",
+        maxHeight: '500px',
+        overflowY: 'auto',
+        overflowX: 'hidden',
+        padding: '10px'
     },
       details: {
         display: 'flex',
+        minWidth: '375px',
         alignItems: 'center',
+        //justifyContent: 'center',
         color: '#ccc',
         fontSize: '12px'
       },
@@ -173,39 +177,33 @@ class CallHistory extends VertoBaseComponent {
           style={this.getStyle('container')}
       >
         <div
-            className="headerCont"
-            style={{...this.getDefaultStyle('headerCont')}}
+            className="header"
+            style={{...this.getDefaultStyle('header')}}
         >
-          <div
-              className="header"
-              style={{...this.getDefaultStyle('header')}}
-          >
-              <span
-                  onClick={()=>{
-                    this.setState({...this.state, 'callDetailDisplayed': false});
-                  }}
-              >
-                  <BackArrowIconSVG svgStyle={{...this.getDefaultStyle('headerSvgs')}} />
-              </span>
-              {this.callerId}
-              <span
-                  className="rmvHistory"
-                  style={{...this.getDefaultStyle('rmvHistory')}}
-                  onClick={this.props.cbClearHistory}
-                  tabIndex="0"
-              >
-                  Remove History
-              </span>
-          </div>
+            <span
+                onClick={()=>{
+                  this.setState({...this.state, 'callDetailDisplayed': false});
+                }}
+            >
+                <BackArrowIconSVG svgStyle={{...this.getDefaultStyle('headerSvgs')}} />
+            </span>
+            {this.callerId}
+            <span
+                className="rmvHistory"
+                style={{...this.getDefaultStyle('rmvHistory')}}
+                onClick={this.props.cbClearHistory}
+                tabIndex="0"
+            >
+                Remove History
+            </span>
         </div>
         <div
             className="body"
             tabIndex="0"
             style={{...this.getDefaultStyle('body')}}
         >
-          <div>
             {details}
-          </div>
+
         </div>
       </div>
     );
