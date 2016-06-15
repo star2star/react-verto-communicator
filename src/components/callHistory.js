@@ -8,7 +8,7 @@ import moment from 'moment';
 const propTypes = {
   compStyle : React.PropTypes.object,
   history : React.PropTypes.array,
-  cbClearHistory : React.PropTypes.func,
+  cbClearHistory : React.PropTypes.func.isRequired,
   cbCall : React.PropTypes.func,
   cbBack: React.PropTypes.func.isRequired,
   callerId : React.PropTypes.string
@@ -48,7 +48,7 @@ class CallHistory extends VertoBaseComponent {
         //flex: '1 100%',
         //width: '100%', // this is a bad bad no no
         //flex: 'auto',
-        minWidth: '375px', // i'm not sure if this is ok...
+        minWidth: '375px' // i'm not sure if this is ok...
         //justifyContent: 'stretch'
       },
       header: {
