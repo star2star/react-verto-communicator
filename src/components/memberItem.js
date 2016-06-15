@@ -72,9 +72,21 @@ export default class MemberItem extends VertoBaseComponent {
           paddingRight: '10px'
         }
       },
+      floorBadgeStyle: {
+        backgroundColor: '#1194f6',
+        color: '#fff',
+        fontSize: '.8rem',
+        padding: '1px 3px'
+      },
       floorLockStyle: {
         height: '10px',
         fill: '#888'
+      },
+      presenterBadgeStyle: {
+        backgroundColor: '#1194f6',
+        color: '#fff',
+        fontSize: '.8rem',
+        padding: '1px 3px'
       }
     };
 
