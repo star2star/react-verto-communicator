@@ -65,22 +65,6 @@ export default class MemberList extends VertoBaseComponent {
     return(
         <div className="memberList" style={this.getStyle('MLStyles')}>
         {members}
-        {members}
-        {members}
-        {members}
-        {members}
-        {members}
-        {members}
-        {members}
-        {members}
-        {members}
-        {members}
-        {members}
-        {members}
-        {members}
-        {members}
-        {members}
-          {members}
         </div>
       );
   }
