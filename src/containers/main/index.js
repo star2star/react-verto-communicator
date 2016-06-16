@@ -36,11 +36,8 @@ class Main extends VertoBaseComponent {
 
     this.handleControlClick = this.handleControlClick.bind(this);
     this.handleClearHistory = this.handleClearHistory.bind(this);
-<<<<<<< HEAD
     this.handleToggleChat = this.handleToggleChat.bind(this);
-=======
     this.makeCall = this.makeCall.bind(this);
->>>>>>> cba1e5bd3a6c437c7e4f4839e164f64756665538
   }
 
   componentWillMount() {
@@ -60,12 +57,10 @@ class Main extends VertoBaseComponent {
         display: 'flex',
         height: '100%'
       },
-      // chatVidWrapStyles : {
-      //   display: 'flex',
-      //   flexDirection: 'row',
-      //   justifyContent: 'flex-start',
-      //   alignItems: 'flex-start'
-      // },
+      chatVidWrapStyles : {
+        display: 'flex',
+        height: '100%'
+      },
       chatVidStyle: {
         display: 'flex',
         flexDirection: 'column',
@@ -84,7 +79,6 @@ class Main extends VertoBaseComponent {
           width: '0px'
         }
       },
-
       videoStyles : {
         display: 'none',
         maxWidth: '100%',
@@ -94,11 +88,6 @@ class Main extends VertoBaseComponent {
       },
       loggedInfoStyles: {
         margin: 'auto'
-      },
-      videoStyle: {
-        display: 'none',
-        maxWidth: '100%',
-        objectFit: 'inherit'
       }
     };
 
@@ -203,8 +192,6 @@ class Main extends VertoBaseComponent {
         break;
       case 'call_inprogress':
         //console.log('jjj');
-        activeVideo = true;
-
         // Extract conference data from currentCall (if it is a conference)
         {
           //const confData = this.props.callInfo.activeCalls[this.props.callInfo.currentCallId].conferenceData;
@@ -294,19 +281,12 @@ class Main extends VertoBaseComponent {
     }
 
     return (
-<<<<<<< HEAD
-      <div id="chatVideoWrapper" style={{display: 'flex', height: '100%'}}>
+      <div id="chatVideoWrapper" style={this.getStyle('chatVidWrapStyles')}>
         <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", flex:'1', overflowY: 'auto'}}>
           {incomingCall}
 
             <video id="webcam" autoPlay="autoplay"  style={this.getStyle("videoStyles")}></video>
 
-=======
-      <div id="chatVideoWrapper" style={this.getStyle('chatVidWrapStyles')}>
-        <div style={this.getStyle('chatVidStyle')}>
-          {incomingCall}
-            <video id="webcam" autoPlay="autoplay"  style={this.getStyle('videoStyle')}></video>
->>>>>>> cba1e5bd3a6c437c7e4f4839e164f64756665538
           {loggedInfo}
           {showSplash}
         </div>
