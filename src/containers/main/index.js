@@ -1,6 +1,6 @@
 import React from 'react';
 import VertoBaseComponent from '../../components/vertobasecomponent';
-//import Radium from 'radium';
+import Radium from 'radium';
 import { connect } from 'react-redux';
 //import ReactTooltip from 'react-tooltip';
 import VCStatus from '../../components/vcstatus';
@@ -55,15 +55,22 @@ class Main extends VertoBaseComponent {
         alignItems: 'flex-start'
       },
       sidebarWrapStyles: {
-        flex:'0 0 360px',
+        width: '360px',
         height: '100%',
-        transition: 'width 0.3s ease-out'
-      },
-      sidebarWrapHideStyles: {
-        width: '0px',
-        transition: 'width 0.3s ease-in'
+        opacity: '1',
+        transition: 'width 0.3s ease-out opacity 0.2s ease-out',
+        '@media (max-width: 768px)': {
+          width: '0px'
+        }
       },
 
+      videoStyles : {
+        display: 'none',
+        maxWidth: '100%',
+        objectFit: 'inherit',
+        flex: '1',
+        transition: 'padding 0.3s ease-out'
+      },
       loggedInfoStyles: {
         margin: 'auto'
       }
@@ -89,7 +96,6 @@ class Main extends VertoBaseComponent {
   }
 
   handleToggleChat(){
-    console.log('##### Toggling chat???')
     this.setState({...this.state, showChat: !this.state.showChat});
   }
 
@@ -171,13 +177,15 @@ class Main extends VertoBaseComponent {
         break;
       case 'call_inprogress':
         //console.log('jjj');
+        activeVideo = true;
+
         // Extract conference data from currentCall (if it is a conference)
         {
           //const confData = this.props.callInfo.activeCalls[this.props.callInfo.currentCallId].conferenceData;
           window.conf = this.props.confData;
           if (this.props.confData) {
             loggedInfo = (
-              <div>
+              <div style={{flex:'1'}}>
                 <CallProgress callData={this.props.callInfo.activeCalls[this.props.callInfo.currentCallId]}
                     cbHangup={(callId)=>{
                       this.props.dispatch(doHangUp(callId));
@@ -216,11 +224,17 @@ class Main extends VertoBaseComponent {
           // NOTE:  Child components MUST be in the same order that their labels
           // are in the tabLabels array
           if (this.props.confData) {
+            const contentStyle = this.state.showChat ?
+                          {...this.getStyle("sidebarWrapStyles")} :
+                          {...this.getStyle("sidebarWrapStyles"),
+                              opacity: '0',
+                              width: '0px',
+                              visibility: 'hidden',
+                              transition: 'opacity 0.4s ease-out, width 0.3s ease-out, visibility 1s'};
+
             chatSideBar = (
               <div className="sidebarWrapper"
-                  style={this.state.showChat ?
-                          this.getStyle("sidebarWrapStyles"):
-                          this.getStyle("sidebarWrapHideStyles")}
+                  style={contentStyle}
               >
                 <TabbedContainer tabLabels={["Members", "Chat"]}>
                   <Memberlist members={Object.keys(this.props.confData.users).map(
@@ -252,12 +266,13 @@ class Main extends VertoBaseComponent {
       const intlTitle = formatMessage({"id": "LOADING", "defaultMessage": "Loading"});
       showSplash = (<Splash step={splashObject} title={intlTitle} style={{margin: 'auto'}}/>);
     }
+
     return (
       <div id="chatVideoWrapper" style={{display: 'flex', height: '100%'}}>
-        <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", flex:'1'}}>
+        <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", flex:'1', overflowY: 'auto'}}>
           {incomingCall}
 
-            <video id="webcam" autoPlay="autoplay"  style={{display:"none", maxWidth:"100%", objectFit:"inherit"}}></video>
+            <video id="webcam" autoPlay="autoplay"  style={this.getStyle("videoStyles")}></video>
 
           {loggedInfo}
           {showSplash}
@@ -276,4 +291,4 @@ export default connect((state)=>{
     callInfo: state.callInfo,
     confData: state.callInfo.currentCallId ? state.callInfo.activeCalls[state.callInfo.currentCallId].conferenceData : undefined
   });
-})(injectIntl(Main));
+})(injectIntl(Radium(Main)));
