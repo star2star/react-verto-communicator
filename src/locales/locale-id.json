@@ -168,6 +168,18 @@ const messages = {
   "YOUR_PASSWORD": "Kata sandi Anda",
   "VERSION": "Versi: ",
   "GIT_REV": "Git Rev: ",
-  "POWERED_BY": "Dikuasai oleh: "
+  "POWERED_BY": "Dikuasai oleh: ",
+  "PREVIOUS": "Sebelumnya",
+  "SET_LAYOUT_POSITION": "Atur posisi tata letak.",
+  "ENTER_LAYOUT_POSITION": "Silakan masuk posisi tata letak.",
+  "LAYOUT_POSITION": "posisi tata letak",
+  "DISCONNECTED": "terputus",
+  "CONNECTING": "menghubungkan",
+  "CONNECTED": "terhubung",
+  "COM_STATUS": "status komunikasi.",
+  "SCREEN_SHARE": "layar Share",
+  "PRESENTER": "Pembawa acara",
+  "WATCHING_CANVAS": "menonton Canvas",
+  "INPUT_CANVAS": "masukan Canvas"
 };
 module.exports = messages;
