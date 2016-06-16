@@ -39,6 +39,15 @@ class AppBar extends VertoBaseComponent {
     this.handleCloseDropdowns = this.handleCloseDropdowns.bind(this);
     this.handleSubmitPreviewSettings = this.handleSubmitPreviewSettings.bind(this);
     AppBar.closeMenu = this.handleCloseMenu.bind(this);
+
+    // add event listener for clicks in body and close menus that are open,
+    //document.body.addEventListener('click', (e)=>{e.preventDefault(); this.handleCloseDropdowns();});
+
+  }
+
+  componentWillUnmount() {
+    //document.body.removeEventListener('click', (e)=>{e.preventDefault(); this.handleCloseDropdowns();}); 
+
   }
 
   getCompStyle() {
