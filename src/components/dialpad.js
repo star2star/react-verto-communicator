@@ -28,12 +28,14 @@ class Dialpad extends VertoBaseComponent {
       container: {
         display: 'flex',
         flex: 1,
-        // alignItems: "center",
-        // justifyContent: 'flex-start',
         flexDirection: "column",
-        maxWidth: "500px",
+        //height: '500px',
+        width: '25vw',
+        '@media (max-width: 1280px)': {
+          width: '50vw'
+        },
         '@media (max-width: 768px)': {
-          //width: '90vw'
+          width: '80vw'
         },
         boxShadow: '0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)'
       },
@@ -64,10 +66,10 @@ class Dialpad extends VertoBaseComponent {
         fontWeight: '300',
         border: 'none',
         outline: 'none',
-        fontSize: '40px', //!this.state.number ? '1vw' : '1.5vw',
-        '@media (max-width: 768px)': {
-          fontSize: '1em'
-        }
+        fontSize: '1em', //!this.state.number ? '1vw' : '1.5vw',
+        // '@media (max-width: 1280px)': {
+        //   fontSize: '1em'
+        // }
       },
       back : {
         width: "24px", // this is for svg styling

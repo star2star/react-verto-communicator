@@ -5,6 +5,7 @@ import CallHistoryService from '../js/callHistoryService';
 import { UpArrowIconSVG, DownArrowIconSVG, RemoveIconSVG, BackArrowIconSVG } from './svgIcons';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
+import Radium  from 'radium';
 
 const propTypes = {
   compStyle : React.PropTypes.object,
@@ -36,19 +37,26 @@ class CallHistory extends VertoBaseComponent {
         borderRadius: '3px',
         justifyContent: 'flex-start',
         flexDirection: "column",
-        minHeight: '375px',
+        height: '500px',
         minWidth: '375px',
-        maxWidth: "500px",
-        maxHeight: '500px',
+        width: '25vw', //
+        '@media (max-width: 1280px)': {
+          width: '90vw'
+        },
         overflowY: 'auto',
         overflowX: 'hidden',
         boxShadow: '0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)',
         color: "#4a4a4a"
       },
+      headerCont: {
+        width: '100%'
+      },
       header: {
         display: 'flex',
         flex: 1,
-        minWidth: '375px',
+
+        //width: '100%',
+        //minWidth: '375px',
         alignItems: 'center',
         paddingLeft: '5px',
         paddingRight: '15px',
@@ -70,13 +78,10 @@ class CallHistory extends VertoBaseComponent {
         cursor: 'pointer'
       },
       body : {
-        minHeight: '375px',
-        minWidth: '375px',
-        maxWidth: "500px",
+        width: '100%',
         maxHeight: '500px',
         overflowY: 'auto',
-        overflowX: 'hidden',
-        padding: '10px'
+        overflowX: 'hidden'
       },
       dir : {
         fill: '#009688',
@@ -213,18 +218,23 @@ class CallHistory extends VertoBaseComponent {
           className="container"
           style={this.getStyle('container')}
       >
-        <div
-            className="header"
-            style={{...this.getDefaultStyle('header')}}
-        >
-            <span
-                onClick={()=>{
-                  this.setState({...this.state, 'callDetailDisplayed': false});
-                }}
-            >
-                <BackArrowIconSVG svgStyle={{...this.getDefaultStyle('headerSvgs')}} />
-            </span>
-            {this.callerId}
+      <div
+          className="headerCont"
+          style={{...this.getDefaultStyle('headerCont')}}
+      >
+          <div
+              className="header"
+              style={{...this.getDefaultStyle('header')}}
+          >
+              <span
+                  onClick={()=>{
+                    this.setState({...this.state, 'callDetailDisplayed': false});
+                  }}
+              >
+                  <BackArrowIconSVG svgStyle={{...this.getDefaultStyle('headerSvgs')}} />
+              </span>
+              {this.callerId}
+          </div>
         </div>
         <div
             className="detailBody"
@@ -285,4 +295,4 @@ class CallHistory extends VertoBaseComponent {
 }
 
 CallHistory.propTypes = propTypes;
-export default CallHistory;
+export default Radium(CallHistory);
