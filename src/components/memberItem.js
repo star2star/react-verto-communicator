@@ -82,7 +82,7 @@ export default class MemberItem extends VertoBaseComponent {
         }
       },
       floorBadgeStyle: {
-        backgroundColor: '#1194f6',
+        backgroundColor: this.props.member.conferenceStatus.video.floorLocked ? '#f45a5a' :'#1194f6',
         color: '#fff',
         fontSize: '.8rem',
         padding: '1px 6px'
@@ -91,12 +91,12 @@ export default class MemberItem extends VertoBaseComponent {
         height: '10px',
         fill: '#fff'
       },
-      lockFloorBadgeStyle: {
-        backgroundColor: '#f45a5a',
-        color: '#fff',
-        fontSize: '.8rem',
-        padding: '1px 6px'
-      },
+      // lockFloorBadgeStyle: {
+      //   backgroundColor: '#f45a5a',
+      //   color: '#fff',
+      //   fontSize: '.8rem',
+      //   padding: '1px 6px'
+      // },
       presenterBadgeStyle: {
         backgroundColor: '#1194f6',
         color: '#fff',
@@ -183,11 +183,11 @@ export default class MemberItem extends VertoBaseComponent {
     }
 
     const floorLocked = this.props.member.conferenceStatus.video.floorLocked ?
-            (<span style={this.getStyle("lockFloorBadgeStyle")}><LockIconSVG svgStyle={this.getStyle("floorLockStyle")}/> Floor</span>) :
+            (<LockIconSVG svgStyle={this.getStyle("floorLockStyle")}/>) :
             undefined;
 
     const floor = this.props.member.conferenceStatus.audio.floor ?
-            (<span style={this.getStyle("floorBadgeStyle")}>Floor</span>) :
+            (<span style={this.getStyle("floorBadgeStyle")}>{floorLocked} Floor</span>) :
             undefined;
 
     const screenShare = this.props.member.conferenceStatus.video.screenShare ?
@@ -206,7 +206,6 @@ export default class MemberItem extends VertoBaseComponent {
           <span style={this.getStyle("emailStyle")}>{this.props.member.avatar.email}</span>
           <span>
             {floor}
-            {floorLocked}
             {screenShare}
             {presenter}
           </span>
