@@ -3,6 +3,7 @@ import VertoBaseComponent from './vertobasecomponent';
 import CallHistoryItem from './callHistoryItem';
 import CallHistoryService from '../js/callHistoryService';
 import { UpArrowIconSVG, DownArrowIconSVG, RemoveIconSVG, BackArrowIconSVG } from './svgIcons';
+import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 
 const propTypes = {
@@ -44,14 +45,6 @@ class CallHistory extends VertoBaseComponent {
         boxShadow: '0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)',
         color: "#4a4a4a"
       },
-      // headerCont : {
-      //   display: 'flex',
-      //   flex: '1 100%',
-      //   width: '100%', // this is a bad bad no no
-      //   flex: 'auto',
-      //   minWidth: '375px' // i'm not sure if this is ok...
-      //   //justifyContent: 'stretch'
-      // },
       header: {
         display: 'flex',
         flex: 1,
@@ -84,12 +77,18 @@ class CallHistory extends VertoBaseComponent {
         overflowY: 'auto',
         overflowX: 'hidden',
         padding: '10px'
-    },
+      },
+      dir : {
+        fill: '#009688',
+        width: '24px',
+        height: '24px'
+      },
       details: {
         display: 'flex',
         minWidth: '375px',
         alignItems: 'center',
         //justifyContent: 'center',
+        cursor: 'pointer',
         color: '#ccc',
         fontSize: '12px'
       },
@@ -98,8 +97,9 @@ class CallHistory extends VertoBaseComponent {
         height: '100px',
         width: '100%',
         alignItems: 'center',
-        color: '#ccc',
-        backgroundColor: '#f00'
+        justifyContent: 'center',
+        fontWeight: 300,
+        color: '#4a4a4a'
       }
      };
 
@@ -119,12 +119,12 @@ class CallHistory extends VertoBaseComponent {
           if(i.direction == 'outgoing') { // if 'outgoing' it renders an up arrow svg
             renderedDirection = (
               <span className="outgoing" >
-                <UpArrowIconSVG svgStyle={{fill: '#009688', width: '24px', height: '24px'}}/>
+                <UpArrowIconSVG svgStyle={{...self.getDefaultStyle('dir')}}/>
               </span>);
           } else {
             renderedDirection = ( // if 'incoming' it renders a down arrow svg
               <span className="incoming">
-                <DownArrowIconSVG svgStyle={{fill: '#009688', width: '24px', height: '24px'}} />
+                <DownArrowIconSVG svgStyle={{...self.getDefaultStyle('dir')}} />
               </span>);
           }
 
@@ -134,6 +134,9 @@ class CallHistory extends VertoBaseComponent {
             <div
                 className="details"
                 key={key}
+                onClick={()=>{
+                  self.props.cbCall(i.callerId);
+                }}
                 style={{...self.getDefaultStyle('details')}}
             >
               {renderedDirection}
@@ -141,7 +144,7 @@ class CallHistory extends VertoBaseComponent {
             </div>
           );
       }); // end of map function
-    } else {
+    }} else {
         details = (<div
               className="noCallDetails"
               style={{...self.getDefaultStyle('noCallDetails')}}
@@ -152,23 +155,38 @@ class CallHistory extends VertoBaseComponent {
         </div>
       );
     }
-  }
+
 
     // regular state list items renders an arrow svg, ext, number of calls, timestamp, and a menu svg
-    const listitems = this.props.history.map((i, index)=>{
-      return(
-        <CallHistoryItem
-            key={index}
-            data={i}
-            cbClick={()=>{
-              this.props.cbCall(i.callerId);
-            }}
-            cbShowCalls={()=>{
-              this.callerId = i.callerId;
-              this.setState({...this.state, 'callDetailDisplayed' : true});
-            }}
-        />);
-    });
+    let listitems;
+    if(this.props.history.length > 0){
+    listitems = this.props.history.map((i, index)=>{
+        return(
+          <CallHistoryItem
+              key={index}
+              data={i}
+              cbClick={()=>{
+                this.props.cbCall(i.callerId);
+              }}
+              cbShowCalls={()=>{
+                this.callerId = i.callerId;
+                this.setState({...this.state, 'callDetailDisplayed' : true});
+              }}
+          />
+        );
+      });
+    } else {
+      listitems = (
+        <div
+            className="noCallDetails"
+            style={{...self.getDefaultStyle('noCallDetails')}}
+        >
+            <span>
+              No calls to show.
+            </span>
+        </div>
+      );
+    }
 
     // callDetail state area (the whole container)
     const callDetailState = (
@@ -194,7 +212,9 @@ class CallHistory extends VertoBaseComponent {
                 onClick={this.props.cbClearHistory}
                 tabIndex="0"
             >
-                Remove History
+                <FormattedMessage
+                    id="CLEAR_CALL_HISTORY"
+                />
             </span>
         </div>
         <div
@@ -232,7 +252,9 @@ class CallHistory extends VertoBaseComponent {
                   className="title"
                   style={{...this.getDefaultStyle('title')}}
               >
-                  Call History
+                  <FormattedMessage
+                      id="CALL_HISTORY"
+                  />
               </span>
               <span
                   className="rmvHistory"
@@ -240,7 +262,9 @@ class CallHistory extends VertoBaseComponent {
                   onClick={this.props.cbClearHistory}
                   tabIndex="0"
               >
-                  Remove History
+                  <FormattedMessage
+                      id="CLEAR_CALL_HISTORY"
+                  />
               </span>
           </div>
         </div>

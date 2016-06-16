@@ -36,7 +36,11 @@ class Main extends VertoBaseComponent {
 
     this.handleControlClick = this.handleControlClick.bind(this);
     this.handleClearHistory = this.handleClearHistory.bind(this);
+<<<<<<< HEAD
     this.handleToggleChat = this.handleToggleChat.bind(this);
+=======
+    this.makeCall = this.makeCall.bind(this);
+>>>>>>> cba1e5bd3a6c437c7e4f4839e164f64756665538
   }
 
   componentWillMount() {
@@ -48,11 +52,28 @@ class Main extends VertoBaseComponent {
 
   getDefaultStyle(styleName) {
     const styles = {
-      chatVidWrapStyles : {
+      sidebarWrapperStyles: {
+        flex:'0 0 360px',
+        height: '100%'
+      },
+      chatVidWrapStyles: {
         display: 'flex',
-        flexDirection: 'row',
+        height: '100%'
+      },
+      // chatVidWrapStyles : {
+      //   display: 'flex',
+      //   flexDirection: 'row',
+      //   justifyContent: 'flex-start',
+      //   alignItems: 'flex-start'
+      // },
+      chatVidStyle: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
         justifyContent: 'flex-start',
-        alignItems: 'flex-start'
+        flex:'1'},
+      showSplashStyle: {
+        margin: 'auto'
       },
       sidebarWrapStyles: {
         width: '360px',
@@ -73,6 +94,11 @@ class Main extends VertoBaseComponent {
       },
       loggedInfoStyles: {
         margin: 'auto'
+      },
+      videoStyle: {
+        display: 'none',
+        maxWidth: '100%',
+        objectFit: 'inherit'
       }
     };
 
@@ -150,7 +176,7 @@ class Main extends VertoBaseComponent {
       case 'loggedIn':
         loggedInfo = (
           <div style={this.getStyle("loggedInfoStyles")}>
-            <Dialpad cbCall={this.makeCall.bind(this)} cbClearHistory={this.handleClearHistory} lastNumber={this.props.callInfo.lastNumber} nbrToDial="" />
+            <Dialpad cbCall={this.makeCall} cbClearHistory={this.handleClearHistory} lastNumber={this.props.callInfo.lastNumber} nbrToDial="" />
         </div>);
         break;
       case 'resolution_failed':
@@ -264,16 +290,23 @@ class Main extends VertoBaseComponent {
     let showSplash;
     if (this.props.auth.splash && this.props.auth.splash.current != this.props.auth.splash.number) {
       const intlTitle = formatMessage({"id": "LOADING", "defaultMessage": "Loading"});
-      showSplash = (<Splash step={splashObject} title={intlTitle} style={{margin: 'auto'}}/>);
+      showSplash = (<Splash step={splashObject} title={intlTitle} style={this.getStyle('showSplashStyle')}/>);
     }
 
     return (
+<<<<<<< HEAD
       <div id="chatVideoWrapper" style={{display: 'flex', height: '100%'}}>
         <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", flex:'1', overflowY: 'auto'}}>
           {incomingCall}
 
             <video id="webcam" autoPlay="autoplay"  style={this.getStyle("videoStyles")}></video>
 
+=======
+      <div id="chatVideoWrapper" style={this.getStyle('chatVidWrapStyles')}>
+        <div style={this.getStyle('chatVidStyle')}>
+          {incomingCall}
+            <video id="webcam" autoPlay="autoplay"  style={this.getStyle('videoStyle')}></video>
+>>>>>>> cba1e5bd3a6c437c7e4f4839e164f64756665538
           {loggedInfo}
           {showSplash}
         </div>

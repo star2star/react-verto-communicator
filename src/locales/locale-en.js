@@ -168,6 +168,16 @@ const messages = {
   "YOUR_PASSWORD": "Your Password",
   "VERSION": "Version: ",
   "GIT_REV": "Git Rev: ",
-  "POWERED_BY": "Powered By: "
+  "POWERED_BY": "Powered By: ",
+  "PREVIOUS": "Previous",
+  "SET_LAYOUT_POSITION": "Set layout position.",
+  "ENTER_LAYOUT_POSITION": "Please enter layout position.",
+  "LAYOUT_POSITION": "Layout position",
+  "DISCONNECTED": "Disconnected",
+  "CONNECTING": "Connecting",
+  "CONNECTED": "Connected",
+  "COM_STATUS": "Communication status.",
+  "SCREEN_SHARE": "Screen share.",
+  "PRESENTER": "Presenter"
 };
 module.exports = messages;
