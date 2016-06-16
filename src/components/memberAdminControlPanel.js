@@ -118,6 +118,7 @@ export default class AdminControls extends VertoBaseComponent {
   }
 
   render(){
+    console.log(this.props.member);
     const { formatMessage } = this.props.intl;
     //this.props.multCanvas == true;
     //console.log('&&&&&& member object', this.props.member);
