@@ -23,6 +23,7 @@ import Login from '../../components/login';
 import Dialpad from '../../components/dialpad';
 import {injectIntl} from 'react-intl';
 import CallProgress from '../../components/callprogress';
+import Dialing from '../../components/dialing';
 import IncomingCall from '../../components/incomingcall';
 import ChatSession from '../../components/chatSession';
 import Memberlist from '../../components/memberlist';
@@ -190,15 +191,40 @@ class Main extends VertoBaseComponent {
           body: formatMessage({"id":"ERROR_PERMISSION_MEDIA", "defaultMessage":"Error: Media Permission Denied"})
         };
         break;
+      case 'dialing':
+        loggedInfo = (
+            <div style={{flex:'1', width: '40vw'}}>
+              <Dialing callData={this.props.callInfo.activeCalls[this.props.callInfo.currentCallId]}
+                  cbHangup={(callId)=>{
+                    this.props.dispatch(doHangUp(callId));
+                  }}
+                  cbMute ={(callId, mutedDevice='mic' )=>{
+                    if (mutedDevice === 'mic'){
+                      this.props.dispatch(doMuteMic(callId));
+                    } else {
+                      this.props.dispatch(doMuteVideo(callId));
+                    }
+                  }}
+                  cbDTMF={(callId, key)=>{
+
+                  }}
+                  cbHold={(callId)=>{
+                    this.props.dispatch(doHold(callId));
+                  }}
+              />
+            </div>
+          );
+        break;
+
       case 'call_inprogress':
         //console.log('jjj');
         // Extract conference data from currentCall (if it is a conference)
         {
           //const confData = this.props.callInfo.activeCalls[this.props.callInfo.currentCallId].conferenceData;
           window.conf = this.props.confData;
-          if (this.props.confData) {
+          // if (this.props.confData) {
             loggedInfo = (
-              <div style={{flex:'1'}}>
+              <div style={{flex:'1', width: '100%'}}>
                 <CallProgress callData={this.props.callInfo.activeCalls[this.props.callInfo.currentCallId]}
                     cbHangup={(callId)=>{
                       this.props.dispatch(doHangUp(callId));
@@ -220,15 +246,15 @@ class Main extends VertoBaseComponent {
                       this.props.dispatch(doShareScreen(this.props.app));
                     }}
                     cbToggleChat={this.handleToggleChat}
-                    isModerator={this.props.confData.currentRole == 'moderator'}
-                    userConfStatus={this.props.confData.users[this.props.confData.callId]? this.props.confData.users[this.props.confData.callId].conferenceStatus:
-                            {}
+                    isModerator={this.props.confData ? this.props.confData.currentRole == 'moderator' : undefined}
+                    userConfStatus={this.props.confData && this.props.confData.users[this.props.confData.callId]? this.props.confData.users[this.props.confData.callId].conferenceStatus:
+                            undefined
                           }
                 />
               </div>
             );
 
-          }
+          // } // end if confData
           // setup chat/memberlist here
 
           // Show chat sidebar only if confData has a value
@@ -271,6 +297,7 @@ class Main extends VertoBaseComponent {
           }
         }
         break;
+
       default:
         break;
     }
@@ -284,9 +311,7 @@ class Main extends VertoBaseComponent {
       <div id="chatVideoWrapper" style={this.getStyle('chatVidWrapStyles')}>
         <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", flex:'1', overflowY: 'auto'}}>
           {incomingCall}
-
-            <video id="webcam" autoPlay="autoplay"  style={this.getStyle("videoStyles")}></video>
-
+          <video id="webcam" autoPlay="autoplay"  style={this.getStyle("videoStyles")}></video>
           {loggedInfo}
           {showSplash}
         </div>

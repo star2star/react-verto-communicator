@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tooltip, Origin } from 'redux-tooltip';
 import VertoBaseComponent from './vertobasecomponent';
-import { FormattedMessage } from 'react-intl';
+//import { FormattedMessage } from 'react-intl';
 
 const propTypes = {
   place: React.PropTypes.string.isRequired,
@@ -25,11 +25,7 @@ export default class ToolTip extends VertoBaseComponent {
     const styles = {
     };
 
-    let styleReturn = styles[styleName];
-    if(this.props.style && this.props.style[styleName]) {
-      styleReturn = {...styleReturn, ...this.props.style[styleName]};
-    }
-    return styleReturn;
+    return styles[styleName];
   }
 
   render(){
