@@ -163,6 +163,7 @@ class CallHistory extends VertoBaseComponent {
     listitems = this.props.history.map((i, index)=>{
         return(
           <CallHistoryItem
+              className="chi"
               key={index}
               data={i}
               cbClick={()=>{
@@ -178,7 +179,7 @@ class CallHistory extends VertoBaseComponent {
     } else {
       listitems = (
         <div
-            className="noCallDetails"
+            className="noCalls"
             style={{...self.getDefaultStyle('noCallDetails')}}
         >
             <span>
@@ -218,7 +219,7 @@ class CallHistory extends VertoBaseComponent {
             </span>
         </div>
         <div
-            className="body"
+            className="detailBody"
             tabIndex="0"
             style={{...this.getDefaultStyle('body')}}
         >
