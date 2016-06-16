@@ -35,7 +35,7 @@ class CallHistoryItem extends VertoBaseComponent {
         flex: 1,
         fontWeight: '300',
         minWidth: '375px',
-        alignItems: "center",
+        alignItems: 'flex-start',
         cursor: 'pointer',
         maxWidth: "500px"
       },
@@ -58,6 +58,7 @@ class CallHistoryItem extends VertoBaseComponent {
       },
       menuCont : {
         flex: 1,
+        paddingTop: '3px',
         paddingRight: '20px',
         marginLeft: 'auto',
         display: 'flex',
