@@ -168,6 +168,18 @@ const messages = {
   "YOUR_PASSWORD": "La tua password",
   "VERSION": "Versione: ",
   "GIT_REV": "Git Rev: ",
-  "POWERED_BY": "Offerto da: "
+  "POWERED_BY": "Offerto da: ",
+  "PREVIOUS": "Precedente",
+  "SET_LAYOUT_POSITION": "Impostare la posizione di layout .",
+  "ENTER_LAYOUT_POSITION": "Si prega di inserire la posizione di layout .",
+  "LAYOUT_POSITION": "posizione di layout",
+  "DISCONNECTED": "scollegato",
+  "CONNECTING": "collegamento",
+  "CONNECTED": "collegamento",
+  "COM_STATUS": "stato della comunicazione.",
+  "SCREEN_SHARE": "schermo Condividi",
+  "PRESENTER": "Presentatore",
+  "WATCHING_CANVAS": "guardando Canvas",
+  "INPUT_CANVAS": "Tela di ingresso"
 };
 module.exports = messages;

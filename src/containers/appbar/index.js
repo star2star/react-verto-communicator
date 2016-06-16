@@ -89,7 +89,7 @@ class AppBar extends VertoBaseComponent {
             }
           },
           altNsiCompStyle: {
-            container:{
+            icon:{
               marginBottom: '10px'
             },
             menu: {
@@ -121,7 +121,16 @@ class AppBar extends VertoBaseComponent {
                 }
             }
           },
-
+          marginBottomStyle:{
+            marginBottom: '10px'
+          },
+          marginRightStyle: {
+            marginRight: '20px'
+          },
+          altMenuTagStyle: {
+            marginBottom:'10px',
+            position:'relative'
+          },
           altMenuStyles: {
             display: 'none',
             visbility: 'hidden',
@@ -154,6 +163,11 @@ class AppBar extends VertoBaseComponent {
           lastCallStyles: {
             marginRight: '15px'
           },
+          chatIconStyle: {
+            height: '24px',
+            width: '24px',
+            fill: '#fff'
+          },
           menu: {
             position: 'absolute',
             top: '64px',
@@ -171,7 +185,6 @@ class AppBar extends VertoBaseComponent {
             backgroundColor: '#0A387F',
             maxHeight: '600px',
             overflow: 'auto'
-
           },
           li: {
             color: '#4a4a4a',
@@ -371,6 +384,7 @@ showSpeeds(){
           <button
               style={{...this.getStyle('button')}}
               onClick={()=>{this.props.dispatch(doSpeedTest());this.showSpeeds();}}
+
               >
             <FormattedMessage
                 id="CHECK_NETWORK_SPEED"
@@ -419,7 +433,8 @@ showSpeeds(){
                     App.toggleModal((
                       <SettingsPreview
                           settingsData={this.props.settings}
-                          cbClose={App.toggleModal} cbSubmitSettings={this.handleSubmitPreviewSettings}
+                          cbClose={App.toggleModal}
+                          cbSubmitSettings={this.handleSubmitPreviewSettings}
                       />));}}
               >
                 <FormattedMessage
@@ -580,14 +595,14 @@ showSpeeds(){
 
     if (false) {
       toggleChat = (
-        <div  style={!this.state.showAltAppControls ? {marginRight: '20px'}:{marginBottom:'10px'}}
+        <div  style={!this.state.showAltAppControls ? this.getStyle('marginRightStyle') : this.getStyle('marginBottomStyle')}
             onClick={()=>{
                   // TODO add dispatch to toggle the slide out of memberlist/chat from right side...
                   console.log('Toggle Chat Clicked in app bar');
                 }
         }
         >
-          <ChatIconSVG svgStyle={{height: "24px", width: "24px", fill: "#fff"}} />
+          <ChatIconSVG svgStyle={this.getStyle('chatIconStyle')} />
 
           </div>
 );
@@ -610,11 +625,11 @@ showSpeeds(){
           <span className="appName" style={this.getStyle("appNameStyles")}>{appName}</span>
 
           <span className="appControls" style={acStyles}>
-            <span style={{marginRight: "10px" }}>{nsIndicator}</span>
+            <span style={this.getStyle('marginRightStyle')}>{nsIndicator}</span>
             <VCStatus status = {this.props.vcStatus} compStyle={!this.state.showAltAppControls ? {svgStyle:{marginRight: '20px'}}:{svgStyle:{marginBottom:'10px'}}}/>
             {lastCall}
 
-            <div style={!this.state.showAltAppControls ? {marginRight: '20px'}:{marginBottom:'10px'}}>
+            <div style={!this.state.showAltAppControls ? this.getStyle('marginRightStyle') : this.getStyle('marginBottomStyle')}>
               <Settings  allowDisplayDetails={this.props.vcStatus != 'disconnected'}
                   cbSubmitSetting = {(data)=>{this.props.dispatch(doUpdateSetting(data));}}
                   cbToggleShowSettings={this.settings.bind(this)}
@@ -626,7 +641,7 @@ showSpeeds(){
 
             {toggleChat}
 
-            <div style={!this.state.showAltAppControls ? {marginRight: '20px'}:{marginBottom:'10px'}}>
+            <div style={!this.state.showAltAppControls ? this.getStyle('marginRightStyle') : this.getStyle('marginBottomStyle')}>
               <UserMenu allowDisplayDetails={this.props.vcStatus != 'disconnected'}
                   compStyle={this.state.showAltAppControls ? this.getStyle("altUserMenu") : undefined}
                   cbClick={this.handleCloseDropdowns}
@@ -640,7 +655,7 @@ showSpeeds(){
               </UserMenu>
 
             </div>
-            <div style={!this.state.showAltAppControls ? {marginRight: '20px'}:{marginBottom:'10px', position:'relative'}}>
+            <div style={!this.state.showAltAppControls ? this.getStyle('marginRightStyle') : this.getStyle('altMenuTagStyle')}>
               <TagMenu allowDisplayDetails="true"
                   compStyle={this.state.showAltAppControls ? this.getStyle("altTagMenu") : undefined}
                   cbClick={this.handleCloseDropdowns}

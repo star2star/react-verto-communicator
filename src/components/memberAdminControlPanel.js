@@ -155,7 +155,7 @@ export default class AdminControls extends VertoBaseComponent {
       const multCanvasControls = this.props.multCanvas ?
               (
                 <div className="multCanvasControls">
-                  <div style={this.getStyle("headingStyle")}>WATCHING CANVAS</div>
+                  <div style={this.getStyle("headingStyle")}>{formatMessage({"id":"WATCHING_CANVAS", "defaultMessage":"Watching Canvas"})}</div>
                   <div style={this.getStyle("multiCanvasStyle")}>
                     <ControlItem type="SetIconSVG" label={formatMessage({"id":"CHAT_SET", "defaultMessage":"Set"})}
                         compStyle={this.getStyle("controlIconStyle")}
@@ -170,7 +170,7 @@ export default class AdminControls extends VertoBaseComponent {
                         cbActionClick={()=>{console.log('Prev Watching Canvas');}}
                     />
                   </div>
-                  <div style={this.getStyle("headingStyle")}>INPUT CANVAS</div>
+                  <div style={this.getStyle("headingStyle")}>{formatMessage({"id":"INPUT_CANVAS", "defaultMessage":"Input Canvas"})}</div>
                   <div style={this.getStyle("multiCanvasStyle")}>
                     <ControlItem type="SetIconSVG" label={formatMessage({"id":"CHAT_SET", "defaultMessage":"Set"})}
                         compStyle={this.getStyle("controlIconStyle")}
@@ -193,7 +193,7 @@ export default class AdminControls extends VertoBaseComponent {
       <div style={this.getStyle('container')}>
         <div style={this.getStyle('column1')}>
           <div className="generalSettings">
-            <div style={this.getStyle("headingStyle")}>GENERAL</div>
+            <div style={this.getStyle("headingStyle")}>{formatMessage({"id":"CHAT_GENERAL", "defaultMessage":"General"})}</div>
             <div style={this.getStyle("generalStyle")}>
               <ControlItem type="KickIconSVG" label={formatMessage({"id":"CHAT_KICK", "defaultMessage":"Kick"})}
                   compStyle={this.getStyle("controlIconStyle")}
@@ -222,7 +222,7 @@ export default class AdminControls extends VertoBaseComponent {
             </div>
           </div>
           <div className="audioVideo">
-            <div style={this.getStyle("headingStyle")}>AUDIO/VIDEO</div>
+            <div style={this.getStyle("headingStyle")}>{formatMessage({"id":"CHAT_AUDIO_VIDEO", "defaultMessage":"Audio/Video"})}</div>
             <div style={this.getStyle('audioVideoStyle')}>
               <div className="avRightCol" style={this.getStyle('volumeAndGainStyle')}>
                 {micStatus}
@@ -250,7 +250,7 @@ export default class AdminControls extends VertoBaseComponent {
           </div>
         </div>
         <div className="bannerSettings" style={this.getStyle('bannerContainerStyle')}>
-          <div style={this.getStyle("headingStyle")}>BANNER</div>
+          <div style={this.getStyle("headingStyle")}>{formatMessage({"id":"CHAT_BANNER", "defaultMessage":"Banner"})}</div>
           <div style={this.getStyle("bannerStyle")}>
             <ControlItem type="StatusIconSVG" label={formatMessage({"id":"CHAT_SET", "defaultMessage":"Set"})}
                 compStyle={this.getStyle("controlIconStyle")}
@@ -274,7 +274,7 @@ export default class AdminControls extends VertoBaseComponent {
             />
           </div>
           <div className="canvasSettings">
-            <div style={this.getStyle("headingStyle")}>CANVAS</div>
+            <div style={this.getStyle("headingStyle")}>{formatMessage({"id":"CHAT_CANVAS", "defaultMessage":"Canvas"})}</div>
             <div style={this.getStyle("canvasStyle")}>
               <ControlItem type="SetIconSVG" label={formatMessage({"id":"CHAT_TITLE_RESET", "defaultMessage":"Reset"})}
                   compStyle={this.getStyle("controlIconStyle")}

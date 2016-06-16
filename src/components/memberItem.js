@@ -36,36 +36,42 @@ export default class MemberItem extends VertoBaseComponent {
 
   getDefaultStyle(styleName) {
     const styles = {
+      //styles item container
       memberWrapStyle: {
           padding: '15px 10px 5px 10px'
           //display: 'flex',
           //justifyContent: 'flex-start',
           //alignItems: 'flex-start'
       },
+      //item content flex-spacing
       memberStyle: {
-          //padding: '15px 10px 5px 10px',
           display: 'flex',
           justifyContent: 'space-between'
-          // alignItems: 'flex-start'
       },
+      //(gr)avatar icon
       avatarStyle: {
         height: '40px',
         width: '40px',
         borderRadius: '50%',
         boxShadow: this.props.member.conferenceStatus.audio.muted  ? '1px 1px 9px red' : 'none'
       },
+      //name/email grouping for flex-positioning
       userInfoStyle: {
         display: 'flex',
         flexDirection: 'column'
       },
+      //name line
       nameStyle: {
         color: '#393939',
         paddingBottom: '5px'
       },
+      //email line
       emailStyle: {
         fontSize:'.75rem',
-        color: '#9b9b9b'
+        color: '#9b9b9b',
+        paddingBottom: '1px'
       },
+      //groups audio, video, presenter icons for placement
       avStatusStyle: {
         display: 'flex',
         alignItems: 'center',
@@ -82,21 +88,34 @@ export default class MemberItem extends VertoBaseComponent {
           paddingRight: '10px'
         }
       },
+      //floor & (locked) badge styles
       floorBadgeStyle: {
         backgroundColor: this.props.member.conferenceStatus.video.floorLocked ? '#f45a5a' :'#1194f6',
         color: '#fff',
-        fontSize: '.8rem',
-        padding: '1px 6px'
+        fontSize: '.7rem',
+        padding: '1px 6px',
+        marginRight: '2px'
       },
+      //styles the lock icon
       floorLockStyle: {
         height: '10px',
         fill: '#fff'
       },
+      //screen share badge styles
+      screenShareBadgeStyle: {
+        backgroundColor: '#1194f6',
+        color: '#fff',
+        fontSize: '.7rem',
+        padding: '1px 6px',
+        marginRight: '2px'
+      },
+      //presenter badge styles
       presenterBadgeStyle: {
         backgroundColor: '#1194f6',
         color: '#fff',
-        fontSize: '.8rem',
-        padding: '1px 6px'
+        fontSize: '.7rem',
+        padding: '1px 6px',
+        marginRight: '2px'
       }
     };
 

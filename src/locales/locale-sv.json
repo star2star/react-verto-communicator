@@ -168,6 +168,18 @@ const messages = {
   "YOUR_PASSWORD": "Ditt lösenord",
   "VERSION": "Version: ",
   "GIT_REV": "Git Rev: ",
-  "POWERED_BY": "Powered By: "
+  "POWERED_BY": "Powered By: ",
+  "PREVIOUS": "Tidigare",
+  "SET_LAYOUT_POSITION": "Ställ layout läge .",
+  "ENTER_LAYOUT_POSITION": "ange layout läge .",
+  "LAYOUT_POSITION": "layout ståndpunkt",
+  "DISCONNECTED": "Osammanhängande",
+  "CONNECTING": "Ansluta",
+  "CONNECTED": "Ansluten",
+  "COM_STATUS": "Kommunikationsstatus .",
+  "SCREEN_SHARE": "Screen Share",
+  "PRESENTER": "Presentatör",
+  "WATCHING_CANVAS": "Titta på Canvas",
+  "INPUT_CANVAS": "input kanfas"
   };
   module.exports = messages;

@@ -168,6 +168,18 @@ const messages = {
   "YOUR_PASSWORD": "Ваш пароль",
   "VERSION": "Версия: ",
   "GIT_REV": "Гит Rev: ",
-  "POWERED_BY": "Питаться от: "
+  "POWERED_BY": "Питаться от: ",
+  "PREVIOUS": "предыдущий",
+  "SET_LAYOUT_POSITION": "Установить макет положение .",
+  "ENTER_LAYOUT_POSITION": "Пожалуйста, введите макет позиции .",
+  "LAYOUT_POSITION": "Макет позиции",
+  "DISCONNECTED": "Отключен",
+  "CONNECTING": "соединительный",
+  "CONNECTED": "Связанный",
+  "COM_STATUS": "Состояние связи .",
+  "SCREEN_SHARE": "экран Поделиться",
+  "PRESENTER": "ведущий",
+  "WATCHING_CANVAS": "Смотря Холст",
+  "INPUT_CANVAS": "Ввод Холст"
   };
   module.exports = messages;
