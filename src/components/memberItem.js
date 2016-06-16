@@ -88,7 +88,7 @@ export default class MemberItem extends VertoBaseComponent {
           paddingRight: '10px'
         }
       },
-      //floor & (locked) badge
+      //floor & (locked) badge styles
       floorBadgeStyle: {
         backgroundColor: this.props.member.conferenceStatus.video.floorLocked ? '#f45a5a' :'#1194f6',
         color: '#fff',
@@ -101,6 +101,7 @@ export default class MemberItem extends VertoBaseComponent {
         height: '10px',
         fill: '#fff'
       },
+      //screen share badge styles
       screenShareBadgeStyle: {
         backgroundColor: '#1194f6',
         color: '#fff',
@@ -108,7 +109,7 @@ export default class MemberItem extends VertoBaseComponent {
         padding: '1px 6px',
         marginRight: '2px'
       },
-      //presenter badge
+      //presenter badge styles
       presenterBadgeStyle: {
         backgroundColor: '#1194f6',
         color: '#fff',

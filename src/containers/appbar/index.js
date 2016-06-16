@@ -145,6 +145,7 @@ class AppBar extends VertoBaseComponent {
           lastCallStyles: {
             marginRight: '15px'
           },
+          chatIconStyle: {height: "24px", width: "24px", fill: "#fff"},
           menu: {
             position: 'absolute',
             top: '64px',
@@ -362,6 +363,7 @@ showSpeeds(){
           <button
               style={{...this.getStyle('button')}}
               onClick={()=>{this.props.dispatch(doSpeedTest());this.showSpeeds();}}
+
               >
             <FormattedMessage
                 id="CHECK_NETWORK_SPEED"
@@ -578,7 +580,7 @@ showSpeeds(){
                 }
         }
         >
-          <ChatIconSVG svgStyle={{height: "24px", width: "24px", fill: "#fff"}} />
+          <ChatIconSVG svgStyle={this.getStyle('chatIconStyle')} />
 
           </div>
 );
