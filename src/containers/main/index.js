@@ -48,14 +48,36 @@ class Main extends VertoBaseComponent {
 
   getDefaultStyle(styleName) {
     const styles = {
-      chatVidWrapStyles : {
+      sidebarWrapperStyles: {
+        flex:'0 0 360px',
+        height: '100%'
+      },
+      chatVidWrapStyles: {
         display: 'flex',
-        flexDirection: 'row',
+        height: '100%'
+      },
+      // chatVidWrapStyles : {
+      //   display: 'flex',
+      //   flexDirection: 'row',
+      //   justifyContent: 'flex-start',
+      //   alignItems: 'flex-start'
+      // },
+      chatVidStyle: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
         justifyContent: 'flex-start',
-        alignItems: 'flex-start'
+        flex:'1'},
+      showSplashStyle: {
+        margin: 'auto'
       },
       loggedInfoStyles: {
         margin: 'auto'
+      },
+      videoStyle: {
+        display: 'none',
+        maxWidth: '100%',
+        objectFit: 'inherit'
       }
     };
 
@@ -199,7 +221,7 @@ class Main extends VertoBaseComponent {
           // are in the tabLabels array
           if (this.props.confData) {
             chatSideBar = (
-              <div className="sidebarWrapper" style={{flex:'0 0 360px', height: '100%'}}>
+              <div className="sidebarWrapper" style={this.getStyle('sidebarWrapperStyles')}>
                 <TabbedContainer tabLabels={["Members", "Chat"]}>
                   <Memberlist members={Object.keys(this.props.confData.users).map(
                     (k)=>{
@@ -228,15 +250,13 @@ class Main extends VertoBaseComponent {
     let showSplash;
     if (this.props.auth.splash && this.props.auth.splash.current != this.props.auth.splash.number) {
       const intlTitle = formatMessage({"id": "LOADING", "defaultMessage": "Loading"});
-      showSplash = (<Splash step={splashObject} title={intlTitle} style={{margin: 'auto'}}/>);
+      showSplash = (<Splash step={splashObject} title={intlTitle} style={this.getStyle('showSplashStyle')}/>);
     }
     return (
-      <div id="chatVideoWrapper" style={{display: 'flex', height: '100%'}}>
-        <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", flex:'1'}}>
+      <div id="chatVideoWrapper" style={this.getStyle('chatVidWrapStyles')}>
+        <div style={this.getStyle('chatVidStyle')}>
           {incomingCall}
-
-            <video id="webcam" autoPlay="autoplay"  style={{display:"none", maxWidth:"100%", objectFit:"inherit"}}></video>
-
+            <video id="webcam" autoPlay="autoplay"  style={this.getStyle('videoStyle')}></video>
           {loggedInfo}
           {showSplash}
         </div>
