@@ -135,7 +135,7 @@ class AppBar extends VertoBaseComponent {
               justifyContent: 'flex-start',
               alignItems: 'flex-start',
               position: 'absolute',
-              top: '70px',
+              top: '63px',
               left: '0px',
               paddingLeft: '5px',
               backgroundColor: '#0544a4',
@@ -147,7 +147,7 @@ class AppBar extends VertoBaseComponent {
           },
           menu: {
             position: 'absolute',
-            top: '65px',
+            top: '64px',
             left: '0px',
             right: '0px',
             // minWidth:'375px',
@@ -158,7 +158,7 @@ class AppBar extends VertoBaseComponent {
             flexWrap: 'wrap',
             justifyContent: 'space-around',
             opacity: '.9',
-            padding: '25px 80px 25px 80px',
+            padding: '25px 80px',
             backgroundColor: '#0A387F',
             maxHeight: '600px',
             overflow: 'auto'
