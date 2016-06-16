@@ -102,9 +102,9 @@ const doSpeedTest = () => {
 
 const doSpeedTestResults = (data) => {
   const bw = {};
-  bw.outgoingBandwidth = data.upKPS ?data.upKPS: undefined ;
-  bw.incomingBandwidth = data.downKPS? data.downKPS: undefined;
-  bw.vidQual = data.vidQual.label;
+  bw.outgoingBandwidth = data.upKPS ? data.upKPS : undefined ;
+  bw.incomingBandwidth = data.downKPS ? data.downKPS : undefined;
+  bw.vidQual = data.vidQual ? data.vidQual.label : undefined;
   //console.log('BBBSSSWWWW:', bw);
   return {
     "type": "SPEED_TEST",

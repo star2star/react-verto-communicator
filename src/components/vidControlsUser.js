@@ -6,10 +6,9 @@ import ControlItem from './controlItem';
 const propTypes = {
   cbMicMute : React.PropTypes.func.isRequired,
   cbVideoMute : React.PropTypes.func.isRequired,
-  cbToggleFullScreen : React.PropTypes.func.isRequired,
   cbScreenShare : React.PropTypes.func.isRequired,
   cbToggleChat : React.PropTypes.func.isRequired,
-  userConfStatus: React.PropTypes.object.isRequired
+  userConfStatus: React.PropTypes.object
 
 };
 

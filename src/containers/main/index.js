@@ -1,6 +1,6 @@
 import React from 'react';
 import VertoBaseComponent from '../../components/vertobasecomponent';
-//import Radium from 'radium';
+import Radium from 'radium';
 import { connect } from 'react-redux';
 //import ReactTooltip from 'react-tooltip';
 import VCStatus from '../../components/vcstatus';
@@ -32,10 +32,11 @@ class Main extends VertoBaseComponent {
   constructor(props) {
     super(props);
 
-    this.state={};
+    this.state={showChat: true};
 
     this.handleControlClick = this.handleControlClick.bind(this);
     this.handleClearHistory = this.handleClearHistory.bind(this);
+    this.handleToggleChat = this.handleToggleChat.bind(this);
     this.makeCall = this.makeCall.bind(this);
   }
 
@@ -48,11 +49,42 @@ class Main extends VertoBaseComponent {
 
   getDefaultStyle(styleName) {
     const styles = {
+      sidebarWrapperStyles: {
+        flex:'0 0 360px',
+        height: '100%'
+      },
+      chatVidWrapStyles: {
+        display: 'flex',
+        height: '100%'
+      },
       chatVidWrapStyles : {
         display: 'flex',
-        flexDirection: 'row',
+        height: '100%'
+      },
+      chatVidStyle: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
         justifyContent: 'flex-start',
-        alignItems: 'flex-start'
+        flex:'1'},
+      showSplashStyle: {
+        margin: 'auto'
+      },
+      sidebarWrapStyles: {
+        width: '360px',
+        height: '100%',
+        opacity: '1',
+        transition: 'width 0.3s ease-out opacity 0.2s ease-out',
+        '@media (max-width: 768px)': {
+          width: '0px'
+        }
+      },
+      videoStyles : {
+        display: 'none',
+        maxWidth: '100%',
+        objectFit: 'inherit',
+        flex: '1',
+        transition: 'padding 0.3s ease-out'
       },
       loggedInfoStyles: {
         margin: 'auto'
@@ -76,6 +108,10 @@ class Main extends VertoBaseComponent {
   handleClearHistory(){
     console.log('at handleClearHistory()');
     this.props.dispatch(doClearHistory());
+  }
+
+  handleToggleChat(){
+    this.setState({...this.state, showChat: !this.state.showChat});
   }
 
   render() {
@@ -162,7 +198,7 @@ class Main extends VertoBaseComponent {
           window.conf = this.props.confData;
           if (this.props.confData) {
             loggedInfo = (
-              <div>
+              <div style={{flex:'1'}}>
                 <CallProgress callData={this.props.callInfo.activeCalls[this.props.callInfo.currentCallId]}
                     cbHangup={(callId)=>{
                       this.props.dispatch(doHangUp(callId));
@@ -183,8 +219,11 @@ class Main extends VertoBaseComponent {
                     cbShare={()=>{
                       this.props.dispatch(doShareScreen(this.props.app));
                     }}
+                    cbToggleChat={this.handleToggleChat}
                     isModerator={this.props.confData.currentRole == 'moderator'}
-                    userConfStatus={this.props.confData.users[this.props.confData.callId].conferenceStatus}
+                    userConfStatus={this.props.confData.users[this.props.confData.callId]? this.props.confData.users[this.props.confData.callId].conferenceStatus:
+                            {}
+                          }
                 />
               </div>
             );
@@ -198,8 +237,18 @@ class Main extends VertoBaseComponent {
           // NOTE:  Child components MUST be in the same order that their labels
           // are in the tabLabels array
           if (this.props.confData) {
+            const contentStyle = this.state.showChat ?
+                          {...this.getStyle("sidebarWrapStyles")} :
+                          {...this.getStyle("sidebarWrapStyles"),
+                              opacity: '0',
+                              width: '0px',
+                              visibility: 'hidden',
+                              transition: 'opacity 0.4s ease-out, width 0.3s ease-out, visibility 1s'};
+
             chatSideBar = (
-              <div className="sidebarWrapper" style={{flex:'0 0 360px', height: '100%'}}>
+              <div className="sidebarWrapper"
+                  style={contentStyle}
+              >
                 <TabbedContainer tabLabels={["Members", "Chat"]}>
                   <Memberlist members={Object.keys(this.props.confData.users).map(
                     (k)=>{
@@ -228,14 +277,15 @@ class Main extends VertoBaseComponent {
     let showSplash;
     if (this.props.auth.splash && this.props.auth.splash.current != this.props.auth.splash.number) {
       const intlTitle = formatMessage({"id": "LOADING", "defaultMessage": "Loading"});
-      showSplash = (<Splash step={splashObject} title={intlTitle} style={{margin: 'auto'}}/>);
+      showSplash = (<Splash step={splashObject} title={intlTitle} style={this.getStyle('showSplashStyle')}/>);
     }
+
     return (
-      <div id="chatVideoWrapper" style={{display: 'flex', height: '100%'}}>
-        <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", flex:'1'}}>
+      <div id="chatVideoWrapper" style={this.getStyle('chatVidWrapStyles')}>
+        <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", flex:'1', overflowY: 'auto'}}>
           {incomingCall}
 
-            <video id="webcam" autoPlay="autoplay"  style={{display:"none", maxWidth:"100%", objectFit:"inherit"}}></video>
+            <video id="webcam" autoPlay="autoplay"  style={this.getStyle("videoStyles")}></video>
 
           {loggedInfo}
           {showSplash}
@@ -254,4 +304,4 @@ export default connect((state)=>{
     callInfo: state.callInfo,
     confData: state.callInfo.currentCallId ? state.callInfo.activeCalls[state.callInfo.currentCallId].conferenceData : undefined
   });
-})(injectIntl(Main));
+})(injectIntl(Radium(Main)));

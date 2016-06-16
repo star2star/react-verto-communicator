@@ -3,6 +3,7 @@ import VertoBaseComponent from './vertobasecomponent';
 import App from './app'; // for transfer
 import ControlItem from './controlItem';
 import InputModal from './inputModal';
+import { FormattedMessage, injectIntl } from 'react-intl';
 // import {
 //   KickIconSVG,  // kick
 //   FullScreenIconSVG, // floor
@@ -67,6 +68,16 @@ export default class AdminControls extends VertoBaseComponent {
         justifyContent: 'space-around'
       },
 
+      bannerContainerStyle: {
+        flex: '1',
+        border:'1px solid #e9e9e9'
+      },
+
+      volumeAndGainStyle: {
+        display:'flex',
+        flexDirection:'column'
+      },
+
       multiCanvasStyle:{
         display: 'flex',
         justifyContent: 'space-around',
@@ -79,6 +90,23 @@ export default class AdminControls extends VertoBaseComponent {
         flexDirection: 'row',
         paddingBottom: '10px'
 
+      },
+
+      container: {
+        display: 'flex',
+        backgroundColor: '#f3f3f3'
+      },
+
+      column1: {
+        display: 'flex',
+        flexDirection: 'column',
+        flex: '1',
+        border:'1px solid #e9e9e9'
+      },
+
+      audioVideoStyle: {
+        display: 'flex',
+        justifyContent: 'space-around'
       }
     };
 
@@ -90,6 +118,7 @@ export default class AdminControls extends VertoBaseComponent {
   }
 
   render(){
+    const { formatMessage } = this.props.intl;
     //this.props.multCanvas == true;
     //console.log('&&&&&& member object', this.props.member);
 
@@ -102,21 +131,21 @@ export default class AdminControls extends VertoBaseComponent {
 
     // Setup up based on the user status object
     const micStatus = this.props.member.conferenceStatus.audio.muted ?
-            (<ControlItem type="MuteMicrophoneIconSVG" label="UNMUTE"
+            (<ControlItem type="MuteMicrophoneIconSVG" label={formatMessage({"id":"CHAT_UNMUTE_MIC", "defaultMessage":"Unmute"})}
                 compStyle={this.getStyle("controlIconStyle")}
                 cbActionClick={()=>{this.props.cbControlClick("MUTEMIC", [this.props.member.memberId]);}}
             />) :
-            (<ControlItem type="MicrophoneIconSVG" label="MUTE"
+            (<ControlItem type="MicrophoneIconSVG" label={formatMessage({"id":"CHAT_MUTE_MIC", "defaultMessage":"Mute"})}
                 compStyle={this.getStyle("controlIconStyle")}
                 cbActionClick={()=>{this.props.cbControlClick("MUTEMIC", [this.props.member.memberId]);}}
             />);
 
     const videoStatus = this.props.member.conferenceStatus.video.muted ?
-            (<ControlItem type="MuteVideoIconSVG" label="UNMUTE"
+            (<ControlItem type="MuteVideoIconSVG" label={formatMessage({"id":"CHAT_UNMUTE_MIC", "defaultMessage":"Unmute"})}
                 compStyle={this.getStyle("controlIconStyle")}
                 cbActionClick={()=>{this.props.cbControlClick("MUTEVIDEO", [this.props.member.memberId]);}}
             />) :
-            (<ControlItem type="VideoIconSVG" label="MUTE"
+            (<ControlItem type="VideoIconSVG" label={formatMessage({"id":"CHAT_MUTE_MIC", "defaultMessage":"Mute"})}
                 compStyle={this.getStyle("controlIconStyle")}
                 cbActionClick={()=>{this.props.cbControlClick("MUTEVIDEO", [this.props.member.memberId]);}}
             />);
@@ -128,11 +157,11 @@ export default class AdminControls extends VertoBaseComponent {
                 <div className="multCanvasControls">
                   <div style={this.getStyle("headingStyle")}>WATCHING CANVAS</div>
                   <div style={this.getStyle("multiCanvasStyle")}>
-                    <ControlItem type="SetIconSVG" label="SET"
+                    <ControlItem type="SetIconSVG" label={formatMessage({"id":"CHAT_SET", "defaultMessage":"Set"})}
                         compStyle={this.getStyle("controlIconStyle")}
                         cbActionClick={()=>{console.log('Set Watching Canvas');}}
                     />
-                    <ControlItem type="NextIconSVG" label="NEXT"
+                    <ControlItem type="NextIconSVG" label={formatMessage({"id":"CHAT_NEXT", "defaultMessage":"Next"})}
                         compStyle={this.getStyle("controlIconStyle")}
                         cbActionClick={()=>{console.log('Next Watching Canvas');}}
                     />
@@ -143,11 +172,11 @@ export default class AdminControls extends VertoBaseComponent {
                   </div>
                   <div style={this.getStyle("headingStyle")}>INPUT CANVAS</div>
                   <div style={this.getStyle("multiCanvasStyle")}>
-                    <ControlItem type="SetIconSVG" label="SET"
+                    <ControlItem type="SetIconSVG" label={formatMessage({"id":"CHAT_SET", "defaultMessage":"Set"})}
                         compStyle={this.getStyle("controlIconStyle")}
                         cbActionClick={()=>{console.log('Set Input Canvas');}}
                     />
-                    <ControlItem type="NextIconSVG" label="NEXT"
+                    <ControlItem type="NextIconSVG" label={formatMessage({"id":"CHAT_NEXT", "defaultMessage":"Next"})}
                         compStyle={this.getStyle("controlIconStyle")}
                         cbActionClick={()=>{console.log('Next Input Canvas');}}
                     />
@@ -161,16 +190,16 @@ export default class AdminControls extends VertoBaseComponent {
 
     // Build out the admin control panel
     return (
-      <div style={{display: 'flex', backgroundColor: '#f3f3f3'}}>
-        <div style={{display: 'flex', flexDirection: 'column', flex: '1', border:'1px solid #e9e9e9'}}>
+      <div style={this.getStyle('container')}>
+        <div style={this.getStyle('column1')}>
           <div className="generalSettings">
             <div style={this.getStyle("headingStyle")}>GENERAL</div>
             <div style={this.getStyle("generalStyle")}>
-              <ControlItem type="KickIconSVG" label="KICK"
+              <ControlItem type="KickIconSVG" label={formatMessage({"id":"CHAT_KICK", "defaultMessage":"Kick"})}
                   compStyle={this.getStyle("controlIconStyle")}
                   cbActionClick={()=>{this.props.cbControlClick("KICK", [this.props.member.memberId]);}}
               />
-              <ControlItem type="FullScreenIconSVG" label="FLOOR"
+              <ControlItem type="FullScreenIconSVG" label={formatMessage({"id":"CHAT_FLOOR", "defaultMessage":"Floor"})}
                   compStyle={this.getStyle("controlIconStyle")}
                   cbActionClick={()=>{this.props.cbControlClick("VIDEOFLOOR", [this.props.member.memberId]);}}
               />
@@ -179,10 +208,10 @@ export default class AdminControls extends VertoBaseComponent {
                   cbActionClick={()=>{
                     App.toggleModal((
                       <InputModal cbClose={App.toggleModal}
-                          title="Transfer party?"
-                          label="Desintation"
-                          message="To what destination would you like to transfer this call?"
-                          placeholder="Destination"
+                          title={formatMessage({"id":"TITLE_TRANSFER", "defaultMessage":"Transfer Party?"})}
+                          label={formatMessage({"id":"LABEL_TRANSFER", "defaultMessage":"Destination"})}
+                          message={formatMessage({"id":"MESSAGE_TRANSFER", "defaultMessage":"To what destination would you like to transfer this call?"})}
+                          placeholder={formatMessage({"id":"LABEL_TRANSFER", "defaultMessage":"Destination"})}
                           cbSubmit={(dest)=>{
                               this.props.cbControlClick("TRANSFER", [this.props.member.memberId, dest]);
 
@@ -194,25 +223,25 @@ export default class AdminControls extends VertoBaseComponent {
           </div>
           <div className="audioVideo">
             <div style={this.getStyle("headingStyle")}>AUDIO/VIDEO</div>
-            <div style={{display: 'flex', justifyContent: 'space-around'}}>
-              <div className="avRightCol" style={{display:'flex', flexDirection:'column'}}>
+            <div style={this.getStyle('audioVideoStyle')}>
+              <div className="avRightCol" style={this.getStyle('volumeAndGainStyle')}>
                 {micStatus}
-                <ControlItem type="VolumeDownIconSVG" label="VOL-"
+                <ControlItem type="VolumeDownIconSVG" label={formatMessage({"id":"CHAT_TITLE_VOL_MINUS", "defaultMessage":"VOL-"})}
                     compStyle={this.getStyle("controlIconStyle")}
                     cbActionClick={()=>{this.props.cbControlClick("VOLUMEDOWN", [this.props.member.memberId]);}}
                 />
-                <ControlItem type="VolumeDownIconSVG" label="GAIN-"
+                <ControlItem type="VolumeDownIconSVG" label={formatMessage({"id":"CHAT_TITLE_GAIN_MINUS", "defaultMessage":"GAIN-"})}
                     compStyle={this.getStyle("controlIconStyle")}
                     cbActionClick={()=>{this.props.cbControlClick("GAINDOWN", [this.props.member.memberId]);}}
                 />
               </div>
-              <div className="avLeftCol" style={{display:'flex', flexDirection:'column'}}>
+              <div className="avLeftCol" style={this.getStyle('volumeAndGainStyle')}>
                 {videoStatus}
-                <ControlItem type="VolumeUpIconSVG" label="VOL+"
+                <ControlItem type="VolumeUpIconSVG" label={formatMessage({"id":"CHAT_TITLE_VOL_PLUS", "defaultMessage":"VOL+"})}
                     compStyle={this.getStyle("controlIconStyle")}
                     cbActionClick={()=>{this.props.cbControlClick("VOLUMEUP", [this.props.member.memberId]);}}
                 />
-                <ControlItem type="VolumeUpIconSVG" label="GAIN+"
+                <ControlItem type="VolumeUpIconSVG" label={formatMessage({"id":"CHAT_TITLE_GAIN_PLUS", "defaultMessage":"GAIN+"})}
                     compStyle={this.getStyle("controlIconStyle")}
                     cbActionClick={()=>{this.props.cbControlClick("GAINUP", [this.props.member.memberId]);}}
                 />
@@ -220,17 +249,17 @@ export default class AdminControls extends VertoBaseComponent {
             </div>
           </div>
         </div>
-        <div className="bannerSettings" style={{flex: '1', border:'1px solid #e9e9e9'}}>
+        <div className="bannerSettings" style={this.getStyle('bannerContainerStyle')}>
           <div style={this.getStyle("headingStyle")}>BANNER</div>
           <div style={this.getStyle("bannerStyle")}>
-            <ControlItem type="StatusIconSVG" label="Set"
+            <ControlItem type="StatusIconSVG" label={formatMessage({"id":"CHAT_SET", "defaultMessage":"Set"})}
                 compStyle={this.getStyle("controlIconStyle")}
                 cbActionClick={()=>{
                   App.toggleModal((
                     <InputModal cbClose={App.toggleModal}
-                        title="Banner Text"
-                        label="Please insert the banner text"
-                        placeholder="Banner Text"
+                        title={formatMessage({"id":"CHAT_BANNER", "defaultMessage":"Banner "})}
+                        label={formatMessage({"id":"TITLE_INSERT_BANNER", "defaultMessage":"Please insert the banner text "})}
+                        placeholder={formatMessage({"id":"CHAT_BANNER", "defaultMessage":"Banner "})}
                         cbSubmit={(text)=>{
                             this.props.cbControlClick("BANNER", [this.props.member.memberId, text]);
                           }
@@ -239,7 +268,7 @@ export default class AdminControls extends VertoBaseComponent {
                 }
               }
             />
-            <ControlItem type="RemoveIconSVG" label="Reset"
+            <ControlItem type="RemoveIconSVG" label={formatMessage({"id":"CHAT_BANNER", "defaultMessage":"Banner "})}
                 compStyle={this.getStyle("controlIconStyle")}
                 cbActionClick={()=>{this.props.cbControlClick("RESETBANNER", [this.props.member.memberId, 'reset']);}}
             />
@@ -247,7 +276,7 @@ export default class AdminControls extends VertoBaseComponent {
           <div className="canvasSettings">
             <div style={this.getStyle("headingStyle")}>CANVAS</div>
             <div style={this.getStyle("canvasStyle")}>
-              <ControlItem type="SetIconSVG" label="SET"
+              <ControlItem type="SetIconSVG" label={formatMessage({"id":"CHAT_TITLE_RESET", "defaultMessage":"Reset"})}
                   compStyle={this.getStyle("controlIconStyle")}
                   cbActionClick={()=>{
                     App.toggleModal((
@@ -262,7 +291,7 @@ export default class AdminControls extends VertoBaseComponent {
                       />));
                   }}
               />
-              <ControlItem type="NextIconSVG" label="NEXT"
+              <ControlItem type="NextIconSVG" label={formatMessage({"id":"CHAT_NEXT", "defaultMessage":"Next"})}
                   compStyle={this.getStyle("controlIconStyle")}
                   cbActionClick={()=>{this.props.cbControlClick("NEXTLAYER", ['vid-layer', this.props.member.memberId, 'next']);}}
               />
@@ -280,3 +309,4 @@ export default class AdminControls extends VertoBaseComponent {
 }
 
 AdminControls.propTypes = propTypes;
+export default injectIntl(AdminControls);

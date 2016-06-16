@@ -135,7 +135,7 @@ class AppBar extends VertoBaseComponent {
               justifyContent: 'flex-start',
               alignItems: 'flex-start',
               position: 'absolute',
-              top: '70px',
+              top: '63px',
               left: '0px',
               paddingLeft: '5px',
               backgroundColor: '#0544a4',
@@ -147,7 +147,7 @@ class AppBar extends VertoBaseComponent {
           },
           menu: {
             position: 'absolute',
-            top: '65px',
+            top: '64px',
             left: '0px',
             right: '0px',
             // minWidth:'375px',
