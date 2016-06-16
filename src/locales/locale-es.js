@@ -167,6 +167,18 @@ const messages = {
   "YOUR_PASSWORD": "Su Contraseña",
   "VERSION": "Versión: ",
   "GIT_REV": "Git Rev: ",
-  "POWERED_BY": "Energizado por: "
+  "POWERED_BY": "Energizado por: ",
+  "PREVIOUS": "Anterior",
+  "SET_LAYOUT_POSITION": "Establecer posición de diseño.",
+  "ENTER_LAYOUT_POSITION": "Por favor, introduzca posición de diseño .",
+  "LAYOUT_POSITION": "posición de diseño",
+  "DISCONNECTED": "Desconectado",
+  "CONNECTING": "Conexión",
+  "CONNECTED": "Conectado",
+  "COM_STATUS": "estado de la comunicación.",
+  "SCREEN_SHARE": "captura de pantalla",
+  "PRESENTER": "Presentador",
+  "WATCHING_CANVAS": "viendo la lona",
+  "INPUT_CANVAS": "Lienzo de entrada"
 };
 module.exports = messages;

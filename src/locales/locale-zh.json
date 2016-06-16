@@ -168,6 +168,18 @@ const messages = {
   "YOUR_PASSWORD": "你的密码",
   "VERSION": "版: ",
   "GIT_REV": "git的轉: ",
-  "POWERED_BY": "供電: "
+  "POWERED_BY": "供電: ",
+  "PREVIOUS": "以前",
+  "SET_LAYOUT_POSITION": "設置佈局位置。",
+  "ENTER_LAYOUT_POSITION": "請輸入佈局位置.",
+  "LAYOUT_POSITION": "佈局位置",
+  "DISCONNECTED": "斷開的",
+  "CONNECTING": "連",
+  "CONNECTED": "連接的",
+  "COM_STATUS": "通信狀態。",
+  "SCREEN_SHARE": "屏幕共享",
+  "PRESENTER": "主持人",
+  "WATCHING_CANVAS": "看著畫布",
+  "INPUT_CANVAS": "輸入帆布"
   };
   module.exports = messages;

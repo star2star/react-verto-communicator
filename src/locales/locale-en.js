@@ -112,7 +112,7 @@ const messages = {
   "GENERAL_SETTINGS": "General Settings:",
   "USE_VIDEO": "Use Video",
   "USE_STEREO_AUDIO": "Stereo Audio",
-  "USE_STUN": "Use STUN",
+  "USE_STUN": "Use STUN ",
   "SCALE_VIDEO": "Scale Remote Video To Match Camera Resolution",
   "ASK_BEFORE_RECOVER": "Ask Before Recovering Call",
   "BEST_FRAME_RATE": "Best Frame Rate:",

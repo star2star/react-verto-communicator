@@ -55,7 +55,8 @@ class Dialpad extends VertoBaseComponent {
       callhist : {
         width: "24px", // this is for svg styling
         height: "24px",
-        fill: "green"
+        fill: "green",
+        marginRight: "10px"
       },
       input: {
         display: 'flex',
@@ -70,6 +71,10 @@ class Dialpad extends VertoBaseComponent {
         // '@media (max-width: 1280px)': {
         //   fontSize: '1em'
         // }
+        fontSize: '25px', //!this.state.number ? '1vw' : '1.5vw',
+        '@media (max-width: 768px)': {
+          fontSize: '1em'
+        }
       },
       back : {
         width: "24px", // this is for svg styling

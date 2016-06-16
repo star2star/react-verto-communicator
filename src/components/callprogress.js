@@ -6,18 +6,19 @@ import {ShareScreenIconSVG, AvatarSVG, DialPadIconSVG, MicrophoneIconSVG, PauseI
 
  const propTypes = {
    callData : React.PropTypes.object.isRequired,
-   cbHangup : React.PropTypes.func.isRequired,
-   cbHold:  React.PropTypes.func.isRequired,
-   cbDTMF:  React.PropTypes.func.isRequired,
-   cbMute:  React.PropTypes.func.isRequired,
-   cbToggleChat: React.PropTypes.func.isRequired,
+   cbHangup : React.PropTypes.func,
+   cbHold:  React.PropTypes.func,
+   cbDTMF:  React.PropTypes.func,
+   cbMute:  React.PropTypes.func,
+   cbToggleChat: React.PropTypes.func,
    userConfStatus : React.PropTypes.object,
-   cbShare: React.PropTypes.func.isRequired
+   cbShare: React.PropTypes.func
 };
 
 class CallProgress extends VertoBaseComponent {
     constructor(props){
         super(props);
+        // TODO ta - should we restart the timer?  If not, need to get props with startTime
         this.state={startTime: Date.now(), timer: 0, status: 'trying'};
         this.padLeft = (s, len, c) =>{
               var c = c || '0';
@@ -60,7 +61,8 @@ class CallProgress extends VertoBaseComponent {
       const styles = {
         vidControlStyles: {
           display: 'flex',
-          flexDirection: 'column'
+          flexDirection: 'column',
+          justifyContent: 'center'
         }
       };
 
@@ -81,66 +83,39 @@ class CallProgress extends VertoBaseComponent {
               ) :
               undefined;
 
+      const userControls = (
+              <UserVideoControls
+                  cbMicMute={()=>{this.props.cbMute(this.props.callData.callId, 'mic');}}
+                  cbVideoMute={()=>{this.props.cbMute(this.props.callData.callId, 'video');}}
+                  cbScreenShare={this.props.cbShare}
+                  cbToggleChat={()=>{console.log('Toggling chat in callProgress?'); this.props.cbToggleChat();}}
+                  userConfStatus={this.props.userConfStatus}
+              />
+            );
 
-      return (
-          <div style={{flexDirection: "column", display:"flex"}}>
-            <div style={{flexDirection: "row", display:"flex"}}>
-              <AvatarSVG svgStyle={{width: "100px", height: "100px", fillColor: "white"}} />
-              <div style={{flexDirection: "column", display:"flex"}} >
-                <div>{this.props.callData.destination}</div>
-                <div>{this.state.status == 'active'? this.state.timer: 'Connecting ...'}</div>
-              </div>
-              <div className="vidControls" style={this.getStyle("vidControlStyles")}>
-                {adminControls}
-                <UserVideoControls
-                    cbMicMute={()=>{this.props.cbMute(this.props.callData.callId, 'mic');}}
-                    cbVideoMute={()=>{this.props.cbMute(this.props.callData.callId, 'video');}}
-                    cbScreenShare={this.props.cbShare}
-                    cbToggleChat={()=>{console.log('Toggling chat in callProgress?'); this.props.cbToggleChat();}}
-                    userConfStatus={this.props.userConfStatus}
-                />
-              </div>
+        return (
+          <div style={{display:'flex', backgroundColor: '#333', height: '70px', justifyContent: 'space-around'}}>
+            <div style={{display:"flex", flexDirection: "column", justifyContent: 'center', color: '#ddd'}} >
+              <div>{this.props.callData.destination}</div>
+              <div>{this.state.status == 'active'? this.state.timer: 'Connecting ...'}</div>
             </div>
-            <div style={{backgroundColor: "green"}}>
-              <DialPadIconSVG svgStyle={{width: "20px", height: "20px", fillColor: "white"}} />
-
-              <span onClick={()=>{
-                //console.log('mute Microphone clicked: ', this.props);
-                this.props.cbMute(this.props.callData.callId, 'mic');
-              }}>
-                <MicrophoneIconSVG svgStyle={{width: "20px", height: "20px", fillColor: "white"}} />
-              </span>
-              <span onClick={()=>{
-                //console.log('mute Microphone clicked: ', this.props);
-                this.props.cbMute(this.props.callData.callId, 'video');
-              }}>
-                <VideoIconSVG svgStyle={{width: "20px", height: "20px", fillColor: "white"}} />
-              </span>
-              <span onClick={()=>{
-                //console.log('mute Microphone clicked: ', this.props);
-                this.props.cbHold(this.props.callData.callId);
-              }}>
-                <PauseIconSVG svgStyle={{width: "20px", height: "20px", fillColor: "white"}} />
-              </span>
-              <span onClick={()=>{
-                //console.log('hangup clicked: ', this.props);
-                this.props.cbShare(this.props.callData.callId);
-              }}>
-                <ShareScreenIconSVG svgStyle={{width: "20px", height: "20px", fillColor: "white"}} />
-              </span>
-
-
-              <span onClick={()=>{
+            <div className="vidControls" style={this.getStyle("vidControlStyles")}>
+              {adminControls}
+              {userControls}
+            </div>
+            <span style={{display:'flex', flexDirection: 'column', justifyContent: 'center'}}
+                onClick={()=>{
                 //console.log('hangup clicked: ', this.props);
                 this.props.cbHangup(this.props.callData.callId);
-              }}>
-                <PhoneIconSVG svgStyle={{width: "20px", height: "20px", fillColor: "white"}} />
-              </span>
-            </div>
+            }}>
+                <PhoneIconSVG svgStyle={{width: "20px", height: "20px", fill: "white", backgroundColor: '#f00', padding: '5px', borderRadius: '50%'}} />
+            </span>
+
           </div>
         );
+      }
     }
-}
+
 
 CallProgress.propTypes = propTypes;
 

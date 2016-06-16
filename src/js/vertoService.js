@@ -156,7 +156,6 @@ class VertoService {
               //console.log('^^^^^^^^^^destroy event', d);
               //console.debug('Destroying: ' + d.cause);
               if (d.params.screenShare) {
-                //TODO cleanShareCall(xInstance);
                 xInstance._data.shareCall = null;
                 delete xInstance._data.shareCall;
                 xInstance._data.callState = 'active';
@@ -164,17 +163,9 @@ class VertoService {
                   console.log('refresh from destroy ...')
                 });
               } else {
-                // if (xInstance._data.shareCall) {
-                //   xInstance._data.shareCall.hangup();
-                //   xInstance._data.shareCall = null;
-                //   delete xInstance._data.shareCall;
-                // }
                 xInstance.stopConference();
                 _dispatch(doHungUp(d));
-                //TODO
-                // if (!xInstance.reloaded) {
-                //   cleanCall();
-                // }
+
               }
 
 
@@ -191,8 +182,8 @@ class VertoService {
               console.log('^^^^^^^REQUESTING ....', d);
               xInstance._data._activeCalls[d.callID] = d;
               //jes tom does not want it
-              //TODO
               //Processor.starphone('requesting', d.params);
+              _dispatch(doingMakeCall('trying', d.params.destination_number, d.callID, d.direction.name));
               break;
 
           default:
@@ -238,9 +229,10 @@ class VertoService {
   }
 
   startConference(v, dialog, pvtData) {
+    //TODO might need to tell video to start here
     //$rootScope.$emit('call.video', 'video');
     //$rootScope.$emit('call.conference', 'conference');
-    //console.log('^^^^^ startConference: ', v, dialog, pvtData);
+    console.log('^^^^^ startConference: ', v, dialog, pvtData);
     this._data.chattingWith = pvtData.chatID;
     this._data.confRole = pvtData.role;
     this._data.conferenceMemberID = pvtData.conferenceMemberID;
@@ -274,7 +266,7 @@ class VertoService {
 
     var conf = new $.verto.conf(v, {
       dialog: dialog,
-      hasVid: true, //TODO storage.data.useVideo,
+      hasVid: this._data.canVideo, // storage.data.useVideo,
       laData: pvtData,
       chatCallback: (v, e) => {
 
@@ -341,7 +333,7 @@ class VertoService {
             //
             // };
           } else {
-            //TODO
+            //I dont think I need this since all messages are coming over already just leaving it out JES
             //console.log('..... ELSE ONBROADCAST ...', message );
             //$rootScope.$emit('conference.broadcast', message);
           }
@@ -400,11 +392,9 @@ class VertoService {
           // args.data.map((member)=>{
           //   console.log('BBBB:', member[0], member[1]);
           // });
-          //TODO
           //$rootScope.$emit('members.boot', args.data);
           // args.data.forEach(function(member){
           //   var callId = member[0];
-          //   //TODO fix this
           //   // var status = true; //angular.fromJson(member[1][4]);
           //   // if (callId === data.call.callID) {
           //   //   $rootScope.$apply(function(){
@@ -416,18 +406,18 @@ class VertoService {
           //break;
         case 'add':
           //var member = [args.key, args.data];
-          //TODO $rootScope.$emit('members.add', member);
+          // $rootScope.$emit('members.add', member);
           //break;
         case 'del':
           //var uuid = args.key;
-          //TODO $rootScope.$emit('members.del', uuid);
+          // $rootScope.$emit('members.del', uuid);
           //break;
         case 'clear':
-          //TODO $rootScope.$emit('members.clear');
+          // $rootScope.$emit('members.clear');
           //break;
         case 'modify':
           //var member = [args.key, args.data];
-          //TODO $rootScope.$emit('members.update', member);
+          // $rootScope.$emit('members.update', member);
           //break;
           _dispatch(doConferenceData({callId: Object.keys(obj.verto.dialogs)[0], hasMultipleCanvases: this._data.conf.params.laData.canvasCount > 1, currentRole: this._data.conf.params.laData.role, users: obj.getUsers(obj) }));
           break;
@@ -442,7 +432,8 @@ class VertoService {
     if (this._data.liveArray) {
       this._data.liveArray.destroy();
       //console.log('Has data.liveArray.');
-      //TODO $rootScope.$emit('members.clear');
+      // handled in hangup
+      // $rootScope.$emit('members.clear');
       this._data.liveArray = null;
       delete this._data.liveArray;
     }
@@ -458,18 +449,12 @@ class VertoService {
       delete this._data.conferenceMemberID;
       delete this._data.confLayoutsData;
     }
-
-
-
-
   }
 
 
   login(data){
     //console.log('logging in',  data);
     const v = new $.verto(this.getOptions(data), _callbacks );
-
-
     _verto.verto =v;
     //console.log('>>>>>', _verto.verto, this._data);
   }
@@ -584,7 +569,6 @@ class VertoService {
     }
   }
 
-//jes
   shareScreen(settings) {
     console.log('share screen video');
 
@@ -670,6 +654,7 @@ class VertoService {
   hangup(callerId){
     if (_verto._data._activeCalls[callerId]) {
       if (_verto._data.shareCall) {
+        //TODO fix this 
         alert('sharing so aborting');
         return;
       }
@@ -708,6 +693,8 @@ class VertoService {
         avatar:  "http://gravatar.com/avatar/" + md5(_verto.verto.options.loginParams.email) + ".png?s=75"    // "http://gravatar.com/avatar/" + md5(storage.data.email) + ".png?s=600"
       }
     };
+
+    this._data.settings = settings;
 
     //console.log('------', phoneObject);
     const ncDialog = _verto.verto.newCall(phoneObject);

@@ -92,23 +92,23 @@ class Input extends VertoBaseComponent {
         <div style={{...this.getStyle('label')}}>{this.props.label}</div>
         <div>
           <input
-            tabindex="0"
-            type={this.props.type}
-            ref="name"
-            placeholder={this.props.placeholder}
-            style={{...this.getStyle('inputArea') }}
-            onBlur={()=>{
-              this.setState({...this.state, 'onFocus': false });
-              //console.log('LOSING FOCUS', this.state.onFocus);
+              tabIndex="0"
+              type={this.props.type}
+              ref="name"
+              placeholder={this.props.placeholder}
+              style={{...this.getStyle('inputArea') }}
+              onBlur={()=>{
+                this.setState({...this.state, 'onFocus': false });
+                //console.log('LOSING FOCUS', this.state.onFocus);
             }}
-            onFocus={()=>{
-              this.setState({...this.state,'onFocus': true});
-              //console.log('GETTING FOCUSED', this.state.onFocus);
+              onFocus={()=>{
+                this.setState({...this.state,'onFocus': true});
+                //console.log('GETTING FOCUSED', this.state.onFocus);
             }}
-            onChange={
-            (e) =>{
-              this.props.cbChanging(this.props.label.replace(' ', '').toLowerCase(), e.target.value );
-            }
+              onChange={
+              (e) =>{
+                this.props.cbChanging(this.props.label.replace(' ', '').toLowerCase(), e.target.value );
+              }
           } defaultValue={this.props.value}
           />
           <span style={{...this.getStyle('bar')}}>
