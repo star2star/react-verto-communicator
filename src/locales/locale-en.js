@@ -178,6 +178,8 @@ const messages = {
   "CONNECTED": "Connected",
   "COM_STATUS": "Communication status.",
   "SCREEN_SHARE": "Screen Share",
-  "PRESENTER": "Presenter"
+  "PRESENTER": "Presenter",
+  "WATCHING_CANVAS": "Watching Canvas",
+  "INPUT_CANVAS": "Input Canvas"
 };
 module.exports = messages;
