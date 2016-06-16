@@ -168,6 +168,18 @@ const messages = {
   "YOUR_PASSWORD": "Twoje hasło",
   "VERSION": "Wersja: ",
   "GIT_REV": "Git Rev: ",
-  "POWERED_BY": "Powered By: "
+  "POWERED_BY": "Powered By: ",
+  "PREVIOUS": "Poprzedni",
+  "SET_LAYOUT_POSITION": "Ustaw pozycję układu.",
+  "ENTER_LAYOUT_POSITION": "Proszę podać pozycję układu.",
+  "LAYOUT_POSITION": "układ pozycji",
+  "DISCONNECTED": "Niepowiązany",
+  "CONNECTING": "Złączony",
+  "CONNECTED": "Połączony",
+  "COM_STATUS": "Stan komunikacji .",
+  "SCREEN_SHARE": "Ekran Podziel się",
+  "PRESENTER": "Prezenter",
+  "WATCHING_CANVAS": "Oglądając Canvas",
+  "INPUT_CANVAS": "wejście na płótnie"
 };
 module.exports = messages;
