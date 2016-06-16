@@ -2,6 +2,7 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import AdminControls from './memberAdminControlPanel';
 import ControlItem from './controlItem';
+import { FormattedMessage } from 'react-intl';
 import {
   MicrophoneIconSVG,
   VideoIconSVG,
@@ -91,12 +92,6 @@ export default class MemberItem extends VertoBaseComponent {
         height: '10px',
         fill: '#fff'
       },
-      // lockFloorBadgeStyle: {
-      //   backgroundColor: '#f45a5a',
-      //   color: '#fff',
-      //   fontSize: '.8rem',
-      //   padding: '1px 6px'
-      // },
       presenterBadgeStyle: {
         backgroundColor: '#1194f6',
         color: '#fff',
@@ -161,7 +156,12 @@ export default class MemberItem extends VertoBaseComponent {
           // TODO replace with 'presenter toggle icon'
           presenterStatus = (<PresenterIconSVG svgStyle={{...this.getStyle("svgStyle"), fill: "#454545", cursor: "pointer"}}/>);
           // set the presenter 'badge'
-          presenter = (<span style={this.getStyle("presenterBadgeStyle")}>Presenter</span>);
+          presenter = (<span style={this.getStyle("presenterBadgeStyle")}>
+            <FormattedMessage
+                id="PRESENTER"
+                defaultMessage="Presenter"
+            />
+          </span>);
         } else {
           // TODO replace with 'presenter toggle icon toggled off'
           presenterStatus = (<PresenterIconSVG svgStyle={{...this.getStyle("svgStyle"), fill: "#c5c5c5", cursor: "pointer"}}/>);
@@ -187,11 +187,21 @@ export default class MemberItem extends VertoBaseComponent {
             undefined;
 
     const floor = this.props.member.conferenceStatus.audio.floor ?
-            (<span style={this.getStyle("floorBadgeStyle")}>{floorLocked} Floor</span>) :
+            (<span style={this.getStyle("floorBadgeStyle")}>
+            {floorLocked} <FormattedMessage
+                id="CHAT_FLOOR"
+                defaultMessage="Floor"
+              />
+          </span>) :
             undefined;
 
     const screenShare = this.props.member.conferenceStatus.video.screenShare ?
-            (<span style={this.getStyle("screenShareBadgeStyle")}>Screen Share</span>) :
+            (<span style={this.getStyle("screenShareBadgeStyle")}>
+              <FormattedMessage
+                  id="SCREEN_SHARE"
+                  defaultMessage="Screen Share"
+              />
+              </span>) :
             undefined;
 
 

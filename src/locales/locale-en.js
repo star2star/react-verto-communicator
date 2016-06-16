@@ -177,7 +177,7 @@ const messages = {
   "CONNECTING": "Connecting",
   "CONNECTED": "Connected",
   "COM_STATUS": "Communication status.",
-  "SCREEN_SHARE": "Screen share.",
+  "SCREEN_SHARE": "Screen Share",
   "PRESENTER": "Presenter"
 };
 module.exports = messages;
