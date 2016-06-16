@@ -207,16 +207,6 @@ class CallHistory extends VertoBaseComponent {
                 <BackArrowIconSVG svgStyle={{...this.getDefaultStyle('headerSvgs')}} />
             </span>
             {this.callerId}
-            <span
-                className="rmvHistory"
-                style={{...this.getDefaultStyle('rmvHistory')}}
-                onClick={this.props.cbClearHistory}
-                tabIndex="0"
-            >
-                <FormattedMessage
-                    id="CLEAR_CALL_HISTORY"
-                />
-            </span>
         </div>
         <div
             className="detailBody"
