@@ -4,6 +4,7 @@ import moment from 'moment';
 import { UpArrowIconSVG, DownArrowIconSVG, MenuIconSVG } from './svgIcons';
 //import Radium from 'radium';
 import {injectIntl, formattedMessage } from 'react-intl';
+import ToolTip from './tooltip';
 
 const propTypes = {
   compStyle : React.PropTypes.object,
@@ -64,6 +65,9 @@ class CallHistoryItem extends VertoBaseComponent {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'
+      },
+      ttip: {
+        padding: '0px'
       },
       timestamp : {
         marginTop: '15px',
@@ -127,29 +131,38 @@ class CallHistoryItem extends VertoBaseComponent {
     }
 
     return (
-      <div
-        tabIndex="0"
-        style={this.getStyle('container')}>
+      <ToolTip
+          place="bottom"
+          compStyle={{...this.getDefaultStyle('ttip')}}
+          name="chi"
+          msg="Click to dial"
+      >
         <div
-            tabIndex="0"
-            className="top"
-            onClick={this.call}
-            style={{...this.getDefaultStyle('top')}}>
-            <div className="info">
-              {renderedDirection}
-              <span className="callerId">
-                {this.props.data.callerId}
-              </span>
-              {nbrCalls}
-            </div>
-            <div
-              className="timestamp"
-              style={{...this.getDefaultStyle('timestamp')}}>
-              {renderedTS}
-            </div>
+          tabIndex="0"
+          style={this.getStyle('container')}>
+          <div
+              tabIndex="0"
+              className="top"
+              onClick={this.call}
+              style={{...this.getDefaultStyle('top')}}>
+              <div className="info">
+                {renderedDirection}
+                <span className="callerId">
+                  {this.props.data.callerId}
+                </span>
+                {nbrCalls}
+              </div>
+              <div
+                className="timestamp"
+                style={{...this.getDefaultStyle('timestamp')}}>
+                {renderedTS}
+              </div>
+          </div>
+          {menu}
         </div>
-        {menu}
-      </div>);
+      </ToolTip>
+
+    );
   }
 
 }
