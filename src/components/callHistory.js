@@ -90,6 +90,7 @@ class CallHistory extends VertoBaseComponent {
         minWidth: '375px',
         alignItems: 'center',
         //justifyContent: 'center',
+        cursor: 'pointer',
         color: '#ccc',
         fontSize: '12px'
       },
@@ -134,6 +135,9 @@ class CallHistory extends VertoBaseComponent {
             <div
                 className="details"
                 key={key}
+                onClick={()=>{
+                  self.props.cbCall(i.callerId);
+                }}
                 style={{...self.getDefaultStyle('details')}}
             >
               {renderedDirection}

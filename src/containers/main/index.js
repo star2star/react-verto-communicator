@@ -36,6 +36,7 @@ class Main extends VertoBaseComponent {
 
     this.handleControlClick = this.handleControlClick.bind(this);
     this.handleClearHistory = this.handleClearHistory.bind(this);
+    this.makeCall = this.makeCall.bind(this);
   }
 
   componentWillMount() {
@@ -128,7 +129,7 @@ class Main extends VertoBaseComponent {
       case 'loggedIn':
         loggedInfo = (
           <div style={this.getStyle("loggedInfoStyles")}>
-            <Dialpad cbCall={this.makeCall.bind(this)} cbClearHistory={this.handleClearHistory} lastNumber={this.props.callInfo.lastNumber} nbrToDial="" />
+            <Dialpad cbCall={this.makeCall} cbClearHistory={this.handleClearHistory} lastNumber={this.props.callInfo.lastNumber} nbrToDial="" />
         </div>);
         break;
       case 'resolution_failed':
