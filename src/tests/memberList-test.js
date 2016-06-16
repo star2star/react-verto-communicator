@@ -11,21 +11,19 @@ jest.unmock('../js/messages.js');
 
 describe('Default test for MemberList', ()=>{
 
-  const  = {
+  const cbControlClick=sinon.spy();
+  const members=[{key:1, member:"Name"},{key:2, member:"1Name", {key:3, member:"2Name"}}];
 
-  };
-
-  it(' ', () => {
-    const wrapper = shallow(<MemberList  />);
-    //console.log(wrapper.childAt(1).childAt(2).props().children[2]);
-    expect(wrapper.childAt(1).childAt(2).props().children[2]).toEqual();
+  it('renders a div', () => {
+    const wrapper = shallow(
+      <MemberList
+        cbControlClick={cbControlClick}
+        members={members}
+        />);
+     expect(wrapper.find('div').length).toEqual(1);
   });
 
-  it(' ', () => {
-    const wrapper = shallow(<MemberList />);
-    //console.log(wrapper.childAt(1).childAt(2).props().children[2]);
-    expect(wrapper.childAt(1).childAt(2).props().children[0]).toEqual();
-  });
+
 
 
 });

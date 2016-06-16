@@ -424,7 +424,8 @@ showSpeeds(){
                     App.toggleModal((
                       <SettingsPreview
                           settingsData={this.props.settings}
-                          cbClose={App.toggleModal} cbSubmitSettings={this.handleSubmitPreviewSettings}
+                          cbClose={App.toggleModal}
+                          cbSubmitSettings={this.handleSubmitPreviewSettings}
                       />));}}
               >
                 <FormattedMessage
