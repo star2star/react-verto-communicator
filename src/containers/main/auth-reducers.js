@@ -49,7 +49,12 @@ const auth = (state, action)=>{
     case 'RESOLUTION_FAILED':
       return { ...state, showPage: 'resolution_failed'  };
     case 'CALLING':
-      return { ...state, showPage: 'call_inprogress' };
+      if (action.data.status === 'trying') {
+          return { ...state, showPage: 'dialing' };
+      } else {
+        return { ...state, showPage: 'call_inprogress' };
+      }
+
     case 'CALLING_ERROR':
       return { ...state, showPage: 'loggedIn', error: action.data };
     case 'CALL_HUNG_UP':

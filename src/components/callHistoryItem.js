@@ -90,6 +90,26 @@ class CallHistoryItem extends VertoBaseComponent {
 
     const renderedTS = moment(this.props.data.lastTimestamp).format('ddd MMM DD YYYY HH:mm:ss A');
 
+    let nbrCalls;
+    let menu;
+    if(this.props.data.nbrCalls == 1) {
+      nbrCalls = (<span className="nbrCalls">
+      </span>);
+      menu = (<span></span>);
+    } else {
+      nbrCalls = (<span className="nbrCalls">
+        ({this.props.data.nbrCalls})
+      </span>);
+      menu = (
+        <span
+            tabIndex="0"
+            className="menuCont"
+            onClick={this.props.cbShowCalls}
+            style={{...this.getDefaultStyle('menuCont')}}>
+          <MenuIconSVG svgStyle={{...this.getStyle('dirSVG')}} />
+        </span>);
+    }
+
     var renderedDirection;
     if(this.props.data.lastDirection == 'outgoing') {
       renderedDirection = (<span className="incoming" style={{...this.getDefaultStyle('dirCont')}}>
@@ -119,9 +139,7 @@ class CallHistoryItem extends VertoBaseComponent {
               <span className="callerId">
                 {this.props.data.callerId}
               </span>
-                (<span className="nbrCalls">
-                  {this.props.data.nbrCalls}
-                </span>)
+              {nbrCalls}
             </div>
             <div
               className="timestamp"
@@ -129,14 +147,7 @@ class CallHistoryItem extends VertoBaseComponent {
               {renderedTS}
             </div>
         </div>
-        <span
-            tabIndex="0"
-            className="menuCont"
-            onClick={this.props.cbShowCalls}
-            style={{...this.getDefaultStyle('menuCont')}}>
-          <MenuIconSVG svgStyle={{...this.getStyle('dirSVG')}} />
-        </span>
-
+        {menu}
       </div>);
   }
 
