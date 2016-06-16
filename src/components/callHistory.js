@@ -109,6 +109,24 @@ class CallHistory extends VertoBaseComponent {
 
   render(){
 
+    let clearHistory;
+    if(this.props.history.length > 0) {
+      clearHistory = (
+        <span
+            className="rmvHistory"
+            style={{...this.getDefaultStyle('rmvHistory')}}
+            onClick={this.props.cbClearHistory}
+            tabIndex="0"
+        >
+            <FormattedMessage
+                id="CLEAR_CALL_HISTORY"
+            />
+        </span>
+      );
+    } else {
+      clearHistory = (<span></span>);
+    }
+
     const self = this; // so I can use inside of map
     let details; // declaring details variable
     if(this.props.history.length > 0){ // if history array is greater than zero
@@ -247,16 +265,7 @@ class CallHistory extends VertoBaseComponent {
                       id="CALL_HISTORY"
                   />
               </span>
-              <span
-                  className="rmvHistory"
-                  style={{...this.getDefaultStyle('rmvHistory')}}
-                  onClick={this.props.cbClearHistory}
-                  tabIndex="0"
-              >
-                  <FormattedMessage
-                      id="CLEAR_CALL_HISTORY"
-                  />
-              </span>
+              {clearHistory}
           </div>
         </div>
         <div
@@ -266,7 +275,6 @@ class CallHistory extends VertoBaseComponent {
         >
           {listitems}
         </div>
-
       </div>);
 
       const renderedState = this.state.callDetailDisplayed ? callDetailState : defaultState ;
