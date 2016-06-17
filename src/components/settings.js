@@ -69,7 +69,7 @@ class Settings extends VertoBaseComponent {
 
   render() {
     if(this.props.status == "disconnected"){
-      var theMsg = "Log-in to change settings";
+      var theMsg = "Login to change settings";
     }else{
       var theMsg = "Settings";
     }

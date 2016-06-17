@@ -649,6 +649,8 @@ showSpeeds(){
               <UserMenu allowDisplayDetails={this.props.vcStatus != 'disconnected'}
                   compStyle={this.state.showAltAppControls ? this.getStyle("altUserMenu") : undefined}
                   cbClick={this.handleCloseDropdowns}
+                  status = {this.props.vcStatus}
+                  ttPosition={!this.state.showAltAppControls ? "bottom" : "right"}
               >
                 <MenuItem label={<FormattedMessage id='OPEN_NEW_WINDOW' />}cbAction={()=>{
                   window.open(location.href);
@@ -663,6 +665,7 @@ showSpeeds(){
               <TagMenu allowDisplayDetails="true"
                   compStyle={this.state.showAltAppControls ? this.getStyle("altTagMenu") : undefined}
                   cbClick={this.handleCloseDropdowns}
+                  ttPosition={!this.state.showAltAppControls ? "bottom" : "right"}
               >
                 <MenuItem label={formatMessage({"id":"ABOUT", "defaultMessage":"About"})} cbAction={()=>{
                   // TODO ta need to pass version and gitRev in to the About component
