@@ -75,7 +75,8 @@ export default class AdminControls extends VertoBaseComponent {
 
       volumeAndGainStyle: {
         display:'flex',
-        flexDirection:'column'
+        flexDirection:'column',
+        paddingBottom: '10px'
       },
 
       multiCanvasStyle:{
@@ -94,7 +95,8 @@ export default class AdminControls extends VertoBaseComponent {
 
       container: {
         display: 'flex',
-        backgroundColor: '#f3f3f3'
+        backgroundColor: '#f3f3f3',
+        marginTop: '15px'
       },
 
       column1: {
