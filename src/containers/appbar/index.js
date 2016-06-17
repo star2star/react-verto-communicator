@@ -230,8 +230,9 @@ class AppBar extends VertoBaseComponent {
           },
           buttonContainer: {
             display: 'flex',
-            flexDirection: 'column'
-            // alignItems: 'flex-start', //buttons fill container or not?
+            flexDirection: 'column',
+            alignItems: 'flex-start'
+            //buttons fill container or not?
             // flex: '1'
           },
           button: {
@@ -248,7 +249,8 @@ class AppBar extends VertoBaseComponent {
           },
           netSpeedContainer: {
             display: 'flex',
-            justifyContent: 'center',
+            justifyContent: 'flex-start',
+            // justifyContent: 'center',
             alignItems: 'center'
           },
           outgoingSpacing: {

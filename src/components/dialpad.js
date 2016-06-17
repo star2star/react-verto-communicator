@@ -28,18 +28,21 @@ class Dialpad extends VertoBaseComponent {
       container: {
         display: 'flex',
         flex: 1,
-        // alignItems: "center",
-        // justifyContent: 'flex-start',
         flexDirection: "column",
-        maxWidth: "500px",
+        height: '500px',
+        width: '25vw',
+        minWidth: '375px',
+        '@media (max-width: 1280px)': {
+          width: '50vw'
+        },
         '@media (max-width: 768px)': {
-          //width: '90vw'
+          width: '80vw'
         },
         boxShadow: '0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)'
       },
       header: {
         display: 'flex',
-        flex: 1,
+        //flex: 3,
         alignItems: 'center',
         alignContent: 'stretch',
         justifyContent: 'space-between',
@@ -48,7 +51,7 @@ class Dialpad extends VertoBaseComponent {
         borderBottom: '2px solid #ccc'
       },
       span : {
-        flex: 1
+        //flex: 1
       },
       callhist : {
         width: "24px", // this is for svg styling
@@ -65,6 +68,10 @@ class Dialpad extends VertoBaseComponent {
         fontWeight: '300',
         border: 'none',
         outline: 'none',
+        fontSize: '1em', //!this.state.number ? '1vw' : '1.5vw',
+        // '@media (max-width: 1280px)': {
+        //   fontSize: '1em'
+        // }
         fontSize: '25px', //!this.state.number ? '1vw' : '1.5vw',
         '@media (max-width: 768px)': {
           fontSize: '1em'
@@ -88,7 +95,7 @@ class Dialpad extends VertoBaseComponent {
         borderWidth: '2px',
         borderColor: '#ccc',
         width: '100%',
-        backgroundColor: '#ccc'
+        //backgroundColor: '#ccc'
       },
       left: {
         content: '" "',
@@ -109,7 +116,7 @@ class Dialpad extends VertoBaseComponent {
         left: '50%'
       },
       callcont: {
-        paddingTop: '15px',
+        //paddingTop: '15px',
         paddingBottom: '15px',
         display: 'flex',
         justifyContent: 'center'

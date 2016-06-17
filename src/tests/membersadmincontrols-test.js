@@ -44,10 +44,25 @@ const sampleMember = {
 
 describe('Default test for ChatMessageItem', ()=>{
 
+//for some reason I can't find the ControlItems so I have to just look for some lame divs....
+  it('Renders the correct amount of SVGs when there is only one canvas', () => {
+    const wrapper = mountWithIntl(<AdminControls multCanvas={false} member={sampleMember}  cbControlClick={()=>{}} />);
+    expect(wrapper.find('div').length).toEqual(16);
+  });
 
-  it('some dumb test to show off this error ', () => {
-    const wrapper = shallowWithIntl(<AdminControls multCanvas={false} member={{}}  cbControlClick={()=>{}} />);
-    expect(wrapper.find('div')).toEqual(3);
+  it('Renders the correct amount of SVGs when there are multiple canvases ', () => {
+    const wrapper = mountWithIntl(<AdminControls multCanvas={true} member={sampleMember}  cbControlClick={()=>{}} />);
+    expect(wrapper.find('div').length).toEqual(21);
+  });
+
+  it('Proporly takes in the props ', () => {
+    const wrapper = mountWithIntl(<AdminControls multCanvas={true} member={sampleMember}  cbControlClick={()=>{}} />);
+    expect(wrapper.props().multCanvas).toEqual(true);
+  });
+
+  it('Proporly takes in the props ', () => {
+    const wrapper = mountWithIntl(<AdminControls multCanvas={true} member={sampleMember}  cbControlClick={()=>{}} />);
+    expect(wrapper.props().member.name).toEqual('Cory');
   });
 
 });
