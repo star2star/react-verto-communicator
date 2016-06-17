@@ -55,6 +55,9 @@ export default class MemberItem extends VertoBaseComponent {
         width: '40px',
         borderRadius: '50%'
       },
+      avatarSpacing: {
+        marginRight: '10px'
+      },
       //name/email grouping for flex-positioning
       userInfoStyle: {
         display: 'flex',
@@ -84,7 +87,7 @@ export default class MemberItem extends VertoBaseComponent {
       avStatusStyle: {
         display: 'flex',
         alignItems: 'center',
-        paddingRight: '10px'
+        paddingRight: '20px'
       },
       svgStyle: {
         height: '24px',
@@ -155,11 +158,13 @@ export default class MemberItem extends VertoBaseComponent {
             (<VideoIconSVG  svgStyle={this.getStyle("svgStyle")} />);
 
     let avatarStyle = {...this.getStyle('avatarStyle')};
-    if (this.props.member.conferenceStatus.audio.muted)
-      ({...this.getStyle('avatarStyle'), boxShadow:'1px 1px 9px red'});
+        if (this.props.member.conferenceStatus.audio.muted) {
+          ({...this.getStyle('avatarStyle'), boxShadow:'1px 1px 9px red'});
+        }
 
-    if (this.props.member.conferenceStatus.audio.talking)
-        ({...this.getStyle('avatarStyle'), boxShadow:'1px 1px 9px green'});
+        if (this.props.member.conferenceStatus.audio.talking) {
+            ({...this.getStyle('avatarStyle'), boxShadow:'1px 1px 9px green'});
+          }
 
     //
     // let avatarStatus = this.props.member.conferenceStatus.audio.muted ?
@@ -260,7 +265,7 @@ export default class MemberItem extends VertoBaseComponent {
     return (
       <div style={this.getStyle("memberWrapStyle")}>
       <div style={this.getStyle("memberStyle")}>
-        <span style={{marginRight:'5px'}}>
+        <span style={this.getStyle('avatarSpacing')}>
         <img src={this.props.member.avatar.avatar} style={avatarStyle}/>
         </span>
         <div className="userInfo" style={this.getStyle("userInfoStyle")}
