@@ -47,35 +47,47 @@ export default class MemberItem extends VertoBaseComponent {
       memberStyle: {
           display: 'flex',
           justifyContent: 'space-between'
+
       },
       //(gr)avatar icon
       avatarStyle: {
         height: '40px',
         width: '40px',
-        borderRadius: '50%',
-        boxShadow: this.props.member.conferenceStatus.audio.muted  ? '1px 1px 9px red' : 'none'
+        borderRadius: '50%'
+      },
+      avatarSpacing: {
+        marginRight: '10px'
       },
       //name/email grouping for flex-positioning
       userInfoStyle: {
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis'
       },
       //name line
       nameStyle: {
         color: '#393939',
-        paddingBottom: '5px'
+        paddingBottom: '5px',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis'
       },
       //email line
       emailStyle: {
         fontSize:'.75rem',
         color: '#9b9b9b',
-        paddingBottom: '1px'
+        paddingBottom: '1px',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis'
       },
       //groups audio, video, presenter icons for placement
       avStatusStyle: {
         display: 'flex',
         alignItems: 'center',
-        paddingRight: '10px'
+        paddingRight: '20px'
       },
       svgStyle: {
         height: '24px',
@@ -84,14 +96,14 @@ export default class MemberItem extends VertoBaseComponent {
       controlAudioIconStyle: {
         svgStyle: {
           height: '24px',
-          fill: this.props.member.conferenceStatus.audio.muted  ? '#c5c5c5' : '#65ac43',
+          fill: this.props.member.conferenceStatus.audio.muted  ? '#333333' : '#65ac43',
           paddingRight: '10px'
         }
       },
       controlVideoIconStyle: {
         svgStyle: {
           height: '24px',
-          fill: this.props.member.conferenceStatus.video.muted  ? '#c5c5c5' : '#65ac43',
+          fill: this.props.member.conferenceStatus.video.muted  ? '#333333' : '#65ac43',
           paddingRight: '10px'
         }
       },
@@ -138,12 +150,20 @@ export default class MemberItem extends VertoBaseComponent {
 
     // Setup up mic and video status/controls
     let micStatus = this.props.member.conferenceStatus.audio.muted ?
-            (<MuteMicrophoneIconSVG svgStyle={this.getStyle("svgStyle")} />):
+            (<MuteMicrophoneIconSVG svgStyle={this.getStyle("svgStyle")} />) :
             (<MicrophoneIconSVG  svgStyle={this.getStyle("svgStyle")} />);
 
     let videoStatus = this.props.member.conferenceStatus.video.muted ?
-            (<MuteVideoIconSVG  svgStyle={this.getStyle("svgStyle")} />):
+            (<MuteVideoIconSVG  svgStyle={this.getStyle("svgStyle")} />) :
             (<VideoIconSVG  svgStyle={this.getStyle("svgStyle")} />);
+
+    let avatarStyle = {...this.getStyle('avatarStyle')};
+        if (this.props.member.conferenceStatus.audio.muted) {
+          avatarStyle = ({...this.getStyle('avatarStyle'), boxShadow:'1px 1px 9px red'});
+        }
+        if (this.props.member.conferenceStatus.audio.talking) {
+          avatarStyle = ({...this.getStyle('avatarStyle'), boxShadow:'1px 1px 9px green'});
+          }
 
     if (this.props.controlSettings.moderator) {
       // since we are in admin mode, redefine audio and video status indicators to
@@ -233,8 +253,10 @@ export default class MemberItem extends VertoBaseComponent {
 
     return (
       <div style={this.getStyle("memberWrapStyle")}>
-      <div style={this.getStyle("memberStyle")}>
-        <img src={this.props.member.avatar.avatar} style={this.getStyle("avatarStyle")} />
+      <div id="testthing" style={this.getStyle("memberStyle")}>
+        <span style={this.getStyle('avatarSpacing')}>
+          <img src={this.props.member.avatar.avatar} style={avatarStyle}/>
+        </span>
         <div className="userInfo" style={this.getStyle("userInfoStyle")}
             onClick={()=>{this.setState({...this.state, showAdminControls: !this.state.showAdminControls});}}
         >

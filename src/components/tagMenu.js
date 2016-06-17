@@ -4,10 +4,12 @@ import {
 TagIconSVG,
 CaretUpIconSVG,
 CaretDownIconSVG } from './svgIcons';
+import ToolTip from './tooltip';
 
 const propTypes = {
   cbClick : React.PropTypes.func,
-  compStyle : React.PropTypes.object
+  compStyle : React.PropTypes.object,
+  ttPosition: React.PropTypes.string.isRequired
 };
 
 const defaultProps = {
@@ -88,15 +90,17 @@ class TagMenu extends VertoBaseComponent {
       </div>
     );
 
-
+    const theMsg = "Info menu";
     return (
-      <span onClick={this.toggleMenu}  style={this.getStyle("container")}>
-        <TagIconSVG svgStyle={{...this.getStyle('icon'), fill: 'white'}}  />
-          {this.state.dropdownDisplayed ?
-              <CaretUpIconSVG svgStyle={{...this.getStyle('caret'), fill: 'white'}} /> :
-              <CaretDownIconSVG svgStyle={{...this.getStyle('caret'), fill: 'white'}} />}
-          {menuContainer}
-      </span>
+      <ToolTip name="info" place={this.props.ttPosition} msg={theMsg}>
+        <span onClick={this.toggleMenu}  style={this.getStyle("container")}>
+          <TagIconSVG svgStyle={{...this.getStyle('icon'), fill: 'white'}}  />
+            {this.state.dropdownDisplayed ?
+                <CaretUpIconSVG svgStyle={{...this.getStyle('caret'), fill: 'white'}} /> :
+                <CaretDownIconSVG svgStyle={{...this.getStyle('caret'), fill: 'white'}} />}
+            {menuContainer}
+        </span>
+      </ToolTip>
     );
   }
 }
