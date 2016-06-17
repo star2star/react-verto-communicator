@@ -4,12 +4,12 @@ import sinon from 'sinon';
 import ReactDOM from 'react-dom';
 import { mountWithIntl, shallowWithIntl } from '../helpers/intl-enzyme-test-helper.js';
 import AdminControls from '../components/memberAdminControlPanel';
-import moment from 'moment';
+//import moment from 'moment';
 
 jest.unmock('../components/memberAdminControlPanel');
 jest.unmock('../helpers/intl-enzyme-test-helper.js');
 jest.unmock('../js/messages.js');
-jest.unmock('moment');
+//jest.unmock('moment');
 
 const sampleMember = {
   callerId: "Cory",
@@ -22,7 +22,16 @@ const sampleMember = {
   },
   conferenceStatus: {
     oldStatus: "floor",
-    video: false,
+    video: {
+      avatarPresented:false,
+      floor:true,
+      mediaFlow:"sendRecv",
+      muted:true,
+      reservationID:null,
+      videoLayerID:0,
+      videoOnly:false,
+      visible:false
+    },
     audio: {
       energyScore:515,
       floor: true,
@@ -37,7 +46,7 @@ describe('Default test for ChatMessageItem', ()=>{
 
 
   it('some dumb test to show off this error ', () => {
-    const wrapper = mountWithIntl(<AdminControls multCanvas={false} member={sampleMember}  cbControlClick={()=>{}} />);
+    const wrapper = shallowWithIntl(<AdminControls multCanvas={false} member={{}}  cbControlClick={()=>{}} />);
     expect(wrapper.find('div')).toEqual(3);
   });
 
