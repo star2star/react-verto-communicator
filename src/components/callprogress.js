@@ -6,13 +6,18 @@ import {ShareScreenIconSVG, AvatarSVG, DialPadIconSVG, MicrophoneIconSVG, PauseI
 
  const propTypes = {
    callData : React.PropTypes.object.isRequired,
+   cbDTMF:  React.PropTypes.func,
    cbHangup : React.PropTypes.func,
    cbHold:  React.PropTypes.func,
-   cbDTMF:  React.PropTypes.func,
    cbMute:  React.PropTypes.func,
+   cbSetVideoMode: React.PropTypes.func,
+   cbShare: React.PropTypes.func,
    cbToggleChat: React.PropTypes.func,
-   userConfStatus : React.PropTypes.object,
-   cbShare: React.PropTypes.func
+   layouts: React.PropTypes.array,
+   currLayout: React.PropTypes.array,
+   userConfStatus : React.PropTypes.object
+
+
 };
 
 class CallProgress extends VertoBaseComponent {
@@ -78,7 +83,9 @@ class CallProgress extends VertoBaseComponent {
                   cbRecord={()=>{console.log('Record Clicked');}}
                   cbStopRecord={()=>{console.log('Stop Record Clicked');}}
                   cbSnapshot={()=>{console.log('Snapshot Clicked');}}
-                  cbSetVideoMode={()=>{console.log('Set Video Mode Clicked');}}
+                  cbSetVideoMode={(params)=>{this.props.cbSetVideoMode(params);}}
+                  layouts={this.props.layouts}
+                  currLayout={this.props.currLayout}
                 />
               ) :
               undefined;
@@ -93,28 +100,28 @@ class CallProgress extends VertoBaseComponent {
               />
             );
 
-        return (
-          <div style={{display:'flex', backgroundColor: '#333', height: '70px', justifyContent: 'space-around'}}>
-            <div style={{display:"flex", flexDirection: "column", justifyContent: 'center', color: '#ddd'}} >
-              <div>{this.props.callData.destination}</div>
-              <div>{this.state.status == 'active'? this.state.timer: 'Connecting ...'}</div>
-            </div>
-            <div className="vidControls" style={this.getStyle("vidControlStyles")}>
-              {adminControls}
-              {userControls}
-            </div>
-            <span style={{display:'flex', flexDirection: 'column', justifyContent: 'center'}}
-                onClick={()=>{
-                //console.log('hangup clicked: ', this.props);
-                this.props.cbHangup(this.props.callData.callId);
-            }}>
-                <PhoneIconSVG svgStyle={{width: "20px", height: "20px", fill: "white", backgroundColor: '#f00', padding: '5px', borderRadius: '50%'}} />
-            </span>
-
+      return (
+        <div style={{display:'flex', backgroundColor: '#333', height: '70px', justifyContent: 'space-around'}}>
+          <div style={{display:"flex", flexDirection: "column", justifyContent: 'center', color: '#ddd'}} >
+            <div>{this.props.callData.destination}</div>
+            <div>{this.state.status == 'active'? this.state.timer: 'Connecting ...'}</div>
           </div>
-        );
-      }
+          <div className="vidControls" style={this.getStyle("vidControlStyles")}>
+            {adminControls}
+            {userControls}
+          </div>
+          <span style={{display:'flex', flexDirection: 'column', justifyContent: 'center'}}
+              onClick={()=>{
+              //console.log('hangup clicked: ', this.props);
+              this.props.cbHangup(this.props.callData.callId);
+          }}>
+              <PhoneIconSVG svgStyle={{width: "20px", height: "20px", fill: "white", backgroundColor: '#f00', padding: '5px', borderRadius: '50%'}} />
+          </span>
+
+        </div>
+      );
     }
+  }
 
 
 CallProgress.propTypes = propTypes;

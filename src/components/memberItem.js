@@ -81,10 +81,17 @@ export default class MemberItem extends VertoBaseComponent {
         height: '24px',
         fill: '#65ac43'
       },
-      controlIconStyle: {
+      controlAudioIconStyle: {
         svgStyle: {
           height: '24px',
-          fill: '#65ac43',
+          fill: this.props.member.conferenceStatus.audio.muted  ? '#c5c5c5' : '#65ac43',
+          paddingRight: '10px'
+        }
+      },
+      controlVideoIconStyle: {
+        svgStyle: {
+          height: '24px',
+          fill: this.props.member.conferenceStatus.video.muted  ? '#c5c5c5' : '#65ac43',
           paddingRight: '10px'
         }
       },
@@ -131,12 +138,12 @@ export default class MemberItem extends VertoBaseComponent {
 
     // Setup up mic and video status/controls
     let micStatus = this.props.member.conferenceStatus.audio.muted ?
-            (<MuteMicrophoneIconSVG svgStyle={this.getStyle("svgStyle")}/>):
-            (<MicrophoneIconSVG  svgStyle={this.getStyle("svgStyle")}/>);
+            (<MuteMicrophoneIconSVG svgStyle={this.getStyle("svgStyle")} />):
+            (<MicrophoneIconSVG  svgStyle={this.getStyle("svgStyle")} />);
 
     let videoStatus = this.props.member.conferenceStatus.video.muted ?
-            (<MuteVideoIconSVG  svgStyle={this.getStyle("svgStyle")}/>):
-            (<VideoIconSVG  svgStyle={this.getStyle("svgStyle")}/>);
+            (<MuteVideoIconSVG  svgStyle={this.getStyle("svgStyle")} />):
+            (<VideoIconSVG  svgStyle={this.getStyle("svgStyle")} />);
 
     if (this.props.controlSettings.moderator) {
       // since we are in admin mode, redefine audio and video status indicators to
@@ -144,21 +151,21 @@ export default class MemberItem extends VertoBaseComponent {
 
       micStatus = this.props.member.conferenceStatus.audio.muted ?
               (<ControlItem type="MuteMicrophoneIconSVG"
-                  compStyle={this.getStyle("controlIconStyle")}
+                  compStyle={this.getStyle("controlAudioIconStyle")}
                   cbActionClick={()=>{this.props.cbControlClick("MUTEMIC", [this.props.member.memberId]);}}
               />) :
               (<ControlItem type="MicrophoneIconSVG"
-                  compStyle={this.getStyle("controlIconStyle")}
+                  compStyle={this.getStyle("controlAudioIconStyle")}
                   cbActionClick={()=>{this.props.cbControlClick("MUTEMIC", [this.props.member.memberId]);}}
               />);
 
       videoStatus = this.props.member.conferenceStatus.video.muted ?
               (<ControlItem type="MuteVideoIconSVG"
-                  compStyle={this.getStyle("controlIconStyle")}
+                  compStyle={this.getStyle("controlVideoIconStyle")}
                   cbActionClick={()=>{this.props.cbControlClick("MUTEVIDEO", [this.props.member.memberId]);}}
               />) :
               (<ControlItem type="VideoIconSVG"
-                  compStyle={this.getStyle("controlIconStyle")}
+                  compStyle={this.getStyle("controlVideoIconStyle")}
                   cbActionClick={()=>{this.props.cbControlClick("MUTEVIDEO", [this.props.member.memberId]);}}
               />);
     }

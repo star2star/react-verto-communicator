@@ -75,7 +75,8 @@ export default class AdminControls extends VertoBaseComponent {
 
       volumeAndGainStyle: {
         display:'flex',
-        flexDirection:'column'
+        flexDirection:'column',
+        paddingBottom: '10px'
       },
 
       multiCanvasStyle:{
@@ -94,7 +95,8 @@ export default class AdminControls extends VertoBaseComponent {
 
       container: {
         display: 'flex',
-        backgroundColor: '#f3f3f3'
+        backgroundColor: '#f3f3f3',
+        marginTop: '15px'
       },
 
       column1: {
@@ -118,7 +120,7 @@ export default class AdminControls extends VertoBaseComponent {
   }
 
   render(){
-    console.log(this.props.member);
+    //console.log(this.props.member);
     const { formatMessage } = this.props.intl;
     //this.props.multCanvas == true;
     //console.log('&&&&&& member object', this.props.member);
@@ -166,7 +168,7 @@ export default class AdminControls extends VertoBaseComponent {
                         compStyle={this.getStyle("controlIconStyle")}
                         cbActionClick={()=>{console.log('Next Watching Canvas');}}
                     />
-                    <ControlItem type="PreviousIconSVG" label="PREVIOUS"
+                    <ControlItem type="PreviousIconSVG" label={formatMessage({"id":"PREVIOUS", "defaultMessage":"Previous"})}
                         compStyle={this.getStyle("controlIconStyle")}
                         cbActionClick={()=>{console.log('Prev Watching Canvas');}}
                     />
@@ -181,7 +183,7 @@ export default class AdminControls extends VertoBaseComponent {
                         compStyle={this.getStyle("controlIconStyle")}
                         cbActionClick={()=>{console.log('Next Input Canvas');}}
                     />
-                    <ControlItem type="PreviousIconSVG" label="PREVIOUS"
+                    <ControlItem type="PreviousIconSVG" label={formatMessage({"id":"PREVIOUS", "defaultMessage":"Previous"})}
                         compStyle={this.getStyle("controlIconStyle")}
                         cbActionClick={()=>{console.log('Prev Input Canvas');}}
                     />
@@ -296,7 +298,7 @@ export default class AdminControls extends VertoBaseComponent {
                   compStyle={this.getStyle("controlIconStyle")}
                   cbActionClick={()=>{this.props.cbControlClick("NEXTLAYER", ['vid-layer', this.props.member.memberId, 'next']);}}
               />
-              <ControlItem type="PreviousIconSVG" label="PREVIOUS"
+              <ControlItem type="PreviousIconSVG" label={formatMessage({"id":"PREVIOUS", "defaultMessage":"Previous"})}
                   compStyle={this.getStyle("controlIconStyle")}
                   cbActionClick={()=>{this.props.cbControlClick("PREVLAYER", ['vid-layer', this.props.member.memberId, 'prev']);}}
               />

@@ -9,7 +9,7 @@ jest.unmock('../components/memberList');
 jest.unmock('../helpers/intl-enzyme-test-helper.js');
 jest.unmock('../js/messages.js');
 
-describe('Default test for MemberList', ()=>{
+describe( 'MemberList', ()=>{
 
   const cbControlClick=sinon.spy();
   const members=[{key:0, member:"Name"},{key:1, member:"1Name"}, {key:2, member:"2Name"}];
@@ -35,14 +35,16 @@ describe('Default test for MemberList', ()=>{
       expect(cbControlClick.calledOnce);
     });
 
-    // it('renders the correct members ', () => {
-    //   const wrapper = mount(<MemberList
-    //     cbControlClick={cbControlClick}
-    //     members={members}
-    //     controlSettings={controlSettings}
-    //     />);
-    //   expect(wrapper.childAt(0).props()).toEqual({});
-    // });
+    it('renders members ', () => {
+      const wrapper = mount(
+        <MemberList
+            cbControlClick={cbControlClick}
+            members={members}
+            controlSettings={controlSettings}
+        />);
+        const expectedNode = wrapper.children().first().find('.info').children().find('.name');
+        // console.log('***************', expectedNode.debug());
+    });
 
 
 });

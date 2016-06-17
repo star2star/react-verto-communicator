@@ -250,6 +250,9 @@ class Main extends VertoBaseComponent {
                     userConfStatus={this.props.confData && this.props.confData.users[this.props.confData.callId]? this.props.confData.users[this.props.confData.callId].conferenceStatus:
                             undefined
                           }
+                    cbSetVideoMode={(params)=>{this.handleControlClick('SETLAYOUT', params);}}
+                    layouts={this.props.confData ? this.props.confData.layouts : undefined}
+                    currLayout={this.props.confData ? this.props.confData.videoLayout : undefined}
                 />
               </div>
             );

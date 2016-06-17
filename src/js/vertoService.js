@@ -162,6 +162,7 @@ class VertoService {
                 VertoService.refreshDevices(()=>{
                   console.log('refresh from destroy ...')
                 });
+                //TODO send user list _dispatch conference data
               } else {
                 xInstance.stopConference();
                 _dispatch(doHungUp(d));
@@ -183,7 +184,9 @@ class VertoService {
               xInstance._data._activeCalls[d.callID] = d;
               //jes tom does not want it
               //Processor.starphone('requesting', d.params);
-              _dispatch(doingMakeCall('trying', d.params.destination_number, d.callID, d.direction.name));
+              if (!d.params.screenShare) {
+                _dispatch(doingMakeCall('trying', d.params.destination_number, d.callID, d.direction.name));
+              }
               break;
 
           default:
@@ -654,7 +657,7 @@ class VertoService {
   hangup(callerId){
     if (_verto._data._activeCalls[callerId]) {
       if (_verto._data.shareCall) {
-        //TODO fix this 
+        //TODO fix this
         alert('sharing so aborting');
         return;
       }
