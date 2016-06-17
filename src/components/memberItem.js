@@ -159,22 +159,11 @@ export default class MemberItem extends VertoBaseComponent {
 
     let avatarStyle = {...this.getStyle('avatarStyle')};
         if (this.props.member.conferenceStatus.audio.muted) {
-          ({...this.getStyle('avatarStyle'), boxShadow:'1px 1px 9px red'});
+          avatarStyle = ({...this.getStyle('avatarStyle'), boxShadow:'1px 1px 9px red'});
         }
-
         if (this.props.member.conferenceStatus.audio.talking) {
-            ({...this.getStyle('avatarStyle'), boxShadow:'1px 1px 9px green'});
+          avatarStyle = ({...this.getStyle('avatarStyle'), boxShadow:'1px 1px 9px green'});
           }
-
-    //
-    // let avatarStatus = this.props.member.conferenceStatus.audio.muted ?
-    //         ({...this.getStyle('avatarStyle'), boxShadow:'1px 1px 9px red'}) :
-    //         ({...this.getStyle('avatarStyle'), boxShadow:'none'});
-    //
-    // let avatarTalkStatus = this.props.member.conferenceStatus.audio.talking ?
-    //         ({...this.getStyle('avatarStyle'), boxShadow:'1px 1px 9px green'}) :
-    //         ({...this.getStyle('avatarStyle'), boxShadow:'none'});
-
 
     if (this.props.controlSettings.moderator) {
       // since we are in admin mode, redefine audio and video status indicators to
@@ -264,9 +253,9 @@ export default class MemberItem extends VertoBaseComponent {
 
     return (
       <div style={this.getStyle("memberWrapStyle")}>
-      <div style={this.getStyle("memberStyle")}>
+      <div id="testthing" style={this.getStyle("memberStyle")}>
         <span style={this.getStyle('avatarSpacing')}>
-        <img src={this.props.member.avatar.avatar} style={avatarStyle}/>
+          <img src={this.props.member.avatar.avatar} style={avatarStyle}/>
         </span>
         <div className="userInfo" style={this.getStyle("userInfoStyle")}
             onClick={()=>{this.setState({...this.state, showAdminControls: !this.state.showAdminControls});}}
