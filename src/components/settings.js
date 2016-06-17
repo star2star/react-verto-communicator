@@ -4,13 +4,17 @@ import {
 SettingsIconSVG,
 CaretUpIconSVG,
 CaretDownIconSVG } from './svgIcons';
+import ToolTip from './tooltip';
+
 
 const propTypes = {
   cbDeviceList: React.PropTypes.func,
   cbPreviewSet: React.PropTypes.func.isRequired,
   cbSubmitSetting: React.PropTypes.func.isRequired,
   cbToggleShowSettings: React.PropTypes.func.isRequired,
-  compStyle : React.PropTypes.object
+  compStyle : React.PropTypes.object,
+  ttPosition: React.PropTypes.string,
+  status:  React.PropTypes.oneOf(['connected','disconnected', 'connecting', 'active']).isRequired
 };
 
 const defaultProps = {
@@ -64,14 +68,22 @@ class Settings extends VertoBaseComponent {
   }
 
   render() {
+    if(this.props.status == "disconnected"){
+      var theMsg = "Log-in to change settings";
+    }else{
+      var theMsg = "Settings";
+    }
     // console.log('settings render props: ', this.props.settingsData);
     return (
+
       <div  style={this.getStyle("container")}>
         <span onClick={this.showMenu.bind(this)}  >
-          <SettingsIconSVG svgStyle={{...this.getStyle('icon')}}  />
+          <ToolTip name="settings" place={this.props.ttPosition} msg={theMsg} >
+            <SettingsIconSVG svgStyle={{...this.getStyle('icon')}}  />
             {this.state.dropdownDisplayed ?
                 <CaretUpIconSVG svgStyle={{...this.getStyle('caret')}} /> :
                 <CaretDownIconSVG svgStyle={{...this.getStyle('caret')}} />}
+          </ToolTip>
         </span>
       </div>
     );
