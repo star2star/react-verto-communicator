@@ -41,7 +41,10 @@ class CallHistory extends VertoBaseComponent {
         minWidth: '375px',
         width: '25vw', //
         '@media (max-width: 1280px)': {
-          width: '90vw'
+          width: '50vw'
+        },
+        '@media (max-width: 768px)': {
+          width: '80vw'
         },
         overflowY: 'auto',
         overflowX: 'hidden',
