@@ -6,7 +6,8 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 
 const propTypes = {
   status: React.PropTypes.oneOf(['connected','disconnected', 'connecting', 'active']).isRequired,
-  compStyle:   React.PropTypes.object
+  compStyle:   React.PropTypes.object,
+  ttPosition: React.PropTypes.string.isRequired
 };
 
 class VCStatus extends VertoBaseComponent {
@@ -66,7 +67,7 @@ class VCStatus extends VertoBaseComponent {
     const theMsg= intlStatus = formatMessage({"id":"COM_STATUS", "defaultMessage":"Communication Status: "}) + intlStatus;
 
      return (
-        <ToolTip name="vcStatus" place="bottom" msg={theMsg}>
+        <ToolTip name="vcStatus" place={this.props.ttPosition} msg={theMsg}>
           < StatusIconSVG svgStyle = {{...this.getStyle('svgStyle'), ...fillColor}} />
         </ToolTip>
      );
