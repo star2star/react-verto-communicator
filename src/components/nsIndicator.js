@@ -112,7 +112,7 @@ class NetworkStatusIndicator extends VertoBaseComponent {
         >
             {formatMessage({"id":"BANDWIDTH_INFO_VIDEO_RES", "defaultMessage":"Bandwidth Info"})} {this.props.networkData.vidQual}
         </div>
-        </span>
+      </span>
     );
 
     if (this.props.allowDisplayDetails) {

@@ -17,6 +17,14 @@ export default class UserVideoControls extends VertoBaseComponent {
     super(props);
     this.state = {};
     this.handleToggleFullScreen = this.handleToggleFullScreen.bind(this);
+
+    // addEventListener for dblclick to go to full screen moderator
+    document.getElementById("webcam").addEventListener('dblclick', this.handleToggleFullScreen);
+
+  }
+
+  componentWillUnmount() {
+    document.getElementById("webcam").removeEventListener('dblclick', this.handleToggleFullScreen);
   }
 
   getCompStyle() {
@@ -73,9 +81,8 @@ export default class UserVideoControls extends VertoBaseComponent {
   }
 
   render(){
-
     // Setup up based on the conference status object
-    const micStatus = this.props.userConfStatus.audio.muted ?
+    const micStatus = this.props.userConfStatus && this.props.userConfStatus.audio.muted ?
             (<ControlItem type="MuteMicrophoneIconSVG"
                 compStyle={this.getStyle("controlIconStyle")}
                 cbActionClick={this.props.cbMicMute}
@@ -85,7 +92,7 @@ export default class UserVideoControls extends VertoBaseComponent {
                 cbActionClick={this.props.cbMicMute}
             />);
 
-    const videoStatus = this.props.userConfStatus.video.muted ?
+    const videoStatus = this.props.userConfStatus && this.props.userConfStatus.video.muted ?
             (<ControlItem type="MuteVideoIconSVG"
                 compStyle={this.getStyle("controlIconStyle")}
                 cbActionClick={this.props.cbVideoMute}

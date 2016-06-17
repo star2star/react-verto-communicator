@@ -37,8 +37,7 @@ class CallHistoryItem extends VertoBaseComponent {
         fontWeight: '300',
         minWidth: '375px',
         alignItems: 'flex-start',
-        cursor: 'pointer',
-        maxWidth: "500px"
+        cursor: 'pointer'
       },
       top: {
         paddingLeft: '20px',
