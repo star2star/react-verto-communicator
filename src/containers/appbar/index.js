@@ -638,6 +638,8 @@ showSpeeds(){
                   settings={this.props.settings}
                   onClick={()=>{this.props.dispatch(doSpeedTest());this.showSpeeds;}}
                   cbPreviewSet={()=>{App.toggleModal((<SettingsPreview settings={this.props.settings} cbClose={App.toggleModal}/>));}}
+                  ttPosition={!this.state.showAltAppControls ? "bottom" : "right"}
+                  status = {this.props.vcStatus}
               />
             </div>
 
