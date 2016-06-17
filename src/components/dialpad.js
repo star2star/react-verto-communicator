@@ -5,6 +5,7 @@ import { CallHistoryIconSVG, PhoneIconSVG, RemoveIconSVG, DeleteIconSVG } from '
 import Radium  from 'radium';
 import CallHistory from './callHistory';
 import CallHistoryService from '../js/callHistoryService';
+import { FormattedMessage, injectIntl } from 'react-intl';
 
 const propTypes = {
   compStyle : React.PropTypes.object,
@@ -42,7 +43,6 @@ class Dialpad extends VertoBaseComponent {
       },
       header: {
         display: 'flex',
-        //flex: 3,
         alignItems: 'center',
         alignContent: 'stretch',
         justifyContent: 'space-between',
@@ -51,10 +51,9 @@ class Dialpad extends VertoBaseComponent {
         borderBottom: '2px solid #ccc'
       },
       span : {
-        //flex: 1
       },
       callhist : {
-        width: "24px", // this is for svg styling
+        width: "24px",
         height: "24px",
         fill: "green",
         marginRight: "10px"
@@ -64,21 +63,17 @@ class Dialpad extends VertoBaseComponent {
         backgroundColor: this.state.inputFocused ? '#eee' : 'transparent',
         color: '#4a4a4a',
         height: '75px',
-        // marginLeft: '10px',
         fontWeight: '300',
         border: 'none',
         outline: 'none',
-        fontSize: '1em', //!this.state.number ? '1vw' : '1.5vw',
-        // '@media (max-width: 1280px)': {
-        //   fontSize: '1em'
-        // }
-        fontSize: '25px', //!this.state.number ? '1vw' : '1.5vw',
+        fontSize: '1em',
+        //fontSize: '25px',
         '@media (max-width: 768px)': {
           fontSize: '1em'
         }
       },
       back : {
-        width: "24px", // this is for svg styling
+        width: "24px",
         height: "24px",
         fill: "#ccc",
         cursor: 'pointer'
@@ -94,8 +89,7 @@ class Dialpad extends VertoBaseComponent {
         height: '2px',
         borderWidth: '2px',
         borderColor: '#ccc',
-        width: '100%',
-        //backgroundColor: '#ccc'
+        width: '100%'
       },
       left: {
         content: '" "',
@@ -116,7 +110,6 @@ class Dialpad extends VertoBaseComponent {
         left: '50%'
       },
       callcont: {
-        //paddingTop: '15px',
         paddingBottom: '15px',
         display: 'flex',
         justifyContent: 'center'
@@ -132,7 +125,7 @@ class Dialpad extends VertoBaseComponent {
         cursor: 'pointer'
       },
       call: {
-        width: "24px", // this is for svg styles
+        width: "24px",
         height: "24px",
         fill: "#fff"
         }
@@ -167,14 +160,9 @@ class Dialpad extends VertoBaseComponent {
     this.setState({ ...this.state, number: this.state.number + k });
   }
 
-
-  // eraseLastNumber(){
-  //   const number = this.state.number;
-  //   const newNumber = number.slice(0, number.length - 1);
-  //   this.setState({...this.state,'number': newNumber });
-  // }
-
   render() {
+
+    const { formatMessage } = this.props.intl;
 
     if (this.state.showingCallHistory) {
       return (
@@ -221,7 +209,7 @@ class Dialpad extends VertoBaseComponent {
             </span>
             <input
                 className="input"
-                placeholder="Enter an extension"
+                placeholder={formatMessage({"id":"ENTER_EXTENSION", "defaultMessage":"Enter a number"})}
                 style={{...this.getDefaultStyle('input')}}
                 value={this.state.number}
                 onChange={this.changingNumber.bind(this)}
@@ -286,4 +274,4 @@ class Dialpad extends VertoBaseComponent {
 
 Dialpad.propTypes = propTypes;
 
-export default Radium(Dialpad);
+export default injectIntl(Radium(Dialpad));
