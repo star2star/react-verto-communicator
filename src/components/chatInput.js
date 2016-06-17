@@ -44,7 +44,9 @@ export default class ChatInput extends VertoBaseComponent {
           // border: '1px solid #d1d1d1',
           //borderTop: '1px solid #d1d1d1',
           borderRight: '0px',
-          outline: 'none'
+          outline: 'none',
+          marginLeft: '5px',
+          marginRight: '5px'
           //borderRadius: '0px 0px 0px 5px'
       },
       inputSpacing: {
