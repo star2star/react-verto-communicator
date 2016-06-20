@@ -3,6 +3,7 @@ import {doLogOut, doVertoLogin, doMakeCallError, doHungUp, doCallHeld,
 import VideoConstants from './VideoConstants';
 import md5 from 'md5';
 import CallHistoryService from './callHistoryService';
+import AlertService from './alertService';
 
 // private stuff
 let _callbacks;
@@ -658,7 +659,15 @@ class VertoService {
     if (_verto._data._activeCalls[callerId]) {
       if (_verto._data.shareCall) {
         //TODO fix this
-        alert('sharing so aborting');
+        //alert('sharing so aborting');
+        // create alertObj
+        const alertObj = {  level: 'warn',
+                            timestamp: Date.now(),
+                            summary: 'Can\'t hang up while sharing screen',
+                            detail: 'You must stop sharing your screen before you can hangup the call'
+                          };
+
+        AlertService.getInstance().createAlert(alertObj);
         return;
       }
       _verto.verto.hangup(callerId);

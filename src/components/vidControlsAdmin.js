@@ -99,6 +99,10 @@ export default class UserVideoControls extends VertoBaseComponent {
             undefined;
 
     // Build out the admin control panel
+    // TODO ta - add inputmodals to collect file name info where appropriate
+    // Do we need to retain file info for calls into VertoServices to stop play/record?
+    // Does play button become 'pause' when playing a file?  Can VertoServices resume
+    // playing from pause point?
     return (
       <div style={{display: 'flex', position: 'relative'}}>
         <ControlItem type="PlayIconSVG"
