@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router'
+import { Link } from 'react-router';
 import VertoBaseComponent from './vertobasecomponent';
 
 import Main from '../containers/main/index.js';

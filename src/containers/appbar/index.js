@@ -22,6 +22,7 @@ import { MenuIconSVG, ChatIconSVG } from '../../components/svgIcons';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import LastCall from '../../components/lastCall';
 import { doMakeCall } from '../main/action-creators';
+import AlertLog from '../../components/alertLog';
 
 // Need to close menu on resize so that if we pass media query limit then
 // normal size menu will reappear...
@@ -157,7 +158,7 @@ class AppBar extends VertoBaseComponent {
               left: '0px',
               paddingLeft: '5px',
               backgroundColor: '#0544a4',
-              zIndex: '1'
+              zIndex: '2'
             }
           },
           lastCallStyles: {
@@ -184,7 +185,8 @@ class AppBar extends VertoBaseComponent {
             padding: '25px 80px',
             backgroundColor: '#0A387F',
             maxHeight: '600px',
-            overflow: 'auto'
+            overflow: 'auto',
+            zIndex: '1'
           },
           li: {
             color: '#4a4a4a',
@@ -591,27 +593,6 @@ showSpeeds(){
       }
     }
 
-    // toggle Chat control - only display if there is a conference in session...
-    // TODO find out where in store in progress conference is indicated
-    let toggleChat;
-
-    if (false) {
-      toggleChat = (
-        <div  style={!this.state.showAltAppControls ? this.getStyle('marginRightStyle') : this.getStyle('marginBottomStyle')}
-            onClick={()=>{
-                  // TODO add dispatch to toggle the slide out of memberlist/chat from right side...
-                  console.log('Toggle Chat Clicked in app bar');
-                }
-        }
-        >
-          <ChatIconSVG svgStyle={this.getStyle('chatIconStyle')} />
-
-          </div>
-);
-    }
-
-
-
 
     // settings here
     //TODO define settings style for alt menu orientation
@@ -643,7 +624,6 @@ showSpeeds(){
               />
             </div>
 
-            {toggleChat}
 
             <div style={!this.state.showAltAppControls ? this.getStyle('marginRightStyle') : this.getStyle('marginBottomStyle')}>
               <UserMenu allowDisplayDetails={this.props.vcStatus != 'disconnected'}
@@ -670,6 +650,10 @@ showSpeeds(){
                 <MenuItem label={formatMessage({"id":"ABOUT", "defaultMessage":"About"})} cbAction={()=>{
                   // TODO ta need to pass version and gitRev in to the About component
                   App.toggleModal((<About version="0.2.0" gitRev="xxxxx" cbClose={App.toggleModal}/>));
+                }} />
+                <MenuItem label="View Alert Log" cbAction={()=>{
+                  // TODO ta need to pass version and gitRev in to the About component
+                  App.toggleModal((<AlertLog cbClose={App.toggleModal}/>));
                 }} />
                 <MenuItem label={formatMessage({"id":"TITLE_CONTRIBUTORS", "defaultMessage":"Contributors"})}  cbAction={()=>{
 

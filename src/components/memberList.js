@@ -39,9 +39,9 @@ export default class MemberList extends VertoBaseComponent {
       MLStyles : {
         flex: 1,
         borderLeft: '1px solid #d1d1d1',
-        backgroundColor: '#FAFAFA',
         maxHeight: '100%', // need this so list will scroll on overflow...
-        overflowY: 'auto'
+        overflowY: 'auto',
+        cursor: 'pointer'
       }
     };
 

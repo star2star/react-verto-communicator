@@ -28,6 +28,8 @@ import IncomingCall from '../../components/incomingcall';
 import ChatSession from '../../components/chatSession';
 import Memberlist from '../../components/memberlist';
 import TabbedContainer from '../../components/tabbedContainer';
+import AlertService from '../../js/alertService';
+import AlertList from '../../components/alertList';
 
 class Main extends VertoBaseComponent {
   constructor(props) {
@@ -56,11 +58,8 @@ class Main extends VertoBaseComponent {
       },
       chatVidWrapStyles: {
         display: 'flex',
-        height: '100%'
-      },
-      chatVidWrapStyles : {
-        display: 'flex',
-        height: '100%'
+        height: '100%',
+        position: 'relative' // for positioning of alert list
       },
       chatVidStyle: {
         display: 'flex',
@@ -312,6 +311,7 @@ class Main extends VertoBaseComponent {
 
     return (
       <div id="chatVideoWrapper" style={this.getStyle('chatVidWrapStyles')}>
+        <AlertList />
         <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", flex:'1', overflowY: 'auto'}}>
           {incomingCall}
           <video id="webcam" autoPlay="autoplay"  style={this.getStyle("videoStyles")}></video>
