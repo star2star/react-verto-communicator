@@ -4,10 +4,14 @@ import {
 AvatarSVG,
 CaretUpIconSVG,
 CaretDownIconSVG } from './svgIcons';
+import ToolTip from './tooltip';
+
 
 const propTypes = {
   cbClick: React.PropTypes.func,
-  compStyle : React.PropTypes.object
+  compStyle : React.PropTypes.object,
+  ttPosition: React.PropTypes.string,
+  status:  React.PropTypes.oneOf(['connected','disconnected', 'connecting', 'active']).isRequired
 };
 
 const defaultProps = {
@@ -91,15 +95,23 @@ class UserMenu extends VertoBaseComponent {
       </div>
     );
 
+    if(this.props.status == "disconnected"){
+      var theMsg = "Login to change user settings";
+    }else{
+      var theMsg = "User settings";
+    }
 
     return (
-      <span onClick={this.toggleMenu.bind(this)}  style={this.getStyle("container")}>
-        <AvatarSVG svgStyle={{...this.getStyle('icon')}}  />
-          {this.state.dropdownDisplayed ?
-              <CaretUpIconSVG svgStyle={{...this.getStyle('caret')}} /> :
-              <CaretDownIconSVG svgStyle={{...this.getStyle('caret')}} />}
-            {menuContainer}
-      </span>
+      <ToolTip name="user" place={this.props.ttPosition} msg={theMsg} >
+        <span onClick={this.toggleMenu.bind(this)}  style={this.getStyle("container")}>
+          <AvatarSVG svgStyle={{...this.getStyle('icon')}}  />
+            {this.state.dropdownDisplayed ?
+                <CaretUpIconSVG svgStyle={{...this.getStyle('caret')}} /> :
+                <CaretDownIconSVG svgStyle={{...this.getStyle('caret')}} />}
+              {menuContainer}
+
+        </span>
+      </ToolTip>
     );
   }
 }

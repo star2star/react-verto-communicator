@@ -176,7 +176,7 @@ const messages = {
   "DISCONNECTED": "Disconnected",
   "CONNECTING": "Connecting",
   "CONNECTED": "Connected",
-  "COM_STATUS": "Communication status.",
+  "COM_STATUS": "Communication status: ",
   "SCREEN_SHARE": "Screen Share",
   "PRESENTER": "Presenter",
   "WATCHING_CANVAS": "Watching Canvas",

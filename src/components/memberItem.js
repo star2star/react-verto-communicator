@@ -2,6 +2,7 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import AdminControls from './memberAdminControlPanel';
 import ControlItem from './controlItem';
+import Radium from 'radium';
 import { FormattedMessage } from 'react-intl';
 import {
   MicrophoneIconSVG,
@@ -38,44 +39,57 @@ export default class MemberItem extends VertoBaseComponent {
     const styles = {
       //styles item container
       memberWrapStyle: {
-          padding: '15px 10px 5px 10px'
-          //display: 'flex',
-          //justifyContent: 'flex-start',
-          //alignItems: 'flex-start'
+        padding: '15px 10px 5px 10px',
+          ':hover': {
+            backgroundColor: '#f8f8f8'
+        }
       },
       //item content flex-spacing
       memberStyle: {
-          display: 'flex',
-          justifyContent: 'space-between'
+        display: 'flex',
+        flex: 1
       },
       //(gr)avatar icon
       avatarStyle: {
         height: '40px',
         width: '40px',
-        borderRadius: '50%',
-        boxShadow: this.props.member.conferenceStatus.audio.muted  ? '1px 1px 9px red' : 'none'
+        borderRadius: '50%'
+      },
+      avatarSpacing: {
+        marginRight: '15px'
       },
       //name/email grouping for flex-positioning
       userInfoStyle: {
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        flex: 1,
+        marginRight: '5px',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis'
       },
       //name line
       nameStyle: {
         color: '#393939',
-        paddingBottom: '5px'
+        paddingBottom: '5px',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis'
       },
       //email line
       emailStyle: {
         fontSize:'.75rem',
         color: '#9b9b9b',
-        paddingBottom: '1px'
+        paddingBottom: '1px',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis'
       },
       //groups audio, video, presenter icons for placement
       avStatusStyle: {
         display: 'flex',
         alignItems: 'center',
-        paddingRight: '10px'
+        paddingRight: '15px'
       },
       svgStyle: {
         height: '24px',
@@ -84,14 +98,14 @@ export default class MemberItem extends VertoBaseComponent {
       controlAudioIconStyle: {
         svgStyle: {
           height: '24px',
-          fill: this.props.member.conferenceStatus.audio.muted  ? '#c5c5c5' : '#65ac43',
+          fill: this.props.member.conferenceStatus.audio.muted  ? '#333333' : '#65ac43',
           paddingRight: '10px'
         }
       },
       controlVideoIconStyle: {
         svgStyle: {
           height: '24px',
-          fill: this.props.member.conferenceStatus.video.muted  ? '#c5c5c5' : '#65ac43',
+          fill: this.props.member.conferenceStatus.video.muted  ? '#333333' : '#65ac43',
           paddingRight: '10px'
         }
       },
@@ -138,12 +152,20 @@ export default class MemberItem extends VertoBaseComponent {
 
     // Setup up mic and video status/controls
     let micStatus = this.props.member.conferenceStatus.audio.muted ?
-            (<MuteMicrophoneIconSVG svgStyle={this.getStyle("svgStyle")} />):
+            (<MuteMicrophoneIconSVG svgStyle={this.getStyle("svgStyle")} />) :
             (<MicrophoneIconSVG  svgStyle={this.getStyle("svgStyle")} />);
 
     let videoStatus = this.props.member.conferenceStatus.video.muted ?
-            (<MuteVideoIconSVG  svgStyle={this.getStyle("svgStyle")} />):
+            (<MuteVideoIconSVG  svgStyle={this.getStyle("svgStyle")} />) :
             (<VideoIconSVG  svgStyle={this.getStyle("svgStyle")} />);
+
+    let avatarStyle = {...this.getStyle('avatarStyle')};
+        if (this.props.member.conferenceStatus.audio.muted) {
+          avatarStyle = ({...this.getStyle('avatarStyle'), boxShadow:'1px 1px 9px red'});
+        }
+        if (this.props.member.conferenceStatus.audio.talking) {
+          avatarStyle = ({...this.getStyle('avatarStyle'), boxShadow:'1px 1px 9px green'});
+          }
 
     if (this.props.controlSettings.moderator) {
       // since we are in admin mode, redefine audio and video status indicators to
@@ -232,34 +254,33 @@ export default class MemberItem extends VertoBaseComponent {
 
 
     return (
-      <div style={this.getStyle("memberWrapStyle")}>
-      <div style={this.getStyle("memberStyle")}>
-        <img src={this.props.member.avatar.avatar} style={this.getStyle("avatarStyle")} />
-        <div className="userInfo" style={this.getStyle("userInfoStyle")}
-            onClick={()=>{this.setState({...this.state, showAdminControls: !this.state.showAdminControls});}}
-        >
-          <span style={this.getStyle("nameStyle")}>{this.props.member.name}</span>
-          <span style={this.getStyle("emailStyle")}>{this.props.member.avatar.email}</span>
-          <span>
-            {floor}
-            {screenShare}
-            {presenter}
+      <div className="outer container" style={this.getStyle("memberWrapStyle")}>
+        <div className="inner container" style={this.getStyle("memberStyle")}>
+          <span style={this.getStyle('avatarSpacing')}>
+              <img src={this.props.member.avatar.avatar} style={avatarStyle}/>
           </span>
+          <div className="userInfo" style={this.getStyle("userInfoStyle")}
+              onClick={()=>{this.setState({...this.state, showAdminControls: !this.state.showAdminControls});}}
+          >
+            <span style={this.getStyle("nameStyle")}>{this.props.member.name}</span>
+            <span style={this.getStyle("emailStyle")}>{this.props.member.avatar.email}</span>
+            <span>
+              {floor}
+              {screenShare}
+              {presenter}
+           </span>
         </div>
-        <span style={this.getStyle("avStatusStyle")}>
+        <div className="a/v icons" style={this.getStyle("avStatusStyle")}>
           {micStatus}
           {videoStatus}
           {presenterStatus}
-        </span>
+        </div>
       </div>
-      {adminControls}
+        {adminControls}
       </div>
     );
   }
 }
 
 MemberItem.propTypes = propTypes;
-
-
-
-//export default Radium(ChatMessageItem);
+export default (Radium(MemberItem));

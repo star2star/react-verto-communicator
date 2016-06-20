@@ -46,7 +46,7 @@ class AppBar extends VertoBaseComponent {
   }
 
   componentWillUnmount() {
-    //document.body.removeEventListener('click', (e)=>{e.preventDefault(); this.handleCloseDropdowns();}); 
+    //document.body.removeEventListener('click', (e)=>{e.preventDefault(); this.handleCloseDropdowns();});
 
   }
 
@@ -581,13 +581,13 @@ showSpeeds(){
 
     if (true && !this.state.showAltAppControls) {
       if (this.props.callInfo.currentCallId) {
-        lastCall = (<LastCall labelText= {"In Call:"} lastNumber={this.props.callInfo.lastNumber}  />);
+        lastCall = (<LastCall  ttPosition={!this.state.showAltAppControls ? "bottom" : "right"} labelText= {"In Call:     "} lastNumber={this.props.callInfo.lastNumber}  />);
       }else if (this.props.callInfo.lastNumber && this.props.auth.vcStatus == 'active' ) {
-        lastCall = (<LastCall labelText= {"Last Call:"} lastNumber={this.props.callInfo.lastNumber} cbClick={(number)=>{
+        lastCall = (<LastCall  ttPosition={!this.state.showAltAppControls ? "bottom" : "right"} labelText= {"Last Call:     "} lastNumber={this.props.callInfo.lastNumber} cbClick={(number)=>{
           this.props.dispatch(doMakeCall(number, this.props.app));
         }} />);
       } else {
-        lastCall = (<LastCall labelText= {"No Call"} />);
+        lastCall = (<LastCall  ttPosition={!this.state.showAltAppControls ? "bottom" : "right"} labelText= {"No Call"} />);
       }
     }
 
@@ -628,7 +628,7 @@ showSpeeds(){
 
           <span className="appControls" style={acStyles}>
             <span style={this.getStyle('marginRightStyle')}>{nsIndicator}</span>
-            <VCStatus status = {this.props.vcStatus} compStyle={!this.state.showAltAppControls ? {svgStyle:{marginRight: '20px'}}:{svgStyle:{marginBottom:'10px'}}}/>
+            <VCStatus status = {this.props.vcStatus} ttPosition={!this.state.showAltAppControls ? "bottom" : "right"} compStyle={!this.state.showAltAppControls ? {svgStyle:{marginRight: '20px'}}:{svgStyle:{marginBottom:'10px'}}}/>
             {lastCall}
 
             <div style={!this.state.showAltAppControls ? this.getStyle('marginRightStyle') : this.getStyle('marginBottomStyle')}>
@@ -638,6 +638,8 @@ showSpeeds(){
                   settings={this.props.settings}
                   onClick={()=>{this.props.dispatch(doSpeedTest());this.showSpeeds;}}
                   cbPreviewSet={()=>{App.toggleModal((<SettingsPreview settings={this.props.settings} cbClose={App.toggleModal}/>));}}
+                  ttPosition={!this.state.showAltAppControls ? "bottom" : "right"}
+                  status = {this.props.vcStatus}
               />
             </div>
 
@@ -647,6 +649,8 @@ showSpeeds(){
               <UserMenu allowDisplayDetails={this.props.vcStatus != 'disconnected'}
                   compStyle={this.state.showAltAppControls ? this.getStyle("altUserMenu") : undefined}
                   cbClick={this.handleCloseDropdowns}
+                  status = {this.props.vcStatus}
+                  ttPosition={!this.state.showAltAppControls ? "bottom" : "right"}
               >
                 <MenuItem label={<FormattedMessage id='OPEN_NEW_WINDOW' />}cbAction={()=>{
                   window.open(location.href);
@@ -661,6 +665,7 @@ showSpeeds(){
               <TagMenu allowDisplayDetails="true"
                   compStyle={this.state.showAltAppControls ? this.getStyle("altTagMenu") : undefined}
                   cbClick={this.handleCloseDropdowns}
+                  ttPosition={!this.state.showAltAppControls ? "bottom" : "right"}
               >
                 <MenuItem label={formatMessage({"id":"ABOUT", "defaultMessage":"About"})} cbAction={()=>{
                   // TODO ta need to pass version and gitRev in to the About component

@@ -1,12 +1,14 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
+import ToolTip from './tooltip';
 
 
 const propTypes = {
   lastNumber: React.PropTypes.string,
   labelText: React.PropTypes.string,
   cbClick: React.PropTypes.func,
-  compStyle:   React.PropTypes.object
+  compStyle:   React.PropTypes.object,
+  ttPosition: React.PropTypes.string
 };
 
 class LastCall extends VertoBaseComponent {
@@ -39,13 +41,22 @@ class LastCall extends VertoBaseComponent {
   }
 
   render() {
+    const theMsg = "Click To Dial";
+    let lastcall =  <div onClick={this.call} style={this.getStyle('container')}>
+                      <span style={this.getStyle('lastCallStyle')}>{this.props.labelText}
+                      {this.props.lastNumber? this.props.lastNumber :''}</span>
+                    </div>;
 
 
+    if(this.props.labelText == "No Call" || this.props.labelText == "In Call:     "){
 
-     return (<div onClick={this.call} style={this.getStyle('container')}>
-              <span>{this.props.labelText}</span>
-                <span style={this.getStyle('lastCallStyle')}>{this.props.lastNumber? this.props.lastNumber :''}</span>
-             </div>);
+    }else{
+      lastcall = <ToolTip place={this.props.ttPosition} msg={theMsg}>{lastcall}</ToolTip>;
+    }
+    //console.log("^^^^^^^^^^^^^^^^^^^^^^^^^", lastcalll);
+    return (
+      lastcall
+    );
   }
 }
 
