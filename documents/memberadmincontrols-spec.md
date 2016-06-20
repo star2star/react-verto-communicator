@@ -25,7 +25,7 @@ This component will be a 'pure' component.
 
 ## c. Context-Aware Specification ##
 
-  his component is NOT a context-aware component
+  This component is NOT a context-aware component
 
 # 5. Reference Components #
 
