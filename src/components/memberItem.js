@@ -2,6 +2,7 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import AdminControls from './memberAdminControlPanel';
 import ControlItem from './controlItem';
+import Radium from 'radium';
 import { FormattedMessage } from 'react-intl';
 import {
   MicrophoneIconSVG,
@@ -38,17 +39,15 @@ export default class MemberItem extends VertoBaseComponent {
     const styles = {
       //styles item container
       memberWrapStyle: {
-          padding: '15px 10px 5px 10px'
-          // display: 'flex',
-          //justifyContent: 'flex-start',
-          // alignItems: 'flex-start'
+        padding: '15px 10px 5px 10px',
+          ':hover': {
+            backgroundColor: '#f8f8f8'
+        }
       },
       //item content flex-spacing
       memberStyle: {
-          display: 'flex',
-          //justifyContent: 'space-between'
-          flex: 1
-
+        display: 'flex',
+        flex: 1
       },
       //(gr)avatar icon
       avatarStyle: {
@@ -284,7 +283,4 @@ export default class MemberItem extends VertoBaseComponent {
 }
 
 MemberItem.propTypes = propTypes;
-
-
-
-//export default Radium(ChatMessageItem);
+export default (Radium(MemberItem));
