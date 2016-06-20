@@ -39,14 +39,15 @@ export default class MemberItem extends VertoBaseComponent {
       //styles item container
       memberWrapStyle: {
           padding: '15px 10px 5px 10px'
-          //display: 'flex',
+          // display: 'flex',
           //justifyContent: 'flex-start',
-          //alignItems: 'flex-start'
+          // alignItems: 'flex-start'
       },
       //item content flex-spacing
       memberStyle: {
           display: 'flex',
-          justifyContent: 'space-between'
+          //justifyContent: 'space-between'
+          flex: 1
 
       },
       //(gr)avatar icon
@@ -56,12 +57,14 @@ export default class MemberItem extends VertoBaseComponent {
         borderRadius: '50%'
       },
       avatarSpacing: {
-        marginRight: '10px'
+        marginRight: '15px'
       },
       //name/email grouping for flex-positioning
       userInfoStyle: {
         display: 'flex',
         flexDirection: 'column',
+        flex: 1,
+        marginRight: '5px',
         whiteSpace: 'nowrap',
         overflow: 'hidden',
         textOverflow: 'ellipsis'
@@ -87,7 +90,7 @@ export default class MemberItem extends VertoBaseComponent {
       avStatusStyle: {
         display: 'flex',
         alignItems: 'center',
-        paddingRight: '20px'
+        paddingRight: '15px'
       },
       svgStyle: {
         height: '24px',
@@ -252,29 +255,29 @@ export default class MemberItem extends VertoBaseComponent {
 
 
     return (
-      <div style={this.getStyle("memberWrapStyle")}>
-      <div id="testthing" style={this.getStyle("memberStyle")}>
-        <span style={this.getStyle('avatarSpacing')}>
-          <img src={this.props.member.avatar.avatar} style={avatarStyle}/>
-        </span>
-        <div className="userInfo" style={this.getStyle("userInfoStyle")}
-            onClick={()=>{this.setState({...this.state, showAdminControls: !this.state.showAdminControls});}}
-        >
-          <span style={this.getStyle("nameStyle")}>{this.props.member.name}</span>
-          <span style={this.getStyle("emailStyle")}>{this.props.member.avatar.email}</span>
-          <span>
-            {floor}
-            {screenShare}
-            {presenter}
+      <div className="outer container" style={this.getStyle("memberWrapStyle")}>
+        <div className="inner container" style={this.getStyle("memberStyle")}>
+          <span style={this.getStyle('avatarSpacing')}>
+              <img src={this.props.member.avatar.avatar} style={avatarStyle}/>
           </span>
+          <div className="userInfo" style={this.getStyle("userInfoStyle")}
+              onClick={()=>{this.setState({...this.state, showAdminControls: !this.state.showAdminControls});}}
+          >
+            <span style={this.getStyle("nameStyle")}>{this.props.member.name}</span>
+            <span style={this.getStyle("emailStyle")}>{this.props.member.avatar.email}</span>
+            <span>
+              {floor}
+              {screenShare}
+              {presenter}
+           </span>
         </div>
-        <span style={this.getStyle("avStatusStyle")}>
+        <div className="a/v icons" style={this.getStyle("avStatusStyle")}>
           {micStatus}
           {videoStatus}
           {presenterStatus}
-        </span>
+        </div>
       </div>
-      {adminControls}
+        {adminControls}
       </div>
     );
   }
