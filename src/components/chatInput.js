@@ -70,7 +70,8 @@ export default class ChatInput extends VertoBaseComponent {
           outline: 'none',
           border: '1px solid #d5dde0',
           marginLeft: '3px',
-          marginRight: '3px'
+          marginRight: '3px',
+          paddingLeft: '5px'
       }
     };
 
