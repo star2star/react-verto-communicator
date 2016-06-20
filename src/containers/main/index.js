@@ -58,10 +58,6 @@ class Main extends VertoBaseComponent {
         display: 'flex',
         height: '100%'
       },
-      chatVidWrapStyles : {
-        display: 'flex',
-        height: '100%'
-      },
       chatVidStyle: {
         display: 'flex',
         flexDirection: 'column',
