@@ -22,6 +22,7 @@ import { MenuIconSVG, ChatIconSVG } from '../../components/svgIcons';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import LastCall from '../../components/lastCall';
 import { doMakeCall } from '../main/action-creators';
+import AlertLog from '../../components/alertLog';
 
 // Need to close menu on resize so that if we pass media query limit then
 // normal size menu will reappear...
@@ -670,6 +671,10 @@ showSpeeds(){
                 <MenuItem label={formatMessage({"id":"ABOUT", "defaultMessage":"About"})} cbAction={()=>{
                   // TODO ta need to pass version and gitRev in to the About component
                   App.toggleModal((<About version="0.2.0" gitRev="xxxxx" cbClose={App.toggleModal}/>));
+                }} />
+                <MenuItem label="View Alert Log" cbAction={()=>{
+                  // TODO ta need to pass version and gitRev in to the About component
+                  App.toggleModal((<AlertLog cbClose={App.toggleModal}/>));
                 }} />
                 <MenuItem label={formatMessage({"id":"TITLE_CONTRIBUTORS", "defaultMessage":"Contributors"})}  cbAction={()=>{
 

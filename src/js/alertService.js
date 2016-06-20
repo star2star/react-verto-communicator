@@ -32,14 +32,25 @@ class AlertService {
     let event = new CustomEvent('alert', { detail: {alert: objAlertItem}});
 
     document.dispatchEvent(event);
-
-
   }
 
   clearAlerts(){
-    // console.log('clear method running hopefully');
     this.alerts = [];
+
+    // clear the local storage
+    if (localStorage) {
+      localStorage.setItem('alerts', JSON.stringify(this.alerts));
+    }
   }
+
+  setAlertLog(alertArray){
+    this.alerts = alertArray;
+    // update the local storage
+    if (localStorage) {
+      localStorage.setItem('alerts', JSON.stringify(this.alerts));
+    }
+  }
+
   getAlertLog(){
     // converting object to array and sorting descending on lasttimestamp
     return this.alerts.sort((a,b)=>{

@@ -10,6 +10,7 @@ export default class AlertList extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {alertArray: []};
+    this.nextId = 0;
 
     this.handleNewAlert = this.handleNewAlert.bind(this);
     this.handleDismissAlert = this.handleDismissAlert.bind(this);
@@ -17,7 +18,6 @@ export default class AlertList extends VertoBaseComponent {
 
   componentDidMount(){
     document.addEventListener('alert', this.handleNewAlert);
-
   }
 
   getCompStyle() {
@@ -46,14 +46,17 @@ export default class AlertList extends VertoBaseComponent {
 
   handleNewAlert(e){
     // add the new alert to start of this.state.alertArray.  Use concat!!!!
-    console.log('alert event!!', e.detail);
+    const newObj = { ...e.detail.alert, id: this.nextId++};
 
-    this.setState({...this.state, alertArray: [e.detail.alert].concat(this.state.alertArray)});
+    this.setState({...this.state, alertArray: [newObj].concat(this.state.alertArray)});
   }
 
-  handleDismissAlert(dismissIndex) {
+  handleDismissAlert(id) {
     // remove the alert at dismissIndex from this.state.alertArray
-    let newAlertArray = this.state.alertArray.filter((alert, index)=>{return(dismissIndex !== index);});
+
+    let newAlertArray = this.state.alertArray.filter((a)=>{
+      return a.id != id;
+    });
 
     this.setState({...this.state, alertArray: newAlertArray});
   }
@@ -61,15 +64,12 @@ export default class AlertList extends VertoBaseComponent {
 
   render(){
     //console.log('---- ', this.state.alertArray);
-    console.log('this.handleDismissAlert', this.handleDismissAlert);
 
-
-    const alerts = this.state.alertArray.map((alert, index)=>{
+    const alerts = this.state.alertArray.map((a, index)=>{
       return (
         <AlertItem
-            key={index}
-            index={index}
-            alertData={alert}
+            key={a.id}
+            alertData={a}
             cbDismissAlert={this.handleDismissAlert}
         /> );
     });

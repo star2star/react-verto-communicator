@@ -34,7 +34,8 @@ class TagMenu extends VertoBaseComponent {
       container: {
         display: 'flex',
         position: 'relative',
-        alignItems: 'center'
+        alignItems: 'center',
+        zIndex: '1'
       },
       icon: {
         height: '24px',
