@@ -31,6 +31,22 @@ export default class MemberItem extends VertoBaseComponent {
     this.state = {showAdminControls: false};
   }
 
+  // handleCloseDropdowns() {
+  //   AdminControls.closeMenu();
+  // }
+  //
+  // handleCloseMenu(){
+  //   this.setState({...this.state, showAdminControls: false });
+  // }
+  //
+  // settings(displayAdmin) {
+  //   AdminControls.closeMenu();
+  //
+  //   //console.log('toggle adminControls', displayAdmin);
+  //   this.setState({ ...this.state, showAdminControls: displayAdmin });
+  // }
+
+
   getCompStyle() {
     return this.props.compStyle;
   }
