@@ -12,8 +12,13 @@ const propTypes = {
   history : React.PropTypes.array,
   cbClearHistory : React.PropTypes.func.isRequired,
   cbCall : React.PropTypes.func,
+  allowToolTip : React.PropTypes.bool,
   cbBack: React.PropTypes.func.isRequired,
   callerId : React.PropTypes.string
+};
+
+const defaultProps = {
+  allowToolTip : false
 };
 
 class CallHistory extends VertoBaseComponent {
@@ -39,13 +44,6 @@ class CallHistory extends VertoBaseComponent {
         flexDirection: "column",
         height: '500px',
         minWidth: '225px', // allows animation to go in/out further without clashing 'Call History' and 'Clear History'
-        // width: '25vw', //
-        // '@media (max-width: 1280px)': {
-        //   width: '50vw'
-        // },
-        // '@media (max-width: 768px)': {
-        //   width: '80vw'
-        // },
         overflowY: 'auto',
         overflowX: 'hidden',
         boxShadow: '0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)',
@@ -57,9 +55,6 @@ class CallHistory extends VertoBaseComponent {
       header: {
         display: 'flex',
         flex: 1,
-
-        //width: '100%',
-        //minWidth: '375px',
         alignItems: 'center',
         paddingLeft: '5px',
         paddingRight: '15px',
@@ -95,7 +90,6 @@ class CallHistory extends VertoBaseComponent {
         display: 'flex',
         minWidth: '375px',
         alignItems: 'center',
-        //justifyContent: 'center',
         cursor: 'pointer',
         color: '#ccc',
         fontSize: '12px'
@@ -189,6 +183,7 @@ class CallHistory extends VertoBaseComponent {
     listitems = this.props.history.map((i, index)=>{
         return(
           <CallHistoryItem
+              allowToolTip = {this.props.allowToolTip}
               className="chi"
               key={index}
               data={i}
@@ -297,5 +292,6 @@ class CallHistory extends VertoBaseComponent {
 
 }
 
+CallHistory.defaultProps = defaultProps;
 CallHistory.propTypes = propTypes;
 export default Radium(CallHistory);

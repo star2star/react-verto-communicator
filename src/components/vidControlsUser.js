@@ -36,8 +36,9 @@ export default class UserVideoControls extends VertoBaseComponent {
     const styles = {
       controlIconStyle: {
         svgStyle: {
-          height: '20px',
-          fill: '#65ac43'
+          height: '30px',
+          fill: 'white',
+          width: '30px'
         }
       },
       headingStyle:{
@@ -135,7 +136,7 @@ export default class UserVideoControls extends VertoBaseComponent {
 
     // Build out the user controls
     return (
-      <div style={{display: 'flex'}}>
+      <div style={{display: 'flex', justifyContent: 'space-around', flex: '1'}}>
         {micStatus}
         {videoStatus}
         {screenStatus}

@@ -33,7 +33,8 @@ class Dialpad extends VertoBaseComponent {
   getDefaultStyle(styleName) {
     const styles = {
       cont: {
-        display: 'block',
+        display: 'flex',
+        flexDirection: 'row',
         height: '500px',
         overflow: 'hidden',
         boxShadow: '0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)'
@@ -46,15 +47,7 @@ class Dialpad extends VertoBaseComponent {
         display: this.state.showingCallHistory ? 'none' : 'flex',
         flexDirection: "column",
         height: this.state.showingCallHistory ? '0px': '100%',
-        width: '25vw',
-        //minWidth: '479px',
-        // '@media (max-width: 1280px)': {
-        //   width: '50vw'
-        // },
-        // '@media (max-width: 768px)': {
-        //   width: '80vw'
-        // }
-
+        width: '25vw'
       },
       header: {
         display: 'flex',
@@ -81,11 +74,7 @@ class Dialpad extends VertoBaseComponent {
         fontWeight: '300',
         border: 'none',
         outline: 'none',
-        fontSize: '1em',
-        //fontSize: '25px',
-        '@media (max-width: 768px)': {
-          fontSize: '1em'
-        }
+        fontSize: '1em'
       },
       back : {
         width: "24px",
@@ -169,17 +158,27 @@ class Dialpad extends VertoBaseComponent {
   showDialpad() {
     //console.log('in showDialpad method');
     var x = { ...this.state };
-    x.items.push({key: "dp", size: spring(375) });
+    x.items.push({key: "dp", size: spring(375, {stiffness: 170, damping: 12}) });
     this.setState(x);
   }
 
   showCallHistory() {
     //console.log('cccccaaallll history showing ')
     var x = { ...this.state };
-    x.items.push({key: "ch", size: spring(375) });
+    x.items.push({key: "ch", size: spring(375,{stiffness: 170, damping: 12}) });
     //console.log('xxxxxx', x);
     this.setState(x);
   }
+
+  // toggleDialpad() {
+  //   if(this.state.showingCallHistory) {
+  //     this.setState({ ...this.state, showingCallHistory: true});
+  //     setTimeout(()=> this.removeItem('dp'), 0);
+  //     setTimeout(()=>this.showCallHistory(),800)
+  //   } else {
+  //
+  //   }
+  // }
 
   makeCall(){
     //console.log('***********',this.state.number);
@@ -210,7 +209,7 @@ class Dialpad extends VertoBaseComponent {
     const { formatMessage } = this.props.intl;
 
     var nStyles = this.state.items.map(item => {
-      //console.log(item);
+      //console.log('Item Size',item.size);
       var x = {
         key: item.key,
         style: {width: item.size },
@@ -236,20 +235,21 @@ class Dialpad extends VertoBaseComponent {
               return (<span>
                 {interpolatedStyles.map(config => {
                 if (this.state.showingCallHistory){
-                  console.log('CH  CCCCC: ', config.style.width);
-                  const d = config.style.width < 100 ? 'none': 'flex';
+                  //console.log('CH  CCCCC: ', config.style.width);
+                  const d = config.style.width < 1 ? 'none': 'flex';
                   return (
                     <div
                       style={{...this.getDefaultStyle('cont'), ...config.style, display: d }}
                     >
                     <CallHistory
+                      allowToolTip = {config.style.width == 375 ? true : false}
                       compStyle={{...this.getDefaultStyle('callh')}}
                       history={CallHistoryService.getInstance().getHistory()}
                       cbClearHistory={()=>{
                         this.props.cbClearHistory();
                         setTimeout(()=>this.setState({...this.state, showingCallHistory: false}), 0);
                         setTimeout(()=> this.removeItem('ch'), 0);
-                        setTimeout(()=>this.showDialpad(),300 )
+                        setTimeout(()=>this.showDialpad(),2000 )
                       }}
                       cbCall={(num)=>{
                         //console.log('**********', num);
@@ -259,16 +259,17 @@ class Dialpad extends VertoBaseComponent {
                       }}
                       cbBack={()=>{
                         //this.showDialpad();
-                        this.setState({ ...this.state, showingCallHistory: !this.state.showingCallHistory});
+                        setTimeout(()=>this.setState({ ...this.state, showingCallHistory: !this.state.showingCallHistory}),800 )
+                        setTimeout(()=>this.showDialpad(),800 )
                         setTimeout(()=> this.removeItem('ch'), 0);
-                        setTimeout(()=>this.showDialpad(),300 )
                   }}
                   />
                   </div>
                 );
                 } else {
-                  //console.log('DP  CCCCC: ', config);
-                  const d1 = config.style.width < 100 ? 'none': 'flex';
+                  //console.log('DP  CCCCC: ', config.style.width);
+                  const d1 = config.style.width < 1 ? 'none': 'flex';
+                  //const op1 = config.style.width >= 350 ? 'none' : 'flex;'
                   return (
                     <div
                       style={{...this.getDefaultStyle('cont'), ...config.style, display: d1 }}
@@ -289,9 +290,10 @@ class Dialpad extends VertoBaseComponent {
                           className="callhist"
                           style={{...this.getStyle('span')}}
                           onClick={()=>{
-                            this.setState({ ...this.state, showingCallHistory: true});
+                            setTimeout(()=>this.setState({ ...this.state, showingCallHistory: true}),800 )
+                            setTimeout(()=>this.showCallHistory(),800 )
                             setTimeout(()=> this.removeItem('dp'), 0);
-                            setTimeout(()=>this.showCallHistory(),300)
+
                           }}
                       >
                         <CallHistoryIconSVG
