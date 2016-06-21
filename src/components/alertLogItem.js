@@ -56,9 +56,6 @@ export default class AlertLogItem extends VertoBaseComponent {
     };
 
     let styleReturn = styles[styleName];
-      if(this.props.style && this.props.style[styleName]) {
-        styleReturn = {...styleReturn, ...this.props.style[styleName]};
-      }
     return styleReturn;
   }
 

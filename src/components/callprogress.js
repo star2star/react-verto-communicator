@@ -6,18 +6,18 @@ import {ShareScreenIconSVG, AvatarSVG, DialPadIconSVG, MicrophoneIconSVG, PauseI
 import Radium from 'radium';
 
  const propTypes = {
-   callData : React.PropTypes.object.isRequired,
-   cbDTMF:  React.PropTypes.func,
-   cbHangup : React.PropTypes.func,
-   cbHold:  React.PropTypes.func,
-   cbMute:  React.PropTypes.func,
-   cbSetVideoMode: React.PropTypes.func,
-   cbShare: React.PropTypes.func,
-   cbToggleChat: React.PropTypes.func,
-   layouts: React.PropTypes.array,
-   currLayout: React.PropTypes.array,
-   userConfStatus : React.PropTypes.object
-
+      callData : React.PropTypes.object.isRequired,
+      cbDTMF:  React.PropTypes.func,
+      cbHangup : React.PropTypes.func,
+      cbHold:  React.PropTypes.func,
+      cbMute:  React.PropTypes.func,
+      cbSetVideoMode: React.PropTypes.func,
+      cbShare: React.PropTypes.func,
+      cbToggleChat: React.PropTypes.func,
+      currLayout: React.PropTypes.array,
+      layouts: React.PropTypes.array,
+      newMsgCount : React.PropTypes.number,
+      userConfStatus : React.PropTypes.object
 
 };
 
@@ -108,6 +108,7 @@ class CallProgress extends VertoBaseComponent {
                   cbScreenShare={this.props.cbShare}
                   cbToggleChat={()=>{console.log('Toggling chat in callProgress?'); this.props.cbToggleChat();}}
                   userConfStatus={this.props.userConfStatus}
+                  newMsgCount={this.props.newMsgCount}
               />
             );
 
