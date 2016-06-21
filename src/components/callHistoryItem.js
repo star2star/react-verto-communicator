@@ -36,7 +36,7 @@ class CallHistoryItem extends VertoBaseComponent {
         backgroundColor: '#fff',
         flex: 1,
         fontWeight: '300',
-        minWidth: '100%',
+        //minWidth: '100%',
         //minWidth: '375px',
         alignItems: 'flex-start',
         cursor: 'pointer'
