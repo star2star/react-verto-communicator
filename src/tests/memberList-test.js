@@ -85,15 +85,20 @@ describe( 'MemberList', ()=>{
      expect(wrapper.find('div').length).toEqual(1);
   });
 
-  it('cbControlClick callback fires', function () {
-      const wrapper = shallow(
-        <MemberList
-          cbControlClick={cbControlClick}
-          members={sampleMembers}
-          controlSettings={controlSettings}
-          />);
-      expect(cbControlClick.calledOnce);
-    });
+  // it('cbControlClick callback fires', () => {
+  //     const spy = sinon.spy();
+  //     const wrapper = shallow(
+  //       <MemberList
+  //         cbControlClick={cbControlClick}
+  //         members={sampleMembers}
+  //         controlSettings={controlSettings}
+  //         />);
+  //     const expectedNode = wrapper.children().find('');
+  //     // console.log('--------->', wrapper.children());
+  //       expectedNode.simulate('click');
+  //     expect(spy.calledOnce, true);
+  //   });
+
 
 
 });
