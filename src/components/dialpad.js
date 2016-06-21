@@ -210,7 +210,7 @@ class Dialpad extends VertoBaseComponent {
     const { formatMessage } = this.props.intl;
 
     var nStyles = this.state.items.map(item => {
-      //console.log(item);
+      //console.log('Item Size',item.size);
       var x = {
         key: item.key,
         style: {width: item.size },
@@ -243,6 +243,7 @@ class Dialpad extends VertoBaseComponent {
                       style={{...this.getDefaultStyle('cont'), ...config.style, display: d }}
                     >
                     <CallHistory
+                      allowToolTip = {config.style.width == 375 ? true : false}
                       compStyle={{...this.getDefaultStyle('callh')}}
                       history={CallHistoryService.getInstance().getHistory()}
                       cbClearHistory={()=>{
@@ -267,8 +268,8 @@ class Dialpad extends VertoBaseComponent {
                   </div>
                 );
                 } else {
-                  //console.log('DP  CCCCC: ', config);
-                  const d1 = config.style.width < 55 ? 'none': 'flex';
+                  //console.log('DP  CCCCC: ', config.style.width);
+                  const d1 = config.style.width < 50 ? 'none': 'flex';
                   return (
                     <div
                       style={{...this.getDefaultStyle('cont'), ...config.style, display: d1 }}

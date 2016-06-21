@@ -10,7 +10,8 @@ const propTypes = {
   compStyle : React.PropTypes.object,
   data: React.PropTypes.object.isRequired,
   cbClick : React.PropTypes.func,
-  cbShowCalls : React.PropTypes.func
+  cbShowCalls : React.PropTypes.func,
+  allowToolTip : React.PropTypes.bool
 };
 
 class CallHistoryItem extends VertoBaseComponent {
@@ -35,7 +36,8 @@ class CallHistoryItem extends VertoBaseComponent {
         backgroundColor: '#fff',
         flex: 1,
         fontWeight: '300',
-        minWidth: '375px',
+        minWidth: '100%',
+        //minWidth: '375px',
         alignItems: 'flex-start',
         cursor: 'pointer'
       },
@@ -129,7 +131,9 @@ class CallHistoryItem extends VertoBaseComponent {
       </span>);
     }
 
-    return (
+    let displayObject;
+    if(this.props.allowToolTip){
+    displayObject = (
       <ToolTip
           place="bottom"
           compStyle={{...this.getDefaultStyle('ttip')}}
@@ -160,6 +164,38 @@ class CallHistoryItem extends VertoBaseComponent {
           {menu}
         </div>
       </ToolTip>
+    );} else {
+      displayObject = (
+        <div
+          tabIndex="0"
+          style={this.getStyle('container')}>
+          <div
+              tabIndex="0"
+              className="top"
+              onClick={this.call}
+              style={{...this.getDefaultStyle('top')}}>
+              <div className="info">
+                {renderedDirection}
+                <span className="callerId">
+                  {this.props.data.callerId}
+                </span>
+                {nbrCalls}
+              </div>
+              <div
+                className="timestamp"
+                style={{...this.getDefaultStyle('timestamp')}}>
+                {renderedTS}
+              </div>
+          </div>
+          {menu}
+        </div>
+      );
+    }
+
+
+
+    return (
+      displayObject
 
     );
   }
