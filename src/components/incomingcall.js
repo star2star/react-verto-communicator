@@ -22,35 +22,42 @@ class IncomingCall extends VertoBaseComponent {
 
     getDefaultStyle(styleName) {
       const styles = {
+        container: {
+
+        }
       };
 
       return (styles[styleName]);
     }
 
     render() {
-      console.log('CP: ', this.props.callData);
+      //console.log('CP: ', this.props.callData);
 
       return (
-          <div style={{flexDirection: "column", display:"flex", margin: "auto"}}>
-            <div style={{flexDirection: "row", display:"flex"}}>
-              <AvatarSVG svgStyle={{width: "100px", height: "100px", fill: "black"}} />
-              <div style={{flexDirection: "column", display:"flex"}} >
-                <div>{this.props.callData.params.caller_id_number}</div>
-              </div>
+          <div style={{backgroundColor: "#fff", boxShadow: "0px 8px 17px 0px rgba(0,0,0,.2), 0px 6px 20px 0px rgba(0,0,0,.19)",width: '100%', display: 'flex', justifyContent: 'space-between', padding: '10px 0px'}}>
+            <div style={{flexDirection: "row", display:"flex", alignItems: 'center', flex: '1', marginRight: '15px'}}>
+              <AvatarSVG svgStyle={{width: "70px", height: "70px", fill: "#444"}} />
+                <div style={{display: 'flex', flexDirection:'column', color: '#444'}}>
+                  <span>Call From:</span>
+                  <span style={{wordWrap: 'break-word'}}>{this.props.callData.params.caller_id_number}</span>
+                </div>
             </div>
-            <div style={{backgroundColor: "yellow"}}>
-              <span onClick={()=>{
+            <div className="callControls" style={{display: 'flex', justifyContent: 'space-between', alignItems:'center', width: '120px', marginRight: '15px', color: '#444', flex: '0 0 120px'}}>
+              <span style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}} onClick={()=>{
                 //console.log('answer clicked: ', this.props);
                 this.props.cbAnswer(this.props.callData);
               }}>
-                <PhoneIconSVG svgStyle={{width: "20px", height: "20px", fill: "green"}} />
+                <PhoneIconSVG svgStyle={{width: "20px", height: "20px", padding:'10px', transform: 'rotate(235deg)', fill: "white", backgroundColor:"green", borderRadius: "50%" }} />
+                <span>Answer</span>
               </span>
-              <span onClick={()=>{
+              <span style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}} onClick={()=>{
                 //console.log('hangup clicked: ', this.props);
                 this.props.cbHangup(this.props.callData);
               }}>
-                <PhoneIconSVG svgStyle={{width: "20px", height: "20px", fill: "red"}} />
+                <PhoneIconSVG svgStyle={{width: "20px", height: "20px", padding:'10px', fill: "white", backgroundColor:"red", borderRadius: "50%"}} />
+                <span>Reject</span>
               </span>
+
             </div>
           </div>
         );
