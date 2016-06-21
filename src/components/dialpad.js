@@ -19,7 +19,7 @@ class Dialpad extends VertoBaseComponent {
   constructor(props) {
     super(props);
     this.state = {items: [], number: this.props.nbrToDial, inputFocused: false, lcDisplayed: false, showingCallHistory: false };
-
+    this.generateCallHistory = this.generateCallHistory.bind(this);
   }
 
   componentDidMount() {
@@ -204,9 +204,137 @@ class Dialpad extends VertoBaseComponent {
     this.setState({ ...this.state, number: this.state.number + k });
   }
 
-  render() {
+generateCallHistory(config){
+  const d = config.style.width < 10 ? 'none': 'flex';
+  return (
+    <div
+      style={{...this.getDefaultStyle('cont'), ...config.style, display: d}}
+    >
+    <CallHistory
+      allowToolTip = {config.style.width == 375 ? true : false}
+      compStyle={{...this.getDefaultStyle('callh')}}
+      history={CallHistoryService.getInstance().getHistory()}
+      cbClearHistory={()=>{
+        this.props.cbClearHistory();
+        setTimeout(()=>this.setState({...this.state, showingCallHistory: false}), 0);
+        setTimeout(()=> this.removeItem('ch'), 0);
+        setTimeout(()=>this.showDialpad(),2000 )
+      }}
+      cbCall={(num)=>{
+        this.setState({...this.state, showingCallHistory: !this.state.showingCallHistory, number : num});
+        setTimeout(()=>this.makeCall(),0);
 
-    const { formatMessage } = this.props.intl;
+      }}
+      cbBack={()=>{
+        setTimeout(()=>this.setState({ ...this.state, showingCallHistory: !this.state.showingCallHistory}),800 )
+        setTimeout(()=>this.showDialpad(),800 )
+        setTimeout(()=> this.removeItem('ch'));
+  }}
+  />
+  </div>);
+}
+
+generateDialpad(config){
+  const { formatMessage } = this.props.intl;
+  //console.log('DP  CCCCC: ', config.style.width);
+  const d1 = config.style.width < 10 ? 'none': 'flex';
+  //const op1 = config.style.width >= 350 ? 'none' : 'flex;'
+  return (
+    <div
+      style={{...this.getDefaultStyle('cont'), ...config.style, display: d1 }}
+    >
+    <div
+      style={{...this.getDefaultStyle('dpad'), ...config.style }}
+      onKeyPress={(e)=>{
+          if(e.which == 13 || e.keyCode == 13) {
+            this.makeCall();
+            return false;
+          }}}
+      >
+    <div
+        className="header"
+        style={{...this.getDefaultStyle('header')}}
+    >
+      <span
+          className="callhist"
+          style={{...this.getStyle('span')}}
+          onClick={()=>{
+            setTimeout(()=>this.setState({ ...this.state, showingCallHistory: true}),800 )
+            setTimeout(()=>this.showCallHistory(),800 )
+            setTimeout(()=> this.removeItem('dp'), 0);
+
+          }}
+      >
+        <CallHistoryIconSVG
+            svgStyle={{...this.getDefaultStyle('callhist')}}
+        />
+      </span>
+      <input
+          className="input"
+          placeholder={formatMessage({"id":"ENTER_EXTENSION", "defaultMessage":"Enter a number"})}
+          style={{...this.getDefaultStyle('input')}}
+          value={this.state.number}
+          onChange={this.changingNumber.bind(this)}
+          onFocus={()=>{
+            this.setState({...this.state,'inputFocused': true});
+          }}
+          onBlur={()=>{
+            this.setState({...this.state,'inputFocused': false});
+          }}
+      />
+
+      <span
+          className="back"
+          style={{...this.getStyle('span')}}
+          onClick={()=>{
+            const number = this.state.number;
+            const newNumber = number.slice(0, number.length - 1);
+            this.setState({...this.state,'number': newNumber });
+          }}
+
+      >
+      <DeleteIconSVG svgStyle={{...this.getDefaultStyle('back')}}
+      />
+      </span>
+    </div>
+    <div
+        style={{...this.getStyle('bar')}}
+    >
+      <span
+          className="left"
+          style={{...this.getStyle('left')}}
+      >
+          &nbsp;
+      </span>
+      <span
+          className="right"
+          style={{...this.getStyle('right')}}
+      >
+        &nbsp;
+      </span>
+    </div>
+    <Numberpad cbClick={this.dialNumber.bind(this)} />
+    <div
+        onFocus={()=>{
+          this.setState({...this.state,'inputFocused': false});
+        }}
+        style={{...this.getDefaultStyle('callcont')}}>
+      <div
+          className="dial"
+          onClick={this.makeCall.bind(this)}
+          style={{...this.getDefaultStyle('callbg')}} >
+        <PhoneIconSVG
+            svgStyle={{...this.getDefaultStyle('call')}}
+            //svgTransform={{rotate(15)}}
+        />
+      </div>
+    </div>
+  </div>
+</div>);
+
+}
+
+  render() {
 
     var nStyles = this.state.items.map(item => {
       //console.log('Item Size',item.size);
@@ -235,133 +363,9 @@ class Dialpad extends VertoBaseComponent {
               return (<span>
                 {interpolatedStyles.map(config => {
                 if (this.state.showingCallHistory){
-                  //console.log('CH  CCCCC: ', config.style.width);
-                  const d = config.style.width < 1 ? 'none': 'flex';
-                  return (
-                    <div
-                      style={{...this.getDefaultStyle('cont'), ...config.style, display: d }}
-                    >
-                    <CallHistory
-                      allowToolTip = {config.style.width == 375 ? true : false}
-                      compStyle={{...this.getDefaultStyle('callh')}}
-                      history={CallHistoryService.getInstance().getHistory()}
-                      cbClearHistory={()=>{
-                        this.props.cbClearHistory();
-                        setTimeout(()=>this.setState({...this.state, showingCallHistory: false}), 0);
-                        setTimeout(()=> this.removeItem('ch'), 0);
-                        setTimeout(()=>this.showDialpad(),2000 )
-                      }}
-                      cbCall={(num)=>{
-                        //console.log('**********', num);
-                        this.setState({...this.state, showingCallHistory: !this.state.showingCallHistory, number : num});
-                        setTimeout(()=>this.makeCall(),0);
-
-                      }}
-                      cbBack={()=>{
-                        //this.showDialpad();
-                        setTimeout(()=>this.setState({ ...this.state, showingCallHistory: !this.state.showingCallHistory}),800 )
-                        setTimeout(()=>this.showDialpad(),800 )
-                        setTimeout(()=> this.removeItem('ch'), 0);
-                  }}
-                  />
-                  </div>
-                );
+                  return this.generateCallHistory(config);
                 } else {
-                  //console.log('DP  CCCCC: ', config.style.width);
-                  const d1 = config.style.width < 1 ? 'none': 'flex';
-                  //const op1 = config.style.width >= 350 ? 'none' : 'flex;'
-                  return (
-                    <div
-                      style={{...this.getDefaultStyle('cont'), ...config.style, display: d1 }}
-                    >
-                    <div
-                      style={{...this.getDefaultStyle('dpad'), ...config.style }}
-                      onKeyPress={(e)=>{
-                          if(e.which == 13 || e.keyCode == 13) {
-                            this.makeCall();
-                            return false;
-                          }}}
-                      >
-                    <div
-                        className="header"
-                        style={{...this.getDefaultStyle('header')}}
-                    >
-                      <span
-                          className="callhist"
-                          style={{...this.getStyle('span')}}
-                          onClick={()=>{
-                            setTimeout(()=>this.setState({ ...this.state, showingCallHistory: true}),800 )
-                            setTimeout(()=>this.showCallHistory(),800 )
-                            setTimeout(()=> this.removeItem('dp'), 0);
-
-                          }}
-                      >
-                        <CallHistoryIconSVG
-                            svgStyle={{...this.getDefaultStyle('callhist')}}
-                        />
-                      </span>
-                      <input
-                          className="input"
-                          placeholder={formatMessage({"id":"ENTER_EXTENSION", "defaultMessage":"Enter a number"})}
-                          style={{...this.getDefaultStyle('input')}}
-                          value={this.state.number}
-                          onChange={this.changingNumber.bind(this)}
-                          onFocus={()=>{
-                            this.setState({...this.state,'inputFocused': true});
-                          }}
-                          onBlur={()=>{
-                            this.setState({...this.state,'inputFocused': false});
-                          }}
-                      />
-
-                      <span
-                          className="back"
-                          style={{...this.getStyle('span')}}
-                          onClick={()=>{
-                            const number = this.state.number;
-                            const newNumber = number.slice(0, number.length - 1);
-                            this.setState({...this.state,'number': newNumber });
-                          }}
-
-                      >
-                      <DeleteIconSVG svgStyle={{...this.getDefaultStyle('back')}}
-                      />
-                      </span>
-                    </div>
-                    <div
-                        style={{...this.getStyle('bar')}}
-                    >
-                      <span
-                          className="left"
-                          style={{...this.getStyle('left')}}
-                      >
-                          &nbsp;
-                      </span>
-                      <span
-                          className="right"
-                          style={{...this.getStyle('right')}}
-                      >
-                        &nbsp;
-                      </span>
-                    </div>
-                    <Numberpad cbClick={this.dialNumber.bind(this)} />
-                    <div
-                        onFocus={()=>{
-                          this.setState({...this.state,'inputFocused': false});
-                        }}
-                        style={{...this.getDefaultStyle('callcont')}}>
-                      <div
-                          className="dial"
-                          onClick={this.makeCall.bind(this)}
-                          style={{...this.getDefaultStyle('callbg')}} >
-                        <PhoneIconSVG
-                            svgStyle={{...this.getDefaultStyle('call')}}
-                            //svgTransform={{rotate(15)}}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>);
+                  return this.generateDialpad(config);
                 }
               })}
             </span>);
