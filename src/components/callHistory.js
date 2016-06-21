@@ -38,14 +38,14 @@ class CallHistory extends VertoBaseComponent {
         justifyContent: 'flex-start',
         flexDirection: "column",
         height: '500px',
-        minWidth: '375px',
-        width: '25vw', //
-        '@media (max-width: 1280px)': {
-          width: '50vw'
-        },
-        '@media (max-width: 768px)': {
-          width: '80vw'
-        },
+        minWidth: '225px', // allows animation to go in/out further without clashing 'Call History' and 'Clear History'
+        // width: '25vw', //
+        // '@media (max-width: 1280px)': {
+        //   width: '50vw'
+        // },
+        // '@media (max-width: 768px)': {
+        //   width: '80vw'
+        // },
         overflowY: 'auto',
         overflowX: 'hidden',
         boxShadow: '0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)',

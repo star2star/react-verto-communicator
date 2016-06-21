@@ -169,14 +169,14 @@ class Dialpad extends VertoBaseComponent {
   showDialpad() {
     //console.log('in showDialpad method');
     var x = { ...this.state };
-    x.items.push({key: "dp", size: spring(479) });
+    x.items.push({key: "dp", size: spring(375) });
     this.setState(x);
   }
 
   showCallHistory() {
     //console.log('cccccaaallll history showing ')
     var x = { ...this.state };
-    x.items.push({key: "ch", size: spring(390) });
+    x.items.push({key: "ch", size: spring(375) });
     //console.log('xxxxxx', x);
     this.setState(x);
   }
@@ -236,8 +236,8 @@ class Dialpad extends VertoBaseComponent {
               return (<span>
                 {interpolatedStyles.map(config => {
                 if (this.state.showingCallHistory){
-                  //console.log('CH  CCCCC: ', config);
-                  const d = config.style.width < 60 ? 'none': 'flex';
+                  console.log('CH  CCCCC: ', config.style.width);
+                  const d = config.style.width < 100 ? 'none': 'flex';
                   return (
                     <div
                       style={{...this.getDefaultStyle('cont'), ...config.style, display: d }}
@@ -248,6 +248,8 @@ class Dialpad extends VertoBaseComponent {
                       cbClearHistory={()=>{
                         this.props.cbClearHistory();
                         setTimeout(()=>this.setState({...this.state, showingCallHistory: false}), 0);
+                        setTimeout(()=> this.removeItem('ch'), 0);
+                        setTimeout(()=>this.showDialpad(),300 )
                       }}
                       cbCall={(num)=>{
                         //console.log('**********', num);
@@ -266,7 +268,7 @@ class Dialpad extends VertoBaseComponent {
                 );
                 } else {
                   //console.log('DP  CCCCC: ', config);
-                  const d1 = config.style.width < 60  ? 'none': 'flex';
+                  const d1 = config.style.width < 100 ? 'none': 'flex';
                   return (
                     <div
                       style={{...this.getDefaultStyle('cont'), ...config.style, display: d1 }}
