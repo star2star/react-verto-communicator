@@ -12,14 +12,73 @@ jest.unmock('../js/messages.js');
 describe( 'MemberList', ()=>{
 
   const cbControlClick=sinon.spy();
-  const members=[{key:0, member:"Name"},{key:1, member:"1Name"}, {key:2, member:"2Name"}];
-  const controlSettings={ moderator: true, multCanvas: false, allowPresenter: true }
+  const controlSettings={ moderator: true, multCanvas: false, allowPresenter: true };
+  const sampleMembers = [{
+    callerId: "Name",
+    codec: "opus@48000",
+    memberId: "0000",
+    name: "Name",
+    avatar: {
+      email: "Name@email.com",
+      avatar: "http://gravatar.com/avatar/2456ab4d05ef8d750b6d7492839e32d7.png?s=75"
+    },
+    conferenceStatus: {
+      oldStatus: "floor",
+      video: {
+        avatarPresented:false,
+        floor:true,
+        mediaFlow:"sendRecv",
+        muted:true,
+        reservationID:null,
+        videoLayerID:0,
+        videoOnly:false,
+        visible:false
+      },
+      audio: {
+        energyScore:515,
+        floor: true,
+        muted: false,
+        onHold: false,
+        talking: false
+      }
+    }
+  },
+  {
+    callerId: "1Name",
+    codec: "opus@48000",
+    memberId: "0000",
+    name: "1Name",
+    avatar: {
+      email: "1Name@email.com",
+      avatar: "http://gravatar.com/avatar/2456ab4d05ef8d750b6d7492839e32d7.png?s=75"
+    },
+    conferenceStatus: {
+      oldStatus: "floor",
+      video: {
+        avatarPresented:false,
+        floor:true,
+        mediaFlow:"sendRecv",
+        muted:true,
+        reservationID:null,
+        videoLayerID:0,
+        videoOnly:false,
+        visible:false
+      },
+      audio: {
+        energyScore:515,
+        floor: true,
+        muted: true,
+        onHold: false,
+        talking: false
+      }
+    }
+  }];
 
   it('renders a div', () => {
     const wrapper = shallow(
       <MemberList
         cbControlClick={cbControlClick}
-        members={members}
+        members={sampleMembers}
         controlSettings={controlSettings}
         />);
      expect(wrapper.find('div').length).toEqual(1);
@@ -29,22 +88,22 @@ describe( 'MemberList', ()=>{
       const wrapper = shallow(
         <MemberList
           cbControlClick={cbControlClick}
-          members={members}
+          members={sampleMembers}
           controlSettings={controlSettings}
           />);
       expect(cbControlClick.calledOnce);
     });
 
-    it('renders members ', () => {
-      const wrapper = mount(
-        <MemberList
-            cbControlClick={cbControlClick}
-            members={members}
-            controlSettings={controlSettings}
-        />);
-        const expectedNode = wrapper.children().first().find('.info').children().find('.name');
-        // console.log('***************', expectedNode.debug());
-    });
+    // it('renders members ', () => {
+    //   const wrapper = mount(
+    //     <MemberList
+    //         cbControlClick={cbControlClick}
+    //         members={sampleMembers}
+    //         controlSettings={controlSettings}
+    //     />);
+    //     const expectedNode = wrapper.children().first().find('.members').children().find('.name');
+    //     // console.log('***************', expectedNode.debug());
+    // });
 
 
 });
