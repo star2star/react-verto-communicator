@@ -16,7 +16,7 @@ const propTypes = {
   layouts: React.PropTypes.array
 };
 
-export default class UserVideoControls extends VertoBaseComponent {
+export default class AdminVideoControls extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {showLayoutList: false};
@@ -136,4 +136,4 @@ export default class UserVideoControls extends VertoBaseComponent {
   }
 }
 
-UserVideoControls.propTypes = propTypes;
+AdminVideoControls.propTypes = propTypes;

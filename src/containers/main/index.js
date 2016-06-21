@@ -35,7 +35,7 @@ class Main extends VertoBaseComponent {
   constructor(props) {
     super(props);
 
-    this.state={showChat: true};
+    this.state={showChat: true, msgCountAtToggle: 0, newMsgCount: 0};
 
     this.handleControlClick = this.handleControlClick.bind(this);
     this.handleClearHistory = this.handleClearHistory.bind(this);
@@ -45,6 +45,18 @@ class Main extends VertoBaseComponent {
 
   componentWillMount() {
   }
+
+  componentWillReceiveProps(nextProps) {
+    if (!this.state.showChat) {
+      // in case we got thrown from session, check integrity of data
+      const newCountAtToggle = nextProps.chatMsgCount < this.state.msgCountAtToggle ?
+                              nextProps.chatMsgCount :
+                              this.state.msgCountAtToggle;
+
+      this.setState({...this.state, newMsgCount: nextProps.chatMsgCount - newCountAtToggle, msgCountAtToggle: newCountAtToggle});
+    }
+  }
+
 
   getCompStyle() {
     return this.props.compStyle;
@@ -115,7 +127,11 @@ class Main extends VertoBaseComponent {
   }
 
   handleToggleChat(){
-    this.setState({...this.state, showChat: !this.state.showChat});
+    // if chat will be hidden (currently showing), then we need to keep track of how many
+    // chat messages are received and update the count for the chat message badge
+    // if chat is will be showing (currently hidden), then the message count in state should be 0
+
+    this.setState({...this.state, showChat: !this.state.showChat, msgCountAtToggle: this.props.chatMsgCount, newMsgCount: 0 });
   }
 
   render() {
@@ -267,6 +283,7 @@ class Main extends VertoBaseComponent {
                     cbSetVideoMode={(params)=>{this.handleControlClick('SETLAYOUT', params);}}
                     layouts={this.props.confData ? this.props.confData.layouts : undefined}
                     currLayout={this.props.confData ? this.props.confData.videoLayout : undefined}
+                    newMsgCount={this.state.newMsgCount}
                 />
               </div>
             );
@@ -345,6 +362,7 @@ export default connect((state)=>{
     auth: state.auth,
     app: state.app,
     callInfo: state.callInfo,
-    confData: state.callInfo.currentCallId ? state.callInfo.activeCalls[state.callInfo.currentCallId].conferenceData : undefined
+    confData: state.callInfo.currentCallId ? state.callInfo.activeCalls[state.callInfo.currentCallId].conferenceData : undefined,
+    chatMsgCount: state.callInfo.currentCallId && state.callInfo.activeCalls[state.callInfo.currentCallId].conferenceData ? state.callInfo.activeCalls[state.callInfo.currentCallId].conferenceData.messages.length : undefined
   });
 })(injectIntl(Radium(Main)));
