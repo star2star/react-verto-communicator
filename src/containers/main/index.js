@@ -56,6 +56,10 @@ class Main extends VertoBaseComponent {
         flex:'0 0 360px',
         height: '100%'
       },
+      incomingContainerStyles: {
+        minWidth: '40vw',
+        margin: 'auto'
+      },
       chatVidWrapStyles: {
         display: 'flex',
         height: '100%',
@@ -123,15 +127,26 @@ class Main extends VertoBaseComponent {
 
     const incomingCall = this.props.callInfo && Object.keys(this.props.callInfo.incomingCalls).map((callId)=>{
       console.log('------- GOT CALL', this.props.callInfo.incomingCalls[callId]);
-      return (<IncomingCall key={callId} callData={this.props.callInfo.incomingCalls[callId]} cbHangup={(d)=>{
-        console.log('hang up', d);
-        this.props.dispatch(doHangUp(d.callID));
-      }}
-          cbAnswer={(d)=>{
-          console.log('Answering: ', d);
-          this.props.dispatch(doAnswer(d.callID));
-      }}  />);
+      return (
+          <IncomingCall key={callId}
+              callData={this.props.callInfo.incomingCalls[callId]}
+              cbHangup={(d)=>{
+                console.log('hang up', d);
+                this.props.dispatch(doHangUp(d.callID));
+              }}
+              cbAnswer={(d)=>{
+                console.log('Answering: ', d);
+                this.props.dispatch(doAnswer(d.callID));
+              }}
+          />
+      );
     });
+
+    const incomingCallsContainer = incomingCall.length ? (
+            <div className="incomingCallContainer" style={this.getStyle("incomingContainerStyles")}>
+              {incomingCall}
+            </div>
+          ) : undefined;
 
 
     switch (this.props.auth.showPage){
@@ -313,7 +328,7 @@ class Main extends VertoBaseComponent {
       <div id="chatVideoWrapper" style={this.getStyle('chatVidWrapStyles')}>
         <AlertList />
         <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", flex:'1', overflowY: 'auto'}}>
-          {incomingCall}
+          {incomingCallsContainer}
           <video id="webcam" autoPlay="autoplay"  style={this.getStyle("videoStyles")}></video>
           {loggedInfo}
           {showSplash}
