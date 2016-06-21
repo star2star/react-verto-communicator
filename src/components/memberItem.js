@@ -29,22 +29,33 @@ export default class MemberItem extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {showAdminControls: false};
+
+      this.handleMenuClick = this.handleMenuClick.bind(this);
+      this.handleCloseDropdowns = this.handleCloseDropdowns.bind(this);
+      AdminControls.closeMenu = this.handleCloseMenu.bind(this);
   }
 
-  // handleCloseDropdowns() {
-  //   AdminControls.closeMenu();
-  // }
-  //
-  // handleCloseMenu(){
-  //   this.setState({...this.state, showAdminControls: false });
-  // }
-  //
-  // settings(displayAdmin) {
-  //   AdminControls.closeMenu();
-  //
-  //   //console.log('toggle adminControls', displayAdmin);
-  //   this.setState({ ...this.state, showAdminControls: displayAdmin });
-  // }
+  handleMenuClick(){
+    //console.log('Alt Menu Clicked');
+    this.handleCloseDropdowns();
+
+    this.setState({...this.state, showAdminControls: !this.state.showAdminControls});
+  }
+
+  handleCloseDropdowns() {
+    AdminControls.closeMenu();
+  }
+
+  handleCloseMenu(){
+    this.setState({...this.state, showAdminControls: false });
+  }
+
+  memberList(displayAdmin) {
+    AdminControls.closeMenu();
+
+    console.log('------------->toggle adminControls', displayAdmin);
+    this.setState({ ...this.state, showAdminControls: displayAdmin });
+  }
 
 
   getCompStyle() {
@@ -276,7 +287,7 @@ export default class MemberItem extends VertoBaseComponent {
               <img src={this.props.member.avatar.avatar} style={avatarStyle}/>
           </span>
           <div className="userInfo" style={this.getStyle("userInfoStyle")}
-              onClick={()=>{this.setState({...this.state, showAdminControls: !this.state.showAdminControls});}}
+              onClick={this.handleMenuClick}
           >
             <span style={this.getStyle("nameStyle")}>{this.props.member.name}</span>
             <span style={this.getStyle("emailStyle")}>{this.props.member.avatar.email}</span>
