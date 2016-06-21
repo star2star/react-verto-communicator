@@ -1,6 +1,7 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import ControlItem from './controlItem';
+import Badge from './badge';
 
 
 const propTypes = {
@@ -8,8 +9,8 @@ const propTypes = {
   cbVideoMute : React.PropTypes.func.isRequired,
   cbScreenShare : React.PropTypes.func.isRequired,
   cbToggleChat : React.PropTypes.func.isRequired,
+  newMsgCount : React.PropTypes.number,
   userConfStatus: React.PropTypes.object
-
 };
 
 export default class UserVideoControls extends VertoBaseComponent {
@@ -53,7 +54,7 @@ export default class UserVideoControls extends VertoBaseComponent {
   }
 
   handleToggleFullScreen() {
-    console.log('Handle Toggle Full Screen');
+    //console.log('Handle Toggle Full Screen');
 
     const elem = document.getElementById("chatVideoWrapper");
     if (!document.fullscreenElement && !document.mozFullScreenElement &&
@@ -112,6 +113,25 @@ export default class UserVideoControls extends VertoBaseComponent {
                 cbActionClick={this.handleToggleFullScreen}
             />);
 
+    //console.log('################ New Msg Count', this.props.newMsgCount);
+
+    const badge = this.props.newMsgCount > 0 ?
+      (
+        <Badge count={this.props.newMsgCount} cbClick={this.props.cbToggleChat}/>
+      ) :
+      undefined;
+
+    const chatStatus = (
+      <span>
+      <ControlItem type="ChatIconSVG"
+          compStyle={this.getStyle("controlIconStyle")}
+          cbActionClick={this.props.cbToggleChat}
+      />
+      {badge}
+      </span>
+    );
+
+
 
     // Build out the user controls
     return (
@@ -123,10 +143,7 @@ export default class UserVideoControls extends VertoBaseComponent {
             compStyle={this.getStyle("controlIconStyle")}
             cbActionClick={this.props.cbScreenShare}
         />
-        <ControlItem type="ChatIconSVG"
-            compStyle={this.getStyle("controlIconStyle")}
-            cbActionClick={this.props.cbToggleChat}
-        />
+        {chatStatus}
       </div>
     );
   }
