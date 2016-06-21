@@ -236,8 +236,8 @@ class Dialpad extends VertoBaseComponent {
               return (<span>
                 {interpolatedStyles.map(config => {
                 if (this.state.showingCallHistory){
-                  console.log('CH  CCCCC: ', config.style.width);
-                  const d = config.style.width < 100 ? 'none': 'flex';
+                  //console.log('CH  CCCCC: ', config.style.width);
+                  const d = config.style.width < 50 ? 'none': 'flex';
                   return (
                     <div
                       style={{...this.getDefaultStyle('cont'), ...config.style, display: d }}
@@ -268,7 +268,7 @@ class Dialpad extends VertoBaseComponent {
                 );
                 } else {
                   //console.log('DP  CCCCC: ', config);
-                  const d1 = config.style.width < 100 ? 'none': 'flex';
+                  const d1 = config.style.width < 55 ? 'none': 'flex';
                   return (
                     <div
                       style={{...this.getDefaultStyle('cont'), ...config.style, display: d1 }}
