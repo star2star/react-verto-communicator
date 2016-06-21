@@ -3,6 +3,7 @@ import VertoBaseComponent from './vertobasecomponent';
 import UserVideoControls from './vidControlsUser';
 import AdminVideoControls from './vidControlsAdmin';
 import {ShareScreenIconSVG, AvatarSVG, DialPadIconSVG, MicrophoneIconSVG, PauseIconSVG, MuteMicrophoneIconSVG, PhoneIconSVG, VideoIconSVG } from './svgIcons';
+import Radium from 'radium';
 
  const propTypes = {
    callData : React.PropTypes.object.isRequired,
@@ -66,8 +67,18 @@ class CallProgress extends VertoBaseComponent {
       const styles = {
         vidControlStyles: {
           display: 'flex',
-          flexDirection: 'column',
           justifyContent: 'center'
+        },
+
+        statusStyle: {
+          display:"flex",
+          justifyContent: 'center',
+          color: '#ddd',
+          wrap: 'auto',
+          overflow: 'auto',
+          '@media (max-width: 991px)': {
+            flexDirection: 'column'
+          }
         }
       };
 
@@ -101,9 +112,9 @@ class CallProgress extends VertoBaseComponent {
             );
 
       return (
-        <div style={{display:'flex', backgroundColor: '#333', height: '70px', justifyContent: 'space-around'}}>
-          <div style={{display:"flex", flexDirection: "column", justifyContent: 'center', color: '#ddd'}} >
-            <div>{this.props.callData.destination}</div>
+        <div style={{display:'flex', backgroundColor: '#333', height: '70px', justifyContent: 'space-around', alignItems: 'center'}}>
+          <div style={this.getStyle("statusStyle")} >
+            <div style={{paddingRight: '30px'}}>{this.props.callData.destination}</div>
             <div>{this.state.status == 'active'? this.state.timer: 'Connecting ...'}</div>
           </div>
           <div className="vidControls" style={this.getStyle("vidControlStyles")}>
@@ -126,4 +137,4 @@ class CallProgress extends VertoBaseComponent {
 
 CallProgress.propTypes = propTypes;
 
-export default CallProgress;
+export default Radium(CallProgress);
