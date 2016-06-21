@@ -18,6 +18,8 @@ export default class MemberList extends VertoBaseComponent {
     this.state = {};
   }
 
+  
+
   componentDidUpdate() {
     // scroll to bottom of message list
     const node = ReactDOM.findDOMNode(this);

@@ -28,7 +28,7 @@ describe('<UserMenu />', ()=>{
   it('renders display: flex if displayDropdown is true', () => {
     const wrapper = shallow(<UserMenu />);
     wrapper.setState({ dropdownDisplayed: true});
-    //console.log(wrapper.childAt(2).props().style.display);
+    // console.log(wrapper.childAt(2).props().style.display);
     expect(wrapper.childAt(2).props().style.display).toEqual('flex');
   });
 

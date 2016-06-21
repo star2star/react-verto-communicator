@@ -2,16 +2,17 @@ import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import sinon from 'sinon';
 import ReactDOM from 'react-dom';
-import { mountWithIntl, shallowWithIntl } from '../helpers/intl-enzyme-test-helper.js';
+// import { mountWithIntl, shallowWithIntl } from '../helpers/intl-enzyme-test-helper.js';
 import MemberList from '../components/memberList';
 
 jest.unmock('../components/memberList');
-jest.unmock('../helpers/intl-enzyme-test-helper.js');
-jest.unmock('../js/messages.js');
+// jest.unmock('../helpers/intl-enzyme-test-helper.js');
+// jest.unmock('../js/messages.js');
+ jest.unmock('../components/svgIcons.js');
 
 describe( 'MemberList', ()=>{
 
-  const cbControlClick=sinon.spy();
+  const cbControlClick= sinon.spy();
   const controlSettings={ moderator: true, multCanvas: false, allowPresenter: true };
   const sampleMembers = [{
     callerId: "Name",
@@ -93,17 +94,6 @@ describe( 'MemberList', ()=>{
           />);
       expect(cbControlClick.calledOnce);
     });
-
-    // it('renders members ', () => {
-    //   const wrapper = mount(
-    //     <MemberList
-    //         cbControlClick={cbControlClick}
-    //         members={sampleMembers}
-    //         controlSettings={controlSettings}
-    //     />);
-    //     const expectedNode = wrapper.children().first().find('.members').children().find('.name');
-    //     // console.log('***************', expectedNode.debug());
-    // });
 
 
 });
