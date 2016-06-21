@@ -3,6 +3,7 @@ import VertoBaseComponent from './vertobasecomponent';
 import UserVideoControls from './vidControlsUser';
 import AdminVideoControls from './vidControlsAdmin';
 import {ShareScreenIconSVG, AvatarSVG, DialPadIconSVG, MicrophoneIconSVG, PauseIconSVG, MuteMicrophoneIconSVG, PhoneIconSVG, VideoIconSVG } from './svgIcons';
+import Radium from 'radium';
 
  const propTypes = {
       callData : React.PropTypes.object.isRequired,
@@ -66,8 +67,51 @@ class CallProgress extends VertoBaseComponent {
       const styles = {
         vidControlStyles: {
           display: 'flex',
+          justifyContent: 'center',
+          width: '75%',
+          maxWidth: '390px'
+        },
+
+        controlBarStyle: {
+          display:'flex',
+          backgroundColor: '#333',
+          height: '70px',
+          justifyContent: 'space-around',
+          alignItems: 'center'
+        },
+
+        statusStyle: {
+          display:"flex",
+          justifyContent: 'center',
+          color: '#ddd',
+          wrap: 'auto',
+          overflow: 'auto',
+          '@media (max-width: 991px)': {
+            flexDirection: 'column'
+          }
+        },
+
+        destinationStyle: {
+          paddingRight: '10px'
+        },
+
+        phoneIconStyle: {
+          width: "20px",
+          height: "20px",
+          fill: "white",
+          backgroundColor: '#f00',
+          padding: '5px',
+          borderRadius: '50%'
+        },
+
+        phoneIconContainer: {
+          display:'flex',
           flexDirection: 'column',
-          justifyContent: 'center'
+           justifyContent: 'center'
+        },
+
+        timerColor: {
+          color: '#6C6C6C'
         }
       };
 
@@ -102,21 +146,21 @@ class CallProgress extends VertoBaseComponent {
             );
 
       return (
-        <div style={{display:'flex', backgroundColor: '#333', height: '70px', justifyContent: 'space-around'}}>
-          <div style={{display:"flex", flexDirection: "column", justifyContent: 'center', color: '#ddd'}} >
-            <div>{this.props.callData.destination}</div>
-            <div>{this.state.status == 'active'? this.state.timer: 'Connecting ...'}</div>
+        <div style={this.getStyle('controlBarStyle')}>
+          <div style={this.getStyle("statusStyle")} >
+            <div style={this.getStyle('destinationStyle')} >{this.props.callData.destination}</div>
+            <div style={this.getStyle('timerColor')}>{this.state.status == 'active'? this.state.timer: 'Connecting ...'}</div>
           </div>
           <div className="vidControls" style={this.getStyle("vidControlStyles")}>
             {adminControls}
             {userControls}
           </div>
-          <span style={{display:'flex', flexDirection: 'column', justifyContent: 'center'}}
+          <span style={this.getStyle('phoneIconContainer')}
               onClick={()=>{
               //console.log('hangup clicked: ', this.props);
               this.props.cbHangup(this.props.callData.callId);
           }}>
-              <PhoneIconSVG svgStyle={{width: "20px", height: "20px", fill: "white", backgroundColor: '#f00', padding: '5px', borderRadius: '50%'}} />
+              <PhoneIconSVG svgStyle={this.getStyle('phoneIconStyle')} />
           </span>
 
         </div>
@@ -127,4 +171,4 @@ class CallProgress extends VertoBaseComponent {
 
 CallProgress.propTypes = propTypes;
 
-export default CallProgress;
+export default Radium(CallProgress);
