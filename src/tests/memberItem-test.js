@@ -152,14 +152,20 @@ describe('Default test for MemberItem', ()=>{
       expect(wrapper.find('div').length).toEqual(20); //4 memberItem divs, 16 adminControl divs
   });
 
-  it('renders PresenterIconSVG', () => {
+  it('renders display: flex ', () => {
     const wrapper = mountWithIntl(
       <MemberItem
           member={sampleMember}
           controlSettings={controlSettings}
           cbControlClick={cbControlClick}
-    />);
-    expect(wrapper.find('PresenterIconSVG').length).toEqual(1);
+  />);
+  console.log('----------------->', wrapper.childAt(0).props().children[0]);                    //avatar span
+  // console.log('----------------->', wrapper.childAt(0).childAt(1).props());                  //userInfo
+  // console.log('----------------->', wrapper.childAt(0).childAt(1).props().children[0]); //name
+  // console.log('----------------->', wrapper.childAt(0).childAt(1).props().children[1]); //email
+  // console.log('----------------->', wrapper.childAt(0).childAt(2).props().children[0]); //av svg's
+    expect(wrapper.childAt(0).childAt(0).props().style.display).toEqual('flex');
   });
+
 
 });
