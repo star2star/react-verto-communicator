@@ -12,8 +12,13 @@ const propTypes = {
   history : React.PropTypes.array,
   cbClearHistory : React.PropTypes.func.isRequired,
   cbCall : React.PropTypes.func,
+  allowToolTip : React.PropTypes.bool,
   cbBack: React.PropTypes.func.isRequired,
   callerId : React.PropTypes.string
+};
+
+const defaultProps = {
+  allowToolTip : false
 };
 
 class CallHistory extends VertoBaseComponent {
@@ -178,6 +183,7 @@ class CallHistory extends VertoBaseComponent {
     listitems = this.props.history.map((i, index)=>{
         return(
           <CallHistoryItem
+              allowToolTip = {this.props.allowToolTip}
               className="chi"
               key={index}
               data={i}
@@ -286,5 +292,6 @@ class CallHistory extends VertoBaseComponent {
 
 }
 
+CallHistory.defaultProps = defaultProps;
 CallHistory.propTypes = propTypes;
 export default Radium(CallHistory);
