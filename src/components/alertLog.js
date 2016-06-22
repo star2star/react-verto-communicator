@@ -47,6 +47,9 @@ export default class AlertLog extends VertoBaseComponent {
           zIndex: "1"
         }
       },
+      container : {
+        padding: '50px'
+      },
       clearAlertBtnStyle : {
         padding: '8px 30px',
         border: '0px',
@@ -101,7 +104,7 @@ export default class AlertLog extends VertoBaseComponent {
     if (alerts.length !== 0) {
       return(
         <Modal isOpen onRequestClose={this.props.cbClose} style={this.getStyle('mymodal')}>
-          <div className="container" style={this.getStyle('container')}>
+          <div className="container">
             <button
                 style={this.getStyle("clearAlertBtnStyle")}
                 onClick={this.handleClearAlerts}>
