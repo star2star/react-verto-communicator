@@ -2,10 +2,12 @@ import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import sinon from 'sinon';
 import ReactDOM from 'react-dom';
-// import { mountWithIntl, shallowWithIntl } from '../helpers/intl-enzyme-test-helper.js';
+import { mountWithIntl, shallowWithIntl } from '../helpers/intl-enzyme-test-helper.js';
 import MemberList from '../components/memberList';
+import MemberItem from '../components/memberItem';
 
 jest.unmock('../components/memberList');
+jest.unmock('../components/memberItem');
 // jest.unmock('../helpers/intl-enzyme-test-helper.js');
 // jest.unmock('../js/messages.js');
  jest.unmock('../components/svgIcons.js');
@@ -78,23 +80,35 @@ describe( 'MemberList', ()=>{
   it('renders a div', () => {
     const wrapper = shallow(
       <MemberList
-        cbControlClick={cbControlClick}
-        members={sampleMembers}
-        controlSettings={controlSettings}
+          cbControlClick={cbControlClick}
+          members={sampleMembers}
+          controlSettings={controlSettings}
         />);
      expect(wrapper.find('div').length).toEqual(1);
   });
+
+  it('Takes in & displays props correctly (name:)', () => {
+    const wrapper = mountWithIntl(
+      <MemberList
+          cbControlClick={cbControlClick}
+          members={sampleMembers}
+          controlSettings={controlSettings}
+        />);
+    expect(wrapper.props().sampleMember.name).toEqual('Name');
+  });
+
+
 
   // it('cbControlClick callback fires', () => {
   //     const spy = sinon.spy();
   //     const wrapper = shallow(
   //       <MemberList
-  //         cbControlClick={cbControlClick}
-  //         members={sampleMembers}
-  //         controlSettings={controlSettings}
+  //           cbControlClick={cbControlClick}
+  //           members={sampleMembers}
+  //           controlSettings={controlSettings}
   //         />);
   //     const expectedNode = wrapper.children().find('');
-  //     // console.log('--------->', wrapper.children());
+  //      console.log('--------->', wrapper.children());
   //       expectedNode.simulate('click');
   //     expect(spy.calledOnce, true);
   //   });
