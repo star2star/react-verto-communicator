@@ -167,16 +167,16 @@ class CallHistory extends VertoBaseComponent {
       }
 
       const formattedTimestamp = moment(i.timestamp).format('ddd MMM DD YYYY HH:mm:ss A');
-
+      const d1 = config.style.width < 150 ? 'none': 'block';
       return (
         <div
             className="body"
             tabIndex="0"
-            style={{...self.getDefaultStyle('body'), ...config.style}}
+            style={{...self.getDefaultStyle('body'), ...config.style, display: d1 }}
         >
             <div
                 className="details"
-                key={key}
+                key={config.key}
                 onClick={()=>{
                   self.props.cbCall(i.callerId);
                 }}
@@ -193,28 +193,28 @@ class CallHistory extends VertoBaseComponent {
 
   generateHistory(config) {
     let listitems;
-    if(this.props.history.length > 0){
-    listitems = this.props.history.map((i, index)=>{
+    const d1 = config.style.width < 250 ? 'none': 'block';
+    if(this.props.history.length > 1){
+    listitems = this.props.history.map((i)=>{
         return(
         <div
             className="body"
             tabIndex="0"
-            style={{...this.getDefaultStyle('body'), ...config.style}}
+            style={{...this.getDefaultStyle('body'), ...config.style, display: d1}}
         >
             <CallHistoryItem
                 allowToolTip = {this.props.allowToolTip}
                 className="chi"
-                key={index}
+                key={config.key}
                 data={i}
                 cbClick={()=>{
                   this.props.cbCall(i.callerId);
                 }}
                 cbShowCalls={()=>{
                   this.callerId = i.callerId;
-                  setTimeout(()=>this.setState({...this.state, 'callDetailDisplayed' : true}),0);
-                  setTimeout(()=>this.removeItem('hi'),10);
-                  setTimeout(()=>this.showDetails(),20);
-
+                  this.removeItem('hi');
+                  setTimeout(()=>this.showDetails(),1000);
+                  setTimeout(()=>this.setState({...this.state, 'callDetailDisplayed' : true}),1000);
                 }}
             />
         </div>
@@ -242,9 +242,9 @@ class CallHistory extends VertoBaseComponent {
       icon =(
         <span
           onClick={()=>{
-            setTimeout(()=>this.setState({...this.state, 'callDetailDisplayed': false}),0);
-            setTimeout(()=>this.removeItem('de'),10);
-            setTimeout(()=>this.showHistory(),20);
+            setTimeout(()=>this.setState({...this.state, 'callDetailDisplayed': false}),1000);
+            this.removeItem('de');
+            setTimeout(()=>this.showHistory(),1000);
           }}
         >
           <BackArrowIconSVG svgStyle={{...this.getDefaultStyle('headerSvgs')}} />
@@ -341,10 +341,8 @@ class CallHistory extends VertoBaseComponent {
                    <span>
                      {interpolatedStyles.map(config => {
                        if (this.state.callDetailDisplayed){
-                         console.log('state: ', this.state.callDetailDisplayed);
                          return this.generateDetails(config);
                        } else {
-                         console.log('state: ', this.state.callDetailDisplayed);
                          return this.generateHistory(config);
                        }
                     })}
