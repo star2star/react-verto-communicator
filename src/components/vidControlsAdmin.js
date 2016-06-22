@@ -3,7 +3,8 @@ import VertoBaseComponent from './vertobasecomponent';
 import InputModal from './inputModal';
 import ListSelect from './list-select';
 import ControlItem from './controlItem';
-
+import ToolTip from './tooltip';
+import { FormattedMessage, injectIntl } from 'react-intl';
 
 const propTypes = {
   cbPlay : React.PropTypes.func.isRequired,
@@ -109,32 +110,51 @@ export default class AdminVideoControls extends VertoBaseComponent {
     // Do we need to retain file info for calls into VertoServices to stop play/record?
     // Does play button become 'pause' when playing a file?  Can VertoServices resume
     // playing from pause point?
+    const { formatMessage } = this.props.intl;
+    const playMsg = formatMessage({"id":"MESSAGE_PLAY", "defaultMessage":"Play"});
+    const stopMsg = formatMessage({"id":"MESSAGE_STOP", "defaultMessage":"Stop"});
+    const recMsg = formatMessage({"id":"MESSAGE_RECORD", "defaultMessage":"Record"});
+    const stoprecMsg = formatMessage({"id":"MESSAGE_STOP_RECORD", "defaultMessage":"Stop Record"});
+    const snapMsg = formatMessage({"id":"MESSAGE_SNAPSHOT", "defaultMessage":"Snapshot"});
+    const modeMsg = formatMessage({"id":"MESSAGE_VIDEO_MODE", "defaultMessage":"Video Mode"});
     return (
       <div style={this.getStyle('adminControlsStyle')}>
-        <ControlItem type="PlayIconSVG"
-            compStyle={this.getStyle("controlIconStyle")}
-            cbActionClick={this.props.cbPlay}
-        />
-        <ControlItem type="StopIconSVG"
-            compStyle={this.getStyle("controlIconStyle")}
-            cbActionClick={this.props.cbStop}
-        />
-        <ControlItem type="StatusIconSVG"
-            compStyle={this.getStyle("controlIconStyle")}
-            cbActionClick={this.props.cbRecord}
-        />
-        <ControlItem type="RoswellSVG"
-            compStyle={this.getStyle("controlIconStyle")}
-            cbActionClick={this.props.cbStopRecord}
-        />
-        <ControlItem type="SnapshotIconSVG"
-            compStyle={this.getStyle("controlIconStyle")}
-            cbActionClick={this.props.cbSnapshot}
-        />
-        <ControlItem type="VideoModeIconSVG"
-            compStyle={this.getStyle("controlIconStyle")}
-            cbActionClick={this.handleShowLayoutList}
-        />
+        <ToolTip name="play" place='top' msg={playMsg}>
+          <ControlItem type="PlayIconSVG"
+              compStyle={this.getStyle("controlIconStyle")}
+              cbActionClick={this.props.cbPlay}
+          />
+        </ToolTip>
+        <ToolTip name="stop" place='top' msg={stopMsg}>
+          <ControlItem type="StopIconSVG"
+              compStyle={this.getStyle("controlIconStyle")}
+              cbActionClick={this.props.cbStop}
+          />
+        </ToolTip>
+        <ToolTip name="record" place='top' msg={recMsg}>
+          <ControlItem type="StatusIconSVG"
+              compStyle={this.getStyle("controlIconStyle")}
+              cbActionClick={this.props.cbRecord}
+          />
+        </ToolTip>
+        <ToolTip name="stoprecord" place='top' msg={stoprecMsg}>
+          <ControlItem type="RoswellSVG"
+              compStyle={this.getStyle("controlIconStyle")}
+              cbActionClick={this.props.cbStopRecord}
+          />
+        </ToolTip>
+        <ToolTip name="snapshot" place='top' msg={snapMsg}>
+          <ControlItem type="SnapshotIconSVG"
+              compStyle={this.getStyle("controlIconStyle")}
+              cbActionClick={this.props.cbSnapshot}
+          />
+        </ToolTip>
+        <ToolTip name="snapshot" place='top' msg={modeMsg}>
+          <ControlItem type="VideoModeIconSVG"
+              compStyle={this.getStyle("controlIconStyle")}
+              cbActionClick={this.handleShowLayoutList}
+          />
+        </ToolTip>
         {layoutContainer}
 
       </div>
@@ -143,3 +163,5 @@ export default class AdminVideoControls extends VertoBaseComponent {
 }
 
 AdminVideoControls.propTypes = propTypes;
+
+export default injectIntl(AdminVideoControls);

@@ -119,7 +119,7 @@ class CallProgress extends VertoBaseComponent {
         },
 
         controlStyleAdmin: {
-          //width: '50%',
+          width: '50%',
           borderRightWidth: '1px',
           borderRightColor: '#474747',
           borderRightStyle: 'solid'

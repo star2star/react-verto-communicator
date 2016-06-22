@@ -180,6 +180,8 @@ const messages = {
   "SCREEN_SHARE": "Screen Share",
   "PRESENTER": "Presenter",
   "WATCHING_CANVAS": "Watching Canvas",
-  "INPUT_CANVAS": "Input Canvas"
+  "INPUT_CANVAS": "Input Canvas",
+  "CLEAR_ALERTS": "Clear Alerts",
+  "NO_LOG": "No Log Data"
 };
 module.exports = messages;

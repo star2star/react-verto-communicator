@@ -2,6 +2,8 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import ControlItem from './controlItem';
 import Badge from './badge';
+import ToolTip from './tooltip';
+import { FormattedMessage, injectIntl } from 'react-intl';
 
 const propTypes = {
   cbMicMute : React.PropTypes.func.isRequired,
@@ -47,6 +49,14 @@ export default class UserVideoControls extends VertoBaseComponent {
         display: 'flex',
         justifyContent: 'space-around',
         flex: '1'
+      },
+
+      badgeCompStyle: {
+        badgeStyles:{
+        position: 'absolute',
+        top: '-15px',
+        left: '10px'
+        }
       }
     };
 
@@ -86,67 +96,89 @@ export default class UserVideoControls extends VertoBaseComponent {
   }
 
   render(){
+    const { formatMessage } = this.props.intl;
     // Setup up based on the conference status object
+    const unMuteMsg = formatMessage({"id":"CHAT_UNMUTE_MIC", "defaultMessage":"Unmute"});
+    const muteMsg = formatMessage({"id":"CHAT_MUTE_MIC", "defaultMessage":"Mute"});
+    const fullscreenMsg = formatMessage({"id":"MESSAGE_FULLSCREEN", "defaultMessage":"Toggle Fullscreen"});
+    const openCloseMessage = formatMessage({"id":"MESSAGE_OPEN_CLOSE_CHAT", "defaultMessage":"Open/Close Chat"});
+    const screenshareMessage = formatMessage({"id":"MESSAGE_SCREENSHARE", "defaultMessage":"Screen Share"});
     const micStatus = this.props.userConfStatus && this.props.userConfStatus.audio.muted ?
-            (<ControlItem type="MuteMicrophoneIconSVG"
+            (<ToolTip name="unmutemic" place='top' msg={unMuteMsg}>
+              <ControlItem type="MuteMicrophoneIconSVG"
                 compStyle={this.getStyle("controlIconStyle")}
                 cbActionClick={this.props.cbMicMute}
-            />) :
-            (<ControlItem type="MicrophoneIconSVG"
+              />
+            </ToolTip>) :
+            (<ToolTip name="mutemic" place='top' msg={muteMsg}>
+              <ControlItem type="MicrophoneIconSVG"
                 compStyle={this.getStyle("controlIconStyle")}
                 cbActionClick={this.props.cbMicMute}
-            />);
+              />
+            </ToolTip>);
 
     const videoStatus = this.props.userConfStatus && this.props.userConfStatus.video.muted ?
-            (<ControlItem type="MuteVideoIconSVG"
+            (<ToolTip name="unmutemic" place='top' msg={unMuteMsg}>
+              <ControlItem type="MuteVideoIconSVG"
                 compStyle={this.getStyle("controlIconStyle")}
                 cbActionClick={this.props.cbVideoMute}
-            />) :
-            (<ControlItem type="VideoIconSVG"
+              />
+             </ToolTip>) :
+            (<ToolTip name="unmutemic" place='top' msg={muteMsg}>
+              <ControlItem type="VideoIconSVG"
                 compStyle={this.getStyle("controlIconStyle")}
                 cbActionClick={this.props.cbVideoMute}
-            />);
+              />
+            </ToolTip> );
 
     const screenStatus = document.webkitIsFullScreen || document.mozFulScreen ?
-            (<ControlItem type="RestoreIconSVG"
+            (<ToolTip name="fullscreen" place='top' msg={fullscreenMsg}>
+              <ControlItem type="RestoreIconSVG"
                 compStyle={this.getStyle("controlIconStyle")}
                 cbActionClick={this.handleToggleFullScreen}
-            />) :
-            (<ControlItem type="FullScreenIconSVG"
+              />
+            </ToolTip>) :
+            (<ToolTip name="fullscreen" place='top' msg={fullscreenMsg}>
+              <ControlItem type="FullScreenIconSVG"
                 compStyle={this.getStyle("controlIconStyle")}
                 cbActionClick={this.handleToggleFullScreen}
-            />);
+              />
+            </ToolTip>);
 
     //console.log('################ New Msg Count', this.props.newMsgCount);
 
     const badge = this.props.newMsgCount > 0 ?
       (
-        <Badge count={this.props.newMsgCount} cbClick={this.props.cbToggleChat}/>
+        <Badge compStyle={this.getStyle('badgeCompStyle')} count={this.props.newMsgCount} cbClick={this.props.cbToggleChat}/>
       ) :
       undefined;
 
     const chatStatus = (
-      <span>
-      <ControlItem type="ChatIconSVG"
-          compStyle={this.getStyle("controlIconStyle")}
-          cbActionClick={this.props.cbToggleChat}
-      />
-      {badge}
+      <span style={{position: 'relative'}}>
+        <ToolTip name="share" place='top' msg={openCloseMessage}>
+          <ControlItem type="ChatIconSVG"
+              compStyle={this.getStyle("controlIconStyle")}
+              cbActionClick={this.props.cbToggleChat}
+          />
+        </ToolTip>
+        {badge}
       </span>
     );
 
 
-
+    //TODO look at the issue causing the tooltips to be all weird
     // Build out the user controls
     return (
       <div style={this.getStyle('controlsStyle')}>
           {micStatus}
           {videoStatus}
           {screenStatus}
-          <ControlItem type="ShareScreenIconSVG"
-              compStyle={this.getStyle("controlIconStyle")}
-              cbActionClick={this.props.cbScreenShare}
-          />
+          <ToolTip name="togglechat" place='top' msg={screenshareMessage}>
+            <ControlItem type="ShareScreenIconSVG"
+                compStyle={this.getStyle("controlIconStyle")}
+                cbActionClick={this.props.cbScreenShare}
+            />
+          </ToolTip>
           {chatStatus}
       </div>
     );
@@ -154,3 +186,4 @@ export default class UserVideoControls extends VertoBaseComponent {
 }
 
 UserVideoControls.propTypes = propTypes;
+export default injectIntl(UserVideoControls);
