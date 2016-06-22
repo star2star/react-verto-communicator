@@ -1,5 +1,6 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
+import { injectIntl, FormattedMessage } from 'react-intl';
 import AlertService from '../js/alertService';
 import AlertLogItem from './alertLogItem';
 import Modal from 'react-modal';
@@ -34,17 +35,29 @@ export default class AlertLog extends VertoBaseComponent {
       },
       mymodal : {
         content: {
-          top                  : '50%',
-          left                  : '50%',
-          right                : 'auto',
-          bottom             : 'auto',
-          marginRight           : '-50%',
-          transform             : 'translate(-50%, -50%)',
-          boxShadow             : '0px 27px 24px 0px rgba(0,0,0,.2), 0px 40px 77px 0px rgba(0,0,0,.22)'
+          top: '50%',
+          left: '50%',
+          right: 'auto',
+          bottom: 'auto',
+          marginRight: '-50%',
+          transform: 'translate(-50%, -50%)',
+          boxShadow: '0px 27px 24px 0px rgba(0,0,0,.2), 0px 40px 77px 0px rgba(0,0,0,.22)'
         },
         overlay: {
           zIndex: "1"
         }
+      },
+      clearAlertBtnStyle : {
+        padding: '8px 30px',
+        border: '0px',
+        borderRadius: '3px',
+        fontSize: '.75rem',
+        fontWeight: '400',
+        margin: '25px 0px 10px 0px',
+        cursor: 'pointer',
+        backgroundColor: '#3974D9',
+        color: '#FFF',
+        textTransform: 'uppercase'
       }
     };
 
@@ -89,8 +102,15 @@ export default class AlertLog extends VertoBaseComponent {
       return(
         <Modal isOpen onRequestClose={this.props.cbClose} style={this.getStyle('mymodal')}>
           <div className="container" style={this.getStyle('container')}>
+            <button
+                style={this.getStyle("clearAlertBtnStyle")}
+                onClick={this.handleClearAlerts}>
+                  <FormattedMessage
+                      id="CLEAR_ALERTS"
+                      defaultMessage="Clear Alerts"
+                  />
+            </button>
             <div className="alertList" style={this.getStyle('ALogStyles')}>
-            <button style={this.getStyle("clearAlertsStyle")} onClick={this.handleClearAlerts}>Clear Alerts</button>
             {alerts}
             </div>
           </div>
