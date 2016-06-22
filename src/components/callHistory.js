@@ -31,6 +31,7 @@ class CallHistory extends VertoBaseComponent {
     this.willEnter = this.willEnter.bind(this);
     this.generateHistory = this.generateHistory.bind(this);
     this.generateDetails = this.generateDetails.bind(this);
+    this.showDetails = this.showDetails.bind(this);
 }
 
   componentDidMount() {
@@ -169,15 +170,21 @@ class CallHistory extends VertoBaseComponent {
 
       return (
         <div
-            className="details"
-            key={key}
-            onClick={()=>{
-              self.props.cbCall(i.callerId);
-            }}
-            style={{...self.getDefaultStyle('details'), ...config.style}}
+            className="body"
+            tabIndex="0"
+            style={{...self.getDefaultStyle('body'), ...config.style}}
         >
-          {renderedDirection}
-          {formattedTimestamp}
+            <div
+                className="details"
+                key={key}
+                onClick={()=>{
+                  self.props.cbCall(i.callerId);
+                }}
+                style={{...self.getDefaultStyle('details')}}
+            >
+              {renderedDirection}
+              {formattedTimestamp}
+            </div>
         </div>
       );
     });
@@ -334,8 +341,10 @@ class CallHistory extends VertoBaseComponent {
                    <span>
                      {interpolatedStyles.map(config => {
                        if (this.state.callDetailDisplayed){
+                         console.log('state: ', this.state.callDetailDisplayed);
                          return this.generateDetails(config);
                        } else {
+                         console.log('state: ', this.state.callDetailDisplayed);
                          return this.generateHistory(config);
                        }
                     })}
