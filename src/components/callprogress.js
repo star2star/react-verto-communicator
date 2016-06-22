@@ -69,7 +69,7 @@ class CallProgress extends VertoBaseComponent {
           display: 'flex',
           justifyContent: 'center',
           width: '75%',
-          maxWidth: '390px'
+          maxWidth: '780px'
         },
 
         controlBarStyle: {
@@ -112,6 +112,17 @@ class CallProgress extends VertoBaseComponent {
 
         timerColor: {
           color: '#6C6C6C'
+        },
+
+        controlStyleUser: {
+          width: '50%'
+        },
+
+        controlStyleAdmin: {
+          //width: '50%',
+          borderRightWidth: '1px',
+          borderRightColor: '#474747',
+          borderRightStyle: 'solid'
         }
       };
 
@@ -121,7 +132,8 @@ class CallProgress extends VertoBaseComponent {
     render() {
       //console.log('<<<<<< CP: ', this.props.callData, this.state );
       const adminControls = this.props.isModerator ?
-              (<AdminVideoControls
+              (<div style={this.getStyle('controlStyleAdmin')}>
+                <AdminVideoControls
                   cbPlay={()=>{console.log('Play Clicked');}}
                   cbStop={()=>{console.log('Stop Clicked');}}
                   cbRecord={()=>{console.log('Record Clicked');}}
@@ -131,10 +143,12 @@ class CallProgress extends VertoBaseComponent {
                   layouts={this.props.layouts}
                   currLayout={this.props.currLayout}
                 />
+              </div>
               ) :
               undefined;
 
       const userControls = (
+            <div style={this.getStyle('controlStyleUser')}>
               <UserVideoControls
                   cbMicMute={()=>{this.props.cbMute(this.props.callData.callId, 'mic');}}
                   cbVideoMute={()=>{this.props.cbMute(this.props.callData.callId, 'video');}}
@@ -143,17 +157,18 @@ class CallProgress extends VertoBaseComponent {
                   userConfStatus={this.props.userConfStatus}
                   newMsgCount={this.props.newMsgCount}
               />
+            </div>
             );
 
       return (
         <div style={this.getStyle('controlBarStyle')}>
-          <div style={this.getStyle("statusStyle")} >
-            <div style={this.getStyle('destinationStyle')} >{this.props.callData.destination}</div>
-            <div style={this.getStyle('timerColor')}>{this.state.status == 'active'? this.state.timer: 'Connecting ...'}</div>
-          </div>
+            <div style={this.getStyle("statusStyle")} >
+              <div style={this.getStyle('destinationStyle')} >{this.props.callData.destination}</div>
+              <div style={this.getStyle('timerColor')}>{this.state.status == 'active'? this.state.timer: 'Connecting ...'}</div>
+            </div>
           <div className="vidControls" style={this.getStyle("vidControlStyles")}>
-            {adminControls}
-            {userControls}
+              {adminControls}
+              {userControls}
           </div>
           <span style={this.getStyle('phoneIconContainer')}
               onClick={()=>{

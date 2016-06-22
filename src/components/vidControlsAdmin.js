@@ -32,8 +32,9 @@ export default class AdminVideoControls extends VertoBaseComponent {
     const styles = {
       controlIconStyle: {
         svgStyle: {
-          height: '20px',
-          fill: '#65ac43'
+          height: '30px',
+          fill: 'white',
+          width: '30px'
         }
       },
       headingStyle:{
@@ -48,8 +49,13 @@ export default class AdminVideoControls extends VertoBaseComponent {
         maxHeight: '200px',
         overflowX: 'auto',
         backgroundColor: '#fff',
-        width: '210px', //TODO -ta content should push width, but it's overflowing.... need to look into
+        //width: '210px', //TODO -ta content should push width, but it's overflowing.... need to look into
         fontSize: '12px'
+      },
+      adminControlsStyle: {
+        display: 'flex',
+        justifyContent: 'space-around',
+        flex: '1'
       }
     };
 
@@ -104,7 +110,7 @@ export default class AdminVideoControls extends VertoBaseComponent {
     // Does play button become 'pause' when playing a file?  Can VertoServices resume
     // playing from pause point?
     return (
-      <div style={{display: 'flex', position: 'relative'}}>
+      <div style={this.getStyle('adminControlsStyle')}>
         <ControlItem type="PlayIconSVG"
             compStyle={this.getStyle("controlIconStyle")}
             cbActionClick={this.props.cbPlay}

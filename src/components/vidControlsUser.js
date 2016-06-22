@@ -3,7 +3,6 @@ import VertoBaseComponent from './vertobasecomponent';
 import ControlItem from './controlItem';
 import Badge from './badge';
 
-
 const propTypes = {
   cbMicMute : React.PropTypes.func.isRequired,
   cbVideoMute : React.PropTypes.func.isRequired,
@@ -18,7 +17,6 @@ export default class UserVideoControls extends VertoBaseComponent {
     super(props);
     this.state = {};
     this.handleToggleFullScreen = this.handleToggleFullScreen.bind(this);
-
     // addEventListener for dblclick to go to full screen moderator
     document.getElementById("webcam").addEventListener('dblclick', this.handleToggleFullScreen);
 
@@ -43,7 +41,12 @@ export default class UserVideoControls extends VertoBaseComponent {
       },
       headingStyle:{
         backgroundColor: '#e9e9e9'
+      },
 
+      controlsStyle: {
+        display: 'flex',
+        justifyContent: 'space-around',
+        flex: '1'
       }
     };
 
@@ -136,15 +139,15 @@ export default class UserVideoControls extends VertoBaseComponent {
 
     // Build out the user controls
     return (
-      <div style={{display: 'flex', justifyContent: 'space-around', flex: '1'}}>
-        {micStatus}
-        {videoStatus}
-        {screenStatus}
-        <ControlItem type="ShareScreenIconSVG"
-            compStyle={this.getStyle("controlIconStyle")}
-            cbActionClick={this.props.cbScreenShare}
-        />
-        {chatStatus}
+      <div style={this.getStyle('controlsStyle')}>
+          {micStatus}
+          {videoStatus}
+          {screenStatus}
+          <ControlItem type="ShareScreenIconSVG"
+              compStyle={this.getStyle("controlIconStyle")}
+              cbActionClick={this.props.cbScreenShare}
+          />
+          {chatStatus}
       </div>
     );
   }
