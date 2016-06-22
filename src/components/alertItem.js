@@ -41,20 +41,28 @@ export default class AlertItem extends VertoBaseComponent {
         display: 'flex',
         border: '1px solid #d1d1d1',
         borderRadius: '5px',
+        // padding: '10px 0px 10px 0px',
         backgroundColor: '#FAFAFA',
         flexDirection: 'column',
         marginBottom: '10px'
       },
       headingStyles: {
         display: 'flex',
-        justifyContent: 'space-between'
-
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '5px 3px 5px 10px'
 
       },
       compStyle : {
         controlStyle: {
-          flex: 1
+          flex: 1,
+          fontSize: '.5rem'
         }
+      },
+      alertDetailStyle : {
+        padding:'5px 3px 5px 10px',
+        display:'flex',
+        alignItems:'center'
       }
     };
 
@@ -86,7 +94,9 @@ export default class AlertItem extends VertoBaseComponent {
             {this.props.alertData.summary}
             <ControlItem type="RemoveIconSVG" cbActionClick={this.handleDismissClick} />
           </div>
-          {this.props.alertData.detail}
+          <div style={this.getStyle('alertDetailStyle')}>
+            {this.props.alertData.detail}
+          </div>
         </div>
       );
   }
