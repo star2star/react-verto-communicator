@@ -26,7 +26,7 @@ class Action extends VertoBaseComponent {
     const styles = {
       controlStyle: {
         cursor: 'pointer',
-        fontSize: '10px',
+        fontSize: '1rem',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center'

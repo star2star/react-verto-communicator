@@ -22,7 +22,7 @@ export default class AlertItem extends VertoBaseComponent {
     // set timeout for removing the alert from list after 5 seconds
     this.alertTimeout = setTimeout(()=>{
       this.props.cbDismissAlert(this.props.alertData.id);
-    }, 500000);
+    }, 5000);
   }
 
 

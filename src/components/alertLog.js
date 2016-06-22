@@ -1,5 +1,6 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
+import { injectIntl, FormattedMessage } from 'react-intl';
 import AlertService from '../js/alertService';
 import AlertLogItem from './alertLogItem';
 import Modal from 'react-modal';
@@ -46,8 +47,17 @@ export default class AlertLog extends VertoBaseComponent {
           zIndex: "1"
         }
       },
-      clearAlertsStyle : {
-        
+      clearAlertBtnStyle : {
+        padding: '8px 30px',
+        border: '0px',
+        borderRadius: '3px',
+        fontSize: '.75rem',
+        fontWeight: '400',
+        margin: '25px 0px 10px 0px',
+        cursor: 'pointer',
+        backgroundColor: '#3974D9',
+        color: '#FFF',
+        textTransform: 'uppercase'
       }
     };
 
@@ -92,8 +102,15 @@ export default class AlertLog extends VertoBaseComponent {
       return(
         <Modal isOpen onRequestClose={this.props.cbClose} style={this.getStyle('mymodal')}>
           <div className="container" style={this.getStyle('container')}>
+            <button
+                style={this.getStyle("clearAlertBtnStyle")}
+                onClick={this.handleClearAlerts}>
+                  <FormattedMessage
+                      id="CLEAR_ALERTS"
+                      defaultMessage="Clear Alerts"
+                  />
+            </button>
             <div className="alertList" style={this.getStyle('ALogStyles')}>
-            <button style={this.getStyle("clearAlertsStyle")} onClick={this.handleClearAlerts}>Clear Alerts</button>
             {alerts}
             </div>
           </div>
