@@ -38,34 +38,36 @@ export default class AlertLogItem extends VertoBaseComponent {
         flex: '0 0 30px',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        paddingTop: '5px',
+        alignItems: 'flex-start'
       },
       timestampStyles: {
         flex: '1',
         display: 'flex',
-        alignItems: 'center',
+        alignItems: 'flex-start',
+        paddingTop: '5px',
         paddingLeft: '10px',
         paddingRight: '5px'
       },
       summaryStyles: {
         flex: '1',
         display: 'flex',
-        alignItems: 'center',
-        paddingLeft: '5px',
-        paddingRight: '5px'
+        alignItems: 'flex-start',
+        padding: '5px'
         // overflowY: 'auto'
       },
       detailStyles: {
         flex: '1',
         display: 'flex',
-        fontSize: '.75rem',
-        alignItems: 'center',
-        paddingRight: '10px'
+        alignItems: 'flex-start',
+        paddingRight: '10px',
+        paddingTop: '5px',
+        paddingBottom: '5px'
         // overflowY: 'auto',
       },
       compStyle : {
         controlStyle: {
-          flex: 1
+          flex: '1'
         }
       }
     };
@@ -97,7 +99,8 @@ export default class AlertLogItem extends VertoBaseComponent {
           </div>
           <div className="timestamp" style={this.getStyle("timestampStyles")}>
             {formattedTimeStamp}
-          </div><div className="summary" style={this.getStyle("summaryStyles")}>
+          </div>
+          <div className="summary" style={this.getStyle("summaryStyles")}>
             {this.props.alertData.summary}
           </div>
           <div className="detail" style={this.getStyle("detailStyles")}>
