@@ -34,17 +34,20 @@ export default class AlertLog extends VertoBaseComponent {
       },
       mymodal : {
         content: {
-          top                  : '50%',
-          left                  : '50%',
-          right                : 'auto',
-          bottom             : 'auto',
-          marginRight           : '-50%',
-          transform             : 'translate(-50%, -50%)',
-          boxShadow             : '0px 27px 24px 0px rgba(0,0,0,.2), 0px 40px 77px 0px rgba(0,0,0,.22)'
+          top: '50%',
+          left: '50%',
+          right: 'auto',
+          bottom: 'auto',
+          marginRight: '-50%',
+          transform: 'translate(-50%, -50%)',
+          boxShadow: '0px 27px 24px 0px rgba(0,0,0,.2), 0px 40px 77px 0px rgba(0,0,0,.22)'
         },
         overlay: {
           zIndex: "1"
         }
+      },
+      clearAlertsStyle : {
+        
       }
     };
 

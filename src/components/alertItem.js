@@ -22,7 +22,7 @@ export default class AlertItem extends VertoBaseComponent {
     // set timeout for removing the alert from list after 5 seconds
     this.alertTimeout = setTimeout(()=>{
       this.props.cbDismissAlert(this.props.alertData.id);
-    }, 5000);
+    }, 500000);
   }
 
 
@@ -41,7 +41,6 @@ export default class AlertItem extends VertoBaseComponent {
         display: 'flex',
         border: '1px solid #d1d1d1',
         borderRadius: '5px',
-        // padding: '10px 0px 10px 0px',
         backgroundColor: '#FAFAFA',
         flexDirection: 'column',
         marginBottom: '10px'
@@ -50,7 +49,7 @@ export default class AlertItem extends VertoBaseComponent {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        padding: '5px 3px 5px 10px'
+        padding: '5px 3px 10px 10px'
 
       },
       compStyle : {
