@@ -6,6 +6,7 @@ import { UpArrowIconSVG, DownArrowIconSVG, RemoveIconSVG, BackArrowIconSVG } fro
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import Radium  from 'radium';
+import {TransitionMotion, spring} from 'react-motion';
 
 const propTypes = {
   compStyle : React.PropTypes.object,
@@ -24,9 +25,19 @@ const defaultProps = {
 class CallHistory extends VertoBaseComponent {
   constructor(props) {
     super(props);
-    this.state = { callDetailDisplayed : false, callItem: ''};
+    this.state = { items: [], callDetailDisplayed : false, callItem: ''};
 
+    this.willLeave = this.willLeave.bind(this);
+    this.willEnter = this.willEnter.bind(this);
+    this.generateHistory = this.generateHistory.bind(this);
+    this.generateDetails = this.generateDetails.bind(this);
 }
+
+  componentDidMount() {
+    this.showHistory();
+  }
+
+
 
   getCompStyle() {
     return this.props.compStyle;
@@ -108,100 +119,105 @@ class CallHistory extends VertoBaseComponent {
     return (styles[styleName]);
   }
 
+  willLeave() {
+    return {width: spring(0) };
+  }
+  willEnter(){
+    return {width: 0 };
+  }
+  removeItem(control){
+    var x = { ...this.state };
+    x.items = x.items.filter((i)=>i.key != control  );
 
-  render(){
+    this.setState( x);
+  }
 
-    let clearHistory;
-    if(this.props.history.length > 0) {
-      clearHistory = (
-        <span
-            className="rmvHistory"
-            style={{...this.getDefaultStyle('rmvHistory')}}
-            onClick={this.props.cbClearHistory}
-            tabIndex="0"
+  showDetails() {
+    //console.log('in showDialpad method');
+    var x = { ...this.state };
+    x.items.push({key: "de", size: spring(375) });
+    this.setState(x);
+  }
+
+  showHistory() {
+    //console.log('cccccaaallll history showing ')
+    var x = { ...this.state };
+    x.items.push({key: "hi", size: spring(375) });
+    //console.log('xxxxxx', x);
+    this.setState(x);
+  }
+
+  generateDetails(config) {
+    const self = this;
+    let details;
+    const detailData = CallHistoryService.getInstance().getHistoryDetail(this.callerId);
+    details = detailData.map(function(i, key){
+      let renderedDirection;
+      if(i.direction == 'outgoing') {
+        renderedDirection = (
+          <span className="outgoing" >
+            <UpArrowIconSVG svgStyle={{...self.getDefaultStyle('dir')}} />
+          </span>);
+      } else {
+        renderedDirection = (
+          <span className="incoming">
+            <DownArrowIconSVG svgStyle={{...self.getDefaultStyle('dir')}} />
+          </span>);
+      }
+
+      const formattedTimestamp = moment(i.timestamp).format('ddd MMM DD YYYY HH:mm:ss A');
+
+      return (
+        <div
+            className="details"
+            key={key}
+            onClick={()=>{
+              self.props.cbCall(i.callerId);
+            }}
+            style={{...self.getDefaultStyle('details'), ...config.style}}
         >
-            <FormattedMessage
-                id="CLEAR_CALL_HISTORY"
-            />
-        </span>
-      );
-    } else {
-      clearHistory = (<span></span>);
-    }
-
-    const self = this; // so I can use inside of map
-    let details; // declaring details variable
-    if(this.props.history.length > 0){ // if history array is greater than zero
-      if(this.state.callDetailDisplayed) { // detail state is true
-        const detailData = CallHistoryService.getInstance().getHistoryDetail(this.callerId);
-        details = detailData.map(function(i, key){ // mapping over detailData and assigning it to details
-          let renderedDirection; // svg fun
-          if(i.direction == 'outgoing') { // if 'outgoing' it renders an up arrow svg
-            renderedDirection = (
-              <span className="outgoing" >
-                <UpArrowIconSVG svgStyle={{...self.getDefaultStyle('dir')}}/>
-              </span>);
-          } else {
-            renderedDirection = ( // if 'incoming' it renders a down arrow svg
-              <span className="incoming">
-                <DownArrowIconSVG svgStyle={{...self.getDefaultStyle('dir')}} />
-              </span>);
-          }
-
-          const formattedTimestamp = moment(i.timestamp).format('ddd MMM DD YYYY HH:mm:ss A');
-
-          return ( //after all that it returns a simple div with the correlating svg and formatted timestamp
-            <div
-                className="details"
-                key={key}
-                onClick={()=>{
-                  self.props.cbCall(i.callerId);
-                }}
-                style={{...self.getDefaultStyle('details')}}
-            >
-              {renderedDirection}
-              {formattedTimestamp}
-            </div>
-          );
-      }); // end of map function
-    }} else {
-        details = (<div
-              className="noCallDetails"
-              style={{...self.getDefaultStyle('noCallDetails')}}
-          >
-            <span>
-              No calls to show.
-            </span>
+          {renderedDirection}
+          {formattedTimestamp}
         </div>
       );
-    }
+    });
+    return details;
+  }
 
-
-    // regular state list items renders an arrow svg, ext, number of calls, timestamp, and a menu svg
+  generateHistory(config) {
     let listitems;
     if(this.props.history.length > 0){
     listitems = this.props.history.map((i, index)=>{
         return(
-          <CallHistoryItem
-              allowToolTip = {this.props.allowToolTip}
-              className="chi"
-              key={index}
-              data={i}
-              cbClick={()=>{
-                this.props.cbCall(i.callerId);
-              }}
-              cbShowCalls={()=>{
-                this.callerId = i.callerId;
-                this.setState({...this.state, 'callDetailDisplayed' : true});
-              }}
-          />
+        <div
+            className="body"
+            tabIndex="0"
+            style={{...this.getDefaultStyle('body'), ...config.style}}
+        >
+            <CallHistoryItem
+                allowToolTip = {this.props.allowToolTip}
+                className="chi"
+                key={index}
+                data={i}
+                cbClick={()=>{
+                  this.props.cbCall(i.callerId);
+                }}
+                cbShowCalls={()=>{
+                  this.callerId = i.callerId;
+                  setTimeout(()=>this.setState({...this.state, 'callDetailDisplayed' : true}),0);
+                  setTimeout(()=>this.removeItem('hi'),10);
+                  setTimeout(()=>this.showDetails(),20);
+
+                }}
+            />
+        </div>
         );
       });
     } else {
       listitems = (
         <div
             className="noCalls"
-            style={{...self.getDefaultStyle('noCallDetails')}}
+            style={{...this.getDefaultStyle('noCallDetails'), ...config.style}}
         >
             <span>
               No calls to show.
@@ -209,44 +225,88 @@ class CallHistory extends VertoBaseComponent {
         </div>
       );
     }
+    return listitems;
+  }
 
-    // callDetail state area (the whole container)
-    const callDetailState = (
-      <div
-          className="container"
-          style={this.getStyle('container')}
-      >
-      <div
-          className="headerCont"
-          style={{...this.getDefaultStyle('headerCont')}}
-      >
-          <div
-              className="header"
-              style={{...this.getDefaultStyle('header')}}
-          >
-              <span
-                  onClick={()=>{
-                    this.setState({...this.state, 'callDetailDisplayed': false});
-                  }}
-              >
-                  <BackArrowIconSVG svgStyle={{...this.getDefaultStyle('headerSvgs')}} />
-              </span>
-              {this.callerId}
-          </div>
-        </div>
-        <div
-            className="detailBody"
-            tabIndex="0"
-            style={{...this.getDefaultStyle('body')}}
+  render(){
+
+    let icon;
+    if(this.state.callDetailDisplayed) {
+      icon =(
+        <span
+          onClick={()=>{
+            setTimeout(()=>this.setState({...this.state, 'callDetailDisplayed': false}),0);
+            setTimeout(()=>this.removeItem('de'),10);
+            setTimeout(()=>this.showHistory(),20);
+          }}
         >
-            {details}
+          <BackArrowIconSVG svgStyle={{...this.getDefaultStyle('headerSvgs')}} />
+        </span>
+      );
+    } else {
+      icon = (
+        <span
+            onClick={this.props.cbBack}
+            tabIndex="0"
+        >
+            <RemoveIconSVG svgStyle={{...this.getDefaultStyle('headerSvgs')}} />
+        </span>
+      );
+    }
 
-        </div>
-      </div>
-    );
 
-    // default state (whole container)
-    const defaultState = (
+    let clearHistory;
+    if(this.state.callDetailDisplayed) {
+      clearHistory = (<span></span>);
+    } else {
+      if(this.props.history.length > 0) {
+        clearHistory = (
+          <span
+              className="rmvHistory"
+              style={{...this.getDefaultStyle('rmvHistory')}}
+              onClick={this.props.cbClearHistory}
+              tabIndex="0"
+          >
+              <FormattedMessage
+                  id="CLEAR_CALL_HISTORY"
+              />
+          </span>
+        );
+      } else {
+        clearHistory = (<span></span>);
+      }
+    }
+
+    let title;
+      if(this.state.callDetailDisplayed) {
+        title = (
+          <span
+              className="title"
+              style={{...this.getDefaultStyle('title')}}
+          >
+            {this.callerId}
+        </span>);
+      } else {
+        title = (
+          <span
+              className="title"
+              style={{...this.getDefaultStyle('title')}}
+          >
+            <FormattedMessage
+                id="CALL_HISTORY"
+            />
+        </span>);
+      }
+
+    var nStyles = this.state.items.map(item => {
+      var x = {
+        key: item.key,
+        style: {width: item.size }
+      };
+      return (x);
+    });
+
+    return (
       <div
           className="container"
           style={this.getStyle('container')}
@@ -259,35 +319,31 @@ class CallHistory extends VertoBaseComponent {
               className="header"
               style={{...this.getDefaultStyle('header')}}
           >
-              <span
-                  onClick={this.props.cbBack}
-                  tabIndex="0"
-              >
-                  <RemoveIconSVG svgStyle={{...this.getDefaultStyle('headerSvgs')}} />
-              </span>
-              <span
-                  className="title"
-                  style={{...this.getDefaultStyle('title')}}
-              >
-                  <FormattedMessage
-                      id="CALL_HISTORY"
-                  />
-              </span>
+              {icon}
+              {title}
               {clearHistory}
           </div>
         </div>
-        <div
-          className="body"
-          tabIndex="0"
-          style={{...this.getDefaultStyle('body')}}
-        >
-          {listitems}
-        </div>
-      </div>);
-
-      const renderedState = this.state.callDetailDisplayed ? callDetailState : defaultState ;
-
-    return (renderedState);
+            <TransitionMotion
+                styles={nStyles}
+                willLeave={this.willLeave}
+                willEnter={this.willEnter}
+            >
+             {interpolatedStyles =>{
+                 return (
+                   <span>
+                     {interpolatedStyles.map(config => {
+                       if (this.state.callDetailDisplayed){
+                         return this.generateDetails(config);
+                       } else {
+                         return this.generateHistory(config);
+                       }
+                    })}
+                  </span>);
+             }}
+             </TransitionMotion>
+      </div>
+    );
   }
 
 }
