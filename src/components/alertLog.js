@@ -33,7 +33,7 @@ export default class AlertLog extends VertoBaseComponent {
         minWidth: '400px',
         fontSize: '.8rem'
       },
-      mymodal : {
+      myModal : {
         content: {
           top: '50%',
           left: '50%',
@@ -47,8 +47,9 @@ export default class AlertLog extends VertoBaseComponent {
           zIndex: "1"
         }
       },
-      container : {
-        padding: '50px'
+      noDataContainer : {
+        padding: '75px',
+        fontWeight: '500'
       },
       clearAlertBtnStyle : {
         padding: '8px 30px',
@@ -103,7 +104,7 @@ export default class AlertLog extends VertoBaseComponent {
 
     if (alerts.length !== 0) {
       return(
-        <Modal isOpen onRequestClose={this.props.cbClose} style={this.getStyle('mymodal')}>
+        <Modal isOpen onRequestClose={this.props.cbClose} style={this.getStyle('myModal')}>
           <div className="container">
             <button
                 style={this.getStyle("clearAlertBtnStyle")}
@@ -113,16 +114,16 @@ export default class AlertLog extends VertoBaseComponent {
                       defaultMessage="Clear Alerts"
                   />
             </button>
-            <div className="alertList" style={this.getStyle('ALogStyles')}>
-            {alerts}
-            </div>
+              <div className="alertList" style={this.getStyle('ALogStyles')}>
+              {alerts}
+              </div>
           </div>
         </Modal>
         );
     } else {
       return (
-        <Modal isOpen onRequestClose={this.props.cbClose} style={this.getStyle('mymodal')}>
-          <div className="nodatacontainer" style={this.getStyle('container')}>
+        <Modal isOpen onRequestClose={this.props.cbClose} style={this.getStyle('myModal')}>
+          <div className="nodatacontainer" style={this.getStyle('noDataContainer')}>
             <FormattedMessage
                 id="NO_LOG_DATA"
                 defaultMessage="No Log Data"
