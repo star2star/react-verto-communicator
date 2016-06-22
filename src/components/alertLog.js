@@ -34,10 +34,10 @@ export default class AlertLog extends VertoBaseComponent {
       },
       mymodal : {
         content: {
-          top                   : '50%',
+          top                  : '50%',
           left                  : '50%',
-          right                 : 'auto',
-          bottom                : 'auto',
+          right                : 'auto',
+          bottom             : 'auto',
           marginRight           : '-50%',
           transform             : 'translate(-50%, -50%)',
           boxShadow             : '0px 27px 24px 0px rgba(0,0,0,.2), 0px 40px 77px 0px rgba(0,0,0,.22)'
@@ -59,7 +59,7 @@ export default class AlertLog extends VertoBaseComponent {
     // remove the alert at dismissIndex from this.state.alertArray
     let newAlertArray = this.state.alertArray.filter((alert, index)=>{return(removeIndex !== index);});
 
-    console.log('$$$$$$$$$ REmove alert frmo log', removeIndex);
+    console.log('$$$$$$$$$ REmove alert from log', removeIndex);
     AlertService.getInstance().setAlertLog(newAlertArray);
     this.setState({...this.state, alertArray: AlertService.getInstance().getAlertLog()});
   }
@@ -88,7 +88,7 @@ export default class AlertLog extends VertoBaseComponent {
     if (alerts.length !== 0) {
       return(
         <Modal isOpen onRequestClose={this.props.cbClose} style={this.getStyle('mymodal')}>
-          <div style={this.getStyle('container')}>
+          <div className="container" style={this.getStyle('container')}>
             <div className="alertList" style={this.getStyle('ALogStyles')}>
             <button style={this.getStyle("clearAlertsStyle")} onClick={this.handleClearAlerts}>Clear Alerts</button>
             {alerts}
@@ -99,7 +99,7 @@ export default class AlertLog extends VertoBaseComponent {
     } else {
       return (
         <Modal isOpen onRequestClose={this.props.cbClose} style={this.getStyle('mymodal')}>
-          <div style={this.getStyle('container')}>
+          <div className="nodatacontainer" style={this.getStyle('container')}>
             No log data
           </div>
         </Modal>

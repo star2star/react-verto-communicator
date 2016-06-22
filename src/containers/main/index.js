@@ -104,7 +104,17 @@ class Main extends VertoBaseComponent {
       },
       loggedInfoStyles: {
         margin: 'auto'
+      },
+      vidWindowStyle : {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        flex:'1',
+        overflowY: 'auto'
+
       }
+
     };
 
     return (styles[styleName]);
@@ -344,7 +354,7 @@ class Main extends VertoBaseComponent {
     return (
       <div id="chatVideoWrapper" style={this.getStyle('chatVidWrapStyles')}>
         <AlertList />
-        <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", flex:'1', overflowY: 'auto'}}>
+        <div style={this.getStyle("vidWindowStyle")}>
           {incomingCallsContainer}
           <video id="webcam" autoPlay="autoplay"  style={this.getStyle("videoStyles")}></video>
           {loggedInfo}
