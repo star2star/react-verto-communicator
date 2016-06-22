@@ -120,7 +120,10 @@ export default class AlertLog extends VertoBaseComponent {
       return (
         <Modal isOpen onRequestClose={this.props.cbClose} style={this.getStyle('mymodal')}>
           <div className="nodatacontainer" style={this.getStyle('container')}>
-            No log data
+            <FormattedMessage
+                id="NO_LOG_DATA"
+                defaultMessage="No Log Data"
+            />
           </div>
         </Modal>
       );

@@ -35,18 +35,33 @@ export default class AlertLogItem extends VertoBaseComponent {
         backgroundColor: '#FAFAFA'
       },
       typeTabStyles: {
-        flex: '0 0 30px'
+        flex: '0 0 30px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+      },
+      timestampStyles: {
+        flex: '1',
+        display: 'flex',
+        alignItems: 'center',
+        paddingLeft: '10px',
+        paddingRight: '5px'
       },
       summaryStyles: {
         flex: '1',
-        overflowY: 'auto'
-      },
-      timestampStyles: {
-        flex: '1'
+        display: 'flex',
+        alignItems: 'center',
+        paddingLeft: '5px',
+        paddingRight: '5px'
+        // overflowY: 'auto'
       },
       detailStyles: {
         flex: '1',
-        overflowY: 'auto'
+        display: 'flex',
+        fontSize: '.75rem',
+        alignItems: 'center',
+        paddingRight: '10px'
+        // overflowY: 'auto',
       },
       compStyle : {
         controlStyle: {
@@ -76,16 +91,16 @@ export default class AlertLogItem extends VertoBaseComponent {
     const formattedTimeStamp = moment(this.props.alertData.timestamp).format('ddd MMM DD YYYY HH:mm:ss A');
 
     return(
-        <div style={this.getStyle('alertItemStyles')}>
-          <div style={{...this.getStyle('typeTabStyles'), ...tabbgColor }}>
+        <div className="item container" style={this.getStyle('alertItemStyles')}>
+          <div className="tab" style={{...this.getStyle('typeTabStyles'), ...tabbgColor }}>
             <ControlItem type="RemoveIconSVG" cbActionClick={this.handleRemoveClick} />
           </div>
-          <div style={this.getStyle("timestampStyles")}>
+          <div className="timestamp" style={this.getStyle("timestampStyles")}>
             {formattedTimeStamp}
-          </div><div style={this.getStyle("summaryStyles")}>
+          </div><div className="summary" style={this.getStyle("summaryStyles")}>
             {this.props.alertData.summary}
           </div>
-          <div style={this.getStyle("detailStyles")}>
+          <div className="detail" style={this.getStyle("detailStyles")}>
             {this.props.alertData.detail}
           </div>
         </div>
