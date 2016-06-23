@@ -9,7 +9,7 @@ import {ShareScreenIconSVG, AvatarSVG, DialPadIconSVG, MicrophoneIconSVG, PauseI
    cbHangup : React.PropTypes.func,
    cbHold:  React.PropTypes.func,
    cbDTMF:  React.PropTypes.func,
-   cbMute:  React.PropTypes.func,
+   cbMute:  React.PropTypes.func
 };
 
 class Dialing extends VertoBaseComponent {

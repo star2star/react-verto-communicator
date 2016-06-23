@@ -107,7 +107,8 @@ class CallProgress extends VertoBaseComponent {
         phoneIconContainer: {
           display:'flex',
           flexDirection: 'column',
-           justifyContent: 'center'
+          justifyContent: 'center',
+          cursor: 'pointer'
         },
 
         timerColor: {

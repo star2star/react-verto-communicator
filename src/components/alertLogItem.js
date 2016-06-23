@@ -32,7 +32,7 @@ export default class AlertLogItem extends VertoBaseComponent {
       alertItemStyles : {
         display: 'flex',
         border: '1px solid #d1d1d1',
-        backgroundColor: '#FAFAFA'
+        backgroundColor: '#FFF'
       },
       typeTabStyles: {
         flex: '0 0 30px',
