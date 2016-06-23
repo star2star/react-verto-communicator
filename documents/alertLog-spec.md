@@ -6,10 +6,10 @@ The AlertLog component is a modal displaying AlertLogItem components. The alerts
 # 2. Visual Design #
 
  - Alert Log with Alerts:
-![Alert Log](img/alertLog-full.png)
+![Alert Log Showing Alerts](img/alertLog-full.png)
 
 - Alert Log with No Alerts:
-![Alert Log](img/alertLog-noData.png)
+![Alert Log Showing No Alerts](img/alertLog-noData.png)
 
 # 3. Component Type #
 

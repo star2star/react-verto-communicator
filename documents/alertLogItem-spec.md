@@ -1,12 +1,12 @@
 # Component Name:  AlertLogItem   #
 # 1. Functional Description #
 
-AlertLogItem is a simple list item component used in the AlertLog component.
+AlertLogItem is a simple list item component used in the AlertLog component. Based on the level, the alert tab will change color: "error" = red (*#FD5F56*), "warn" = yellow (*#FFC02F*) as shown, & "info" = green *(#63B653*)
 
 # 2. Visual Design #
 
  - Alert Log Item:
-![Alert Log Item](img/alertLogItem.png)
+![Alert Log Item Pic](img/alertLogItem.png)
 
 # 3. Component Type #
 
@@ -19,7 +19,7 @@ This is a ‘pure' component.
 | alertData | alertData={level:"warn", timestamp:'1466703201123', summary: "Can't hang up while sharing screen",<br> detail: "You must stop sharing your screen before you can hangup the call", <br>id: 0} | An object. Required. Contains the data for alerts.|
 | cbRemoveAlert | Function implemented and bound to a higher-order parent container of this component | Function. Required. This prop is invoked when clicking the RemoveIconSVG to remove an alert from log. |
 |compStyle |  _NOTE styles are in JSX, not CSS_ { alertItemStyles : {display: 'flex',border: '1px solid #d1d1d1', backgroundColor: '#FFF'} } | Optional prop. If value is provided, then it will render new styles, if not it will render default styling. |
-| index | index: 0 | Number. Indexes each alertItem. 
+| index | index: 0 | Number. Indexes each alertItem.
 
 ## b. Component State ##
 
