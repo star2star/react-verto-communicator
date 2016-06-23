@@ -1,15 +1,12 @@
-# Component Name:  AlertLog   #
+# Component Name:  AlertItem   #
 # 1. Functional Description #
 
-The AlertLog component is a modal displaying AlertLogItem components. The alerts can be cleared from the log by clicking on the **Clear Alerts** button.
+AlertItem is a simple list item component used in the AlertList component.
 
 # 2. Visual Design #
 
- - Alert Log with Alerts:
-![Alert Log](img/alertLog-full.png)
-
-- Alert Log with No Alerts:
-![Alert Log](img/alertLog-noData.png)
+ - Alert Log with Alerts:<br>
+![Alert Log](img/alertItem.png)
 
 # 3. Component Type #
 
@@ -39,12 +36,9 @@ This component is a pure component and it will maintain it’s own state.
 The component to be developed requires the following components:
 
 - VertoBaseComponent
-- ReactIntl
-- AlertService
-- AlertLogItem
-- Modal
+- ControlItem
 
 # 5. Unit Testing Requirement #
 Tests for this component are located at:
 
-        src/tests/alertLog-test.js
+        src/tests/alertItem-test.js
