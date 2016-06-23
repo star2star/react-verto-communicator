@@ -75,7 +75,7 @@ export default class AlertList extends VertoBaseComponent {
     });
 
     return(
-        <div className="alertList" style={this.getStyle('ALStyles')}>
+        <div className="alertList" style={this.getStyle("ALStyles")}>
         {alerts}
         </div>
       );

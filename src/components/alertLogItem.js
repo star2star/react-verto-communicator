@@ -93,8 +93,8 @@ export default class AlertLogItem extends VertoBaseComponent {
     const formattedTimeStamp = moment(this.props.alertData.timestamp).format('ddd MMM DD YYYY HH:mm:ss A');
 
     return(
-        <div className="item container" style={this.getStyle('alertItemStyles')}>
-          <div className="tab" style={{...this.getStyle('typeTabStyles'), ...tabbgColor }}>
+        <div className="item container" style={this.getStyle("alertItemStyles")}>
+          <div className="tab" style={{...this.getStyle("typeTabStyles"), ...tabbgColor }}>
             <ControlItem type="RemoveIconSVG" cbActionClick={this.handleRemoveClick} />
           </div>
           <div className="timestamp" style={this.getStyle("timestampStyles")}>

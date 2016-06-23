@@ -160,12 +160,12 @@ export default class MemberItem extends VertoBaseComponent {
             (<MuteVideoIconSVG  svgStyle={this.getStyle("svgStyle")} />) :
             (<VideoIconSVG  svgStyle={this.getStyle("svgStyle")} />);
 
-    let avatarStyle = {...this.getStyle('avatarStyle')};
+    let avatarStyle = {...this.getStyle("avatarStyle")};
         if (this.props.member.conferenceStatus.audio.muted) {
-          avatarStyle = ({...this.getStyle('avatarStyle'), boxShadow:'1px 1px 9px red'});
+          avatarStyle = ({...this.getStyle("avatarStyle"), boxShadow:'1px 1px 9px red'});
         }
         if (this.props.member.conferenceStatus.audio.talking) {
-          avatarStyle = ({...this.getStyle('avatarStyle'), boxShadow:'1px 1px 9px green'});
+          avatarStyle = ({...this.getStyle("avatarStyle"), boxShadow:'1px 1px 9px green'});
           }
 
     if (this.props.controlSettings.moderator) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
-import { injectIntl, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import AlertService from '../js/alertService';
 import AlertLogItem from './alertLogItem';
 import Modal from 'react-modal';
@@ -78,7 +78,7 @@ export default class AlertLog extends VertoBaseComponent {
     // remove the alert at dismissIndex from this.state.alertArray
     let newAlertArray = this.state.alertArray.filter((alert, index)=>{return(removeIndex !== index);});
 
-    console.log('$$$$$$$$$ REmove alert from log', removeIndex);
+    // console.log('->->->->->-> Remove alert from log', removeIndex);
     AlertService.getInstance().setAlertLog(newAlertArray);
     this.setState({...this.state, alertArray: AlertService.getInstance().getAlertLog()});
   }
@@ -106,7 +106,7 @@ export default class AlertLog extends VertoBaseComponent {
 
     if (alerts.length !== 0) {
       return(
-        <Modal isOpen onRequestClose={this.props.cbClose} style={this.getStyle('myModal')}>
+        <Modal isOpen onRequestClose={this.props.cbClose} style={this.getStyle("myModal")}>
           <div className="container">
             <button
                 style={this.getStyle("clearAlertBtnStyle")}
@@ -116,7 +116,7 @@ export default class AlertLog extends VertoBaseComponent {
                       defaultMessage="Clear Alerts"
                   />
             </button>
-              <div className="alertList" style={this.getStyle('ALogStyles')}>
+              <div className="alertList" style={this.getStyle("ALogStyles")}>
               {alerts}
               </div>
           </div>
@@ -124,8 +124,8 @@ export default class AlertLog extends VertoBaseComponent {
         );
     } else {
       return (
-        <Modal isOpen onRequestClose={this.props.cbClose} style={this.getStyle('myModal')}>
-          <div className="nodatacontainer" style={this.getStyle('noDataContainer')}>
+        <Modal isOpen onRequestClose={this.props.cbClose} style={this.getStyle("myModal")}>
+          <div className="nodatacontainer" style={this.getStyle("noDataContainer")}>
             <FormattedMessage
                 id="NO_LOG"
                 defaultMessage="No Log Data"

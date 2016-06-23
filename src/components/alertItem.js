@@ -76,7 +76,7 @@ export default class AlertItem extends VertoBaseComponent {
   }
 
   render(){
-    //console.log('---- ', this.props.alertData);
+    // console.log('--------------> ', this.props.alertData);
     let headingbgColor;
     switch (this.props.alertData.level) {
       case 'error':
@@ -91,12 +91,12 @@ export default class AlertItem extends VertoBaseComponent {
   }
 
     return(
-        <div className="item container" style={this.getStyle('alertItemStyles')}>
-          <div className="heading" style={{...this.getStyle('headingStyles'), ...headingbgColor }}>
+        <div className="item container" style={this.getStyle("alertItemStyles")}>
+          <div className="heading" style={{...this.getStyle("headingStyles"), ...headingbgColor }}>
             {this.props.alertData.summary}
             <ControlItem type="RemoveIconSVG" cbActionClick={this.handleDismissClick} />
           </div>
-          <div className="detail area" style={this.getStyle('alertDetailStyle')}>
+          <div className="detail area" style={this.getStyle("alertDetailStyle")}>
             {this.props.alertData.detail}
           </div>
         </div>
