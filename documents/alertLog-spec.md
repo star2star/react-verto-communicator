@@ -1,7 +1,7 @@
 # Component Name:  AlertLog   #
 # 1. Functional Description #
 
-AlertLog is a simple list component displaying AlertLogItem components.
+AlertLog is a simple list component displaying AlertLogItem components in a modal that appears when **View Alert Log** is clicked in the **Info Menu**. The alerts can be cleared from the log by clicking on the **Clear Alerts** button.
 
 # 2. Visual Design #
 
@@ -27,7 +27,8 @@ This is a ‘pure' component.
 
 | Event | Action(s) |
 | ------------ | ------------- |
-| onClick | call cbRemoveAlert() |
+| 'Clear Alerts' button clicked | 1. Callback function invoked.<br>2. State Change.<br>3. All alerts are cleared from log. 'No Log Data' modal rendered. |
+| 'RemoveIconSVG' clicked | 1. Callback function invoked.<br>2. State Change.<br>3. Specific alert is removed from alertArray. |
 
 ## d. Context-Aware Specification ##
 
@@ -38,6 +39,7 @@ This component is a pure component and it will maintain it’s own state.
 The component to be developed requires the following components:
 
 - VertoBaseComponent
+- ReactIntl
 - AlertService
 - AlertLogItem
 - Modal
