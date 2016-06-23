@@ -2,7 +2,16 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import UserVideoControls from './vidControlsUser';
 import AdminVideoControls from './vidControlsAdmin';
-import {ShareScreenIconSVG, AvatarSVG, DialPadIconSVG, MicrophoneIconSVG, PauseIconSVG, MuteMicrophoneIconSVG, PhoneIconSVG, VideoIconSVG } from './svgIcons';
+import {
+    ShareScreenIconSVG,
+    AvatarSVG,
+    DialPadIconSVG,
+    MicrophoneIconSVG,
+    PauseIconSVG,
+    MuteMicrophoneIconSVG,
+    PhoneIconSVG,
+    VideoIconSVG
+  } from './svgIcons';
 
  const propTypes = {
    callData : React.PropTypes.object.isRequired,
@@ -55,6 +64,36 @@ class Dialing extends VertoBaseComponent {
 
   getDefaultStyle(styleName) {
     const styles = {
+        dialingContainer : {
+          flexDirection: 'column',
+          display: 'flex',
+          border: '1px solid #ccc',
+          marginTop: '10vh'
+        },
+        avatarStyle : {
+          width: '50px',
+          height: '50px',
+          fill: 'white',
+          backgroundColor: '#333',
+          borderRadius: '50%'
+        },
+        avatarRowStyle : {
+          flexDirection: 'row',
+          display: 'flex',
+          justifyContent: 'space-between',
+          padding: '10px 20px'
+        },
+        callStatusStyle : {
+          flexDirection: 'column',
+          display: 'flex'
+        },
+        iconRowStyle : {
+          backgroundColor: "#333",
+          flex:'0 0 60px',
+          display: 'flex',
+          justifyContent: 'space-around',
+          alignItems: 'center'
+        },
         svgStyle: {
           width: '20px',
           height: '20px',
@@ -68,15 +107,15 @@ class Dialing extends VertoBaseComponent {
 
   render() {
       return (
-        <div style={{flexDirection: "column", display:"flex", border: '1px solid #ccc', marginTop: '10vh'}}>
-          <div style={{flexDirection: "row", display:"flex", justifyContent: 'space-between', padding: '10px 20px'}}>
-            <AvatarSVG svgStyle={{width: "50px", height: "50px", fill: "white", backgroundColor: '#333', borderRadius: '50%'}} />
-            <div style={{flexDirection: "column", display:"flex"}} >
+        <div className="container" style={this.getStyle('dialingContainer')}>
+          <div style={this.getStyle('avatarRowStyle')}>
+            <AvatarSVG svgStyle={this.getStyle('avatarStyle')} />
+            <div style={this.getStyle('callStatusStyle')}>
               <div>{this.props.callData.destination}</div>
               <div>{this.state.status == 'active'? this.state.timer: 'Connecting ...'}</div>
             </div>
           </div>
-          <div style={{backgroundColor: "#333", flex:'0 0 60px', display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
+          <div style={this.getStyle('iconRowStyle')}>
             <DialPadIconSVG svgStyle={this.getStyle("svgStyle")} />
 
             <span onClick={()=>{
