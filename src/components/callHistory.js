@@ -6,7 +6,7 @@ import { UpArrowIconSVG, DownArrowIconSVG, RemoveIconSVG, BackArrowIconSVG } fro
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import Radium  from 'radium';
-import {TransitionMotion, spring} from 'react-motion';
+import {TransitionMotion, Motion, spring} from 'react-motion';
 
 const propTypes = {
   compStyle : React.PropTypes.object,
@@ -22,13 +22,18 @@ const defaultProps = {
   allowToolTip : false
 };
 
+const springSettings = {stiffness: 170, damping: 26};
+const NEXT = 'show-next';
+
+
 class CallHistory extends VertoBaseComponent {
   constructor(props) {
     super(props);
-    this.state = { items: [], callDetailDisplayed : false, callItem: ''};
+    this.state = { items: [], item: [[500, 350], [800,600]], currItem: 0, callDetailDisplayed : false, callItem: ''};
 
     this.willLeave = this.willLeave.bind(this);
     this.willEnter = this.willEnter.bind(this);
+    //this.clickHandler = this.clickHandler.bind(this);
     this.generateHistory = this.generateHistory.bind(this);
     this.generateDetails = this.generateDetails.bind(this);
     this.showDetails = this.showDetails.bind(this);
@@ -38,7 +43,17 @@ class CallHistory extends VertoBaseComponent {
     this.showHistory();
   }
 
+  handleChange({target: {value}}) {
+    this.setState({...this.state, currItem: value});
+  }
 
+  clickHandler() {
+    if(this.state.currItem == 0) {
+      this.setState({...this.state, currItem : 1 });
+    } else {
+      this.setState({...this.state, currItem: 0 });
+    }
+  }
 
   getCompStyle() {
     return this.props.compStyle;
@@ -237,6 +252,8 @@ class CallHistory extends VertoBaseComponent {
 
   render(){
 
+    console.log('current item',this.state.currItem);
+
     let icon;
     if(this.state.callDetailDisplayed) {
       icon =(
@@ -313,6 +330,33 @@ class CallHistory extends VertoBaseComponent {
       return (x);
     });
 
+    // animation hell
+    const {item, currItem} = this.state;
+    //console.log('animation hell', item, currItem);
+    const [currWidth, currHeight] = item[currItem];
+    //console.log('kill yourself',currWidth, currHeight);
+
+    const widths = item.map(([origW, origH])=> currHeight / origH * origW);
+    //console.log('widths',widths);
+
+    const leftStartCoords = widths
+      .slice(0, currItem)
+      .reduce((sum,width) => sum-width, 0);
+    //console.log('Left Start Coords',leftStartCoords);
+
+    let configs = [];
+    item.reduce((prevLeft, [origW, origH], i) => {
+      configs.push({
+        left: spring(prevLeft, springSettings),
+        height: spring(currHeight, springSettings),
+        width: spring(widths[i], springSettings)
+      });
+      return prevLeft + widths[i];
+    }, leftStartCoords);
+    //console.log('configs array',configs);
+
+
+
     return (
       <div
           className="container"
@@ -326,6 +370,7 @@ class CallHistory extends VertoBaseComponent {
               className="header"
               style={{...this.getDefaultStyle('header')}}
           >
+            <span onClick={this.clickHandler.bind(this)}>Click Test</span>
               {icon}
               {title}
               {clearHistory}
@@ -333,8 +378,8 @@ class CallHistory extends VertoBaseComponent {
         </div>
             <TransitionMotion
                 styles={nStyles}
-                willLeave={this.willLeave}
-                willEnter={this.willEnter}
+                //willLeave={this.willLeave}
+                //willEnter={this.willEnter}
             >
              {interpolatedStyles =>{
                  return (
