@@ -112,7 +112,6 @@ class Main extends VertoBaseComponent {
         justifyContent: 'flex-start',
         flex:'1',
         overflowY: 'auto'
-
       }
 
     };
