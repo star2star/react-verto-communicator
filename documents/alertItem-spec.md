@@ -5,7 +5,7 @@ AlertItem is a simple list item component used in the AlertList component.
 
 # 2. Visual Design #
 
- - Alert Log with Alerts:<br>
+ - Alert Item:<br>
 ![Alert Log](img/alertItem.png)
 
 # 3. Component Type #
@@ -16,7 +16,10 @@ This is a ‘pure' component.
 
 | Prop Name | Sample | Description |
 | ------------ | ------------- | ------------- |
+| alertData | alertData={level:"warn", timestamp:'1466703201123', summary: "Can't hang up while sharing screen",<br> detail: "You must stop sharing your screen before you can hangup the call", <br>id: 0} | An object. Required. Contains the data for alerts.|
+| cbRemoveAlert | Function implemented and bound to a higher-order parent container of this component | Function. Required. This prop is invoked when clicking the RemoveIconSVG to remove an alert from log. |
 |compStyle |  _NOTE styles are in JSX, not CSS_ { alertItemStyles : {display: 'flex',border: '1px solid #d1d1d1', backgroundColor: '#FFF'} } | Optional prop. If value is provided, then it will render new styles, if not it will render default styling. |
+| index | index: 0 | Number. Indexes each alertItem.
 
 ## b. Component State ##
 
