@@ -41,6 +41,7 @@ export default class AlertLog extends VertoBaseComponent {
           bottom: 'auto',
           marginRight: '-50%',
           transform: 'translate(-50%, -50%)',
+          backgroundColor: '#FAFAFA',
           boxShadow: '0px 27px 24px 0px rgba(0,0,0,.2), 0px 40px 77px 0px rgba(0,0,0,.22)'
         },
         overlay: {
@@ -50,6 +51,7 @@ export default class AlertLog extends VertoBaseComponent {
       noDataContainer : {
         padding: '75px',
         fontWeight: '500'
+        // backgroundColor: '#FAFAFA'
       },
       clearAlertBtnStyle : {
         padding: '8px 30px',

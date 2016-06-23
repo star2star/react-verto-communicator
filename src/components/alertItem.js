@@ -41,27 +41,30 @@ export default class AlertItem extends VertoBaseComponent {
         display: 'flex',
         border: '1px solid #d1d1d1',
         borderRadius: '5px',
-        backgroundColor: '#FAFAFA',
+        backgroundColor: '#FFF',
         flexDirection: 'column',
-        marginBottom: '10px'
+        marginBottom: '10px',
+        boxShadow: 'rgba(0, 0, 0, 0.1) -5px 3px 0px -4px, rgba(0, 0, 0, 0.219608) 0px 3px 7px 0px'
       },
       headingStyles: {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        padding: '5px 3px 10px 10px'
-
+        padding: '5px 3px 10px 10px',
+        borderRadius: '4px 4px 0px 0px'
       },
       compStyle : {
         controlStyle: {
-          flex: 1,
-          fontSize: '.5rem'
+          flex: 1
         }
       },
       alertDetailStyle : {
         padding:'5px 3px 5px 10px',
         display:'flex',
-        alignItems:'center'
+        alignItems:'center',
+        fontSize: '.85rem',
+        backgroundColor: '#EEE',
+        borderRadius: '0px 0px 4px 4px'
       }
     };
 
@@ -88,12 +91,12 @@ export default class AlertItem extends VertoBaseComponent {
   }
 
     return(
-        <div style={this.getStyle('alertItemStyles')}>
-          <div style={{...this.getStyle('headingStyles'), ...headingbgColor }}>
+        <div className="item container" style={this.getStyle('alertItemStyles')}>
+          <div className="heading" style={{...this.getStyle('headingStyles'), ...headingbgColor }}>
             {this.props.alertData.summary}
             <ControlItem type="RemoveIconSVG" cbActionClick={this.handleDismissClick} />
           </div>
-          <div style={this.getStyle('alertDetailStyle')}>
+          <div className="detail area" style={this.getStyle('alertDetailStyle')}>
             {this.props.alertData.detail}
           </div>
         </div>
