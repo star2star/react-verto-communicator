@@ -22,10 +22,24 @@ describe('Default test for AlertLog', ()=>{
     summary: "Can't hang up while sharing screen",
     detail: "You must stop sharing your screen before you can hangup the call",
     id: 0
-    };
-    const sampleKey = {
+  };
+  const sampleKey = {
       id: 0
-    };
+  };
+  const errorData = {
+    level:"error",
+    timestamp:1466703201123,
+    summary: "Can't hang up while sharing screen",
+    detail: "You must stop sharing your screen before you can hangup the call",
+    id: 0
+  };
+  const infoData = {
+    level:"info",
+    timestamp:1466703201123,
+    summary: "Can't hang up while sharing screen",
+    detail: "You must stop sharing your screen before you can hangup the call",
+    id: 0
+  };
 
 
   it('renders 5 divs', () => {
@@ -74,87 +88,59 @@ describe('Default test for AlertLog', ()=>{
     expect(expectedNode.props().children).toEqual('Thu Jun 23 2016 13:33:21 PM');
   });
 
-//   it('renders MicrophoneIconSVG if audio is not muted', () => {
-//     const wrapper = mountWithIntl(
-//       <MemberItem
-//           member={sampleMember}
-//           controlSettings={controlSettings}
-//           cbControlClick={cbControlClick}
-//     />);
-//     expect(wrapper.find('MicrophoneIconSVG').length).toEqual(1);
-//   });
-//
-//   it('renders MuteVideoIconSVG if video is muted', () => {
-//     const wrapper = mountWithIntl(
-//       <MemberItem
-//           member={sampleMember}
-//           controlSettings={controlSettings}
-//           cbControlClick={cbControlClick}
-//     />);
-//     expect(wrapper.find('MuteVideoIconSVG').length).toEqual(1);
-//   });
-//
-//   it('renders PresenterIconSVG', () => {
-//     const wrapper = mountWithIntl(
-//       <MemberItem
-//           member={sampleMember}
-//           controlSettings={controlSettings}
-//           cbControlClick={cbControlClick}
-//     />);
-//     expect(wrapper.find('PresenterIconSVG').length).toEqual(1);
-//   });
-//
-//   it('Takes in & displays props correctly (name:)', () => {
-//     const wrapper = mountWithIntl(
-//       <MemberItem
-//           member={sampleMember}
-//           controlSettings={controlSettings}
-//           cbControlClick={cbControlClick}
-//     />);
-//     expect(wrapper.props().member.name).toEqual('Name');
-//   });
-//
-//   it('Takes in & displays props correctly (email:)', () => {
-//     const wrapper = mountWithIntl(
-//       <MemberItem
-//           member={sampleMember}
-//           controlSettings={controlSettings}
-//           cbControlClick={cbControlClick}
-//     />);
-//     expect(wrapper.props().member.avatar.email).toEqual('Name@email.com');
-//   });
-//
-//   it('renders AdminControl SVGs if showAdminControls is true', () => {
-//     const wrapper = mountWithIntl(
-//       <MemberItem
-//           member={sampleMember}
-//           controlSettings={controlSettings}
-//           cbControlClick={cbControlClick}
-//     />,
-//     <AdminControls
-//         multCanvas={false}
-//         member={sampleMember}
-//         cbControlClick={cbControlClick}
-//       />);
-//       wrapper.setState({ showAdminControls: true});
-//       expect(wrapper.find('KickIconSVG').length).toEqual(1);
-//   });
-//
-//   it('renders all AdminControl SVGs if showAdminControls is true', () => {
-//     const wrapper = mountWithIntl(
-//       <MemberItem
-//           member={sampleMember}
-//           controlSettings={controlSettings}
-//           cbControlClick={cbControlClick}
-//     />,
-//     <AdminControls
-//         multCanvas={false}
-//         member={sampleMember}
-//         cbControlClick={cbControlClick}
-//       />);
-//       wrapper.setState({ showAdminControls: true});
-//       expect(wrapper.find('div').length).toEqual(20);
-//   });
+  it('displays summary', () => {
+    const wrapper = shallowWithIntl(
+      <AlertLogItem
+          key={sampleKey}
+          alertData={sampleData}
+          cbRemoveAlert={cbRemoveAlert}
+      />);
+    const expectedNode = wrapper.children().find('.summary');
+    // console.log('------------->>>', wrapper.children().find('.summary'));
+    expect(expectedNode.props().children).toEqual("Can't hang up while sharing screen");
+  });
 
+    it('displays detail', () => {
+      const wrapper = shallowWithIntl(
+        <AlertLogItem
+            key={sampleKey}
+            alertData={sampleData}
+            cbRemoveAlert={cbRemoveAlert}
+        />);
+      const expectedNode = wrapper.children().find('.detail');
+      // console.log('------------->>>', wrapper.children().find('.detail'));
+      expect(expectedNode.props().children).toEqual("You must stop sharing your screen before you can hangup the call");
+    });
+
+    it('displays correct header color based on level(warn/yellow)', () => {
+      const wrapper = mountWithIntl(
+        <AlertLogItem
+            key={sampleKey}
+            alertData={sampleData}
+            cbRemoveAlert={cbRemoveAlert}
+        />);
+      // console.log('------------->>>', wrapper.childAt(0).props());
+     expect(wrapper.childAt(0).props().style.backgroundColor ).toEqual('#FFC02F');
+    });
+
+    it('displays correct header color based on level(error/red)', () => {
+      const wrapper = mountWithIntl(
+        <AlertLogItem
+            key={sampleKey}
+            alertData={errorData}
+            cbRemoveAlert={cbRemoveAlert}
+        />);
+     expect(wrapper.childAt(0).props().style.backgroundColor ).toEqual('#FD5F56');
+    });
+
+    it('displays correct header color based on level(info/green)', () => {
+      const wrapper = mountWithIntl(
+        <AlertLogItem
+            key={sampleKey}
+            alertData={infoData}
+            cbRemoveAlert={cbRemoveAlert}
+        />);
+     expect(wrapper.childAt(0).props().style.backgroundColor ).toEqual('#63B653');
+    });
 
 });
