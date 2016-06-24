@@ -39,7 +39,11 @@ class CallHistoryService {
 
   getHistoryDetail(callerId){
     // return a new array
-    return [ ...this.history[callerId]];
+    if(callerId){
+      return [ ...this.history[callerId]];
+    } else {
+      return [];
+    }
   }
 
   static getInstance() {
