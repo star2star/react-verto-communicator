@@ -4,8 +4,10 @@ import sinon from 'sinon';
 import ReactDOM from 'react-dom';
 import { mountWithIntl, shallowWithIntl } from '../helpers/intl-enzyme-test-helper.js';
 import AlertList from '../components/alertList';
+import AlertItem from '../components/alertItem';
 
 jest.unmock('../components/alertItem');
+jest.unmock('../components/alertListItem');
 jest.unmock('../helpers/intl-enzyme-test-helper.js');
 
 
