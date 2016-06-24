@@ -11,6 +11,7 @@ import {TransitionMotion, Motion, spring} from 'react-motion';
 const propTypes = {
   compStyle : React.PropTypes.object,
   history : React.PropTypes.array,
+  cbClick : React.PropTypes.func,
   cbClearHistory : React.PropTypes.func.isRequired,
   cbCall : React.PropTypes.func,
   allowToolTip : React.PropTypes.bool,
@@ -23,36 +24,13 @@ const defaultProps = {
 };
 
 const springSettings = {stiffness: 170, damping: 26};
-const NEXT = 'show-next';
 
-
-class CallHistory extends VertoBaseComponent {
+class HistoryItems extends VertoBaseComponent {
   constructor(props) {
     super(props);
-    this.state = { items: [], item: [[500, 350], [800,600]], currItem: 0, callDetailDisplayed : false, callItem: ''};
+    this.state = {};
 
-    this.willLeave = this.willLeave.bind(this);
-    this.willEnter = this.willEnter.bind(this);
-    //this.clickHandler = this.clickHandler.bind(this);
     this.generateHistory = this.generateHistory.bind(this);
-    this.generateDetails = this.generateDetails.bind(this);
-    this.showDetails = this.showDetails.bind(this);
-}
-
-  componentDidMount() {
-    this.showHistory();
-  }
-
-  handleChange({target: {value}}) {
-    this.setState({...this.state, currItem: value});
-  }
-
-  clickHandler() {
-    if(this.state.currItem == 0) {
-      this.setState({...this.state, currItem : 1 });
-    } else {
-      this.setState({...this.state, currItem: 0 });
-    }
   }
 
   getCompStyle() {
@@ -61,22 +39,6 @@ class CallHistory extends VertoBaseComponent {
 
   getDefaultStyle(styleName) {
     const styles = {
-      container: {
-        display: 'flex',
-        position: 'relative',
-        flex: 1,
-        alignItems: 'flex-start',
-        alignContent: 'stretch',
-        borderRadius: '3px',
-        justifyContent: 'flex-start',
-        flexDirection: "column",
-        height: '500px',
-        minWidth: '225px', // allows animation to go in/out further without clashing 'Call History' and 'Clear History'
-        overflowY: 'auto',
-        overflowX: 'hidden',
-        boxShadow: '0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)',
-        color: "#4a4a4a"
-      },
       headerCont: {
         width: '100%'
       },
@@ -132,46 +94,188 @@ class CallHistory extends VertoBaseComponent {
         fontWeight: 300,
         color: '#4a4a4a'
       }
-     };
+      };
+      return (styles[styleName]);
+    }
 
-    return (styles[styleName]);
+
+  generateHistory(config) {
+    let listitems;
+    //const d1 = config.style.width < 250 ? 'none': 'block';
+    if(this.props.history.length > 1){
+    listitems = this.props.history.map((i)=>{
+        return(
+            <CallHistoryItem
+                allowToolTip = {this.props.allowToolTip}
+                className="chi"
+                data={i}
+                cbClick={()=>{
+                  this.props.cbCall(i.callerId);
+                }}
+                cbShowCalls={()=>{
+                  this.callerId = i.callerId;
+                  //setTimeout(()=>this.showDetails(),1000);
+                  setTimeout(()=>this.setState({...this.state, 'callDetailDisplayed' : true}),1000);
+                }}
+            />
+        );
+      });
+    } else {
+      listitems = (
+        <div
+            className="noCalls"
+            style={{...this.getDefaultStyle('noCallDetails'), ...config}}
+        >
+            <span>
+              No calls to show.
+            </span>
+        </div>
+      );
+    }
+    console.log('listitems: ', listitems);
+    return listitems;
   }
 
-  willLeave() {
-    return {width: spring(0) };
-  }
-  willEnter(){
-    return {width: 0 };
-  }
-  removeItem(control){
-    var x = { ...this.state };
-    x.items = x.items.filter((i)=>i.key != control  );
 
-    this.setState( x);
+
+  render(){
+    let clearHistory;
+      if(this.props.history.length > 0) {
+        clearHistory = (
+          <span
+              className="rmvHistory"
+              style={{...this.getDefaultStyle('rmvHistory')}}
+              onClick={this.props.cbClearHistory}
+              tabIndex="0"
+          >
+              <FormattedMessage
+                  id="CLEAR_CALL_HISTORY"
+              />
+          </span>
+        );
+
+    }
+
+
+    return (
+      <div>
+        <div
+            className="headerCont"
+            style={{...this.getDefaultStyle('headerCont')}}
+        >
+          <div
+              className="header"
+              style={{...this.getDefaultStyle('header')}}
+          >
+              <span
+                  onClick={this.props.cbBack}
+                  tabIndex="0"
+              >
+                  <RemoveIconSVG svgStyle={{...this.getDefaultStyle('headerSvgs')}} />
+              </span>
+              <span
+                  className="title"
+                  style={{...this.getDefaultStyle('title')}}
+              >
+                <FormattedMessage
+                    id="CALL_HISTORY"
+                />
+            </span>
+              {clearHistory}
+          </div>
+        </div>
+        <div
+            className="body"
+            tabIndex="0"
+            style={{...this.getDefaultStyle('body')}}
+        >
+        {this.generateHistory()}
+        </div>
+      </div>
+    );
+  }
+}
+
+class DetailItems extends VertoBaseComponent {
+  constructor(props) {
+    super(props);
+    this.state = {};
+
+    this.generateDetails = this.generateDetails.bind(this);
   }
 
-  showDetails() {
-    //console.log('in showDialpad method');
-    var x = { ...this.state };
-    x.items.push({key: "de", size: spring(375) });
-    this.setState(x);
+  getCompStyle() {
+    return this.props.compStyle;
   }
 
-  showHistory() {
-    //console.log('cccccaaallll history showing ')
-    var x = { ...this.state };
-    x.items.push({key: "hi", size: spring(375) });
-    //console.log('xxxxxx', x);
-    this.setState(x);
+  getDefaultStyle(styleName) {
+    const styles = {
+      headerCont: {
+        width: '100%'
+      },
+      header: {
+        display: 'flex',
+        flex: 1,
+        alignItems: 'center',
+        paddingLeft: '5px',
+        paddingRight: '15px',
+        justifyContent: 'stretch',
+        borderTopLeftRadius: '3px',
+        borderTopRightRadius: '3px',
+        fontWeight: 300,
+        height: '40px',
+        backgroundColor: '#eee'
+      },
+      headerSvgs : {
+        cursor: 'pointer',
+        fill: "#4a4a4a",
+        width: '24px',
+        height: '24px'
+      },
+      rmvHistory : {
+        marginLeft: 'auto',
+        cursor: 'pointer'
+      },
+      body : {
+        width: '100%',
+        position: 'absolute',
+        maxHeight: '500px',
+        overflowY: 'auto',
+        overflowX: 'hidden'
+      },
+      dir : {
+        fill: '#009688',
+        width: '24px',
+        height: '24px'
+      },
+      details: {
+        display: 'flex',
+        minWidth: '375px',
+        alignItems: 'center',
+        cursor: 'pointer',
+        color: '#ccc',
+        fontSize: '12px'
+      },
+      noCallDetails: {
+        display: 'flex',
+        height: '100px',
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontWeight: 300,
+        color: '#4a4a4a'
+      }
+      };
+      return (styles[styleName]);
   }
 
-  generateDetails(config) {
+  generateDetails() {
     const self = this;
     let details;
-    console.log('........callerId:', this.callerId);
     const detailData = CallHistoryService.getInstance().getHistoryDetail(this.callerId);
-    console.log('detailData',detailData);
-    details = detailData.map(function(i){
+    //console.log('detailData',detailData); // empty array onload
+    details = detailData.length ? (
+      detailData.map(function(i){
       let renderedDirection;
       if(i.direction == 'outgoing') {
         renderedDirection = (
@@ -191,11 +295,10 @@ class CallHistory extends VertoBaseComponent {
         <div
             className="body"
             tabIndex="0"
-            style={{...self.getDefaultStyle('body'), ...config}}
+            style={{...self.getDefaultStyle('body')}}
         >
             <div
                 className="details"
-                key={config.key}
                 onClick={()=>{
                   self.props.cbCall(i.callerId);
                 }}
@@ -206,157 +309,124 @@ class CallHistory extends VertoBaseComponent {
             </div>
         </div>
       );
-    });
+    })
+  ) : null;
+
     console.log('Details:', details);
     return details;
   }
 
-  generateHistory(config) {
-    let listitems;
-    //const d1 = config.style.width < 250 ? 'none': 'block';
-    if(this.props.history.length > 1){
-    listitems = this.props.history.map((i)=>{
-        return(
+  render(){
+    return (
+      <div>
         <div
-            className="body"
-            tabIndex="0"
-            style={{...this.getDefaultStyle('body'), ...config}}
-        >
-            <CallHistoryItem
-                allowToolTip = {this.props.allowToolTip}
-                className="chi"
-                key={config.key}
-                data={i}
-                cbClick={()=>{
-                  this.props.cbCall(i.callerId);
-                }}
-                cbShowCalls={()=>{
-                  this.callerId = i.callerId;
-                  this.removeItem('hi');
-                  setTimeout(()=>this.showDetails(),1000);
-                  setTimeout(()=>this.setState({...this.state, 'callDetailDisplayed' : true}),1000);
-                }}
-            />
+              className="headerCont"
+              style={{...this.getDefaultStyle('headerCont')}}
+          >
+            <div
+                className="header"
+                style={{...this.getDefaultStyle('header')}}
+            >
+                <span
+                    onClick={this.props.cbBack}
+                    tabIndex="0"
+                >
+                    <RemoveIconSVG svgStyle={{...this.getDefaultStyle('headerSvgs')}} />
+                </span>
+                <span
+                    className="title"
+                    style={{...this.getDefaultStyle('title')}}
+                >
+                  {this.callerId}
+                </span>
+            </div>
+          </div>
+          {this.generateDetails()}
         </div>
-        );
-      });
+    );
+  }
+}
+
+class CallHistory extends VertoBaseComponent {
+  constructor(props) {
+    super(props);
+    this.state = { items: [], item: [[375,400], [375,400]], currItem: 0, callDetailDisplayed : false, callItem: ''};
+
+}
+
+  clickHandler() {
+    if(this.state.currItem == 0) {
+      this.setState({...this.state, currItem : 1 });
     } else {
-      listitems = (
-        <div
-            className="noCalls"
-            style={{...this.getDefaultStyle('noCallDetails'), ...config.style}}
-        >
-            <span>
-              No calls to show.
-            </span>
-        </div>
-      );
+      this.setState({...this.state, currItem: 0 });
     }
-    console.log('listitems: ', listitems);
-    return listitems;
   }
 
-  generateContent(i, config) {
-    var comp1 = (this.generateHistory(config));
-    console.log('comp1', comp1);
-    var comp2 = (this.generateDetails(config));
-    console.log('comp2', comp2);
+  getCompStyle() {
+    return this.props.compStyle;
+  }
 
-    var comp = [comp1, comp2];
-    console.log('comp[i]:', comp[i]);
-    return comp[i];
+  getDefaultStyle(styleName) {
+    const styles = {
+      container: {
+        display: 'flex',
+        position: 'relative',
+        flex: 1,
+        alignItems: 'flex-start',
+        alignContent: 'stretch',
+        borderRadius: '3px',
+        justifyContent: 'flex-start',
+        flexDirection: "column",
+        height: '500px',
+        minWidth: '225px', // allows animation to go in/out further without clashing 'Call History' and 'Clear History'
+        overflowY: 'auto',
+        overflowX: 'hidden',
+        boxShadow: '0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)',
+        color: "#4a4a4a"
+      }
+     };
+
+    return (styles[styleName]);
+  }
+
+  generateContent() {
+    var historyItems = (
+      <HistoryItems
+          history={this.props.history}
+          cbClick={this.props.cbClick}
+          cbBack={this.props.cbBack}
+          cbShowCalls={this.props.cbShowCalls}
+          cbClearHistory={this.props.cbClearHistory}
+          cbCall={this.props.cbCall}
+      />
+    );
+
+    var detailItems = (
+      <DetailItems
+          callerId={this.props.callerId}
+      />
+    );
+
+    var renderedComponent = [historyItems, detailItems];
+    //console.log('comp[i]:', i, comp[i]);
+    return renderedComponent[0];
   }
 
   render(){
 
-    let icon;
-    if(this.state.callDetailDisplayed) {
-      icon =(
-        <span
-          onClick={()=>{
-            setTimeout(()=>this.setState({...this.state, 'callDetailDisplayed': false}),1000);
-            this.removeItem('de');
-            setTimeout(()=>this.showHistory(),1000);
-          }}
-        >
-          <BackArrowIconSVG svgStyle={{...this.getDefaultStyle('headerSvgs')}} />
-        </span>
-      );
-    } else {
-      icon = (
-        <span
-            onClick={this.props.cbBack}
-            tabIndex="0"
-        >
-            <RemoveIconSVG svgStyle={{...this.getDefaultStyle('headerSvgs')}} />
-        </span>
-      );
-    }
-
-    let clearHistory;
-    if(this.state.callDetailDisplayed) {
-      clearHistory = (<span></span>);
-    } else {
-      if(this.props.history.length > 0) {
-        clearHistory = (
-          <span
-              className="rmvHistory"
-              style={{...this.getDefaultStyle('rmvHistory')}}
-              onClick={this.props.cbClearHistory}
-              tabIndex="0"
-          >
-              <FormattedMessage
-                  id="CLEAR_CALL_HISTORY"
-              />
-          </span>
-        );
-      } else {
-        clearHistory = (<span></span>);
-      }
-    }
-
-    let title;
-      if(this.state.callDetailDisplayed) {
-        title = (
-          <span
-              className="title"
-              style={{...this.getDefaultStyle('title')}}
-          >
-            {this.callerId}
-        </span>);
-      } else {
-        title = (
-          <span
-              className="title"
-              style={{...this.getDefaultStyle('title')}}
-          >
-            <FormattedMessage
-                id="CALL_HISTORY"
-            />
-        </span>);
-      }
-
-    var nStyles = this.state.items.map(item => {
-      var x = {
-        key: item.key,
-        style: {width: item.size }
-      };
-      return (x);
-    });
-
     // animation hell
     const {item, currItem} = this.state;
-    console.log('this.state.item + this.state.currItem', item, currItem);
+    //console.log('this.state.item + this.state.currItem', item, currItem);
     const [currWidth, currHeight] = item[currItem];
-    console.log('currWidth + currHeight',currWidth, currHeight);
+    //console.log('currWidth + currHeight',currWidth, currHeight);
 
     const widths = item.map(([origW, origH])=> currHeight / origH * origW);
-    console.log('widths',widths);
+    //console.log('widths',widths);
 
     const leftStartCoords = widths
       .slice(0, currItem)
       .reduce((sum,width) => sum-width, 0);
-    console.log('Left Start Coords',leftStartCoords);
+    //console.log('Left Start Coords',leftStartCoords);
 
     let configs = [];
     item.reduce((prevLeft, [origW, origH], i) => {
@@ -367,59 +437,14 @@ class CallHistory extends VertoBaseComponent {
       });
       return prevLeft + widths[i];
     }, leftStartCoords);
-    console.log('configs array',configs);
-
-    // <TransitionMotion
-    //     styles={nStyles}
-    //     //willLeave={this.willLeave}
-    //     //willEnter={this.willEnter}
-    // >
-    //  {interpolatedStyles =>{
-    //      return (
-    //        <span>
-    //          {interpolatedStyles.map(config => {
-    //            if (this.state.callDetailDisplayed){
-    //              return this.generateDetails(config);
-    //            } else {
-    //              return this.generateHistory(config);
-    //            }
-    //         })}
-    //       </span>);
-    //  }}
-    //  </TransitionMotion>
+    //console.log('configs array',configs);
 
     return (
       <div
           className="container"
           style={this.getStyle('container')}
       >
-        <div
-            className="headerCont"
-            style={{...this.getDefaultStyle('headerCont')}}
-        >
-          <div
-              className="header"
-              style={{...this.getDefaultStyle('header')}}
-          >
-            <span onClick={this.clickHandler.bind(this)}>Click Test</span>
-              {icon}
-              {title}
-              {clearHistory}
-          </div>
-        </div>
-        <Motion style={{height: spring(currHeight), width: spring(currWidth)}}>
-          {container =>
-            <div className="demo4-inner" style={container}>
-              {configs.map((style, i) =>
-                <Motion key={i} style={style}>
-                  {style =>
-                    (this.generateContent(i, style))
-                  }
-                </Motion>
-              )}
-            </div>
-          }
-        </Motion>
+        {this.generateContent()}
       </div>
     );
   }
@@ -428,4 +453,4 @@ class CallHistory extends VertoBaseComponent {
 
 CallHistory.defaultProps = defaultProps;
 CallHistory.propTypes = propTypes;
-export default Radium(CallHistory);
+export default CallHistory;
