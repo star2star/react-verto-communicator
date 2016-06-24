@@ -63,6 +63,7 @@ class CallHistory extends VertoBaseComponent {
     const styles = {
       container: {
         display: 'flex',
+        position: 'relative',
         flex: 1,
         alignItems: 'flex-start',
         alignContent: 'stretch',
@@ -104,6 +105,7 @@ class CallHistory extends VertoBaseComponent {
       },
       body : {
         width: '100%',
+        position: 'absolute',
         maxHeight: '500px',
         overflowY: 'auto',
         overflowX: 'hidden'
@@ -166,8 +168,10 @@ class CallHistory extends VertoBaseComponent {
   generateDetails(config) {
     const self = this;
     let details;
+    console.log('........callerId:', this.callerId);
     const detailData = CallHistoryService.getInstance().getHistoryDetail(this.callerId);
-    details = detailData.map(function(i, key){
+    console.log('detailData',detailData);
+    details = detailData.map(function(i){
       let renderedDirection;
       if(i.direction == 'outgoing') {
         renderedDirection = (
@@ -182,12 +186,12 @@ class CallHistory extends VertoBaseComponent {
       }
 
       const formattedTimestamp = moment(i.timestamp).format('ddd MMM DD YYYY HH:mm:ss A');
-      const d1 = config.style.width < 150 ? 'none': 'block';
+      //const d1 = config.style.width < 150 ? 'none': 'block';
       return (
         <div
             className="body"
             tabIndex="0"
-            style={{...self.getDefaultStyle('body'), ...config.style, display: d1 }}
+            style={{...self.getDefaultStyle('body'), ...config}}
         >
             <div
                 className="details"
@@ -203,19 +207,20 @@ class CallHistory extends VertoBaseComponent {
         </div>
       );
     });
+    console.log('Details:', details);
     return details;
   }
 
   generateHistory(config) {
     let listitems;
-    const d1 = config.style.width < 250 ? 'none': 'block';
+    //const d1 = config.style.width < 250 ? 'none': 'block';
     if(this.props.history.length > 1){
     listitems = this.props.history.map((i)=>{
         return(
         <div
             className="body"
             tabIndex="0"
-            style={{...this.getDefaultStyle('body'), ...config.style, display: d1}}
+            style={{...this.getDefaultStyle('body'), ...config}}
         >
             <CallHistoryItem
                 allowToolTip = {this.props.allowToolTip}
@@ -247,12 +252,22 @@ class CallHistory extends VertoBaseComponent {
         </div>
       );
     }
+    console.log('listitems: ', listitems);
     return listitems;
   }
 
-  render(){
+  generateContent(i, config) {
+    var comp1 = (this.generateHistory(config));
+    console.log('comp1', comp1);
+    var comp2 = (this.generateDetails(config));
+    console.log('comp2', comp2);
 
-    console.log('current item',this.state.currItem);
+    var comp = [comp1, comp2];
+    console.log('comp[i]:', comp[i]);
+    return comp[i];
+  }
+
+  render(){
 
     let icon;
     if(this.state.callDetailDisplayed) {
@@ -277,7 +292,6 @@ class CallHistory extends VertoBaseComponent {
         </span>
       );
     }
-
 
     let clearHistory;
     if(this.state.callDetailDisplayed) {
@@ -332,17 +346,17 @@ class CallHistory extends VertoBaseComponent {
 
     // animation hell
     const {item, currItem} = this.state;
-    //console.log('animation hell', item, currItem);
+    console.log('this.state.item + this.state.currItem', item, currItem);
     const [currWidth, currHeight] = item[currItem];
-    //console.log('kill yourself',currWidth, currHeight);
+    console.log('currWidth + currHeight',currWidth, currHeight);
 
     const widths = item.map(([origW, origH])=> currHeight / origH * origW);
-    //console.log('widths',widths);
+    console.log('widths',widths);
 
     const leftStartCoords = widths
       .slice(0, currItem)
       .reduce((sum,width) => sum-width, 0);
-    //console.log('Left Start Coords',leftStartCoords);
+    console.log('Left Start Coords',leftStartCoords);
 
     let configs = [];
     item.reduce((prevLeft, [origW, origH], i) => {
@@ -353,9 +367,26 @@ class CallHistory extends VertoBaseComponent {
       });
       return prevLeft + widths[i];
     }, leftStartCoords);
-    //console.log('configs array',configs);
+    console.log('configs array',configs);
 
-
+    // <TransitionMotion
+    //     styles={nStyles}
+    //     //willLeave={this.willLeave}
+    //     //willEnter={this.willEnter}
+    // >
+    //  {interpolatedStyles =>{
+    //      return (
+    //        <span>
+    //          {interpolatedStyles.map(config => {
+    //            if (this.state.callDetailDisplayed){
+    //              return this.generateDetails(config);
+    //            } else {
+    //              return this.generateHistory(config);
+    //            }
+    //         })}
+    //       </span>);
+    //  }}
+    //  </TransitionMotion>
 
     return (
       <div
@@ -376,24 +407,19 @@ class CallHistory extends VertoBaseComponent {
               {clearHistory}
           </div>
         </div>
-            <TransitionMotion
-                styles={nStyles}
-                //willLeave={this.willLeave}
-                //willEnter={this.willEnter}
-            >
-             {interpolatedStyles =>{
-                 return (
-                   <span>
-                     {interpolatedStyles.map(config => {
-                       if (this.state.callDetailDisplayed){
-                         return this.generateDetails(config);
-                       } else {
-                         return this.generateHistory(config);
-                       }
-                    })}
-                  </span>);
-             }}
-             </TransitionMotion>
+        <Motion style={{height: spring(currHeight), width: spring(currWidth)}}>
+          {container =>
+            <div className="demo4-inner" style={container}>
+              {configs.map((style, i) =>
+                <Motion key={i} style={style}>
+                  {style =>
+                    (this.generateContent(i, style))
+                  }
+                </Motion>
+              )}
+            </div>
+          }
+        </Motion>
       </div>
     );
   }
