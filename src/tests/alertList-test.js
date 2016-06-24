@@ -7,7 +7,7 @@ import AlertList from '../components/alertList';
 import AlertItem from '../components/alertItem';
 
 jest.unmock('../components/alertItem');
-jest.unmock('../components/alertListItem');
+jest.unmock('../components/alertList');
 jest.unmock('../helpers/intl-enzyme-test-helper.js');
 
 
@@ -29,7 +29,6 @@ describe('Default test for AlertList', ()=>{
   it('renders a div', () => {
     const wrapper = shallow(
       <AlertList
-
       />);
      expect(wrapper.find('div').length).toEqual(1);
   });

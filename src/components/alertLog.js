@@ -91,7 +91,7 @@ export default class AlertLog extends VertoBaseComponent {
   render(){
     // const alertArray= AlertService.getInstance().getAlertLog();
 
-    //console.log('##### alert log data', alertArray);
+    // console.log('##### alert log data', alertArray);
 
     const alerts = this.state.alertArray.map((alert, index)=>{
       return (
