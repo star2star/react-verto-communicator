@@ -51,6 +51,10 @@ export default class UserVideoControls extends VertoBaseComponent {
         flex: '1'
       },
 
+      badgePosition: {
+        position: 'relative'
+      },
+
       badgeCompStyle: {
         badgeStyles:{
         position: 'absolute',
@@ -154,14 +158,14 @@ export default class UserVideoControls extends VertoBaseComponent {
       undefined;
 
     const chatStatus = (
-      <span style={{position: 'relative'}}>
+      <span>
+        <span style={this.getStyle('badgePosition')}>{badge}</span>
         <ToolTip name="share" place='top' msg={openCloseMessage}>
           <ControlItem type="ChatIconSVG"
               compStyle={this.getStyle("controlIconStyle")}
               cbActionClick={this.props.cbToggleChat}
           />
         </ToolTip>
-        {badge}
       </span>
     );
 
@@ -172,6 +176,7 @@ export default class UserVideoControls extends VertoBaseComponent {
       <div style={this.getStyle('controlsStyle')}>
           {micStatus}
           {videoStatus}
+
           {screenStatus}
           <ToolTip name="togglechat" place='top' msg={screenshareMessage}>
             <ControlItem type="ShareScreenIconSVG"
