@@ -1,73 +1,33 @@
-# Component Name:  < component name \>   #
+# Component Name:  vidcontrolsadmin  #
+
 # 1. Functional Description #
-(REMOVE WHEN DONE)
 
- Write a brief description of what this component will do, how it is intended to be used, etc.  This description should give the reader a high level idea of what the component development requirements are.
+This component displays a set of controls to the moderator of a call. These controls get displayed underneath the video.
 
- Sample:
-*This component will be a text input control that will invoke a callback function when the enter/return key is pressed by the user.  When the enter key is pressed, the input field will be cleared and will retain focus.  The input must be contained in div that has rounded corners at the bottom and square corners at the top so it can be aligned with another component.  Default styling should include font-size, line-height, color, border-radius, margin and padding for the input, and for the container, background-color, border, and border-radius.  The default styles should be overridable via props in part or in their entirety.  Placeholder text value is passed in using props.*
+# 2. Visual Design #  
 
-  (REMOVE)
+![A sample set of admin controls](https://raw.githubusercontent.com/star2star/react-verto-communicator/master/documents/img/admin-img%202.png)
 
-# 2. Star2Star Spore Component Project - SCP #
+# 3. Component Type #
 
-Star2Star will provide a spore (aka skeletal or seed) component project that can be used as a starting point for new component development.  To get started execute to below command in your new project area.
-
-** curl -G https://npm-registry.star2star.com/star2star-spore-component-project
-/-/star2star-spore-component-project-1.0.6.tgz -s -o s2s-spore.tgz **
-
-Templates will consist of an archive (.zip) file with files needed to begin component development such as:
-* package.json file - contains metadata about the component being developed, including a list of dependencies to install from npm when running npm install, as well as scripts for build and test, and configuration definitions.
-* README.md file - contains documentation for the component being developed.  Refer to the Star2Star Programming Standards document.  
-* tests folder - will contain unit test code once written.
-* assets folder - will contain images and other materials needed for the component.
-* src folder - contains the JavaScript and JSX implementing the component.  
-* src/index.jsx - contains initial file definition for component.
-* lib folder - contains the output from building the component as defined in the package.json file.
-
-# 3. Visual Design #  
-
-(REMOVE WHEN DONE)
-
-Images with callouts for size, colors, etc. and/or reference to a document containing the visual design specification for the component.  Extract from design documentation and paste here.
-
-Sample:
-
-![A breakdown of how this component looks](https://raw.githubusercontent.com/star2star/react-verto-communicator/master/documents/img/Template-Image.png)
-
-(REMOVE)
-
-# 4. Component Type #
-
-(REMOVE WHEN DONE)
-
-Indicate whether this is to be a ‘pure’ component or ‘context-aware’ component.  Context-aware components will access the 'store' and contribute to maintaining application state and are sometimes referred to as container components.  ‘Pure’ components receive data through props from parent nodes, may or may not maintain their own state,  and are sometimes called presentational components.
-
-Sample:
-
-_This component will be a 'pure' component.  It will accept props for styling, placeholder text, and callback function when enter is pressed. Or for a ChatContainer component
-This component will be a 'context-aware' component.  It will maintain a 'store' object that will maintain all data required to run multiple chat sessions and maintain the integrity of the visual components that it references._
-
-(REMOVE)
+This component will be a 'pure' component.
 
 ## a. Required Props ##
 
-(REMOVE WHEN DONE)
-
-List the props that will be input to this component, as well as their data type and a brief description of their intended usage.  
-
-If the prop is an object, a sample of the object structure needs to be provided.
-If the prop is a callback function, then a sample of the function call including input arguments and their data types must be provided.  If an argument is an object, then a sample of its structure must be provided.
-
-Sample:
 
 | Prop Name | Sample | Description |
 | ------------ | ------------- | ------------- |
-| placeHolderTxt | "Send a message..." | _Include a brief description of what the prop does as well as whether it is required or not and its' type_ |
-| styles |  _NOTE styles are in JSX, not CSX_ { inputWrapStyle: {backgroundColor: '#ddd'} inputStyle {fontSize: '1rem'} }m | Sample: |
-| cbSubmit |  _Function implemented and bound to a higher-order parent container of this component_ | This prop is a string and is required. This prop is passed into this component from the session component and controls what message we display to the user. |
+| currLayout | currLayout = [] | This prop is an array and is not required. This prop provides the communicator with information on how to position the different video windows. |
+| layouts | layouts=[] | This prop is an array and is not required. This prop provides a list of all the possible video layouts. |
+| cbSubmit |  _Function iponent_ | This prop is a string and sage we display to the user. |
+| cbSubmit |  _Function iponent_ | This prop is a string and sage we display to the user. |
+| cbSubmit |  _Function iponent_ | This prop is a string and sage we display to the user. |
+| cbSubmit |  _Function iponent_ | This prop is a string and sage we display to the user. |
+| cbSubmit |  _Function iponent_ | This prop is a string and sage we display to the user. |
+| cbSubmit |  _Function iponent_ | This prop is a string and sage we display to the user. |
 
-(REMOVE)
+
+
 
 ## b. Component State ##
 

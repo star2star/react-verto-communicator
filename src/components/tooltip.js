@@ -29,7 +29,7 @@ export default class ToolTip extends VertoBaseComponent {
   }
 
   render(){
-    console.log("#$$%$%^$%%$^%^%%$^$%^Y&^&$%%^$%#", this.props.name);
+    //console.log("#$$%$%^$%%$^%^%%$^$%^Y&^&$%%^$%#", this.props.name);
     return(
       <span>
        <Origin name={this.props.name}>
