@@ -37,16 +37,16 @@ describe('Default test for AlertLog', ()=>{
       />);
      expect(wrapper.find('div').length).toEqual(5);
   });
-  
-  it('simulates click event (cbDismissAlert)', () => {
+
+  it('simulates click event (cbRemoveAlert)', () => {
     const spy = sinon.spy();
     const wrapper = shallow(
-      <AlertItem
+      <AlertLogItem
           key={sampleKey}
           alertData={sampleData}
-          cbDismissAlert={cbDismissAlert}
-     />);
-    const expectedNode = wrapper.children().find('.heading');
+          cbRemoveAlert={cbRemoveAlert}
+      />);
+    const expectedNode = wrapper.children().find('.tab');
     //console.log(expectedNode.debug());
     expectedNode.simulate('click');
     expect(spy.calledOnce, true);
