@@ -180,6 +180,8 @@ const messages = {
   "SCREEN_SHARE": "Ekran Podziel się",
   "PRESENTER": "Prezenter",
   "WATCHING_CANVAS": "Oglądając Canvas",
-  "INPUT_CANVAS": "wejście na płótnie"
+  "INPUT_CANVAS": "wejście na płótnie",
+  "CLEAR_ALERTS": "Pogodne Alerts",
+  "NO_LOG": "Brak danych dziennika"
 };
 module.exports = messages;

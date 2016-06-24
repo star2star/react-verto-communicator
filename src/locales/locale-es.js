@@ -179,6 +179,8 @@ const messages = {
   "SCREEN_SHARE": "captura de pantalla",
   "PRESENTER": "Presentador",
   "WATCHING_CANVAS": "viendo la lona",
-  "INPUT_CANVAS": "Lienzo de entrada"
+  "INPUT_CANVAS": "Lienzo de entrada",
+  "CLEAR_ALERTS": "alertas claras",
+  "NO_LOG": "hay datos de registro"
 };
 module.exports = messages;

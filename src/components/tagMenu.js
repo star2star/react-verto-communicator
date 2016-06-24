@@ -95,14 +95,11 @@ class TagMenu extends VertoBaseComponent {
     return (
 
         <span onClick={this.toggleMenu}  style={this.getStyle("container")}>
-          <ToolTip name="nomeaning" place={this.props.ttPosition} msg={theMsg}>
             <TagIconSVG svgStyle={{...this.getStyle('icon'), fill: 'white'}}  />
-
             {this.state.dropdownDisplayed ?
                 <CaretUpIconSVG svgStyle={{...this.getStyle('caret'), fill: 'white'}} /> :
                 <CaretDownIconSVG svgStyle={{...this.getStyle('caret'), fill: 'white'}} />}
-          </ToolTip>
-
+            {menuContainer}
         </span>
     );
   }

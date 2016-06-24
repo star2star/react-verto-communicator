@@ -180,6 +180,8 @@ const messages = {
   "SCREEN_SHARE": "экран Поделиться",
   "PRESENTER": "ведущий",
   "WATCHING_CANVAS": "Смотря Холст",
-  "INPUT_CANVAS": "Ввод Холст"
+  "INPUT_CANVAS": "Ввод Холст",
+  "CLEAR_ALERTS": "четкие предупреждения",
+  "NO_LOG": "нет данных журнала"
   };
   module.exports = messages;

@@ -27,7 +27,7 @@ describe('<Login />', ()=>{
 
   it('displays a label', () => {
     const wrapper = shallowWithIntl(<Login settings={settings} />);
-    console.log('%%%%%%%%%%%%%%%%%%%%', wrapper);
+    // console.log('%%%%%%%%%%%%%%%%%%%%', wrapper);
     //expect(wrapper.get(0).props.settings).toEqual(settings);
   });
 

@@ -180,6 +180,8 @@ const messages = {
   "SCREEN_SHARE": "Screen Share",
   "PRESENTER": "Moderator",
   "WATCHING_CANVAS": "Beobachten Leinwand",
-  "INPUT_CANVAS": "Eingang Leinwand"
+  "INPUT_CANVAS": "Eingang Leinwand",
+  "CLEAR_ALERTS": "Warnungen löschen",
+  "NO_LOG": "Keine Protokolldaten"
 };
 module.exports = messages;
