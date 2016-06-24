@@ -1,7 +1,7 @@
 # Component Name:  vidControlsUser   #
 # 1. Functional Description #
 
-This component displays 5 controls to modify either a user's video or audio. These controls will always show for the user.
+This component displays 5 controls to modify either a user's video or audio. These controls will always show for the user. When a control is hovered over a tooltip will show.
 
 # 3. Visual Design #  
 
@@ -20,6 +20,7 @@ This component will be a 'pure' component.
 | cbScreenShare| function cbScreenShare = {...} | This prop is a function and is required. This function gets called when the screen share icon is clicked |
 | cbToggleChat |  function cbToggleChat = {...} | This prop is a function and is required. This function gets called when the chat icon is clicked. If chat is open the function will cause the the chat the close when clicked. |
 | userConfStatus |  userConfStatus = {} | This prop is an object and is not required. This prop is used in checking if a user's video or audio is muted. |
+| newMsgCount |  newMsgCount = 88 | This prop is used in printing out the badge for the chat icon. This prop is a representation how many new messages have been added to the chat since the chat was hidden. |
 
 ## b. Component State ##
 
@@ -41,6 +42,7 @@ This component is NOT a context-aware component
 
 - vertobase
 - controlItem
+- tooltip
 
 # 6. Unit Testing Requirement #
 
