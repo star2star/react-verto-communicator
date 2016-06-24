@@ -97,22 +97,4 @@ describe( 'MemberList', ()=>{
     expect(wrapper.props().sampleMember.name).toEqual('Name');
   });
 
-
-
-  // it('cbControlClick callback fires', () => {
-  //     const spy = sinon.spy();
-  //     const wrapper = shallow(
-  //       <MemberList
-  //           cbControlClick={cbControlClick}
-  //           members={sampleMembers}
-  //           controlSettings={controlSettings}
-  //         />);
-  //     const expectedNode = wrapper.children().find('');
-  //      console.log('--------->', wrapper.children());
-  //       expectedNode.simulate('click');
-  //     expect(spy.calledOnce, true);
-  //   });
-
-
-
 });

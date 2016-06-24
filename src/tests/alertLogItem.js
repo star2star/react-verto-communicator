@@ -37,18 +37,20 @@ describe('Default test for AlertLog', ()=>{
       />);
      expect(wrapper.find('div').length).toEqual(5);
   });
-//
-// //don't understand why this isn't passing when 'toEqual(true)''
-//   it('Click event fires callback function', () => {
-//     const wrapper = shallow(
-//       <MemberItem
-//           member={sampleMember}
-//           controlSettings={controlSettings}
-//           cbControlClick={cbControlClick}
-//       />);
-//       wrapper.simulate('click');
-//     expect(cbControlClick.calledOnce).toEqual(false);
-//   });
+  
+  it('simulates click event (cbDismissAlert)', () => {
+    const spy = sinon.spy();
+    const wrapper = shallow(
+      <AlertItem
+          key={sampleKey}
+          alertData={sampleData}
+          cbDismissAlert={cbDismissAlert}
+     />);
+    const expectedNode = wrapper.children().find('.heading');
+    //console.log(expectedNode.debug());
+    expectedNode.simulate('click');
+    expect(spy.calledOnce, true);
+  });
 //
 //   it('renders MicrophoneIconSVG if audio is not muted', () => {
 //     const wrapper = mountWithIntl(

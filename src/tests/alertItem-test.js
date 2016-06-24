@@ -28,7 +28,7 @@ describe('Default test for AlertItem', ()=>{
 
 
   it('renders 3 divs', () => {
-    const wrapper = shallow(
+    const wrapper = shallowWithIntl(
       <AlertItem
           key={sampleKey}
           alertData={sampleData}
@@ -36,18 +36,33 @@ describe('Default test for AlertItem', ()=>{
       />);
      expect(wrapper.find('div').length).toEqual(3);
   });
-//
-// //don't understand why this isn't passing when 'toEqual(true)''
-//   it('Click event fires callback function', () => {
-//     const wrapper = shallow(
-//       <MemberItem
-//           member={sampleMember}
-//           controlSettings={controlSettings}
-//           cbControlClick={cbControlClick}
-//       />);
-//       wrapper.simulate('click');
-//     expect(cbControlClick.calledOnce).toEqual(false);
-//   });
+
+
+    // it('renders correct heading color if warn', () => {
+    //   const wrapper = mountWithIntl(
+    //     <AlertItem
+    //         key={sampleKey}
+    //         alertData={sampleData}
+    //         cbDismissAlert={cbDismissAlert}
+    //     />);
+    //     console.log('---->>', )
+    //   expect(wrapper.find('headingbgColor').style.headingStyles.fill).toEqual("#FFC02F");
+    // },);
+
+
+  it('simulates click event (cbDismissAlert)', () => {
+    const spy = sinon.spy();
+    const wrapper = shallow(
+      <AlertItem
+          key={sampleKey}
+          alertData={sampleData}
+          cbDismissAlert={cbDismissAlert}
+     />);
+    const expectedNode = wrapper.children().find('.heading');
+    //console.log(expectedNode.debug());
+    expectedNode.simulate('click');
+    expect(spy.calledOnce, true);
+  });
 //
 //   it('renders MicrophoneIconSVG if audio is not muted', () => {
 //     const wrapper = mountWithIntl(
