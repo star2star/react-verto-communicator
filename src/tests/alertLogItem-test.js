@@ -18,7 +18,7 @@ describe('Default test for AlertLog', ()=>{
   const cbRemoveAlert = sinon.spy();
   const sampleData = {
     level:"warn",
-    timestamp:"1466703201123",
+    timestamp:1466703201123,
     summary: "Can't hang up while sharing screen",
     detail: "You must stop sharing your screen before you can hangup the call",
     id: 0
@@ -51,7 +51,29 @@ describe('Default test for AlertLog', ()=>{
     expectedNode.simulate('click');
     expect(spy.calledOnce, true);
   });
-//
+
+  it('displays RemoveIconSVG', () => {
+    const wrapper = mountWithIntl(
+      <AlertLogItem
+          key={sampleKey}
+          alertData={sampleData}
+          cbRemoveAlert={cbRemoveAlert}
+      />);
+    expect(wrapper.find('RemoveIconSVG').length).toEqual(1);
+  });
+
+  it('displays formatted timestamp', () => {
+    const wrapper = shallowWithIntl(
+      <AlertLogItem
+          key={sampleKey}
+          alertData={sampleData}
+          cbRemoveAlert={cbRemoveAlert}
+      />);
+    const expectedNode = wrapper.children().find('.timestamp');
+    // console.log('------------->>>', wrapper.children().find('.timestamp'));
+    expect(expectedNode.props().children).toEqual('Thu Jun 23 2016 13:33:21 PM');
+  });
+
 //   it('renders MicrophoneIconSVG if audio is not muted', () => {
 //     const wrapper = mountWithIntl(
 //       <MemberItem

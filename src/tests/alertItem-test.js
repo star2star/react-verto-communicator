@@ -16,7 +16,7 @@ describe('Default test for AlertItem', ()=>{
   const cbDismissAlert = sinon.spy();
   const sampleData = {
     level:"warn",
-    timestamp:"1466703201123",
+    timestamp:1466703201123,
     summary: "Can't hang up while sharing screen",
     detail: "You must stop sharing your screen before you can hangup the call",
     id: 0
