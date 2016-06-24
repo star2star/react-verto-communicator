@@ -53,9 +53,14 @@ class AlertService {
 
   getAlertLog(){
     // converting object to array and sorting descending on lasttimestamp
-    return this.alerts.sort((a,b)=>{
-      return a.timestamp < b.timestamp;
-    });
+    if (this.alerts){
+      return this.alerts.sort((a,b)=>{
+        return a.timestamp < b.timestamp;
+      });
+    } else {
+      return [];
+    }
+
   }
 
   static getInstance() {
