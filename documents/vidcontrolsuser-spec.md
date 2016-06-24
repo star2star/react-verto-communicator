@@ -3,11 +3,11 @@
 
 This component displays 5 controls to modify either a user's video or audio. These controls will always show for the user. When a control is hovered over a tooltip will show.
 
-# 3. Visual Design #  
+# 2. Visual Design #  
 
 We are changing the style from the original verto. Will ad an image when the styles are done.
 
-# 4. Component Type #
+# 3. Component Type #
 
 This component will be a 'pure' component.
 
@@ -38,7 +38,7 @@ This component will maintain it's own state for presentational purposes.
 
 This component is NOT a context-aware component
 
-# 5. Reference Components #
+# 4. Reference Components #
 
 - vertobase
 - controlItem

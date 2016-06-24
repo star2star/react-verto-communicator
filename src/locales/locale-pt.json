@@ -180,6 +180,8 @@ const messages = {
   "SCREEN_SHARE": "compartilhamento de tela",
   "PRESENTER": "Apresentador",
   "WATCHING_CANVAS": "assistindo Canvas",
-  "INPUT_CANVAS": "Canvas de entrada"
+  "INPUT_CANVAS": "Canvas de entrada",
+  "CLEAR_ALERTS": "alertas claros",
+  "NO_LOG": "No Log Data"
 };
   module.exports = messages;

@@ -180,6 +180,8 @@ const messages = {
   "SCREEN_SHARE": "Screen Share",
   "PRESENTER": "Presentatör",
   "WATCHING_CANVAS": "Titta på Canvas",
-  "INPUT_CANVAS": "input kanfas"
+  "INPUT_CANVAS": "input kanfas",
+  "CLEAR_ALERTS": "tydliga varningar",
+  "NO_LOG": "Ingen loggdata"
   };
   module.exports = messages;

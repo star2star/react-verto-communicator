@@ -180,6 +180,8 @@ const messages = {
   "SCREEN_SHARE": "屏幕共享",
   "PRESENTER": "主持人",
   "WATCHING_CANVAS": "看著畫布",
-  "INPUT_CANVAS": "輸入帆布"
+  "INPUT_CANVAS": "輸入帆布",
+  "CLEAR_ALERTS": "清除警報",
+  "NO_LOG": "沒有日誌數據"
   };
   module.exports = messages;

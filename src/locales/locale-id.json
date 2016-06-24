@@ -180,6 +180,8 @@ const messages = {
   "SCREEN_SHARE": "layar Share",
   "PRESENTER": "Pembawa acara",
   "WATCHING_CANVAS": "menonton Canvas",
-  "INPUT_CANVAS": "masukan Canvas"
+  "INPUT_CANVAS": "masukan Canvas",
+  "CLEAR_ALERTS": "alert jelas",
+  "NO_LOG": "tidak ada data log"
 };
 module.exports = messages;
