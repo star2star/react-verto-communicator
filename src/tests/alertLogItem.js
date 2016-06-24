@@ -3,17 +3,19 @@ import { shallow, mount, render } from 'enzyme';
 import sinon from 'sinon';
 import ReactDOM from 'react-dom';
 import { mountWithIntl, shallowWithIntl } from '../helpers/intl-enzyme-test-helper.js';
-import AlertItem from '../components/alertItem';
+import AlertLogItem from '../components/alertLogItem';
 import ControlItem from '../components/controlItem';
+import moment from 'moment';
 
-jest.unmock('../components/alertItem');
 jest.unmock('../components/controlItem');
+jest.unmock('../components/alertLogItem');
  jest.unmock('../helpers/intl-enzyme-test-helper.js');
+ jest.unmock('moment');
+ jest.unmock('../js/messages.js');
 
+describe('Default test for AlertLog', ()=>{
 
-describe('Default test for AlertItem', ()=>{
-
-  const cbDismissAlert = sinon.spy();
+  const cbRemoveAlert = sinon.spy();
   const sampleData = {
     level:"warn",
     timestamp:"1466703201123",
@@ -26,15 +28,14 @@ describe('Default test for AlertItem', ()=>{
     };
 
 
-
-  it('renders 3 divs', () => {
-    const wrapper = shallow(
-      <AlertItem
+  it('renders 5 divs', () => {
+    const wrapper = mountWithIntl(
+      <AlertLogItem
           key={sampleKey}
           alertData={sampleData}
-          cbDismissAlert={cbDismissAlert}
+          cbRemoveAlert={cbRemoveAlert}
       />);
-     expect(wrapper.find('div').length).toEqual(3);
+     expect(wrapper.find('div').length).toEqual(5);
   });
 //
 // //don't understand why this isn't passing when 'toEqual(true)''

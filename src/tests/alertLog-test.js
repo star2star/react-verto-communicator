@@ -3,17 +3,20 @@ import { shallow, mount, render } from 'enzyme';
 import sinon from 'sinon';
 import ReactDOM from 'react-dom';
 import { mountWithIntl, shallowWithIntl } from '../helpers/intl-enzyme-test-helper.js';
-import AlertItem from '../components/alertItem';
-import ControlItem from '../components/controlItem';
+import AlertService from '../js/alertService';
+import Modal from 'react-modal';
+import AlertLog from '../components/alertLog';
+import AlertLogItem from '../components/alertLogItem';
 
-jest.unmock('../components/alertItem');
-jest.unmock('../components/controlItem');
+
+jest.unmock('../components/alertLog');
+jest.unmock('../components/alertLogItem');
  jest.unmock('../helpers/intl-enzyme-test-helper.js');
+ jest.unmock('../js/messages.js');
 
+describe('Default test for AlertLog', ()=>{
 
-describe('Default test for AlertItem', ()=>{
-
-  const cbDismissAlert = sinon.spy();
+  const cbRemoveAlert = sinon.spy();
   const sampleData = {
     level:"warn",
     timestamp:"1466703201123",
@@ -27,14 +30,20 @@ describe('Default test for AlertItem', ()=>{
 
 
 
-  it('renders 3 divs', () => {
-    const wrapper = shallow(
-      <AlertItem
-          key={sampleKey}
-          alertData={sampleData}
-          cbDismissAlert={cbDismissAlert}
+    it('renders a modal', () => {
+      const wrapper = mountWithIntl(
+        <AlertLog
+
+        />);
+       expect(wrapper.find('modal').length).toEqual(1);
+    });
+
+  it('renders 2 divs', () => {
+    const wrapper = mountWithIntl(
+      <AlertLog
+
       />);
-     expect(wrapper.find('div').length).toEqual(3);
+     expect(wrapper.find('div').length).toEqual(2);
   });
 //
 // //don't understand why this isn't passing when 'toEqual(true)''

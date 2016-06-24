@@ -27,7 +27,7 @@ This is a ‘pure' component.
 
 | Event | Action(s) |
 | ------------ | ------------- |
-| onClick | call cbRemoveAlert() |
+| 'RemoveIconSVG' clicked | 1. Callback function invoked.<br>2. State Change.<br>3. Specific alert is removed from alertLog. |
 
 ## d. Context-Aware Specification ##
 
