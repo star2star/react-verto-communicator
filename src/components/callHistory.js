@@ -154,7 +154,7 @@ class HistoryItems extends VertoBaseComponent {
     return (
       <div>
         <div
-            className="headerCont"
+            className="headerCont-hist"
             style={{...this.getDefaultStyle('headerCont')}}
         >
           <div
@@ -264,7 +264,7 @@ class DetailItems extends VertoBaseComponent {
   }
 
   generateDetails(style, i) {
-    console.log('details callerId',this.props.callerId);
+    //console.log('details arguments', style, i);
     const self = this;
     let details;
     const detailData = CallHistoryService.getInstance().getHistoryDetail(this.props.callerId);
@@ -306,7 +306,7 @@ class DetailItems extends VertoBaseComponent {
     return (
       <div>
         <div
-              className="headerCont"
+              className="headerCont-deets"
               style={{...this.getDefaultStyle('headerCont')}}
         >
             <div
@@ -342,7 +342,11 @@ class DetailItems extends VertoBaseComponent {
 class CallHistory extends VertoBaseComponent {
   constructor(props) {
     super(props);
-    this.state = { item: [[375,375], [375,375]], currItem: 0, callItem: ''};
+    this.state = {
+      item: [[375,375], [375,375]],
+      currItem: 0,
+      callItem: ''
+    };
 
     this.clickHandler = this.clickHandler.bind(this);
 }
@@ -362,7 +366,7 @@ class CallHistory extends VertoBaseComponent {
   getDefaultStyle(styleName) {
     const styles = {
       container: {
-        display: 'flex',
+        display:  'flex',
         position: 'relative',
         flex: 1,
         alignItems: 'flex-start',
@@ -383,12 +387,12 @@ class CallHistory extends VertoBaseComponent {
   }
 
   generateContent(style, i) {
-    //console.log('styles and keys being passed in', style, i);
-
     var historyItems = (
+      <span
+          style={{...style, position: 'absolute'}}
+      >
       <HistoryItems
           key={i}
-          compStyle={{...style}}
           history={this.props.history}
           cbClick={this.clickHandler}
           cbBack={this.props.cbBack}
@@ -399,27 +403,27 @@ class CallHistory extends VertoBaseComponent {
           cbClearHistory={this.props.cbClearHistory}
           cbCall={this.props.cbCall}
       />
+      </span>
     );
 
     var detailItems = (
+      <span
+          style={{...style, position: 'absolute'}}
+      >
       <DetailItems
           key={i}
-          compStyle={{...style}}
           cbBack={()=>{
             this.clickHandler();
           }}
           cbCall={this.props.cbCall}
           callerId={this.state.callItem}
       />
+      </span>
     );
 
     var renderedComponent = [historyItems, detailItems];
 
-    if(this.state.currItem == 0) {
-      return renderedComponent[0];
-    } else {
-      return renderedComponent[1];
-    }
+    return renderedComponent[i];
   }
 
   render(){
@@ -428,15 +432,12 @@ class CallHistory extends VertoBaseComponent {
     const {item, currItem} = this.state;
     //console.log('this.state.item + this.state.currItem', item, currItem);
     const [currWidth, currHeight] = item[currItem];
-    //console.log('currWidth + currHeight',currWidth, currHeight);
 
     const widths = item.map(([origW, origH])=> currHeight / origH * origW);
-    //console.log('widths',widths);
 
     const leftStartCoords = widths
       .slice(0, currItem)
-      .reduce((sum,width) => sum-width, 0);
-    //console.log('Left Start Coords',leftStartCoords);
+      .reduce((sum,width) => sum - width, 0);
 
     let configs = [];
     item.reduce((prevLeft, [origW, origH], i) => {
@@ -447,13 +448,13 @@ class CallHistory extends VertoBaseComponent {
       });
       return prevLeft + widths[i];
     }, leftStartCoords);
-    //console.log('configs array',configs);
 
     return (
       <div
           className="container"
           style={this.getStyle('container')}
       >
+      <div>
         <Motion style={{height: spring(currHeight), width: spring(currWidth)}}>
           {container =>
             <div style={container}>
@@ -467,6 +468,7 @@ class CallHistory extends VertoBaseComponent {
             </div>
           }
         </Motion>
+      </div>
       </div>
     );
   }
