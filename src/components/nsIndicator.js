@@ -58,7 +58,6 @@ class NetworkStatusIndicator extends VertoBaseComponent {
         paddingLeft: '15px',
         paddingRight: '15px'
       }
-
     };
 
     return (styles[styleName]);
@@ -86,8 +85,11 @@ class NetworkStatusIndicator extends VertoBaseComponent {
         case 3:
             icon = (<SignalMediumIconSVG svgStyle={{...this.getStyle('icon'), fill: 'yellow'}} />);
             break;
-        default:
+        case 2:
             icon = (<SignalLowIconSVG svgStyle={{...this.getStyle('icon'), fill: 'red'}} />);
+            break;
+        default:
+            icon = (<SignalFullIconSVG svgStyle={{...this.getStyle('icon'), fill: 'black'}} />);
             break;
     }
 
