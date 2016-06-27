@@ -233,8 +233,11 @@ class AppBar extends VertoBaseComponent {
           buttonContainer: {
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'flex-start'
-            //buttons fill container or not?
+               //align buttons left...
+            // alignItems: 'flex-start'
+              // ...or align buttons center?
+            alignItems: 'center'
+              //buttons fill container or not?
             // flex: '1'
           },
           button: {
@@ -251,15 +254,15 @@ class AppBar extends VertoBaseComponent {
           },
           netSpeedContainer: {
             display: 'flex',
-            justifyContent: 'flex-start',
-            // justifyContent: 'center',
+            //justifyContent: 'flex-start',
+            justifyContent: 'space-around',
             alignItems: 'center'
           },
           outgoingSpacing: {
-            padding: '5px'
+            padding: '5px 0px 5px 20px'
           },
-          bandwidthSpacing: {
-            padding: '10px'
+          incomingSpacing: {
+            padding: '10px 30px 10px 0px'
           }
     };
 
@@ -310,10 +313,24 @@ showSpeeds(){
     const { formatMessage } = this.props.intl;
     // console.log('xxxxxxxxxxxx', this.props.settings);
 
-    //network speed displays under "Check Netwok Speed" button
+    //network speed displays under "Check Network Speed" button
     let netSpeedDisplay;
     if (this.state.showSpeeds === false) {
-      netSpeedDisplay = (<div></div>);
+      netSpeedDisplay = (
+        <div className='netSpeedContainer' style={{...this.getStyle('netSpeedContainer')}}>
+          <span style={{...this.getStyle('outgoingSpacing')}}>
+            <FormattedMessage
+                id="BANDWIDTH_INFO_OUTGOING"
+                defaultMessage="Outgoing:"
+            />
+        </span>
+        <span style={{...this.getStyle('incomingSpacing')}}>
+           <FormattedMessage
+               id="BANDWIDTH_INFO_INCOMING"
+               defaultMessage="Incoming:"
+           />
+       </span>
+</div>);
     } else {
       netSpeedDisplay = (
         <div className='netSpeedContainer' style={{...this.getStyle('netSpeedContainer')}}>
@@ -323,7 +340,7 @@ showSpeeds(){
                defaultMessage="Outgoing:"
            /> {this.props.bandwidthInfo.outgoingBandwidth}
          </span>
-         <span style={{...this.getStyle('bandwidthSpacing')}}>
+         <span style={{...this.getStyle('incomingSpacing')}}>
            <FormattedMessage
                id="BANDWIDTH_INFO_INCOMING"
                defaultMessage="Incoming:"
@@ -388,15 +405,14 @@ showSpeeds(){
           <button
               style={{...this.getStyle('button')}}
               onClick={()=>{this.props.dispatch(doSpeedTest());this.showSpeeds();}}
-
               >
             <FormattedMessage
                 id="CHECK_NETWORK_SPEED"
                 defaultMessage="Check Network Speed"
             />
           </button>
-        </div>
-        {netSpeedDisplay}
+          </div>
+          {netSpeedDisplay}
       </div>);}
 
     if (this.props.showSettings) {
