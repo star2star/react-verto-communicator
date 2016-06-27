@@ -282,8 +282,8 @@ class AppBar extends VertoBaseComponent {
     foundUserMenu && foundUserMenu.closeMenu();
     const foundTagMenu = this.findWrappedMethods(this.refs.MyTagMenu, 'closeMenu');
     foundTagMenu && foundTagMenu.closeMenu();
-    const foundCloseMenu = this.findWrappedMethods(this.refs.MySettingsMenu, 'closeMenu');
-    foundCloseMenu && foundCloseMenu.closeMenu();
+    const foundSettingsMenu = this.findWrappedMethods(this.refs.MySettingsMenu, 'closeMenu');
+    foundSettingsMenu && foundSettingsMenu.closeMenu();
     //TagMenu.closeMenu();
   }
 
