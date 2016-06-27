@@ -149,7 +149,7 @@ export default class AdminVideoControls extends VertoBaseComponent {
               cbActionClick={this.props.cbSnapshot}
           />
         </ToolTip>
-        <ToolTip name="snapshot" place='top' msg={modeMsg}>
+        <ToolTip name="videomode" place='top' msg={modeMsg}>
           <ControlItem type="VideoModeIconSVG"
               compStyle={this.getStyle("controlIconStyle")}
               cbActionClick={this.handleShowLayoutList}
