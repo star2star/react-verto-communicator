@@ -182,6 +182,11 @@ const messages = {
   "WATCHING_CANVAS": "Regarder Toile",
   "INPUT_CANVAS": "Toile d'entrée",
   "CLEAR_ALERTS": "alertes claires",
-  "NO_LOG": "aucune donnée de journal"
+  "NO_LOG": "aucune donnée de journal",
+  "CLICK_DIAL": "Cliquez pour composer",
+  "SETTINGS_LOGIN": "Connectez-vous pour modifier les paramètres",
+  "SETTINGS_USER": "Paramètres utilisateur",
+  "SETTINGS_USER_LOGIN": "Connectez-vous pour modifier les paramètres utilisateur",
+  "MENU_INFO": "Menu info"
 };
 module.exports = messages;

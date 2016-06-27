@@ -182,6 +182,11 @@ const messages = {
   "WATCHING_CANVAS": "Beobachten Leinwand",
   "INPUT_CANVAS": "Eingang Leinwand",
   "CLEAR_ALERTS": "Warnungen löschen",
-  "NO_LOG": "Keine Protokolldaten"
+  "NO_LOG": "Keine Protokolldaten",
+  "CLICK_DIAL": "Klicken Sie zum Wählen",
+  "SETTINGS_LOGIN": "Melden Sie sich an Einstellungen zu ändern",
+  "SETTINGS_USER": "Benutzereinstellungen",
+  "SETTINGS_USER_LOGIN": "Login-Benutzereinstellungen ändern",
+  "MENU_INFO": "Info-Menü"
 };
 module.exports = messages;

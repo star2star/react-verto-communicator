@@ -182,6 +182,11 @@ const messages = {
   "WATCHING_CANVAS": "看著畫布",
   "INPUT_CANVAS": "輸入帆布",
   "CLEAR_ALERTS": "清除警報",
-  "NO_LOG": "沒有日誌數據"
+  "NO_LOG": "沒有日誌數據",
+  "CLICK_DIAL": "點擊撥號",
+  "SETTINGS_LOGIN": "登錄更改設置",
+  "SETTINGS_USER": "用戶設置",
+  "SETTINGS_USER_LOGIN": "登錄更改用戶設置",
+  "MENU_INFO": "信息菜單"
   };
   module.exports = messages;

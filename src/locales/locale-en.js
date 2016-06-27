@@ -182,6 +182,11 @@ const messages = {
   "WATCHING_CANVAS": "Watching Canvas",
   "INPUT_CANVAS": "Input Canvas",
   "CLEAR_ALERTS": "Clear Alerts",
-  "NO_LOG": "No Log Data"
+  "NO_LOG": "No Log Data",
+  "CLICK_DIAL": "Click to dial",
+  "SETTINGS_LOGIN": "Log in to change settings",
+  "SETTINGS_USER": "User settings",
+  "SETTINGS_USER_LOGIN": "Login to change user settings",
+  "MENU_INFO": "Info menu"
 };
 module.exports = messages;

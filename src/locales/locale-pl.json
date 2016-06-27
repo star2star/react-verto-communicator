@@ -182,6 +182,11 @@ const messages = {
   "WATCHING_CANVAS": "Oglądając Canvas",
   "INPUT_CANVAS": "wejście na płótnie",
   "CLEAR_ALERTS": "Pogodne Alerts",
-  "NO_LOG": "Brak danych dziennika"
+  "NO_LOG": "Brak danych dziennika",
+  "CLICK_DIAL": "Kliknij , aby wybrać",
+  "SETTINGS_LOGIN": "Zaloguj się, aby zmienić ustawienia",
+  "SETTINGS_USER": "Ustawienia użytkownika",
+  "SETTINGS_USER_LOGIN": "Zaloguj się, aby zmienić ustawienia użytkownika",
+  "MENU_INFO": "menu Info"
 };
 module.exports = messages;

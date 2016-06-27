@@ -182,6 +182,11 @@ const messages = {
   "WATCHING_CANVAS": "guardando Canvas",
   "INPUT_CANVAS": "Tela di ingresso",
   "CLEAR_ALERTS": "chiari avvisi",
-  "NO_LOG": "non ci sono dati di registro"
+  "NO_LOG": "non ci sono dati di registro",
+  "CLICK_DIAL": "Fare clic per comporre",
+  "SETTINGS_LOGIN": "Esegui il login per modificare le impostazioni",
+  "SETTINGS_USER": "Impostazioni utente",
+  "SETTINGS_USER_LOGIN": "Login per modificare le impostazioni utente",
+  "MENU_INFO": "menu Info"
 };
 module.exports = messages;
