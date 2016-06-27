@@ -16,12 +16,8 @@ This component will be a 'pure' component.
 
 | Prop Name | Sample | Description |
 |------------ | ------------- | ---------------|
-<<<<<<< HEAD
 |networkData | networkData={<br>upkpbs: {value},<br> downkpbs: {value},<br>videoResolution: {value}<br>} | Required. An object that contains properties necessary for calculating the correct icon to render and content to display. |
 |addMenuOption |  addMenuOption={}| An optional object that may contain a method to run onClick|
-=======
-|networkData | networkData={<br>upkpbs: {value},<br> downkpbs: {value},<br>videoResolution: {value}<br>} | Required. An object that contains properties necessary for calculating the correct icon to render and content to display.  |
->>>>>>> 575c2d67f8853ef22f46d908a7f5b459d9b04357
 |compStyle | compStyle={} | An object that contains css styles.|
 | allowDisplayDetails | allowDisplayDetails={true} | A boolean. If true, it will render the caret icon and a dropdown menu. If false, it will simply render the network-status icon|
 
