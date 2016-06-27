@@ -55,12 +55,12 @@ describe('Default test for ChatMessageItem', ()=>{
     expect(wrapper.find('div').length).toEqual(21);
   });
 
-  it('Proporly takes in the props ', () => {
+  it('Properly takes in the props ', () => {
     const wrapper = mountWithIntl(<AdminControls multCanvas={true} member={sampleMember}  cbControlClick={()=>{}} />);
     expect(wrapper.props().multCanvas).toEqual(true);
   });
 
-  it('Proporly takes in the props ', () => {
+  it('Properly takes in the props ', () => {
     const wrapper = mountWithIntl(<AdminControls multCanvas={true} member={sampleMember}  cbControlClick={()=>{}} />);
     expect(wrapper.props().member.name).toEqual('Cory');
   });

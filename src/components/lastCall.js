@@ -51,7 +51,7 @@ class LastCall extends VertoBaseComponent {
     if(this.props.labelText == "No Call" || this.props.labelText == "In Call:     "){
 
     }else{
-      lastcall = <ToolTip place={this.props.ttPosition} msg={theMsg}>{lastcall}</ToolTip>;
+      lastcall = <ToolTip name="last call" place={this.props.ttPosition} msg={theMsg}>{lastcall}</ToolTip>;
     }
     //console.log("^^^^^^^^^^^^^^^^^^^^^^^^^", lastcalll);
     return (

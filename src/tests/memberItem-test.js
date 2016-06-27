@@ -152,6 +152,26 @@ describe('Default test for MemberItem', ()=>{
       expect(wrapper.find('div').length).toEqual(20); //4 memberItem divs, 16 adminControl divs
   });
 
+  it('simulates click event (cbControlClick)', () => {
+    const spy = sinon.spy();
+    const wrapper = mountWithIntl(
+      <MemberItem
+          member={sampleMember}
+          controlSettings={controlSettings}
+          cbControlClick={cbControlClick}
+    />,
+    <AdminControls
+        multCanvas={false}
+        member={sampleMember}
+        cbControlClick={cbControlClick}
+      />);
+     wrapper.children().find('.a/v icons');
+    // console.log('------------------->', expectedNode.debug());
+    wrapper.simulate('click');
+    expect(spy.calledOnce, true);
+  });
+
+
   // it('renders  ', () => {
   //   const wrapper = mountWithIntl(
   //     <MemberItem
