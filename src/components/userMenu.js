@@ -5,6 +5,7 @@ AvatarSVG,
 CaretUpIconSVG,
 CaretDownIconSVG } from './svgIcons';
 import ToolTip from './tooltip';
+import { FormattedMessage, injectIntl } from 'react-intl';
 
 
 const propTypes = {
@@ -89,6 +90,7 @@ class UserMenu extends VertoBaseComponent {
   }
 
   render() {
+    const { formatMessage } = this.props.intl;
     const menuContainer = (
 
       <div className="menuContainer" style={this.getStyle('menu')} >
@@ -97,9 +99,9 @@ class UserMenu extends VertoBaseComponent {
     );
 
     if(this.props.status == "disconnected"){
-      var theMsg = "Login to change user settings";
+      var theMsg = formatMessage({"id":"SETTINGS_USER_LOGIN", "defaultMessage":"login to change user settings"});;
     }else{
-      var theMsg = "User settings";
+      var theMsg = formatMessage({"id":"SETTINGS_USER", "defaultMessage":"Disconnected"});;
     }
 
     return (
@@ -120,4 +122,4 @@ class UserMenu extends VertoBaseComponent {
 
 UserMenu.propTypes = propTypes;
 UserMenu.defaultProps = defaultProps;
-export default UserMenu;
+export default injectIntl(UserMenu);

@@ -182,6 +182,11 @@ const messages = {
   "WATCHING_CANVAS": "ser lærred",
   "INPUT_CANVAS": "Input Canvas",
   "CLEAR_ALERTS": "klare advarsler",
-  "NO_LOG": "Ingen Log data"
+  "NO_LOG": "Ingen Log data",
+  "CLICK_DIAL": "Klik for at ringe",
+  "SETTINGS_LOGIN": "Log på for at ændre indstillinger",
+  "SETTINGS_USER": "indstillinger Ser",
+  "SETTINGS_USER_LOGIN": "Login for at ændre brugerindstillinger",
+  "MENU_INFO": "menuen Info"
 };
 module.exports = messages;

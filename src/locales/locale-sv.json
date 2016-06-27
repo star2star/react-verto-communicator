@@ -182,6 +182,11 @@ const messages = {
   "WATCHING_CANVAS": "Titta på Canvas",
   "INPUT_CANVAS": "input kanfas",
   "CLEAR_ALERTS": "tydliga varningar",
-  "NO_LOG": "Ingen loggdata"
+  "NO_LOG": "Ingen loggdata",
+  "CLICK_DIAL": "Klicka för att ringa",
+  "SETTINGS_LOGIN": "Logga in för att ändra inställningarna",
+  "SETTINGS_USER": "Användarinställningar",
+  "SETTINGS_USER_LOGIN": "Logga in för att ändra användarinställningar",
+  "MENU_INFO": "info -menyn"
   };
   module.exports = messages;

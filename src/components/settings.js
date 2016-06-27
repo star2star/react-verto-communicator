@@ -5,7 +5,7 @@ SettingsIconSVG,
 CaretUpIconSVG,
 CaretDownIconSVG } from './svgIcons';
 import ToolTip from './tooltip';
-
+import { FormattedMessage, injectIntl } from 'react-intl';
 
 const propTypes = {
   cbDeviceList: React.PropTypes.func,
@@ -68,10 +68,11 @@ class Settings extends VertoBaseComponent {
   }
 
   render() {
+    const { formatMessage } = this.props.intl;
     if(this.props.status == "disconnected"){
-      var theMsg = "Login to change settings";
+      var theMsg = formatMessage({"id":"SETTINGS_LOGIN", "defaultMessage":"Login to change settings"});
     }else{
-      var theMsg = "Settings";
+      var theMsg = formatMessage({"id":"SETTINGS", "defaultMessage":"settings"});;
     }
     // console.log('settings render props: ', this.props.settingsData);
     return (
@@ -92,4 +93,4 @@ class Settings extends VertoBaseComponent {
 
 Settings.propTypes = propTypes;
 Settings.defaultProps = defaultProps;
-export default Settings;
+export default injectIntl(Settings);

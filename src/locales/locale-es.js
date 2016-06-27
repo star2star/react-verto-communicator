@@ -181,6 +181,11 @@ const messages = {
   "WATCHING_CANVAS": "viendo la lona",
   "INPUT_CANVAS": "Lienzo de entrada",
   "CLEAR_ALERTS": "alertas claras",
-  "NO_LOG": "hay datos de registro"
+  "NO_LOG": "hay datos de registro",
+  "CLICK_DIAL": "Haga clic para marcar",
+  "SETTINGS_LOGIN": "Entre para cambiar los ajustes",
+  "SETTINGS_USER": "ajustes de usuario",
+  "SETTINGS_USER_LOGIN": "Inicia sesión para cambiar la configuración del usuario",
+  "MENU_INFO": "menú de información"
 };
 module.exports = messages;

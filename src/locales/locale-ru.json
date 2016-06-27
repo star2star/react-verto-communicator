@@ -182,6 +182,11 @@ const messages = {
   "WATCHING_CANVAS": "Смотря Холст",
   "INPUT_CANVAS": "Ввод Холст",
   "CLEAR_ALERTS": "четкие предупреждения",
-  "NO_LOG": "нет данных журнала"
+  "NO_LOG": "нет данных журнала",
+  "CLICK_DIAL": "нажмите чтобы набрать",
+  "SETTINGS_LOGIN": "Войти , чтобы изменить настройки",
+  "SETTINGS_USER": "Пользовательские настройки",
+  "SETTINGS_USER_LOGIN": "Вход для изменения настроек пользователя",
+  "MENU_INFO": "Информационное меню"
   };
   module.exports = messages;

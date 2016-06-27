@@ -182,6 +182,11 @@ const messages = {
   "WATCHING_CANVAS": "menonton Canvas",
   "INPUT_CANVAS": "masukan Canvas",
   "CLEAR_ALERTS": "alert jelas",
-  "NO_LOG": "tidak ada data log"
+  "NO_LOG": "tidak ada data log",
+  "CLICK_DIAL": "Klik untuk dial",
+  "SETTINGS_LOGIN": "Masuk untuk mengubah pengaturan",
+  "SETTINGS_USER": "Pengaturan pengguna",
+  "SETTINGS_USER_LOGIN": "Masuk untuk mengubah pengaturan pengguna",
+  "MENU_INFO": "menu Info"
 };
 module.exports = messages;
