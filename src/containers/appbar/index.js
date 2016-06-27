@@ -278,8 +278,13 @@ class AppBar extends VertoBaseComponent {
   }
 
   handleCloseDropdowns() {
-    UserMenu.closeMenu();
-    TagMenu.closeMenu();
+    const foundUserMenu = this.findWrappedMethods(this.refs.MyUserMenu, 'closeMenu');
+    foundUserMenu && foundUserMenu.closeMenu();
+    const foundTagMenu = this.findWrappedMethods(this.refs.MyTagMenu, 'closeMenu');
+    foundTagMenu && foundTagMenu.closeMenu();
+    const foundCloseMenu = this.findWrappedMethods(this.refs.MySettingsMenu, 'closeMenu');
+    foundCloseMenu && foundCloseMenu.closeMenu();
+    //TagMenu.closeMenu();
   }
 
   handleCloseMenu(){
@@ -289,11 +294,11 @@ class AppBar extends VertoBaseComponent {
 
   settings(displaySettings) {
     // Close any open menus in the appbar
-    UserMenu.closeMenu();
-    TagMenu.closeMenu();
+
+    displaySettings && this.handleCloseDropdowns();
 
     //console.log('toggle settings', displaySettings);
-    this.setState({ ...this.state, showSettings: displaySettings });
+    setTimeout( ()=>this.setState({ ...this.state, showSettings: displaySettings }), 0);
   }
 
 
@@ -630,7 +635,7 @@ showSpeeds(){
             {lastCall}
 
             <div style={!this.state.showAltAppControls ? this.getStyle('marginRightStyle') : this.getStyle('marginBottomStyle')}>
-              <Settings  allowDisplayDetails={this.props.vcStatus != 'disconnected'}
+              <Settings ref="MySettingsMenu" allowDisplayDetails={this.props.vcStatus != 'disconnected'}
                   cbSubmitSetting = {(data)=>{this.props.dispatch(doUpdateSetting(data));}}
                   cbToggleShowSettings={this.settings.bind(this)}
                   settings={this.props.settings}
@@ -643,7 +648,7 @@ showSpeeds(){
 
 
             <div style={!this.state.showAltAppControls ? this.getStyle('marginRightStyle') : this.getStyle('marginBottomStyle')}>
-              <UserMenu allowDisplayDetails={this.props.vcStatus != 'disconnected'}
+              <UserMenu ref="MyUserMenu" allowDisplayDetails={this.props.vcStatus != 'disconnected'}
                   compStyle={this.state.showAltAppControls ? this.getStyle("altUserMenu") : undefined}
                   cbClick={this.handleCloseDropdowns}
                   status = {this.props.vcStatus}
@@ -659,7 +664,7 @@ showSpeeds(){
 
             </div>
             <div style={!this.state.showAltAppControls ? this.getStyle('marginRightStyle') : this.getStyle('altMenuTagStyle')}>
-              <TagMenu allowDisplayDetails="true"
+              <TagMenu ref="MyTagMenu" allowDisplayDetails="true"
                   compStyle={this.state.showAltAppControls ? this.getStyle("altTagMenu") : undefined}
                   cbClick={this.handleCloseDropdowns}
                   ttPosition={!this.state.showAltAppControls ? "bottom" : "right"}
