@@ -5,8 +5,7 @@ import CallHistoryService from '../js/callHistoryService';
 import { UpArrowIconSVG, DownArrowIconSVG, RemoveIconSVG, BackArrowIconSVG } from './svgIcons';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
-import Radium  from 'radium';
-import {TransitionMotion, Motion, spring} from 'react-motion';
+import {Motion, spring} from 'react-motion';
 
 const propTypes = {
   compStyle : React.PropTypes.object,
@@ -99,8 +98,7 @@ class HistoryItems extends VertoBaseComponent {
       return (styles[styleName]);
     }
 
-
-  generateHistory(config) {
+  generateHistory() {
     let listitems;
     if(this.props.history.length > 1){
     listitems = this.props.history.map((i)=>{
@@ -120,7 +118,7 @@ class HistoryItems extends VertoBaseComponent {
       listitems = (
         <div
             className="noCalls"
-            style={{...this.getDefaultStyle('noCallDetails'), ...config}}
+            style={{...this.getDefaultStyle('noCallDetails') }}
         >
             <span>
               No calls to show.
@@ -130,8 +128,6 @@ class HistoryItems extends VertoBaseComponent {
     }
     return listitems;
   }
-
-
 
   render(){
     let clearHistory;
@@ -175,7 +171,7 @@ class HistoryItems extends VertoBaseComponent {
                     id="CALL_HISTORY"
                 />
             </span>
-              {clearHistory}
+            {clearHistory}
           </div>
         </div>
         <div
@@ -183,7 +179,7 @@ class HistoryItems extends VertoBaseComponent {
             tabIndex="0"
             style={{...this.getDefaultStyle('body')}}
         >
-        {this.generateHistory()}
+            {this.generateHistory()}
         </div>
       </div>
     );
@@ -263,8 +259,7 @@ class DetailItems extends VertoBaseComponent {
       return (styles[styleName]);
   }
 
-  generateDetails(style, i) {
-    //console.log('details arguments', style, i);
+  generateDetails() {
     const self = this;
     let details;
     const detailData = CallHistoryService.getInstance().getHistoryDetail(this.props.callerId);
@@ -290,7 +285,7 @@ class DetailItems extends VertoBaseComponent {
                 onClick={()=>{
                   self.props.cbCall(i.callerId);
                 }}
-                style={{...self.getDefaultStyle('details'), ...style}}
+                style={{...self.getDefaultStyle('details') }}
             >
               {renderedDirection}
               {formattedTimestamp}
@@ -306,7 +301,7 @@ class DetailItems extends VertoBaseComponent {
     return (
       <div>
         <div
-              className="headerCont-deets"
+            className="headerCont-deets"
               style={{...this.getDefaultStyle('headerCont')}}
         >
             <div
@@ -317,13 +312,13 @@ class DetailItems extends VertoBaseComponent {
                     onClick={this.props.cbBack}
                     tabIndex="0"
                 >
-                    <RemoveIconSVG svgStyle={{...this.getDefaultStyle('headerSvgs')}} />
+                    <BackArrowIconSVG svgStyle={{...this.getDefaultStyle('headerSvgs')}} />
                 </span>
                 <span
                     className="title"
                     style={{...this.getDefaultStyle('title')}}
                 >
-                  {this.callerId}
+                  {this.props.callerId}
                 </span>
             </div>
           </div>
@@ -376,7 +371,7 @@ class CallHistory extends VertoBaseComponent {
         flexDirection: "column",
         height: '500px',
         minWidth: '225px', // allows animation to go in/out further without clashing 'Call History' and 'Clear History'
-        overflowY: 'auto',
+        overflowY: 'hidden',
         overflowX: 'hidden',
         boxShadow: '0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)',
         color: "#4a4a4a"
@@ -398,7 +393,6 @@ class CallHistory extends VertoBaseComponent {
           cbBack={this.props.cbBack}
           cbShowCalls={(num)=>{
             this.setState({...this.state, currItem : 1, callItem: num});
-            //this.clickHandler();
           }}
           cbClearHistory={this.props.cbClearHistory}
           cbCall={this.props.cbCall}
@@ -428,13 +422,9 @@ class CallHistory extends VertoBaseComponent {
 
   render(){
 
-    // animation hell
     const {item, currItem} = this.state;
-    //console.log('this.state.item + this.state.currItem', item, currItem);
     const [currWidth, currHeight] = item[currItem];
-
     const widths = item.map(([origW, origH])=> currHeight / origH * origW);
-
     const leftStartCoords = widths
       .slice(0, currItem)
       .reduce((sum,width) => sum - width, 0);
@@ -454,7 +444,6 @@ class CallHistory extends VertoBaseComponent {
           className="container"
           style={this.getStyle('container')}
       >
-      <div>
         <Motion style={{height: spring(currHeight), width: spring(currWidth)}}>
           {container =>
             <div style={container}>
@@ -469,10 +458,8 @@ class CallHistory extends VertoBaseComponent {
           }
         </Motion>
       </div>
-      </div>
     );
   }
-
 }
 
 CallHistory.defaultProps = defaultProps;
