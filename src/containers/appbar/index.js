@@ -280,11 +280,12 @@ class AppBar extends VertoBaseComponent {
   handleCloseDropdowns() {
     const foundUserMenu = this.findWrappedMethods(this.refs.MyUserMenu, 'closeMenu');
     foundUserMenu && foundUserMenu.closeMenu();
+
     const foundTagMenu = this.findWrappedMethods(this.refs.MyTagMenu, 'closeMenu');
     foundTagMenu && foundTagMenu.closeMenu();
+
     const foundSettingsMenu = this.findWrappedMethods(this.refs.MySettingsMenu, 'closeMenu');
     foundSettingsMenu && foundSettingsMenu.closeMenu();
-    //TagMenu.closeMenu();
   }
 
   handleCloseMenu(){

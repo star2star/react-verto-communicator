@@ -89,7 +89,6 @@ class UserMenu extends VertoBaseComponent {
   }
 
   render() {
-    console.log('^^^^^^^^^', this);
     const { formatMessage } = this.props.intl;
     const menuContainer = (
 
