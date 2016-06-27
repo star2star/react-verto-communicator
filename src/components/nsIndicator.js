@@ -89,7 +89,7 @@ class NetworkStatusIndicator extends VertoBaseComponent {
             icon = (<SignalLowIconSVG svgStyle={{...this.getStyle('icon'), fill: 'red'}} />);
             break;
         default:
-            icon = (<SignalFullIconSVG svgStyle={{...this.getStyle('icon'), fill: 'black'}} />);
+             (<SignalFullIconSVG svgStyle={{...this.getStyle('icon'), fill: 'black'}} />);
             break;
     }
 
