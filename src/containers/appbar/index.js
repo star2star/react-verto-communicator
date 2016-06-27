@@ -255,6 +255,7 @@ class AppBar extends VertoBaseComponent {
           netSpeedContainer: {
             display: 'flex',
             //justifyContent: 'flex-start',
+              //outgoing-incoming spacing underneath button
             justifyContent: 'space-around',
             alignItems: 'center'
           },
