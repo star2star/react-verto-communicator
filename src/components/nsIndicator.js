@@ -4,9 +4,7 @@ import {
 //SignalNoneIconSVG,
 SignalMediumIconSVG,
 SignalFullIconSVG,
-SignalLowIconSVG,
-CaretUpIconSVG,
-CaretDownIconSVG } from './svgIcons';
+SignalLowIconSVG } from './svgIcons';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import ToolTip from './tooltip';
 import ReactDOMServer  from 'react-dom/server';
@@ -69,7 +67,7 @@ class NetworkStatusIndicator extends VertoBaseComponent {
   render() {
     const { formatMessage } = this.props.intl;
 
-    //console.log('&&&&&&&&&&&&& this.props.compStyle', this.props.compStyle);
+    //console.log('&&&&&&&&&&&&& this.props.networkData', this.props.networkData);
 
     let bwp = 4;
     const networkData = this.props.networkData;
@@ -90,6 +88,7 @@ class NetworkStatusIndicator extends VertoBaseComponent {
             break;
         default:
             icon = (<SignalLowIconSVG svgStyle={{...this.getStyle('icon'), fill: 'red'}} />);
+            break;
     }
 
     const toolTipMessage =(

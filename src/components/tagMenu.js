@@ -109,4 +109,6 @@ class TagMenu extends VertoBaseComponent {
 
 TagMenu.propTypes = propTypes;
 TagMenu.defaultProps = defaultProps;
-export default injectIntl(TagMenu);
+export default injectIntl(TagMenu, {
+        withRef: true
+    });

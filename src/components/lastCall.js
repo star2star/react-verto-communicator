@@ -42,10 +42,11 @@ class LastCall extends VertoBaseComponent {
 
   render() {
     const theMsg = "Click To Dial";
-    let lastcall =  <div onClick={this.call} style={this.getStyle('container')}>
-                      <span style={this.getStyle('lastCallStyle')}>{this.props.labelText}
-                      {this.props.lastNumber? this.props.lastNumber :''}</span>
-                    </div>;
+    let lastcall =  (<div onClick={this.call} style={this.getStyle('container')}>
+                          <span style={this.getStyle('lastCallStyle')}>
+                            {this.props.labelText}{this.props.lastNumber ? this.props.lastNumber :''}
+                          </span>
+                        </div>);
 
 
     if(this.props.labelText == "No Call" || this.props.labelText == "In Call:     "){

@@ -25,8 +25,7 @@ class UserMenu extends VertoBaseComponent {
     this.state = {'dropdownDisplayed': false};
 
     this.toggleMenu = this.toggleMenu.bind(this);
-    UserMenu.toggleMenu = this.toggleMenu.bind(this);
-    UserMenu.closeMenu = this.closeMenu.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
   }
 
   getCompStyle() {
@@ -122,4 +121,6 @@ class UserMenu extends VertoBaseComponent {
 
 UserMenu.propTypes = propTypes;
 UserMenu.defaultProps = defaultProps;
-export default injectIntl(UserMenu);
+export default  injectIntl(UserMenu,{
+        withRef: true
+    });

@@ -27,12 +27,18 @@ class Settings extends VertoBaseComponent {
     this.state = {'dropdownDisplayed': this.props.allowDisplayDetails };
 
     this.showMenu = this.showMenu.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
 
     Settings.toggleSettings = this.showMenu;
   }
 
   getCompStyle() {
     return this.props.compStyle;
+  }
+
+  closeMenu(){
+    this.props.cbToggleShowSettings(false);
+    this.setState({...this.state, dropdownDisplayed: false});
   }
 
   getDefaultStyle(styleName) {
@@ -93,4 +99,6 @@ class Settings extends VertoBaseComponent {
 
 Settings.propTypes = propTypes;
 Settings.defaultProps = defaultProps;
-export default injectIntl(Settings);
+export default injectIntl(Settings, {
+        withRef: true
+    });
