@@ -83,11 +83,13 @@ class CallHistoryItem extends VertoBaseComponent {
 
   call() {
     if (this.props.cbClick) {
+      console.log('cbClick Clicked');
       this.props.cbClick(this.props.data.callerId);
     }
   }
   showCalls() {
-    if (this.props.cbClick) {
+    if (this.props.cbShowCalls) {
+      console.log('showcalls Clicked', this.props.data);
       this.props.cbShowCalls(this.props.data.callerId);
     }
   }
@@ -110,7 +112,7 @@ class CallHistoryItem extends VertoBaseComponent {
         <span
             tabIndex="0"
             className="menuCont"
-            onClick={this.props.cbShowCalls}
+            onClick={this.showCalls}
             style={{...this.getDefaultStyle('menuCont')}}>
           <MenuIconSVG svgStyle={{...this.getStyle('dirSVG')}} />
         </span>);

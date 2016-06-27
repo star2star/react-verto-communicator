@@ -12,6 +12,7 @@ const propTypes = {
   compStyle : React.PropTypes.object,
   history : React.PropTypes.array,
   cbClick : React.PropTypes.func,
+  cbShowCalls : React.PropTypes.func,
   cbClearHistory : React.PropTypes.func.isRequired,
   cbCall : React.PropTypes.func,
   allowToolTip : React.PropTypes.bool,
@@ -112,11 +113,7 @@ class HistoryItems extends VertoBaseComponent {
                 cbClick={()=>{
                   this.props.cbCall(i.callerId);
                 }}
-                cbShowCalls={()=>{
-                  this.callerId = i.callerId;
-                  //setTimeout(()=>this.showDetails(),1000);
-                  setTimeout(()=>this.setState({...this.state, 'callDetailDisplayed' : true}),1000);
-                }}
+                cbShowCalls ={this.props.cbShowCalls}
             />
         );
       });
@@ -132,7 +129,7 @@ class HistoryItems extends VertoBaseComponent {
         </div>
       );
     }
-    console.log('listitems: ', listitems);
+    //console.log('listitems: ', listitems);
     return listitems;
   }
 
@@ -270,9 +267,10 @@ class DetailItems extends VertoBaseComponent {
   }
 
   generateDetails() {
+    console.log('details callerId',this.props.callerId);
     const self = this;
     let details;
-    const detailData = CallHistoryService.getInstance().getHistoryDetail(this.callerId);
+    const detailData = CallHistoryService.getInstance().getHistoryDetail(this.props.callerId);
     //console.log('detailData',detailData); // empty array onload
     details = detailData.length ? (
       detailData.map(function(i){
@@ -292,11 +290,6 @@ class DetailItems extends VertoBaseComponent {
       const formattedTimestamp = moment(i.timestamp).format('ddd MMM DD YYYY HH:mm:ss A');
       //const d1 = config.style.width < 150 ? 'none': 'block';
       return (
-        <div
-            className="body"
-            tabIndex="0"
-            style={{...self.getDefaultStyle('body')}}
-        >
             <div
                 className="details"
                 onClick={()=>{
@@ -307,12 +300,11 @@ class DetailItems extends VertoBaseComponent {
               {renderedDirection}
               {formattedTimestamp}
             </div>
-        </div>
       );
     })
   ) : null;
 
-    console.log('Details:', details);
+    //console.log('Details:', details);
     return details;
   }
 
@@ -341,7 +333,13 @@ class DetailItems extends VertoBaseComponent {
                 </span>
             </div>
           </div>
-          {this.generateDetails()}
+          <div
+              className="body"
+              tabIndex="0"
+              style={{...this.getDefaultStyle('body')}}
+          >
+              {this.generateDetails()}
+          </div>
         </div>
     );
   }
@@ -350,15 +348,20 @@ class DetailItems extends VertoBaseComponent {
 class CallHistory extends VertoBaseComponent {
   constructor(props) {
     super(props);
-    this.state = { items: [], item: [[375,400], [375,400]], currItem: 0, callDetailDisplayed : false, callItem: ''};
+    this.state = { item: [[375,400], [375,400]], currItem: 0, callDetailDisplayed : false, callItem: ''};
 
+    this.clickHandler = this.clickHandler.bind(this);
 }
 
   clickHandler() {
+    console.log('clickHandler clicked');
     if(this.state.currItem == 0) {
       this.setState({...this.state, currItem : 1 });
+      console.log('setting state currItem 1');
     } else {
       this.setState({...this.state, currItem: 0 });
+      console.log('setting state currItem 0');
+
     }
   }
 
@@ -393,9 +396,13 @@ class CallHistory extends VertoBaseComponent {
     var historyItems = (
       <HistoryItems
           history={this.props.history}
-          cbClick={this.props.cbClick}
+          cbClick={this.clickHandler}
           cbBack={this.props.cbBack}
-          cbShowCalls={this.props.cbShowCalls}
+          cbShowCalls={(num)=>{
+            console.log('num',num);
+            this.setState({...this.state, currItem : 1, callItem: num});
+            //this.clickHandler();
+          }}
           cbClearHistory={this.props.cbClearHistory}
           cbCall={this.props.cbCall}
       />
@@ -403,13 +410,22 @@ class CallHistory extends VertoBaseComponent {
 
     var detailItems = (
       <DetailItems
-          callerId={this.props.callerId}
+          cbBack={()=>{
+            this.clickHandler();
+            //this.setState({...this.state, currItem : 0});
+          }}
+          callerId={this.state.callItem}
       />
     );
 
     var renderedComponent = [historyItems, detailItems];
     //console.log('comp[i]:', i, comp[i]);
-    return renderedComponent[0];
+
+    if(this.state.currItem == 0) {
+      return renderedComponent[0];
+    } else {
+      return renderedComponent[1];
+    }
   }
 
   render(){
