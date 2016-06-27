@@ -5,8 +5,7 @@ import CallHistoryService from '../js/callHistoryService';
 import { UpArrowIconSVG, DownArrowIconSVG, RemoveIconSVG, BackArrowIconSVG } from './svgIcons';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
-import Radium  from 'radium';
-import {TransitionMotion, Motion, spring} from 'react-motion';
+import {Motion, spring} from 'react-motion';
 
 const propTypes = {
   compStyle : React.PropTypes.object,
@@ -317,13 +316,13 @@ class DetailItems extends VertoBaseComponent {
                     onClick={this.props.cbBack}
                     tabIndex="0"
                 >
-                    <RemoveIconSVG svgStyle={{...this.getDefaultStyle('headerSvgs')}} />
+                    <BackArrowIconSVG svgStyle={{...this.getDefaultStyle('headerSvgs')}} />
                 </span>
                 <span
                     className="title"
                     style={{...this.getDefaultStyle('title')}}
                 >
-                  {this.callerId}
+                  {this.props.callerId}
                 </span>
             </div>
           </div>
@@ -376,7 +375,7 @@ class CallHistory extends VertoBaseComponent {
         flexDirection: "column",
         height: '500px',
         minWidth: '225px', // allows animation to go in/out further without clashing 'Call History' and 'Clear History'
-        overflowY: 'auto',
+        overflowY: 'hidden',
         overflowX: 'hidden',
         boxShadow: '0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21)',
         color: "#4a4a4a"
