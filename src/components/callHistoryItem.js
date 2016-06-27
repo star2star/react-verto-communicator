@@ -83,13 +83,11 @@ class CallHistoryItem extends VertoBaseComponent {
 
   call() {
     if (this.props.cbClick) {
-      console.log('cbClick Clicked');
       this.props.cbClick(this.props.data.callerId);
     }
   }
   showCalls() {
     if (this.props.cbShowCalls) {
-      console.log('showcalls Clicked', this.props.data);
       this.props.cbShowCalls(this.props.data.callerId);
     }
   }
