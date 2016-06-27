@@ -5,9 +5,11 @@ class VertoBaseComponent extends React.Component {
   constructor(props) {
     super(props);
   }
-  findWrappedMethods(obj,methodName){
-    console.log('ooooo', obj, methodName );
-    if (obj && obj[methodName])
+  findWrappedMethods(obj={},methodName){
+    //console.log('ooooo', obj, methodName );
+    if (!methodName) return;
+
+    if (obj[methodName])
       return obj;
 
     if(obj['getWrappedInstance']){
