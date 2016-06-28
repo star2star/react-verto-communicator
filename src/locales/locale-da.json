@@ -187,6 +187,9 @@ const messages = {
   "SETTINGS_LOGIN": "Log på for at ændre indstillinger",
   "SETTINGS_USER": "indstillinger Ser",
   "SETTINGS_USER_LOGIN": "Login for at ændre brugerindstillinger",
-  "MENU_INFO": "menuen Info"
+  "MENU_INFO": "Menuen Info",
+  "CALL_FROM": "Ringe fra:",
+  "ANSWER": "Svar",
+  "REJECT": "Afvise"
 };
 module.exports = messages;

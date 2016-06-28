@@ -177,16 +177,19 @@ const messages = {
   "CONNECTING": "соединительный",
   "CONNECTED": "Связанный",
   "COM_STATUS": "Состояние связи .",
-  "SCREEN_SHARE": "экран Поделиться",
+  "SCREEN_SHARE": "доля экрана",
   "PRESENTER": "ведущий",
   "WATCHING_CANVAS": "Смотря Холст",
   "INPUT_CANVAS": "Ввод Холст",
   "CLEAR_ALERTS": "четкие предупреждения",
-  "NO_LOG": "нет данных журнала",
-  "CLICK_DIAL": "нажмите чтобы набрать",
+  "NO_LOG": "Hет данных журнала",
+  "CLICK_DIAL": "Hажмите чтобы набрать",
   "SETTINGS_LOGIN": "Войти , чтобы изменить настройки",
   "SETTINGS_USER": "Пользовательские настройки",
   "SETTINGS_USER_LOGIN": "Вход для изменения настроек пользователя",
-  "MENU_INFO": "Информационное меню"
+  "MENU_INFO": "Информационное меню",
+  "CALL_FROM": "Звонить из:",
+  "ANSWER": "Ответ",
+  "REJECT": "отклонять"
   };
   module.exports = messages;

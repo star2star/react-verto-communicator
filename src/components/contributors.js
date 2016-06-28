@@ -70,13 +70,17 @@ class Contributors extends VertoBaseComponent{
       }} style={{...this.getStyle('modal')}} >
         <div >
           <h1 style={{...this.getStyle('header')}}>
-            <FormattedMessage id="CONTRIBUTORS" defaultMessage="Contributors" />
+            <FormattedMessage
+                id="CONTRIBUTORS"
+                defaultMessage="Contributors"
+              />
           </h1>
         </div>
         <div style={{...this.getStyle('scrollContent')}}>
             {contList}
         </div>
-      </Modal> );
+      </Modal>
+    );
   }
 }
 

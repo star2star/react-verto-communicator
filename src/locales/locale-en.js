@@ -187,6 +187,9 @@ const messages = {
   "SETTINGS_LOGIN": "Log in to change settings",
   "SETTINGS_USER": "User settings",
   "SETTINGS_USER_LOGIN": "Login to change user settings",
-  "MENU_INFO": "Info menu"
+  "MENU_INFO": "Info menu",
+  "CALL_FROM": "Call From:",
+  "ANSWER": "Answer",
+  "REJECT": "Reject"
 };
 module.exports = messages;
