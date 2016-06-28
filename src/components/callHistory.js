@@ -137,6 +137,11 @@ class HistoryItems extends VertoBaseComponent {
           <span
               className="rmvHistory"
               style={{...this.getDefaultStyle('rmvHistory')}}
+              onKeyPress={(e)=>{
+              if(e.which == 13 || e.keyCode == 13) {
+                this.props.cbClearHistory();
+                return false;
+              }}}
               onClick={this.props.cbClearHistory}
               tabIndex="0"
           >
@@ -159,6 +164,11 @@ class HistoryItems extends VertoBaseComponent {
               style={{...this.getDefaultStyle('header')}}
           >
               <span
+                onKeyPress={(e)=>{
+                  if(e.which == 13 || e.keyCode == 13) {
+                    this.props.cbBack();
+                    return false;
+                  }}}
                   onClick={this.props.cbBack}
                   tabIndex="0"
               >
@@ -314,6 +324,11 @@ class DetailItems extends VertoBaseComponent {
                 style={{...this.getDefaultStyle('header')}}
             >
                 <span
+                  onKeyPress={(e)=>{
+                    if(e.which == 13 || e.keyCode == 13) {
+                      this.props.cbBack();
+                      return false;
+                    }}}
                     onClick={this.props.cbBack}
                     tabIndex="0"
                 >
