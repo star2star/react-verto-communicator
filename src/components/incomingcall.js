@@ -16,39 +16,79 @@ class IncomingCall extends VertoBaseComponent {
         this.state={};
     }
 
-
     getCompStyle() {
       return this.props.compStyle;
     }
 
     getDefaultStyle(styleName) {
       const styles = {
-        container: {backgroundColor: "#fff",
+        container: {
+          backgroundColor: '#fff',
           boxShadow: "0px 8px 17px 0px rgba(0,0,0,.2), 0px 6px 20px 0px rgba(0,0,0,.19)",
           width: '100%',
           display: 'flex',
           justifyContent: 'space-between',
           padding: '10px 0px'
         },
-        displayStyle: {
-          flexDirection: "row",
-          display:"flex",
+        displayAreaStyle: {
+          flexDirection: 'row',
+          display: 'flex',
           alignItems: 'center',
           flex: '1',
           marginRight: '15px'
         },
         avatarStyle: {
-          width: "70px",
-          height: "70px",
-          fill: "#444"
+          width: '70px',
+          height: '70px',
+          fill: '#444'
         },
         callFromDisplay: {
           display: 'flex',
-          flexDirection:'column',
+          flexDirection: 'column',
           color: '#444'
         },
         callIdDisplay: {
           wordWrap: 'break-word'
+        },
+        callControlStyle: {
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems:'center',
+          // width: '120px',
+          marginRight: '15px',
+          color: '#444',
+          flex: '0 0 120px'
+        },
+        // adds spacing between buttons and "answer"/"reject"
+        labelSpacingStyle: {
+          paddingTop:'3px'
+        },
+        // styles the container for each button(answer/reject)
+        buttonContainer: {
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center'
+        },
+        //styles the answer button (the green one)
+        answerIconStyle: {
+          width: '20px',
+          height: '20px',
+          padding: '10px',
+          transform: 'rotate(235deg)',
+          fill: 'white',
+          backgroundColor: 'green',
+          borderRadius: '50%',
+          cursor: 'pointer'
+        },
+        // styles the reject button (the red one)
+        rejectIconStyle: {
+          width: '20px',
+          height: '20px',
+          padding: '10px',
+          fill: 'white',
+          backgroundColor:"red",
+          borderRadius: '50%',
+          cursor: 'pointer'
         }
       };
 
@@ -59,37 +99,48 @@ class IncomingCall extends VertoBaseComponent {
       //console.log('CP: ', this.props.callData);
 
       return (
-          <div style={this.getStyle("container")}>
-            <div style={this.getStyle("displayStyle")}>
+          <div className="container" style={this.getStyle("container")}>
+            <div className="displayArea"style={this.getStyle("displayAreaStyle")}>
               <AvatarSVG svgStyle={this.getStyle("avatarStyle")} />
-                <div style={this.getStyle("callFromDisplay")}>
+                <div className="callFrom" style={this.getStyle("callFromDisplay")}>
                   <span>
                     <FormattedMessage
                         id="CALL_FROM"
                         defaultMessage="Call From:"
                     />
                   </span>
-                  <span style={this.getStyle("callIdDisplay")}>
+                  <span className="callID" style={this.getStyle("callIdDisplay")}>
                       {this.props.callData.params.caller_id_number}
                   </span>
                 </div>
             </div>
-            <div className="callControls" style={{display: 'flex', justifyContent: 'space-between', alignItems:'center', width: '120px', marginRight: '15px', color: '#444', flex: '0 0 120px'}}>
-              <span style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}} onClick={()=>{
+            <div className="callControls" style={this.getStyle("callControlStyle")}>
+              <span style={this.getStyle("buttonContainer")} onClick={()=>{
                 //console.log('answer clicked: ', this.props);
                 this.props.cbAnswer(this.props.callData);
-              }}>
-                <PhoneIconSVG svgStyle={{width: "20px", height: "20px", padding:'10px', transform: 'rotate(235deg)', fill: "white", backgroundColor:"green", borderRadius: "50%" }} />
-                <span>Answer</span>
+                }}
+              >
+                <PhoneIconSVG svgStyle={this.getStyle("answerIconStyle")} />
+                  <span style={this.getStyle("labelSpacingStyle")}>
+                    <FormattedMessage
+                        id="ANSWER"
+                        defaultMessage="Answer"
+                    />
+                  </span>
               </span>
-              <span style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}} onClick={()=>{
+              <span style={this.getStyle("buttonContainer")} onClick={()=>{
                 //console.log('hangup clicked: ', this.props);
                 this.props.cbHangup(this.props.callData);
-              }}>
-                <PhoneIconSVG svgStyle={{width: "20px", height: "20px", padding:'10px', fill: "white", backgroundColor:"red", borderRadius: "50%"}} />
-                <span>Reject</span>
+                }}
+              >
+                <PhoneIconSVG svgStyle={this.getStyle("rejectIconStyle")} />
+                  <span style={this.getStyle("labelSpacingStyle")}>
+                    <FormattedMessage
+                        id="REJECT"
+                        defaultMessage="Reject"
+                    />
+                  </span>
               </span>
-
             </div>
           </div>
         );
