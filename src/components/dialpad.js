@@ -20,7 +20,7 @@ const springSettings = {stiffness: 170, damping: 26};
 class Dialpad extends VertoBaseComponent {
   constructor(props) {
     super(props);
-    this.state = {items: [[375,500],[375,500]], currItem: 0, number: this.props.nbrToDial, inputFocused: false, lcDisplayed: false };
+    this.state = {items: [[375,500],[375,500]], currItem: 0, number: this.props.nbrToDial, makingCall: false, inputFocused: false, lcDisplayed: false };
     this.generateContent = this.generateContent.bind(this);
     this.dialNumber = this.dialNumber.bind(this);
     this.makeCall = this.makeCall.bind(this);
@@ -32,6 +32,7 @@ class Dialpad extends VertoBaseComponent {
   }
 
   getDefaultStyle(styleName) {
+    console.log('>>>>>>>>>',this.state.makingCall);
     const styles = {
         container: {
           display:  'flex',
@@ -139,14 +140,16 @@ class Dialpad extends VertoBaseComponent {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: "#4caf50",
+        transform: this.state.makingCall ? 'rotate(360deg)' : 'rotate(235deg)',
+        backgroundColor: this.state.makingCall ? '#f00': "#4caf50",
+        transition : 'backgroundColor 1s, transform 1s',
         borderRadius: '50%',
         width: '56px',
         height: '56px',
         cursor: 'pointer'
       },
       call: {
-        transform: 'rotate(235deg)',
+        //transform: this.state.makingCall ? 'rotate(0deg)' : 'rotate(235deg)',
         width: "24px",
         height: "24px",
         fill: "#fff"
@@ -159,10 +162,12 @@ class Dialpad extends VertoBaseComponent {
   makeCall(){
     if(this.state.number) {
       // makes a call if there is a number entered.
-      this.props.cbCall(this.state.number);
+      setTimeout(()=>this.props.cbCall(this.state.number),850);
+      this.setState({...this.state, makingCall: true });
     } else {
       // if there is NOT a number it gets the last number dialed.
       this.setState({...this.state, number: this.props.lastNumber, redialing: true });
+
     }
   }
 
@@ -278,7 +283,9 @@ class Dialpad extends VertoBaseComponent {
           >
             <div
                 className="dial"
-                onClick={this.makeCall}
+                onClick={()=>{
+                  this.makeCall();
+                }}
                 style={{...this.getDefaultStyle('callbg')}}
             >
               <PhoneIconSVG
