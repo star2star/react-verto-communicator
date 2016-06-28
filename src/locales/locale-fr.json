@@ -175,8 +175,8 @@ const messages = {
   "LAYOUT_POSITION": "Position Mise en page",
   "DISCONNECTED": "Coupé",
   "CONNECTING": "De liaison",
-  "CONNECTED": "connecté",
-  "COM_STATUS": "état de la communication.",
+  "CONNECTED": "Connecté",
+  "COM_STATUS": "Etat de la communication.",
   "SCREEN_SHARE": "partage d'écran",
   "PRESENTER": "présentateur",
   "WATCHING_CANVAS": "Regarder Toile",
@@ -187,6 +187,9 @@ const messages = {
   "SETTINGS_LOGIN": "Connectez-vous pour modifier les paramètres",
   "SETTINGS_USER": "Paramètres utilisateur",
   "SETTINGS_USER_LOGIN": "Connectez-vous pour modifier les paramètres utilisateur",
-  "MENU_INFO": "Menu info"
+  "MENU_INFO": "Menu info",
+  "CALL_FROM": "Appeler à partir de:",
+  "ANSWER": "Répondre",
+  "REJECT": "Rejeter"
 };
 module.exports = messages;

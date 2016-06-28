@@ -180,13 +180,16 @@ const messages = {
   "SCREEN_SHARE": "Ekran Podziel się",
   "PRESENTER": "Prezenter",
   "WATCHING_CANVAS": "Oglądając Canvas",
-  "INPUT_CANVAS": "wejście na płótnie",
+  "INPUT_CANVAS": "Wejście na płótnie",
   "CLEAR_ALERTS": "Pogodne Alerts",
   "NO_LOG": "Brak danych dziennika",
   "CLICK_DIAL": "Kliknij , aby wybrać",
   "SETTINGS_LOGIN": "Zaloguj się, aby zmienić ustawienia",
   "SETTINGS_USER": "Ustawienia użytkownika",
   "SETTINGS_USER_LOGIN": "Zaloguj się, aby zmienić ustawienia użytkownika",
-  "MENU_INFO": "menu Info"
+  "MENU_INFO": "Informacje Menu",
+  "CALL_FROM": "Połącz z:",
+  "ANSWER": "Odpowiedź",
+  "REJECT": "Odrzucać"
 };
 module.exports = messages;
