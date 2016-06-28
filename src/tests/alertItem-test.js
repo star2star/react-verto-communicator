@@ -96,7 +96,7 @@ describe('Default test for AlertItem', ()=>{
           cbDismissAlert={cbDismissAlert}
       />);
     const expectedNode = wrapper.children().find('.summary');
-    console.log('------------->>>', wrapper.children().find('.summary'));
+    // console.log('------------->>>', wrapper.children().find('.summary'));
     expect(expectedNode.props().children[0]).toEqual("Can't hang up while sharing screen");
   });
 
