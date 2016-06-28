@@ -146,10 +146,10 @@ class Dialpad extends VertoBaseComponent {
         cursor: 'pointer'
       },
       call: {
+        transform: 'rotate(235deg)',
         width: "24px",
         height: "24px",
-        fill: "#fff",
-        transform: 'rotate(235deg)'
+        fill: "#fff"
         }
     };
 
