@@ -206,7 +206,7 @@ export default class AdminControls extends VertoBaseComponent {
                   compStyle={this.getStyle("controlIconStyle")}
                   cbActionClick={()=>{this.props.cbControlClick("VIDEOFLOOR", [this.props.member.memberId]);}}
               />
-              <ControlItem type="UpArrowIconSVG" label="TRANSFER"
+            <ControlItem type="UpArrowIconSVG" label={formatMessage({"id":"CHAT_TRANSFER", "defaultMessage":"Transfer"})}
                   compStyle={this.getStyle("controlIconStyle")}
                   cbActionClick={()=>{
                     App.toggleModal((
