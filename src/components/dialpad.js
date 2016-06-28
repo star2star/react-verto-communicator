@@ -5,8 +5,8 @@ import { CallHistoryIconSVG, PhoneIconSVG, DeleteIconSVG } from './svgIcons';
 import Radium  from 'radium';
 import CallHistory from './callHistory';
 import CallHistoryService from '../js/callHistoryService';
-import { FormattedMessage, injectIntl } from 'react-intl';
-import {TransitionMotion, Motion, spring} from 'react-motion';
+import { injectIntl } from 'react-intl';
+import {Motion, spring} from 'react-motion';
 
 const propTypes = {
   compStyle : React.PropTypes.object,
@@ -298,7 +298,7 @@ class Dialpad extends VertoBaseComponent {
 
   render() {
 
-
+    // Sliding Animation Styles
     const {items, currItem} = this.state;
     const [currWidth, currHeight] = items[currItem];
     const widths = items.map(([origW, origH])=> currHeight / origH * origW);

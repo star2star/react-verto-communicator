@@ -100,7 +100,7 @@ class HistoryItems extends VertoBaseComponent {
 
   generateHistory() {
     let listitems;
-    if(this.props.history.length > 1){
+    if(this.props.history.length >= 1){
     listitems = this.props.history.map((i, index)=>{
         return(
             <CallHistoryItem
