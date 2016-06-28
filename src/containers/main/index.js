@@ -102,8 +102,16 @@ class Main extends VertoBaseComponent {
         flex: '1',
         transition: 'padding 0.3s ease-out'
       },
-      loggedInfoStyles: {
+      loggedInOutStyles: {
         margin: 'auto'
+      },
+      dialingStyle : {
+        flex:'1',
+        width: '40vw'
+      },
+      inProgessStyle : {
+        flex:'1',
+        width: '100%'
       },
       vidWindowStyle : {
         display: 'flex',
@@ -192,7 +200,7 @@ class Main extends VertoBaseComponent {
       case 'login':
       case 'logout':
         loggedInfo = (
-          <div style={this.getStyle("loggedInfoStyles")}>
+          <div style={this.getStyle("loggedInOutStyles")}>
             <Login cbClick={(data)=>{
               // fix websocket url
               this.props.dispatch(doSubmitLogin({ ...data, wsURL: data.websocketurl }));
@@ -204,7 +212,7 @@ class Main extends VertoBaseComponent {
         break;
       case 'loggedIn':
         loggedInfo = (
-          <div style={this.getStyle("loggedInfoStyles")}>
+          <div style={this.getStyle("loggedInOutStyles")}>
             <Dialpad cbCall={this.makeCall} cbClearHistory={this.handleClearHistory} lastNumber={this.props.callInfo.lastNumber} nbrToDial="" />
         </div>);
         break;
@@ -232,7 +240,7 @@ class Main extends VertoBaseComponent {
         break;
       case 'dialing':
         loggedInfo = (
-            <div style={{flex:'1', width: '40vw'}}>
+            <div style={this.getStyle("dialingStyle")}>
               <Dialing callData={this.props.callInfo.activeCalls[this.props.callInfo.currentCallId]}
                   cbHangup={(callId)=>{
                     this.props.dispatch(doHangUp(callId));
@@ -263,7 +271,7 @@ class Main extends VertoBaseComponent {
           window.conf = this.props.confData;
           // if (this.props.confData) {
             loggedInfo = (
-              <div style={{flex:'1', width: '100%'}}>
+              <div style={this.getStyle("inProgessStyle")}>
                 <CallProgress callData={this.props.callInfo.activeCalls[this.props.callInfo.currentCallId]}
                     cbHangup={(callId)=>{
                       this.props.dispatch(doHangUp(callId));
