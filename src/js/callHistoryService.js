@@ -39,7 +39,7 @@ class CallHistoryService {
 
   getHistoryDetail(callerId){
     // return a new array
-    if(callerId){
+    if(callerId && this.history[callerId]){
       return [ ...this.history[callerId]];
     } else {
       return [];

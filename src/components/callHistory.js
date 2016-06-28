@@ -263,6 +263,9 @@ class DetailItems extends VertoBaseComponent {
   generateDetails() {
     const self = this;
     let details;
+    if(!this.props.callerId) {
+      return;
+    }
     const detailData = CallHistoryService.getInstance().getHistoryDetail(this.props.callerId);
     details = detailData.length ? (
       detailData.map(function(i, index){
