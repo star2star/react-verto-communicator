@@ -311,11 +311,6 @@ const doingSendingChat = () => {
   }
 }
 
-const doingClearHistory = () => {
-  return {
-    type: 'CLEARING_HISTORY'
-  };
-};
 const doClearHistory = () => {
   return dispatch =>{
     dispatch({
@@ -328,4 +323,4 @@ export { doValidation, doBrowserCheck,
   doSubmitLogin, doShowLogin, doVertoLogin, doSubmitLogOut, doLogOut,
   doMakeCall, doMakeCallError, doIncomingCall, doSpeedTest, doShareScreen,
   doingMakeCall, doHungUp, doHangUp, doAnswer, doMuteMic, doConferenceData, doHold, doMuteVideo, doCallHeld,
-  doSendChat, doReceiveChat, doingSendingChat,doSendConfCommand, doingClearHistory, doClearHistory };
+  doSendChat, doReceiveChat, doingSendingChat,doSendConfCommand, doClearHistory };
