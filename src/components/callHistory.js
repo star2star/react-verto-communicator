@@ -100,10 +100,11 @@ class HistoryItems extends VertoBaseComponent {
 
   generateHistory() {
     let listitems;
-    if(this.props.history.length > 1){
-    listitems = this.props.history.map((i)=>{
+    if(this.props.history.length >= 1){
+    listitems = this.props.history.map((i, index)=>{
         return(
             <CallHistoryItem
+                key={index}
                 allowToolTip = {this.props.allowToolTip}
                 className="chi"
                 data={i}
@@ -161,7 +162,7 @@ class HistoryItems extends VertoBaseComponent {
                   onClick={this.props.cbBack}
                   tabIndex="0"
               >
-                  <RemoveIconSVG svgStyle={{...this.getDefaultStyle('headerSvgs')}} />
+                  <BackArrowIconSVG svgStyle={{...this.getDefaultStyle('headerSvgs')}} />
               </span>
               <span
                   className="title"
@@ -264,7 +265,7 @@ class DetailItems extends VertoBaseComponent {
     let details;
     const detailData = CallHistoryService.getInstance().getHistoryDetail(this.props.callerId);
     details = detailData.length ? (
-      detailData.map(function(i){
+      detailData.map(function(i, index){
       let renderedDirection;
       if(i.direction == 'outgoing') {
         renderedDirection = (
@@ -281,6 +282,7 @@ class DetailItems extends VertoBaseComponent {
       const formattedTimestamp = moment(i.timestamp).format('ddd MMM DD YYYY HH:mm:ss A');
       return (
             <div
+                key={index}
                 className="details"
                 onClick={()=>{
                   self.props.cbCall(i.callerId);
@@ -404,14 +406,14 @@ class CallHistory extends VertoBaseComponent {
       <span
           style={{...style, position: 'absolute'}}
       >
-      <DetailItems
-          key={i}
-          cbBack={()=>{
-            this.clickHandler();
-          }}
-          cbCall={this.props.cbCall}
-          callerId={this.state.callItem}
-      />
+        <DetailItems
+            key={i}
+            cbBack={()=>{
+              this.clickHandler();
+            }}
+            cbCall={this.props.cbCall}
+            callerId={this.state.callItem}
+        />
       </span>
     );
 
