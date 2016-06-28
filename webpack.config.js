@@ -1,5 +1,6 @@
-var path = require('path')
-var webpack = require('webpack')
+var path = require('path');
+var webpack = require('webpack');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 var config = {
   entry: {
@@ -27,33 +28,40 @@ var config = {
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(true),
     new webpack.optimize.DedupePlugin(),
-    /* jes uncomment when moved to production
-    new webpack.optimize.UglifyJsPlugin({
-      output: {
-        comments: false
-      },
-      compress: {
-        warnings: false,
-        screw_ie8: true
-      }
-    }), */
     new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js')
   ]
 }
-
+console.log('---> ', process.env.NODE_ENV );
 if (process.env.NODE_ENV === 'production') {
   config.output.path = path.join(__dirname, 'dist/')
-
-  /*
-  Note: by default, React will be in development mode
-        see https://facebook.github.io/react/downloads.html
-  */
-
+  config.plugins.push(new webpack.optimize.UglifyJsPlugin({
+    output: {
+      comments: false
+    },
+    compress: {
+      warnings: false,
+      screw_ie8: true
+    }
+  }));
   config.plugins.push(new webpack.DefinePlugin({
     'process.env': {
       'NODE_ENV': '"production"'
     }
-  }))
+  }));
+  config.plugins.push(new CopyWebpackPlugin([
+          // {output}/file.txt
+          //{ from: 'messages', to: 'messages' },
+          { from: 'src/index.html', to: 'index.html' },
+          { from: 'src/css', to: 'css'},
+          { from: 'src/locales', to: 'locales'},
+          { from: 'src/3rd-party', to: '3rd-party'},
+          { from: 'src/favicon.ico', to: 'favicon.ico' }
+        ], {
+            ignore: [
+                // Doesn't copy any files with a txt extension
+                '*.txt'
+            ]
+        }));
 }
 
 module.exports = config

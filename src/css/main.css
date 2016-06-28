@@ -1,11 +1,25 @@
+html,
 body {
+  height: 100%;
+  overflow: hidden;
   padding: 0;
   margin: 0;
 
   font-family: RobotoDraft,Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
-
+body { /* can also be whatever container */
+  display: flex;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
 #app {
   height: 100%;
   width: 100%;
+}
+.active {
+  color: green;
 }
