@@ -146,10 +146,10 @@ class Dialpad extends VertoBaseComponent {
         cursor: 'pointer'
       },
       call: {
+        transform: 'rotate(235deg)',
         width: "24px",
         height: "24px",
-        fill: "#fff",
-        transform: 'rotate(235deg)'
+        fill: "#fff"
         }
     };
 
@@ -186,7 +186,8 @@ class Dialpad extends VertoBaseComponent {
               compStyle={{...this.getDefaultStyle('callh')}}
               history={CallHistoryService.getInstance().getHistory()}
               cbClearHistory={()=>{
-                this.props.cbClearHistory();
+                //setTimeout()
+                setTimeout(()=>this.props.cbClearHistory(), 1000);
                 this.setState({...this.state, currItem: 0});
               }}
               cbCall={(num)=>{
