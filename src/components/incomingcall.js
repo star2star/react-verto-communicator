@@ -103,7 +103,7 @@ class IncomingCall extends VertoBaseComponent {
             <div className="displayArea"style={this.getStyle("displayAreaStyle")}>
               <AvatarSVG svgStyle={this.getStyle("avatarStyle")} />
                 <div className="callFrom" style={this.getStyle("callFromDisplay")}>
-                  <span>
+                  <span className="callFromLabel">
                     <FormattedMessage
                         id="CALL_FROM"
                         defaultMessage="Call From:"
@@ -115,26 +115,26 @@ class IncomingCall extends VertoBaseComponent {
                 </div>
             </div>
             <div className="callControls" style={this.getStyle("callControlStyle")}>
-              <span style={this.getStyle("buttonContainer")} onClick={()=>{
+              <span className="buttonArea" style={this.getStyle("buttonContainer")} onClick={()=>{
                 //console.log('answer clicked: ', this.props);
                 this.props.cbAnswer(this.props.callData);
                 }}
               >
                 <PhoneIconSVG svgStyle={this.getStyle("answerIconStyle")} />
-                  <span style={this.getStyle("labelSpacingStyle")}>
+                  <span className="answerLabel" style={this.getStyle("labelSpacingStyle")}>
                     <FormattedMessage
                         id="ANSWER"
                         defaultMessage="Answer"
                     />
                   </span>
               </span>
-              <span style={this.getStyle("buttonContainer")} onClick={()=>{
+              <span className="buttonArea" style={this.getStyle("buttonContainer")} onClick={()=>{
                 //console.log('hangup clicked: ', this.props);
                 this.props.cbHangup(this.props.callData);
                 }}
               >
                 <PhoneIconSVG svgStyle={this.getStyle("rejectIconStyle")} />
-                  <span style={this.getStyle("labelSpacingStyle")}>
+                  <span className="rejectLabel" style={this.getStyle("labelSpacingStyle")}>
                     <FormattedMessage
                         id="REJECT"
                         defaultMessage="Reject"
