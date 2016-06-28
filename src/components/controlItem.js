@@ -53,7 +53,7 @@ class Action extends VertoBaseComponent {
     }
     // console.log('---->',DynamicIcon);
     return (
-      <span style={this.getStyle("controlStyle")}
+      <span className="container" style={this.getStyle("controlStyle")}
           onClick={()=>{
               if (this.props.cbActionClick) {
                 this.props.cbActionClick();
@@ -63,7 +63,7 @@ class Action extends VertoBaseComponent {
         <DynamicIcon
             svgStyle={this.getStyle("svgStyle")}
         />
-        <span style={this.getStyle("labelStyle")}>
+        <span className="label" style={this.getStyle("labelStyle")}>
           {this.props.label}
         </span>
       </span>

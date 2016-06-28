@@ -62,7 +62,6 @@ class VCStatus extends VertoBaseComponent {
         break;
       }
 
-    //TODO internationalize
     //console.log("$$$$$$$$$$$$$$$$$$$$$$" + intlStatus);
     const theMsg= intlStatus = formatMessage({"id":"COM_STATUS", "defaultMessage":"Communication Status: "}) + intlStatus;
 
