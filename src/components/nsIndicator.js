@@ -87,7 +87,6 @@ class NetworkStatusIndicator extends VertoBaseComponent {
             break;
         default:
             icon = (<SignalLowIconSVG svgStyle={{...this.getStyle('icon'), fill: 'red'}} />);
-            break;
     }
 
     const toolTipMessage =(
@@ -116,7 +115,7 @@ class NetworkStatusIndicator extends VertoBaseComponent {
     if (this.props.allowDisplayDetails) {
       return  (<ToolTip place="bottom" name="nsi" msg={toolTipMessage}>{icon}</ToolTip>) ;
     } else {
-      return ({icon});
+      return (icon);
     }
 
   }

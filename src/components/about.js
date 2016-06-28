@@ -34,17 +34,20 @@ class About extends VertoBaseComponent{
 
       mymodal : {
         content: {
-          top                   : '50%',
-          left                  : '50%',
-          right                 : 'auto',
-          bottom                : 'auto',
-          marginRight           : '-50%',
-          transform             : 'translate(-50%, -50%)',
-          boxShadow             : '0px 27px 24px 0px rgba(0,0,0,.2), 0px 40px 77px 0px rgba(0,0,0,.22)'
+          top: '50%',
+          left: '50%',
+          right: 'auto',
+          bottom: 'auto',
+          marginRight: '-50%',
+          transform: 'translate(-50%, -50%)',
+          boxShadow: '0px 27px 24px 0px rgba(0,0,0,.2), 0px 40px 77px 0px rgba(0,0,0,.22)'
         },
         overlay: {
           zIndex: "1"
         }
+      },
+      logoSrcStyle: {
+        width: '100%'
       }
     };
 
@@ -56,22 +59,23 @@ class About extends VertoBaseComponent{
     const poweredBy = WhiteLabel.get('poweredBy');
     return (
       <Modal isOpen onRequestClose={this.props.cbClose} style={this.getStyle('mymodal')}>
-        <div style={this.getStyle('container')}>
-          <div style={this.getStyle('imageStyle')}>
-            <img src={logoSrc} style={{width: "100%"}}  />
+        <div className="container" style={this.getStyle('container')}>
+          <div className="image" style={this.getStyle('imageStyle')}>
+            <img src={logoSrc} style={this.getStyle("logoSrcStyle")}  />
           </div>
 
-          <div>
+          <div className="version">
            <FormattedMessage id='VERSION' defaultMessage="Version"/>
            <span> {this.props.version} </span>
           </div>
 
-          <div>
+          <div className="poweredBy">
             <FormattedMessage id='POWERED_BY' defaultMessage="Powered By: " />
             <img src={poweredBy} />
           </div>
         </div>
-      </Modal> );
+      </Modal>
+    );
   }
 }
 
