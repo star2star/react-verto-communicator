@@ -1,5 +1,6 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
+import { FormattedMessage } from 'react-intl';
 import {AvatarSVG, PhoneIconSVG } from './svgIcons';
 
  const propTypes = {
@@ -22,8 +23,32 @@ class IncomingCall extends VertoBaseComponent {
 
     getDefaultStyle(styleName) {
       const styles = {
-        container: {
-
+        container: {backgroundColor: "#fff",
+          boxShadow: "0px 8px 17px 0px rgba(0,0,0,.2), 0px 6px 20px 0px rgba(0,0,0,.19)",
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'space-between',
+          padding: '10px 0px'
+        },
+        displayStyle: {
+          flexDirection: "row",
+          display:"flex",
+          alignItems: 'center',
+          flex: '1',
+          marginRight: '15px'
+        },
+        avatarStyle: {
+          width: "70px",
+          height: "70px",
+          fill: "#444"
+        },
+        callFromDisplay: {
+          display: 'flex',
+          flexDirection:'column',
+          color: '#444'
+        },
+        callIdDisplay: {
+          wordWrap: 'break-word'
         }
       };
 
@@ -34,12 +59,19 @@ class IncomingCall extends VertoBaseComponent {
       //console.log('CP: ', this.props.callData);
 
       return (
-          <div style={{backgroundColor: "#fff", boxShadow: "0px 8px 17px 0px rgba(0,0,0,.2), 0px 6px 20px 0px rgba(0,0,0,.19)",width: '100%', display: 'flex', justifyContent: 'space-between', padding: '10px 0px'}}>
-            <div style={{flexDirection: "row", display:"flex", alignItems: 'center', flex: '1', marginRight: '15px'}}>
-              <AvatarSVG svgStyle={{width: "70px", height: "70px", fill: "#444"}} />
-                <div style={{display: 'flex', flexDirection:'column', color: '#444'}}>
-                  <span>Call From:</span>
-                  <span style={{wordWrap: 'break-word'}}>{this.props.callData.params.caller_id_number}</span>
+          <div style={this.getStyle("container")}>
+            <div style={this.getStyle("displayStyle")}>
+              <AvatarSVG svgStyle={this.getStyle("avatarStyle")} />
+                <div style={this.getStyle("callFromDisplay")}>
+                  <span>
+                    <FormattedMessage
+                        id="CALL_FROM"
+                        defaultMessage="Call From:"
+                    />
+                  </span>
+                  <span style={this.getStyle("callIdDisplay")}>
+                      {this.props.callData.params.caller_id_number}
+                  </span>
                 </div>
             </div>
             <div className="callControls" style={{display: 'flex', justifyContent: 'space-between', alignItems:'center', width: '120px', marginRight: '15px', color: '#444', flex: '0 0 120px'}}>
