@@ -110,6 +110,11 @@ class CallHistoryItem extends VertoBaseComponent {
         <span
             tabIndex="0"
             className="menuCont"
+            onKeyPress={(e)=>{
+              if(e.which == 13 || e.keyCode == 13) {
+                this.showCalls();
+                return false;
+              }}}
             onClick={this.showCalls}
             style={{...this.getDefaultStyle('menuCont')}}>
           <MenuIconSVG svgStyle={{...this.getStyle('dirSVG')}} />
@@ -146,6 +151,11 @@ class CallHistoryItem extends VertoBaseComponent {
           <div
               tabIndex="0"
               className="top"
+              onKeyPress={(e)=>{
+                if(e.which == 13 || e.keyCode == 13) {
+                  this.call();
+                  return false;
+                }}}
               onClick={this.call}
               style={{...this.getDefaultStyle('top')}}>
               <div className="info">
@@ -172,6 +182,11 @@ class CallHistoryItem extends VertoBaseComponent {
           <div
               tabIndex="0"
               className="top"
+              onKeyPress={(e)=>{
+                if(e.which == 13 || e.keyCode == 13) {
+                  this.call();
+                  return false;
+                }}}
               onClick={this.call}
               style={{...this.getDefaultStyle('top')}}>
               <div className="info">
