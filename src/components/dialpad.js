@@ -75,6 +75,7 @@ class Dialpad extends VertoBaseComponent {
         borderBottom: '2px solid #ccc'
       },
       span : {
+        cursor: 'pointer'
       },
       callhist : {
         width: "24px",
