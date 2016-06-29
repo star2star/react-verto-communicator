@@ -92,9 +92,9 @@ class VertoService {
 
                       //jes inbound call
                       //Processor.starphone('inboundCall', d.params);
-                      Object.keys(xInstance.subscriptions).map((i)=>{
-                        xInstance.subscriptions[i]('incoming-call', d);
-                      });
+
+                      xInstance.notify('incoming-call', d);
+
                       _dispatch(doIncomingCall(d));
                     }
                   }
@@ -220,18 +220,12 @@ class VertoService {
       onWSLogin: (v, success) => {
         //console.log('onWSLogin: ', v, success);
         //display("");
-        Object.keys(xInstance.subscriptions).map((i)=>{
-          xInstance.subscriptions[i]('loggedIn', { status: success, data: (success ? v.options : null) });
-        });
-        _dispatch(doVertoLogin(success, (success ? v.options : null) ));
+        xInstance.notify('loggedIn', success,  v.options );
       },
 
       onWSClose: (v, success) => {
         //console.log('onWSClose', arguments);
-        Object.keys(xInstance.subscriptions).map((i)=>{
-          xInstance.subscriptions[i]('logout', {});
-        });
-        _dispatch(doLogOut());
+        xInstance.notify('logout', true, {});
       },
 
       onEvent: (v, e) => {
@@ -249,6 +243,7 @@ class VertoService {
     this.sendConferenceCommand = this.sendConferenceCommand.bind(this);
     this.subscribe = this.subscribe.bind(this);
     this.removeSubscription = this.removeSubscription.bind(this);
+    this.notify = this.notify.bind(this);
 
     VertoService.getInstance = VertoService.getInstance.bind(this);
     VertoService.login = VertoService.login.bind(this);
@@ -270,6 +265,12 @@ class VertoService {
 
   removeSubscription(id){
     delete this.subscriptions[id];
+  }
+
+  notify(event, status, data){
+    Object.keys(this.subscriptions).map((i)=>{
+      this.subscriptions[i](event, status, data);
+    });
   }
 
   startConference(v, dialog, pvtData) {

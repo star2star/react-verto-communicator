@@ -9,8 +9,9 @@ import thunk from 'redux-thunk';
 import VertoService from './js/vertoService';
 import reducer from './containers/reducers.js';
 import Messages from './js/messages';
-import { doValidation } from './containers/main/action-creators';
 import App from './components/app';
+import {doValidation, doLogOut, doVertoLogin, doMakeCallError, doHungUp, doCallHeld,
+   doingMakeCall, doIncomingCall, doConferenceData, doReceiveChat } from './containers/main/action-creators';
 
 function getLanguage(){
   let sReturn = 'en-US';
@@ -52,8 +53,18 @@ addLocaleData(localeData);
 
 const store = createStore(reducer, applyMiddleware(thunk));
 
-const subId = VertoService.getInstance().subscribe((event, data)=>{
-  console.log('>>>> Subscription: ', event, data)
+const subId = VertoService.getInstance().subscribe((event, status, data)=>{
+  console.log('>>>> Subscription: ', event, status, data)
+  switch (event){
+    case "loggedIn":
+      store.dispatch(doVertoLogin(status, data.data ));
+      break;
+    case "logout":
+      store.dispatch(doLogOut());
+      break;
+    default:
+      console.log('>>> Subscription Not Handled:', event, data);
+  }
 });
 
 console.log('verto subscriptionID:', subId);
