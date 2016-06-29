@@ -594,7 +594,13 @@ showSpeeds(){
             networkData={{upkpbs: this.props.bandwidthInfo.outgoingBandwidth,
                           downkpbs: this.props.bandwidthInfo.incomingBandwidth,
                           vidQual: vidQual}}
-          />
+        />
+      );
+    } else {
+      nsIndicator = (
+        <NetworkStatusIndicator
+            compStyle={this.state.showAltAppControls ? this.getStyle("altNsiCompStyle") : this.getStyle("nsiCompStyle")}
+        />
       );
     }
 
