@@ -19,8 +19,10 @@ class VertoService {
   constructor(){
     //console.log('building VERTO SERVICE: <<<<<<<<<<<<<<<<')
     this._data = {_activeCalls:[], _maxActiveCalls: 32 };
-
+    this.subscriptions = {};
+    this.nextSubscriptionId = 0;
     const xInstance = this;
+
 
     window.v = this;
     _callbacks = {
@@ -66,7 +68,7 @@ class VertoService {
 
           switch (d.state) {
               case $.verto.enum.state.ringing:
-                  console.log('^^^^^^ringing ... onDialogState display', d, d.params.screenShare);
+                  //console.log('^^^^^^ringing ... onDialogState display', d, d.params.screenShare);
 
                   xInstance._data._activeCalls[d.callID] = d;
 
@@ -90,6 +92,9 @@ class VertoService {
 
                       //jes inbound call
                       //Processor.starphone('inboundCall', d.params);
+                      Object.keys(xInstance.subscriptions).map((i)=>{
+                        xInstance.subscriptions[i]('incoming-call', d);
+                      });
                       _dispatch(doIncomingCall(d));
                     }
                   }
@@ -100,12 +105,15 @@ class VertoService {
               //jes tell it is ringing
               //display("Calling: " + d.cidString());
               //goto_page("incall");
-              console.log('^^^^^^trying .. calling', d,d.params.screenShare);
+              //console.log('^^^^^^trying .. calling', d,d.params.screenShare);
               if (!d.params.screenShare){
                 CallHistoryService.getInstance().add({
                   timestamp: Date.now(),
                   callerId: d.params.destination_number,
                   direction: d.params.direction
+                });
+                Object.keys(xInstance.subscriptions).map((i)=>{
+                  xInstance.subscriptions[i]('make-call', {status: 'trying', number: d.params.destination_number, callID: d.callID, name: d.direction.name});
                 });
                 _dispatch(doingMakeCall('trying', d.params.destination_number, d.callID, d.direction.name));
               }
@@ -120,7 +128,7 @@ class VertoService {
               //jes tell them we are now talking
               //display("Talking to: " + d.cidString());
               //goto_page("incall");
-              console.log('^^^^^active ...:', d, d.params.screenShare);
+              //console.log('^^^^^active ...:', d, d.params.screenShare);
               if (!d.params.screenShare){
                 d.params.isHeld = false;
                 // ta- added to init isMuted attribute
@@ -134,6 +142,9 @@ class VertoService {
                   delete d.immediateTransferURI;
                 } else {
                   //Processor.starphone('answered', d.params);
+                  Object.keys(xInstance.subscriptions).map((i)=>{
+                    xInstance.subscriptions[i]('make-call', {status: 'active', number: (d.direction.name == 'outbound' ? d.params.destination_number : d.params.caller_id_number), callID: d.callID, name: d.direction.name});
+                  });
                   _dispatch(doingMakeCall('active', (d.direction.name == 'outbound' ? d.params.destination_number : d.params.caller_id_number), d.callID, d.direction.name));
                 }
               }
@@ -166,6 +177,9 @@ class VertoService {
                 //TODO send user list _dispatch conference data
               } else {
                 xInstance.stopConference();
+                Object.keys(xInstance.subscriptions).map((i)=>{
+                  xInstance.subscriptions[i]('hangup', d);
+                });
                 _dispatch(doHungUp(d));
 
               }
@@ -177,15 +191,21 @@ class VertoService {
               //jes tell the UI we are on HOLD
               //console.log('****** HELD ....', d);
               d.params.isHeld = true;
+              Object.keys(xInstance.subscriptions).map((i)=>{
+                xInstance.subscriptions[i]('held', d);
+              });
               _dispatch(doCallHeld(d.callID));
               break;
 
           case $.verto.enum.state.requesting:
-              console.log('^^^^^^^REQUESTING ....', d);
+              //console.log('^^^^^^^REQUESTING ....', d);
               xInstance._data._activeCalls[d.callID] = d;
               //jes tom does not want it
               //Processor.starphone('requesting', d.params);
               if (!d.params.screenShare) {
+                Object.keys(xInstance.subscriptions).map((i)=>{
+                  xInstance.subscriptions[i]('making-call', {status: 'trying', ...d });
+                });
                 _dispatch(doingMakeCall('trying', d.params.destination_number, d.callID, d.direction.name));
               }
               break;
@@ -200,11 +220,17 @@ class VertoService {
       onWSLogin: (v, success) => {
         //console.log('onWSLogin: ', v, success);
         //display("");
+        Object.keys(xInstance.subscriptions).map((i)=>{
+          xInstance.subscriptions[i]('loggedIn', { status: success, data: (success ? v.options : null) });
+        });
         _dispatch(doVertoLogin(success, (success ? v.options : null) ));
       },
 
       onWSClose: (v, success) => {
         //console.log('onWSClose', arguments);
+        Object.keys(xInstance.subscriptions).map((i)=>{
+          xInstance.subscriptions[i]('logout', {});
+        });
         _dispatch(doLogOut());
       },
 
@@ -221,6 +247,8 @@ class VertoService {
     this.hasPresenterOption = this.hasPresenterOption.bind(this);
     this.startConference = this.startConference.bind(this);
     this.sendConferenceCommand = this.sendConferenceCommand.bind(this);
+    this.subscribe = this.subscribe.bind(this);
+    this.removeSubscription = this.removeSubscription.bind(this);
 
     VertoService.getInstance = VertoService.getInstance.bind(this);
     VertoService.login = VertoService.login.bind(this);
@@ -230,6 +258,18 @@ class VertoService {
     VertoService.refreshVideoResolution = VertoService.refreshVideoResolution.bind(this);
     VertoService.updateResolutions = VertoService.updateResolutions.bind(this);
 
+  }
+
+  subscribe(func){
+    const id = this.nextSubscriptionId++;
+
+    this.subscriptions[id] = func;
+
+    return id;
+  }
+
+  removeSubscription(id){
+    delete this.subscriptions[id];
   }
 
   startConference(v, dialog, pvtData) {
@@ -281,6 +321,9 @@ class VertoService {
         const sentUser = e.data.from.substring(0, e.data.from.indexOf('@'));
         const currentUser = v.options.loginParams.user;
         console.log('chatCallback ..... ', e,v );
+        Object.keys(xInstance.subscriptions).map((i)=>{
+          xInstance.subscriptions[i]('chat-received', {callID, displayName, message, utc_timestamp: Date.now(), isMe: sentUser == currentUser , bgColor: this.getChatUserColor(sentUser) } );
+        });
         _dispatch(doReceiveChat(callID, {callID, displayName, message, utc_timestamp: Date.now(), isMe: sentUser == currentUser , bgColor: this.getChatUserColor(sentUser) }));
       },
       onBroadcast: (v, conf, message) => {
@@ -308,6 +351,9 @@ class VertoService {
             });
             this._data.confLayoutsData = message.responseData;
             this._data.confLayouts = options;
+            Object.keys(xInstance.subscriptions).map((i)=>{
+              xInstance.subscriptions[i]('conferenceData', {callId: Object.keys(v.dialogs)[0], layouts: this._data.confLayouts });
+            });
             _dispatch(doConferenceData({callId: Object.keys(v.dialogs)[0], layouts: this._data.confLayouts }));
           } else if (message['conf-command'] == 'canvasInfo') {
             this._data.canvasInfo = message.responseData;
@@ -316,6 +362,9 @@ class VertoService {
             if (this._data.confLayoutsData && message.responseData[0]) {
               this._data.confLayoutsData.filter(l=>l.name === message.responseData[0].layoutName).map((mLayout)=>{
                 // found it so
+                Object.keys(xInstance.subscriptions).map((i)=>{
+                  xInstance.subscriptions[i]('conferenceData', {callId: Object.keys(v.dialogs)[0],  videoLayout: this._data.canvasInfo, hasMultipleCanvases: message.responseData > 1, allowPresenter: mLayout.resIDS && mLayout.resIDS.length > 0 });
+                });
                 _dispatch(doConferenceData({callId: Object.keys(v.dialogs)[0],  videoLayout: this._data.canvasInfo, hasMultipleCanvases: message.responseData > 1, allowPresenter: mLayout.resIDS && mLayout.resIDS.length > 0 }));
               });
             };
@@ -423,6 +472,9 @@ class VertoService {
           //var member = [args.key, args.data];
           // $rootScope.$emit('members.update', member);
           //break;
+          Object.keys(xInstance.subscriptions).map((i)=>{
+            xInstance.subscriptions[i]('conferenceData', {callId: Object.keys(obj.verto.dialogs)[0], hasMultipleCanvases: this._data.conf.params.laData.canvasCount > 1, currentRole: this._data.conf.params.laData.role, users: obj.getUsers(obj) });
+          });
           _dispatch(doConferenceData({callId: Object.keys(obj.verto.dialogs)[0], hasMultipleCanvases: this._data.conf.params.laData.canvasCount > 1, currentRole: this._data.conf.params.laData.role, users: obj.getUsers(obj) }));
           break;
         default:
@@ -682,6 +734,9 @@ class VertoService {
     _dispatch = dispatch;
     if (!_verto.verto) {
       const message = "not connected";
+      Object.keys(xInstance.subscriptions).map((i)=>{
+        xInstance.subscriptions[i]('makeCallError', {destination, message });
+      });
       return _dispatch(doMakeCallError({destination, message }));
     }
     // ok make a call

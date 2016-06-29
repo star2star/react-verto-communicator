@@ -32,7 +32,7 @@ class Dialpad extends VertoBaseComponent {
   }
 
   getDefaultStyle(styleName) {
-    console.log('>>>>>>>>>',this.state.makingCall);
+    //console.log('>>>>>>>>>',this.state.makingCall);
     const styles = {
         container: {
           display:  'flex',
