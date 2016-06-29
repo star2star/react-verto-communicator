@@ -12,6 +12,7 @@ import Messages from './js/messages';
 import App from './components/app';
 import {doValidation, doLogOut, doVertoLogin, doMakeCallError, doHungUp, doCallHeld,
    doingMakeCall, doIncomingCall, doConferenceData, doReceiveChat } from './containers/main/action-creators';
+//import AlertService from './js/alertService';
 
 function getLanguage(){
   let sReturn = 'en-US';
@@ -68,6 +69,26 @@ const subId = VertoService.getInstance().subscribe((event, status, data)=>{
     case 'makeCallError':
       store.dispatch(doMakeCallError(data));
       break;
+    case 'make-call-active':
+      store.dispatch(doingMakeCall(status, (data.direction.name == 'outbound' ? data.params.destination_number : data.params.caller_id_number), data.callID, data.direction.name));
+      break;
+    case 'callHeld':
+      store.dispatch(doCallHeld(data));
+      break;
+    case 'chat-received':
+      store.dispatch(doReceiveChat(data));
+      break;
+    case 'conferenceData':
+      store.dispatch(doConferenceData(data));
+      break;
+    case 'hangup':
+      store.dispatch(doHungUp(data));
+      break;
+    //case 'showAlert':
+    //  AlertService.getInstance().createAlert(data);
+    //  break;
+
+      //this is were I am adding things
     default:
       console.log('>>> Subscription Not Handled:', event, data);
   }

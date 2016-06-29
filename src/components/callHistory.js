@@ -164,6 +164,7 @@ class HistoryItems extends VertoBaseComponent {
               style={{...this.getDefaultStyle('header')}}
           >
               <span
+                className="back"
                 onKeyPress={(e)=>{
                   if(e.which == 13 || e.keyCode == 13) {
                     this.props.cbBack();
@@ -335,7 +336,7 @@ class DetailItems extends VertoBaseComponent {
                     <BackArrowIconSVG svgStyle={{...this.getDefaultStyle('headerSvgs')}} />
                 </span>
                 <span
-                    className="title"
+                    className="title-de"
                     style={{...this.getDefaultStyle('title')}}
                 >
                   {this.props.callerId}
@@ -343,7 +344,7 @@ class DetailItems extends VertoBaseComponent {
             </div>
           </div>
           <div
-              className="body"
+              className="body-de"
               tabIndex="0"
               style={{...this.getDefaultStyle('body')}}
           >
