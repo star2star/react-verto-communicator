@@ -9,6 +9,7 @@ const propTypes = {
   msg: React.PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.object ]).isRequired,
+  within: React.PropTypes.func,
   compStyle: React.PropTypes.object
 };
 
@@ -29,15 +30,20 @@ export default class ToolTip extends VertoBaseComponent {
   }
 
   render(){
-    //console.log("#$$%$%^$%%$^%^%%$^$%^Y&^&$%%^$%#", this.props.name);
+    //console.log("$$$$$ tooltip props", this.props);
+    if (this.props.name !== 'info') {
+      return <span>{this.props.children}</span>
+
+    } else {
+    console.log('this.props.auto', this.props.auto);
     return(
       <span>
-       <Origin name={this.props.name}>
+       <Origin name={this.props.name} auto={this.props.auto}>
         {this.props.children}
        </Origin>
-       <Tooltip name={this.props.name} place={this.props.place}>{this.props.msg}</Tooltip>
+       <Tooltip name={this.props.name} place={this.props.place} within={this.props.within}>{this.props.msg} auto={this.props.auto}</Tooltip>
      </span>
-    );
+    );}
   }
 }
 
