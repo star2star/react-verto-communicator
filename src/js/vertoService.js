@@ -465,6 +465,7 @@ class VertoService {
       delete this._data.liveArray;
     }
 
+
     if (this._data.conf) {
       this._data.conf.destroy();
       this._data.conf = null;
