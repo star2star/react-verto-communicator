@@ -18,7 +18,6 @@ import Radium from 'radium';
       layouts: React.PropTypes.array,
       newMsgCount : React.PropTypes.number,
       userConfStatus : React.PropTypes.object
-
 };
 
 class CallProgress extends VertoBaseComponent {
@@ -139,7 +138,7 @@ class CallProgress extends VertoBaseComponent {
                   cbStop={()=>{console.log('Stop Clicked');}}
                   cbRecord={()=>{console.log('Record Clicked');}}
                   cbStopRecord={()=>{console.log('Stop Record Clicked');}}
-                  cbSnapshot={()=>{console.log('Snapshot Clicked');}}
+                  cbSnapshot={this.props.cbSnapshot}
                   cbSetVideoMode={(params)=>{this.props.cbSetVideoMode(params);}}
                   layouts={this.props.layouts}
                   currLayout={this.props.currLayout}

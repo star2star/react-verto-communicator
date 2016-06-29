@@ -100,10 +100,11 @@ class HistoryItems extends VertoBaseComponent {
 
   generateHistory() {
     let listitems;
-    if(this.props.history.length > 1){
-    listitems = this.props.history.map((i)=>{
+    if(this.props.history.length >= 1){
+    listitems = this.props.history.map((i, index)=>{
         return(
             <CallHistoryItem
+                key={index}
                 allowToolTip = {this.props.allowToolTip}
                 className="chi"
                 data={i}
@@ -136,6 +137,11 @@ class HistoryItems extends VertoBaseComponent {
           <span
               className="rmvHistory"
               style={{...this.getDefaultStyle('rmvHistory')}}
+              onKeyPress={(e)=>{
+              if(e.which == 13 || e.keyCode == 13) {
+                this.props.cbClearHistory();
+                return false;
+              }}}
               onClick={this.props.cbClearHistory}
               tabIndex="0"
           >
@@ -158,10 +164,15 @@ class HistoryItems extends VertoBaseComponent {
               style={{...this.getDefaultStyle('header')}}
           >
               <span
+                onKeyPress={(e)=>{
+                  if(e.which == 13 || e.keyCode == 13) {
+                    this.props.cbBack();
+                    return false;
+                  }}}
                   onClick={this.props.cbBack}
                   tabIndex="0"
               >
-                  <RemoveIconSVG svgStyle={{...this.getDefaultStyle('headerSvgs')}} />
+                  <BackArrowIconSVG svgStyle={{...this.getDefaultStyle('headerSvgs')}} />
               </span>
               <span
                   className="title"
@@ -262,9 +273,12 @@ class DetailItems extends VertoBaseComponent {
   generateDetails() {
     const self = this;
     let details;
+    if(!this.props.callerId) {
+      return;
+    }
     const detailData = CallHistoryService.getInstance().getHistoryDetail(this.props.callerId);
     details = detailData.length ? (
-      detailData.map(function(i){
+      detailData.map(function(i, index){
       let renderedDirection;
       if(i.direction == 'outgoing') {
         renderedDirection = (
@@ -281,6 +295,7 @@ class DetailItems extends VertoBaseComponent {
       const formattedTimestamp = moment(i.timestamp).format('ddd MMM DD YYYY HH:mm:ss A');
       return (
             <div
+                key={index}
                 className="details"
                 onClick={()=>{
                   self.props.cbCall(i.callerId);
@@ -309,6 +324,11 @@ class DetailItems extends VertoBaseComponent {
                 style={{...this.getDefaultStyle('header')}}
             >
                 <span
+                  onKeyPress={(e)=>{
+                    if(e.which == 13 || e.keyCode == 13) {
+                      this.props.cbBack();
+                      return false;
+                    }}}
                     onClick={this.props.cbBack}
                     tabIndex="0"
                 >
@@ -404,14 +424,14 @@ class CallHistory extends VertoBaseComponent {
       <span
           style={{...style, position: 'absolute'}}
       >
-      <DetailItems
-          key={i}
-          cbBack={()=>{
-            this.clickHandler();
-          }}
-          cbCall={this.props.cbCall}
-          callerId={this.state.callItem}
-      />
+        <DetailItems
+            key={i}
+            cbBack={()=>{
+              this.clickHandler();
+            }}
+            cbCall={this.props.cbCall}
+            callerId={this.state.callItem}
+        />
       </span>
     );
 

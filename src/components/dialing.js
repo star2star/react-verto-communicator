@@ -98,7 +98,8 @@ class Dialing extends VertoBaseComponent {
           width: '20px',
           height: '20px',
           fill: 'white',
-          padding: '5px'
+          padding: '5px',
+          cursor: 'pointer'
         }
     };
 
@@ -106,10 +107,11 @@ class Dialing extends VertoBaseComponent {
   }
 
   render() {
+    //console.log('------>>> ', this.props.callData);
       return (
         <div className="container" style={this.getStyle('dialingContainer')}>
           <div style={this.getStyle('avatarRowStyle')}>
-            <AvatarSVG svgStyle={this.getStyle('avatarStyle')} />
+            <AvatarSVG svgStyle={this.getStyle('avatarStyle')}  />
             <div style={this.getStyle('callStatusStyle')}>
               <div>{this.props.callData.destination}</div>
               <div>{this.state.status == 'active'? this.state.timer: 'Connecting ...'}</div>

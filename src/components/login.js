@@ -88,7 +88,6 @@ class Login extends VertoBaseComponent{
     //console.log('submitting login with this data: ', this.state.settings);
     this.props.cbClick(this.state.settings);
   }
-  //TODO intl
   render() {
     const { formatMessage } = this.props.intl;
 

@@ -43,8 +43,12 @@ export default class AdminControls extends VertoBaseComponent {
           width: '30px',
           fill: 'gray',
           paddingTop: '10px'
-        }
-      },
+        },
+        controlStyle: {
+          paddingTop: '2px',
+          fontSize: '.8rem'
+      }
+    },
 
       headingStyle:{
         backgroundColor: '#e9e9e9',
@@ -90,7 +94,6 @@ export default class AdminControls extends VertoBaseComponent {
         justifyContent: 'space-around',
         flexDirection: 'row',
         paddingBottom: '10px'
-
       },
 
       container: {
@@ -126,7 +129,6 @@ export default class AdminControls extends VertoBaseComponent {
     //console.log('&&&&&& member object', this.props.member);
 
     // TODO - ta - Finish up Transfer component to handle transfer click
-    // TODO - ta - INternationalize strings in headings
     // TODO - ta - Add new component for input of banner text
     // TODO - ta - Add new component to get 'canvasId' when setting layer
     // TODO - ta - Add real callback functions to canvas controls when available
@@ -206,9 +208,9 @@ export default class AdminControls extends VertoBaseComponent {
                   compStyle={this.getStyle("controlIconStyle")}
                   cbActionClick={()=>{this.props.cbControlClick("VIDEOFLOOR", [this.props.member.memberId]);}}
               />
-              <ControlItem type="UpArrowIconSVG" label="TRANSFER"
-                  compStyle={this.getStyle("controlIconStyle")}
-                  cbActionClick={()=>{
+            <ControlItem type="UpArrowIconSVG" label={formatMessage({"id":"CHAT_TRANSFER", "defaultMessage":"Transfer"})}
+                compStyle={this.getStyle("controlIconStyle")}
+                cbActionClick={()=>{
                     App.toggleModal((
                       <InputModal cbClose={App.toggleModal}
                           title={formatMessage({"id":"TITLE_TRANSFER", "defaultMessage":"Transfer Party?"})}

@@ -38,7 +38,7 @@ class NetworkStatusIndicator extends VertoBaseComponent {
         display: 'flex',
         justifyContent: 'center',
         color: '#4a4a4a',
-        fontSize: '14px',
+        fontSize: '1rem',
         fontWeight: '700',
         padding: '5px',
         paddingTop: '10px',
@@ -51,7 +51,7 @@ class NetworkStatusIndicator extends VertoBaseComponent {
       li: {
         minWidth: '250px',
         color: '#333',
-        fontSize: '14px',
+        fontSize: '.9rem',
         fontWeight: 400,
         fontFamily: 'Helvetica',
         padding: '5px',
@@ -85,12 +85,8 @@ class NetworkStatusIndicator extends VertoBaseComponent {
         case 3:
             icon = (<SignalMediumIconSVG svgStyle={{...this.getStyle('icon'), fill: 'yellow'}} />);
             break;
-        case 2:
-            icon = (<SignalLowIconSVG svgStyle={{...this.getStyle('icon'), fill: 'red'}} />);
-            break;
         default:
-             (<SignalFullIconSVG svgStyle={{...this.getStyle('icon'), fill: 'black'}} />);
-            break;
+            icon = (<SignalLowIconSVG svgStyle={{...this.getStyle('icon'), fill: 'red'}} />);
     }
 
     const toolTipMessage =(

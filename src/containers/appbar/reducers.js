@@ -8,7 +8,7 @@ const app = (state, action)=>{
 
     if (localStorage){
       lsSettings = JSON.parse(localStorage.getItem('settings'));
-      console.log('sssss: ', lsSettings);
+      //console.log('sssss: ', lsSettings);
     }
     return  { settings :{
                 selectedVideo: null,
