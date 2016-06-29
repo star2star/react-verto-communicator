@@ -968,7 +968,7 @@ class PreviousIconSVG extends React.Component {
 	}
 }
 
-// Set svg icon
+// Set svg icon (check mark)
 
 class SetIconSVG extends React.Component {
 
