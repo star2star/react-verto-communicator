@@ -32,6 +32,7 @@ var config = {
   ]
 }
 console.log('---> ', process.env.NODE_ENV );
+//export NODE_ENV=production
 if (process.env.NODE_ENV === 'production') {
   config.output.path = path.join(__dirname, 'dist/')
   config.plugins.push(new webpack.optimize.UglifyJsPlugin({
