@@ -343,7 +343,7 @@ class DetailItems extends VertoBaseComponent {
             </div>
           </div>
           <div
-              className="body"
+              className="body-de"
               tabIndex="0"
               style={{...this.getDefaultStyle('body')}}
           >
