@@ -590,6 +590,7 @@ showSpeeds(){
       const vidQual = this.props.bandwidthInfo.vidQual ? this.props.bandwidthInfo.vidQual : '';
       nsIndicator = (
         <NetworkStatusIndicator
+            ttPosition={!this.state.showAltAppControls ? "bottom" : "right"}
             compStyle={this.state.showAltAppControls ? this.getStyle("altNsiCompStyle") : this.getStyle("nsiCompStyle")}
             networkData={{upkpbs: this.props.bandwidthInfo.outgoingBandwidth,
                           downkpbs: this.props.bandwidthInfo.incomingBandwidth,

@@ -35,7 +35,6 @@ class TagMenu extends VertoBaseComponent {
         display: 'flex',
         position: 'relative',
         alignItems: 'center',
-        backgroundColor: 'red',
         zIndex: '1'
       },
       icon: {

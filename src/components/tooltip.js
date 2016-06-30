@@ -3,6 +3,8 @@ import { Tooltip, Origin } from 'redux-tooltip';
 import VertoBaseComponent from './vertobasecomponent';
 //import { FormattedMessage } from 'react-intl';
 
+const SVGOrigin = Origin.wrapBy('g');
+
 const propTypes = {
   place: React.PropTypes.string.isRequired,
   name: React.PropTypes.string.isRequired,
@@ -30,21 +32,16 @@ export default class ToolTip extends VertoBaseComponent {
   }
 
   render(){
-    //console.log("$$$$$ tooltip props", this.props);
-    if (this.props.name !== 'info') {
-      return <span>{this.props.children}</span>
-
-    } else {
-    console.log('this.props.auto', this.props.auto);
     return(
       <span>
-       <Origin name={this.props.name} auto={this.props.auto}>
-        {this.props.children}
-       </Origin>
-       <Tooltip name={this.props.name} place={this.props.place} within={this.props.within}>{this.props.msg} auto={this.props.auto}</Tooltip>
+        <Origin name={this.props.name} auto={this.props.auto}>
+          {this.props.children}
+        </Origin>
+        <Tooltip name={this.props.name} place={this.props.place} within={this.props.within} auto={this.props.auto}>
+          {this.props.msg}
+        </Tooltip>
      </span>
     );}
-  }
 }
 
 ToolTip.propTypes = propTypes;
