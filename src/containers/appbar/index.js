@@ -600,6 +600,7 @@ showSpeeds(){
     } else {
       nsIndicator = (
         <NetworkStatusIndicator
+            ttPosition={!this.state.showAltAppControls ? "bottom" : "right"}
             compStyle={this.state.showAltAppControls ? this.getStyle("altNsiCompStyle") : this.getStyle("nsiCompStyle")}
         />
       );
