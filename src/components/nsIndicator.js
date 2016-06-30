@@ -147,7 +147,7 @@ class NetworkStatusIndicator extends VertoBaseComponent {
     }
 
     if (this.props.allowDisplayDetails) {
-      return  (<ToolTip place={this.props.ttPosition} name="nsi" msg={toolTipMessage}>{icon}</ToolTip>) ;
+      return  (<ToolTip place="top" name="nsi" msg={toolTipMessage}>{icon}</ToolTip>) ;
     } else {
       return (icon);
     }
