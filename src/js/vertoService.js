@@ -299,7 +299,7 @@ class VertoService {
         const currentUser = v.options.loginParams.user;
         console.log('chatCallback ..... ', e,v );
 
-        xInstance.notify('chat-received', 'true', {callID, displayName, message, utc_timestamp: Date.now(), isMe: sentUser == currentUser , bgColor: this.getChatUserColor(sentUser) } );
+        this.notify('chat-received', 'true', {callID, displayName, message, utc_timestamp: Date.now(), isMe: sentUser == currentUser , bgColor: this.getChatUserColor(sentUser) } );
       },
       onBroadcast: (v, conf, message) => {
         console.log('>>> conf.onBroadcast:', message, arguments);
@@ -326,7 +326,7 @@ class VertoService {
             });
             this._data.confLayoutsData = message.responseData;
             this._data.confLayouts = options;
-              xInstance.notify('conferenceData', 'true', {callId: Object.keys(v.dialogs)[0], layouts: this._data.confLayouts });
+            this.notify('conferenceData', 'true', {callID: Object.keys(v.dialogs)[0], layouts: this._data.confLayouts });
           } else if (message['conf-command'] == 'canvasInfo') {
             this._data.canvasInfo = message.responseData;
             //console.log('..... CANVASINFO ...', message, v );
@@ -334,7 +334,7 @@ class VertoService {
             if (this._data.confLayoutsData && message.responseData[0]) {
               this._data.confLayoutsData.filter(l=>l.name === message.responseData[0].layoutName).map((mLayout)=>{
                 // found it so
-                xInstance.notify('conferenceData', 'true', {callId: Object.keys(v.dialogs)[0],  videoLayout: this._data.canvasInfo, hasMultipleCanvases: message.responseData > 1, allowPresenter: mLayout.resIDS && mLayout.resIDS.length > 0 });
+                this.notify('conferenceData', 'true', {callID: Object.keys(v.dialogs)[0],  videoLayout: this._data.canvasInfo, hasMultipleCanvases: message.responseData > 1, allowPresenter: mLayout.resIDS && mLayout.resIDS.length > 0 });
                 });
             };
           } else if (message['conf-command'].indexOf('vid-layout') ) {

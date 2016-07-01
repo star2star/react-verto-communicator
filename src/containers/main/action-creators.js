@@ -295,7 +295,7 @@ const doSendChat = (message) => {
   };
 }
 
-const doReceiveChat = (callID, messageObject) => {
+const doReceiveChat = (messageObject) => {
   return dispatch =>{
     //console.log('received a chat msssgggg: ', callID, from, message);
     dispatch({
