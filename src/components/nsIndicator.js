@@ -1,7 +1,7 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent.js';
 import {
-//SignalNoneIconSVG,
+SignalNoneIconSVG,
 SignalMediumIconSVG,
 SignalFullIconSVG,
 SignalLowIconSVG } from './svgIcons';
@@ -12,7 +12,7 @@ import ReactDOMServer  from 'react-dom/server';
 const propTypes = {
   allowDisplayDetails : React.PropTypes.bool,
   compStyle : React.PropTypes.object,
-  networkData : React.PropTypes.object.isRequired
+  networkData : React.PropTypes.object//.isRequired
 };
 
 const defaultProps = {
@@ -57,6 +57,16 @@ class NetworkStatusIndicator extends VertoBaseComponent {
         padding: '5px',
         paddingLeft: '15px',
         paddingRight: '15px'
+      },
+      noInfo: {
+        display: 'flex',
+        minWidth: '250px',
+        color: '#333',
+        fontSize: '.9rem',
+        fontWeight: 400,
+        fontFamily: 'Helvetica',
+        padding: '15px',
+        justifyContent: 'center'
       }
     };
 
@@ -70,11 +80,15 @@ class NetworkStatusIndicator extends VertoBaseComponent {
 
     let bwp = 4;
     const networkData = this.props.networkData;
-    if(networkData.upkpbs < 2000) {
-      bwp--;
-    }
-    if(networkData.downkpbs < 2000) {
-      bwp--;
+    if(networkData) {
+      if(networkData.upkpbs < 2000) {
+        bwp--;
+      }
+      if(networkData.downkpbs < 2000) {
+        bwp--;
+      }
+    } else {
+      bwp=0;
     }
 
     let icon;
@@ -85,35 +99,55 @@ class NetworkStatusIndicator extends VertoBaseComponent {
         case 3:
             icon = (<SignalMediumIconSVG svgStyle={{...this.getStyle('icon'), fill: 'yellow'}} />);
             break;
+        case 0:
+            icon = (<SignalNoneIconSVG svgStyle={{...this.getStyle('icon'), fill: '#F45A5A'}} />);
+            break;
         default:
-            icon = (<SignalLowIconSVG svgStyle={{...this.getStyle('icon'), fill: 'red'}} />);
+            icon = (<SignalLowIconSVG svgStyle={{...this.getStyle('icon'), fill: '#F45A5A'}} />);
     }
 
-    const toolTipMessage =(
-      <span>
-        <div style={this.getStyle('header')} >
-            {formatMessage({"id":"BANDWIDTH_INFO", "defaultMessage":"Bandwidth Info"})}
-        </div>
-        <div
-            style={this.getStyle('li')}
-        >
-          {formatMessage({"id":"BANDWIDTH_INFO_OUTGOING", "defaultMessage":"Bandwidth Info"})} {this.props.networkData.upkpbs}
-        </div>
-        <div
-            style={this.getStyle('li')}
-        >
-          {formatMessage({"id":"BANDWIDTH_INFO_INCOMING", "defaultMessage":"Bandwidth Info"})} {this.props.networkData.downkpbs}
-        </div>
-        <div
-            style={this.getStyle('li')}
-        >
-            {formatMessage({"id":"BANDWIDTH_INFO_VIDEO_RES", "defaultMessage":"Bandwidth Info"})} {this.props.networkData.vidQual}
-        </div>
-      </span>
-    );
+    let toolTipMessage;
+
+    if(this.props.networkData) {
+      toolTipMessage =(
+        <span>
+          <div style={this.getStyle('header')} >
+              {formatMessage({"id":"BANDWIDTH_INFO", "defaultMessage":"Bandwidth Info"})}
+          </div>
+          <div
+              style={this.getStyle('li')}
+          >
+            {formatMessage({"id":"BANDWIDTH_INFO_OUTGOING", "defaultMessage":"Bandwidth Info"})} {this.props.networkData.upkpbs}
+          </div>
+          <div
+              style={this.getStyle('li')}
+          >
+            {formatMessage({"id":"BANDWIDTH_INFO_INCOMING", "defaultMessage":"Bandwidth Info"})} {this.props.networkData.downkpbs}
+          </div>
+          <div
+              style={this.getStyle('li')}
+          >
+              {formatMessage({"id":"BANDWIDTH_INFO_VIDEO_RES", "defaultMessage":"Bandwidth Info"})} {this.props.networkData.vidQual}
+          </div>
+        </span>
+      );
+    } else {
+      toolTipMessage =(
+        <span>
+          <div style={this.getStyle('header')} >
+              {formatMessage({"id":"BANDWIDTH_INFO", "defaultMessage":"Bandwidth Info"})}
+          </div>
+          <div
+              style={this.getStyle('noInfo')}
+          >
+            Information not currently available.
+          </div>
+        </span>
+      );
+    }
 
     if (this.props.allowDisplayDetails) {
-      return  (<ToolTip place="bottom" name="nsi" msg={toolTipMessage}>{icon}</ToolTip>) ;
+      return  (<ToolTip place="top" name="nsi" msg={toolTipMessage}>{icon}</ToolTip>) ;
     } else {
       return (icon);
     }

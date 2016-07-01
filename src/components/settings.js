@@ -78,7 +78,7 @@ class Settings extends VertoBaseComponent {
     if(this.props.status == "disconnected"){
       var theMsg = formatMessage({"id":"SETTINGS_LOGIN", "defaultMessage":"Login to change settings"});
     }else{
-      var theMsg = formatMessage({"id":"SETTINGS", "defaultMessage":"settings"});;
+      var theMsg = formatMessage({"id":"SETTINGS", "defaultMessage":"settings"});
     }
     // console.log('settings render props: ', this.props.settingsData);
     return (

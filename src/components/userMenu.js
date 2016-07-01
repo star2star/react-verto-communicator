@@ -106,13 +106,13 @@ class UserMenu extends VertoBaseComponent {
     return (
 
         <span onClick={this.toggleMenu.bind(this)}  style={this.getStyle("container")}>
-        <ToolTip name="user" place={this.props.ttPosition} msg={theMsg} >
-          <AvatarSVG svgStyle={{...this.getStyle('icon')}}  />
-        </ToolTip>
-            {this.state.dropdownDisplayed ?
-                <CaretUpIconSVG svgStyle={{...this.getStyle('caret')}} /> :
-                <CaretDownIconSVG svgStyle={{...this.getStyle('caret')}} />}
-              {menuContainer}
+          <ToolTip name="user" place={this.props.ttPosition} msg={theMsg} >
+            <AvatarSVG svgStyle={{...this.getStyle('icon')}}  />
+              {this.state.dropdownDisplayed ?
+                  <CaretUpIconSVG svgStyle={{...this.getStyle('caret')}} /> :
+                  <CaretDownIconSVG svgStyle={{...this.getStyle('caret')}} />}
+          </ToolTip>
+          {menuContainer}
         </span>
 
     );
