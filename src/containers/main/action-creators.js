@@ -201,7 +201,7 @@ const doIncomingCall = (dialog) =>{
 const doMakeCall = (aPhoneNumber, appSettings) => {
   return dispatch => {
 
-    const callID = VertoService.getInstance().makeCall(dispatch, aPhoneNumber, appSettings);
+    const callID = VertoService.getInstance().makeCall(aPhoneNumber, appSettings);
     dispatch(doingMakeCall('trying', aPhoneNumber, callID));
   };
 };
@@ -295,7 +295,7 @@ const doSendChat = (message) => {
   };
 }
 
-const doReceiveChat = (callID, messageObject) => {
+const doReceiveChat = (messageObject) => {
   return dispatch =>{
     //console.log('received a chat msssgggg: ', callID, from, message);
     dispatch({

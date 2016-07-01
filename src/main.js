@@ -12,7 +12,7 @@ import Messages from './js/messages';
 import App from './components/app';
 import {doValidation, doLogOut, doVertoLogin, doMakeCallError, doHungUp, doCallHeld,
    doingMakeCall, doIncomingCall, doConferenceData, doReceiveChat } from './containers/main/action-creators';
-//import AlertService from './js/alertService';
+import AlertService from './js/alertService';
 
 function getLanguage(){
   let sReturn = 'en-US';
@@ -55,7 +55,7 @@ addLocaleData(localeData);
 const store = createStore(reducer, applyMiddleware(thunk));
 
 const subId = VertoService.getInstance().subscribe((event, status, data)=>{
-  console.log('>>>> Subscription: ', event, status, data)
+  //console.log('>>>> Subscription: ', event, status, data)
   switch (event){
     case "loggedIn":
       store.dispatch(doVertoLogin(status, data ));
@@ -84,9 +84,9 @@ const subId = VertoService.getInstance().subscribe((event, status, data)=>{
     case 'hangup':
       store.dispatch(doHungUp(data));
       break;
-    //case 'showAlert':
-    //  AlertService.getInstance().createAlert(data);
-    //  break;
+    case 'showAlert':
+      AlertService.getInstance().createAlert(data);
+      break;
 
       //this is were I am adding things
     default:

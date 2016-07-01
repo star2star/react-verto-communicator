@@ -1,10 +1,6 @@
-//TODO remove this import once code has been migrated
-import {doLogOut, doVertoLogin, doMakeCallError, doHungUp, doCallHeld,
-   doingMakeCall, doIncomingCall, doConferenceData, doReceiveChat } from '../containers/main/action-creators';
 import VideoConstants from './VideoConstants';
 import md5 from 'md5';
 import CallHistoryService from './callHistoryService';
-import AlertService from './alertService';
 
 // private stuff
 let _callbacks;
@@ -226,10 +222,8 @@ class VertoService {
     this.subscribe = this.subscribe.bind(this);
     this.removeSubscription = this.removeSubscription.bind(this);
     this.notify = this.notify.bind(this);
-
+    this.hangup = this.hangup.bind(this);
     VertoService.getInstance = VertoService.getInstance.bind(this);
-    //VertoService.login = VertoService.login.bind(this);
-    //VertoService.logout = VertoService.logout.bind(this);
     VertoService.mediaPerm = VertoService.mediaPerm.bind(this);
     VertoService.speedTest = VertoService.speedTest.bind(this);
     VertoService.refreshVideoResolution = VertoService.refreshVideoResolution.bind(this);
@@ -305,15 +299,15 @@ class VertoService {
         const currentUser = v.options.loginParams.user;
         console.log('chatCallback ..... ', e,v );
 
-        xInstance.notify('chat-received', 'true', {callID, displayName, message, utc_timestamp: Date.now(), isMe: sentUser == currentUser , bgColor: this.getChatUserColor(sentUser) } );
+        this.notify('chat-received', 'true', {callID, displayName, message, utc_timestamp: Date.now(), isMe: sentUser == currentUser , bgColor: this.getChatUserColor(sentUser) } );
       },
       onBroadcast: (v, conf, message) => {
-        console.log('>>> conf.onBroadcast:', message, arguments);
+        //console.log('>>> conf.onBroadcast:', message, arguments);
 
         if (message.action == 'response') {
           // This is a response with the video layouts list.
           if (message['conf-command'] == 'list-videoLayouts') {
-            console.log('hmmmmmmm', message.responseData);
+            //console.log('hmmmmmmm', message.responseData);
             var rdata = [];
 
             for (var i in message.responseData) {
@@ -332,7 +326,7 @@ class VertoService {
             });
             this._data.confLayoutsData = message.responseData;
             this._data.confLayouts = options;
-              xInstance.notify('conferenceData', 'true', {callId: Object.keys(v.dialogs)[0], layouts: this._data.confLayouts });
+            this.notify('conferenceData', 'true', {callID: Object.keys(v.dialogs)[0], layouts: this._data.confLayouts });
           } else if (message['conf-command'] == 'canvasInfo') {
             this._data.canvasInfo = message.responseData;
             //console.log('..... CANVASINFO ...', message, v );
@@ -340,7 +334,7 @@ class VertoService {
             if (this._data.confLayoutsData && message.responseData[0]) {
               this._data.confLayoutsData.filter(l=>l.name === message.responseData[0].layoutName).map((mLayout)=>{
                 // found it so
-                xInstance.notify('conferenceData', 'true', {callId: Object.keys(v.dialogs)[0],  videoLayout: this._data.canvasInfo, hasMultipleCanvases: message.responseData > 1, allowPresenter: mLayout.resIDS && mLayout.resIDS.length > 0 });
+                this.notify('conferenceData', 'true', {callID: Object.keys(v.dialogs)[0],  videoLayout: this._data.canvasInfo, hasMultipleCanvases: message.responseData > 1, allowPresenter: mLayout.resIDS && mLayout.resIDS.length > 0 });
                 });
             };
           } else if (message['conf-command'].indexOf('vid-layout') ) {
@@ -412,7 +406,7 @@ class VertoService {
 
     this._data.liveArray.onChange = (obj, args) => {
       //window.foo = obj;
-      console.log('liveArray.onChange --- action: %s',args.action,  obj, args);
+      //console.log('liveArray.onChange --- action: %s',args.action,  obj, args);
 
       switch (args.action) {
         case 'bootObj':
@@ -598,7 +592,7 @@ class VertoService {
   }
 
   shareScreen(settings) {
-    console.log('share screen video');
+    //console.log('share screen video');
 
     var that = this;
 
@@ -635,24 +629,24 @@ class VertoService {
           StreamTrack.addEventListener('ended', ()=>{
             if(that._data.shareCall) {
               that.screenshareHangup.bind(that)();
-              console.log("screenshare ended");
+              //console.log("screenshare ended");
             }
           });
         }
 
-        console.log("screenshare started");
+        //console.log("screenshare started");
       };
 
       that._data.shareCall = call;
 
-      console.log('shareCall', that._data.shareCall );
+      //console.log('shareCall', that._data.shareCall );
 
       // JES dont know why we are doing this so i am commenting out
       // this._data.mutedMic = false;
       // this._data.mutedVideo = false;
 
       VertoService.refreshDevices(()=>{
-        console.log('screeen sharing refresh devices callback ')
+        //console.log('screeen sharing refresh devices callback ')
       });
 
     });
@@ -665,7 +659,7 @@ class VertoService {
       return false;
     }
 
-    console.log('shareCall End', this._data.shareCall);
+    //console.log('shareCall End', this._data.shareCall);
     this._data.shareCall.hangup();
 
     console.debug('The screencall was hangup.');
@@ -685,9 +679,7 @@ class VertoService {
                             summary: 'Can\'t hang up while sharing screen',
                             detail: 'You must stop sharing your screen before you can hangup the call'
                           };
-
-        AlertService.getInstance().createAlert(alertObj);
-        xInstance.notify('showAlert', 'true', alertObj)
+        this.notify('showAlert', 'true', alertObj);
         return;
       }
       _verto.verto.hangup(callerId);
@@ -697,7 +689,7 @@ class VertoService {
     }
   }
 
-  makeCall(dispatch, destination, settings) {
+  makeCall(destination, settings) {
     //console.log('calling desitnation', destination);
     if (!_verto.verto) {
       const message = "not connected";
