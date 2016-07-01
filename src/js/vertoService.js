@@ -302,12 +302,12 @@ class VertoService {
         this.notify('chat-received', 'true', {callID, displayName, message, utc_timestamp: Date.now(), isMe: sentUser == currentUser , bgColor: this.getChatUserColor(sentUser) } );
       },
       onBroadcast: (v, conf, message) => {
-        console.log('>>> conf.onBroadcast:', message, arguments);
+        //console.log('>>> conf.onBroadcast:', message, arguments);
 
         if (message.action == 'response') {
           // This is a response with the video layouts list.
           if (message['conf-command'] == 'list-videoLayouts') {
-            console.log('hmmmmmmm', message.responseData);
+            //console.log('hmmmmmmm', message.responseData);
             var rdata = [];
 
             for (var i in message.responseData) {
@@ -406,7 +406,7 @@ class VertoService {
 
     this._data.liveArray.onChange = (obj, args) => {
       //window.foo = obj;
-      console.log('liveArray.onChange --- action: %s',args.action,  obj, args);
+      //console.log('liveArray.onChange --- action: %s',args.action,  obj, args);
 
       switch (args.action) {
         case 'bootObj':
@@ -592,7 +592,7 @@ class VertoService {
   }
 
   shareScreen(settings) {
-    console.log('share screen video');
+    //console.log('share screen video');
 
     var that = this;
 
@@ -629,24 +629,24 @@ class VertoService {
           StreamTrack.addEventListener('ended', ()=>{
             if(that._data.shareCall) {
               that.screenshareHangup.bind(that)();
-              console.log("screenshare ended");
+              //console.log("screenshare ended");
             }
           });
         }
 
-        console.log("screenshare started");
+        //console.log("screenshare started");
       };
 
       that._data.shareCall = call;
 
-      console.log('shareCall', that._data.shareCall );
+      //console.log('shareCall', that._data.shareCall );
 
       // JES dont know why we are doing this so i am commenting out
       // this._data.mutedMic = false;
       // this._data.mutedVideo = false;
 
       VertoService.refreshDevices(()=>{
-        console.log('screeen sharing refresh devices callback ')
+        //console.log('screeen sharing refresh devices callback ')
       });
 
     });
@@ -659,7 +659,7 @@ class VertoService {
       return false;
     }
 
-    console.log('shareCall End', this._data.shareCall);
+    //console.log('shareCall End', this._data.shareCall);
     this._data.shareCall.hangup();
 
     console.debug('The screencall was hangup.');

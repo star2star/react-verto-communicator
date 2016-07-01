@@ -55,7 +55,7 @@ addLocaleData(localeData);
 const store = createStore(reducer, applyMiddleware(thunk));
 
 const subId = VertoService.getInstance().subscribe((event, status, data)=>{
-  console.log('>>>> Subscription: ', event, status, data)
+  //console.log('>>>> Subscription: ', event, status, data)
   switch (event){
     case "loggedIn":
       store.dispatch(doVertoLogin(status, data ));
