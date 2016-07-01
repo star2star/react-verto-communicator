@@ -201,7 +201,7 @@ const doIncomingCall = (dialog) =>{
 const doMakeCall = (aPhoneNumber, appSettings) => {
   return dispatch => {
 
-    const callID = VertoService.getInstance().makeCall(dispatch, aPhoneNumber, appSettings);
+    const callID = VertoService.getInstance().makeCall(aPhoneNumber, appSettings);
     dispatch(doingMakeCall('trying', aPhoneNumber, callID));
   };
 };

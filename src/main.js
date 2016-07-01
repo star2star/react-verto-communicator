@@ -12,7 +12,7 @@ import Messages from './js/messages';
 import App from './components/app';
 import {doValidation, doLogOut, doVertoLogin, doMakeCallError, doHungUp, doCallHeld,
    doingMakeCall, doIncomingCall, doConferenceData, doReceiveChat } from './containers/main/action-creators';
-//import AlertService from './js/alertService';
+import AlertService from './js/alertService';
 
 function getLanguage(){
   let sReturn = 'en-US';
@@ -84,9 +84,9 @@ const subId = VertoService.getInstance().subscribe((event, status, data)=>{
     case 'hangup':
       store.dispatch(doHungUp(data));
       break;
-    //case 'showAlert':
-    //  AlertService.getInstance().createAlert(data);
-    //  break;
+    case 'showAlert':
+      AlertService.getInstance().createAlert(data);
+      break;
 
       //this is were I am adding things
     default:

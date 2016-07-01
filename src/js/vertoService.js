@@ -1,10 +1,6 @@
-//TODO remove this import once code has been migrated
-import {doLogOut, doVertoLogin, doMakeCallError, doHungUp, doCallHeld,
-   doingMakeCall, doIncomingCall, doConferenceData, doReceiveChat } from '../containers/main/action-creators';
 import VideoConstants from './VideoConstants';
 import md5 from 'md5';
 import CallHistoryService from './callHistoryService';
-import AlertService from './alertService';
 
 // private stuff
 let _callbacks;
@@ -226,10 +222,8 @@ class VertoService {
     this.subscribe = this.subscribe.bind(this);
     this.removeSubscription = this.removeSubscription.bind(this);
     this.notify = this.notify.bind(this);
-
+    this.hangup = this.hangup.bind(this);
     VertoService.getInstance = VertoService.getInstance.bind(this);
-    //VertoService.login = VertoService.login.bind(this);
-    //VertoService.logout = VertoService.logout.bind(this);
     VertoService.mediaPerm = VertoService.mediaPerm.bind(this);
     VertoService.speedTest = VertoService.speedTest.bind(this);
     VertoService.refreshVideoResolution = VertoService.refreshVideoResolution.bind(this);
@@ -685,9 +679,7 @@ class VertoService {
                             summary: 'Can\'t hang up while sharing screen',
                             detail: 'You must stop sharing your screen before you can hangup the call'
                           };
-
-        AlertService.getInstance().createAlert(alertObj);
-        xInstance.notify('showAlert', 'true', alertObj)
+        this.notify('showAlert', 'true', alertObj);
         return;
       }
       _verto.verto.hangup(callerId);
@@ -697,7 +689,7 @@ class VertoService {
     }
   }
 
-  makeCall(dispatch, destination, settings) {
+  makeCall(destination, settings) {
     //console.log('calling desitnation', destination);
     if (!_verto.verto) {
       const message = "not connected";
