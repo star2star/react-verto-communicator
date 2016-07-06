@@ -148,11 +148,10 @@ class NetworkStatusIndicator extends VertoBaseComponent {
     }
 
     if (this.props.allowDisplayDetails) {
-      return  (<ToolTip place="top" name="nsi" msg={toolTipMessage} custStyle={{content:{padding:'0px'}}}>{icon}</ToolTip>) ;
+      return  (<ToolTip place="top" name="nsi" msg={toolTipMessage} custStyle={{base:{marginTop:'10px'}, content:{padding:'0px'}}}>{icon}</ToolTip>) ;
     } else {
       return (icon);
     }
-
   }
 }
 
