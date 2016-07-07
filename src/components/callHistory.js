@@ -68,7 +68,7 @@ class HistoryItems extends VertoBaseComponent {
       body : {
         width: '100%',
         position: 'absolute',
-        maxHeight: '500px',
+        height: '500px',
         overflowY: 'auto',
         overflowX: 'hidden'
       },
