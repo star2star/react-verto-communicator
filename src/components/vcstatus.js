@@ -66,7 +66,7 @@ class VCStatus extends VertoBaseComponent {
     const theMsg= intlStatus = formatMessage({"id":"COM_STATUS", "defaultMessage":"Communication Status: "}) + intlStatus;
 
      return (
-        <ToolTip name="vcStatus" place={this.props.ttPosition} msg={theMsg}>
+        <ToolTip name="vcStatus" place={this.props.ttPosition} msg={theMsg} custStyle={{base:{marginTop: '10px'}}}>
           < StatusIconSVG svgStyle = {{...this.getStyle('svgStyle'), ...fillColor}} />
         </ToolTip>
      );

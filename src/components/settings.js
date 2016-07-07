@@ -85,7 +85,7 @@ class Settings extends VertoBaseComponent {
 
       <div  style={this.getStyle("container")}>
         <span onClick={this.showMenu.bind(this)}  >
-          <ToolTip name="settings" place={this.props.ttPosition} msg={theMsg} >
+          <ToolTip name="settings" place={this.props.ttPosition} msg={theMsg} custStyle={{base: {marginTop:'10px'}}}>
             <SettingsIconSVG svgStyle={{...this.getStyle('icon')}}  />
             {this.state.dropdownDisplayed ?
                 <CaretUpIconSVG svgStyle={{...this.getStyle('caret')}} /> :

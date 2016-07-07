@@ -46,7 +46,8 @@ class NetworkStatusIndicator extends VertoBaseComponent {
         margin: '0px',
         borderBottom: '1px solid #ebebeb',
         backgroundColor: '#F7F7F7',
-        fontFamily: 'sans-serif'
+        fontFamily: 'sans-serif',
+        borderRadius: '5px 5px 0px 0px'
       },
       li: {
         minWidth: '250px',
@@ -147,11 +148,10 @@ class NetworkStatusIndicator extends VertoBaseComponent {
     }
 
     if (this.props.allowDisplayDetails) {
-      return  (<ToolTip place="top" name="nsi" msg={toolTipMessage}>{icon}</ToolTip>) ;
+      return  (<ToolTip place="top" name="nsi" msg={toolTipMessage} custStyle={{base:{marginTop:'10px'}, content:{padding:'0px'}}}>{icon}</ToolTip>) ;
     } else {
       return (icon);
     }
-
   }
 }
 
