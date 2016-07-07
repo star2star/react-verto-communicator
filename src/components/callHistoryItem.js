@@ -93,7 +93,6 @@ class CallHistoryItem extends VertoBaseComponent {
   }
 
   render(){
-    console.log('>>>>>>',this.props.allowToolTip);
     const renderedTS = moment(this.props.data.lastTimestamp).format('ddd MMM DD YYYY HH:mm:ss A');
 
     let nbrCalls;
@@ -207,8 +206,6 @@ class CallHistoryItem extends VertoBaseComponent {
         </div>
       );
     }
-
-    console.log('Display Object', displayObject);
 
     return (
       displayObject
