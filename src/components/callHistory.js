@@ -105,7 +105,7 @@ class HistoryItems extends VertoBaseComponent {
         return(
             <CallHistoryItem
                 key={index}
-                allowToolTip = {this.props.allowToolTip}
+                allowToolTip
                 className="chi"
                 data={i}
                 cbClick={()=>{
