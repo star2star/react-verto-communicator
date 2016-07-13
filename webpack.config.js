@@ -55,7 +55,7 @@ if (process.env.NODE_ENV === 'production') {
           //{ from: 'messages', to: 'messages' },
           { from: 'src/index.html', to: 'index.html' },
           { from: 'src/css', to: 'css'},
-          { from: 'img', to: 'img' }, 
+          { from: 'src/img', to: 'img' }, 
           { from: 'src/locales', to: 'locales'},
           { from: 'src/3rd-party', to: '3rd-party'},
           { from: 'src/favicon.ico', to: 'favicon.ico' }
