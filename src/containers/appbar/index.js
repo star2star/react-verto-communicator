@@ -706,7 +706,7 @@ showSpeeds(){
 }
 
 export default connect((state)=>{
-  //console.log('----STORE in appbar ----', state);
+  console.log('----STORE in appbar ----', state);
   return ({
     settings: state.app.settings,
     bandwidthInfo: state.app.bandwidthInfo,

@@ -50,15 +50,15 @@ const auth = (state, action)=>{
       return { ...state, showPage: 'resolution_failed'  };
     case 'CALLING':
       if (action.data.status === 'trying') {
-          return { ...state, showPage: 'dialing' };
+          return { ...state, showPage: 'dialing', vcStatus: 'connected' };
       } else {
         return { ...state, showPage: 'call_inprogress' };
       }
 
     case 'CALLING_ERROR':
-      return { ...state, showPage: 'loggedIn', error: action.data };
+      return { ...state, showPage: 'loggedIn', error: action.data, vcStatus: 'active' };
     case 'CALL_HUNG_UP':
-      return { ...state, showPage: 'loggedIn' };
+      return { ...state, showPage: 'loggedIn', vcStatus: 'active' };
     default:
      return state;
     }

@@ -175,6 +175,7 @@ const messages = {
   "LAYOUT_POSITION": "Layout position",
   "DISCONNECTED": "Disconnected",
   "CONNECTING": "Connecting",
+  "ACTIVE":"Active",
   "CONNECTED": "Connected",
   "COM_STATUS": "Communication status: ",
   "SCREEN_SHARE": "Screen Share",
