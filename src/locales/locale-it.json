@@ -190,6 +190,7 @@ const messages = {
   "MENU_INFO": "Informazioni del menu",
   "CALL_FROM": "Chiamata da:",
   "ANSWER": "Risposta",
-  "REJECT": "Rifiutare"
+  "REJECT": "Rifiutare",
+  "ACTIVE": "attivo"
 };
 module.exports = messages;

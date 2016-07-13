@@ -190,6 +190,7 @@ const messages = {
   "MENU_INFO": "Informasi menu",
   "CALL_FROM": "Panggilan dari:",
   "ANSWER": "Menjawab",
-  "REJECT": "Menolak"
+  "REJECT": "Menolak",
+  "ACTIVE": "aktif"
 };
 module.exports = messages;

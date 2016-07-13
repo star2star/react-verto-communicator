@@ -189,6 +189,7 @@ const messages = {
   "MENU_INFO": "Menú de información",
   "CALL_FROM": "Llamada de:",
   "ANSWER": "Responder",
-  "REJECT": "Rechazar"
+  "REJECT": "Rechazar",
+  "ACTIVE": "activo"
 };
 module.exports = messages;

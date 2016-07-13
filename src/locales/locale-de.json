@@ -190,6 +190,7 @@ const messages = {
   "MENU_INFO": "Info-Menü",
   "CALL_FROM": "Anruf von:",
   "ANSWER": "Antworten",
-  "REJECT": "Ablehnen"
+  "REJECT": "Ablehnen",
+  "ACTIVE": "aktiv"
 };
 module.exports = messages;

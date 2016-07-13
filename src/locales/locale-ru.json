@@ -190,6 +190,7 @@ const messages = {
   "MENU_INFO": "Информационное меню",
   "CALL_FROM": "Звонить из:",
   "ANSWER": "Ответ",
-  "REJECT": "отклонять"
+  "REJECT": "отклонять",
+  "ACTIVE": "активный"
   };
   module.exports = messages;

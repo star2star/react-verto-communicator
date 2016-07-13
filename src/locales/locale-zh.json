@@ -190,6 +190,7 @@ const messages = {
   "MENU_INFO": "信息菜單",
   "CALL_FROM": "來電者：",
   "ANSWER": "回答",
-  "REJECT": "拒絕"
+  "REJECT": "拒絕",
+  "ACTIVE": "活性"
   };
   module.exports = messages;
