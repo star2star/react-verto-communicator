@@ -21,6 +21,9 @@ class VertoService {
 
 
     window.v = this;
+    // ---------------
+    // CALLBACKS HERE
+    // ---------------
     _callbacks = {
       onMessage: (v, dialog, msg, params) => {
         //console.debug('^^^^^^^ onMessage:', v, dialog, msg, params);
@@ -61,7 +64,7 @@ class VertoService {
           d.params.event = d.state;
           d.params.caller_id_ext = parseInt(d.params.caller_id_number);
           d.params.remote_caller_id_ext = parseInt(d.params.remote_caller_id_number);
-
+          console.log('dialog state change: ', d);
           switch (d.state) {
               case $.verto.enum.state.ringing:
                   //console.log('^^^^^^ringing ... onDialogState display', d, d.params.screenShare);
@@ -188,6 +191,10 @@ class VertoService {
               }
               break;
 
+          case $.verto.enum.state.recovering:
+              console.log('^^^^^^^recovering ....', d);
+              break;
+              
           default:
               //display("");
               console.error('^^^^^^^default state not handled:', d.state, d);

@@ -127,7 +127,6 @@ const doingResolutionRefresh = () => {
 };
 //LOGIN
 const doShowLogin = () => {
-  console.log('hhhhhhh');
   return (dispatch, getState) => {
     try {
       const state = getState();
