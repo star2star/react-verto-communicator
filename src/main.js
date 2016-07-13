@@ -70,6 +70,7 @@ const subId = VertoService.getInstance().subscribe((event, status, data)=>{
       store.dispatch(doMakeCallError(data));
       break;
     case 'make-call-active':
+    case 'recovering':
       store.dispatch(doingMakeCall(status, (data.direction.name == 'outbound' ? data.params.destination_number : data.params.caller_id_number), data.callID, data.direction.name));
       break;
     case 'callHeld':

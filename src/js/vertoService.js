@@ -193,8 +193,9 @@ class VertoService {
 
           case $.verto.enum.state.recovering:
               console.log('^^^^^^^recovering ....', d);
+              xInstance.notify('recovering', 'true', d);
               break;
-              
+
           default:
               //display("");
               console.error('^^^^^^^default state not handled:', d.state, d);
