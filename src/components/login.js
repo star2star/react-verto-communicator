@@ -86,7 +86,12 @@ class Login extends VertoBaseComponent{
   submitLogin() {
     //TODO validate data before sending
     //console.log('submitting login with this data: ', this.state.settings);
-    this.props.cbClick(this.state.settings);
+    if (this.state.settings.name.length > 0 && this.state.settings.email.length > 0){
+      this.props.cbClick(this.state.settings);
+    } else {
+      //TODO add required field style 
+    }
+
   }
   render() {
     const { formatMessage } = this.props.intl;

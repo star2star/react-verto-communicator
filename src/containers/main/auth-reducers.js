@@ -8,11 +8,11 @@ const auth = (state, action)=>{
       lsLoginSettings = JSON.parse(localStorage.getItem('loginSettings'));
     }
     return  { loginSettings :{
-                name: 'James',
-                email: 'James@james.com',
-                user: '1010',
+                name: '',
+                email: '',
+                user: '1008',
                 password: 'Starvert0',
-                callerid: 'James',
+                callerid: '',
                 hostname: 'www.star2starglobal.com',
                 websocketurl: 'wss://www.star2starglobal.com:8082',
                 ...lsLoginSettings
