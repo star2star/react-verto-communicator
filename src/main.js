@@ -99,7 +99,8 @@ console.log('verto subscriptionID:', subId);
 window.theStore = store;
 
 store.dispatch(doValidation());
-browserHistory.push('#/login');
+
+browserHistory.push(location.href + '#/login');
 //console.log('INTL: ', locale, messages);
 ReactDOM.render((
   <Provider store={store}>
