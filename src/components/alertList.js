@@ -37,11 +37,7 @@ export default class AlertList extends VertoBaseComponent {
       }
     };
 
-    let styleReturn = styles[styleName];
-      if(this.props.style && this.props.style[styleName]) {
-        styleReturn = {...styleReturn, ...this.props.style[styleName]};
-      }
-    return styleReturn;
+    return styles[styleName];
   }
 
   handleNewAlert(e){
@@ -61,25 +57,25 @@ export default class AlertList extends VertoBaseComponent {
     this.setState({...this.state, alertArray: newAlertArray});
   }
 
-
   render(){
     //console.log('---- ', this.state.alertArray);
 
-    const alerts = this.state.alertArray.map((a, index)=>{
-      return (
-        <AlertItem
-            key={a.id}
-            alertData={a}
-            cbDismissAlert={this.handleDismissAlert}
-        /> );
-    });
-
     return(
         <div className="alertList" style={this.getStyle("ALStyles")}>
-        {alerts}
+        {this.state.alertArray.map((a)=>{
+          return (
+            <AlertItem
+                key={a.id}
+                alertData={a}
+                cbDismissAlert={this.handleDismissAlert}
+            /> );
+        })}
         </div>
       );
   }
 }
 
 AlertList.propTypes = propTypes;
+
+export default AlertList;
+// reviewed 7/13/2016

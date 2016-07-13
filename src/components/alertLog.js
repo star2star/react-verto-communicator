@@ -67,11 +67,7 @@ export default class AlertLog extends VertoBaseComponent {
       }
     };
 
-    let styleReturn = styles[styleName];
-      if(this.props.style && this.props.style[styleName]) {
-        styleReturn = {...styleReturn, ...this.props.style[styleName]};
-      }
-    return styleReturn;
+    return styles[styleName];
   }
 
   handleRemoveAlert(removeIndex) {
@@ -90,51 +86,53 @@ export default class AlertLog extends VertoBaseComponent {
 
   render(){
     // const alertArray= AlertService.getInstance().getAlertLog();
-
     // console.log('##### alert log data', alertArray);
 
-    const alerts = this.state.alertArray.map((alert, index)=>{
-      return (
-        <AlertLogItem
-            key={index}
-            index={index}
-            alertData={alert}
-            cbRemoveAlert={this.handleRemoveAlert}
+    let alertContent;
+    if (this.state.alertArray.length !== 0) {
+      alertContent = (
+        <div className="container">
+          <button
+              style={this.getStyle("clearAlertBtnStyle")}
+              onClick={this.handleClearAlerts}>
+                <FormattedMessage
+                    id="CLEAR_ALERTS"
+                    defaultMessage="Clear Alerts"
+                />
+          </button>
+            <div className="alertList" style={this.getStyle("ALogStyles")}>
+            {this.state.alertArray.map((alert, index)=>{
+              return (
+                <AlertLogItem
+                    key={index}
+                    index={index}
+                    alertData={alert}
+                    cbRemoveAlert={this.handleRemoveAlert}
 
-        /> );
-    });
-
-    if (alerts.length !== 0) {
-      return(
-        <Modal isOpen onRequestClose={this.props.cbClose} style={this.getStyle("myModal")}>
-          <div className="container">
-            <button
-                style={this.getStyle("clearAlertBtnStyle")}
-                onClick={this.handleClearAlerts}>
-                  <FormattedMessage
-                      id="CLEAR_ALERTS"
-                      defaultMessage="Clear Alerts"
-                  />
-            </button>
-              <div className="alertList" style={this.getStyle("ALogStyles")}>
-              {alerts}
-              </div>
-          </div>
-        </Modal>
-        );
+                /> );
+            })}
+            </div>
+        </div>
+      );
     } else {
-      return (
-        <Modal isOpen onRequestClose={this.props.cbClose} style={this.getStyle("myModal")}>
-          <div className="nodatacontainer" style={this.getStyle("noDataContainer")}>
-            <FormattedMessage
-                id="NO_LOG"
-                defaultMessage="No Log Data"
-            />
-          </div>
-        </Modal>
+      alertContent = (
+        <div className="nodatacontainer" style={this.getStyle("noDataContainer")}>
+          <FormattedMessage
+              id="NO_LOG"
+              defaultMessage="No Log Data"
+          />
+        </div>
       );
     }
+    return(
+        <Modal isOpen onRequestClose={this.props.cbClose} style={this.getStyle("myModal")}>
+          {alertContent}
+        </Modal>
+    );
   }
 }
 
 AlertLog.propTypes = propTypes;
+
+export default AlertLog;
+// reviewed 7/13/2016

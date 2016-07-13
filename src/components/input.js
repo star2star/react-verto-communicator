@@ -8,7 +8,6 @@ const propTypes = {
   type : React.PropTypes.string,
   placeholder : React.PropTypes.string,
   value : React.PropTypes.string
-  //tabIndex : React.PropTypes.string
 };
 
 class Input extends VertoBaseComponent {
@@ -116,11 +115,11 @@ class Input extends VertoBaseComponent {
             <span className="right" style={{...this.getStyle('right')}}>&nbsp; </span>
           </span>
         </div>
-
-      </div>);
+      </div>
+    );
   }
-
 }
 
 Input.propTypes = propTypes;
 export default Input;
+// reviewed 7/13/2016

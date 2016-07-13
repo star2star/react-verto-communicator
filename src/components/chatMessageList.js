@@ -9,7 +9,7 @@ const propTypes = {
   compStyle : React.PropTypes.object
 };
 
-export default class ChatMessageList extends VertoBaseComponent {
+class ChatMessageList extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {};
@@ -38,16 +38,11 @@ export default class ChatMessageList extends VertoBaseComponent {
         flex: 1,
         borderLeft: '1px solid #d1d1d1',
         backgroundColor: '#FAFAFA',
-        overflowY: 'auto',
-        //height: "95%"
+        overflowY: 'auto'
       }
     };
 
-    let styleReturn = styles[styleName];
-      if(this.props.style && this.props.style[styleName]) {
-        styleReturn = {...styleReturn, ...this.props.style[styleName]};
-      }
-    return styleReturn;
+    return styles[styleName];
   }
 
   getAvatar(displayName) {
@@ -71,18 +66,19 @@ export default class ChatMessageList extends VertoBaseComponent {
 
   render(){
     //console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^", this.props.chatUsers);
-    const messages = this.props.chatItems.map((msgObj, index)=>{
-      const avatarUrl = this.getAvatar(msgObj.displayName);
-
-      return (<ChatMessageItem key={index} avatarUrl={avatarUrl} message={msgObj} /> );
-    });
-
     return(
         <div className="chatMsgList" style={this.getStyle('CMLStyles')}>
-          {messages}
+          {this.props.chatItems.map((msgObj, index)=>{
+            const avatarUrl = this.getAvatar(msgObj.displayName);
+
+            return (<ChatMessageItem key={index} avatarUrl={avatarUrl} message={msgObj} /> );
+          })}
         </div>
       );
   }
 }
 
 ChatMessageList.propTypes = propTypes;
+
+export default ChatMessageList;
+// reviewed 7/13/2016
