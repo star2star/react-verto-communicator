@@ -96,7 +96,6 @@ class IncomingCall extends VertoBaseComponent {
 
   render() {
     //console.log('CP: ', this.props.callData);
-
     return (
       <div className="container" style={this.getStyle("container")}>
         <div className="displayArea"style={this.getStyle("displayAreaStyle")}>

@@ -102,7 +102,7 @@ class Dialing extends VertoBaseComponent {
   }
 
   render() {
-    //console.log('------>>> ', this.props.callData);
+    //console.log('$@#$$%#@$#%$%$%$%&^%$#%^& ', this.props.callData);
       return (
         <div className="container" style={this.getStyle('dialingContainer')}>
           <div style={this.getStyle('avatarRowStyle')}>

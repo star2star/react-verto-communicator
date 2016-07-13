@@ -52,7 +52,7 @@ class VCStatus extends VertoBaseComponent {
         intlStatus = formatMessage({"id":"CONNECTING", "defaultMessage":"Connecting"});
         break;
       case 'active':
-        fillColor = this.getStyle('connectingFill');
+        fillColor = this.getStyle('connectedFill');
         intlStatus = formatMessage({"id":"ACTIVE", "defaultMessage":"Active"});
         break;
       case 'connected':

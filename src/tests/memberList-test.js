@@ -88,12 +88,13 @@ describe( 'MemberList', ()=>{
   });
 
   it('Takes in & displays props correctly (name:)', () => {
-    const wrapper = mountWithIntl(
+    const wrapper = shallow(
       <MemberList
           cbControlClick={cbControlClick}
           members={sampleMembers}
           controlSettings={controlSettings}
         />);
+        console.log(wrapper.props().children[0]);
     expect(wrapper.props().sampleMember.name).toEqual('Name');
   });
 
