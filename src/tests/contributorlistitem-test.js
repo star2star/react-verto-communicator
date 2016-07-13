@@ -11,11 +11,6 @@ jest.unmock('../js/messages.js');
 
 describe('Default test for contributorsListItem', ()=>{
 
-  it('provides the correct stlye to the entire list item', () => {
-    const wrapper = mountWithIntl(<ContributorsListItem name="Matt" email="Matt@matt.com" avatar="../../pic.png" cbClose={()=>{}}/>);
-    //console.log(wrapper.find('div').props().style);
-    expect(wrapper.find('volSegment').props().style.display).toEqual('flex');
-  });
 
   it('the name prop gets passed in properly to the component', () => {
     const wrapper = mountWithIntl(<ContributorsListItem name="Matt" email="Matt@matt.com" avatar="../../pic.png" cbClose={()=>{}}/>);

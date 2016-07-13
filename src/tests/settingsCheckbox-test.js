@@ -34,7 +34,7 @@ it('renders a input tag', () => {
            cbSubmitSetting={cbSubmitSetting}
            label={label}
         />);
-     expect(wrapper.find('div').length).toEqual(1);
+     expect(wrapper.find('div').length).toEqual(2);
   });
 
   it('renders a span', () => {
@@ -45,7 +45,7 @@ it('renders a input tag', () => {
            cbSubmitSetting={cbSubmitSetting}
            label={label}
         />);
-     expect(wrapper.find('span').length).toEqual(1);
+     expect(wrapper.find('span').length).toEqual(2);
    });
 
    it('renders a label', () => {

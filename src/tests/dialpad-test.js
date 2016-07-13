@@ -4,12 +4,18 @@ import { shallow, mount, render } from 'enzyme';
 import sinon from 'sinon';
 import ReactDOM from 'react-dom';
 import {StyleRoot} from 'radium';
-//import CallHistory from '../components/callHistory.js';
-
+//import CallHistory from '../components/callhistory.js';
+import { mountWithIntl, shallowWithIntl } from '../helpers/intl-enzyme-test-helper.js';
+//import CallHistoryItem from '../callHistoryItem';
+//import CallHistoryService from '../js/callHistory';
 import Dialpad from '../components/dialpad.js';
 
 jest.unmock('../components/dialpad.js');
 jest.unmock('../components/callHistory.js');
+jest.unmock('../helpers/intl-enzyme-test-helper.js');
+jest.unmock('../js/messages.js');
+//jest.unmock('../callHistoryItem');
+//jest.unmock('../js/callHistory');
 
 describe('<Dialpad />', ()=>{
 const lastCall = "9413569660";
@@ -21,7 +27,7 @@ const cbCall = function() {
 
     it('erases when back icon is clicked', () => {
       const onFocusStub = sinon.spy();
-      const wrapper = mount(<StyleRoot><Dialpad lastCall={lastCall}  nbrToDial={nbrToDial} cbCall={cbCall} /></StyleRoot>);
+      const wrapper = mountWithIntl(<StyleRoot><Dialpad lastCall={lastCall}  nbrToDial={nbrToDial} cbCall={cbCall} /></StyleRoot>);
       const backIcon = wrapper.children().first().find('.back');
       const inputArea = wrapper.children().first().find('.input');
 
@@ -34,7 +40,7 @@ const cbCall = function() {
 
    it('displays lastNumber if number input is empty and dial is clicked.', () => {
       const onClickStub = sinon.spy();
-      const wrapper = mount(<StyleRoot><Dialpad lastNumber={lastCall}  nbrToDial={a} cbCall={cbCall} /></StyleRoot>);
+      const wrapper = mountWithIntl(<StyleRoot><Dialpad lastNumber={lastCall}  nbrToDial={a} cbCall={cbCall} /></StyleRoot>);
       const dial = wrapper.children().first().find('.dial');
       const inputArea = wrapper.children().first().find('.input');
 
