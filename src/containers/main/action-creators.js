@@ -127,9 +127,31 @@ const doingResolutionRefresh = () => {
 };
 //LOGIN
 const doShowLogin = () => {
-  return {
-    "type": "SHOW_LOGIN"
+  console.log('hhhhhhh');
+  return (dispatch, getState) => {
+    try {
+      const state = getState();
+      if (state.auth.loginSettings.autologin) {
+        dispatch(doSubmitLogin(state.auth.loginSettings));
+      } else {
+        dispatch ({
+          "type": "SHOW_LOGIN"
+        });
+      }
+    } catch(e){
+      console.log('eeee', e);
+    }
+
+
+
+    // dispatch(doingSpeedTest());
+    // VertoService.speedTest((data)=>{
+    //   //console.log('doing speed test : ', data);
+    //   //TODO
+    //   dispatch(doSpeedTestResults(data))
+    // });
   }
+
 };
 // called by click
 const doSubmitLogin = (data) => {
@@ -144,7 +166,7 @@ const doSubmitLogin = (data) => {
 // verto login callback
 const doVertoLogin = (success, data) => {
   return dispatch => {
-    //console.log('verto ....', data);
+    console.log('verto ....', data);
     if(success){
       dispatch(doVertoLoginValid(data));
       dispatch(doSpeedTest());

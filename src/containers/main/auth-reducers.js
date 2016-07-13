@@ -15,6 +15,7 @@ const auth = (state, action)=>{
                 callerid: '',
                 hostname: 'www.star2starglobal.com',
                 websocketurl: 'wss://www.star2starglobal.com:8082',
+                autologin: false,
                 ...lsLoginSettings
               },
               sessionInfo: {
@@ -33,6 +34,7 @@ const auth = (state, action)=>{
     case 'AUTH_SUBMIT_LOGIN':
       if (localStorage) {
         //save it
+        action.data.autologin = true;
         localStorage.setItem('loginSettings', JSON.stringify(action.data))
       }
       return { ...state, showPage: 'logout', vcStatus: 'connecting', loginSettings: action.data };
