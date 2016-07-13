@@ -16,7 +16,6 @@ class Login extends VertoBaseComponent{
     //console.log('&&&', this.props.settings)
   }
 
-
   getCompStyle() {
     return this.props.compStyle;
   }
@@ -89,7 +88,7 @@ class Login extends VertoBaseComponent{
     if (this.state.settings.name.length > 0 && this.state.settings.email.length > 0){
       this.props.cbClick(this.state.settings);
     } else {
-      //TODO add required field style 
+      //TODO add required field style
     }
 
   }
@@ -171,4 +170,4 @@ class Login extends VertoBaseComponent{
 
 Login.propTypes = propTypes;
 export default injectIntl(Radium(Login));
-//export default injectIntl(Login);
+// reviewed on 7/13/2016

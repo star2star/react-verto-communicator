@@ -10,7 +10,7 @@ const propTypes = {
   index : React.PropTypes.number
 };
 
-export default class AlertItem extends VertoBaseComponent {
+class AlertItem extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {};
@@ -24,7 +24,6 @@ export default class AlertItem extends VertoBaseComponent {
       this.props.cbDismissAlert(this.props.alertData.id);
     }, 5000);
   }
-
 
   handleDismissClick() {
     clearTimeout(this.alertTimeout);
@@ -68,11 +67,7 @@ export default class AlertItem extends VertoBaseComponent {
       }
     };
 
-    let styleReturn = styles[styleName];
-      if(this.props.style && this.props.style[styleName]) {
-        styleReturn = {...styleReturn, ...this.props.style[styleName]};
-      }
-    return styleReturn;
+    return styles[styleName];
   }
 
   render(){
@@ -105,3 +100,6 @@ export default class AlertItem extends VertoBaseComponent {
 }
 
 AlertItem.propTypes = propTypes;
+
+export default AlertItem;
+// reviewed 7/13/2016

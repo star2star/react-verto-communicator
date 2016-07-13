@@ -13,7 +13,7 @@ const defaultProps = {
   compStyle : {svgStyle:{fill: '#6b6c6c', height: '24px', width: '24px'}}
 };
 
-class Action extends VertoBaseComponent {
+class ControlItem extends VertoBaseComponent {
   constructor(props){
       super(props);
   }
@@ -37,13 +37,8 @@ class Action extends VertoBaseComponent {
       }
     };
 
-    let styleReturn = styles[styleName];
-      if(this.props.style && this.props.style[styleName]) {
-        styleReturn = {...styleReturn, ...this.props.style[styleName]};
-      }
-    return styleReturn;
+    return styles[styleName];
   }
-
 
   render(){
     //variable must begin with capital letter or will NOT render.
@@ -71,8 +66,8 @@ class Action extends VertoBaseComponent {
   }
 }
 
+ControlItem.propTypes = propTypes;
+ControlItem.defaultProps = defaultProps;
 
-Action.propTypes = propTypes;
-Action.defaultProps = defaultProps;
-
-export default Action;
+export default ControlItem;
+// reviewed 7/13/2016

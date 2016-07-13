@@ -2,8 +2,6 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import moment from 'moment';
 import { UpArrowIconSVG, DownArrowIconSVG, MenuIconSVG } from './svgIcons';
-//import Radium from 'radium';
-import {injectIntl, formattedMessage } from 'react-intl';
 import ToolTip from './tooltip';
 
 const propTypes = {
@@ -36,8 +34,6 @@ class CallHistoryItem extends VertoBaseComponent {
         backgroundColor: '#fff',
         flex: 1,
         fontWeight: '300',
-        //minWidth: '100%',
-        //minWidth: '375px',
         alignItems: 'flex-start',
         cursor: 'pointer'
       },
@@ -124,13 +120,13 @@ class CallHistoryItem extends VertoBaseComponent {
     if(this.props.data.lastDirection == 'outgoing') {
       renderedDirection = (<span className="incoming" style={{...this.getDefaultStyle('dirCont')}}>
         <UpArrowIconSVG
-          svgStyle={{...this.getDefaultStyle('dirSVG')}}
+            svgStyle={{...this.getDefaultStyle('dirSVG')}}
         />
       </span>);
     } else {
       renderedDirection = (<span className="outgoing" style={{...this.getDefaultStyle('dirCont')}}>
         <DownArrowIconSVG
-          svgStyle={{...this.getDefaultStyle('dirSVG')}}
+            svgStyle={{...this.getDefaultStyle('dirSVG')}}
         />
       </span>);
     }
@@ -145,8 +141,8 @@ class CallHistoryItem extends VertoBaseComponent {
           msg="Click to dial"
       >
         <div
-          tabIndex="0"
-          style={this.getStyle('container')}>
+            tabIndex="0"
+            style={this.getStyle('container')}>
           <div
               tabIndex="0"
               className="top"
@@ -165,8 +161,9 @@ class CallHistoryItem extends VertoBaseComponent {
                 {nbrCalls}
               </div>
               <div
-                className="timestamp"
-                style={{...this.getDefaultStyle('timestamp')}}>
+                  className="timestamp"
+                  style={{...this.getDefaultStyle('timestamp')}}
+              >
                 {renderedTS}
               </div>
           </div>
@@ -176,9 +173,10 @@ class CallHistoryItem extends VertoBaseComponent {
     );} else {
       displayObject = (
         <div
-          className=""
-          tabIndex="0"
-          style={this.getStyle('container')}>
+            className=""
+            tabIndex="0"
+            style={this.getStyle('container')}
+        >
           <div
               tabIndex="0"
               className="top"
@@ -197,8 +195,9 @@ class CallHistoryItem extends VertoBaseComponent {
                 {nbrCalls}
               </div>
               <div
-                className="timestamp"
-                style={{...this.getDefaultStyle('timestamp')}}>
+                  className="timestamp"
+                  style={{...this.getDefaultStyle('timestamp')}}
+              >
                 {renderedTS}
               </div>
           </div>
@@ -216,3 +215,4 @@ class CallHistoryItem extends VertoBaseComponent {
 
 CallHistoryItem.propTypes = propTypes;
 export default CallHistoryItem;
+// reviewed 7/13/2016

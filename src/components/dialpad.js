@@ -149,7 +149,6 @@ class Dialpad extends VertoBaseComponent {
         cursor: 'pointer'
       },
       call: {
-        //transform: this.state.makingCall ? 'rotate(0deg)' : 'rotate(235deg)',
         width: "24px",
         height: "24px",
         fill: "#fff"
@@ -349,3 +348,4 @@ class Dialpad extends VertoBaseComponent {
 
 Dialpad.propTypes = propTypes;
 export default injectIntl(Radium(Dialpad));
+// reviewed 7/13/2016

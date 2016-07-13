@@ -2,7 +2,7 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import CallHistoryItem from './callHistoryItem';
 import CallHistoryService from '../js/callHistoryService';
-import { UpArrowIconSVG, DownArrowIconSVG, RemoveIconSVG, BackArrowIconSVG } from './svgIcons';
+import { UpArrowIconSVG, DownArrowIconSVG, BackArrowIconSVG } from './svgIcons';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import {Motion, spring} from 'react-motion';
@@ -164,8 +164,8 @@ class HistoryItems extends VertoBaseComponent {
               style={{...this.getDefaultStyle('header')}}
           >
               <span
-                className="back"
-                onKeyPress={(e)=>{
+                  className="back"
+                  onKeyPress={(e)=>{
                   if(e.which == 13 || e.keyCode == 13) {
                     this.props.cbBack();
                     return false;
@@ -173,7 +173,7 @@ class HistoryItems extends VertoBaseComponent {
                   onClick={this.props.cbBack}
                   tabIndex="0"
               >
-                  <BackArrowIconSVG svgStyle={{...this.getDefaultStyle('headerSvgs')}} />
+                <BackArrowIconSVG svgStyle={{...this.getDefaultStyle('headerSvgs')}} />
               </span>
               <span
                   className="title"
@@ -267,8 +267,8 @@ class DetailItems extends VertoBaseComponent {
         fontWeight: 300,
         color: '#4a4a4a'
       }
-      };
-      return (styles[styleName]);
+    };
+    return (styles[styleName]);
   }
 
   generateDetails() {
@@ -318,14 +318,14 @@ class DetailItems extends VertoBaseComponent {
       <div>
         <div
             className="headerCont-deets"
-              style={{...this.getDefaultStyle('headerCont')}}
+            style={{...this.getDefaultStyle('headerCont')}}
         >
             <div
                 className="header-de"
                 style={{...this.getDefaultStyle('header')}}
             >
                 <span
-                  onKeyPress={(e)=>{
+                    onKeyPress={(e)=>{
                     if(e.which == 13 || e.keyCode == 13) {
                       this.props.cbBack();
                       return false;
@@ -486,3 +486,4 @@ class CallHistory extends VertoBaseComponent {
 CallHistory.defaultProps = defaultProps;
 CallHistory.propTypes = propTypes;
 export default CallHistory;
+// reviewed 7/13/2016

@@ -55,3 +55,4 @@ class App extends VertoBaseComponent {
 }
 
 export default App;
+// reviewed 7/13/2016
