@@ -7,14 +7,40 @@ import { mountWithIntl, shallowWithIntl } from '../helpers/intl-enzyme-test-help
 import AlertLog from '../components/alertLog';
 import AlertLogItem from '../components/alertLogItem';
 
-// jest.unmock('../js/alertService');
+jest.unmock('../js/alertService');
 jest.unmock('../components/alertLog');
 jest.unmock('../components/alertLogItem');
 jest.unmock('../helpers/intl-enzyme-test-helper.js');
 
 describe('Default test for AlertLog', ()=>{
 
+  function storageMock() {
+    var storage = {};
+
+    return {
+      setItem: function(key, value) {
+        storage[key] = value || '';
+      },
+      getItem: function(key) {
+        return storage[key] || null;
+      },
+      removeItem: function(key) {
+        delete storage[key];
+      },
+      get length() {
+        return Object.keys(storage).length;
+      },
+      key: function(i) {
+        var keys = Object.keys(storage);
+        return keys[i] || null;
+      }
+    };
+  }
+
+window.localStorage = storageMock();
+
   const cbRemoveAlert = sinon.spy();
+
   const sampleData = {
     level:"warn",
     timestamp:1466703201123,
@@ -35,7 +61,7 @@ describe('Default test for AlertLog', ()=>{
   it('renders two divs', () => {
     const wrapper = shallow(<AlertLog />);
 
-     expect(wrapper.find('div').length).toEqual(2);
+     expect(wrapper.find('div').length).toEqual(1);
   });
 
 });

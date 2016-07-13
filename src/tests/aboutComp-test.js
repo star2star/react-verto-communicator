@@ -8,11 +8,11 @@ import About from '../components/about';
 jest.unmock('../components/about.js');
 jest.unmock('../helpers/intl-enzyme-test-helper.js');
 jest.unmock('../js/messages.js');
-
+//the three tests that fail are the result of the fact that the gitRev section of the component was removed recently 
 
 describe('Default test for about', ()=>{
 
-  it('renders the correct number of elements by counting divs', () => {
+  it('renders the correct number of elements', () => {
     const wrapper = shallowWithIntl(<About cbClose={()=>{}}/>);
     expect(wrapper.find('div').length).toEqual(5);
   });

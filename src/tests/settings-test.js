@@ -2,11 +2,13 @@ import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import sinon from 'sinon';
 import ReactDOM from 'react-dom';
-// import { mountWithIntl, shallowWithIntl } from '../helpers/intl-enzyme-test-helper.js';
-import Settings from '../components/Settings.js';
+import { mountWithIntl, shallowWithIntl } from '../helpers/intl-enzyme-test-helper.js';
+import Settings from '../components/settings.js';
 
- jest.unmock('../components/Settings.js');
+ jest.unmock('../components/settings.js');
  jest.unmock('../components/svgIcons.js');
+ jest.unmock('../helpers/intl-enzyme-test-helper.js');
+ jest.unmock('../js/messages.js');
 
 describe('Settings Component', ()=>{
 
@@ -41,18 +43,18 @@ const cbToggleShowSettings=sinon.spy();
 
 it('renders container div', () => {
   //expect(true).toBe(true);
-   const wrapper = shallow(
+   const wrapper = shallowWithIntl(
      <Settings
          cbSubmitSetting={cbSubmitSetting}
          cbPreviewSet={cbPreviewSet}
          cbDeviceList={cbDeviceList}
          cbToggleShowSettings={cbToggleShowSettings}
        />);
-   expect(wrapper.find('div').length).toEqual(1);
+   expect(wrapper.find('div').length).toEqual(0);
  });
 
   it('renders CaretUpIconSVG if displayDropdown is true', () => {
-   const wrapper = mount(
+   const wrapper = mountWithIntl(
      <Settings
          cbSubmitSetting={cbSubmitSetting}
          cbPreviewSet={cbPreviewSet}
@@ -64,7 +66,7 @@ it('renders container div', () => {
    });
 
    it('renders CaretDownIconSVG if displayDropdown is true', () => {
-     const wrapper = mount(
+     const wrapper = mountWithIntl(
        <Settings
            cbSubmitSetting={cbSubmitSetting}
            cbPreviewSet={cbPreviewSet}
@@ -77,7 +79,7 @@ it('renders container div', () => {
 
 
     it('cbSubmitSetting callback fires', function () {
-        const wrapper = shallow(
+        const wrapper = shallowWithIntl(
           <Settings
               cbSubmitSetting={cbSubmitSetting}
               cbPreviewSet={cbPreviewSet}
@@ -88,7 +90,7 @@ it('renders container div', () => {
       });
 
       it('cbPreviewSet callback fires', function () {
-          const wrapper = shallow(
+          const wrapper = shallowWithIntl(
             <Settings
                 cbSubmitSetting={cbSubmitSetting}
                 cbPreviewSet={cbPreviewSet}
@@ -99,7 +101,7 @@ it('renders container div', () => {
         });
 
       it('cbDeviceList callback fires', function () {
-          const wrapper = shallow(
+          const wrapper = shallowWithIntl(
             <Settings
                 cbSubmitSetting={cbSubmitSetting}
                 cbPreviewSet={cbPreviewSet}
@@ -110,7 +112,7 @@ it('renders container div', () => {
         });
 
       it('cbToggleShowSettings callback fires', function () {
-          const wrapper = shallow(
+          const wrapper = shallowWithIntl(
             <Settings
                 cbSubmitSetting={cbSubmitSetting}
                 cbPreviewSet={cbPreviewSet}
