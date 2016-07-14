@@ -14,6 +14,9 @@ class Login extends VertoBaseComponent{
     super(props);
     this.state = {advanced: false, settings: this.props.settings };
     //console.log('&&&', this.props.settings)
+
+    this.changingInput = this.changingInput.bind(this);
+    this.submitLogin = this.submitLogin.bind(this);
   }
 
   getCompStyle() {
@@ -75,11 +78,10 @@ class Login extends VertoBaseComponent{
   }
 
   changingInput(field, value){
-    //console.log('xxxx', field, value);
+    //console.log('changing input');
     let xData = { ...this.state.settings };
     xData[field] = value;
     this.setState({ ...this.state, settings: xData });
-    //console.log('....', this.state );
   }
 
   submitLogin() {
@@ -103,7 +105,7 @@ class Login extends VertoBaseComponent{
               tabindex="0"
               label={formatMessage({"id":"USER", "defaultMessage":"User"})}
               placeholder= {formatMessage({"id":"USER", "defaultMessage":"User"})+" i.e. 1008"}
-              cbChanging={this.changingInput.bind(this)}
+              cbChanging={this.changingInput}
               value={this.state.settings.user}
           />
           <Input
@@ -111,28 +113,28 @@ class Login extends VertoBaseComponent{
               type="password"
               label={formatMessage({"id":"PASSWORD", "defaultMessage":"Password"})}
               placeholder={formatMessage({"id":"YOUR_PASSWORD", "defaultMessage":"Your Password"})+" i.e. 1234"}
-              cbChanging={this.changingInput.bind(this)}
+              cbChanging={this.changingInput}
               value={this.state.settings.password}
           />
           <Input
               tabindex="0"
               label={formatMessage({"id":"CALLER_ID", "defaultMessage":"Caller Id"})}
               placeholder={formatMessage({"id":"CALLER_ID", "defaultMessage":"Caller Id"})}
-              cbChanging={this.changingInput.bind(this)}
+              cbChanging={this.changingInput}
               value={this.state.settings.callerid}
           />
           <Input
               tabindex="0"
               label={formatMessage({"id":"HOSTNAME", "defaultMessage":"Hostname"})}
               placeholder={formatMessage({"id":"HOSTNAME", "defaultMessage":"Hostname"})}
-              cbChanging={this.changingInput.bind(this)}
+              cbChanging={this.changingInput}
               value={this.state.settings.hostname}
           />
           <Input
               tabindex="0"
               label={formatMessage({"id":"WEBSOCKET_URL", "defaultMessage":"Websocket URL"})}
               placeholder={formatMessage({"id":"WEBSOCKET_URL", "defaultMessage":"Websocket URL"})}
-              cbChanging={this.changingInput.bind(this)}
+              cbChanging={this.changingInput}
               value={this.state.settings.websocketurl}/>
         </form>
       );
@@ -140,17 +142,19 @@ class Login extends VertoBaseComponent{
 
     return (
       <div style={{...this.getStyle('container')}}>
-        <div style={{...this.getStyle('header')}}><FormattedMessage id="LOGIN" defaultMessage="Login"  /></div>
+        <div style={{...this.getStyle('header')}}>
+          <FormattedMessage id="LOGIN" defaultMessage="Login"  />
+        </div>
         <Input
             label={formatMessage({"id":"NAME", "defaultMessage":"Name"})}
             placeholder={formatMessage({"id":"YOUR_NAME", "defaultMessage":"Your name"})}
-            cbChanging={this.changingInput.bind(this)}
+            cbChanging={this.changingInput}
             value={this.state.settings.name}
         />
         <Input
             label={formatMessage({"id":"EMAIL", "defaultMessage":"Email"})}
             placeholder={formatMessage({"id":"YOUR_EMAIL", "defaultMessage":"Your email"})}
-            cbChanging={this.changingInput.bind(this)}
+            cbChanging={this.changingInput}
             value={this.state.settings.email}
         />
         {moreSettings}
@@ -160,9 +164,16 @@ class Login extends VertoBaseComponent{
               style={{...this.getStyle('settingsLink')}}
               onClick={()=>{
                 this.setState({...this.state, advanced: !this.state.advanced });
-          }}>{this.state.advanced ? <FormattedMessage id="LESS_SETTINGS" defaultMessage="Less Settings"/> :
+              }}
+          >
+              {this.state.advanced ? <FormattedMessage id="LESS_SETTINGS" defaultMessage="Less Settings"/> :
               <FormattedMessage id="MORE_SETTINGS" defaultMessage="More Settings"/>}</a>
-          <button style={{...this.getStyle('loginButton')}} onClick={this.submitLogin.bind(this)}><FormattedMessage id="LOGIN" defaultMessage="Login"/></button>
+          <button
+            style={{...this.getStyle('loginButton')}}
+            onClick={this.submitLogin}
+          >
+            <FormattedMessage id="LOGIN" defaultMessage="Login"/>
+          </button>
         </div>
       </div>);
   }
