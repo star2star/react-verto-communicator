@@ -12,8 +12,7 @@ const propTypes = {
 class Login extends VertoBaseComponent{
   constructor(props) {
     super(props);
-    this.state = {advanced: false, settings: this.props.settings };
-    //console.log('&&&', this.props.settings)
+    this.state = {advanced: false, settings: this.props.settings, emptyFields: false };
 
     this.changingInput = this.changingInput.bind(this);
     this.submitLogin = this.submitLogin.bind(this);
@@ -59,6 +58,14 @@ class Login extends VertoBaseComponent{
           textDecoration: 'underline'
         }
       },
+      verifyFields: {
+        display: this.state.emptyFields ? 'flex' : 'none',
+        backgroundColor: '#F44336',
+        fontWeight: '300',
+        color: '#fff',
+        padding: '15px',
+        marginBottom: '10px'
+      },
       loginButton: {
         backgroundColor: '#5cb85c',
         color: '#fff',
@@ -78,21 +85,18 @@ class Login extends VertoBaseComponent{
   }
 
   changingInput(field, value){
-    //console.log('changing input');
     let xData = { ...this.state.settings };
     xData[field] = value;
-    this.setState({ ...this.state, settings: xData });
+    this.setState({ ...this.state, settings: xData, emptyFields: false });
   }
 
   submitLogin() {
     //TODO validate data before sending
-    //console.log('submitting login with this data: ', this.state.settings);
     if (this.state.settings.name.length > 0 && this.state.settings.email.length > 0){
       this.props.cbClick(this.state.settings);
     } else {
-      //TODO add required field style
+      this.setState({...this.state, emptyFields: true});
     }
-
   }
   render() {
     const { formatMessage } = this.props.intl;
@@ -145,6 +149,11 @@ class Login extends VertoBaseComponent{
         <div style={{...this.getStyle('header')}}>
           <FormattedMessage id="LOGIN" defaultMessage="Login"  />
         </div>
+        <div
+            style={{...this.getStyle('verifyFields')}}
+        >
+            Verify fields below and try again.
+        </div>
         <Input
             label={formatMessage({"id":"NAME", "defaultMessage":"Name"})}
             placeholder={formatMessage({"id":"YOUR_NAME", "defaultMessage":"Your name"})}
@@ -169,8 +178,8 @@ class Login extends VertoBaseComponent{
               {this.state.advanced ? <FormattedMessage id="LESS_SETTINGS" defaultMessage="Less Settings"/> :
               <FormattedMessage id="MORE_SETTINGS" defaultMessage="More Settings"/>}</a>
           <button
-            style={{...this.getStyle('loginButton')}}
-            onClick={this.submitLogin}
+              style={{...this.getStyle('loginButton')}}
+              onClick={this.submitLogin}
           >
             <FormattedMessage id="LOGIN" defaultMessage="Login"/>
           </button>
