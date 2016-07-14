@@ -16,9 +16,10 @@ export default class MemberList extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {};
+    this.closeAllAdminControls = this.closeAllAdminControls.bind(this);
   }
 
-  
+
 
   componentDidUpdate() {
     // scroll to bottom of message list
@@ -54,8 +55,16 @@ export default class MemberList extends VertoBaseComponent {
     return styleReturn;
   }
 
+  closeAllAdminControls (member) {
+    //console.log(member.name);
+    if (this.state.memWithOpenControls == member.name) {
+      this.setState({...this.state, memWithOpenControls: undefined });
+    } else {
+      this.setState({...this.state, memWithOpenControls: member.name});
+    }
 
-
+  }
+  //this.state member == mem : true ? fale
   render(){
     //console.log('---- ', this.props.members);
     const members = this.props.members.map((mem, index)=>{
@@ -69,6 +78,8 @@ export default class MemberList extends VertoBaseComponent {
               allowPresenter: this.props.allowPresenter
             }}
             cbControlClick={this.props.cbControlClick}
+            cbOpenAdminControls={this.closeAllAdminControls}
+            showAdminControls = {this.state.memWithOpenControls == mem.name ? true : false}
         /> );
     });
 

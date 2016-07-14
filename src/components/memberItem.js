@@ -22,13 +22,11 @@ const propTypes = {
     allowPresenter: React.PropTypes.bool
   }),
   member : React.PropTypes.object.isRequired
-
 };
 
 export default class MemberItem extends VertoBaseComponent {
   constructor(props){
     super(props);
-    this.state = {showAdminControls: false};
   }
 
 
@@ -220,7 +218,7 @@ export default class MemberItem extends VertoBaseComponent {
         presenterStatus = (<PresenterIconSVG svgStyle={{...this.getStyle("svgStyle"), fill: "#c5c5c5"}}/>);
       }
 
-      if (this.state.showAdminControls) {
+      if (this.props.showAdminControls) {
         adminControls = (
           <AdminControls
               member={this.props.member}
@@ -261,7 +259,7 @@ export default class MemberItem extends VertoBaseComponent {
               <img src={this.props.member.avatar.avatar} style={avatarStyle}/>
           </span>
           <div className="userInfo" style={this.getStyle("userInfoStyle")}
-              onClick={()=>{this.setState({...this.state, showAdminControls: !this.state.showAdminControls});}}
+              onClick={()=>{ this.props.cbOpenAdminControls(this.props.member);}}
           >
             <span style={this.getStyle("nameStyle")}>{this.props.member.name}</span>
             <span style={this.getStyle("emailStyle")}>{this.props.member.avatar.email}</span>
