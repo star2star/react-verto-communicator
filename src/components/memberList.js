@@ -12,13 +12,12 @@ const propTypes = {
   compStyle : React.PropTypes.object
 };
 
-export default class MemberList extends VertoBaseComponent {
+class MemberList extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {};
     this.closeAllAdminControls = this.closeAllAdminControls.bind(this);
   }
-
 
 
   componentDidUpdate() {
@@ -48,11 +47,7 @@ export default class MemberList extends VertoBaseComponent {
       }
     };
 
-    let styleReturn = styles[styleName];
-      if(this.props.style && this.props.style[styleName]) {
-        styleReturn = {...styleReturn, ...this.props.style[styleName]};
-      }
-    return styleReturn;
+    return styles[styleName];
   }
 
   closeAllAdminControls (member) {
@@ -82,13 +77,10 @@ export default class MemberList extends VertoBaseComponent {
             showAdminControls = {this.state.memWithOpenControls == mem.name ? true : false}
         /> );
     });
-
-    return(
-        <div className="memberList" style={this.getStyle('MLStyles')}>
-        {members}
-        </div>
-      );
   }
 }
 
 MemberList.propTypes = propTypes;
+
+export default MemberList;
+// reviewed on 7/14/2016

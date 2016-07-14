@@ -55,3 +55,4 @@ class MenuItem extends VertoBaseComponent {
 MenuItem.propTypes = propTypes;
 MenuItem.defaultProps = defaultProps;
 export default Radium(MenuItem);
+// reviewed on 7/14/2016

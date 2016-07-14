@@ -55,9 +55,7 @@ class VertoBaseComponent extends React.Component {
     return styleReturn;
   }
 
-
-
-
 }
 
 export default VertoBaseComponent;
+// reviewed on 7/14/2016

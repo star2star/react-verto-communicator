@@ -80,7 +80,6 @@ class SplashMessage extends VertoBaseComponent{
   }
 }
 
-
-
 SplashMessage.propTypes = propTypes;
 export default SplashMessage;
+// reviewed on 7/14/2016

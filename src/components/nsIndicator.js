@@ -5,9 +5,8 @@ SignalNoneIconSVG,
 SignalMediumIconSVG,
 SignalFullIconSVG,
 SignalLowIconSVG } from './svgIcons';
-import { injectIntl, FormattedMessage } from 'react-intl';
+import { injectIntl } from 'react-intl';
 import ToolTip from './tooltip';
-import ReactDOMServer  from 'react-dom/server';
 
 const propTypes = {
   allowDisplayDetails : React.PropTypes.bool,
@@ -148,7 +147,7 @@ class NetworkStatusIndicator extends VertoBaseComponent {
     }
 
     if (this.props.allowDisplayDetails) {
-      return  (<ToolTip place="top" name="nsi" msg={toolTipMessage} custStyle={{base:{marginTop:'10px'}, content:{padding:'0px'}}}>{icon}</ToolTip>) ;
+      return  (<ToolTip place="bottom" name="nsi" msg={toolTipMessage} custStyle={{base:{marginTop:'10px'}, content:{padding:'0px'}}}>{icon}</ToolTip>) ;
     } else {
       return (icon);
     }
@@ -157,4 +156,6 @@ class NetworkStatusIndicator extends VertoBaseComponent {
 
 NetworkStatusIndicator.propTypes = propTypes;
 NetworkStatusIndicator.defaultProps = defaultProps;
+
 export default injectIntl(NetworkStatusIndicator);
+// reviewed on 7/14/2016

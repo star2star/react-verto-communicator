@@ -1,6 +1,6 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
-import SvgIcons from './svgIcons';
+//import SvgIcons from './svgIcons';
 import Radium from 'radium';
 
 const propTypes = {
@@ -16,20 +16,12 @@ class NumberItem extends VertoBaseComponent {
     super(props);
     this.state = {'onHover': false, 'onFocus': false};
 
-    //this.numberClicked(e) = this.numberClicked.bind(this);
-  }
-  numberClicked(e){
-    this.props.cbClick(this.props.keyValue);
-    //this.props.cbKeyPress(this.props.keyValue);
+    this.numberClicked = this.numberClicked.bind(this);
   }
 
-  // numberEntered(e){
-  //   if(e.which == 13 || e.keyCode == 13 && this.state.onFocus) {
-  //     //console.log('key press', this.props.keyValue);
-  //     this.props.cbKeyPress(this.props.keyValue);
-  //     return false;
-  //   }
-  // }
+  numberClicked(){
+    this.props.cbClick(this.props.keyValue);
+  }
 
   getCompStyle() {
     return this.props.compStyle;
@@ -47,7 +39,6 @@ class NumberItem extends VertoBaseComponent {
         cursor: 'pointer',
         padding: '0px',
         margin: '5px',
-        //padding: '0px 15px 15px 15px',
         transition: 'box-shadow .2s ease',
         outline: 'none',
         ':hover': {
@@ -70,13 +61,6 @@ class NumberItem extends VertoBaseComponent {
   }
 
   render(){
-
-    // if item is hovered, light box shadow
-    // if item is focused, harsher box shadow style
-    // else no box shadow
-
-
-
     return (
       <div
           href="#"
@@ -86,8 +70,7 @@ class NumberItem extends VertoBaseComponent {
           onFocus={()=>{
             this.setState({...this.state, onFocus: true});
           }}
-          //onKeyPress={this.numberEntered.bind(this)}
-          onClick={this.numberClicked.bind(this)}
+          onClick={this.numberClicked}
           >
         <div
             tabIndex="0"
@@ -105,4 +88,7 @@ class NumberItem extends VertoBaseComponent {
   }
 }
 
+NumberItem.propTypes = propTypes;
+
 export default Radium(NumberItem);
+// reviewed on 7/14/2016

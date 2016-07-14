@@ -10,21 +10,21 @@ import {
   PresenterIconSVG,
   MuteMicrophoneIconSVG,
   MuteVideoIconSVG,
-  FullScreenIconSVG,
   LockIconSVG
 } from './svgIcons';
 
 const propTypes = {
   cbControlClick : React.PropTypes.func.isRequired,
   controlSettings : React.PropTypes.shape({
-    moderator: React.PropTypes.bool,
-    multCanvas: React.PropTypes.bool,
-    allowPresenter: React.PropTypes.bool
-  }),
-  member : React.PropTypes.object.isRequired
+      moderator: React.PropTypes.bool,
+      multCanvas: React.PropTypes.bool,
+      allowPresenter: React.PropTypes.bool
+    }),
+  member : React.PropTypes.object.isRequired,
+  cbOpenAdminControls : React.PropTypes.func.isRequired,
 };
 
-export default class MemberItem extends VertoBaseComponent {
+class MemberItem extends VertoBaseComponent {
   constructor(props){
     super(props);
   }
@@ -159,12 +159,12 @@ export default class MemberItem extends VertoBaseComponent {
             (<VideoIconSVG  svgStyle={this.getStyle("svgStyle")} />);
 
     let avatarStyle = {...this.getStyle("avatarStyle")};
-        if (this.props.member.conferenceStatus.audio.muted) {
-          avatarStyle = ({...this.getStyle("avatarStyle"), boxShadow:'1px 1px 9px red'});
-        }
-        if (this.props.member.conferenceStatus.audio.talking) {
-          avatarStyle = ({...this.getStyle("avatarStyle"), boxShadow:'1px 1px 9px green'});
-          }
+    if (this.props.member.conferenceStatus.audio.muted) {
+      avatarStyle = ({...this.getStyle("avatarStyle"), boxShadow:'1px 1px 9px red'});
+    }
+    if (this.props.member.conferenceStatus.audio.talking) {
+      avatarStyle = ({...this.getStyle("avatarStyle"), boxShadow:'1px 1px 9px green'});
+    }
 
     if (this.props.controlSettings.moderator) {
       // since we are in admin mode, redefine audio and video status indicators to
@@ -251,7 +251,6 @@ export default class MemberItem extends VertoBaseComponent {
               </span>) :
             undefined;
 
-
     return (
       <div className="outer container" style={this.getStyle("memberWrapStyle")}>
         <div className="inner container" style={this.getStyle("memberStyle")}>
@@ -282,4 +281,6 @@ export default class MemberItem extends VertoBaseComponent {
 }
 
 MemberItem.propTypes = propTypes;
+
 export default (Radium(MemberItem));
+// reviewed 7/14/2016

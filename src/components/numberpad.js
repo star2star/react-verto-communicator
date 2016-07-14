@@ -1,6 +1,5 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
-import SvgIcons from './svgIcons';
 import Radium from 'radium';
 import NumberItem from './numberitem';
 
@@ -12,6 +11,8 @@ const propTypes = {
 class Numberpad extends VertoBaseComponent {
   constructor(props) {
     super(props);
+
+    this.numberClicked = this.numberClicked.bind(this);
   }
   numberClicked(k){
     this.props.cbClick(k);
@@ -25,25 +26,19 @@ class Numberpad extends VertoBaseComponent {
       wrapper: {
         backgroundColor: "#fff",
         display: "flex",
-        //padding: '15px',
         flexDirection: "column",
-        width: "100%",
-        //height: "400px",
-        //border: '1px solid red'
+        width: "100%"
       },
       rows: {
         display: "flex",
         flexDirection: "row",
         alignItems: 'flex-start',
         justifyContent: "space-around",
-        flexGrow: 1,
-        //marginRight: '-15px',
-        //marginLeft: '-15px'
+        flexGrow: 1
       }
     };
     return (styles[styleName]);
   }
-
 
   render() {
     return (
@@ -52,51 +47,51 @@ class Numberpad extends VertoBaseComponent {
           <NumberItem
               keyValue="1"
               keyString=""
-              cbClick={this.numberClicked.bind(this)}
+              cbClick={this.numberClicked}
           />
           <NumberItem
               keyValue="2"
               keyString="ABC"
-              cbClick={this.numberClicked.bind(this)}
+              cbClick={this.numberClicked}
           />
           <NumberItem
               keyValue="3"
               keyString="DEF"
-              cbClick={this.numberClicked.bind(this)}
+              cbClick={this.numberClicked}
           />
         </div>
         <div style={{...this.getStyle('rows')}}>
           <NumberItem
               keyValue="4"
               keyString="GHI"
-              cbClick={this.numberClicked.bind(this)}
+              cbClick={this.numberClicked}
           />
           <NumberItem
               keyValue="5"
               keyString="JKL"
-              cbClick={this.numberClicked.bind(this)}
+              cbClick={this.numberClicked}
           />
           <NumberItem
               keyValue="6"
               keyString="MNO"
-              cbClick={this.numberClicked.bind(this)}
+              cbClick={this.numberClicked}
           />
         </div>
         <div style={{...this.getStyle('rows')}}>
           <NumberItem
               keyValue="7"
               keyString="PQRS"
-              cbClick={this.numberClicked.bind(this)}
+              cbClick={this.numberClicked}
           />
           <NumberItem
               keyValue="8"
               keyString="TUV"
-              cbClick={this.numberClicked.bind(this)}
+              cbClick={this.numberClicked}
           />
           <NumberItem
               keyValue="9"
               keyString="WXYZ"
-              cbClick={this.numberClicked.bind(this)}
+              cbClick={this.numberClicked}
           />
         </div>
         <div style={{...this.getStyle('rows')}}>
@@ -104,18 +99,18 @@ class Numberpad extends VertoBaseComponent {
               keyValue="*"
               keyString=""
               compStyle={{keyValue: {color: '#999'}}}
-              cbClick={this.numberClicked.bind(this)}
+              cbClick={this.numberClicked}
           />
           <NumberItem
               keyValue="0"
               keyString="+"
-              cbClick={this.numberClicked.bind(this)}
+              cbClick={this.numberClicked}
           />
           <NumberItem
               keyValue="#"
               keyString=""
               compStyle={{keyValue: {color: '#999'}}}
-              cbClick={this.numberClicked.bind(this)}
+              cbClick={this.numberClicked}
           />
         </div>
       </div>);
@@ -125,3 +120,4 @@ class Numberpad extends VertoBaseComponent {
 Numberpad.propTypes = propTypes;
 
 export default Radium(Numberpad);
+// reviewed 7/14/2016

@@ -1,6 +1,5 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent.js';
-import {Motion, spring} from 'react-motion';
 
 const propTypes = {
   cbSubmitSetting: React.PropTypes.func.isRequired,
@@ -12,8 +11,6 @@ const propTypes = {
   label: React.PropTypes.string.isRequired
 };
 
-const springSettings = {stiffness: 170, damping: 26};
-
 class SettingsCheckbox extends VertoBaseComponent {
   constructor(props) {
     super(props);
@@ -22,20 +19,19 @@ class SettingsCheckbox extends VertoBaseComponent {
     this.handleSelect = this.handleSelect.bind(this);
   }
 
-handleSelect() {
-  console.log('handleSelect');
-  // this.props.cbSubmitSetting();
+  handleSelect() {
+    console.log('handleSelect');
+    // this.props.cbSubmitSetting();
 
-let chkdObj = {};
-  chkdObj[this.props.checkedOption.name] = this.refs.checkMe.checked;
-  // console.log('things-------', this.refs.checkMe.checked, chkdObj);
-  this.props.cbSubmitSetting(chkdObj);
-}
+    let chkdObj = {};
+    chkdObj[this.props.checkedOption.name] = this.refs.checkMe.checked;
+    // console.log('things-------', this.refs.checkMe.checked, chkdObj);
+    this.props.cbSubmitSetting(chkdObj);
+  }
 
   getCompStyle() {
     return this.props.compStyle;
   }
-
 
   getDefaultStyle(styleName) {
 
@@ -86,42 +82,14 @@ let chkdObj = {};
         borderTop: this.state.isChecked ? '3px solid #4caf50' : 'none',
         height: this.state.isChecked ? '5px' : '0px',
         width: this.state.isChecked ? '13px' : '0px',
-        transition : 'width .5s ease, height .5s ease',
-        //animation: 'x .5s ease',
-        //animationName: checkoff,
-      },
-      emptyDiv: {
-
+        transition : 'width .5s ease, height .5s ease'
       }
     };
 
     return (styles[styleName]);
   }
 
-
-
   render() {
-
-
-
-    // Sliding Animation Styles
-      // const {items, currItem} = this.state;
-      // const [currWidth, currHeight] = items[currItem];
-      // const widths = items.map(([origW, origH])=> currHeight / origH * origW);
-      // const leftStartCoords = widths
-      //   .slice(0, currItem)
-      //   .reduce((sum,width) => sum - width, 0);
-      //
-      // let configs = [];
-      // items.reduce((prevLeft, [origW, origH], i) => {
-      //   configs.push({
-      //     left: spring(prevLeft, springSettings),
-      //     height: spring(currHeight, springSettings),
-      //     width: spring(widths[i], springSettings)
-      //   });
-      //   return prevLeft + widths[i];
-      // }, leftStartCoords);
-
     return (
       <div
           style={{...this.getStyle('container')}}
@@ -163,3 +131,4 @@ let chkdObj = {};
 
 SettingsCheckbox.propTypes = propTypes;
 export default SettingsCheckbox;
+// reviewed on 7/14/2016
