@@ -21,12 +21,14 @@ const propTypes = {
       allowPresenter: React.PropTypes.bool
     }),
   member : React.PropTypes.object.isRequired,
-  cbOpenAdminControls : React.PropTypes.func.isRequired,
+  cbOpenAdminControls : React.PropTypes.func.isRequired
+
 };
 
 class MemberItem extends VertoBaseComponent {
   constructor(props){
     super(props);
+    this.state = {showAdminControls: false};
   }
 
 

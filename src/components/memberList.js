@@ -19,7 +19,6 @@ class MemberList extends VertoBaseComponent {
     this.closeAllAdminControls = this.closeAllAdminControls.bind(this);
   }
 
-
   componentDidUpdate() {
     // scroll to bottom of message list
     const node = ReactDOM.findDOMNode(this);
@@ -51,32 +50,37 @@ class MemberList extends VertoBaseComponent {
   }
 
   closeAllAdminControls (member) {
-    //console.log(member.name);
-    if (this.state.memWithOpenControls == member.name) {
-      this.setState({...this.state, memWithOpenControls: undefined });
-    } else {
-      this.setState({...this.state, memWithOpenControls: member.name});
-    }
-
+  //console.log(member.name);
+  if (this.state.memWithOpenControls == member.name) {
+    this.setState({...this.state, memWithOpenControls: undefined });
+  } else {
+    this.setState({...this.state, memWithOpenControls: member.name});
   }
-  //this.state member == mem : true ? fale
+  }
+
+
   render(){
     //console.log('---- ', this.props.members);
-    const members = this.props.members.map((mem, index)=>{
-      return (
-        <MemberItem
-            key={index}
-            member={mem}
-            controlSettings={{
-              moderator: this.props.isModerator,
-              multCanvas: this.props.hasMultipleCanvases,
-              allowPresenter: this.props.allowPresenter
-            }}
-            cbControlClick={this.props.cbControlClick}
-            cbOpenAdminControls={this.closeAllAdminControls}
-            showAdminControls = {this.state.memWithOpenControls == mem.name ? true : false}
-        /> );
-    });
+    return(
+        <div className="memberList" style={this.getStyle('MLStyles')}>
+          {this.props.members.map((mem, index)=>{
+            return (
+              <MemberItem
+                  key={index}
+                  member={mem}
+                  controlSettings={{
+                    moderator: this.props.isModerator,
+                    multCanvas: this.props.hasMultipleCanvases,
+                    allowPresenter: this.props.allowPresenter
+                  }}
+                  cbControlClick={this.props.cbControlClick}
+                  cbControlClick={this.props.cbControlClick}
+                  cbOpenAdminControls={this.closeAllAdminControls}
+                  showAdminControls = {this.state.memWithOpenControls == mem.name ? true : false}
+              /> );
+          })}
+        </div>
+      );
   }
 }
 
