@@ -16,7 +16,7 @@ class NumberItem extends VertoBaseComponent {
     super(props);
     this.state = {'onHover': false, 'onFocus': false};
 
-    //this.numberClicked(e) = this.numberClicked.bind(this);
+    this.numberClicked = this.numberClicked.bind(this);
   }
   numberClicked(e){
     this.props.cbClick(this.props.keyValue);
@@ -47,7 +47,6 @@ class NumberItem extends VertoBaseComponent {
         cursor: 'pointer',
         padding: '0px',
         margin: '5px',
-        //padding: '0px 15px 15px 15px',
         transition: 'box-shadow .2s ease',
         outline: 'none',
         ':hover': {
@@ -70,13 +69,6 @@ class NumberItem extends VertoBaseComponent {
   }
 
   render(){
-
-    // if item is hovered, light box shadow
-    // if item is focused, harsher box shadow style
-    // else no box shadow
-
-
-
     return (
       <div
           href="#"
@@ -86,8 +78,7 @@ class NumberItem extends VertoBaseComponent {
           onFocus={()=>{
             this.setState({...this.state, onFocus: true});
           }}
-          //onKeyPress={this.numberEntered.bind(this)}
-          onClick={this.numberClicked.bind(this)}
+          onClick={this.numberClicked}
           >
         <div
             tabIndex="0"
