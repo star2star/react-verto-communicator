@@ -94,7 +94,12 @@ class Login extends VertoBaseComponent{
     //TODO validate data before sending
     //const emailExp = new RegExp('[\w-]+@([\w-]+\.)+[\w-]+');
     if (this.state.settings.name.length > 0 && this.state.settings.email.length > 0){
-        this.props.cbClick(this.state.settings);
+      this.props.cbClick(this.state.settings);
+      // if(this.state.settings.email.value == emailExp) {
+      //   this.props.cbClick(this.state.settings);
+      // } else {
+      //   this.setState({...this.state, emptyFields: true});
+      // }
     } else {
       this.setState({...this.state, emptyFields: true});
     }
