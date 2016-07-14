@@ -1,7 +1,6 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 
-
 const propTypes = {
   items: React.PropTypes.array.isRequired,
   selected: React.PropTypes.array,
@@ -28,8 +27,6 @@ class ListSelect extends VertoBaseComponent {
         itemStyles: {
           margin: '4px 0'
         }
-
-
       };
       return (styles[styleName]);
   }
@@ -37,16 +34,18 @@ class ListSelect extends VertoBaseComponent {
   render() {
     const listItems = this.props.items.map((item, index)=>{
       let styles=this.getStyle("itemStyles");
-        if (this.props.selected && this.props.selected == index) {
-          styles={...this.getStyle("itemStyles"), backgroundColor: '#eee'};
-        }
-        return (
-          <li key={index} style={styles}
-              onClick={()=>{this.props.cbChange(index);}}
-          >
-            {item}
-          </li>
-        );
+
+      if (this.props.selected && this.props.selected == index) {
+        styles={...this.getStyle("itemStyles"), backgroundColor: '#eee'};
+      }
+
+      return (
+        <li key={index} style={styles}
+            onClick={()=>{this.props.cbChange(index);}}
+        >
+          {item}
+        </li>
+      );
     });
 
      return (<ul style={this.getStyle('listStyles')}>
@@ -58,3 +57,4 @@ class ListSelect extends VertoBaseComponent {
 ListSelect.propTypes = propTypes;
 
 export default ListSelect;
+// reviewed on 7/13/2016

@@ -106,3 +106,4 @@ class InputModal extends VertoBaseComponent {
 InputModal.propTypes = propTypes;
 
 export default InputModal;
+// reviewed on 7/13/2016    

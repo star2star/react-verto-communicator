@@ -49,9 +49,7 @@ class LastCall extends VertoBaseComponent {
                         </div>);
 
 
-    if(this.props.labelText == "No Call" || this.props.labelText == "In Call:     "){
-
-    }else{
+    if(this.props.labelText !== "No Call" && this.props.labelText !== "In Call:     "){
       lastcall = <ToolTip name="last call" place={this.props.ttPosition} msg={theMsg} custStyle={{base:{marginTop: '10px'}}}>{lastcall}</ToolTip>;
     }
     //console.log("^^^^^^^^^^^^^^^^^^^^^^^^^", lastcalll);
@@ -64,3 +62,4 @@ class LastCall extends VertoBaseComponent {
 LastCall.propTypes = propTypes;
 
 export default LastCall;
+// reviewed on 7/13/2016

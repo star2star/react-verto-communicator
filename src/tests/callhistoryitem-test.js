@@ -48,7 +48,7 @@ describe('<CallHistoryItem />', ()=>{
     const wrapper = shallow(<CallHistoryItem data={callHist1} />);
     const expectedNode = wrapper.children().first().find('.info').children().find('.nbrCalls');
     //console.log(expectedNode);
-    expect(expectedNode.props().children).toEqual(5);
+    expect(expectedNode.props().children).toEqual([ '(', 5, ')' ]);
   });
 
   it('displays formatted timestamp', () => {

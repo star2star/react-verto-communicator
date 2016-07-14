@@ -82,3 +82,5 @@ class About extends VertoBaseComponent{
 About.propTypes = propTypes;
 
 export default About;
+
+// reviewed 7/13/2016

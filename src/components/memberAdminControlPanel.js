@@ -3,26 +3,12 @@ import VertoBaseComponent from './vertobasecomponent';
 import App from './app'; // for transfer
 import ControlItem from './controlItem';
 import InputModal from './inputModal';
-import { FormattedMessage, injectIntl } from 'react-intl';
-// import {
-//   KickIconSVG,  // kick
-//   FullScreenIconSVG, // floor
-//   UpArrowIconSVG,  // transfer
-//   MicrophoneIconSVG,  // mic
-//   MuteMicrophoneIconSVG, // mic
-//   VideoIconSVG,  // video
-//   MuteVideoIconSVG, //video
-//   VolumeUpIconSVG, // vol/gain
-//   VolumeDownIconSVG, // vol/gain
-//   StatusIconSVG,  // set
-//   RemoveIconSVG // reset
-//   } from './svgIcons';
+import { injectIntl } from 'react-intl';
 
 const propTypes = {
   cbControlClick : React.PropTypes.func.isRequired,
   multCanvas: React.PropTypes.bool,
   member : React.PropTypes.object.isRequired
-
 };
 
 export default class AdminControls extends VertoBaseComponent {
@@ -47,9 +33,8 @@ export default class AdminControls extends VertoBaseComponent {
         controlStyle: {
           paddingTop: '2px',
           fontSize: '.8rem'
-      }
-    },
-
+        }
+      },
       headingStyle:{
         backgroundColor: '#e9e9e9',
         display: 'flex',
@@ -115,24 +100,16 @@ export default class AdminControls extends VertoBaseComponent {
       }
     };
 
-    let styleReturn = styles[styleName];
-      if(this.props.style && this.props.style[styleName]) {
-        styleReturn = {...styleReturn, ...this.props.style[styleName]};
-      }
-    return styleReturn;
+    return styles[styleName];
   }
 
   render(){
-    //console.log(this.props.member);
     const { formatMessage } = this.props.intl;
-    //this.props.multCanvas == true;
-    //console.log('&&&&&& member object', this.props.member);
 
     // TODO - ta - Finish up Transfer component to handle transfer click
     // TODO - ta - Add new component for input of banner text
     // TODO - ta - Add new component to get 'canvasId' when setting layer
     // TODO - ta - Add real callback functions to canvas controls when available
-
 
     // Setup up based on the user status object
     const micStatus = this.props.member.conferenceStatus.audio.muted ?
@@ -154,7 +131,6 @@ export default class AdminControls extends VertoBaseComponent {
                 compStyle={this.getStyle("controlIconStyle")}
                 cbActionClick={()=>{this.props.cbControlClick("MUTEVIDEO", [this.props.member.memberId]);}}
             />);
-
 
       // Setup JSX for controls that only appear with multiple canvas
       const multCanvasControls = this.props.multCanvas ?
@@ -315,3 +291,4 @@ export default class AdminControls extends VertoBaseComponent {
 
 AdminControls.propTypes = propTypes;
 export default injectIntl(AdminControls);
+// reviewed on 7/13/2016

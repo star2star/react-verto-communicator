@@ -7,7 +7,7 @@ const propTypes = {
   compStyle: React.PropTypes.object
 };
 
-export default class ChatInput extends VertoBaseComponent {
+class ChatInput extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {};
@@ -19,7 +19,7 @@ export default class ChatInput extends VertoBaseComponent {
       //console.log('HANDLE SUBMIT - charcode', this.refs.filterInput.value);
       // call the callback function for processing text input since user
       // did not select from the filtered list
-      console.log('enter pressed....');
+      //console.log('enter pressed....');
       this.props.cbSubmitMessage(this.props.sessionId, this.refs.msgInput.value);
       // clear the input value
       this.refs.msgInput.value='';
@@ -37,22 +37,15 @@ export default class ChatInput extends VertoBaseComponent {
           // height: '56px',
           flex: '0 0 56px',
           display: 'flex',
-          // flex: 1,
           alignItems: 'center',
           justifyContent: 'center',
           backgroundColor: '#f7f8fb',
-          // border: '1px solid #d1d1d1',
-          //borderTop: '1px solid #d1d1d1',
           borderRight: '0px',
           outline: 'none',
           marginLeft: '5px',
           marginRight: '5px'
-          //borderRadius: '0px 0px 0px 5px'
       },
       inputSpacing: {
-          //marginLeft: '10px',
-          //marginRight: '10px',
-          //paddingBottom: '5px',
           display:'flex',
           justifyContent:'stretch',
           flex: 1
@@ -63,8 +56,6 @@ export default class ChatInput extends VertoBaseComponent {
           fontFamily: 'Avenir-Medium, sans-serif',
           justifyContent: 'stretch',
           height: '30px',
-          //borderRadius: '5px',
-          //paddingLeft: '10px',
           color: '#4a4a4a',
           fontSize: '0.9rem',
           outline: 'none',
@@ -75,11 +66,7 @@ export default class ChatInput extends VertoBaseComponent {
       }
     };
 
-    let styleReturn = styles[styleName];
-      if(this.props.style && this.props.style[styleName]) {
-        styleReturn = {...styleReturn, ...this.props.style[styleName]};
-      }
-    return styleReturn;
+    return styles[styleName];
   }
 
   render(){
@@ -99,3 +86,6 @@ export default class ChatInput extends VertoBaseComponent {
 }
 
 ChatInput.propTypes = propTypes;
+
+export default ChatInput;
+//reviewed 7/13/2016

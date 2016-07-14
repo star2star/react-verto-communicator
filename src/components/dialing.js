@@ -1,16 +1,11 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
-import UserVideoControls from './vidControlsUser';
-import AdminVideoControls from './vidControlsAdmin';
 import {
-    ShareScreenIconSVG,
     AvatarSVG,
     DialPadIconSVG,
     MicrophoneIconSVG,
     PauseIconSVG,
-    MuteMicrophoneIconSVG,
-    PhoneIconSVG,
-    VideoIconSVG
+    PhoneIconSVG
   } from './svgIcons';
 
  const propTypes = {
@@ -25,8 +20,8 @@ class Dialing extends VertoBaseComponent {
   constructor(props){
       super(props);
       this.state={startTime: Date.now(), timer: 0, status: 'trying'};
-      this.padLeft = (s, len, c) =>{
-            var c = c || '0';
+      this.padLeft = (s, len, cIn) =>{
+            var c = cIn || '0';
             while (s.length < len) s = c+s;
             return s;
           };
@@ -107,7 +102,7 @@ class Dialing extends VertoBaseComponent {
   }
 
   render() {
-    //console.log('------>>> ', this.props.callData);
+    //console.log('$@#$$%#@$#%$%$%$%&^%$#%^& ', this.props.callData);
       return (
         <div className="container" style={this.getStyle('dialingContainer')}>
           <div style={this.getStyle('avatarRowStyle')}>
@@ -148,3 +143,4 @@ class Dialing extends VertoBaseComponent {
 Dialing.propTypes = propTypes;
 
 export default Dialing;
+// reviewed 7/13/2016

@@ -2,7 +2,7 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import UserVideoControls from './vidControlsUser';
 import AdminVideoControls from './vidControlsAdmin';
-import {ShareScreenIconSVG, AvatarSVG, DialPadIconSVG, MicrophoneIconSVG, PauseIconSVG, MuteMicrophoneIconSVG, PhoneIconSVG, VideoIconSVG } from './svgIcons';
+import { PhoneIconSVG } from './svgIcons';
 import Radium from 'radium';
 
  const propTypes = {
@@ -23,10 +23,10 @@ import Radium from 'radium';
 class CallProgress extends VertoBaseComponent {
     constructor(props){
         super(props);
-        // TODO ta - should we restart the timer?  If not, need to get props with startTime
+
         this.state={startTime: Date.now(), timer: 0, status: 'trying'};
-        this.padLeft = (s, len, c) =>{
-              var c = c || '0';
+        this.padLeft = (s, len, cIn) =>{
+              var c = cIn || '0';
               while (s.length < len) s = c+s;
               return s;
             };
@@ -134,14 +134,14 @@ class CallProgress extends VertoBaseComponent {
       const adminControls = this.props.isModerator ?
               (<div style={this.getStyle('controlStyleAdmin')}>
                 <AdminVideoControls
-                  cbPlay={()=>{console.log('Play Clicked');}}
-                  cbStop={()=>{console.log('Stop Clicked');}}
-                  cbRecord={()=>{console.log('Record Clicked');}}
-                  cbStopRecord={()=>{console.log('Stop Record Clicked');}}
-                  cbSnapshot={this.props.cbSnapshot}
-                  cbSetVideoMode={(params)=>{this.props.cbSetVideoMode(params);}}
-                  layouts={this.props.layouts}
-                  currLayout={this.props.currLayout}
+                    cbPlay={()=>{console.log('Play Clicked');}}
+                    cbStop={()=>{console.log('Stop Clicked');}}
+                    cbRecord={()=>{console.log('Record Clicked');}}
+                    cbStopRecord={()=>{console.log('Stop Record Clicked');}}
+                    cbSnapshot={this.props.cbSnapshot}
+                    cbSetVideoMode={(params)=>{this.props.cbSetVideoMode(params);}}
+                    layouts={this.props.layouts}
+                    currLayout={this.props.currLayout}
                 />
               </div>
               ) :
@@ -187,3 +187,4 @@ class CallProgress extends VertoBaseComponent {
 CallProgress.propTypes = propTypes;
 
 export default Radium(CallProgress);
+// reviewed 7/13/2016

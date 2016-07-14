@@ -8,15 +8,6 @@ jest.unmock('../components/lastCall.js');
 
 describe('LastCall', ()=>{
 
-  it('knows that it is being clicked', () => {
-    const onFocusStub = sinon.spy();
-    const wrapper = mount(<LastCall />);
-    //console.log(wrapper.find('.containerr'));
-    const lastClick = wrapper.find('.container');
-    lastClick.simulate('click');
-    expect(onFocusStub.calledOnce, true);
-  });
-
   it('properly takes in a phone number', () => {
     const wrapper = mount(<LastCall labelText="last call: " lastNumber="867-5309"/>);
     //console.log(wrapper.props().lastNumber);

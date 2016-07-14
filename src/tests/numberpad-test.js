@@ -34,7 +34,7 @@ describe('<Numberpad />', ()=>{
   it('Click event fires callback function', () => {
     const wrapper = mount(<Numberpad cbClick={cbTest} />);
     //console.log(wrapper.find('NumberItem'));
-    console.log(wrapper.find('NumberItem').first());
+    //console.log(wrapper.find('NumberItem').first());
     wrapper.find('NumberItem').first().simulate('click');
     expect(cbTest.calledOnce).toEqual(true);
 

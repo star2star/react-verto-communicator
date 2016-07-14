@@ -7,9 +7,7 @@ import VertoBaseComponent from './vertobasecomponent';
   count : React.PropTypes.number
 };
 
-
-
-export default class Badge extends VertoBaseComponent {
+class Badge extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {};
@@ -35,11 +33,8 @@ export default class Badge extends VertoBaseComponent {
         }
     };
 
-    let styleReturn = styles[styleName];
-    return styleReturn;
+    return styles[styleName];
   }
-
-
 
   render(){
     return(
@@ -53,3 +48,4 @@ export default class Badge extends VertoBaseComponent {
 }
 
 Badge.propTypes = propTypes;
+export default Badge;

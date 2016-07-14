@@ -11,7 +11,7 @@ const propTypes = {
   index : React.PropTypes.number
 };
 
-export default class AlertLogItem extends VertoBaseComponent {
+class AlertLogItem extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {};
@@ -112,3 +112,6 @@ export default class AlertLogItem extends VertoBaseComponent {
 }
 
 AlertLogItem.propTypes = propTypes;
+
+export default AlertLogItem;
+// reviewed 7/13/2016

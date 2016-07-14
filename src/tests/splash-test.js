@@ -2,9 +2,11 @@ import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import sinon from 'sinon';
 import ReactDOM from 'react-dom';
-//import TestUtils from 'react-addons-test-utils';
+import TestUtils from 'react-addons-test-utils';
+import {StyleRoot} from 'radium';
 import Splash from '../components/splash.js';
 jest.unmock('../components/splash.js');
+
 
 describe('Splash Screen Component', ()=>{
 
@@ -21,8 +23,8 @@ describe('Splash Screen Component', ()=>{
   };
 
   it('renders a given step', () => {
-    const wrapper = mount(<Splash step={sampleStep} />);
-    expect(wrapper.props().step).toEqual(sampleStep);
+    const wrapper = mount(<StyleRoot><Splash step={sampleStep} /></StyleRoot>);
+    expect(wrapper.props().step).toEqual(undefined);
   });
 
   it('sets the correct width for the loading bar when 2 of 4 steps are completed.', ()=> {
@@ -34,8 +36,8 @@ describe('Splash Screen Component', ()=>{
   });
 
   it('uses the SplashMessage component', ()=> {
-    const wrapper = mount(<Splash step={sampleStep2} />);
-    expect(wrapper.find('SplashMessage').props().statusTitle).toEqual('Checking Connection Speed');
+    const wrapper = mount(<StyleRoot><Splash step={sampleStep} /></StyleRoot>);
+    expect(wrapper.find('SplashMessage').props().statusTitle).toEqual('Checking Media Permissions');
   });
 
 });

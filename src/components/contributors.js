@@ -56,15 +56,9 @@ class Contributors extends VertoBaseComponent{
     return (styles[styleName]);
   }
 
-
-
   render() {
-
-    let contList = (this.props.contributorsData).map((cont,index) => {
-      return(<ContributorsListItem key={index} name={cont.name} email={cont.email} avatar={cont.avatar} />);
-    });
     return (
-      <Modal isOpen={true} onRequestClose={()=>{
+      <Modal isOpen onRequestClose={()=>{
         // console.log('closing');
         App.toggleModal();
       }} style={{...this.getStyle('modal')}} >
@@ -77,7 +71,9 @@ class Contributors extends VertoBaseComponent{
           </h1>
         </div>
         <div style={{...this.getStyle('scrollContent')}}>
-            {contList}
+            {(this.props.contributorsData).map((cont,index) => {
+              return(<ContributorsListItem key={index} name={cont.name} email={cont.email} avatar={cont.avatar} />);
+            })}
         </div>
       </Modal>
     );
@@ -87,3 +83,4 @@ class Contributors extends VertoBaseComponent{
 Contributors.propTypes = propTypes;
 
 export default Radium(Contributors);
+// reviewed 7/13/2016

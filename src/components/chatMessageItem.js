@@ -2,7 +2,6 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import {AvatarSVG} from './svgIcons';
 import moment from 'moment';
-//import Radium from 'radium';
 
 const propTypes = {
   avatarUrl : React.PropTypes.string,
@@ -71,7 +70,6 @@ export default class ChatMessageItem extends VertoBaseComponent {
         fontSize: '.75rem'
       },
       triangleStyleLeft: {
-        //content: ' ',
         width: '0px',
         height: '0px',
         borderStyle: 'solid',
@@ -82,7 +80,6 @@ export default class ChatMessageItem extends VertoBaseComponent {
         left: '-8px'
       },
       triangleStyleRight: {
-        //content: ' ',
         width: '0px',
         height: '0px',
         borderStyle: 'solid',
@@ -94,11 +91,7 @@ export default class ChatMessageItem extends VertoBaseComponent {
       }
     };
 
-    let styleReturn = styles[styleName];
-      if(this.props.style && this.props.style[styleName]) {
-        styleReturn = {...styleReturn, ...this.props.style[styleName]};
-      }
-    return styleReturn;
+    return styles[styleName];
   }
 
   render(){
@@ -114,8 +107,9 @@ export default class ChatMessageItem extends VertoBaseComponent {
     }
 
 
+    let chatContent;
     if (!this.props.message.isMe) {
-      return (
+      chatContent = (
         <div style={this.getStyle("ChatMsgItem")}>
           {avatar}
           <span style={{...this.getStyle("msgStyle"), backgroundColor:this.props.message.bgColor}}> {this.props.message.message}
@@ -125,7 +119,7 @@ export default class ChatMessageItem extends VertoBaseComponent {
         </div>
       );
     } else {
-      return (
+      chatContent =  (
         <div style={this.getStyle("ChatMsgItemRight")}>
           {avatar}
           <span style={{...this.getStyle("msgStyle"), backgroundColor:this.props.message.bgColor}}>{this.props.message.message}
@@ -135,11 +129,12 @@ export default class ChatMessageItem extends VertoBaseComponent {
         </div>
       );
     }
+
+    return (chatContent);
   }
 }
 
 ChatMessageItem.propTypes = propTypes;
 
-
-
-//export default Radium(ChatMessageItem);
+export default ChatMessageItem;
+// reviewed 7/13/2016

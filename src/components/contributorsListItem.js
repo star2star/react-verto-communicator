@@ -50,7 +50,6 @@ class ContributorsList extends VertoBaseComponent{
       return (styles[styleName]);
   }
 
-
   render() {
     return (
       <div style={this.getStyle('totalStyle')}>
@@ -68,7 +67,7 @@ class ContributorsList extends VertoBaseComponent{
   }
 }
 
-
 ContributorsList.propTypes = propTypes;
 
 export default ContributorsList;
+// reviewed 7/13/2016

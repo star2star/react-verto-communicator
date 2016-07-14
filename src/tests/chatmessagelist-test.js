@@ -41,7 +41,7 @@ describe('Default test for ChatMessageList', ()=>{
     expect(wrapper.childAt(1).childAt(2).props().children[2]).toEqual('Today at 3:38 PM');
   });
 
-
+*/
 
 
 
