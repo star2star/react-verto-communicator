@@ -87,7 +87,7 @@ class Login extends VertoBaseComponent{
   changingInput(field, value){
     let xData = { ...this.state.settings };
     xData[field] = value;
-    this.setState({ ...this.state, settings: xData });
+    this.setState({ ...this.state, settings: xData, emptyFields: false });
   }
 
   submitLogin() {
@@ -96,9 +96,7 @@ class Login extends VertoBaseComponent{
       this.props.cbClick(this.state.settings);
     } else {
       this.setState({...this.state, emptyFields: true});
-
     }
-
   }
   render() {
     const { formatMessage } = this.props.intl;
