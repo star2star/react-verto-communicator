@@ -14,12 +14,12 @@ class SettingsMenuSelect extends VertoBaseComponent {
     super(props);
   }
 
-handleSelect() {
-  const theSelect = this.refs.select;
+  handleSelect() {
+    const theSelect = this.refs.select;
 
-  // get the selected option from the options array.  Use [0] to get the array
-  // element only (should only be one).
-  const selValue = this.props.options.filter((opt)=>{
+    // get the selected option from the options array.  Use [0] to get the array
+    // element only (should only be one).
+    const selValue = this.props.options.filter((opt)=>{
     //console.log('theSelect', theSelect);
     return (opt.id == theSelect[theSelect.selectedIndex].value);
   })[0];
@@ -30,7 +30,6 @@ handleSelect() {
   // return the structure to the callback function...
   // The id is the name of the setting attribute to be set, and the data attribute
   // is the value.
-  //TODO see if we really need the 'kind' field in some of the selectedoptions....
 
   let selObj = {};
   selObj[this.props.selectedOption.id] = {...this.props.selectedOption.data, ...selValue};
@@ -91,3 +90,4 @@ handleSelect() {
 
 SettingsMenuSelect.propTypes = propTypes;
 export default SettingsMenuSelect;
+// reviewed on 7/14/2016

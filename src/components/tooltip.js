@@ -1,9 +1,9 @@
 import React from 'react';
 import { Tooltip, Origin } from 'redux-tooltip';
 import VertoBaseComponent from './vertobasecomponent';
-//import { FormattedMessage } from 'react-intl';
 
 const propTypes = {
+  auto: React.PropTypes.boolean,
   place: React.PropTypes.string.isRequired,
   name: React.PropTypes.string.isRequired,
   msg: React.PropTypes.oneOfType([
@@ -13,7 +13,7 @@ const propTypes = {
   compStyle: React.PropTypes.object
 };
 
-export default class ToolTip extends VertoBaseComponent {
+class ToolTip extends VertoBaseComponent {
   constructor(props){
     super(props);
   }
@@ -33,6 +33,7 @@ export default class ToolTip extends VertoBaseComponent {
     return(
       <span>
         <Origin name={this.props.name} auto={this.props.auto}>
+
           {this.props.children}
         </Origin>
         <Tooltip name={this.props.name} place={this.props.place} within={this.props.within} auto={this.props.auto} custStyle={this.props.custStyle}>
@@ -43,3 +44,5 @@ export default class ToolTip extends VertoBaseComponent {
 }
 
 ToolTip.propTypes = propTypes;
+export default ToolTip;
+// reviewed on 7/14/2016

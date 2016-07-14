@@ -294,3 +294,4 @@ class SettingsPreview extends VertoBaseComponent{
 SettingsPreview.propTypes = propTypes;
 
 export default injectIntl(SettingsPreview);
+// reviewed on 7/14/2016

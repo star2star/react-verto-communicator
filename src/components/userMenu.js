@@ -5,8 +5,7 @@ AvatarSVG,
 CaretUpIconSVG,
 CaretDownIconSVG } from './svgIcons';
 import ToolTip from './tooltip';
-import { FormattedMessage, injectIntl } from 'react-intl';
-
+import { injectIntl } from 'react-intl';
 
 const propTypes = {
   cbClick: React.PropTypes.func,
@@ -74,7 +73,6 @@ class UserMenu extends VertoBaseComponent {
     return (styles[styleName]);
   }
 
-
   toggleMenu() {
     if (this.props.allowDisplayDetails) {
       this.props.cbClick();
@@ -91,20 +89,19 @@ class UserMenu extends VertoBaseComponent {
   render() {
     const { formatMessage } = this.props.intl;
     const menuContainer = (
-
       <div className="menuContainer" style={this.getStyle('menu')} >
         {this.props.children}
       </div>
     );
 
+    let theMsg;
     if(this.props.status == "disconnected"){
-      var theMsg = formatMessage({"id":"SETTINGS_USER_LOGIN", "defaultMessage":"login to change user settings"});;
+      theMsg = formatMessage({"id":"SETTINGS_USER_LOGIN", "defaultMessage":"login to change user settings"});
     }else{
-      var theMsg = formatMessage({"id":"SETTINGS_USER", "defaultMessage":"Disconnected"});;
+      theMsg = formatMessage({"id":"SETTINGS_USER", "defaultMessage":"Disconnected"});
     }
 
     return (
-
         <span onClick={this.toggleMenu.bind(this)}  style={this.getStyle("container")}>
           <ToolTip name="user" place={this.props.ttPosition} msg={theMsg} custStyle={{base:{marginTop: '10px'}}} >
             <AvatarSVG svgStyle={{...this.getStyle('icon')}}  />
@@ -124,3 +121,4 @@ UserMenu.defaultProps = defaultProps;
 export default  injectIntl(UserMenu,{
         withRef: true
     });
+// reviewed on 7/14/2016

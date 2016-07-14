@@ -1,10 +1,9 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
-import InputModal from './inputModal';
 import ListSelect from './list-select';
 import ControlItem from './controlItem';
 import ToolTip from './tooltip';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { injectIntl } from 'react-intl';
 
 const propTypes = {
   cbPlay : React.PropTypes.func.isRequired,
@@ -17,7 +16,7 @@ const propTypes = {
   layouts: React.PropTypes.array
 };
 
-export default class AdminVideoControls extends VertoBaseComponent {
+class AdminVideoControls extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {showLayoutList: false};
@@ -60,11 +59,7 @@ export default class AdminVideoControls extends VertoBaseComponent {
       }
     };
 
-    let styleReturn = styles[styleName];
-      if(this.props.style && this.props.style[styleName]) {
-        styleReturn = {...styleReturn, ...this.props.style[styleName]};
-      }
-    return styleReturn;
+    return styles[styleName];
   }
 
   handleShowLayoutList() {
@@ -83,6 +78,7 @@ export default class AdminVideoControls extends VertoBaseComponent {
     //             compStyle={this.getStyle("controlIconStyle")}
     //             cbActionClick={this.props.cbMicMute}
     //         />);
+    // Recording not in this version....
 
     let layoutList;
     if (this.props.layouts && this.props.currLayout) {
@@ -165,3 +161,4 @@ export default class AdminVideoControls extends VertoBaseComponent {
 AdminVideoControls.propTypes = propTypes;
 
 export default injectIntl(AdminVideoControls);
+// reviewed on 7/14/2016

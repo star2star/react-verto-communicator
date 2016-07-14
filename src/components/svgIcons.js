@@ -1,5 +1,13 @@
 import React from 'react';
 
+const propTypes = {
+  svgStyle: React.PropTypes.object,
+  title: React.PropTypes.string,
+  description: React.PropTypes.string,
+  children: React.PropTypes.node
+};
+
+
 class ContainerIconSVG extends React.Component {
   render() {
     return (
@@ -12,6 +20,8 @@ class ContainerIconSVG extends React.Component {
     );
   }
 }
+
+ContainerIconSVG.propTypes = propTypes;
 
 // Notifications none icon
 
@@ -1069,8 +1079,4 @@ VertoLogoSVG,
 RoswellSVG
 };
 
-
-// require the content propType
-// External.propTypes = {
-//   content: React.PropTypes.string.isRequired
-// };
+// reviewed on 7/14/2016
