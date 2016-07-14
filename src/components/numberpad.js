@@ -12,6 +12,8 @@ const propTypes = {
 class Numberpad extends VertoBaseComponent {
   constructor(props) {
     super(props);
+
+    this.numberClicked = this.numberClicked.bind(this);
   }
   numberClicked(k){
     this.props.cbClick(k);
@@ -52,51 +54,51 @@ class Numberpad extends VertoBaseComponent {
           <NumberItem
               keyValue="1"
               keyString=""
-              cbClick={this.numberClicked.bind(this)}
+              cbClick={this.numberClicked}
           />
           <NumberItem
               keyValue="2"
               keyString="ABC"
-              cbClick={this.numberClicked.bind(this)}
+              cbClick={this.numberClicked}
           />
           <NumberItem
               keyValue="3"
               keyString="DEF"
-              cbClick={this.numberClicked.bind(this)}
+              cbClick={this.numberClicked}
           />
         </div>
         <div style={{...this.getStyle('rows')}}>
           <NumberItem
               keyValue="4"
               keyString="GHI"
-              cbClick={this.numberClicked.bind(this)}
+              cbClick={this.numberClicked}
           />
           <NumberItem
               keyValue="5"
               keyString="JKL"
-              cbClick={this.numberClicked.bind(this)}
+              cbClick={this.numberClicked}
           />
           <NumberItem
               keyValue="6"
               keyString="MNO"
-              cbClick={this.numberClicked.bind(this)}
+              cbClick={this.numberClicked}
           />
         </div>
         <div style={{...this.getStyle('rows')}}>
           <NumberItem
               keyValue="7"
               keyString="PQRS"
-              cbClick={this.numberClicked.bind(this)}
+              cbClick={this.numberClicked}
           />
           <NumberItem
               keyValue="8"
               keyString="TUV"
-              cbClick={this.numberClicked.bind(this)}
+              cbClick={this.numberClicked}
           />
           <NumberItem
               keyValue="9"
               keyString="WXYZ"
-              cbClick={this.numberClicked.bind(this)}
+              cbClick={this.numberClicked}
           />
         </div>
         <div style={{...this.getStyle('rows')}}>
@@ -104,18 +106,18 @@ class Numberpad extends VertoBaseComponent {
               keyValue="*"
               keyString=""
               compStyle={{keyValue: {color: '#999'}}}
-              cbClick={this.numberClicked.bind(this)}
+              cbClick={this.numberClicked}
           />
           <NumberItem
               keyValue="0"
               keyString="+"
-              cbClick={this.numberClicked.bind(this)}
+              cbClick={this.numberClicked}
           />
           <NumberItem
               keyValue="#"
               keyString=""
               compStyle={{keyValue: {color: '#999'}}}
-              cbClick={this.numberClicked.bind(this)}
+              cbClick={this.numberClicked}
           />
         </div>
       </div>);
