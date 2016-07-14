@@ -1,6 +1,6 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
-import SvgIcons from './svgIcons';
+//import SvgIcons from './svgIcons';
 import Radium from 'radium';
 
 const propTypes = {
@@ -15,21 +15,11 @@ class NumberItem extends VertoBaseComponent {
   constructor(props) {
     super(props);
     this.state = {'onHover': false, 'onFocus': false};
-
-    //this.numberClicked(e) = this.numberClicked.bind(this);
   }
-  numberClicked(e){
+  
+  numberClicked(){
     this.props.cbClick(this.props.keyValue);
-    //this.props.cbKeyPress(this.props.keyValue);
   }
-
-  // numberEntered(e){
-  //   if(e.which == 13 || e.keyCode == 13 && this.state.onFocus) {
-  //     //console.log('key press', this.props.keyValue);
-  //     this.props.cbKeyPress(this.props.keyValue);
-  //     return false;
-  //   }
-  // }
 
   getCompStyle() {
     return this.props.compStyle;
@@ -47,7 +37,6 @@ class NumberItem extends VertoBaseComponent {
         cursor: 'pointer',
         padding: '0px',
         margin: '5px',
-        //padding: '0px 15px 15px 15px',
         transition: 'box-shadow .2s ease',
         outline: 'none',
         ':hover': {
@@ -74,8 +63,6 @@ class NumberItem extends VertoBaseComponent {
     // if item is hovered, light box shadow
     // if item is focused, harsher box shadow style
     // else no box shadow
-
-
 
     return (
       <div
@@ -105,4 +92,7 @@ class NumberItem extends VertoBaseComponent {
   }
 }
 
+NumberItem.propTypes = propTypes;
+
 export default Radium(NumberItem);
+// reviewed on 7/14/2016

@@ -12,13 +12,11 @@ const propTypes = {
   compStyle : React.PropTypes.object
 };
 
-export default class MemberList extends VertoBaseComponent {
+class MemberList extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {};
   }
-
-  
 
   componentDidUpdate() {
     // scroll to bottom of message list
@@ -47,37 +45,34 @@ export default class MemberList extends VertoBaseComponent {
       }
     };
 
-    let styleReturn = styles[styleName];
-      if(this.props.style && this.props.style[styleName]) {
-        styleReturn = {...styleReturn, ...this.props.style[styleName]};
-      }
-    return styleReturn;
+    return styles[styleName];
   }
 
 
 
   render(){
     //console.log('---- ', this.props.members);
-    const members = this.props.members.map((mem, index)=>{
-      return (
-        <MemberItem
-            key={index}
-            member={mem}
-            controlSettings={{
-              moderator: this.props.isModerator,
-              multCanvas: this.props.hasMultipleCanvases,
-              allowPresenter: this.props.allowPresenter
-            }}
-            cbControlClick={this.props.cbControlClick}
-        /> );
-    });
-
     return(
         <div className="memberList" style={this.getStyle('MLStyles')}>
-        {members}
+          {this.props.members.map((mem, index)=>{
+            return (
+              <MemberItem
+                  key={index}
+                  member={mem}
+                  controlSettings={{
+                    moderator: this.props.isModerator,
+                    multCanvas: this.props.hasMultipleCanvases,
+                    allowPresenter: this.props.allowPresenter
+                  }}
+                  cbControlClick={this.props.cbControlClick}
+              /> );
+          })}
         </div>
       );
   }
 }
 
 MemberList.propTypes = propTypes;
+
+export default MemberList;
+// reviewed on 7/14/2016
