@@ -170,7 +170,7 @@ const doVertoLogin = (success, data) => {
       dispatch(doVertoLoginValid(data));
       dispatch(doSpeedTest());
     } else {
-      dispath({
+      dispatch({
         type: "LOGIN_FAILED"
       });
     }
