@@ -175,7 +175,6 @@ const messages = {
   "LAYOUT_POSITION": "Layout position",
   "DISCONNECTED": "Disconnected",
   "CONNECTING": "Connecting",
-  "ACTIVE":"Active",
   "CONNECTED": "Connected",
   "COM_STATUS": "Communication status: ",
   "SCREEN_SHARE": "Screen Share",
@@ -191,6 +190,7 @@ const messages = {
   "MENU_INFO": "Info menu",
   "CALL_FROM": "Call From:",
   "ANSWER": "Answer",
-  "REJECT": "Reject"
+  "REJECT": "Reject",
+  "ACTIVE": "Active"
 };
 module.exports = messages;
