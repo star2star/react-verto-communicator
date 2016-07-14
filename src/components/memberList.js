@@ -16,7 +16,9 @@ class MemberList extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {};
+    this.closeAllAdminControls = this.closeAllAdminControls.bind(this);
   }
+
 
   componentDidUpdate() {
     // scroll to bottom of message list
@@ -48,27 +50,33 @@ class MemberList extends VertoBaseComponent {
     return styles[styleName];
   }
 
+  closeAllAdminControls (member) {
+    //console.log(member.name);
+    if (this.state.memWithOpenControls == member.name) {
+      this.setState({...this.state, memWithOpenControls: undefined });
+    } else {
+      this.setState({...this.state, memWithOpenControls: member.name});
+    }
 
-
+  }
+  //this.state member == mem : true ? fale
   render(){
     //console.log('---- ', this.props.members);
-    return(
-        <div className="memberList" style={this.getStyle('MLStyles')}>
-          {this.props.members.map((mem, index)=>{
-            return (
-              <MemberItem
-                  key={index}
-                  member={mem}
-                  controlSettings={{
-                    moderator: this.props.isModerator,
-                    multCanvas: this.props.hasMultipleCanvases,
-                    allowPresenter: this.props.allowPresenter
-                  }}
-                  cbControlClick={this.props.cbControlClick}
-              /> );
-          })}
-        </div>
-      );
+    const members = this.props.members.map((mem, index)=>{
+      return (
+        <MemberItem
+            key={index}
+            member={mem}
+            controlSettings={{
+              moderator: this.props.isModerator,
+              multCanvas: this.props.hasMultipleCanvases,
+              allowPresenter: this.props.allowPresenter
+            }}
+            cbControlClick={this.props.cbControlClick}
+            cbOpenAdminControls={this.closeAllAdminControls}
+            showAdminControls = {this.state.memWithOpenControls == mem.name ? true : false}
+        /> );
+    });
   }
 }
 

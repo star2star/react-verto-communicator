@@ -1,6 +1,5 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
-import SvgIcons from './svgIcons';
 import Radium from 'radium';
 import NumberItem from './numberitem';
 
@@ -27,25 +26,19 @@ class Numberpad extends VertoBaseComponent {
       wrapper: {
         backgroundColor: "#fff",
         display: "flex",
-        //padding: '15px',
         flexDirection: "column",
-        width: "100%",
-        //height: "400px",
-        //border: '1px solid red'
+        width: "100%"
       },
       rows: {
         display: "flex",
         flexDirection: "row",
         alignItems: 'flex-start',
         justifyContent: "space-around",
-        flexGrow: 1,
-        //marginRight: '-15px',
-        //marginLeft: '-15px'
+        flexGrow: 1
       }
     };
     return (styles[styleName]);
   }
-
 
   render() {
     return (
@@ -127,3 +120,4 @@ class Numberpad extends VertoBaseComponent {
 Numberpad.propTypes = propTypes;
 
 export default Radium(Numberpad);
+// reviewed 7/14/2016

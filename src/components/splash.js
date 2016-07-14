@@ -87,3 +87,4 @@ class Splash extends VertoBaseComponent {
 Splash.propTypes = propTypes;
 
 export default Radium(Splash);
+// reviewed on 7/14/2016

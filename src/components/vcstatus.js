@@ -2,7 +2,7 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import { StatusIconSVG } from './svgIcons';
 import ToolTip from './tooltip';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { injectIntl } from 'react-intl';
 
 const propTypes = {
   status: React.PropTypes.oneOf(['connected','disconnected', 'connecting', 'active']).isRequired,
@@ -52,7 +52,7 @@ class VCStatus extends VertoBaseComponent {
         intlStatus = formatMessage({"id":"CONNECTING", "defaultMessage":"Connecting"});
         break;
       case 'active':
-        fillColor = this.getStyle('connectedFill');
+        fillColor = this.getStyle('connectingFill');
         intlStatus = formatMessage({"id":"ACTIVE", "defaultMessage":"Active"});
         break;
       case 'connected':
@@ -66,11 +66,11 @@ class VCStatus extends VertoBaseComponent {
       }
 
     //console.log("$$$$$$$$$$$$$$$$$$$$$$" + intlStatus);
-    const theMsg= intlStatus = formatMessage({"id":"COM_STATUS", "defaultMessage":"Communication Status: "}) + intlStatus;
+    const theMsg = formatMessage({"id":"COM_STATUS", "defaultMessage":"Communication Status: "}) + intlStatus;
 
      return (
         <ToolTip name="vcStatus" place={this.props.ttPosition} msg={theMsg} custStyle={{base:{marginTop: '10px'}}}>
-          < StatusIconSVG svgStyle = {{...this.getStyle('svgStyle'), ...fillColor}} />
+          <StatusIconSVG svgStyle = {{...this.getStyle('svgStyle'), ...fillColor}} />
         </ToolTip>
      );
   }
@@ -79,3 +79,4 @@ class VCStatus extends VertoBaseComponent {
 VCStatus.propTypes = propTypes;
 
 export default injectIntl(VCStatus);
+// reviewed on 7/14/2016

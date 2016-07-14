@@ -70,7 +70,6 @@ class TagMenu extends VertoBaseComponent {
     return (styles[styleName]);
   }
 
-
   toggleMenu() {
     if (this.props.allowDisplayDetails) {
       this.props.cbClick();
@@ -85,7 +84,6 @@ class TagMenu extends VertoBaseComponent {
   }
   render() {
     const menuContainer = (
-
       <div className="menuContainer" style={this.getStyle('menu')} >
         {this.props.children}
       </div>
@@ -109,3 +107,4 @@ class TagMenu extends VertoBaseComponent {
 TagMenu.propTypes = propTypes;
 TagMenu.defaultProps = defaultProps;
 export default TagMenu;
+// reviewed on 7/14/2016

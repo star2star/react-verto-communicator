@@ -5,7 +5,7 @@ SettingsIconSVG,
 CaretUpIconSVG,
 CaretDownIconSVG } from './svgIcons';
 import ToolTip from './tooltip';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { injectIntl } from 'react-intl';
 
 const propTypes = {
   cbDeviceList: React.PropTypes.func,
@@ -75,14 +75,14 @@ class Settings extends VertoBaseComponent {
 
   render() {
     const { formatMessage } = this.props.intl;
+    let theMsg;
     if(this.props.status == "disconnected"){
-      var theMsg = formatMessage({"id":"SETTINGS_LOGIN", "defaultMessage":"Login to change settings"});
+      theMsg = formatMessage({"id":"SETTINGS_LOGIN", "defaultMessage":"Login to change settings"});
     }else{
-      var theMsg = formatMessage({"id":"SETTINGS", "defaultMessage":"settings"});
+      theMsg = formatMessage({"id":"SETTINGS", "defaultMessage":"settings"});
     }
     // console.log('settings render props: ', this.props.settingsData);
     return (
-
       <div  style={this.getStyle("container")}>
         <span onClick={this.showMenu.bind(this)}  >
           <ToolTip name="settings" place={this.props.ttPosition} msg={theMsg} custStyle={{base: {marginTop:'10px'}}}>
@@ -99,6 +99,8 @@ class Settings extends VertoBaseComponent {
 
 Settings.propTypes = propTypes;
 Settings.defaultProps = defaultProps;
+
 export default injectIntl(Settings, {
         withRef: true
     });
+// reviewed on 7/14/2016
