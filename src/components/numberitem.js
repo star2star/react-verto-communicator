@@ -1,6 +1,6 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
-import SvgIcons from './svgIcons';
+//import SvgIcons from './svgIcons';
 import Radium from 'radium';
 
 const propTypes = {
@@ -18,18 +18,10 @@ class NumberItem extends VertoBaseComponent {
 
     this.numberClicked = this.numberClicked.bind(this);
   }
-  numberClicked(e){
-    this.props.cbClick(this.props.keyValue);
-    //this.props.cbKeyPress(this.props.keyValue);
-  }
 
-  // numberEntered(e){
-  //   if(e.which == 13 || e.keyCode == 13 && this.state.onFocus) {
-  //     //console.log('key press', this.props.keyValue);
-  //     this.props.cbKeyPress(this.props.keyValue);
-  //     return false;
-  //   }
-  // }
+  numberClicked(){
+    this.props.cbClick(this.props.keyValue);
+  }
 
   getCompStyle() {
     return this.props.compStyle;
@@ -96,4 +88,7 @@ class NumberItem extends VertoBaseComponent {
   }
 }
 
+NumberItem.propTypes = propTypes;
+
 export default Radium(NumberItem);
+// reviewed on 7/14/2016
