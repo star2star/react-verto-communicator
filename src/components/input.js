@@ -13,7 +13,7 @@ const propTypes = {
 class Input extends VertoBaseComponent {
   constructor(props) {
     super(props);
-    this.state = { 'onFocus' : false };
+    this.state = { 'onFocus' : false, isEmpty: true };
 }
 
   getCompStyle() {
@@ -31,7 +31,8 @@ class Input extends VertoBaseComponent {
       label: {
         paddingBottom: '15px',
         fontWeight: '700',
-        fontSize: '14px'
+        fontSize: '14px',
+        color: this.props.value == '' ? '#f44336' : '#000'
       },
       inputArea: {
         paddingBottom: '3px',
@@ -64,7 +65,7 @@ class Input extends VertoBaseComponent {
         content: '" "',
         height: '3px',
         position: 'absolute',
-        backgroundColor: '#009688',
+        backgroundColor: this.props.value == '' ? '#f44336' : '#009688',
         transition : this.state.onFocus ? 'left 1s' : 'left 0s',
         left: this.state.onFocus ?  '0%' : '50%',
         right: '50%'
@@ -73,7 +74,7 @@ class Input extends VertoBaseComponent {
         content: '" "',
         height: '3px',
         position: 'absolute',
-        backgroundColor: '#009688',
+        backgroundColor: this.props.value == '' ? '#f44336' : '#009688' ,
         transition : this.state.onFocus ? 'right 1s' : 'right 0s',
         right: this.state.onFocus ?  '0%' : '50%',
         left: '50%'
@@ -88,7 +89,9 @@ class Input extends VertoBaseComponent {
 
     return (
       <div style={{...this.getStyle('fieldset')}}>
-        <div style={{...this.getStyle('label')}}>{this.props.label}</div>
+        <div style={{...this.getStyle('label')}}>
+          {this.props.label}
+        </div>
         <div>
           <input
               tabIndex="0"
@@ -98,11 +101,9 @@ class Input extends VertoBaseComponent {
               style={{...this.getStyle('inputArea') }}
               onBlur={()=>{
                 this.setState({...this.state, 'onFocus': false });
-                //console.log('LOSING FOCUS', this.state.onFocus);
             }}
               onFocus={()=>{
                 this.setState({...this.state,'onFocus': true});
-                //console.log('GETTING FOCUSED', this.state.onFocus);
             }}
               onChange={
               (e) =>{
