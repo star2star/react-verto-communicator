@@ -25,6 +25,10 @@ class AlertItem extends VertoBaseComponent {
     }, 5000);
   }
 
+  componentWillUnmount() {
+    clearTimeout(this.alertTimeout);
+  }
+
   handleDismissClick() {
     clearTimeout(this.alertTimeout);
     this.props.cbDismissAlert(this.props.alertData.id);

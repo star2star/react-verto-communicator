@@ -10,7 +10,7 @@ const propTypes = {
   cbStop : React.PropTypes.func.isRequired,
   cbRecord : React.PropTypes.func.isRequired,
   cbStopRecord : React.PropTypes.func.isRequired,
-  cbSnapshot : React.PropTypes.func.isRequired,
+  cbSnapshot : React.PropTypes.func, // not currently supported
   cbSetVideoMode : React.PropTypes.func.isRequired,
   currLayout: React.PropTypes.array,
   layouts: React.PropTypes.array

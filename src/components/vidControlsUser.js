@@ -3,7 +3,7 @@ import VertoBaseComponent from './vertobasecomponent';
 import ControlItem from './controlItem';
 import Badge from './badge';
 import ToolTip from './tooltip';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { injectIntl } from 'react-intl';
 
 const propTypes = {
   cbMicMute : React.PropTypes.func.isRequired,
@@ -62,11 +62,7 @@ export default class UserVideoControls extends VertoBaseComponent {
       }
     };
 
-    let styleReturn = styles[styleName];
-      if(this.props.style && this.props.style[styleName]) {
-        styleReturn = {...styleReturn, ...this.props.style[styleName]};
-      }
-    return styleReturn;
+    return styles[styleName];
   }
 
   handleToggleFullScreen() {
@@ -108,42 +104,42 @@ export default class UserVideoControls extends VertoBaseComponent {
     const micStatus = this.props.userConfStatus && this.props.userConfStatus.audio.muted ?
             (<ToolTip name="unmutemic" place='top' msg={unMuteMsg}>
               <ControlItem type="MuteMicrophoneIconSVG"
-                compStyle={this.getStyle("controlIconStyle")}
-                cbActionClick={this.props.cbMicMute}
+                  compStyle={this.getStyle("controlIconStyle")}
+                  cbActionClick={this.props.cbMicMute}
               />
             </ToolTip>) :
             (<ToolTip name="mutemic" place='top' msg={muteMsg}>
               <ControlItem type="MicrophoneIconSVG"
-                compStyle={this.getStyle("controlIconStyle")}
-                cbActionClick={this.props.cbMicMute}
+                  compStyle={this.getStyle("controlIconStyle")}
+                  cbActionClick={this.props.cbMicMute}
               />
             </ToolTip>);
 
     const videoStatus = this.props.userConfStatus && this.props.userConfStatus.video.muted ?
             (<ToolTip name="unmutemic" place='top' msg={unMuteMsg}>
               <ControlItem type="MuteVideoIconSVG"
-                compStyle={this.getStyle("controlIconStyle")}
-                cbActionClick={this.props.cbVideoMute}
+                  compStyle={this.getStyle("controlIconStyle")}
+                  cbActionClick={this.props.cbVideoMute}
               />
              </ToolTip>) :
             (<ToolTip name="unmutemic" place='top' msg={muteMsg}>
               <ControlItem type="VideoIconSVG"
-                compStyle={this.getStyle("controlIconStyle")}
-                cbActionClick={this.props.cbVideoMute}
+                  compStyle={this.getStyle("controlIconStyle")}
+                  cbActionClick={this.props.cbVideoMute}
               />
             </ToolTip> );
 
     const screenStatus = document.webkitIsFullScreen || document.mozFulScreen ?
             (<ToolTip name="fullscreen" place='top' msg={fullscreenMsg}>
               <ControlItem type="RestoreIconSVG"
-                compStyle={this.getStyle("controlIconStyle")}
-                cbActionClick={this.handleToggleFullScreen}
+                  compStyle={this.getStyle("controlIconStyle")}
+                  cbActionClick={this.handleToggleFullScreen}
               />
             </ToolTip>) :
             (<ToolTip name="fullscreen" place='top' msg={fullscreenMsg}>
               <ControlItem type="FullScreenIconSVG"
-                compStyle={this.getStyle("controlIconStyle")}
-                cbActionClick={this.handleToggleFullScreen}
+                  compStyle={this.getStyle("controlIconStyle")}
+                  cbActionClick={this.handleToggleFullScreen}
               />
             </ToolTip>);
 
@@ -167,8 +163,6 @@ export default class UserVideoControls extends VertoBaseComponent {
       </span>
     );
 
-
-    //TODO look at the issue causing the tooltips to be all weird
     // Build out the user controls
     return (
       <div style={this.getStyle('controlsStyle')}>
@@ -190,3 +184,4 @@ export default class UserVideoControls extends VertoBaseComponent {
 
 UserVideoControls.propTypes = propTypes;
 export default injectIntl(UserVideoControls);
+// reviewed on 7/15/2016

@@ -3,7 +3,7 @@ import { Tooltip, Origin } from 'redux-tooltip';
 import VertoBaseComponent from './vertobasecomponent';
 
 const propTypes = {
-  auto: React.PropTypes.boolean,
+  auto: React.PropTypes.bool,
   place: React.PropTypes.string.isRequired,
   name: React.PropTypes.string.isRequired,
   msg: React.PropTypes.oneOfType([

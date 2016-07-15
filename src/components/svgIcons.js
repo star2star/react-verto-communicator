@@ -38,6 +38,7 @@ class NotificationsNoneIconSVG extends React.Component {
   }
 }
 NotificationsNoneIconSVG.propTypes = propTypes;
+
 // Notifications icon
 
 class NotificationsIconSVG extends React.Component {
@@ -53,6 +54,7 @@ class NotificationsIconSVG extends React.Component {
   }
 }
 NotificationsIconSVG.propTypes = propTypes;
+
 // Favorited icon
 
 class FavoritedIconSVG extends React.Component {
@@ -68,6 +70,7 @@ class FavoritedIconSVG extends React.Component {
   }
 }
 FavoritedIconSVG.propTypes = propTypes;
+
 // Caret up icon
 
 class CaretUpIconSVG extends React.Component {
@@ -83,6 +86,7 @@ class CaretUpIconSVG extends React.Component {
   }
 }
 CaretUpIconSVG.propTypes = propTypes;
+
 // Caret down icon
 
 class CaretDownIconSVG extends React.Component {
@@ -98,6 +102,7 @@ class CaretDownIconSVG extends React.Component {
   }
 }
 CaretDownIconSVG.propTypes = propTypes;
+
 // Chat icon
 
 class ChatIconSVG extends React.Component {
@@ -113,6 +118,7 @@ class ChatIconSVG extends React.Component {
   }
 }
 ChatIconSVG.propTypes = propTypes;
+
 // Avatar icon
 
 class AvatarSVG extends React.Component {
@@ -128,6 +134,7 @@ class AvatarSVG extends React.Component {
   }
 }
 AvatarSVG.propTypes = propTypes;
+
 // Shoebox icon
 
 class ShoeboxIconSVG extends React.Component {
@@ -511,7 +518,7 @@ class BackArrowIconSVG extends React.Component {
     );
   }
 }
-
+BackArrowIconSVG.propTypes = propTypes;
 
 // Up Arrow icon
 
@@ -527,6 +534,7 @@ class UpArrowIconSVG extends React.Component {
     );
   }
 }
+UpArrowIconSVG.propTypes = propTypes;
 
 // Down Arrow icon
 
@@ -542,6 +550,7 @@ class DownArrowIconSVG extends React.Component {
     );
   }
 }
+DownArrowIconSVG.propTypes = propTypes;
 
 // Detail icon
 
@@ -557,6 +566,7 @@ class DetailIconSVG extends React.Component {
     );
   }
 }
+DetailIconSVG.propTypes = propTypes;
 
 // Signal None icon
 
@@ -572,6 +582,7 @@ class SignalNoneIconSVG extends React.Component {
     );
   }
 }
+SignalNoneIconSVG.propTypes = propTypes;
 
 // Signal Low icon
 
@@ -589,6 +600,7 @@ class SignalLowIconSVG extends React.Component {
     );
   }
 }
+SignalLowIconSVG.propTypes = propTypes;
 
 // Signal Medium icon
 
@@ -605,6 +617,7 @@ class SignalMediumIconSVG extends React.Component {
     );
   }
 }
+SignalMediumIconSVG.propTypes = propTypes;
 
 // Signal Full icon
 
@@ -622,6 +635,7 @@ class SignalFullIconSVG extends React.Component {
     );
   }
 }
+SignalFullIconSVG.propTypes = propTypes;
 
 // Edge Browser icon
 
@@ -637,6 +651,7 @@ class EdgeBrowserIconSVG extends React.Component {
     );
   }
 }
+EdgeBrowserIconSVG.propTypes = propTypes;
 
 // Chrome Browser icon
 
@@ -652,6 +667,7 @@ class ChromeBrowserIconSVG extends React.Component {
     );
   }
 }
+ChromeBrowserIconSVG.propTypes = propTypes;
 
 // FireFox Browser icon
 
@@ -667,6 +683,7 @@ class FireFoxBrowserIconSVG extends React.Component {
     );
   }
 }
+FireFoxBrowserIconSVG.propTypes = propTypes;
 
 // Opera Browser icon
 
@@ -682,6 +699,7 @@ class OperaBrowserIconSVG extends React.Component {
     );
   }
 }
+OperaBrowserIconSVG.propTypes = propTypes;
 
 // Dialpad Icon
 
@@ -697,6 +715,7 @@ class DialPadIconSVG extends React.Component {
     );
   }
 }
+DialPadIconSVG.propTypes = propTypes;
 
 // Pause Icon
 
@@ -712,6 +731,7 @@ class PauseIconSVG extends React.Component {
     );
   }
 }
+PauseIconSVG.propTypes = propTypes;
 
 //  Microphone Icon
 
@@ -727,6 +747,7 @@ class MicrophoneIconSVG extends React.Component {
     );
   }
 }
+MicrophoneIconSVG.propTypes = propTypes;
 
 //  Mute Microphone Icon
 
@@ -742,6 +763,7 @@ class MuteMicrophoneIconSVG extends React.Component {
     );
   }
 }
+MuteMicrophoneIconSVG.propTypes = propTypes;
 
 //  Phone Icon
 
@@ -757,6 +779,7 @@ class PhoneIconSVG extends React.Component {
     );
   }
 }
+PhoneIconSVG.propTypes = propTypes;
 
 // Call History Icon
 
@@ -772,6 +795,7 @@ class CallHistoryIconSVG extends React.Component {
 		);
 	}
 }
+CallHistoryIconSVG.propTypes = propTypes;
 
 // Video Icon
 
@@ -787,6 +811,7 @@ class VideoIconSVG extends React.Component {
 		);
 	}
 }
+VideoIconSVG.propTypes = propTypes;
 
 // Mute Video Icon
 
@@ -802,6 +827,7 @@ class MuteVideoIconSVG extends React.Component {
 		);
 	}
 }
+MuteVideoIconSVG.propTypes = propTypes;
 
 // Share Screen Icon
 
@@ -812,9 +838,10 @@ class ShareScreenIconSVG extends React.Component {
 			<ContainerIconSVG svgStyle={this.props.svgStyle}>
 			<path d="M13.0611125,14.0703125 L16.4204875,10.9453125 L13.0611125,7.8203125 L13.0611125,9.6171875 C10.3267238,10.0078145 8.66007382,11.6354023 8.06111249,14.5 C9.18090976,12.9895758 10.8475598,12.234375 13.0611125,12.234375 L13.0611125,14.0703125 Z M18.9204875,17 L22.2408,17 L22.2408,18.6796875 L2.24079999,18.6796875 L2.24079999,17 L5.56111249,17 C5.09236015,17 4.70173906,16.8372412 4.38923749,16.5117188 C4.07673593,16.1861963 3.92048749,15.7890648 3.92048749,15.3203125 L3.92048749,7 C3.92048749,6.53124766 4.07673593,6.13411621 4.38923749,5.80859375 C4.70173906,5.48307129 5.09236015,5.3203125 5.56111249,5.3203125 L18.9204875,5.3203125 C19.363198,5.3203125 19.7473088,5.48307129 20.0728312,5.80859375 C20.3983537,6.13411621 20.5611125,6.53124766 20.5611125,7 L20.5611125,15.3203125 C20.5611125,15.763023 20.3983537,16.1536441 20.0728312,16.4921875 C19.7473088,16.8307309 19.363198,17 18.9204875,17 L18.9204875,17 Z"></path>
 			</ContainerIconSVG>
-		)
+		);
 	}
 }
+ShareScreenIconSVG.propTypes = propTypes;
 
 // Full Screen Icon
 
@@ -830,6 +857,7 @@ class FullScreenIconSVG extends React.Component {
 		);
 	}
 }
+FullScreenIconSVG.propTypes = propTypes;
 
 //  Audio Settings Icon
 
@@ -847,6 +875,7 @@ class AudioSettingsIconSVG extends React.Component {
 		);
 	}
 }
+AudioSettingsIconSVG.propTypes = propTypes;
 
 //  Volume Up Icon
 
@@ -862,6 +891,7 @@ class VolumeUpIconSVG extends React.Component {
 		);
 	}
 }
+VolumeUpIconSVG.propTypes = propTypes;
 
 //  Volume Down Icon
 
@@ -877,7 +907,7 @@ class VolumeDownIconSVG extends React.Component {
 		);
 	}
 }
-
+VolumeDownIconSVG.propTypes = propTypes;
 
 // Kick Icon
 
@@ -901,12 +931,12 @@ class PresenterIconSVG extends React.Component {
 
 	render() {
     return (
-    <ContainerIconSVG svgStyle={this.props.svgStyle}>
-      <title>{this.props.title}</title>
-      <desc>{this.props.description}</desc>
-      <path d="M19.3560768,3 C21.1187011,4.81893914 22,6.9246794 22,9.31728395 C22,11.7098885 21.1187011,13.7736539 19.3560768,15.508642 L17.8635394,14.0814815 C19.1144341,12.6543139 19.7398721,11.024289 19.7398721,9.19135802 C19.7398721,7.35842705 19.1144341,5.77037709 17.8635394,4.42716049 L19.3560768,3 Z M16.3710021,5.98024691 C17.2807437,6.95967568 17.7356077,8.06501442 17.7356077,9.2962963 C17.7356077,10.5275782 17.2807437,11.590942 16.3710021,12.4864198 L14.8358209,10.9753086 C15.2338328,10.4436187 15.4328358,9.86296611 15.4328358,9.23333333 C15.4328358,8.60370056 15.2338328,8.02304793 14.8358209,7.49135802 L16.3710021,5.98024691 Z M9.29211087,14.6271605 C10.8272998,14.6271605 12.4264309,14.9559638 14.0895522,15.6135802 C15.7526736,16.2711967 16.5842217,17.1316819 16.5842217,18.1950617 L16.5842217,20 L2,20 L2,18.1950617 C2,17.1316819 2.83154819,16.2711967 4.49466951,15.6135802 C6.15779083,14.9559638 7.75692196,14.6271605 9.29211087,14.6271605 L9.29211087,14.6271605 Z M5.6673774,9.25432099 C5.6673774,8.27489222 6.02273987,7.43539444 6.73347548,6.73580247 C7.44421109,6.03621049 8.29708102,5.68641975 9.29211087,5.68641975 C10.2871407,5.68641975 11.1400107,6.03621049 11.8507463,6.73580247 C12.5614819,7.43539444 12.9168443,8.27489222 12.9168443,9.25432099 C12.9168443,10.2337498 12.5614819,11.0732475 11.8507463,11.7728395 C11.1400107,12.4724315 10.2871407,12.8222222 9.29211087,12.8222222 C8.29708102,12.8222222 7.44421109,12.4724315 6.73347548,11.7728395 C6.02273987,11.0732475 5.6673774,10.2337498 5.6673774,9.25432099 L5.6673774,9.25432099 Z"></path>
-		</ContainerIconSVG>
-  );
+      <ContainerIconSVG svgStyle={this.props.svgStyle}>
+        <title>{this.props.title}</title>
+        <desc>{this.props.description}</desc>
+        <path d="M19.3560768,3 C21.1187011,4.81893914 22,6.9246794 22,9.31728395 C22,11.7098885 21.1187011,13.7736539 19.3560768,15.508642 L17.8635394,14.0814815 C19.1144341,12.6543139 19.7398721,11.024289 19.7398721,9.19135802 C19.7398721,7.35842705 19.1144341,5.77037709 17.8635394,4.42716049 L19.3560768,3 Z M16.3710021,5.98024691 C17.2807437,6.95967568 17.7356077,8.06501442 17.7356077,9.2962963 C17.7356077,10.5275782 17.2807437,11.590942 16.3710021,12.4864198 L14.8358209,10.9753086 C15.2338328,10.4436187 15.4328358,9.86296611 15.4328358,9.23333333 C15.4328358,8.60370056 15.2338328,8.02304793 14.8358209,7.49135802 L16.3710021,5.98024691 Z M9.29211087,14.6271605 C10.8272998,14.6271605 12.4264309,14.9559638 14.0895522,15.6135802 C15.7526736,16.2711967 16.5842217,17.1316819 16.5842217,18.1950617 L16.5842217,20 L2,20 L2,18.1950617 C2,17.1316819 2.83154819,16.2711967 4.49466951,15.6135802 C6.15779083,14.9559638 7.75692196,14.6271605 9.29211087,14.6271605 L9.29211087,14.6271605 Z M5.6673774,9.25432099 C5.6673774,8.27489222 6.02273987,7.43539444 6.73347548,6.73580247 C7.44421109,6.03621049 8.29708102,5.68641975 9.29211087,5.68641975 C10.2871407,5.68641975 11.1400107,6.03621049 11.8507463,6.73580247 C12.5614819,7.43539444 12.9168443,8.27489222 12.9168443,9.25432099 C12.9168443,10.2337498 12.5614819,11.0732475 11.8507463,11.7728395 C11.1400107,12.4724315 10.2871407,12.8222222 9.29211087,12.8222222 C8.29708102,12.8222222 7.44421109,12.4724315 6.73347548,11.7728395 C6.02273987,11.0732475 5.6673774,10.2337498 5.6673774,9.25432099 L5.6673774,9.25432099 Z"></path>
+  		</ContainerIconSVG>
+    );
   }
 }
 PresenterIconSVG.propTypes = propTypes;
@@ -925,6 +955,7 @@ class SnapshotIconSVG extends React.Component {
     );
   }
 }
+SnapshotIconSVG.propTypes = propTypes;
 
 // Video Mode icon
 
@@ -940,6 +971,7 @@ class VideoModeIconSVG extends React.Component {
     );
   }
 }
+VideoModeIconSVG.propTypes = propTypes;
 
 // Verto Logo
 
@@ -955,6 +987,7 @@ class VertoLogoSVG extends React.Component {
 		);
 	}
 }
+VertoLogoSVG.propTypes = propTypes;
 
 // Roswell
 
@@ -970,6 +1003,7 @@ class RoswellSVG extends React.Component {
 		);
 	}
 }
+RoswellSVG.propTypes = propTypes;
 
 // Next svg icon
 
@@ -985,6 +1019,7 @@ class NextIconSVG extends React.Component {
 		);
 	}
 }
+NextIconSVG.propTypes = propTypes;
 
 // Previous svg icon
 
@@ -1000,6 +1035,7 @@ class PreviousIconSVG extends React.Component {
 		);
 	}
 }
+PreviousIconSVG.propTypes = propTypes;
 
 // Set svg icon (check mark)
 
@@ -1015,6 +1051,7 @@ class SetIconSVG extends React.Component {
 		);
 	}
 }
+SetIconSVG.propTypes = propTypes;
 
 // Lock svg icon
 
@@ -1030,8 +1067,7 @@ class LockIconSVG extends React.Component {
 		);
 	}
 }
-
-
+LockIconSVG.propTypes = propTypes;
 
 export {
 NotificationsNoneIconSVG,

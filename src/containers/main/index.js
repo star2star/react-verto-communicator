@@ -3,10 +3,10 @@ import VertoBaseComponent from '../../components/vertobasecomponent';
 import Radium from 'radium';
 import { connect } from 'react-redux';
 //import ReactTooltip from 'react-tooltip';
-import VCStatus from '../../components/vcstatus';
+//import VCStatus from '../../components/vcstatus';
 import {
     doSubmitLogin,
-    doSubmitLogOut,
+    //doSubmitLogOut,
     doMakeCall,
     doSendChat,
     doHangUp,
@@ -26,9 +26,9 @@ import CallProgress from '../../components/callprogress';
 import Dialing from '../../components/dialing';
 import IncomingCall from '../../components/incomingcall';
 import ChatSession from '../../components/chatSession';
-import Memberlist from '../../components/memberlist';
+import Memberlist from '../../components/memberList';
 import TabbedContainer from '../../components/tabbedContainer';
-import AlertService from '../../js/alertService';
+//import AlertService from '../../js/alertService';
 import AlertList from '../../components/alertList';
 
 class Main extends VertoBaseComponent {
@@ -197,6 +197,7 @@ class Main extends VertoBaseComponent {
             break;
         }
         break;
+
       case 'login':
       case 'logout':
         loggedInfo = (
@@ -207,15 +208,18 @@ class Main extends VertoBaseComponent {
             }} settings={this.props.auth.loginSettings} />
         </div>);
         break;
+
       case 'resolution_refresh':
         loggedInfo = (<div >Resolution Refresh .... in progress</div>);
         break;
+
       case 'loggedIn':
         loggedInfo = (
           <div style={this.getStyle("loggedInOutStyles")}>
             <Dialpad cbCall={this.makeCall} cbClearHistory={this.handleClearHistory} lastNumber={this.props.callInfo.lastNumber} nbrToDial="" />
         </div>);
         break;
+
       case 'resolution_failed':
         splashObject.title = formatMessage({"id":"CHECK_RESOLUTION", "defaultMessage":"Checking resolution."});
         splashObject.errorObject = {
@@ -223,6 +227,7 @@ class Main extends VertoBaseComponent {
           body: formatMessage({"id":"ERROR_PERMISSION_MEDIA", "defaultMessage":"Error: internal error checking resolution"})
         };
         break;
+
       case 'bns':
         //console.log('BBBNNNNSSSS', this.props.auth);
         splashObject.title = formatMessage({"id":"BROWSER_COMPATIBILITY", "defaultMessage":"Checking browser compatibility."});
@@ -231,6 +236,7 @@ class Main extends VertoBaseComponent {
           body: formatMessage({"id":"BROWSER_WITHOUT_WEBRTC", "defaultMessage":"Error: browser doesn't support WebRTC"})
         };
         break;
+
       case 'noMedia':
         splashObject.title = formatMessage({"id":"CHECK_PERMISSION_MEDIA", "defaultMessage":"Checking media permissions"});
         splashObject.errorObject = {
@@ -238,6 +244,7 @@ class Main extends VertoBaseComponent {
           body: formatMessage({"id":"ERROR_PERMISSION_MEDIA", "defaultMessage":"Error: Media Permission Denied"})
         };
         break;
+
       case 'dialing':
         loggedInfo = (
             <div style={this.getStyle("dialingStyle")}>
@@ -305,9 +312,6 @@ class Main extends VertoBaseComponent {
               </div>
             );
 
-          // } // end if confData
-          // setup chat/memberlist here
-
           // Show chat sidebar only if confData has a value
           //console.log('#### conf data', confData);
 
@@ -352,7 +356,9 @@ class Main extends VertoBaseComponent {
       default:
         break;
     }
+
     let showSplash;
+
     if (this.props.auth.splash && this.props.auth.splash.current != this.props.auth.splash.number) {
       const intlTitle = formatMessage({"id": "LOADING", "defaultMessage": "Loading"});
       showSplash = (<Splash step={splashObject} title={intlTitle} style={this.getStyle('showSplashStyle')}/>);
@@ -369,7 +375,6 @@ class Main extends VertoBaseComponent {
         </div>
         {chatSideBar}
       </div>
-
     );
   }
 }
@@ -383,3 +388,4 @@ export default connect((state)=>{
     chatMsgCount: state.callInfo.currentCallId && state.callInfo.activeCalls[state.callInfo.currentCallId].conferenceData ? state.callInfo.activeCalls[state.callInfo.currentCallId].conferenceData.messages.length : undefined
   });
 })(injectIntl(Radium(Main)));
+// reviewed on 7/15/2016
