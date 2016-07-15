@@ -4,7 +4,7 @@ import Radium from 'radium';
 import { connect } from 'react-redux';
 import WhiteLabel from '../../js/whitelabel.js';
 import VCStatus from '../../components/vcstatus';
-import NetworkStatusIndicator from '../../components/nsindicator';
+import NetworkStatusIndicator from '../../components/nsIndicator';
 import UserMenu from '../../components/userMenu';
 import MenuItem from '../../components/menuItem';
 import TagMenu from '../../components/tagMenu';

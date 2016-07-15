@@ -26,7 +26,7 @@ import CallProgress from '../../components/callprogress';
 import Dialing from '../../components/dialing';
 import IncomingCall from '../../components/incomingcall';
 import ChatSession from '../../components/chatSession';
-import Memberlist from '../../components/memberlist';
+import Memberlist from '../../components/memberList';
 import TabbedContainer from '../../components/tabbedContainer';
 //import AlertService from '../../js/alertService';
 import AlertList from '../../components/alertList';
