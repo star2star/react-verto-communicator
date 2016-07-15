@@ -18,8 +18,8 @@ const doValidation = (step=1) => {
         return dispatch(doShowLogin());
     }
 
-  }
-}
+  };
+};
 
 const doingValidation = (step, title, number, errorObject) => {
   return {
@@ -30,8 +30,8 @@ const doingValidation = (step, title, number, errorObject) => {
       number: number,
       errorObject
     }
-  }
-}
+  };
+};
 
 // browser
 const doBrowserCheck = () => {
@@ -47,9 +47,8 @@ const doBrowserCheck = () => {
     } else {
       dispatch(doValidation(2));
     }
-
-  }
-}
+  };
+};
 
 // media permissions
 const doMediaCheck = () => {
@@ -63,9 +62,8 @@ const doMediaCheck = () => {
         } else {
           dispatch(doValidation(3));
         }
-
     });
-  }
+  };
 };
 
 // resolution
@@ -84,9 +82,8 @@ const doResolutionRefresh = () => {
           "type": "RESOLUTION_FAILED"
         });
       }
-
     });
-  }
+  };
 };
 
 const doSpeedTest = () => {
@@ -95,9 +92,9 @@ const doSpeedTest = () => {
     VertoService.speedTest((data)=>{
       //console.log('doing speed test : ', data);
       //TODO
-      dispatch(doSpeedTestResults(data))
+      dispatch(doSpeedTestResults(data));
     });
-  }
+  };
 };
 
 const doSpeedTestResults = (data) => {
@@ -110,20 +107,20 @@ const doSpeedTestResults = (data) => {
     "type": "SPEED_TEST",
     "data": bw,
     'videoQuality': VertoService.getInstanceData().videoQuality
-  }
+  };
 };
 
 const doingSpeedTest = () => {
   return {
     "type": "SPEED_TEST_INPROGRESS"
-  }
+  };
 };
 
 const doingResolutionRefresh = () => {
   // rendering login through navigation
   return {
     "type": "RESOLUTION_REFRESH"
-  }
+  };
 };
 //LOGIN
 const doShowLogin = () => {
@@ -140,17 +137,13 @@ const doShowLogin = () => {
     } catch(e){
       console.log('eeee', e);
     }
-
-
-
     // dispatch(doingSpeedTest());
     // VertoService.speedTest((data)=>{
     //   //console.log('doing speed test : ', data);
     //   //TODO
     //   dispatch(doSpeedTestResults(data))
     // });
-  }
-
+  };
 };
 // called by click
 const doSubmitLogin = (data) => {
@@ -174,29 +167,29 @@ const doVertoLogin = (success, data) => {
         type: "LOGIN_FAILED"
       });
     }
+  };
+};
 
-
-  }
-}
 const doVertoLoginValid = (data) => {
   return {
     "type": "VERTO_LOGIN",
     "data": data
   };
-}
+};
+
 const doingLogin = (data) => {
   return {
     type: "AUTH_SUBMIT_LOGIN",
     data: data
-  }
-}
+  };
+};
 
 // logOUT
 // called from verto
 const doLogOut = () => {
   return {
     "type": "LOGOUT"
-  }
+  };
 };
 // called by client actions
 const doSubmitLogOut = () =>{
@@ -217,8 +210,9 @@ const doIncomingCall = (dialog) =>{
       type: "INCOMING_CALL",
       data: dialog
     });
-  }
-}
+  };
+};
+
 const doMakeCall = (aPhoneNumber, appSettings) => {
   return dispatch => {
 
@@ -226,9 +220,9 @@ const doMakeCall = (aPhoneNumber, appSettings) => {
     dispatch(doingMakeCall('trying', aPhoneNumber, callID));
   };
 };
+
 const doShareScreen = (appSettings) => {
   return dispatch => {
-
     VertoService.getInstance().shareScreen(appSettings);
     dispatch({
       "type": "ATTEMPTING_SHARING_SCREEN"
@@ -239,82 +233,89 @@ const doShareScreen = (appSettings) => {
 const doHangUp = (callId) => {
   return dispatch =>{
     VertoService.getInstance().hangup(callId);
-  }
-}
+  };
+};
+
 const doHold = (callId) => {
   return dispatch =>{
     VertoService.getInstance().hold(callId);
-  }
-}
+  };
+};
+
 const doMuteMic = (callId) => {
   return dispatch =>{
     VertoService.getInstance().muteMic(callId);
-  }
-}
+  };
+};
 
 const doMuteVideo = (callId) => {
   return dispatch =>{
     VertoService.getInstance().muteVideo(callId);
-  }
-}
+  };
+};
 
 const doSendConfCommand = (cmd, params) => {
   return dispatch =>{
     VertoService.getInstance().sendConferenceCommand(cmd, params);
-  }
-}
+  };
+};
 
 const doConferenceData = (confData) =>{
   return {
     "type": "CONFERENCE_DATA",
     "data": confData
-  }
-}
+  };
+};
 
 const doAnswer = (callId) => {
   return dispatch =>{
     VertoService.getInstance().answer(callId);
-  }
-}
+  };
+};
+
 const doHungUp = (dialog) =>{
   return {
     "type": "CALL_HUNG_UP",
     "data": dialog
-  }
+  };
 };
+
 const doMakeCallError = (aErrorObject) =>{
   return {
     "type": "CALLING_ERROR",
     "data": aErrorObject
-  }
-}
+  };
+};
+
 const doingMakeCall = (status, dest, callId, direction) => {
   //console.log('doingMakeCall', dialog);
   return {
     "type": "CALLING",
     "data": {status: status, destination: dest, callId: callId, direction: direction}
-  }
+  };
 };
+
 const doCallHeld = (callID) =>{
   return {
     "type": "CALL_HELD",
     "data": callID
-  }
+  };
 };
 
 const doUpdateSettings = (aData) => {
   return {
     "type": "SETTINGS_UPDATE",
     "data": aData
-  }
-}
+  };
+};
+
 const doSendChat = (message) => {
   return dispatch => {
 
     VertoService.getInstance().sendConferenceChat(message);
     dispatch(doingSendingChat());
   };
-}
+};
 
 const doReceiveChat = (messageObject) => {
   return dispatch =>{
@@ -323,14 +324,14 @@ const doReceiveChat = (messageObject) => {
       type: 'RECEIVED_CHAT_MESSAGE',
       data: messageObject
     });
-  }
-}
+  };
+};
 
 const doingSendingChat = () => {
   return {
     type: 'SENDING_CHAT_MESSAGE'
-  }
-}
+  };
+};
 
 const doClearHistory = () => {
   return dispatch =>{
@@ -345,3 +346,4 @@ export { doValidation, doBrowserCheck,
   doMakeCall, doMakeCallError, doIncomingCall, doSpeedTest, doShareScreen,
   doingMakeCall, doHungUp, doHangUp, doAnswer, doMuteMic, doConferenceData, doHold, doMuteVideo, doCallHeld,
   doSendChat, doReceiveChat, doingSendingChat,doSendConfCommand, doClearHistory };
+// reviewed on
