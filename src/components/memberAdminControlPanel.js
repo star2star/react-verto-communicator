@@ -17,9 +17,7 @@ export default class AdminControls extends VertoBaseComponent {
     this.state = {};
   }
 
-  getCompStyle() {
-    return this.props.compStyle;
-  }
+ 
 
   getDefaultStyle(styleName) {
     const styles = {

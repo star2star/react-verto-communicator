@@ -36,9 +36,7 @@ class SettingsMenuSelect extends VertoBaseComponent {
   this.props.cbSubmitSetting(selObj);
 }
 
-  getCompStyle() {
-    return this.props.compStyle;
-  }
+ 
 
   getDefaultStyle(styleName) {
     const styles = {

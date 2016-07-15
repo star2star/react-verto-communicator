@@ -25,10 +25,7 @@ class TagMenu extends VertoBaseComponent {
     TagMenu.closeMenu = this.closeMenu.bind(this);
   }
 
-  getCompStyle() {
-    return this.props.compStyle;
-  }
-
+ 
   getDefaultStyle(styleName) {
     const styles = {
       container: {

@@ -12,10 +12,7 @@ class VolumeMeter extends VertoBaseComponent{
   constructor(props) {
     super(props);
   }
-
-  getCompStyle() {
-    return this.props.compStyle;
-  }
+ 
 
   getDefaultStyle(styleName) {
     const styles = {

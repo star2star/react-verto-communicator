@@ -24,9 +24,7 @@ class App extends VertoBaseComponent {
     this.setState({ ...this.state, isModalOpen: !this.state.isModalOpen });
   }
 
-  getCompStyle() {
-    return this.props.compStyle;
-  }
+
 
   getDefaultStyle(styleName) {
     const styles = {

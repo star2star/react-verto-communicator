@@ -17,9 +17,7 @@ class Numberpad extends VertoBaseComponent {
   numberClicked(k){
     this.props.cbClick(k);
   }
-  getCompStyle() {
-    return this.props.compStyle;
-  }
+ 
 
   getDefaultStyle(styleName) {
     const styles = {

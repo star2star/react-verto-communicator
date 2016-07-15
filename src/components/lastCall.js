@@ -17,9 +17,7 @@ class LastCall extends VertoBaseComponent {
     this.call = this.call.bind(this);
   }
 
-  getCompStyle() {
-    return this.props.compStyle;
-  }
+ 
 
   getDefaultStyle(styleName) {
       const styles = {

@@ -28,10 +28,7 @@ class SettingsCheckbox extends VertoBaseComponent {
     // console.log('things-------', this.refs.checkMe.checked, chkdObj);
     this.props.cbSubmitSetting(chkdObj);
   }
-
-  getCompStyle() {
-    return this.props.compStyle;
-  }
+ 
 
   getDefaultStyle(styleName) {
 

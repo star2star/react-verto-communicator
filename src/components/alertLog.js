@@ -20,9 +20,7 @@ export default class AlertLog extends VertoBaseComponent {
     this.handleClearAlerts= this.handleClearAlerts.bind(this);
   }
 
-  getCompStyle() {
-    return this.props.compStyle;
-  }
+
 
   getDefaultStyle(styleName) {
     const styles = {

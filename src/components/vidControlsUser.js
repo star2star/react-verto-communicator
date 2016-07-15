@@ -28,9 +28,7 @@ export default class UserVideoControls extends VertoBaseComponent {
     document.getElementById("webcam").removeEventListener('dblclick', this.handleToggleFullScreen);
   }
 
-  getCompStyle() {
-    return this.props.compStyle;
-  }
+ 
 
   getDefaultStyle(styleName) {
     const styles = {

@@ -16,9 +16,7 @@ class Input extends VertoBaseComponent {
     this.state = { 'onFocus' : false, isEmpty: true };
 }
 
-  getCompStyle() {
-    return this.props.compStyle;
-  }
+ 
 
   getDefaultStyle(styleName) {
     const styles = {

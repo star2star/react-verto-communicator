@@ -23,9 +23,7 @@ class AlertLogItem extends VertoBaseComponent {
     this.props.cbRemoveAlert(this.props.index);
   }
 
-  getCompStyle() {
-    return this.props.compStyle;
-  }
+
 
   getDefaultStyle(styleName) {
     const styles = {

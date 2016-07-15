@@ -20,9 +20,7 @@ class CallHistoryItem extends VertoBaseComponent {
     this.showCalls = this.showCalls.bind(this);
 }
 
-  getCompStyle() {
-    return this.props.compStyle;
-  }
+
 
   getDefaultStyle(styleName) {
     const styles = {

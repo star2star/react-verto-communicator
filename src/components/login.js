@@ -18,9 +18,6 @@ class Login extends VertoBaseComponent{
     this.submitLogin = this.submitLogin.bind(this);
   }
 
-  getCompStyle() {
-    return this.props.compStyle;
-  }
 
   getDefaultStyle(styleName) {
     const styles = {

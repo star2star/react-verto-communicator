@@ -1,6 +1,8 @@
 import React from 'react';
 import themes from '../themes/theme-styles.js';
 
+const objectMerge = require('object-merge');
+
 class VertoBaseComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -32,8 +34,12 @@ class VertoBaseComponent extends React.Component {
     //console.log("############################",componentName);
     if(themes[window.theme.value][componentName][styleName]) {
       //console.log('Theme Styling',themes[window.theme.value][componentName][styleName]);
-      return( {...styles, ...themes[window.theme.value][componentName][styleName]});
+      return( objectMerge(styles, themes[window.theme.value][componentName][styleName]));
     }
+  }
+
+  getCompStyle(styleName) {
+    return this.props.compStyle && this.props.compStyle[styleName] ? this.props.compStyle[styleName] :  undefined ;
   }
 
   getStyle(styleName) {
@@ -50,7 +56,7 @@ class VertoBaseComponent extends React.Component {
     const compStyle = this.getCompStyle();
     //console.log('base style props', compStyle);
     if(compStyle && compStyle[styleName]) {
-      styleReturn = {...styleReturn, ...compStyle[styleName]};
+      styleReturn = objectMerge(styleReturn, compStyle[styleName]);
     }
     return styleReturn;
   }

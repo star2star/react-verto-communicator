@@ -27,9 +27,7 @@ class UserMenu extends VertoBaseComponent {
     this.closeMenu = this.closeMenu.bind(this);
   }
 
-  getCompStyle() {
-    return this.props.compStyle;
-  }
+ 
 
   getDefaultStyle(styleName) {
     const styles = {

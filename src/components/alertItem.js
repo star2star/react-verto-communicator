@@ -30,10 +30,6 @@ class AlertItem extends VertoBaseComponent {
     this.props.cbDismissAlert(this.props.alertData.id);
   }
 
-  getCompStyle() {
-    return this.props.compStyle;
-  }
-
   getDefaultStyle(styleName) {
     const styles = {
       alertItemStyles : {

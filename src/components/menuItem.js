@@ -15,9 +15,7 @@ class MenuItem extends VertoBaseComponent {
     super(props);
   }
 
-  getCompStyle() {
-    return this.props.compStyle;
-  }
+ 
 
   getDefaultStyle(styleName) {
     const styles = {

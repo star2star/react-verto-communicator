@@ -20,9 +20,6 @@ export default class AlertList extends VertoBaseComponent {
     document.addEventListener('alert', this.handleNewAlert);
   }
 
-  getCompStyle() {
-    return this.props.compStyle;
-  }
 
   getDefaultStyle(styleName) {
     const styles = {

@@ -102,9 +102,7 @@ class SettingsPreview extends VertoBaseComponent{
     this.streamObj.onended = meter.stop.bind(meter);
   }
 
-  getCompStyle() {
-    return this.props.compStyle;
-  }
+ 
 
   getDefaultStyle(styleName) {
     const styles = {

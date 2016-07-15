@@ -33,9 +33,7 @@ class HistoryItems extends VertoBaseComponent {
     this.generateHistory = this.generateHistory.bind(this);
   }
 
-  getCompStyle() {
-    return this.props.compStyle;
-  }
+
 
   getDefaultStyle(styleName) {
     const styles = {
@@ -206,9 +204,6 @@ class DetailItems extends VertoBaseComponent {
     this.generateDetails = this.generateDetails.bind(this);
   }
 
-  getCompStyle() {
-    return this.props.compStyle;
-  }
 
   getDefaultStyle(styleName) {
     const styles = {
@@ -375,9 +370,7 @@ class CallHistory extends VertoBaseComponent {
     }
   }
 
-  getCompStyle() {
-    return this.props.compStyle;
-  }
+ 
 
   getDefaultStyle(styleName) {
     const styles = {

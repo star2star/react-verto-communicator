@@ -28,9 +28,6 @@ class ChatMessageList extends VertoBaseComponent {
     node.scrollTop = node.scrollHeight;
   }
 
-  getCompStyle() {
-    return this.props.compStyle;
-  }
 
   getDefaultStyle(styleName) {
     const styles = {

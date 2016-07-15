@@ -32,9 +32,7 @@ class Settings extends VertoBaseComponent {
     Settings.toggleSettings = this.showMenu;
   }
 
-  getCompStyle() {
-    return this.props.compStyle;
-  }
+ 
 
   closeMenu(){
     this.props.cbToggleShowSettings(false);

@@ -23,9 +23,7 @@ class InputModal extends VertoBaseComponent {
     this.changingInput = this.changingInput.bind(this);
   }
 
-  getCompStyle() {
-    return this.props.compStyle;
-  }
+ 
 
   getDefaultStyle(styleName) {
     const styles = {
@@ -106,4 +104,4 @@ class InputModal extends VertoBaseComponent {
 InputModal.propTypes = propTypes;
 
 export default InputModal;
-// reviewed on 7/13/2016    
+// reviewed on 7/13/2016

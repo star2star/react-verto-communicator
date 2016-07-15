@@ -24,9 +24,7 @@ class AdminVideoControls extends VertoBaseComponent {
     this.handleShowLayoutList = this.handleShowLayoutList.bind(this);
   }
 
-  getCompStyle() {
-    return this.props.compStyle;
-  }
+ 
 
   getDefaultStyle(styleName) {
     const styles = {

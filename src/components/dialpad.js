@@ -27,9 +27,7 @@ class Dialpad extends VertoBaseComponent {
     this.changingNumber = this.changingNumber.bind(this);
   }
 
-  getCompStyle() {
-    return this.props.compStyle;
-  }
+
 
   getDefaultStyle(styleName) {
     //console.log('>>>>>>>>>',this.state.makingCall);

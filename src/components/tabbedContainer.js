@@ -18,9 +18,7 @@ class TabbedContainer extends VertoBaseComponent {
     this.setState({...this.state, activeTabIndex: index});
   }
 
-  getCompStyle() {
-    return this.props.compStyle;
-  }
+ 
 
   getDefaultStyle(styleName) {
     const styles = {

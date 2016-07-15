@@ -23,10 +23,7 @@ class NumberItem extends VertoBaseComponent {
     this.props.cbClick(this.props.keyValue);
   }
 
-  getCompStyle() {
-    return this.props.compStyle;
-  }
-
+ 
   getDefaultStyle(styleName) {
     const styles = {
       container: {
