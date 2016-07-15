@@ -38,6 +38,7 @@ class NotificationsNoneIconSVG extends React.Component {
   }
 }
 NotificationsNoneIconSVG.propTypes = propTypes;
+
 // Notifications icon
 
 class NotificationsIconSVG extends React.Component {
@@ -53,6 +54,7 @@ class NotificationsIconSVG extends React.Component {
   }
 }
 NotificationsIconSVG.propTypes = propTypes;
+
 // Favorited icon
 
 class FavoritedIconSVG extends React.Component {
@@ -68,6 +70,7 @@ class FavoritedIconSVG extends React.Component {
   }
 }
 FavoritedIconSVG.propTypes = propTypes;
+
 // Caret up icon
 
 class CaretUpIconSVG extends React.Component {
@@ -83,6 +86,7 @@ class CaretUpIconSVG extends React.Component {
   }
 }
 CaretUpIconSVG.propTypes = propTypes;
+
 // Caret down icon
 
 class CaretDownIconSVG extends React.Component {
@@ -98,6 +102,7 @@ class CaretDownIconSVG extends React.Component {
   }
 }
 CaretDownIconSVG.propTypes = propTypes;
+
 // Chat icon
 
 class ChatIconSVG extends React.Component {
@@ -113,6 +118,7 @@ class ChatIconSVG extends React.Component {
   }
 }
 ChatIconSVG.propTypes = propTypes;
+
 // Avatar icon
 
 class AvatarSVG extends React.Component {
@@ -128,6 +134,7 @@ class AvatarSVG extends React.Component {
   }
 }
 AvatarSVG.propTypes = propTypes;
+
 // Shoebox icon
 
 class ShoeboxIconSVG extends React.Component {
