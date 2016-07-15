@@ -3,3 +3,4 @@ node_modules/*
 src/bundle.js
 src/vendors.js
 dist/*
+verto.tar
