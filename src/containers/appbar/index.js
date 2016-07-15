@@ -49,9 +49,6 @@ class AppBar extends VertoBaseComponent {
     //document.body.removeEventListener('click', (e)=>{e.preventDefault(); this.handleCloseDropdowns();});
   }
 
-  getCompStyle() {
-    return this.props.compStyle;
-  }
 
   getDefaultStyle(styleName) {
     const styles = {

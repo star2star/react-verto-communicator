@@ -31,7 +31,7 @@ class VertoBaseComponent extends React.Component {
     // it is defined)
 
     const componentName = this.getClassName().toLowerCase();
-    //console.log("############################",componentName);
+    console.log("############################",componentName);
     if(themes[window.theme.value][componentName][styleName]) {
       //console.log('Theme Styling',themes[window.theme.value][componentName][styleName]);
       return( objectMerge(styles, themes[window.theme.value][componentName][styleName]));

@@ -42,7 +42,16 @@ const themes = {
         width: '25px',
         height: '25px'
       }
-    }
+    },
+    app :{
+      appStyles:{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-start',
+          height: '100vh', // want to fill the whole screen height
+          width: '100vw' // and fill screen width
+        }
+      }
   },
   custom: {
     appbar: {
