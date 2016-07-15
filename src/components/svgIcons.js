@@ -1069,7 +1069,6 @@ class LockIconSVG extends React.Component {
 }
 LockIconSVG.propTypes = propTypes;
 
-
 export {
 NotificationsNoneIconSVG,
 NotificationsIconSVG,
