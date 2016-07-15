@@ -18,7 +18,7 @@ import { doUpdateSetting } from './action-creators';
 import App from '../../components/app';
 import About from '../../components/about';
 import Contributors from '../../components/contributors';
-import { MenuIconSVG, ChatIconSVG } from '../../components/svgIcons';
+import { MenuIconSVG } from '../../components/svgIcons';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import LastCall from '../../components/lastCall';
 import { doMakeCall } from '../main/action-creators';
@@ -41,14 +41,12 @@ class AppBar extends VertoBaseComponent {
     this.handleSubmitPreviewSettings = this.handleSubmitPreviewSettings.bind(this);
     AppBar.closeMenu = this.handleCloseMenu.bind(this);
 
-    // add event listener for clicks in body and close menus that are open,
+    // TODO - add event listener for clicks in body and close menus that are open,
     //document.body.addEventListener('click', (e)=>{e.preventDefault(); this.handleCloseDropdowns();});
-
   }
 
   componentWillUnmount() {
     //document.body.removeEventListener('click', (e)=>{e.preventDefault(); this.handleCloseDropdowns();});
-
   }
 
   getCompStyle() {
@@ -174,7 +172,6 @@ class AppBar extends VertoBaseComponent {
             top: '64px',
             left: '0px',
             right: '0px',
-            // minWidth:'375px',
             flex: '1 1 auto',
             display: this.state.showSettings ? 'flex' : 'none',
             flexDirection: 'row',
@@ -217,7 +214,6 @@ class AppBar extends VertoBaseComponent {
             fontWeight: 'bold',
             fontSize: '1rem',
             paddingBottom: '5px'
-            //paddingLeft:'5px'
           },
           langStyle: {
             container: {
@@ -233,12 +229,7 @@ class AppBar extends VertoBaseComponent {
           buttonContainer: {
             display: 'flex',
             flexDirection: 'column',
-               //align buttons left...
-            // alignItems: 'flex-start'
-              // ...or align buttons center?
             alignItems: 'center'
-              //buttons fill container or not?
-            // flex: '1'
           },
           button: {
             padding: '8px 30px',
@@ -254,8 +245,6 @@ class AppBar extends VertoBaseComponent {
           },
           netSpeedContainer: {
             display: 'flex',
-            //justifyContent: 'flex-start',
-              //outgoing-incoming spacing underneath button
             justifyContent: 'space-around',
             alignItems: 'center'
           },
@@ -330,14 +319,14 @@ showSpeeds(){
                 id="BANDWIDTH_INFO_OUTGOING"
                 defaultMessage="Outgoing:"
             />
-        </span>
-        <span style={{...this.getStyle('incomingSpacing')}}>
-           <FormattedMessage
-               id="BANDWIDTH_INFO_INCOMING"
-               defaultMessage="Incoming:"
-           />
-       </span>
-</div>);
+          </span>
+          <span style={{...this.getStyle('incomingSpacing')}}>
+             <FormattedMessage
+                 id="BANDWIDTH_INFO_INCOMING"
+                 defaultMessage="Incoming:"
+             />
+         </span>
+       </div>);
     } else {
       netSpeedDisplay = (
         <div className='netSpeedContainer' style={{...this.getStyle('netSpeedContainer')}}>
@@ -355,72 +344,77 @@ showSpeeds(){
        </span>
      </div>);}
 
-//column1 alternate menu
-  let useVideoAltDisplay;
-  if (this.props.settings.useVideo === false) {
-    useVideoAltDisplay = (<div></div>);
-  } else {
-    useVideoAltDisplay = (
-      <div>
-        <SettingsMenuSelect
-            cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
-            options={this.props.settings.videoDevices ? this.props.settings.videoDevices : []}
-            label={formatMessage({"id":"CAMERA_SETTINGS", "defaultMessage":"Camera:"})}
-            selectedOption={{id:"selectedVideo", data:this.props.settings.selectedVideo}}
-        />
-        <SettingsMenuSelect
-            cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
-            options={this.props.settings.shareDevices ? this.props.settings.shareDevices : []}
-            label={formatMessage({"id":"SHARE_DEVICE", "defaultMessage":"Share Device:"})}
-            selectedOption={{id:"selectedShare", data:this.props.settings.selectedShare}}
-        />
-      </div>);}
+    //column1 alternate menu
+    let useVideoAltDisplay;
+    if (this.props.settings.useVideo === false) {
+      useVideoAltDisplay = (<div></div>);
+    } else {
+      useVideoAltDisplay = (
+        <div>
+          <SettingsMenuSelect
+              cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
+              options={this.props.settings.videoDevices ? this.props.settings.videoDevices : []}
+              label={formatMessage({"id":"CAMERA_SETTINGS", "defaultMessage":"Camera:"})}
+              selectedOption={{id:"selectedVideo", data:this.props.settings.selectedVideo}}
+          />
+          <SettingsMenuSelect
+              cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
+              options={this.props.settings.shareDevices ? this.props.settings.shareDevices : []}
+              label={formatMessage({"id":"SHARE_DEVICE", "defaultMessage":"Share Device:"})}
+              selectedOption={{id:"selectedShare", data:this.props.settings.selectedShare}}
+          />
+        </div>
+      );
+    }
 
-//column3 alternate menu
-  let vidSettingsAltDisplay;
-  if (this.props.settings.autoBand === false) {
-    vidSettingsAltDisplay = (
-      <div>
-        <SettingsMenuSelect
-            cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
-            options={this.props.settings.videoQuality ? this.props.settings.videoQuality : []}
-            label={formatMessage({"id":"VIDEO_QUALITY", "defaultMessage":"Video Quality:"})}
-            selectedOption={{id:"vidQual", data:this.props.settings.vidQual}}
-        />
-        <SettingsMenuSelect
-            cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
-            options={this.props.settings.bandwidth ? this.props.settings.bandwidth : []}
-            label={formatMessage({"id":"MAX_INCOMING_BANDWIDTH", "defaultMessage":"Max Incoming Bandwidth:"})}
-            selectedOption={{id:"incomingBandwidth", data:this.props.settings.incomingBandwidth}}
-        />
-        <SettingsMenuSelect
-            cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
-            options={this.props.settings.bandwidth ? this.props.settings.bandwidth : []}
-            label={formatMessage({"id":"MAX_OUTGOING_BANDWIDTH", "defaultMessage":"Max Outgoing Bandwidth:"})}
-            selectedOption={{id:"outgoingBandwidth", data:this.props.settings.outgoingBandwidth}}
-        />
-    </div>);
-  } else {
-    vidSettingsAltDisplay = (
-      <div>
-        <SettingsCheckbox
-            cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
-            label={formatMessage({"id":"RECHECK_BANDWIDTH", "defaultMessage":"Recheck Bandwidth Before Each Outgoing Call"})}
-            checkedOption={{name:'testSpeedJoin', value:this.props.settings.testSpeedJoin}}
-        />
-        <div className="buttonContainer" style={{...this.getStyle('buttonContainer')}}>
-          <button
-              style={{...this.getStyle('button')}}
-              onClick={()=>{this.props.dispatch(doSpeedTest());this.showSpeeds();}}
-              >
-            <FormattedMessage
-                id="CHECK_NETWORK_SPEED"
-                defaultMessage="Check Network Speed"
-            />
-          </button>
-          </div>
-          {netSpeedDisplay}
-      </div>);}
+    //column3 alternate menu
+    let vidSettingsAltDisplay;
+    if (this.props.settings.autoBand === false) {
+      vidSettingsAltDisplay = (
+        <div>
+          <SettingsMenuSelect
+              cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
+              options={this.props.settings.videoQuality ? this.props.settings.videoQuality : []}
+              label={formatMessage({"id":"VIDEO_QUALITY", "defaultMessage":"Video Quality:"})}
+              selectedOption={{id:"vidQual", data:this.props.settings.vidQual}}
+          />
+          <SettingsMenuSelect
+              cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
+              options={this.props.settings.bandwidth ? this.props.settings.bandwidth : []}
+              label={formatMessage({"id":"MAX_INCOMING_BANDWIDTH", "defaultMessage":"Max Incoming Bandwidth:"})}
+              selectedOption={{id:"incomingBandwidth", data:this.props.settings.incomingBandwidth}}
+          />
+          <SettingsMenuSelect
+              cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
+              options={this.props.settings.bandwidth ? this.props.settings.bandwidth : []}
+              label={formatMessage({"id":"MAX_OUTGOING_BANDWIDTH", "defaultMessage":"Max Outgoing Bandwidth:"})}
+              selectedOption={{id:"outgoingBandwidth", data:this.props.settings.outgoingBandwidth}}
+          />
+        </div>
+      );
+    } else {
+      vidSettingsAltDisplay = (
+        <div>
+          <SettingsCheckbox
+              cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
+              label={formatMessage({"id":"RECHECK_BANDWIDTH", "defaultMessage":"Recheck Bandwidth Before Each Outgoing Call"})}
+              checkedOption={{name:'testSpeedJoin', value:this.props.settings.testSpeedJoin}}
+          />
+          <div className="buttonContainer" style={{...this.getStyle('buttonContainer')}}>
+            <button
+                style={{...this.getStyle('button')}}
+                onClick={()=>{this.props.dispatch(doSpeedTest());this.showSpeeds();}}
+                >
+              <FormattedMessage
+                  id="CHECK_NETWORK_SPEED"
+                  defaultMessage="Check Network Speed"
+              />
+            </button>
+            </div>
+            {netSpeedDisplay}
+        </div>
+      );
+    }
 
     if (this.props.showSettings) {
       return (undefined);
@@ -488,8 +482,8 @@ showSpeeds(){
               <FormattedMessage
                   id="GENERAL_SETTINGS"
                   defaultMessage= "General settings:"
-            />
-        </div>
+              />
+            </div>
             <SettingsCheckbox
                 cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
                 label={formatMessage({"id":"USE_VIDEO", "defaultMessage":"Use Video:"})}
@@ -522,12 +516,12 @@ showSpeeds(){
                 selectedOption={{id:"language", data:this.props.settings.language}}
                 compStyle={{...this.getStyle('langStyle')}}
             />
-          <div style={{...this.getStyle('audioheaderLabel')}}>
+            <div style={{...this.getStyle('audioheaderLabel')}}>
               <FormattedMessage
                   id="AUDIO_SETTINGS"
                   defaultMessage= "Audio settings:"
               />
-          </div>
+            </div>
             <SettingsCheckbox
                 cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
                 label={formatMessage({"id":"ECHO_CANCEL", "defaultMessage":"Echo Cancellation"})}
@@ -553,13 +547,13 @@ showSpeeds(){
                   id="VIDEO_SETTINGS"
                   defaultMessage= "Video settings:"
               />
-          </div>
+            </div>
             <SettingsCheckbox
                 cbSubmitSetting={(setting)=>{this.props.dispatch(doUpdateSetting(setting));}}
                 label={formatMessage({"id":"AUTO_SPEED_RES", "defaultMessage":"Automatically Determine Speed and Resolution Settings"})}
                 checkedOption={{name:'autoBand', value:this.props.settings.autoBand}}
             />
-              {vidSettingsAltDisplay}
+            {vidSettingsAltDisplay}
           </div>
         </div>
       );
@@ -574,10 +568,8 @@ showSpeeds(){
 
     const appName = WhiteLabel.get('appName');
 
-
     // showAltAppControls is true, then reset styles for alt menu positions and orientations
     // otherwise leave set it to appControlStyles.
-
     let acStyles = this.getStyle("appControlStyles");
 
     if (this.state.showAltAppControls) {
@@ -623,15 +615,11 @@ showSpeeds(){
         lastCall = (<LastCall  ttPosition={!this.state.showAltAppControls ? "bottom" : "right"} labelText= {"No Call"} />);
       }
     }
-
-
     // settings here
-    //TODO define settings style for alt menu orientation
     // const settingsMenu = this.getSettingsMenu();
     const settingsContainer = this.buildSettingsContainer();
 
     return (
-
         <div className="appbar" style={this.getStyle('appbarStyles')}>
           <span className="altMenu" style={this.getStyle("altMenuStyles")} onClick={this.handleAltMenuClick}>
             <MenuIconSVG svgStyle={this.getStyle("altMenuSvgStyles")} />
@@ -654,7 +642,6 @@ showSpeeds(){
                   status = {this.props.vcStatus}
               />
             </div>
-
 
             <div style={!this.state.showAltAppControls ? this.getStyle('marginRightStyle') : this.getStyle('marginBottomStyle')}>
               <UserMenu ref="MyUserMenu" allowDisplayDetails={this.props.vcStatus != 'disconnected'}
@@ -696,9 +683,7 @@ showSpeeds(){
               </TagMenu>
             </div>
           </span>
-
           {settingsContainer}
-
         </div>
 
     );
@@ -706,7 +691,7 @@ showSpeeds(){
 }
 
 export default connect((state)=>{
-  console.log('----STORE in appbar ----', state);
+  //console.log('----STORE in appbar ----', state);
   return ({
     settings: state.app.settings,
     bandwidthInfo: state.app.bandwidthInfo,
@@ -718,3 +703,4 @@ export default connect((state)=>{
     chatData: state.auth.conferenceCall && state.auth.conferenceCall.messages
   });
 })(injectIntl(Radium(AppBar)));
+// reviewed on 7/15/2016

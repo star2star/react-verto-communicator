@@ -2,12 +2,11 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import { MicrophoneIconSVG } from './svgIcons';
 
-
-
 const propTypes = {
   compStyle: React.PropTypes.object,
   volumeLevel: React.PropTypes.number.isRequired
 };
+
 class VolumeMeter extends VertoBaseComponent{
   constructor(props) {
     super(props);
@@ -76,3 +75,4 @@ class VolumeMeter extends VertoBaseComponent{
 VolumeMeter.propTypes = propTypes;
 
 export default VolumeMeter;
+// reviewed on 7/15/2016

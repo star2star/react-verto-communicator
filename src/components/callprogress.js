@@ -13,6 +13,7 @@ import Radium from 'radium';
       cbMute:  React.PropTypes.func,
       cbSetVideoMode: React.PropTypes.func,
       cbShare: React.PropTypes.func,
+      cbSnapshot: React.PropTypes.func, // not currently supported
       cbToggleChat: React.PropTypes.func,
       currLayout: React.PropTypes.array,
       layouts: React.PropTypes.array,
