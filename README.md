@@ -1,6 +1,8 @@
 react-verto-communicator
 ========================
 
+Requires node.js version 4 or higher to run build
+
 Step 1 - clone repository
 -------------------------
 
