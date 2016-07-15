@@ -19,12 +19,16 @@ npm install
 Step 3 - run in dev mode
 ------------------------
 
+Listens on port 8080 ... http://localhost:8080
+
 ```javascript
 npm start  
 ```
 
 Step 4 - production build
 -------------------------
+
+produces a verto.tar in the current directory
 
 ```javascript
 npm run build   
