@@ -181,11 +181,11 @@ class Dialpad extends VertoBaseComponent {
     var callHistory = (
       <span style={{...style, position: 'absolute'}}>
         <div
-            style={{...this.getDefaultStyle('cont') }}
+            style={{...this.getStyle('cont') }}
         >
           <CallHistory
               allowToolTip
-              compStyle={{...this.getDefaultStyle('callh')}}
+              compStyle={{...this.getStyle('callh')}}
               history={CallHistoryService.getInstance().getHistory()}
               cbClearHistory={()=>{
                 //setTimeout()
@@ -205,10 +205,10 @@ class Dialpad extends VertoBaseComponent {
     var dialpad = (
         <span style={{...style, position: 'absolute'}}>
           <div
-              style={{...this.getDefaultStyle('cont') }}
+              style={{...this.getStyle('cont') }}
           >
           <div
-              style={{...this.getDefaultStyle('dpad') }}
+              style={{...this.getStyle('dpad') }}
               onKeyPress={(e)=>{
                 if(e.which == 13 || e.keyCode == 13) {
                   this.makeCall();
@@ -217,7 +217,7 @@ class Dialpad extends VertoBaseComponent {
           >
           <div
               className="header"
-              style={{...this.getDefaultStyle('header')}}
+              style={{...this.getStyle('header')}}
           >
             <span
                 className="callhist"
@@ -227,13 +227,13 @@ class Dialpad extends VertoBaseComponent {
                 }}
             >
               <CallHistoryIconSVG
-                  svgStyle={{...this.getDefaultStyle('callhist')}}
+                  svgStyle={{...this.getStyle('callhist')}}
               />
             </span>
             <input
                 className="input"
                 placeholder={this.props.intl.formatMessage({"id":"ENTER_EXTENSION", "defaultMessage":"Enter a number"})}
-                style={{...this.getDefaultStyle('input')}}
+                style={{...this.getStyle('input')}}
                 value={this.state.number}
                 onChange={this.changingNumber}
                 onFocus={()=>{
@@ -252,7 +252,7 @@ class Dialpad extends VertoBaseComponent {
                   this.setState({...this.state,'number': newNumber });
                 }}
             >
-                <DeleteIconSVG svgStyle={{...this.getDefaultStyle('back')}} />
+                <DeleteIconSVG svgStyle={{...this.getStyle('back')}} />
             </span>
           </div>
           <div
@@ -276,17 +276,17 @@ class Dialpad extends VertoBaseComponent {
               onFocus={()=>{
                 this.setState({...this.state,'inputFocused': false});
               }}
-              style={{...this.getDefaultStyle('callcont')}}
+              style={{...this.getStyle('callcont')}}
           >
             <div
                 className="dial"
                 onClick={()=>{
                   this.makeCall();
                 }}
-                style={{...this.getDefaultStyle('callbg')}}
+                style={{...this.getStyle('callbg')}}
             >
               <PhoneIconSVG
-                  svgStyle={{...this.getDefaultStyle('call')}}
+                  svgStyle={{...this.getStyle('call')}}
 
               />
             </div>

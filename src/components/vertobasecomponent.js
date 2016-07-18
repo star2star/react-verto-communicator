@@ -8,7 +8,6 @@ class VertoBaseComponent extends React.Component {
     super(props);
   }
   findWrappedMethods(obj={},methodName){
-    //console.log('ooooo', obj, methodName );
     if (!methodName) return;
 
     if (obj[methodName])
@@ -21,7 +20,6 @@ class VertoBaseComponent extends React.Component {
     return;
   }
   getClassName() {
-    //console.log('*****', this, this.constructor.name );
     const xName = Object.getPrototypeOf(this.constructor).name;
     // if it equals base we need to just get it from constructor ... we handle higher order objects by default
     return xName.toLowerCase() === 'vertobasecomponent' ? this.constructor.name : xName;
@@ -31,12 +29,13 @@ class VertoBaseComponent extends React.Component {
     // it is defined)
 
     const componentName = this.getClassName().toLowerCase();
-    console.log("############################",componentName);
-    if(themes[window.theme.value][componentName][styleName]) {
-      //console.log('Theme Styling',themes[window.theme.value][componentName][styleName]);
-      return( objectMerge(styles, themes[window.theme.value][componentName][styleName]));
+    if(themes[window.theme.value][componentName] && themes[window.theme.value][componentName][styleName]) {
+      return( objectMerge( styles, themes[window.theme.value][componentName][styleName]));
+    } else{
+      return( styles );
     }
   }
+
 
   getCompStyle(styleName) {
     return this.props.compStyle && this.props.compStyle[styleName] ? this.props.compStyle[styleName] :  undefined ;
@@ -54,7 +53,6 @@ class VertoBaseComponent extends React.Component {
 
     // apply style from props
     const compStyle = this.getCompStyle();
-    //console.log('base style props', compStyle);
     if(compStyle && compStyle[styleName]) {
       styleReturn = objectMerge(styleReturn, compStyle[styleName]);
     }
