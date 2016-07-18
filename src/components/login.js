@@ -12,7 +12,7 @@ const propTypes = {
 class Login extends VertoBaseComponent{
   constructor(props) {
     super(props);
-    this.state = {advanced: false, settings: this.props.settings, emptyFields: false };
+    this.state = {advanced: false, settings: this.props.settings, emptyFields: [] };
 
     this.changingInput = this.changingInput.bind(this);
     this.submitLogin = this.submitLogin.bind(this);
@@ -56,7 +56,7 @@ class Login extends VertoBaseComponent{
         }
       },
       verifyFields: {
-        display: this.state.emptyFields ? 'flex' : 'none',
+        display: this.state.emptyFields.length > 0 ? 'flex' : 'none',
         backgroundColor: '#F44336',
         fontWeight: '300',
         color: '#fff',
@@ -84,23 +84,46 @@ class Login extends VertoBaseComponent{
   changingInput(field, value){
     let xData = { ...this.state.settings };
     xData[field] = value;
-    this.setState({ ...this.state, settings: xData, emptyFields: false });
+    this.setState({ ...this.state, settings: xData, emptyFields: [] });
   }
 
+
   submitLogin() {
+    //console.log('>>>>>>>>>>>>>>>>>>', this.state.settings);
     //TODO validate data before sending
-    //const emailExp = new RegExp('[\w-]+@([\w-]+\.)+[\w-]+');
-    if (this.state.settings.name.length > 0 && this.state.settings.email.length > 0){
-      this.props.cbClick(this.state.settings);
-      // if(this.state.settings.email.value == emailExp) {
-      //   this.props.cbClick(this.state.settings);
-      // } else {
-      //   this.setState({...this.state, emptyFields: true});
-      // }
-    } else {
-      this.setState({...this.state, emptyFields: true});
+    const newState = { ...this.state, 'emptyFields': [] };
+    const emailExp = new RegExp(/(\w+)@(\w+)(\.)(\w)/);
+    //valiate name
+    if (this.state.settings.name.length === 0 ){
+      newState.emptyFields.push('name');
     }
+    if(!emailExp.test(this.state.settings.email)) {
+      newState.emptyFields.push('email');
+    }
+    if (this.state.settings.user.length === 0 ){
+      newState.emptyFields.push('user');
+    }
+    if (this.state.settings.password.length === 0 ){
+      newState.emptyFields.push('pass');
+    }
+    if (this.state.settings.callerid.length === 0 ){
+      newState.emptyFields.push('id');
+    }
+    if (this.state.settings.hostname.length === 0 ){
+      newState.emptyFields.push('host');
+    }
+    if (this.state.settings.websocketurl.length === 0 ){
+      newState.emptyFields.push('url');
+    }
+    if (newState.emptyFields.length == 0){
+      this.props.cbClick(this.state.settings);
+    } else {
+      this.setState(newState);
+    }
+
   }
+
+
   render() {
     const { formatMessage } = this.props.intl;
 
@@ -114,6 +137,7 @@ class Login extends VertoBaseComponent{
               placeholder= {formatMessage({"id":"USER", "defaultMessage":"User"})+" i.e. 1008"}
               cbChanging={this.changingInput}
               value={this.state.settings.user}
+              hasErrors={this.state.emptyFields.indexOf('user')>-1}
           />
           <Input
               tabindex="0"
@@ -122,6 +146,7 @@ class Login extends VertoBaseComponent{
               placeholder={formatMessage({"id":"YOUR_PASSWORD", "defaultMessage":"Your Password"})+" i.e. 1234"}
               cbChanging={this.changingInput}
               value={this.state.settings.password}
+              hasErrors={this.state.emptyFields.indexOf('pass')>-1}
           />
           <Input
               tabindex="0"
@@ -129,6 +154,7 @@ class Login extends VertoBaseComponent{
               placeholder={formatMessage({"id":"CALLER_ID", "defaultMessage":"Caller Id"})}
               cbChanging={this.changingInput}
               value={this.state.settings.callerid}
+              hasErrors={this.state.emptyFields.indexOf('id')>-1}
           />
           <Input
               tabindex="0"
@@ -136,13 +162,16 @@ class Login extends VertoBaseComponent{
               placeholder={formatMessage({"id":"HOSTNAME", "defaultMessage":"Hostname"})}
               cbChanging={this.changingInput}
               value={this.state.settings.hostname}
+              hasErrors={this.state.emptyFields.indexOf('host')>-1}
           />
           <Input
               tabindex="0"
               label={formatMessage({"id":"WEBSOCKET_URL", "defaultMessage":"Websocket URL"})}
               placeholder={formatMessage({"id":"WEBSOCKET_URL", "defaultMessage":"Websocket URL"})}
               cbChanging={this.changingInput}
-              value={this.state.settings.websocketurl}/>
+              value={this.state.settings.websocketurl}
+              hasErrors={this.state.emptyFields.indexOf('url')>-1}
+              />
         </form>
       );
     }
@@ -162,12 +191,14 @@ class Login extends VertoBaseComponent{
             placeholder={formatMessage({"id":"YOUR_NAME", "defaultMessage":"Your name"})}
             cbChanging={this.changingInput}
             value={this.state.settings.name}
+            hasErrors={this.state.emptyFields.indexOf('name')>-1}
         />
         <Input
             label={formatMessage({"id":"EMAIL", "defaultMessage":"Email"})}
             placeholder={formatMessage({"id":"YOUR_EMAIL", "defaultMessage":"Your email"})}
             cbChanging={this.changingInput}
             value={this.state.settings.email}
+            hasErrors={this.state.emptyFields.indexOf('email')>-1}
         />
         {moreSettings}
         <div style={{...this.getStyle('settingsLoginCont')}}>

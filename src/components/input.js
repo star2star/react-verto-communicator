@@ -7,7 +7,8 @@ const propTypes = {
   label : React.PropTypes.string,
   type : React.PropTypes.string,
   placeholder : React.PropTypes.string,
-  value : React.PropTypes.string
+  value : React.PropTypes.string,
+  hasErrors: React.PropTypes.bool
 };
 
 class Input extends VertoBaseComponent {
@@ -16,7 +17,7 @@ class Input extends VertoBaseComponent {
     this.state = { 'onFocus' : false, isEmpty: true };
 }
 
- 
+
 
   getDefaultStyle(styleName) {
     const styles = {
@@ -30,11 +31,11 @@ class Input extends VertoBaseComponent {
         paddingBottom: '15px',
         fontWeight: '700',
         fontSize: '14px',
-        color: this.props.value == '' ? '#f44336' : '#000'
+        color: this.props.value == '' || this.props.hasErrors ? '#f44336' : '#000'
       },
       inputArea: {
         paddingBottom: '3px',
-        borderWidth: '0px',
+        borderWidth:  '0px',
         outline: 'none',
         borderColor: 'rgb(85,85,85)',
         borderBottom: '1px solid #d2d2d2',
