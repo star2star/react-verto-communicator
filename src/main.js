@@ -42,17 +42,43 @@ function getLanguage(){
 // Set styling theme globally
 window.theme={ value: 'default'};
 
-const locale = getLanguage();
-const dialect = Messages.getDialect(locale);
 
-const messages = (new Messages(locale)).getAllMessages();
+
+const store = createStore(reducer, applyMiddleware(thunk));
+
+let locale, dialect, messages, localeData;
+
+
+dialect = store.getState().app.settings.language.id;
+locale = dialect;
+//dialect = Messages.getDialect(locale);
+
+messages = (new Messages(dialect)).getAllMessages();
 
 //console.log('##########', messages);
 // needed for INTL
-const localeData = require('react-intl/locale-data/'+dialect);
+localeData = require('react-intl/locale-data/'+dialect);
 addLocaleData(localeData);
 
-const store = createStore(reducer, applyMiddleware(thunk));
+// move language into here
+store.subscribe(()=>{
+  const newLocale = store.getState().app.settings.language.id;
+  if (dialect && dialect !== newLocale ){
+    console.log('it changed ', locale, newLocale, dialect);
+    locale = newLocale;
+
+    dialect = Messages.getDialect(locale);
+
+    messages = (new Messages(locale)).getAllMessages();
+
+    //console.log('##########', messages);
+    // needed for INTL
+    localeData = require('react-intl/locale-data/'+dialect);
+    addLocaleData(localeData);
+    location.reload(true);
+  }
+
+})
 
 const subId = VertoService.getInstance().subscribe((event, status, data)=>{
   //console.log('>>>> Subscription: ', event, status, data)
