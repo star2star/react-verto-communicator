@@ -9,6 +9,7 @@ const propTypes = {
   settings: React.PropTypes.object.isRequired
 };
 
+
 class Login extends VertoBaseComponent{
   constructor(props) {
     super(props);
@@ -84,7 +85,9 @@ class Login extends VertoBaseComponent{
   changingInput(field, value){
     let xData = { ...this.state.settings };
     xData[field] = value;
-    this.setState({ ...this.state, settings: xData, emptyFields: [] });
+    const newEmptyFields = this.state.emptyFields.filter((f)=>f!==field);
+    //console.log(field, value, newEmptyFields);
+    this.setState({ ...this.state, settings: xData, emptyFields: newEmptyFields });
   }
 
 
@@ -104,16 +107,16 @@ class Login extends VertoBaseComponent{
       newState.emptyFields.push('user');
     }
     if (this.state.settings.password.length === 0 ){
-      newState.emptyFields.push('pass');
+      newState.emptyFields.push('password');
     }
     if (this.state.settings.callerid.length === 0 ){
-      newState.emptyFields.push('id');
+      newState.emptyFields.push('callerid');
     }
     if (this.state.settings.hostname.length === 0 ){
-      newState.emptyFields.push('host');
+      newState.emptyFields.push('hostname');
     }
     if (this.state.settings.websocketurl.length === 0 ){
-      newState.emptyFields.push('url');
+      newState.emptyFields.push('websocketurl');
     }
     if (newState.emptyFields.length == 0){
       this.props.cbClick(this.state.settings);
@@ -138,6 +141,7 @@ class Login extends VertoBaseComponent{
               cbChanging={this.changingInput}
               value={this.state.settings.user}
               hasErrors={this.state.emptyFields.indexOf('user')>-1}
+              errorLabel={formatMessage({"id":"PLEASE_ENTER", "defaultMessage":"Please enter a valid "}) + formatMessage({"id":"USER", "defaultMessage":"User"})}
           />
           <Input
               tabindex="0"
@@ -146,7 +150,8 @@ class Login extends VertoBaseComponent{
               placeholder={formatMessage({"id":"YOUR_PASSWORD", "defaultMessage":"Your Password"})+" i.e. 1234"}
               cbChanging={this.changingInput}
               value={this.state.settings.password}
-              hasErrors={this.state.emptyFields.indexOf('pass')>-1}
+              hasErrors={this.state.emptyFields.indexOf('password')>-1}
+              errorLabel={formatMessage({"id":"PLEASE_ENTER", "defaultMessage":"Please enter a valid "}) + formatMessage({"id":"PASSWORD", "defaultMessage":"Password"})}
           />
           <Input
               tabindex="0"
@@ -154,7 +159,8 @@ class Login extends VertoBaseComponent{
               placeholder={formatMessage({"id":"CALLER_ID", "defaultMessage":"Caller Id"})}
               cbChanging={this.changingInput}
               value={this.state.settings.callerid}
-              hasErrors={this.state.emptyFields.indexOf('id')>-1}
+              hasErrors={this.state.emptyFields.indexOf('callerid')>-1}
+              errorLabel={formatMessage({"id":"PLEASE_ENTER", "defaultMessage":"Please enter a valid "}) + formatMessage({"id":"CALLER_ID", "defaultMessage":"Caller ID"})}
           />
           <Input
               tabindex="0"
@@ -162,7 +168,8 @@ class Login extends VertoBaseComponent{
               placeholder={formatMessage({"id":"HOSTNAME", "defaultMessage":"Hostname"})}
               cbChanging={this.changingInput}
               value={this.state.settings.hostname}
-              hasErrors={this.state.emptyFields.indexOf('host')>-1}
+              hasErrors={this.state.emptyFields.indexOf('hostname')>-1}
+              errorLabel={formatMessage({"id":"PLEASE_ENTER", "defaultMessage":"Please enter a valid "}) + formatMessage({"id":"HOSTNAME", "defaultMessage":"Hostname"})}
           />
           <Input
               tabindex="0"
@@ -170,7 +177,8 @@ class Login extends VertoBaseComponent{
               placeholder={formatMessage({"id":"WEBSOCKET_URL", "defaultMessage":"Websocket URL"})}
               cbChanging={this.changingInput}
               value={this.state.settings.websocketurl}
-              hasErrors={this.state.emptyFields.indexOf('url')>-1}
+              hasErrors={this.state.emptyFields.indexOf('websocketurl')>-1}
+              errorLabel={formatMessage({"id":"PLEASE_ENTER", "defaultMessage":"Please enter a valid "}) + formatMessage({"id":"WEBSOCKET_URL", "defaultMessage":"Websock URL"})}
               />
         </form>
       );
@@ -192,6 +200,7 @@ class Login extends VertoBaseComponent{
             cbChanging={this.changingInput}
             value={this.state.settings.name}
             hasErrors={this.state.emptyFields.indexOf('name')>-1}
+            errorLabel={formatMessage({"id":"PLEASE_ENTER", "defaultMessage":"Caller Id"}) + formatMessage({"id":"NAME", "defaultMessage":"Name"})}
         />
         <Input
             label={formatMessage({"id":"EMAIL", "defaultMessage":"Email"})}
@@ -199,6 +208,7 @@ class Login extends VertoBaseComponent{
             cbChanging={this.changingInput}
             value={this.state.settings.email}
             hasErrors={this.state.emptyFields.indexOf('email')>-1}
+            errorLabel={formatMessage({"id":"PLEASE_ENTER", "defaultMessage":"Caller Id"}) + formatMessage({"id":"EMAIL", "defaultMessage":"Email"})}
         />
         {moreSettings}
         <div style={{...this.getStyle('settingsLoginCont')}}>

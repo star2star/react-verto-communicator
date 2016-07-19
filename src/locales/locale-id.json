@@ -191,6 +191,7 @@ const messages = {
   "CALL_FROM": "Panggilan dari:",
   "ANSWER": "Menjawab",
   "REJECT": "Menolak",
-  "ACTIVE": "aktif"
+  "ACTIVE": "aktif",
+  "PLEASE_ENTER": "silahkan masukkan valid "
 };
 module.exports = messages;

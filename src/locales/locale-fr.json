@@ -191,6 +191,7 @@ const messages = {
   "CALL_FROM": "Appeler à partir de:",
   "ANSWER": "Répondre",
   "REJECT": "Rejeter",
-  "ACTIVE": "actif"
+  "ACTIVE": "actif",
+  "PLEASE_ENTER": "s'il vous plaît entrer un valide "
 };
 module.exports = messages;

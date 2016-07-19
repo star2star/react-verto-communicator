@@ -191,6 +191,7 @@ const messages = {
   "CALL_FROM": "Ringe fra:",
   "ANSWER": "Svar",
   "REJECT": "Afvise",
-  "ACTIVE": "aktiv"
+  "ACTIVE": "aktiv",
+  "PLEASE_ENTER": "angiv et gyldigt "
 };
 module.exports = messages;

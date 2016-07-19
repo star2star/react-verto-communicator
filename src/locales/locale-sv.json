@@ -191,6 +191,7 @@ const messages = {
   "CALL_FROM": "Samtal från:",
   "ANSWER": "Svar",
   "REJECT": "Avvisa",
-  "ACTIVE": "aktiva"
+  "ACTIVE": "aktiva",
+  "PLEASE_ENTER": "ange ett giltigt "
   };
   module.exports = messages;

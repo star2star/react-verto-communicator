@@ -8,7 +8,8 @@ const propTypes = {
   type : React.PropTypes.string,
   placeholder : React.PropTypes.string,
   value : React.PropTypes.string,
-  hasErrors: React.PropTypes.bool
+  hasErrors: React.PropTypes.bool,
+  errorLabel: React.PropTypes.string
 };
 
 class Input extends VertoBaseComponent {
@@ -31,7 +32,7 @@ class Input extends VertoBaseComponent {
         paddingBottom: '15px',
         fontWeight: '700',
         fontSize: '14px',
-        color: this.props.value == '' || this.props.hasErrors ? '#f44336' : '#000'
+        color:  this.props.hasErrors ? '#f44336' : '#000'
       },
       inputArea: {
         paddingBottom: '3px',
@@ -51,7 +52,7 @@ class Input extends VertoBaseComponent {
       bar: {
         position: 'relative',
         bottom: '3px',
-        display: 'flex',
+        display:  this.props.hasErrors ? 'none' : 'flex',
         justifyContent: 'space-between',
         content: '" "',
         height: '2px',
@@ -64,7 +65,7 @@ class Input extends VertoBaseComponent {
         content: '" "',
         height: '3px',
         position: 'absolute',
-        backgroundColor: this.props.value == '' ? '#f44336' : '#009688',
+        backgroundColor: this.props.hasErrors ? '#f44336' : '#009688',
         transition : this.state.onFocus ? 'left 1s' : 'left 0s',
         left: this.state.onFocus ?  '0%' : '50%',
         right: '50%'
@@ -73,10 +74,16 @@ class Input extends VertoBaseComponent {
         content: '" "',
         height: '3px',
         position: 'absolute',
-        backgroundColor: this.props.value == '' ? '#f44336' : '#009688' ,
+        backgroundColor: this.props.hasErrors  ? '#f44336' : '#009688' ,
         transition : this.state.onFocus ? 'right 1s' : 'right 0s',
         right: this.state.onFocus ?  '0%' : '50%',
         left: '50%'
+      },
+      invalidStyle:{
+        display:  this.props.hasErrors ? 'flex' : 'none'
+      },
+      inputAreaStyle:{
+        border:  this.props.hasErrors ? '1px solid #f44336' : '#000'
       }
 
      };
@@ -90,8 +97,11 @@ class Input extends VertoBaseComponent {
       <div style={{...this.getStyle('fieldset')}}>
         <div style={{...this.getStyle('label')}}>
           {this.props.label}
+          <span style={this.getStyle('invalidStyle')}>
+             {this.props.errorLabel}
+          </span>
         </div>
-        <div>
+        <div style={{...this.getStyle('inputAreaStyle')}}>
           <input
               tabIndex="0"
               type={this.props.type}
