@@ -1,3 +1,5 @@
+const url = require('url');
+
 const auth = (state, action)=>{
 
   if (typeof state === 'undefined') {
@@ -7,14 +9,17 @@ const auth = (state, action)=>{
     if (localStorage){
       lsLoginSettings = JSON.parse(localStorage.getItem('loginSettings'));
     }
+    const urlStuff = url.parse(location.href);
+    const hostname = urlStuff.hostname === 'localhost' ? 'www.star2starglobal.com' : urlStuff.hostname;
+
     return  { loginSettings :{
                 name: '',
                 email: '',
                 user: '1008',
-                password: 'Starvert0',
+                password: '1234',
                 callerid: '',
-                hostname: 'www.star2starglobal.com',
-                websocketurl: 'wss://www.star2starglobal.com:8082',
+                hostname: hostname,
+                websocketurl: 'wss://' + hostname +':8082',
                 autologin: false,
                 ...lsLoginSettings
               },
