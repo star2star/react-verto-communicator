@@ -215,9 +215,23 @@ const doIncomingCall = (dialog) =>{
 
 const doMakeCall = (aPhoneNumber, appSettings) => {
   return dispatch => {
-
-    const callID = VertoService.getInstance().makeCall(aPhoneNumber, appSettings);
-    dispatch(doingMakeCall('trying', aPhoneNumber, callID));
+    console.log('>>>> appSetttings: ', appSettings)
+    if (appSettings.settings.testSpeedJoin){
+      // dispatches event so we can change screen layout
+      dispatch({
+        "type": "SPEED_TEST_BEFORE_CALL"
+      });
+      // DOOING SPEED TEST
+      VertoService.speedTest((data)=>{
+        // complete ... dont do anything with data so we will ...
+        // NOW MAKE CALL
+        const callID = VertoService.getInstance().makeCall(aPhoneNumber, appSettings);
+        dispatch(doingMakeCall('trying', aPhoneNumber, callID));
+      });
+    } else {
+      const callID = VertoService.getInstance().makeCall(aPhoneNumber, appSettings);
+      dispatch(doingMakeCall('trying', aPhoneNumber, callID));
+    }
   };
 };
 

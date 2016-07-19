@@ -66,6 +66,8 @@ const auth = (state, action)=>{
       return { ...state, showPage: 'loggedIn', error: action.data, vcStatus: 'active' };
     case 'CALL_HUNG_UP':
       return { ...state, showPage: 'loggedIn', vcStatus: 'active' };
+    case 'SPEED_TEST_BEFORE_CALL':
+      return { ...state, showPage: 'speed-test' };
     default:
      return state;
     }

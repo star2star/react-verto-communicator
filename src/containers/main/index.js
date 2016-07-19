@@ -242,6 +242,10 @@ class Main extends VertoBaseComponent {
         };
         break;
 
+     case 'speed-test':
+        console.log('>>>>>> speed test stuff should go here ');
+        break;
+
       case 'dialing':
         loggedInfo = (
             <div style={this.getStyle("dialingStyle")}>
