@@ -11,7 +11,7 @@ class VolumeMeter extends VertoBaseComponent{
   constructor(props) {
     super(props);
   }
- 
+
 
   getDefaultStyle(styleName) {
     const styles = {
@@ -58,7 +58,6 @@ class VolumeMeter extends VertoBaseComponent{
         );
       }
     });
-
     return (
       <div className="volMeter" style={this.getStyle("volMeterStyles")}>
         {volSegArray}

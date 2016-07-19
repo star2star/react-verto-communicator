@@ -38,7 +38,7 @@ class VertoBaseComponent extends React.Component {
 
 
   getCompStyle(styleName) {
-    return this.props.compStyle && this.props.compStyle[styleName] ? this.props.compStyle[styleName] :  undefined ;
+    return this.props.compStyle && this.props.compStyle[styleName] ? this.props.compStyle[styleName] :  this.props.compStyle ;
   }
 
   getStyle(styleName) {
