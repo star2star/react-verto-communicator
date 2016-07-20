@@ -12,6 +12,7 @@
   "author": "Star2Star",
   "license": "MIT",
   "dependencies": {
+    "halogen": "^0.2.0",
     "json-loader": "^0.5.4",
     "md5": "^2.1.0",
     "moment": "^2.13.0",

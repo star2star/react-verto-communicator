@@ -68,7 +68,7 @@ const messages = {
   "BANDWIDTH_INFO_OUTGOING": "При передаче:",
   "BANDWIDTH_INFO_VIDEO_RES": "Видео разрешение:",
   "IN_CALL": "Разговор с:",
-  "LAST_CALL": "Предыдущий вызов:",
+  "LAST_CALL": "Предыдущий вызов:   ",
   "OPEN_NEW_WINDOW": "Открыть новое окно",
   "CHANGE_LOGIN_INFO": "Изменить информацию о логине",
   "LOGOUT": "Выйти",

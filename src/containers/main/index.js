@@ -30,6 +30,7 @@ import Memberlist from '../../components/memberList';
 import TabbedContainer from '../../components/tabbedContainer';
 //import AlertService from '../../js/alertService';
 import AlertList from '../../components/alertList';
+import Loader from 'halogen/MoonLoader';
 
 class Main extends VertoBaseComponent {
   constructor(props) {
@@ -117,7 +118,15 @@ class Main extends VertoBaseComponent {
         justifyContent: 'flex-start',
         flex:'1',
         overflowY: 'auto'
-      }
+      },
+       testingStyle:{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingBottom: '30px',
+        fontSize: '30px'
+       }
+
 
     };
 
@@ -153,6 +162,7 @@ class Main extends VertoBaseComponent {
 
     let loggedInfo;
     let chatSideBar;
+    let testingSpeed;
     const splashObject = { ...this.props.auth.splash };
 
     const incomingCall = this.props.callInfo && Object.keys(this.props.callInfo.incomingCalls).map((callId)=>{
@@ -243,7 +253,15 @@ class Main extends VertoBaseComponent {
         break;
 
      case 'speed-test':
-        console.log('>>>>>> speed test stuff should go here ');
+        //console.log('>>>>>> speed test stuff should go here ');
+        testingSpeed = (
+          <div>
+            <div style={this.getStyle('testingStyle')}>
+              {formatMessage({"id":"DETERMINING_SPEED", "defaultMessage":"Error: Media Permission Denied"})}
+            </div>
+              <Loader color="black" size="275px"/>
+          </div>
+        )
         break;
 
       case 'dialing':
@@ -373,6 +391,7 @@ class Main extends VertoBaseComponent {
           <video id="webcam" autoPlay="autoplay"  style={this.getStyle("videoStyles")}></video>
           {loggedInfo}
           {showSplash}
+          {testingSpeed}
         </div>
         {chatSideBar}
       </div>

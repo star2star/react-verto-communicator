@@ -1,7 +1,7 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import ToolTip from './tooltip';
-
+import { injectIntl } from 'react-intl'
 
 const propTypes = {
   lastNumber: React.PropTypes.string,
@@ -17,7 +17,7 @@ class LastCall extends VertoBaseComponent {
     this.call = this.call.bind(this);
   }
 
- 
+
 
   getDefaultStyle(styleName) {
       const styles = {
@@ -39,7 +39,8 @@ class LastCall extends VertoBaseComponent {
   }
 
   render() {
-    const theMsg = "Click To Dial";
+    const { formatMessage } = this.props.intl;
+    const theMsg = formatMessage({"id":"MENU_INFO", "defaultMessage":"Info Menu"});;
     let lastcall =  (<div onClick={this.call} style={this.getStyle('container')}>
                           <span style={this.getStyle('lastCallStyle')}>
                             {this.props.labelText}{this.props.lastNumber ? this.props.lastNumber :''}
@@ -59,5 +60,5 @@ class LastCall extends VertoBaseComponent {
 
 LastCall.propTypes = propTypes;
 
-export default LastCall;
+export default injectIntl(LastCall);
 // reviewed on 7/13/2016

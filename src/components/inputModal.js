@@ -17,13 +17,11 @@ const propTypes = {
 class InputModal extends VertoBaseComponent {
   constructor(props) {
     super(props);
-
     this.state = {inputVal: ''};
-
     this.changingInput = this.changingInput.bind(this);
   }
 
- 
+
 
   getDefaultStyle(styleName) {
     const styles = {

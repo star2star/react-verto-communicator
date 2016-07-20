@@ -68,7 +68,7 @@ const messages = {
   "BANDWIDTH_INFO_OUTGOING": "Utgående:",
   "BANDWIDTH_INFO_VIDEO_RES": "Videoupplösning:",
   "IN_CALL": "I Samtal:",
-  "LAST_CALL": "Senaste Samtal:",
+  "LAST_CALL": "Senaste Samtal:   ",
   "OPEN_NEW_WINDOW": "Öppna nytt fönster",
   "CHANGE_LOGIN_INFO": "Ändra inloggningsinformation",
   "LOGOUT": "Logga ut",

@@ -215,7 +215,7 @@ const doIncomingCall = (dialog) =>{
 
 const doMakeCall = (aPhoneNumber, appSettings) => {
   return dispatch => {
-    console.log('>>>> appSetttings: ', appSettings)
+    // console.log('>>>> appSetttings: ', appSettings)
     if (appSettings.settings.testSpeedJoin){
       // dispatches event so we can change screen layout
       dispatch({

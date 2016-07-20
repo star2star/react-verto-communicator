@@ -68,7 +68,7 @@ const messages = {
   "BANDWIDTH_INFO_OUTGOING": "发送：",
   "BANDWIDTH_INFO_VIDEO_RES": "视频分辨率：",
   "IN_CALL": "通话中：",
-  "LAST_CALL": "最近通话：",
+  "LAST_CALL": "最近通话：  ",
   "OPEN_NEW_WINDOW": "打开新窗口",
   "CHANGE_LOGIN_INFO": "修改登录信息",
   "LOGOUT": "退出登录",

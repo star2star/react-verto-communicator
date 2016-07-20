@@ -603,9 +603,9 @@ showSpeeds(){
 
     if (true && !this.state.showAltAppControls) {
       if (this.props.callInfo.currentCallId) {
-        lastCall = (<LastCall  ttPosition={!this.state.showAltAppControls ? "bottom" : "right"} labelText= {"In Call:     "} lastNumber={this.props.callInfo.lastNumber}  />);
+        lastCall = (<LastCall  ttPosition={!this.state.showAltAppControls ? "bottom" : "right"} labelText= {formatMessage({"id":"IN_CALL", "defaultMessage":"In Call"})} lastNumber={this.props.callInfo.lastNumber}  />);
       }else if (this.props.callInfo.lastNumber && this.props.auth.vcStatus == 'active' ) {
-        lastCall = (<LastCall  ttPosition={!this.state.showAltAppControls ? "bottom" : "right"} labelText= {"Last Call:     "} lastNumber={this.props.callInfo.lastNumber} cbClick={(number)=>{
+        lastCall = (<LastCall  ttPosition={!this.state.showAltAppControls ? "bottom" : "right"} labelText= {formatMessage({"id":"LAST_CALL", "defaultMessage":"Last Call:     "})} lastNumber={this.props.callInfo.lastNumber} cbClick={(number)=>{
           this.props.dispatch(doMakeCall(number, this.props.app));
         }} />);
       } else {

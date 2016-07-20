@@ -68,7 +68,7 @@ const messages = {
   "BANDWIDTH_INFO_OUTGOING": "Ausgehend:",
   "BANDWIDTH_INFO_VIDEO_RES": "Video Auflösung:",
   "IN_CALL": "Im Gespräch:",
-  "LAST_CALL": "Letzter Anruf:",
+  "LAST_CALL": "Letzter Anruf:   ",
   "OPEN_NEW_WINDOW": "Neues Fenster öffnen",
   "CHANGE_LOGIN_INFO": "Anmeldedaten verändern",
   "LOGOUT": "Abmelden",

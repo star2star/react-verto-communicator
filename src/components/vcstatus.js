@@ -15,7 +15,7 @@ class VCStatus extends VertoBaseComponent {
     super(props);
   }
 
- 
+
   getDefaultStyle(styleName) {
       const styles = {
             svgStyle: {

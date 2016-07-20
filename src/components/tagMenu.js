@@ -5,6 +5,7 @@ TagIconSVG,
 CaretUpIconSVG,
 CaretDownIconSVG } from './svgIcons';
 import ToolTip from './tooltip';
+import { injectIntl } from 'react-intl'
 
 const propTypes = {
   cbClick : React.PropTypes.func,
@@ -17,6 +18,9 @@ const defaultProps = {
 };
 
 class TagMenu extends VertoBaseComponent {
+
+
+
   constructor(props) {
     super(props);
     this.state = {'dropdownDisplayed': false};
@@ -25,7 +29,7 @@ class TagMenu extends VertoBaseComponent {
     TagMenu.closeMenu = this.closeMenu.bind(this);
   }
 
- 
+
   getDefaultStyle(styleName) {
     const styles = {
       container: {
@@ -80,13 +84,14 @@ class TagMenu extends VertoBaseComponent {
     }
   }
   render() {
+    const { formatMessage } = this.props.intl;
     const menuContainer = (
       <div className="menuContainer" style={this.getStyle('menu')} >
         {this.props.children}
       </div>
     );
 
-    const theMsg = "Info menu";
+    let theMsg = formatMessage({"id":"MENU_INFO", "defaultMessage":"Info Menu"});
     return (
         <span onClick={this.toggleMenu}  style={this.getStyle("container")}>
         <ToolTip name="info" place={this.props.ttPosition} msg={theMsg} auto={false} custStyle={{base:{marginTop: '10px'}}}>
@@ -103,5 +108,7 @@ class TagMenu extends VertoBaseComponent {
 
 TagMenu.propTypes = propTypes;
 TagMenu.defaultProps = defaultProps;
-export default TagMenu;
+export default injectIntl(TagMenu, {
+        withRef: true
+    });
 // reviewed on 7/14/2016
