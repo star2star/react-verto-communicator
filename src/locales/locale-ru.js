@@ -191,7 +191,9 @@ const messages = {
   "CALL_FROM": "Звонить из:",
   "ANSWER": "Ответ",
   "REJECT": "отклонять",
-  "ACTIVE": "активный",
-  "PLEASE_ENTER": "пожалуйста, введите правильный "
+  "ACTIVE": "aктивный",
+  "PLEASE_ENTER": "пожалуйста, введите правильный ",
+  "VIEW_ALERT": "Просмотр оповещения Вход ",
+  "NO_CALL": "Нет вызова"
   };
   module.exports = messages;

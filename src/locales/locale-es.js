@@ -191,6 +191,8 @@ const messages = {
   "ANSWER": "Responder",
   "REJECT": "Rechazar",
   "ACTIVE": "activo",
-  "PLEASE_ENTER": "por favor, introduza un valor valido "
+  "PLEASE_ENTER": "Por favor, introduza un valor valido ",
+  "VIEW_ALERT": "Ver registro de alertas ",
+  "NO_CALL": "ninguna llamada"
 };
 module.exports = messages;

@@ -192,6 +192,8 @@ const messages = {
   "ANSWER": "Antworten",
   "REJECT": "Ablehnen",
   "ACTIVE": "aktiv",
-  "PLEASE_ENTER": "Bitte geben Sie eine gültige "
+  "PLEASE_ENTER": "Bitte geben Sie eine gültige ",
+  "VIEW_ALERT": "Ansicht Alarmprotokoll ",
+  "NO_CALL": "kein Anruf"
 };
 module.exports = messages;

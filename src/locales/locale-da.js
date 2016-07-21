@@ -192,6 +192,8 @@ const messages = {
   "ANSWER": "Svar",
   "REJECT": "Afvise",
   "ACTIVE": "aktiv",
-  "PLEASE_ENTER": "angiv et gyldigt "
+  "PLEASE_ENTER": "Angiv et gyldigt ",
+  "VIEW_ALERT": "Se alarm log ",
+  "NO_CALL": "ingen opkald"
 };
 module.exports = messages;

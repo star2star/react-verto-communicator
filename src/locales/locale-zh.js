@@ -192,6 +192,8 @@ const messages = {
   "ANSWER": "回答",
   "REJECT": "拒絕",
   "ACTIVE": "活性",
-  "PLEASE_ENTER": "請輸入有效 "
+  "PLEASE_ENTER": "請輸入有效 ",
+  "VIEW_ALERT": "查看警報日誌",
+  "NO_CALL": "沒有呼叫"
   };
   module.exports = messages;

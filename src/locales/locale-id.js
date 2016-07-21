@@ -192,6 +192,8 @@ const messages = {
   "ANSWER": "Menjawab",
   "REJECT": "Menolak",
   "ACTIVE": "aktif",
-  "PLEASE_ENTER": "silahkan masukkan valid "
+  "PLEASE_ENTER": "Silahkan masukkan valid ",
+  "VIEW_ALERT": "Lihat Notifikasi Log ",
+  "NO_CALL": "tidak ada panggilan"
 };
 module.exports = messages;

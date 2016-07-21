@@ -40,7 +40,7 @@ class LastCall extends VertoBaseComponent {
 
   render() {
     const { formatMessage } = this.props.intl;
-    const theMsg = formatMessage({"id":"MENU_INFO", "defaultMessage":"Info Menu"});;
+    let theMsg = formatMessage({"id":"CLICK_DIAL", "defaultMessage":"Click to Dial"});
     let lastcall =  (<div onClick={this.call} style={this.getStyle('container')}>
                           <span style={this.getStyle('lastCallStyle')}>
                             {this.props.labelText}{this.props.lastNumber ? this.props.lastNumber :''}

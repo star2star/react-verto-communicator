@@ -76,7 +76,7 @@ const messages = {
   "HELP": "Pomoc",
   "CONTRIBUTORS": "Kontrybutorzy",
   "TITLE_PREVIEW_SETTINGS": "Skonfiguruj ustawienia kamery i mikrofonu.",
-  "CAMERA__SETTNGS": "Kamera:",
+  "CAMERA_SETTINGS": "Kamera:",
   "MIC_SETTINGS": "Mikrofon:",
   "SAVE": "Zapisz",
   "LOADING": "Ładowanie",
@@ -192,6 +192,8 @@ const messages = {
   "ANSWER": "Odpowiedź",
   "REJECT": "Odrzucać",
   "ACTIVE": "aktywny",
-  "PLEASE_ENTER": "Proszę podać poprawny "
+  "PLEASE_ENTER": "Proszę podać poprawny ",
+  "VIEW_ALERT": "Zobaczyć powiadomienie dziennik ",
+  "NO_CALL": "brak połączenia"
 };
 module.exports = messages;

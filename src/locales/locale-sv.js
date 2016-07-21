@@ -192,6 +192,8 @@ const messages = {
   "ANSWER": "Svar",
   "REJECT": "Avvisa",
   "ACTIVE": "aktiva",
-  "PLEASE_ENTER": "ange ett giltigt "
+  "PLEASE_ENTER": "Ange ett giltigt ",
+  "VIEW_ALERT": "Visa varningslogg ",
+  "NO_CALL": "inga samtal"
   };
   module.exports = messages;

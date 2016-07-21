@@ -609,7 +609,7 @@ showSpeeds(){
           this.props.dispatch(doMakeCall(number, this.props.app));
         }} />);
       } else {
-        lastCall = (<LastCall  ttPosition={!this.state.showAltAppControls ? "bottom" : "right"} labelText= {"No Call"} />);
+        lastCall = (<LastCall  ttPosition={!this.state.showAltAppControls ? "bottom" : "right"} labelText= {formatMessage({"id":"NO_CALL", "defaultMessage":"No Call"})} />);
       }
     }
     // settings here
@@ -666,7 +666,7 @@ showSpeeds(){
                   // TODO ta need to pass version and gitRev in to the About component
                   App.toggleModal((<About version="0.2.0" gitRev="xxxxx" cbClose={App.toggleModal}/>));
                 }} />
-                <MenuItem label="View Alert Log" cbAction={()=>{
+                <MenuItem label={formatMessage({"id":"VIEW_ALERT", "defaultMessage":"Alert Log"})} cbAction={()=>{
                   // TODO ta need to pass version and gitRev in to the About component
                   App.toggleModal((<AlertLog cbClose={App.toggleModal}/>));
                 }} />

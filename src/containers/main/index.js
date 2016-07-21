@@ -30,7 +30,7 @@ import Memberlist from '../../components/memberList';
 import TabbedContainer from '../../components/tabbedContainer';
 //import AlertService from '../../js/alertService';
 import AlertList from '../../components/alertList';
-import Loader from 'halogen/MoonLoader';
+import Loader from 'halogen/GridLoader';
 
 class Main extends VertoBaseComponent {
   constructor(props) {
@@ -259,7 +259,7 @@ class Main extends VertoBaseComponent {
             <div style={this.getStyle('testingStyle')}>
               {formatMessage({"id":"DETERMINING_SPEED", "defaultMessage":"Error: Media Permission Denied"})}
             </div>
-              <Loader color="black" size="275px"/>
+              <Loader color="black" size="150px"/>
           </div>
         )
         break;
