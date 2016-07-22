@@ -30,7 +30,7 @@ import Memberlist from '../../components/memberList';
 import TabbedContainer from '../../components/tabbedContainer';
 //import AlertService from '../../js/alertService';
 import AlertList from '../../components/alertList';
-import Loader from 'halogen/GridLoader';
+import Loader from 'halogen/ClipLoader';
 
 class Main extends VertoBaseComponent {
   constructor(props) {
@@ -123,9 +123,14 @@ class Main extends VertoBaseComponent {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        fontSize: '30px',
         paddingBottom: '30px',
-        fontSize: '30px'
-       }
+      },
+      loaderStyle:{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }
 
 
     };
@@ -220,6 +225,7 @@ class Main extends VertoBaseComponent {
         loggedInfo = (<div >Resolution Refresh .... in progress</div>);
         break;
 
+
       case 'loggedIn':
         loggedInfo = (
           <div style={this.getStyle("loggedInOutStyles")}>
@@ -259,7 +265,9 @@ class Main extends VertoBaseComponent {
             <div style={this.getStyle('testingStyle')}>
               {formatMessage({"id":"DETERMINING_SPEED", "defaultMessage":"Error: Media Permission Denied"})}
             </div>
-              <Loader color="black" size="150px"/>
+            <div style={this.getStyle('loaderStyle')}>
+              <Loader color="black" size="325px"/>
+            </div>
           </div>
         )
         break;

@@ -48,6 +48,7 @@ const app = (state, action)=>{
                 incomingBandwidth: 'default',
                 bandwidth: VideoConstants.BAND_WIDTH,
                 bestFrameRate: VideoConstants.FRAME_RATE,
+                isRefreshing: false,
                 ...lsSettings
               },
               contributors: ContributorService.getInstance().getContributors(),
@@ -60,13 +61,15 @@ const app = (state, action)=>{
   }
 
   switch (action.type) {
+    case 'RESOLUTION_REFRESH':
+      return { ...state, settings: { ...state.settings, isRefreshing: true } };
     case 'SPEED_TEST':
       //video quality only is available after login which is speed test time
       return { ...state, 'bandwidthInfo': action.data, settings: { ...state.settings, vidQual: action.data.vidQual, videoQuality: action.videoQuality } };
     case 'SETTINGS_UPDATE':
       //console.log("settings update JES: ", action.data);
-
-      const lSettings1 = { ...state.settings, ...action.data, bandwidth: VideoConstants.BAND_WIDTH};
+      //set isRefreshing to false
+      const lSettings1 = { ...state.settings, ...action.data, bandwidth: VideoConstants.BAND_WIDTH, isRefreshing: false};
       if (localStorage) {
         //save it
         localStorage.setItem('settings', JSON.stringify(lSettings1));

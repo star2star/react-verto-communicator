@@ -67,7 +67,8 @@ const doMediaCheck = () => {
 };
 
 // resolution
-const doResolutionRefresh = () => {
+const doResolutionRefresh = (skipValidation) => {
+  //set is refreshing to be tr
   return dispatch => {
     dispatch(doingResolutionRefresh());
     VertoService.refreshDevices((status) => {
@@ -76,7 +77,9 @@ const doResolutionRefresh = () => {
         const resolutionInstanceData = VertoService.getInstanceData();
         //console.log('------^^^^^^______', resolutionInstanceData);
         dispatch(doUpdateSettings(resolutionInstanceData));
-        dispatch(doValidation(4));
+        if(!skipValidation){
+          dispatch(doValidation(4));
+        }
       } else {
         dispatch({
           "type": "RESOLUTION_FAILED"
@@ -85,6 +88,7 @@ const doResolutionRefresh = () => {
     });
   };
 };
+
 
 const doSpeedTest = () => {
   return dispatch => {
@@ -120,6 +124,13 @@ const doingResolutionRefresh = () => {
   // rendering login through navigation
   return {
     "type": "RESOLUTION_REFRESH"
+  };
+};
+
+const doingDeviceRefresh = () => {
+  // rendering login through navigation
+  return {
+    "type": "DEVICE_REFRESH"
   };
 };
 //LOGIN
@@ -355,7 +366,9 @@ const doClearHistory = () => {
   };
 };
 
-export { doValidation, doBrowserCheck,
+
+
+export { doValidation, doBrowserCheck, doResolutionRefresh,
   doSubmitLogin, doShowLogin, doVertoLogin, doSubmitLogOut, doLogOut,
   doMakeCall, doMakeCallError, doIncomingCall, doSpeedTest, doShareScreen,
   doingMakeCall, doHungUp, doHangUp, doAnswer, doMuteMic, doConferenceData, doHold, doMuteVideo, doCallHeld,

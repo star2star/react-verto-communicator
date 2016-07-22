@@ -14,6 +14,7 @@ import SettingsMenuSelect from '../../components/settingsMenuSelect';
 import SettingsPreview from '../../components/settingsPreview';
 import { doSpeedTest } from '../main/action-creators';
 import { doSubmitLogOut } from '../main/action-creators';
+import { doResolutionRefresh } from '../main/action-creators';
 import { doUpdateSetting } from './action-creators';
 import App from '../../components/app';
 import About from '../../components/about';
@@ -23,7 +24,7 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import LastCall from '../../components/lastCall';
 import { doMakeCall } from '../main/action-creators';
 import AlertLog from '../../components/alertLog';
-
+import Loader from 'halogen/ClipLoader';
 // Need to close menu on resize so that if we pass media query limit then
 // normal size menu will reappear...
 window.onresize=()=>{
@@ -250,6 +251,9 @@ class AppBar extends VertoBaseComponent {
           },
           incomingSpacing: {
             padding: '10px 30px 10px 0px'
+          },
+          loaderStyle:{
+            display: 'none'
           }
     };
 
@@ -460,15 +464,22 @@ showSpeeds(){
                     defaultMessage="Preview Settings"
                 />
               </button>
-              <button
-                  style={{...this.getStyle('button')}}
-                  onClick={()=>{console.log('Refresh Device List Clicked');}}
-              >
-                <FormattedMessage
-                    id="REFRESH_DEVICE_LIST"
-                    defaultMessage="Refresh Device List"
-                />
-              </button>
+              <span>
+                <button
+                    style={{...this.getStyle('button')}}
+                    onClick={()=>{
+                      this.props.dispatch(doResolutionRefresh(false));
+                    }}
+                >
+                  <FormattedMessage
+                      id="REFRESH_DEVICE_LIST"
+                      defaultMessage="Refresh Device List"
+                  />
+                  <div style={this.getStyle('loaderStyle')}>
+                    <Loader color="black" size="10px"/>
+                  </div>
+                </button>
+              </span>
             </div>
           </div>
           <div
@@ -688,7 +699,7 @@ showSpeeds(){
 }
 
 export default connect((state)=>{
-  //console.log('----STORE in appbar ----', state);
+  console.log('----STORE in appbar ----', state.app.settings.isRefreshing);
   return ({
     settings: state.app.settings,
     bandwidthInfo: state.app.bandwidthInfo,
@@ -697,7 +708,9 @@ export default connect((state)=>{
     auth: state.auth,
     callInfo: state.callInfo,
     contributorsData: state.app.contributors,
-    chatData: state.auth.conferenceCall && state.auth.conferenceCall.messages
+    chatData: state.auth.conferenceCall && state.auth.conferenceCall.messages,
+    isRefreshing: state.app.settings.isRefreshing
+
   });
 })(injectIntl(Radium(AppBar)));
 // reviewed on 7/15/2016
