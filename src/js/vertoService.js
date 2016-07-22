@@ -1,6 +1,7 @@
 import VideoConstants from './VideoConstants';
 import md5 from 'md5';
 import CallHistoryService from './callHistoryService';
+import url from 'url';
 
 // private stuff
 let _callbacks;
@@ -18,6 +19,9 @@ class VertoService {
     this.subscriptions = {};
     this.nextSubscriptionId = 0;
     const xInstance = this;
+
+    this.protocol = url.parse(location.href).protocol;
+console.log('>>>>>', location.href, url, url.parse(location.href), this.protocol);
 
 
     window.v = this;
@@ -625,7 +629,7 @@ class VertoService {
         mirrorInput: settings.settings.mirrorInput,
         userVariables: {
           email : _verto.verto.options.loginParams.email,
-          avatar: "http://gravatar.com/avatar/" + md5(_verto.verto.options.loginParams.email,) + ".png?s=600"
+          avatar: that.protocol +"//gravatar.com/avatar/" + md5(_verto.verto.options.loginParams.email,) + ".png?s=600"
         }
       });
 
@@ -699,12 +703,14 @@ class VertoService {
 
   makeCall(destination, settings) {
     //console.log('calling desitnation', destination);
+
     if (!_verto.verto) {
       const message = "not connected";
-      return xInstance.notify('makeCallError', 'false', {destination, message });
+      return this.notify('makeCallError', 'false', {destination, message });
     }
     // ok make a call
     //console.log('DATA & VERTO:', this._data, settings.settings, _verto.verto, md5(_verto.verto.options.loginParams.email));
+
     const phoneObject = {
       destination_number: destination,
       caller_id_name: _verto.verto.options.loginParams.name,
@@ -721,7 +727,7 @@ class VertoService {
       mirrorInput: settings.settings.mirrorInput, //storage.data.mirrorInput,
       userVariables: {
         email :  _verto.verto.options.loginParams.email, //storage.data.email,
-        avatar:  "http://gravatar.com/avatar/" + md5(_verto.verto.options.loginParams.email) + ".png?s=75"    // "http://gravatar.com/avatar/" + md5(storage.data.email) + ".png?s=600"
+        avatar:  this.protocol + "//gravatar.com/avatar/" + md5(_verto.verto.options.loginParams.email) + ".png?s=75"
       }
     };
 

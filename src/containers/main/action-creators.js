@@ -159,8 +159,14 @@ const doShowLogin = () => {
 // called by click
 const doSubmitLogin = (data) => {
   return dispatch => {
+    // fix callerid here
+    //console.log('>>>>>>>>', data);
+    if (!data.callerid || data.callerid.length == 0 ){
+      data.callerid = data.user;
+    }
     // dispatching so we change from not authorized to pending
     dispatch(doingLogin(data));
+
     // Thunk here
     VertoService.getInstance().login( data);
     //dispatch(doVertoLogin(data)); // this sent the WS request

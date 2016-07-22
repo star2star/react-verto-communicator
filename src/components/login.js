@@ -109,9 +109,9 @@ class Login extends VertoBaseComponent{
     if (this.state.settings.password.length === 0 ){
       newState.emptyFields.push('password');
     }
-    if (this.state.settings.callerid.length === 0 ){
-      newState.emptyFields.push('callerid');
-    }
+    // if (this.state.settings.callerid.length === 0 ){
+    //   newState.emptyFields.push('callerid');
+    // }
     if (this.state.settings.hostname.length === 0 ){
       newState.emptyFields.push('hostname');
     }
