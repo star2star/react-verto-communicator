@@ -67,25 +67,27 @@ const doMediaCheck = () => {
 };
 
 // resolution
-const doResolutionRefresh = (skipValidation) => {
-  //set is refreshing to be tr
-  return dispatch => {
-    dispatch(doingResolutionRefresh());
-    VertoService.refreshDevices((status) => {
-      //console.log('doRefresh Resolution: ', status);
-      if (status){
-        const resolutionInstanceData = VertoService.getInstanceData();
-        //console.log('------^^^^^^______', resolutionInstanceData);
-        dispatch(doUpdateSettings(resolutionInstanceData));
-        if(!skipValidation){
-          dispatch(doValidation(4));
-        }
-      } else {
-        dispatch({
-          "type": "RESOLUTION_FAILED"
+const doResolutionRefresh = (skipValidation=false, refresh) => {
+  //console.log(this..app.settings.isRefreshing);
+  if (!refresh){
+    return dispatch => {
+        dispatch(doingResolutionRefresh());
+        VertoService.refreshDevices((status) => {
+          //console.log('doRefresh Resolution: ', status);
+          if (status){
+            const resolutionInstanceData = VertoService.getInstanceData();
+            //console.log('------^^^^^^______', resolutionInstanceData);
+            dispatch(doUpdateSettings(resolutionInstanceData));
+            if(!skipValidation){
+              dispatch(doValidation(4));
+            }
+          } else {
+            dispatch({
+              "type": "RESOLUTION_FAILED"
+            });
+          }
         });
-      }
-    });
+    }
   };
 };
 

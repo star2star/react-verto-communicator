@@ -50,6 +50,15 @@ class AppBar extends VertoBaseComponent {
     //document.body.removeEventListener('click', (e)=>{e.preventDefault(); this.handleCloseDropdowns();});
   }
 
+  componentDidMount(){
+    document.getElementById('chatVideoWrapper').addEventListener('click', (event)=>{
+      //console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ß')
+      this.handleCloseDropdowns();
+    });
+  }
+
+
+
 
   getDefaultStyle(styleName) {
     const styles = {
@@ -252,7 +261,12 @@ class AppBar extends VertoBaseComponent {
           incomingSpacing: {
             padding: '10px 30px 10px 0px'
           },
-          loaderStyle:{
+          loaderShowStyle:{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          },
+          loaderHiddenStyle:{
             display: 'none'
           }
     };
@@ -314,7 +328,7 @@ showSpeeds(){
     let netSpeedDisplay;
     if (this.state.showSpeeds === false) {
       netSpeedDisplay = (
-        <div className='netSpeedContainer' style={{...this.getStyle('netSpeedContainer')}}>
+        <div className='netSpeedContainer' style={{...this.getStyle('netSpeedContainer')}} >
           <span style={{...this.getStyle('outgoingSpacing')}}>
             <FormattedMessage
                 id="BANDWIDTH_INFO_OUTGOING"
@@ -330,7 +344,7 @@ showSpeeds(){
        </div>);
     } else {
       netSpeedDisplay = (
-        <div className='netSpeedContainer' style={{...this.getStyle('netSpeedContainer')}}>
+        <div className='netSpeedContainer' style={{...this.getStyle('netSpeedContainer')}} >
          <span style={{...this.getStyle('outgoingSpacing')}}>
            <FormattedMessage
                id="BANDWIDTH_INFO_OUTGOING"
@@ -423,7 +437,11 @@ showSpeeds(){
       return (
         <div
             className="menuContainer"
-            style={{...this.getStyle('menu')}}
+            style={{...this.getStyle('menu')}} onClick={(event)=>{
+              //console.log('settttttttttttttttttttt')
+              event.stopPropagation();
+              event.nativeEvent.stopImmediatePropagation();
+            }}
         >
           <div
               className="column1"
@@ -468,14 +486,14 @@ showSpeeds(){
                 <button
                     style={{...this.getStyle('button')}}
                     onClick={()=>{
-                      this.props.dispatch(doResolutionRefresh(false));
+                      this.props.dispatch(doResolutionRefresh( false ,this.props.app.settings.isRefreshing));
                     }}
                 >
                   <FormattedMessage
                       id="REFRESH_DEVICE_LIST"
                       defaultMessage="Refresh Device List"
                   />
-                  <div style={this.getStyle('loaderStyle')}>
+                  <div style={this.props.app.settings.isRefreshing ? this.getStyle('loaderShowStyle') : this.getStyle('loaderHiddenStyle')}>
                     <Loader color="black" size="10px"/>
                   </div>
                 </button>
@@ -580,6 +598,8 @@ showSpeeds(){
     // otherwise leave set it to appControlStyles.
     let acStyles = this.getStyle("appControlStyles");
 
+    const loaderStyle = this.props.app.settings.isRefreshing ? this.getStyle('loaderShowStyle') : this.getStyle('loaderHiddenStyle');
+
     if (this.state.showAltAppControls) {
       acStyles =  this.getStyle("altAppControlStyles");
     }
@@ -628,7 +648,12 @@ showSpeeds(){
     const settingsContainer = this.buildSettingsContainer();
 
     return (
-        <div className="appbar" style={this.getStyle('appbarStyles')}>
+        <div className="appbar" style={this.getStyle('appbarStyles')} onClick={(event)=>{
+          //console.log(">>>>>>>appbar>>>>>>onlick>>>>>");
+          this.handleCloseDropdowns();
+          event.stopPropagation();
+          event.nativeEvent.stopImmediatePropagation();
+        }}>
           <span className="altMenu" style={this.getStyle("altMenuStyles")} onClick={this.handleAltMenuClick}>
             <MenuIconSVG svgStyle={this.getStyle("altMenuSvgStyles")} />
           </span>
@@ -699,7 +724,7 @@ showSpeeds(){
 }
 
 export default connect((state)=>{
-  console.log('----STORE in appbar ----', state.app.settings.isRefreshing);
+  //console.log('----STORE in appbar ----', state);
   return ({
     settings: state.app.settings,
     bandwidthInfo: state.app.bandwidthInfo,
@@ -708,8 +733,7 @@ export default connect((state)=>{
     auth: state.auth,
     callInfo: state.callInfo,
     contributorsData: state.app.contributors,
-    chatData: state.auth.conferenceCall && state.auth.conferenceCall.messages,
-    isRefreshing: state.app.settings.isRefreshing
+    chatData: state.auth.conferenceCall && state.auth.conferenceCall.messages
 
   });
 })(injectIntl(Radium(AppBar)));

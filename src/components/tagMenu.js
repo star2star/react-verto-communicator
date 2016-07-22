@@ -93,6 +93,10 @@ class TagMenu extends VertoBaseComponent {
 
     let theMsg = formatMessage({"id":"MENU_INFO", "defaultMessage":"Click to Dial"});
     return (
+      <div onClick={(event)=>{
+        event.stopPropagation();
+        event.nativeEvent.stopImmediatePropagation();
+      }}>
         <span onClick={this.toggleMenu}  style={this.getStyle("container")}>
         <ToolTip name="info" place={this.props.ttPosition} msg={theMsg} auto={false} custStyle={{base:{marginTop: '10px'}}}>
           <TagIconSVG svgStyle={{...this.getStyle('icon'), fill: 'white'}}  />
@@ -102,6 +106,7 @@ class TagMenu extends VertoBaseComponent {
         </ToolTip>
             {menuContainer}
         </span>
+      </div>  
     );
   }
 }

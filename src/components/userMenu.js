@@ -98,9 +98,13 @@ class UserMenu extends VertoBaseComponent {
     }else{
       theMsg = formatMessage({"id":"SETTINGS_USER", "defaultMessage":"Disconnected"});
     }
-
+    //nClick={this.toggleMenu.bind(this)}
     return (
-        <span onClick={this.toggleMenu.bind(this)}  style={this.getStyle("container")}>
+      <div onClick={(event)=>{
+        event.stopPropagation();
+        event.nativeEvent.stopImmediatePropagation();
+      }}>
+        <span onClick={this.toggleMenu.bind(this)}  style={this.getStyle("container")} >
           <ToolTip name="user" place={this.props.ttPosition} msg={theMsg} custStyle={{base:{marginTop: '10px'}}} >
             <AvatarSVG svgStyle={{...this.getStyle('icon')}}  />
               {this.state.dropdownDisplayed ?
@@ -109,7 +113,7 @@ class UserMenu extends VertoBaseComponent {
           </ToolTip>
           {menuContainer}
         </span>
-
+      </div>  
     );
   }
 }

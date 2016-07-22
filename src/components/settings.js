@@ -32,7 +32,7 @@ class Settings extends VertoBaseComponent {
     Settings.toggleSettings = this.showMenu;
   }
 
- 
+
 
   closeMenu(){
     this.props.cbToggleShowSettings(false);
@@ -81,7 +81,11 @@ class Settings extends VertoBaseComponent {
     }
     // console.log('settings render props: ', this.props.settingsData);
     return (
-      <div  style={this.getStyle("container")}>
+      <div  style={this.getStyle("container")} onClick={(event)=>{
+        console.log('settttttttttttttttttttt')
+        event.stopPropagation();
+        event.nativeEvent.stopImmediatePropagation();
+      }}>
         <span onClick={this.showMenu.bind(this)}  >
           <ToolTip name="settings" place={this.props.ttPosition} msg={theMsg} custStyle={{base: {marginTop:'10px'}}}>
             <SettingsIconSVG svgStyle={{...this.getStyle('icon')}}  />
