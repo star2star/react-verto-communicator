@@ -149,7 +149,7 @@ const doShowLogin = () => {
 const doSubmitLogin = (data) => {
   return dispatch => {
     // fix callerid here
-    console.log('>>>>>>>>', data);
+    //console.log('>>>>>>>>', data);
     if (!data.callerid || data.callerid.length == 0 ){
       data.callerid = data.user;
     }
