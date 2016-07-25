@@ -59,9 +59,9 @@ class Dialpad extends VertoBaseComponent {
       },
       dpad: {
 
-        display: this.state.showingCallHistory ? 'none' : 'flex',
+        //display: this.state.showingCallHistory ? 'none' : 'flex',
         flexDirection: "column",
-        height: this.state.showingCallHistory ? '0px': '100%',
+        //height: this.state.showingCallHistory ? '0px': '100%',
         width: '100%'
       },
       header: {
@@ -179,7 +179,7 @@ class Dialpad extends VertoBaseComponent {
 
   generateContent(style, i){
     var callHistory = (
-      <span style={{...style, position: 'absolute'}}>
+      <span style={{...style, position: 'absolute', display: this.state.currItem==1 ? 'flex' : 'none'}}>
         <div
             style={{...this.getStyle('cont') }}
         >
@@ -203,7 +203,7 @@ class Dialpad extends VertoBaseComponent {
     </span>
     );
     var dialpad = (
-        <span style={{...style, position: 'absolute'}}>
+        <span style={{...style, position: 'absolute', display: this.state.currItem==0 ? 'block' : 'none'}}>
           <div
               style={{...this.getStyle('cont') }}
           >

@@ -370,7 +370,7 @@ class CallHistory extends VertoBaseComponent {
     }
   }
 
- 
+
 
   getDefaultStyle(styleName) {
     const styles = {
@@ -398,7 +398,7 @@ class CallHistory extends VertoBaseComponent {
   generateContent(style, i) {
     var historyItems = (
       <span
-          style={{...style, position: 'absolute'}}
+          style={{...style, position: 'absolute', display: this.state.currItem==0 ? 'block' : 'none'}}
       >
       <HistoryItems
           key={i}
@@ -416,7 +416,7 @@ class CallHistory extends VertoBaseComponent {
 
     var detailItems = (
       <span
-          style={{...style, position: 'absolute'}}
+          style={{...style, position: 'absolute', display: this.state.currItem==0 ? 'none' : 'block'}}
       >
         <DetailItems
             key={i}
