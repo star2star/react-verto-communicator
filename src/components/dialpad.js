@@ -181,12 +181,12 @@ class Dialpad extends VertoBaseComponent {
     let myReturnComp;
     if(i==1){
       //console.log('>>>>>>>', style.left, style.width);
-      var CH = 'none'
+      let callHistoryDisplayStyle = 'none'
       if(style.left < style.width){
-        CH = 'flex';
+        callHistoryDisplayStyle = 'flex';
       }
       myReturnComp = (
-        <span style={{...style, position: 'absolute', display: CH}}>
+        <span style={{...style, position: 'absolute', display: callHistoryDisplayStyle}}>
           <div
               style={{...this.getStyle('cont') }}
           >
@@ -212,13 +212,13 @@ class Dialpad extends VertoBaseComponent {
     }
 
     if (i==0){
-      var DP = 'block';
+      let dialPadDisplayStyle = 'block';
       //console.log('>>>>>>>', style.left, style.width);
       if(style.left*-1==style.width){
-        DP = 'none';
+        dialPadDisplayStyle = 'none';
       }
       myReturnComp = (
-          <span style={{...style, position: 'absolute', display: DP}}>
+          <span style={{...style, position: 'absolute', display: dialPadDisplayStyle}}>
             <div
                 style={{...this.getStyle('cont') }}
             >
@@ -313,7 +313,6 @@ class Dialpad extends VertoBaseComponent {
 
 }
 
-    //var renderedComponents = [dialpad, callHistory];
 
     return myReturnComp;
   }

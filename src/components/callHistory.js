@@ -398,14 +398,14 @@ class CallHistory extends VertoBaseComponent {
   generateContent(style, i) {
     let myReturnComp;
     if (i==0){
-      var CH = 'block';
+      let callHistoryDisplayStyle = 'block';
       //console.log('>>><><>>>>>>', style.left);
       if(style.left*-1==style.width){
-        CH = 'none';
+        callHistoryDisplayStyle = 'none';
       }
       myReturnComp = (
         <span
-            style={{...style, position: 'absolute', display: CH}}
+            style={{...style, position: 'absolute', display: callHistoryDisplayStyle}}
         >
         <HistoryItems
             key={i}
@@ -422,13 +422,13 @@ class CallHistory extends VertoBaseComponent {
       );
     }
     if (i==1){
-      var DV = 'none';
+      let detailViewDisplayStyle = 'none';
       if(style.left < style.width){
-        DV = 'block';
+        detailViewDisplayStyle = 'block';
       }
       myReturnComp = (
         <span
-            style={{...style, position: 'absolute', display: DV}}
+            style={{...style, position: 'absolute', display: detailViewDisplayStyle}}
         >
           <DetailItems
               key={i}
