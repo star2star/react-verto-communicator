@@ -396,42 +396,55 @@ class CallHistory extends VertoBaseComponent {
   }
 
   generateContent(style, i) {
-    var historyItems = (
-      <span
-          style={{...style, position: 'absolute', display: this.state.currItem==0 ? 'block' : 'none'}}
-      >
-      <HistoryItems
-          key={i}
-          history={this.props.history}
-          cbClick={this.clickHandler}
-          cbBack={this.props.cbBack}
-          cbShowCalls={(num)=>{
-            this.setState({...this.state, currItem : 1, callItem: num});
-          }}
-          cbClearHistory={this.props.cbClearHistory}
-          cbCall={this.props.cbCall}
-      />
-      </span>
-    );
-
-    var detailItems = (
-      <span
-          style={{...style, position: 'absolute', display: this.state.currItem==0 ? 'none' : 'block'}}
-      >
-        <DetailItems
+    let myReturnComp;
+    if (i==0){
+      var CH = 'block';
+      //console.log('>>><><>>>>>>', style.left);
+      if(style.left*-1==style.width){
+        CH = 'none';
+      }
+      myReturnComp = (
+        <span
+            style={{...style, position: 'absolute', display: CH}}
+        >
+        <HistoryItems
             key={i}
-            cbBack={()=>{
-              this.clickHandler();
+            history={this.props.history}
+            cbClick={this.clickHandler}
+            cbBack={this.props.cbBack}
+            cbShowCalls={(num)=>{
+              this.setState({...this.state, currItem : 1, callItem: num});
             }}
+            cbClearHistory={this.props.cbClearHistory}
             cbCall={this.props.cbCall}
-            callerId={this.state.callItem}
         />
-      </span>
-    );
+        </span>
+      );
+    }
+    if (i==1){
+      var DV = 'none';
+      if(style.left < style.width){
+        DV = 'block';
+      }
+      myReturnComp = (
+        <span
+            style={{...style, position: 'absolute', display: DV}}
+        >
+          <DetailItems
+              key={i}
+              cbBack={()=>{
+                this.clickHandler();
+              }}
+              cbCall={this.props.cbCall}
+              callerId={this.state.callItem}
+          />
+        </span>
+      );
+    }
 
-    var renderedComponent = [historyItems, detailItems];
+    //var renderedComponent = [historyItems, detailItems];
 
-    return renderedComponent[i];
+    return myReturnComp;
   }
 
   render(){
