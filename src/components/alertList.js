@@ -6,7 +6,7 @@ const propTypes = {
   compStyle : React.PropTypes.object
 };
 
-export default class AlertList extends VertoBaseComponent {
+class AlertList extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {alertArray: []};

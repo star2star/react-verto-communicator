@@ -14,7 +14,7 @@ const propTypes = {
   userConfStatus: React.PropTypes.object
 };
 
-export default class UserVideoControls extends VertoBaseComponent {
+class UserVideoControls extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {};
@@ -28,7 +28,7 @@ export default class UserVideoControls extends VertoBaseComponent {
     document.getElementById("webcam").removeEventListener('dblclick', this.handleToggleFullScreen);
   }
 
- 
+
 
   getDefaultStyle(styleName) {
     const styles = {

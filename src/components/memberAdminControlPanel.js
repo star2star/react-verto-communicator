@@ -11,13 +11,13 @@ const propTypes = {
   member : React.PropTypes.object.isRequired
 };
 
-export default class AdminControls extends VertoBaseComponent {
+class AdminControls extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {};
   }
 
- 
+
 
   getDefaultStyle(styleName) {
     const styles = {

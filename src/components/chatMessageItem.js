@@ -10,7 +10,7 @@ const propTypes = {
 
 };
 
-export default class ChatMessageItem extends VertoBaseComponent {
+class ChatMessageItem extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {};

@@ -9,7 +9,7 @@ const propTypes = {
   compStyle : React.PropTypes.object
 };
 
-export default class AlertLog extends VertoBaseComponent {
+class AlertLog extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {};
