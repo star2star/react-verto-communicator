@@ -1,6 +1,14 @@
 react-verto-communicator
 ========================
 
+Status
+======
+
+Version 2.0.0 - in progress - 2/17/2017
+
+Installation Steps
+==================
+
 Requires node.js version 4 or higher to run build
 
 Step 1 - clone repository
