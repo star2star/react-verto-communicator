@@ -38,13 +38,11 @@ export default Root;
   //   <Route path="/" component={App}>
   //     <IndexRoute component={Main} />
   //     <Route path="app" component={Main}>
-  //       <Route path="splash" component={Splash} />
-  //       <Route path="login" component={Login} />
+  //       <Route path="splash" component={Splash} /> // ></Route>
+  //
+  //       <Route path="login" component={AppLogin} />
   //       <Route path="resolutionRefresh" component={ResolutionRefresh} />
   //       <Route path="loggedIn" component={LoggedIn} />
-  //       <Route path="resolutionFailed" component={ResolutionFailed} />
-  //       <Route path="bns" component={Bns} />
-  //       <Route path="noMedia" component={NoMedia} />
   //       <Route path="speedTest" component={SpeedTest} />
   //       <Route path="dialing" component={Dialing} />
   //       <Route path="callInProgress" component={CallInProgress} />

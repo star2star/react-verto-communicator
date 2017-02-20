@@ -158,6 +158,7 @@ class Main extends VertoBaseComponent {
     // if chat will be hidden (currently showing), then we need to keep track of how many
     // chat messages are received and update the count for the chat message badge
     // if chat is will be showing (currently hidden), then the message count in state should be 0
+    console.log('handleToggleChat')
 
     this.setState({...this.state, showChat: !this.state.showChat, msgCountAtToggle: this.props.chatMsgCount, newMsgCount: 0 });
   }
@@ -358,11 +359,12 @@ class Main extends VertoBaseComponent {
                   style={contentStyle}
               >
                 <TabbedContainer tabLabels={["Members", "Chat"]}>
-                  <Memberlist members={Object.keys(this.props.confData.users).map(
-                    (k)=>{
-                        return ({...this.props.confData.users[k]});
-                      }
-                    )}
+                  <Memberlist
+                      members={Object.keys(this.props.confData.users).map(
+                        (k)=>{
+                          return ({...this.props.confData.users[k]});
+                        }
+                      )}
                       isModerator={this.props.confData.currentRole == "moderator"}
                       allowPresenter={this.props.confData.allowPresenter}
                       hasMultipleCanvases={this.props.confData.hasMultipleCanvases}
