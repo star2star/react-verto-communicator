@@ -16,7 +16,7 @@ import { doSpeedTest } from '../main/action-creators';
 import { doSubmitLogOut } from '../main/action-creators';
 import { doResolutionRefresh } from '../main/action-creators';
 import { doUpdateSetting } from './action-creators';
-import App from '../../components/app';
+import App from '../../routes/app';
 import About from '../../components/about';
 import Contributors from '../../components/contributors';
 import { MenuIconSVG } from '../../components/svgIcons';
