@@ -1,5 +1,5 @@
 import React from 'react';
-import VertoBaseComponent from '../../components/vertobasecomponent';
+import VertoBaseComponent from '../components/vertobasecomponent';
 import Radium from 'radium';
 import { connect } from 'react-redux';
 //import ReactTooltip from 'react-tooltip';
@@ -17,19 +17,19 @@ import {
     doSendConfCommand,
     doShareScreen,
     doClearHistory }
-from './action-creators';
-import Splash from '../../components/splash';
-import Login from '../../components/login';
-import Dialpad from '../../components/dialpad';
+from '../containers/main/action-creators';
+import Splash from '../components/splash';
+import Login from '../components/login';
+import Dialpad from '../components/dialpad';
 import {injectIntl} from 'react-intl';
-import CallProgress from '../../components/callprogress';
-import Dialing from '../../components/dialing';
-import IncomingCall from '../../components/incomingcall';
-import ChatSession from '../../components/chatSession';
-import Memberlist from '../../components/memberList';
-import TabbedContainer from '../../components/tabbedContainer';
+import CallProgress from '../components/callprogress';
+import Dialing from '../components/dialing';
+import IncomingCall from '../components/incomingcall';
+import ChatSession from '../components/chatSession';
+import Memberlist from '../components/memberList';
+import TabbedContainer from '../components/tabbedContainer';
 //import AlertService from '../../js/alertService';
-import AlertList from '../../components/alertList';
+import AlertList from '../components/alertList';
 import Loader from 'halogen/ClipLoader';
 
 class Main extends VertoBaseComponent {

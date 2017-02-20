@@ -10,6 +10,7 @@ import VertoService from './js/vertoService';
 import reducer from './containers/reducers.js';
 import Messages from './js/messages';
 import App from './components/app';
+import Root from './root';
 import {doValidation, doLogOut, doVertoLogin, doMakeCallError, doHungUp, doCallHeld,
    doingMakeCall, doIncomingCall, doConferenceData, doReceiveChat } from './containers/main/action-creators';
 import AlertService from './js/alertService';
@@ -134,7 +135,7 @@ ReactDOM.render((
   <Provider store={store}>
     <IntlProvider locale={locale} messages={messages}>
       <StyleRoot>
-        <App />
+        <Root />
       </StyleRoot>
     </IntlProvider>
   </Provider>

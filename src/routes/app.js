@@ -46,7 +46,6 @@ class App extends VertoBaseComponent {
         <AppBar />
         {this.props.children}
         {this.modal}
-
       </div>);
 
   }
