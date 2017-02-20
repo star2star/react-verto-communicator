@@ -1,7 +1,7 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import Modal from 'react-modal';
-import App from './app';
+import App from '../routes/app';
 import ContributorsListItem from './contributorsListItem';
 import Radium from 'radium';
 import { FormattedMessage } from 'react-intl';

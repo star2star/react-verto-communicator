@@ -1,6 +1,6 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
-import App from './app'; // for transfer
+import App from '../routes/app'; // for transfer
 import ControlItem from './controlItem';
 import InputModal from './inputModal';
 import { injectIntl } from 'react-intl';
