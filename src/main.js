@@ -9,7 +9,7 @@ import thunk from 'redux-thunk';
 import VertoService from './js/vertoService';
 import reducer from './containers/reducers.js';
 import Messages from './js/messages';
-import App from './components/app';
+import App from './routes/app';
 import Root from './root';
 import {doValidation, doLogOut, doVertoLogin, doMakeCallError, doHungUp, doCallHeld,
    doingMakeCall, doIncomingCall, doConferenceData, doReceiveChat } from './containers/main/action-creators';
