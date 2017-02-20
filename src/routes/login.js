@@ -2,6 +2,10 @@ import React from 'react';
 import Login from '../components/login';
 import { doSubmitLogin } from './action-creators';
 import VertoBaseComponent from '../components/vertobasecomponent';
+import { connect } from 'react-redux';
+import {injectIntl} from 'react-intl';
+import Radium from 'radium';
+import { compose } from 'recompose';
 
 class AppLogin extends VertoBaseComponent {
 
@@ -12,9 +16,8 @@ class AppLogin extends VertoBaseComponent {
 
   getDefaultStyle(styleName) {
     const styles = {
-      logoStyles: {
-        textAlign: 'center',
-        margin: '15px 0px'
+      loggedInOutStyles: {
+        margin: 'auto'
       }
     };
     return (styles[styleName]);
@@ -34,4 +37,11 @@ class AppLogin extends VertoBaseComponent {
 
 }
 
-export default AppLogin;
+const hocComponent = compose(injectIntl, Radium, connect((state)=>{
+      //console.log('Contacts -- route state', state);
+      return ({
+        auth: state.auth
+      });
+  }));
+
+export default hocComponent(AppLogin);
