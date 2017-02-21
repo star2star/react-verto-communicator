@@ -1,6 +1,6 @@
 import React from 'react';
 import Login from '../components/login';
-import { doSubmitLogin } from './action-creators';
+import { doSubmitLogin } from '../containers/main/action-creators';
 import VertoBaseComponent from '../components/vertobasecomponent';
 import { connect } from 'react-redux';
 import {injectIntl} from 'react-intl';
@@ -38,7 +38,6 @@ class AppLogin extends VertoBaseComponent {
 }
 
 const hocComponent = compose(injectIntl, Radium, connect((state)=>{
-      //console.log('Contacts -- route state', state);
       return ({
         auth: state.auth
       });
