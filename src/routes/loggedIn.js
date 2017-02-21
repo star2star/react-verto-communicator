@@ -1,17 +1,21 @@
 import React from 'react';
-import Login from '../components/login';
-import { doSubmitLogin } from '../containers/main/action-creators';
+import Dialpad from '../components/dialpad';
 import VertoBaseComponent from '../components/vertobasecomponent';
 import { connect } from 'react-redux';
 import {injectIntl} from 'react-intl';
 import Radium from 'radium';
 import { compose } from 'recompose';
+import { doClearHistory, doMakeCall } from '../containers/main/action-creators';
 import { fromJS } from 'immutable';
-class AppLogin extends VertoBaseComponent {
+
+class LoggedIn extends VertoBaseComponent {
 
   constructor(props) {
     super(props);
     this.state={};
+
+    this.handleClearHistory = this.handleClearHistory.bind(this);
+    this.makeCall = this.makeCall.bind(this);
   }
 
   getDefaultStyle(styleName) {
@@ -27,15 +31,21 @@ class AppLogin extends VertoBaseComponent {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
   }
 
+  handleClearHistory(){
+    console.log('at handleClearHistory()');
+    this.props.dispatch(doClearHistory());
+  }
+
+  makeCall(number) {
+    //console.log('calling ...', number, this.props.app);
+    this.props.dispatch(doMakeCall(number, this.props.app));
+  }
+
   render() {
     return(
       <div style={this.getStyle("loggedInOutStyles")}>
-        <Login cbClick={(data)=>{
-          // fix websocket url
-          this.props.dispatch(doSubmitLogin({ ...data, wsURL: data.websocketurl }));
-              }}
-            settings={this.props.auth.loginSettings} />
-    </div>
+        <Dialpad cbCall={this.makeCall} cbClearHistory={this.handleClearHistory} lastNumber={this.props.callInfo.lastNumber} nbrToDial="" />
+      </div>
     );
   }
 
@@ -43,8 +53,9 @@ class AppLogin extends VertoBaseComponent {
 
 const hocComponent = compose(injectIntl, Radium, connect((state)=>{
       return ({
-        auth: state.auth
+        app: state.app,
+        callInfo: state.callInfo
       });
   }));
 
-export default hocComponent(AppLogin);
+export default hocComponent(LoggedIn);
