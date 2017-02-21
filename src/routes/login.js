@@ -7,6 +7,7 @@ import {injectIntl} from 'react-intl';
 import Radium from 'radium';
 import { compose } from 'recompose';
 import { fromJS } from 'immutable';
+
 class AppLogin extends VertoBaseComponent {
 
   constructor(props) {

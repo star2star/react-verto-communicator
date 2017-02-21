@@ -17,8 +17,9 @@ class AppDialing extends VertoBaseComponent {
 
   getDefaultStyle(styleName) {
     const styles = {
-      loggedInOutStyles: {
-        margin: 'auto'
+      dialingStyle : {
+        flex:'1',
+        width: '40vw'
       }
     };
     return (styles[styleName]);
@@ -57,7 +58,8 @@ class AppDialing extends VertoBaseComponent {
 
 const hocComponent = compose(injectIntl, Radium, connect((state)=>{
       return ({
-        callInfo: state.callInfo
+        callInfo: state.callInfo,
+        confData: state.callInfo.currentCallId ? state.callInfo.activeCalls[state.callInfo.currentCallId].conferenceData : undefined
       });
   }));
 
