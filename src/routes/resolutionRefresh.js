@@ -4,7 +4,7 @@ import {injectIntl} from 'react-intl';
 import Radium from 'radium';
 import { compose } from 'recompose';
 
-class AppLogin extends VertoBaseComponent {
+class ResolutionRefresh extends VertoBaseComponent {
 
   constructor(props) {
     super(props);
@@ -20,4 +20,4 @@ class AppLogin extends VertoBaseComponent {
 
 const hocComponent = compose(injectIntl, Radium);
 
-export default hocComponent(AppLogin);
+export default hocComponent(ResolutionRefresh);

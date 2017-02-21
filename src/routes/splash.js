@@ -28,12 +28,12 @@ class AppSlpash extends VertoBaseComponent {
     const intlTitle = formatMessage({"id": "LOADING", "defaultMessage": "Loading"});
 
     switch(this.props.params.event){
-      
+
       case 'browser':
         splashObject.title = formatMessage({"id":"BROWSER_COMPATIBILITY", "defaultMessage":"Checking browser compatibility."});
         break;
 
-      case 'meida':
+      case 'media':
         splashObject.title = formatMessage({"id":"CHECK_PERMISSION_MEDIA", "defaultMessage":"Checking media permissions"});
         break;
 
