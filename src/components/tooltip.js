@@ -4,30 +4,38 @@ import VertoBaseComponent from './vertobasecomponent';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  auto: React.PropTypes.bool,
-  place: React.PropTypes.string.isRequired,
-  name: React.PropTypes.string.isRequired,
-  msg: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.object ]).isRequired,
-  within: React.PropTypes.func,
-  compStyle: React.PropTypes.object
-};
-
 class ToolTip extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {};
   }
 
+  static propTypes = {
+    auto: React.PropTypes.bool,
+    place: React.PropTypes.string,
+    name: React.PropTypes.string,
+    msg: React.PropTypes.oneOfType([
+        React.PropTypes.string,
+        React.PropTypes.object ]),
+    within: React.PropTypes.func,
+    compStyle: React.PropTypes.object
+  };
+
+  static defaultProps = {
+    place: 'notAvailable',
+    name: 'notAvailable',
+    msg: 'notAvailable'
+  };
+
+  static filename = "tooltip";
+  static displayName = "ToolTip";
+
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
   }
 
   getDefaultStyle(styleName) {
-    const styles = {
-    };
+    const styles = {};
 
     return styles[styleName];
   }
@@ -46,6 +54,5 @@ class ToolTip extends VertoBaseComponent {
     );}
 }
 
-ToolTip.propTypes = propTypes;
 export default ToolTip;
 // reviewed on 7/14/2016

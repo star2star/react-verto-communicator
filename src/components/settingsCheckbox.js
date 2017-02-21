@@ -3,16 +3,6 @@ import VertoBaseComponent from './vertobasecomponent.js';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  cbSubmitSetting: React.PropTypes.func.isRequired,
-  checkedOption: React.PropTypes.shape({
-    name: React.PropTypes.string,
-    value: React.PropTypes.bool
-  }).isRequired,
-  compStyle : React.PropTypes.object,
-  label: React.PropTypes.string.isRequired
-};
-
 class SettingsCheckbox extends VertoBaseComponent {
   constructor(props) {
     super(props);
@@ -20,6 +10,28 @@ class SettingsCheckbox extends VertoBaseComponent {
 
     this.handleSelect = this.handleSelect.bind(this);
   }
+
+  static propTypes = {
+    cbSubmitSetting: React.PropTypes.func,
+    checkedOption: React.PropTypes.shape({
+      name: React.PropTypes.string,
+      value: React.PropTypes.bool
+    }),
+    compStyle : React.PropTypes.object,
+    label: React.PropTypes.string
+  };
+
+  static defaultProps = {
+    cbSubmitSetting: ()=>{},
+    checkedOption: {
+      name: 'notAvailable',
+      value: false
+    },
+    label: 'notAvailable'
+  };
+
+  static filename = "settingsCheckbox";
+  static displayName = "SettingsCheckbox";
 
   handleSelect() {
     console.log('handleSelect');
@@ -131,6 +143,5 @@ class SettingsCheckbox extends VertoBaseComponent {
   }
 }
 
-SettingsCheckbox.propTypes = propTypes;
 export default SettingsCheckbox;
 // reviewed on 7/14/2016

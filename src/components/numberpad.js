@@ -5,11 +5,6 @@ import NumberItem from './numberitem';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  compStyle : React.PropTypes.object,
-  cbClick: React.PropTypes.func.isRequired
-};
-
 class Numberpad extends VertoBaseComponent {
   constructor(props) {
     super(props);
@@ -17,6 +12,19 @@ class Numberpad extends VertoBaseComponent {
 
     this.numberClicked = this.numberClicked.bind(this);
   }
+
+  static propTypes = {
+    compStyle : React.PropTypes.object,
+    cbClick: React.PropTypes.func
+  };
+
+  static defaultProps = {
+    cbClick: ()=>{}
+  };
+
+  static filename = "numberpad";
+  static displayName = "Numberpad";
+
   numberClicked(k){
     this.props.cbClick(k);
   }
@@ -120,8 +128,6 @@ class Numberpad extends VertoBaseComponent {
       </div>);
   }
 }
-
-Numberpad.propTypes = propTypes;
 
 export default Radium(Numberpad);
 // reviewed 7/14/2016

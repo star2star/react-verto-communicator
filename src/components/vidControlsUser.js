@@ -7,14 +7,6 @@ import { injectIntl } from 'react-intl';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  cbMicMute : React.PropTypes.func.isRequired,
-  cbVideoMute : React.PropTypes.func.isRequired,
-  cbScreenShare : React.PropTypes.func.isRequired,
-  cbToggleChat : React.PropTypes.func.isRequired,
-  newMsgCount : React.PropTypes.number,
-  userConfStatus: React.PropTypes.object
-};
 
 class UserVideoControls extends VertoBaseComponent {
   constructor(props){
@@ -26,6 +18,25 @@ class UserVideoControls extends VertoBaseComponent {
 
   }
 
+  static propTypes = {
+    cbMicMute : React.PropTypes.func,
+    cbVideoMute : React.PropTypes.func,
+    cbScreenShare : React.PropTypes.func,
+    cbToggleChat : React.PropTypes.func,
+    newMsgCount : React.PropTypes.number,
+    userConfStatus: React.PropTypes.object
+  };
+
+  static defaultProps = {
+    cbMicMute : ()=>{},
+    cbVideoMute : ()=>{},
+    cbScreenShare : ()=>{},
+    cbToggleChat : ()=>{}
+  };
+
+  static filename = "vidControlsUser";
+  static displayName = "UserVideoControls";
+
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
   }
@@ -33,7 +44,6 @@ class UserVideoControls extends VertoBaseComponent {
   componentWillUnmount() {
     document.getElementById("webcam").removeEventListener('dblclick', this.handleToggleFullScreen);
   }
-
 
 
   getDefaultStyle(styleName) {
@@ -188,6 +198,5 @@ class UserVideoControls extends VertoBaseComponent {
   }
 }
 
-UserVideoControls.propTypes = propTypes;
 export default injectIntl(UserVideoControls);
 // reviewed on 7/15/2016

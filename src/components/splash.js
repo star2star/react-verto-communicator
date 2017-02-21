@@ -5,16 +5,6 @@ import Radium from 'radium';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  step:   React.PropTypes.shape({
-    number: React.PropTypes.number,
-    current: React.PropTypes.number,
-    title: React.PropTypes.string
-  }).isRequired,
-  title: React.PropTypes.string,
-  compStyle : React.PropTypes.object
-};
-
 class Splash extends VertoBaseComponent {
   constructor(props) {
     super(props);
@@ -24,6 +14,27 @@ class Splash extends VertoBaseComponent {
     Splash.getProgressBarWidth = this.getProgressBarWidth.bind(this);
 
   }
+
+  static propTypes = {
+    step:   React.PropTypes.shape({
+      number: React.PropTypes.number,
+      current: React.PropTypes.number,
+      title: React.PropTypes.string
+    }),
+    title: React.PropTypes.string,
+    compStyle : React.PropTypes.object
+  };
+
+  static defaultProps = {
+    step: {
+      number: 0,
+      current: 0,
+      title: 'noTitle'
+    }
+  };
+
+  static filename = "splash";
+  static displayName = "Splash";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -87,8 +98,6 @@ class Splash extends VertoBaseComponent {
       </div>);
   }
 }
-
-Splash.propTypes = propTypes;
 
 export default Radium(Splash);
 // reviewed on 7/14/2016

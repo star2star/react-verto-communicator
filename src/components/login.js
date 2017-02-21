@@ -6,12 +6,6 @@ import Input from './input';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  compStyle : React.PropTypes.object,
-  settings: React.PropTypes.object.isRequired
-};
-
-
 class Login extends VertoBaseComponent{
   constructor(props) {
     super(props);
@@ -20,6 +14,18 @@ class Login extends VertoBaseComponent{
     this.changingInput = this.changingInput.bind(this);
     this.submitLogin = this.submitLogin.bind(this);
   }
+
+  static propTypes = {
+    compStyle : React.PropTypes.object,
+    settings: React.PropTypes.object
+  };
+
+  static defaultProps = {
+    settings: {}
+  };
+
+  static filename = "login";
+  static displayName = "Login";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -237,6 +243,5 @@ class Login extends VertoBaseComponent{
   }
 }
 
-Login.propTypes = propTypes;
 export default injectIntl(Radium(Login));
 // reviewed on 7/13/2016

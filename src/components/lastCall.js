@@ -5,20 +5,23 @@ import { injectIntl } from 'react-intl'
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  lastNumber: React.PropTypes.string,
-  labelText: React.PropTypes.string,
-  cbClick: React.PropTypes.func,
-  compStyle:   React.PropTypes.object,
-  ttPosition: React.PropTypes.string
-};
-
 class LastCall extends VertoBaseComponent {
   constructor(props) {
     super(props);
     this.call = this.call.bind(this);
     this.state = {};
   }
+
+  static propTypes = {
+    lastNumber: React.PropTypes.string,
+    labelText: React.PropTypes.string,
+    cbClick: React.PropTypes.func,
+    compStyle:   React.PropTypes.object,
+    ttPosition: React.PropTypes.string
+  };
+
+  static filename = "lastCall";
+  static displayName = "LastCall";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -62,8 +65,6 @@ class LastCall extends VertoBaseComponent {
     );
   }
 }
-
-LastCall.propTypes = propTypes;
 
 export default injectIntl(LastCall);
 // reviewed on 7/13/2016

@@ -5,18 +5,20 @@ import moment from 'moment';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  avatarUrl : React.PropTypes.string,
-  message : React.PropTypes.object,
-  compStyle: React.PropTypes.object
-
-};
-
 class ChatMessageItem extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {};
   }
+
+  static propTypes = {
+    avatarUrl : React.PropTypes.string,
+    message : React.PropTypes.object,
+    compStyle: React.PropTypes.object
+  };
+
+  static filename = "chatMessageItem";
+  static displayName = "ChatMessageItem";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -136,7 +138,6 @@ class ChatMessageItem extends VertoBaseComponent {
   }
 }
 
-ChatMessageItem.propTypes = propTypes;
 
 export default ChatMessageItem;
 // reviewed 7/13/2016

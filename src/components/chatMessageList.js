@@ -5,11 +5,6 @@ import ChatMessageItem from './chatMessageItem';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  chatItems : React.PropTypes.array,
-  chatUsers : React.PropTypes.object,
-  compStyle : React.PropTypes.object
-};
 
 class ChatMessageList extends VertoBaseComponent {
   constructor(props){
@@ -17,6 +12,15 @@ class ChatMessageList extends VertoBaseComponent {
     this.state = {};
     //console.log('ChatMessageList chatItems prop', this.props.chatItems);
   }
+
+  static propTypes = {
+    chatItems : React.PropTypes.array,
+    chatUsers : React.PropTypes.object,
+    compStyle : React.PropTypes.object
+  };
+
+  static filename = "chatMessageList";
+  static displayName = "ChatMessageList";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -80,8 +84,6 @@ class ChatMessageList extends VertoBaseComponent {
       );
   }
 }
-
-ChatMessageList.propTypes = propTypes;
 
 export default ChatMessageList;
 // reviewed 7/13/2016

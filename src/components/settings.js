@@ -9,20 +9,6 @@ import { injectIntl } from 'react-intl';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  cbDeviceList: React.PropTypes.func,
-  cbPreviewSet: React.PropTypes.func.isRequired,
-  cbSubmitSetting: React.PropTypes.func.isRequired,
-  cbToggleShowSettings: React.PropTypes.func.isRequired,
-  compStyle : React.PropTypes.object,
-  ttPosition: React.PropTypes.string,
-  status:  React.PropTypes.oneOf(['connected','disconnected', 'connecting', 'active']).isRequired
-};
-
-const defaultProps = {
-  allowDisplayDetails : false
-};
-
 class Settings extends VertoBaseComponent {
   constructor(props) {
     super(props);
@@ -33,6 +19,27 @@ class Settings extends VertoBaseComponent {
 
     Settings.toggleSettings = this.showMenu;
   }
+
+  static propTypes = {
+    cbDeviceList: React.PropTypes.func,
+    cbPreviewSet: React.PropTypes.func,
+    cbSubmitSetting: React.PropTypes.func,
+    cbToggleShowSettings: React.PropTypes.func,
+    compStyle : React.PropTypes.object,
+    ttPosition: React.PropTypes.string,
+    status:  React.PropTypes.oneOf(['connected','disconnected', 'connecting', 'active'])
+  };
+
+  static defaultProps = {
+    allowDisplayDetails : false,
+    cbPreviewSet: ()=>{},
+    cbSubmitSetting: ()=>{},
+    cbToggleShowSettings: ()=>{},
+    status:  'noStatusAvailable'
+  };
+
+  static filename = "settings";
+  static displayName = "Settings";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -102,9 +109,6 @@ class Settings extends VertoBaseComponent {
     );
   }
 }
-
-Settings.propTypes = propTypes;
-Settings.defaultProps = defaultProps;
 
 export default injectIntl(Settings, {
         withRef: true

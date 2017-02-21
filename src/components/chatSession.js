@@ -6,18 +6,21 @@ import Radium from 'radium';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  cbRemove : React.PropTypes.func,
-  cbSubmitMessage: React.PropTypes.func,
-  chatData : React.PropTypes.object,
-  compStyle: React.PropTypes.object
-};
-
 class ChatSession extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {};
   }
+
+  static propTypes = {
+    cbRemove : React.PropTypes.func,
+    cbSubmitMessage: React.PropTypes.func,
+    chatData : React.PropTypes.object,
+    compStyle: React.PropTypes.object
+  };
+
+  static filename = "chatSession";
+  static displayName = "ChatSession";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -94,7 +97,6 @@ class ChatSession extends VertoBaseComponent {
     }
 }
 
-ChatSession.propTypes = propTypes;
 
 export default Radium(ChatSession);
 // reviewed 7/13/2016

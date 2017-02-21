@@ -4,17 +4,25 @@ import Radium from 'radium';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  activeTab: React.PropTypes.number,
-  compStyle: React.PropTypes.object,
-  tabLabels: React.PropTypes.array.isRequired
-};
 
 class TabbedContainer extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {activeTabIndex: this.props.activeTab ? this.props.activeTab : 0};
   }
+
+  static propTypes = {
+    activeTab: React.PropTypes.number,
+    compStyle: React.PropTypes.object,
+    tabLabels: React.PropTypes.array
+  };
+
+  static defaultProps = {
+    tabLabels: []
+  };
+
+  static filename = "tabbedContainer";
+  static displayName = "TabbedContainer";
 
   handleTabClick(index) {
     this.setState({...this.state, activeTabIndex: index});
@@ -85,8 +93,6 @@ class TabbedContainer extends VertoBaseComponent {
 
   }
 }
-
-TabbedContainer.propTypes = propTypes;
 
 export default Radium(TabbedContainer);
 // reviewed on 7/14/2016

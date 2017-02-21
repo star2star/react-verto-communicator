@@ -7,22 +7,6 @@ import Radium from 'radium';
 import { fromJS } from "immutable";
 
 
- const propTypes = {
-      callData : React.PropTypes.object.isRequired,
-      cbDTMF:  React.PropTypes.func,
-      cbHangup : React.PropTypes.func,
-      cbHold:  React.PropTypes.func,
-      cbMute:  React.PropTypes.func,
-      cbSetVideoMode: React.PropTypes.func,
-      cbShare: React.PropTypes.func,
-      cbSnapshot: React.PropTypes.func, // not currently supported
-      cbToggleChat: React.PropTypes.func,
-      currLayout: React.PropTypes.array,
-      layouts: React.PropTypes.array,
-      newMsgCount : React.PropTypes.number,
-      userConfStatus : React.PropTypes.object
-};
-
 class CallProgress extends VertoBaseComponent {
     constructor(props){
         super(props);
@@ -34,6 +18,29 @@ class CallProgress extends VertoBaseComponent {
               return s;
             };
     }
+
+    static propTypes = {
+         callData : React.PropTypes.object,
+         cbDTMF:  React.PropTypes.func,
+         cbHangup : React.PropTypes.func,
+         cbHold:  React.PropTypes.func,
+         cbMute:  React.PropTypes.func,
+         cbSetVideoMode: React.PropTypes.func,
+         cbShare: React.PropTypes.func,
+         cbSnapshot: React.PropTypes.func, // not currently supported
+         cbToggleChat: React.PropTypes.func,
+         currLayout: React.PropTypes.array,
+         layouts: React.PropTypes.array,
+         newMsgCount : React.PropTypes.number,
+         userConfStatus : React.PropTypes.object
+   };
+
+   static defaultProps = {
+        callData : {}
+  };
+
+  static filename = "callprogress";
+  static displayName = "CallProgress";
 
     shouldComponentUpdate(nextProps, nextState) {
       return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -187,9 +194,6 @@ class CallProgress extends VertoBaseComponent {
       );
     }
   }
-
-
-CallProgress.propTypes = propTypes;
 
 export default Radium(CallProgress);
 // reviewed 7/13/2016

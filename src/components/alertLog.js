@@ -7,20 +7,23 @@ import Modal from 'react-modal';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  compStyle : React.PropTypes.object
-};
-
 class AlertLog extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {};
 
-    this.state.alertArray=AlertService.getInstance().getAlertLog();
+    this.state.alertArray = AlertService.getInstance().getAlertLog();
 
     this.handleRemoveAlert = this.handleRemoveAlert.bind(this);
     this.handleClearAlerts= this.handleClearAlerts.bind(this);
   }
+
+  static propTypes = {
+    compStyle : React.PropTypes.object
+  };
+
+  static filename = "alertLog";
+  static displayName = "AlertLog";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -133,8 +136,6 @@ class AlertLog extends VertoBaseComponent {
     );
   }
 }
-
-AlertLog.propTypes = propTypes;
 
 export default AlertLog;
 // reviewed 7/13/2016

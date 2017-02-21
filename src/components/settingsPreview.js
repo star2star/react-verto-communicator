@@ -9,13 +9,6 @@ import { RestoreIconSVG } from './svgIcons';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  compStyle: React.PropTypes.object,
-  cbClose: React.PropTypes.func.isRequired,
-  cbSubmitSettings: React.PropTypes.func.isRequired,
-  settingsData: React.PropTypes.object.isRequired
-};
-
 class SettingsPreview extends VertoBaseComponent{
   constructor(props) {
     super(props);
@@ -32,6 +25,22 @@ class SettingsPreview extends VertoBaseComponent{
     this.submitSave = this.submitSave.bind(this);
     this.submitRefresh = this.submitRefresh.bind(this);
   }
+
+  static propTypes = {
+    compStyle: React.PropTypes.object,
+    cbClose: React.PropTypes.func,
+    cbSubmitSettings: React.PropTypes.func,
+    settingsData: React.PropTypes.object
+  };
+
+  static defaultProps = {
+    cbClose: ()=>{},
+    cbSubmitSettings: ()=>{},
+    settingsData: {}
+  };
+
+  static filename = "settingsPreview";
+  static displayName = "SettingsPreview";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -295,7 +304,6 @@ class SettingsPreview extends VertoBaseComponent{
   }
 }
 
-SettingsPreview.propTypes = propTypes;
 
 export default injectIntl(SettingsPreview);
 // reviewed on 7/14/2016

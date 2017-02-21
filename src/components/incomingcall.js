@@ -5,18 +5,27 @@ import {AvatarSVG, PhoneIconSVG } from './svgIcons';
 import { fromJS } from "immutable";
 
 
- const propTypes = {
-   callData : React.PropTypes.object.isRequired,
-   cbHangup : React.PropTypes.func.isRequired,
-   cbAnswer:  React.PropTypes.func.isRequired,
-   compStyle : React.PropTypes.object
-};
-
 class IncomingCall extends VertoBaseComponent {
   constructor(props){
       super(props);
       this.state={};
   }
+
+  static propTypes = {
+     callData : React.PropTypes.object,
+     cbHangup : React.PropTypes.func,
+     cbAnswer:  React.PropTypes.func,
+     compStyle : React.PropTypes.object
+  };
+
+  static defaultProps = {
+     callData : {},
+     cbHangup : ()=>{},
+     cbAnswer:  ()=>{},
+  };
+
+  static filename = "incomingcall";
+  static displayName = "IncomingCall";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -146,8 +155,6 @@ class IncomingCall extends VertoBaseComponent {
     );
   }
 }
-
-IncomingCall.propTypes = propTypes;
 
 export default IncomingCall;
 // reviewed 7/13/2016

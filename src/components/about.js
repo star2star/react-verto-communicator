@@ -5,20 +5,27 @@ import { FormattedMessage } from 'react-intl';
 import WhiteLabel from '../js/whitelabel.js';
 import { fromJS } from "immutable";
 
-const propTypes = {
-  compStyle: React.PropTypes.object,
-  version: React.PropTypes.string,
-  gitRev: React.PropTypes.string,
-  cbClose: React.PropTypes.func.isRequired
-};
-
-
 
 class About extends VertoBaseComponent{
   constructor(props) {
     super(props);
     this.state = {};
   }
+
+  static propTypes = {
+    compStyle: React.PropTypes.object,
+    version: React.PropTypes.string,
+    gitRev: React.PropTypes.string,
+    cbClose: React.PropTypes.func
+  };
+
+  static defaultProps = {
+    cbClose: ()=>{}
+  };
+
+  static filename = "about";
+  static displayName = "About";
+
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -82,8 +89,6 @@ class About extends VertoBaseComponent{
     );
   }
 }
-
-About.propTypes = propTypes;
 
 export default About;
 

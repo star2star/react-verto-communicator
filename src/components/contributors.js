@@ -8,10 +8,6 @@ import { FormattedMessage } from 'react-intl';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  compStyle : React.PropTypes.object,
-  contributorsData: React.PropTypes.array.isRequired
-};
 
 class Contributors extends VertoBaseComponent{
 
@@ -19,6 +15,18 @@ class Contributors extends VertoBaseComponent{
     super(props);
     this.state = {};
   }
+
+  static propTypes = {
+    compStyle : React.PropTypes.object,
+    contributorsData: React.PropTypes.array
+  };
+
+  static defaultProps = {
+    contributorsData: []
+  };
+
+  static filename = "contributors";
+  static displayName = "Contributors";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -82,8 +90,6 @@ class Contributors extends VertoBaseComponent{
     );
   }
 }
-
-Contributors.propTypes = propTypes;
 
 export default Radium(Contributors);
 // reviewed 7/13/2016

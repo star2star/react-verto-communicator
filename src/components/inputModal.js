@@ -6,22 +6,30 @@ import { FormattedMessage } from 'react-intl';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  cbClose: React.PropTypes.func.isRequired,
-  cbSubmit: React.PropTypes.func.isRequired,
-  compStyle: React.PropTypes.object,
-  title: React.PropTypes.string,
-  message: React.PropTypes.string,
-  label: React.PropTypes.string,
-  placeholder: React.PropTypes.string
-};
-
 class InputModal extends VertoBaseComponent {
   constructor(props) {
     super(props);
     this.state = {inputVal: ''};
     this.changingInput = this.changingInput.bind(this);
   }
+
+  static propTypes = {
+    cbClose: React.PropTypes.func,
+    cbSubmit: React.PropTypes.func,
+    compStyle: React.PropTypes.object,
+    title: React.PropTypes.string,
+    message: React.PropTypes.string,
+    label: React.PropTypes.string,
+    placeholder: React.PropTypes.string
+  };
+
+  static defaultProps = {
+    cbClose: ()=>{},
+    cbSubmit: ()=>{}
+  };
+
+  static filename = "inputModal";
+  static displayName = "InputModal";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -102,8 +110,6 @@ class InputModal extends VertoBaseComponent {
       </Modal> );
   }
 }
-
-InputModal.propTypes = propTypes;
 
 export default InputModal;
 // reviewed on 7/13/2016

@@ -6,17 +6,25 @@ import { injectIntl } from 'react-intl';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  status: React.PropTypes.oneOf(['connected','disconnected', 'connecting', 'active']).isRequired,
-  compStyle:   React.PropTypes.object,
-  ttPosition: React.PropTypes.string.isRequired
-};
-
 class VCStatus extends VertoBaseComponent {
   constructor(props) {
     super(props);
     this.state = {};
   }
+
+  static propTypes = {
+    status: React.PropTypes.oneOf(['connected','disconnected', 'connecting', 'active']),
+    compStyle:   React.PropTypes.object,
+    ttPosition: React.PropTypes.string
+  };
+
+  static defaultProps = {
+    status: 'noStatus',
+    ttPosition: 'notAvailable'
+  };
+
+  static filename = "vcstatus";
+  static displayName = "VCStatus";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -78,8 +86,6 @@ class VCStatus extends VertoBaseComponent {
      );
   }
 }
-
-VCStatus.propTypes = propTypes;
 
 export default injectIntl(VCStatus);
 // reviewed on 7/14/2016

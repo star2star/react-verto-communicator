@@ -4,10 +4,6 @@ import AlertItem from './alertItem';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  compStyle : React.PropTypes.object
-};
-
 class AlertList extends VertoBaseComponent {
   constructor(props){
     super(props);
@@ -17,6 +13,13 @@ class AlertList extends VertoBaseComponent {
     this.handleNewAlert = this.handleNewAlert.bind(this);
     this.handleDismissAlert = this.handleDismissAlert.bind(this);
   }
+
+  static propTypes = {
+    compStyle : React.PropTypes.object
+  };
+
+  static filename = "alertList";
+  static displayName = "AlertList";
 
   componentDidMount(){
     document.addEventListener('alert', this.handleNewAlert);
@@ -76,8 +79,6 @@ class AlertList extends VertoBaseComponent {
       );
   }
 }
-
-AlertList.propTypes = propTypes;
 
 export default AlertList;
 // reviewed 7/13/2016

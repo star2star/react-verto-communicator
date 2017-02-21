@@ -5,21 +5,28 @@ import MemberItem from './memberItem';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  allowPresenter : React.PropTypes.bool,
-  cbControlClick : React.PropTypes.func.isRequired,
-  hasMultipleCanvases : React.PropTypes.bool,
-  members : React.PropTypes.array,
-  isModerator: React.PropTypes.bool,
-  compStyle : React.PropTypes.object
-};
-
 class MemberList extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {};
     this.closeAllAdminControls = this.closeAllAdminControls.bind(this);
   }
+
+  static propTypes = {
+    allowPresenter : React.PropTypes.bool,
+    cbControlClick : React.PropTypes.func,
+    hasMultipleCanvases : React.PropTypes.bool,
+    members : React.PropTypes.array,
+    isModerator: React.PropTypes.bool,
+    compStyle : React.PropTypes.object
+  };
+
+  static defaultProps = {
+    cbControlClick : ()=>{}
+  };
+
+  static filename = "memberList";
+  static displayName = "MemberList";
 
   componentDidUpdate() {
     // scroll to bottom of message list
@@ -85,8 +92,6 @@ class MemberList extends VertoBaseComponent {
       );
   }
 }
-
-MemberList.propTypes = propTypes;
 
 export default MemberList;
 // reviewed on 7/14/2016

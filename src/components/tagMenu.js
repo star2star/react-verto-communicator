@@ -9,15 +9,6 @@ import { injectIntl } from 'react-intl'
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  cbClick : React.PropTypes.func,
-  compStyle : React.PropTypes.object,
-  ttPosition: React.PropTypes.string.isRequired
-};
-
-const defaultProps = {
-  allowDisplayDetails : false
-};
 
 class TagMenu extends VertoBaseComponent {
   constructor(props) {
@@ -27,6 +18,20 @@ class TagMenu extends VertoBaseComponent {
     this.toggleMenu = this.toggleMenu.bind(this);
     TagMenu.closeMenu = this.closeMenu.bind(this);
   }
+
+  static propTypes = {
+    cbClick : React.PropTypes.func,
+    compStyle : React.PropTypes.object,
+    ttPosition: React.PropTypes.string
+  };
+
+  static defaultProps = {
+    allowDisplayDetails : false,
+    ttPosition: 'notAvailable'
+  };
+
+  static filename = "tagMenu";
+  static displayName = "TagMenu";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -113,8 +118,7 @@ class TagMenu extends VertoBaseComponent {
   }
 }
 
-TagMenu.propTypes = propTypes;
-TagMenu.defaultProps = defaultProps;
+
 export default injectIntl(TagMenu, {
         withRef: true
     });

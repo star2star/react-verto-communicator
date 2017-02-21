@@ -9,17 +9,6 @@ import { injectIntl } from 'react-intl';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  cbClick: React.PropTypes.func,
-  compStyle : React.PropTypes.object,
-  ttPosition: React.PropTypes.string,
-  status:  React.PropTypes.oneOf(['connected','disconnected', 'connecting', 'active']).isRequired
-};
-
-const defaultProps = {
-  allowDisplayDetails : false
-};
-
 class UserMenu extends VertoBaseComponent {
   constructor(props) {
     super(props);
@@ -28,6 +17,21 @@ class UserMenu extends VertoBaseComponent {
     this.toggleMenu = this.toggleMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
   }
+
+  static propTypes = {
+    cbClick: React.PropTypes.func,
+    compStyle : React.PropTypes.object,
+    ttPosition: React.PropTypes.string,
+    status:  React.PropTypes.oneOf(['connected','disconnected', 'connecting', 'active'])
+  };
+
+  static defaultProps = {
+    allowDisplayDetails : false,
+    status: 'noStatus'
+  };
+
+  static filename = "userMenu";
+  static displayName = "UserMenu";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -122,8 +126,6 @@ class UserMenu extends VertoBaseComponent {
   }
 }
 
-UserMenu.propTypes = propTypes;
-UserMenu.defaultProps = defaultProps;
 export default  injectIntl(UserMenu,{
         withRef: true
     });

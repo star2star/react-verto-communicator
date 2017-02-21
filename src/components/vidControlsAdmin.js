@@ -7,17 +7,6 @@ import { injectIntl } from 'react-intl';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  cbPlay : React.PropTypes.func.isRequired,
-  cbStop : React.PropTypes.func.isRequired,
-  cbRecord : React.PropTypes.func.isRequired,
-  cbStopRecord : React.PropTypes.func.isRequired,
-  cbSnapshot : React.PropTypes.func, // not currently supported
-  cbSetVideoMode : React.PropTypes.func.isRequired,
-  currLayout: React.PropTypes.array,
-  layouts: React.PropTypes.array
-};
-
 class AdminVideoControls extends VertoBaseComponent {
   constructor(props){
     super(props);
@@ -25,6 +14,28 @@ class AdminVideoControls extends VertoBaseComponent {
 
     this.handleShowLayoutList = this.handleShowLayoutList.bind(this);
   }
+
+  static propTypes = {
+    cbPlay : React.PropTypes.func,
+    cbStop : React.PropTypes.func,
+    cbRecord : React.PropTypes.func,
+    cbStopRecord : React.PropTypes.func,
+    cbSnapshot : React.PropTypes.func, // not currently supported
+    cbSetVideoMode : React.PropTypes.func,
+    currLayout: React.PropTypes.array,
+    layouts: React.PropTypes.array
+  };
+
+  static defaultProps = {
+    cbPlay : ()=>{},
+    cbStop : ()=>{},
+    cbRecord : ()=>{},
+    cbStopRecord : ()=>{},
+    cbSetVideoMode : ()=>{}
+  };
+
+  static filename = "vidControlsAdmin";
+  static displayName = "AdminVideoControls";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -160,7 +171,6 @@ class AdminVideoControls extends VertoBaseComponent {
   }
 }
 
-AdminVideoControls.propTypes = propTypes;
 
 export default injectIntl(AdminVideoControls);
 // reviewed on 7/14/2016

@@ -3,18 +3,25 @@ import VertoBaseComponent from './vertobasecomponent';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  items: React.PropTypes.array.isRequired,
-  selected: React.PropTypes.array,
-  cbChange: React.PropTypes.func,
-  compStyle: React.PropTypes.object
-};
-
 class ListSelect extends VertoBaseComponent {
   constructor(props) {
     super(props);
     this.state = {};
   }
+
+  static propTypes = {
+    items: React.PropTypes.array,
+    selected: React.PropTypes.array,
+    cbChange: React.PropTypes.func,
+    compStyle: React.PropTypes.object
+  };
+
+  static defaultProps = {
+    items: []
+  };
+
+  static filename = "listSelect";
+  static displayName = "ListSelect";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -56,8 +63,6 @@ class ListSelect extends VertoBaseComponent {
              </ul>);
   }
 }
-
-ListSelect.propTypes = propTypes;
 
 export default ListSelect;
 // reviewed on 7/13/2016

@@ -5,13 +5,6 @@ import moment from 'moment';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  alertData: React.PropTypes.object.isRequired,
-  cbRemoveAlert : React.PropTypes.func.isRequired,
-  compStyle : React.PropTypes.object,
-  index : React.PropTypes.number
-};
-
 class AlertLogItem extends VertoBaseComponent {
   constructor(props){
     super(props);
@@ -19,6 +12,21 @@ class AlertLogItem extends VertoBaseComponent {
 
     this.handleRemoveClick = this.handleRemoveClick.bind(this);
   }
+
+  static propTypes = {
+    alertData: React.PropTypes.object.isRequired,
+    cbRemoveAlert : React.PropTypes.func.isRequired,
+    compStyle : React.PropTypes.object,
+    index : React.PropTypes.number
+  };
+
+  static defaultProps = {
+    alertData: {},
+    cbRemoveAlert : ()=>{}
+  };
+
+  static filename = "alertLogItem";
+  static displayName = "AlertLogItem";
 
   handleRemoveClick() {
     this.props.cbRemoveAlert(this.props.index);
@@ -111,8 +119,6 @@ class AlertLogItem extends VertoBaseComponent {
       );
   }
 }
-
-AlertLogItem.propTypes = propTypes;
 
 export default AlertLogItem;
 // reviewed 7/13/2016

@@ -5,14 +5,6 @@ import Radium from 'radium';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  compStyle : React.PropTypes.object,
-  cbClick: React.PropTypes.func.isRequired,
-  cbKeyPress : React.PropTypes.func,
-  keyValue: React.PropTypes.string,
-  keyString : React.PropTypes.string
-};
-
 class NumberItem extends VertoBaseComponent {
   constructor(props) {
     super(props);
@@ -20,6 +12,21 @@ class NumberItem extends VertoBaseComponent {
 
     this.numberClicked = this.numberClicked.bind(this);
   }
+
+  static propTypes = {
+    compStyle : React.PropTypes.object,
+    cbClick: React.PropTypes.func,
+    cbKeyPress : React.PropTypes.func,
+    keyValue: React.PropTypes.string,
+    keyString : React.PropTypes.string
+  };
+
+  static defaultProps = {
+    cbClick: ()=>{}
+  };
+
+  static filename = "numberitem";
+  static displayName = "NumberItem";
 
   numberClicked(){
     this.props.cbClick(this.props.keyValue);
@@ -89,8 +96,6 @@ class NumberItem extends VertoBaseComponent {
     );
   }
 }
-
-NumberItem.propTypes = propTypes;
 
 export default Radium(NumberItem);
 // reviewed on 7/14/2016

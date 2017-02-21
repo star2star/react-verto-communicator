@@ -3,17 +3,21 @@ import VertoBaseComponent from './vertobasecomponent';
 import { fromJS } from "immutable";
 
 
- const propTypes = {
-  compStyle: React.PropTypes.object,
-  cbClick : React.PropTypes.func,
-  count : React.PropTypes.number
-};
 
 class Badge extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {};
   }
+
+  static propTypes = {
+    compStyle: React.PropTypes.object,
+    cbClick : React.PropTypes.func,
+    count : React.PropTypes.number
+  };
+
+  static filename = "badge";
+  static displayName = "Badge";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -49,5 +53,4 @@ class Badge extends VertoBaseComponent {
   }
 }
 
-Badge.propTypes = propTypes;
 export default Badge;

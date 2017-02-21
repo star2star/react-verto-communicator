@@ -7,17 +7,25 @@ import { injectIntl } from 'react-intl';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  cbControlClick : React.PropTypes.func.isRequired,
-  multCanvas: React.PropTypes.bool,
-  member : React.PropTypes.object.isRequired
-};
-
 class AdminControls extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {};
   }
+
+  static propTypes = {
+    cbControlClick : React.PropTypes.func,
+    multCanvas: React.PropTypes.bool,
+    member : React.PropTypes.object
+  };
+
+  static defaultProps = {
+    cbControlClick : ()=>{},
+    member : {}
+  };
+
+  static filename = "memberAdminControlPanel";
+  static displayName = "AdminControls";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -291,6 +299,5 @@ class AdminControls extends VertoBaseComponent {
   }
 }
 
-AdminControls.propTypes = propTypes;
 export default injectIntl(AdminControls);
 // reviewed on 7/13/2016

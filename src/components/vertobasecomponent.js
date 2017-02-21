@@ -11,6 +11,9 @@ class VertoBaseComponent extends React.Component {
     this.state = {};
   }
 
+  static filename = "vertobasecomponent";
+  static displayName = "VertoBaseComponent";
+
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
   }

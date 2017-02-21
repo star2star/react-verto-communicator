@@ -3,19 +3,29 @@ import VertoBaseComponent from './vertobasecomponent.js';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  cbSubmitSetting: React.PropTypes.func.isRequired,
-  compStyle : React.PropTypes.object,
-  label: React.PropTypes.string.isRequired,
-  options: React.PropTypes.array.isRequired,
-  selectedOption: React.PropTypes.object.isRequired
-};
-
 class SettingsMenuSelect extends VertoBaseComponent {
   constructor(props) {
     super(props);
     this.state = {};
   }
+
+  static propTypes = {
+    cbSubmitSetting: React.PropTypes.func,
+    compStyle : React.PropTypes.object,
+    label: React.PropTypes.string,
+    options: React.PropTypes.array,
+    selectedOption: React.PropTypes.object
+  };
+
+  static defaultProps = {
+    cbSubmitSetting: ()=>{},
+    label: 'notAvailable',
+    options: [],
+    selectedOption: {}
+  };
+
+  static filename = "settingsCheckbox";
+  static displayName = "SettingsCheckbox";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -93,6 +103,5 @@ class SettingsMenuSelect extends VertoBaseComponent {
   }
 }
 
-SettingsMenuSelect.propTypes = propTypes;
 export default SettingsMenuSelect;
 // reviewed on 7/14/2016

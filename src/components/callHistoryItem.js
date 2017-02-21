@@ -6,13 +6,6 @@ import ToolTip from './tooltip';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  compStyle : React.PropTypes.object,
-  data: React.PropTypes.object.isRequired,
-  cbClick : React.PropTypes.func,
-  cbShowCalls : React.PropTypes.func,
-  allowToolTip : React.PropTypes.bool
-};
 
 class CallHistoryItem extends VertoBaseComponent {
   constructor(props) {
@@ -20,7 +13,22 @@ class CallHistoryItem extends VertoBaseComponent {
 
     this.call = this.call.bind(this);
     this.showCalls = this.showCalls.bind(this);
-}
+  }
+
+  static propTypes = {
+    compStyle : React.PropTypes.object,
+    data: React.PropTypes.object,
+    cbClick : React.PropTypes.func,
+    cbShowCalls : React.PropTypes.func,
+    allowToolTip : React.PropTypes.bool
+  };
+
+  static defaultProps = {
+    data: {}
+  };
+
+  static filename = "callHistoryItem";
+  static displayName = "CallHistoryItem";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -215,6 +223,5 @@ class CallHistoryItem extends VertoBaseComponent {
 
 }
 
-CallHistoryItem.propTypes = propTypes;
 export default CallHistoryItem;
 // reviewed 7/13/2016

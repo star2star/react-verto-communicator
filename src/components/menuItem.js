@@ -3,20 +3,22 @@ import VertoBaseComponent from './vertobasecomponent.js';
 import Radium from 'radium';
 import { fromJS } from "immutable";
 
-
-const propTypes = {
-  compStyle : React.PropTypes.object
-};
-
-const defaultProps = {
-  allowDisplayDetails : false
-};
-
 class MenuItem extends VertoBaseComponent {
   constructor(props) {
     super(props);
     this.state = {};
   }
+
+  static propTypes = {
+    compStyle : React.PropTypes.object
+  };
+
+  static defaultProps = {
+    allowDisplayDetails : false
+  };
+
+  static filename = "menuItem";
+  static displayName = "MenuItem";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -55,7 +57,6 @@ class MenuItem extends VertoBaseComponent {
   }
 }
 
-MenuItem.propTypes = propTypes;
-MenuItem.defaultProps = defaultProps;
+
 export default Radium(MenuItem);
 // reviewed on 7/14/2016

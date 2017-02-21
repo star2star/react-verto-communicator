@@ -15,24 +15,31 @@ import {
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  cbControlClick : React.PropTypes.func.isRequired,
-  controlSettings : React.PropTypes.shape({
-      moderator: React.PropTypes.bool,
-      multCanvas: React.PropTypes.bool,
-      allowPresenter: React.PropTypes.bool
-    }),
-  member : React.PropTypes.object.isRequired,
-  cbOpenAdminControls : React.PropTypes.func.isRequired
-
-};
-
 class MemberItem extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {showAdminControls: false};
   }
 
+  static propTypes = {
+    cbControlClick : React.PropTypes.func,
+    controlSettings : React.PropTypes.shape({
+        moderator: React.PropTypes.bool,
+        multCanvas: React.PropTypes.bool,
+        allowPresenter: React.PropTypes.bool
+      }),
+    member : React.PropTypes.object,
+    cbOpenAdminControls : React.PropTypes.func
+  };
+
+  static defaultProps = {
+    cbControlClick : ()=>{},
+    member : {},
+    cbOpenAdminControls : ()=>{}
+  };
+
+  static filename = "memberItem";
+  static displayName = "MemberItem";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -283,8 +290,6 @@ class MemberItem extends VertoBaseComponent {
     );
   }
 }
-
-MemberItem.propTypes = propTypes;
 
 export default (Radium(MemberItem));
 // reviewed 7/14/2016

@@ -9,22 +9,6 @@ import {Motion, spring} from 'react-motion';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  compStyle : React.PropTypes.object,
-  history : React.PropTypes.array,
-  cbClick : React.PropTypes.func,
-  cbShowCalls : React.PropTypes.func,
-  cbClearHistory : React.PropTypes.func.isRequired,
-  cbCall : React.PropTypes.func,
-  allowToolTip : React.PropTypes.bool,
-  cbBack: React.PropTypes.func.isRequired,
-  callerId : React.PropTypes.string
-};
-
-const defaultProps = {
-  allowToolTip : false
-};
-
 const springSettings = {stiffness: 170, damping: 26};
 
 class HistoryItems extends VertoBaseComponent {
@@ -34,6 +18,27 @@ class HistoryItems extends VertoBaseComponent {
 
     this.generateHistory = this.generateHistory.bind(this);
   }
+
+  static propTypes = {
+    compStyle : React.PropTypes.object,
+    history : React.PropTypes.array,
+    cbClick : React.PropTypes.func,
+    cbShowCalls : React.PropTypes.func,
+    cbClearHistory : React.PropTypes.func,
+    cbCall : React.PropTypes.func,
+    allowToolTip : React.PropTypes.bool,
+    cbBack : React.PropTypes.func,
+    callerId : React.PropTypes.string
+  };
+
+  static defaultProps = {
+    allowToolTip : false,
+    cbBack : ()=>{},
+    cbClearHistory : ()=>{}
+  };
+
+  static filename = "callHistory";
+  static displayName = "HistoryItems";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -208,6 +213,31 @@ class DetailItems extends VertoBaseComponent {
     this.generateDetails = this.generateDetails.bind(this);
   }
 
+  static propTypes = {
+    compStyle : React.PropTypes.object,
+    history : React.PropTypes.array,
+    cbClick : React.PropTypes.func,
+    cbShowCalls : React.PropTypes.func,
+    cbClearHistory : React.PropTypes.func,
+    cbCall : React.PropTypes.func,
+    allowToolTip : React.PropTypes.bool,
+    cbBack : React.PropTypes.func,
+    callerId : React.PropTypes.string
+  };
+
+  static defaultProps = {
+    allowToolTip : false,
+    cbBack : ()=>{},
+    cbClearHistory : ()=>{}
+  };
+
+  static filename = "callHistory";
+  static displayName = "DetailItems";
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
+
 
   getDefaultStyle(styleName) {
     const styles = {
@@ -356,15 +386,40 @@ class DetailItems extends VertoBaseComponent {
 
 class CallHistory extends VertoBaseComponent {
   constructor(props) {
-    super(props);
-    this.state = {
-      item: [[375,375], [375,375]],
-      currItem: 0,
-      callItem: ''
-    };
+      super(props);
+      this.state = {
+        item: [[375,375], [375,375]],
+        currItem: 0,
+        callItem: ''
+      };
 
-    this.clickHandler = this.clickHandler.bind(this);
-}
+      this.clickHandler = this.clickHandler.bind(this);
+  }
+
+  static propTypes = {
+    compStyle : React.PropTypes.object,
+    history : React.PropTypes.array,
+    cbClick : React.PropTypes.func,
+    cbShowCalls : React.PropTypes.func,
+    cbClearHistory : React.PropTypes.func,
+    cbCall : React.PropTypes.func,
+    allowToolTip : React.PropTypes.bool,
+    cbBack : React.PropTypes.func,
+    callerId : React.PropTypes.string
+  };
+
+  static defaultProps = {
+    allowToolTip : false,
+    cbBack : ()=>{},
+    cbClearHistory : ()=>{}
+  };
+
+  static filename = "callHistory";
+  static displayName = "CallHistory";
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
 
   clickHandler() {
     if(this.state.currItem == 0) {
@@ -493,7 +548,5 @@ class CallHistory extends VertoBaseComponent {
   }
 }
 
-CallHistory.defaultProps = defaultProps;
-CallHistory.propTypes = propTypes;
 export default CallHistory;
 // reviewed 7/13/2016

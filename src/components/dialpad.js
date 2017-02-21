@@ -10,13 +10,6 @@ import {Motion, spring} from 'react-motion';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  compStyle : React.PropTypes.object,
-  cbCall: React.PropTypes.func.isRequired,
-  nbrToDial: React.PropTypes.string,
-  lastNumber : React.PropTypes.string
-};
-
 const springSettings = {stiffness: 170, damping: 26};
 
 class Dialpad extends VertoBaseComponent {
@@ -28,6 +21,20 @@ class Dialpad extends VertoBaseComponent {
     this.makeCall = this.makeCall.bind(this);
     this.changingNumber = this.changingNumber.bind(this);
   }
+
+  static propTypes = {
+    compStyle : React.PropTypes.object,
+    cbCall: React.PropTypes.func,
+    nbrToDial: React.PropTypes.string,
+    lastNumber : React.PropTypes.string
+  };
+
+  static defaultProps = {
+    cbCall: ()=>{}
+  };
+
+  static filename = "dialpad";
+  static displayName = "Dialpad";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -364,6 +371,5 @@ class Dialpad extends VertoBaseComponent {
     }
   }
 
-Dialpad.propTypes = propTypes;
 export default injectIntl(Radium(Dialpad));
 // reviewed 7/13/2016

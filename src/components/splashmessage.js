@@ -3,17 +3,24 @@ import VertoBaseComponent from './vertobasecomponent';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  errorObject: React.PropTypes.object,
-  compStyle:   React.PropTypes.object,
-  statusTitle: React.PropTypes.string.isRequired
-};
-
 class SplashMessage extends VertoBaseComponent{
   constructor(props) {
     super(props);
     this.state = {};
   }
+
+  static propTypes = {
+    errorObject: React.PropTypes.object,
+    compStyle:   React.PropTypes.object,
+    statusTitle: React.PropTypes.string
+  };
+
+  static defaultProps = {
+    statusTitle: 'noTitle'
+  };
+
+  static filename = "splashmessage";
+  static displayName = "SplashMessage";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -83,6 +90,5 @@ class SplashMessage extends VertoBaseComponent{
   }
 }
 
-SplashMessage.propTypes = propTypes;
 export default SplashMessage;
 // reviewed on 7/14/2016

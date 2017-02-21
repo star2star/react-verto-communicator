@@ -3,17 +3,20 @@ import VertoBaseComponent from './vertobasecomponent';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  cbSubmitMessage : React.PropTypes.func,
-  sessionId: React.PropTypes.string,
-  compStyle: React.PropTypes.object
-};
-
 class ChatInput extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {};
   }
+
+  static propTypes = {
+    cbSubmitMessage : React.PropTypes.func,
+    sessionId: React.PropTypes.string,
+    compStyle: React.PropTypes.object
+  };
+
+  static filename = "chatInput";
+  static displayName = "ChatInput";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -88,8 +91,6 @@ class ChatInput extends VertoBaseComponent {
     );
   }
 }
-
-ChatInput.propTypes = propTypes;
 
 export default ChatInput;
 //reviewed 7/13/2016

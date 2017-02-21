@@ -3,22 +3,25 @@ import VertoBaseComponent from './vertobasecomponent';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  cbChanging : React.PropTypes.func,
-  compStyle : React.PropTypes.object,
-  label : React.PropTypes.string,
-  type : React.PropTypes.string,
-  placeholder : React.PropTypes.string,
-  value : React.PropTypes.string,
-  hasErrors: React.PropTypes.bool,
-  errorLabel: React.PropTypes.string
-};
-
 class Input extends VertoBaseComponent {
   constructor(props) {
     super(props);
     this.state = { 'onFocus' : false, isEmpty: true };
 }
+
+  static propTypes = {
+    cbChanging : React.PropTypes.func,
+    compStyle : React.PropTypes.object,
+    label : React.PropTypes.string,
+    type : React.PropTypes.string,
+    placeholder : React.PropTypes.string,
+    value : React.PropTypes.string,
+    hasErrors: React.PropTypes.bool,
+    errorLabel: React.PropTypes.string
+  };
+
+  static filename = "input";
+  static displayName = "Input";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -134,6 +137,5 @@ class Input extends VertoBaseComponent {
   }
 }
 
-Input.propTypes = propTypes;
 export default Input;
 // reviewed 7/13/2016

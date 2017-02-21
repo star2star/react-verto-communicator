@@ -10,14 +10,6 @@ import {
 import { fromJS } from "immutable";
 
 
- const propTypes = {
-   callData : React.PropTypes.object.isRequired,
-   cbHangup : React.PropTypes.func,
-   cbHold:  React.PropTypes.func,
-   cbDTMF:  React.PropTypes.func,
-   cbMute:  React.PropTypes.func
-};
-
 class Dialing extends VertoBaseComponent {
   constructor(props){
       super(props);
@@ -28,6 +20,21 @@ class Dialing extends VertoBaseComponent {
             return s;
           };
   }
+
+  static propTypes = {
+    callData : React.PropTypes.object,
+    cbHangup : React.PropTypes.func,
+    cbHold:  React.PropTypes.func,
+    cbDTMF:  React.PropTypes.func,
+    cbMute:  React.PropTypes.func
+  };
+
+  static defaultProps = {
+     callData : {}
+  };
+
+  static filename = "dialing";
+  static displayName = "Dialing";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -142,8 +149,6 @@ class Dialing extends VertoBaseComponent {
       );
     }
   }
-
-Dialing.propTypes = propTypes;
 
 export default Dialing;
 // reviewed 7/13/2016

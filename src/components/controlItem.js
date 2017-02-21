@@ -4,22 +4,26 @@ import * as icons from './svgIcons';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  cbActionClick : React.PropTypes.func,
-  description : React.PropTypes.string,
-  compStyle : React.PropTypes.object,
-  label : React.PropTypes.string,
-  type : React.PropTypes.string
-};
-const defaultProps = {
-  compStyle : {svgStyle:{fill: '#6b6c6c', height: '24px', width: '24px'}}
-};
-
 class ControlItem extends VertoBaseComponent {
   constructor(props){
       super(props);
       this.state = {};
   }
+
+  static propTypes = {
+    cbActionClick : React.PropTypes.func,
+    description : React.PropTypes.string,
+    compStyle : React.PropTypes.object,
+    label : React.PropTypes.string,
+    type : React.PropTypes.string
+  };
+
+  static defaultProps = {
+    compStyle : {svgStyle:{fill: '#6b6c6c', height: '24px', width: '24px'}}
+  };
+
+  static filename = "controlItem";
+  static displayName = "ControlItem";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -69,8 +73,6 @@ class ControlItem extends VertoBaseComponent {
   }
 }
 
-ControlItem.propTypes = propTypes;
-ControlItem.defaultProps = defaultProps;
 
 export default ControlItem;
 // reviewed 7/13/2016

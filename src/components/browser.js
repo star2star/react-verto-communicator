@@ -3,15 +3,16 @@ import VertoBaseComponent from './vertobasecomponent';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-
-};
-
 class Browser extends VertoBaseComponent {
   constructor(props) {
     super(props);
     this.state = {};
   }
+
+  static propTypes = {};
+
+  static filename = "browser";
+  static displayName = "Browser";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));

@@ -3,19 +3,28 @@ import VertoBaseComponent from './vertobasecomponent';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  compStyle: React.PropTypes.object,
-  name: React.PropTypes.string.isRequired,
-  email: React.PropTypes.string.isRequired,
-  avatar: React.PropTypes.string.isRequired
-};
-
 class ContributorsList extends VertoBaseComponent{
 
   constructor(props) {
     super(props);
     this.state = {};
   }
+
+  static propTypes = {
+    compStyle: React.PropTypes.object,
+    name: React.PropTypes.string,
+    email: React.PropTypes.string,
+    avatar: React.PropTypes.string
+  };
+
+  static defaultProps = {
+    name: '',
+    email: '',
+    avatar: ''
+  };
+
+  static filename = "contributorsListItem";
+  static displayName = "ContributorsList";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -69,8 +78,6 @@ class ContributorsList extends VertoBaseComponent{
     );
   }
 }
-
-ContributorsList.propTypes = propTypes;
 
 export default ContributorsList;
 // reviewed 7/13/2016

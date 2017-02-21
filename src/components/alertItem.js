@@ -3,12 +3,6 @@ import VertoBaseComponent from './vertobasecomponent';
 import ControlItem from './controlItem';
 import { fromJS } from "immutable";
 
-const propTypes = {
-  alertData: React.PropTypes.object.isRequired,
-  cbDismissAlert : React.PropTypes.func.isRequired,
-  compStyle : React.PropTypes.object,
-  index : React.PropTypes.number
-};
 
 class AlertItem extends VertoBaseComponent {
   constructor(props){
@@ -17,6 +11,21 @@ class AlertItem extends VertoBaseComponent {
 
     this.handleDismissClick = this.handleDismissClick.bind(this);
   }
+
+  static propTypes = {
+    alertData: React.PropTypes.object,
+    cbDismissAlert : React.PropTypes.func,
+    compStyle : React.PropTypes.object,
+    index : React.PropTypes.number
+  };
+
+  static defaultProps = {
+    alertData: {},
+    cbDismissAlert : ()=>{},
+  };
+
+  static filename = "alertItem";
+  static displayName = "AlertItem";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -103,7 +112,6 @@ class AlertItem extends VertoBaseComponent {
   }
 }
 
-AlertItem.propTypes = propTypes;
 
 export default AlertItem;
 // reviewed 7/13/2016

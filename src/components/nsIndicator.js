@@ -10,21 +10,25 @@ import ToolTip from './tooltip';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  allowDisplayDetails : React.PropTypes.bool,
-  compStyle : React.PropTypes.object,
-  networkData : React.PropTypes.object//.isRequired
-};
-
-const defaultProps = {
-  allowDisplayDetails : true
-};
 
 class NetworkStatusIndicator extends VertoBaseComponent {
   constructor(props) {
     super(props);
     this.state = {};
   }
+
+  static propTypes = {
+    allowDisplayDetails : React.PropTypes.bool,
+    compStyle : React.PropTypes.object,
+    networkData : React.PropTypes.object
+  };
+
+  static defaultProps = {
+    allowDisplayDetails : true
+  };
+
+  static filename = "nsIndicator";
+  static displayName = "NetworkStatusIndicator";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -156,9 +160,6 @@ class NetworkStatusIndicator extends VertoBaseComponent {
     }
   }
 }
-
-NetworkStatusIndicator.propTypes = propTypes;
-NetworkStatusIndicator.defaultProps = defaultProps;
 
 export default injectIntl(NetworkStatusIndicator);
 // reviewed on 7/14/2016

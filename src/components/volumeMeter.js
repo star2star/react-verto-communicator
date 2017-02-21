@@ -4,16 +4,23 @@ import { MicrophoneIconSVG } from './svgIcons';
 import { fromJS } from "immutable";
 
 
-const propTypes = {
-  compStyle: React.PropTypes.object,
-  volumeLevel: React.PropTypes.number.isRequired
-};
-
 class VolumeMeter extends VertoBaseComponent{
   constructor(props) {
     super(props);
     this.state = {};
   }
+
+  static propTypes = {
+    compStyle: React.PropTypes.object,
+    volumeLevel: React.PropTypes.number
+  };
+
+  static defaultProps = {
+    volumeLevel: 5
+  };
+
+  static filename = "volumeMeter";
+  static displayName = "VolumeMeter";
 
   shouldComponentUpdate(nextProps, nextState) {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
@@ -74,7 +81,6 @@ class VolumeMeter extends VertoBaseComponent{
   }
 }
 
-VolumeMeter.propTypes = propTypes;
 
 export default VolumeMeter;
 // reviewed on 7/15/2016
