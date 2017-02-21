@@ -6,6 +6,8 @@ import { UpArrowIconSVG, DownArrowIconSVG, BackArrowIconSVG } from './svgIcons';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import {Motion, spring} from 'react-motion';
+import { fromJS } from "immutable";
+
 
 const propTypes = {
   compStyle : React.PropTypes.object,
@@ -33,7 +35,9 @@ class HistoryItems extends VertoBaseComponent {
     this.generateHistory = this.generateHistory.bind(this);
   }
 
-
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
 
   getDefaultStyle(styleName) {
     const styles = {

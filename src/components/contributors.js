@@ -5,6 +5,8 @@ import App from '../routes/app';
 import ContributorsListItem from './contributorsListItem';
 import Radium from 'radium';
 import { FormattedMessage } from 'react-intl';
+import { fromJS } from "immutable";
+
 
 const propTypes = {
   compStyle : React.PropTypes.object,
@@ -15,8 +17,12 @@ class Contributors extends VertoBaseComponent{
 
   constructor(props) {
     super(props);
+    this.state = {};
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
 
   getDefaultStyle(styleName) {
     const styles = {

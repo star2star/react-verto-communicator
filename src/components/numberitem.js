@@ -2,6 +2,8 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 //import SvgIcons from './svgIcons';
 import Radium from 'radium';
+import { fromJS } from "immutable";
+
 
 const propTypes = {
   compStyle : React.PropTypes.object,
@@ -23,7 +25,10 @@ class NumberItem extends VertoBaseComponent {
     this.props.cbClick(this.props.keyValue);
   }
 
- 
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
+
   getDefaultStyle(styleName) {
     const styles = {
       container: {

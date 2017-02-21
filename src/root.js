@@ -38,10 +38,10 @@ export default Root;
   //   <Route path="/" component={App}>
   //     <IndexRoute component={Main} />
   //     <Route path="app" component={Main}>
-  //       <Route path="splash" component={Splash} /> // ></Route>
+  //       <Route path="splash" component={Splash} /> // ></Route> //subroute: type
   //
   //       <Route path="login" component={AppLogin} />
-  //       <Route path="resolutionRefresh" component={ResolutionRefresh} />
+  //       <Route path="resolutionRefresh" component={ResolutionRefresh} /> //rename path to resRefresh
   //       <Route path="loggedIn" component={LoggedIn} />
   //       <Route path="speedTest" component={SpeedTest} />
   //       <Route path="dialing" component={Dialing} />

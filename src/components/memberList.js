@@ -2,6 +2,8 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import ReactDOM from 'react-dom';
 import MemberItem from './memberItem';
+import { fromJS } from "immutable";
+
 
 const propTypes = {
   allowPresenter : React.PropTypes.bool,
@@ -31,7 +33,9 @@ class MemberList extends VertoBaseComponent {
     node.scrollTop = node.scrollHeight;
   }
 
- 
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
 
   getDefaultStyle(styleName) {
     const styles = {

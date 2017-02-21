@@ -1,5 +1,7 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent.js';
+import { fromJS } from "immutable";
+
 
 const propTypes = {
   cbSubmitSetting: React.PropTypes.func.isRequired,
@@ -12,31 +14,36 @@ const propTypes = {
 class SettingsMenuSelect extends VertoBaseComponent {
   constructor(props) {
     super(props);
+    this.state = {};
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
   }
 
   handleSelect() {
     const theSelect = this.refs.select;
 
-    // get the selected option from the options array.  Use [0] to get the array
-    // element only (should only be one).
+      // get the selected option from the options array.  Use [0] to get the array
+      // element only (should only be one).
     const selValue = this.props.options.filter((opt)=>{
-    //console.log('theSelect', theSelect);
-    return (opt.id == theSelect[theSelect.selectedIndex].value);
-  })[0];
+      //console.log('theSelect', theSelect);
+      return (opt.id == theSelect[theSelect.selectedIndex].value);
+    })[0];
 
 
-  // The selectedOption prop has the structure that we need for the 'selected'
-  // value in the settings store.  Just replace the id and label values and
-  // return the structure to the callback function...
-  // The id is the name of the setting attribute to be set, and the data attribute
-  // is the value.
+    // The selectedOption prop has the structure that we need for the 'selected'
+    // value in the settings store.  Just replace the id and label values and
+    // return the structure to the callback function...
+    // The id is the name of the setting attribute to be set, and the data attribute
+    // is the value.
 
-  let selObj = {};
-  selObj[this.props.selectedOption.id] = {...this.props.selectedOption.data, ...selValue};
-  this.props.cbSubmitSetting(selObj);
-}
+    let selObj = {};
+    selObj[this.props.selectedOption.id] = {...this.props.selectedOption.data, ...selValue};
+    this.props.cbSubmitSetting(selObj);
+  }
 
- 
+
 
   getDefaultStyle(styleName) {
     const styles = {

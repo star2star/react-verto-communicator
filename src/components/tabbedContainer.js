@@ -1,6 +1,8 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import Radium from 'radium';
+import { fromJS } from "immutable";
+
 
 const propTypes = {
   activeTab: React.PropTypes.number,
@@ -18,7 +20,9 @@ class TabbedContainer extends VertoBaseComponent {
     this.setState({...this.state, activeTabIndex: index});
   }
 
- 
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
 
   getDefaultStyle(styleName) {
     const styles = {

@@ -2,6 +2,8 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import ReactDOM from 'react-dom';
 import ChatMessageItem from './chatMessageItem';
+import { fromJS } from "immutable";
+
 
 const propTypes = {
   chatItems : React.PropTypes.array,
@@ -14,6 +16,10 @@ class ChatMessageList extends VertoBaseComponent {
     super(props);
     this.state = {};
     //console.log('ChatMessageList chatItems prop', this.props.chatItems);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
   }
 
   componentDidUpdate() {

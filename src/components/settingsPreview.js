@@ -6,6 +6,8 @@ import SettingsMenuSelect from './settingsMenuSelect.js';
 import vMeter from 'volume-meter';
 import VolumeMeter from './volumeMeter';
 import { RestoreIconSVG } from './svgIcons';
+import { fromJS } from "immutable";
+
 
 const propTypes = {
   compStyle: React.PropTypes.object,
@@ -29,6 +31,10 @@ class SettingsPreview extends VertoBaseComponent{
     this.stopMedia = this.stopMedia.bind(this);
     this.submitSave = this.submitSave.bind(this);
     this.submitRefresh = this.submitRefresh.bind(this);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
   }
 
   componentDidMount(){
@@ -102,7 +108,7 @@ class SettingsPreview extends VertoBaseComponent{
     this.streamObj.onended = meter.stop.bind(meter);
   }
 
- 
+
 
   getDefaultStyle(styleName) {
     const styles = {

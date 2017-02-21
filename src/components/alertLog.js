@@ -4,6 +4,8 @@ import { FormattedMessage } from 'react-intl';
 import AlertService from '../js/alertService';
 import AlertLogItem from './alertLogItem';
 import Modal from 'react-modal';
+import { fromJS } from "immutable";
+
 
 const propTypes = {
   compStyle : React.PropTypes.object
@@ -20,7 +22,9 @@ class AlertLog extends VertoBaseComponent {
     this.handleClearAlerts= this.handleClearAlerts.bind(this);
   }
 
-
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
 
   getDefaultStyle(styleName) {
     const styles = {

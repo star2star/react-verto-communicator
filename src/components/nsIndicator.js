@@ -7,6 +7,8 @@ SignalFullIconSVG,
 SignalLowIconSVG } from './svgIcons';
 import { injectIntl } from 'react-intl';
 import ToolTip from './tooltip';
+import { fromJS } from "immutable";
+
 
 const propTypes = {
   allowDisplayDetails : React.PropTypes.bool,
@@ -21,9 +23,12 @@ const defaultProps = {
 class NetworkStatusIndicator extends VertoBaseComponent {
   constructor(props) {
     super(props);
+    this.state = {};
   }
 
- 
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
 
   getDefaultStyle(styleName) {
     const styles = {

@@ -6,6 +6,8 @@ CaretUpIconSVG,
 CaretDownIconSVG } from './svgIcons';
 import ToolTip from './tooltip';
 import { injectIntl } from 'react-intl';
+import { fromJS } from "immutable";
+
 
 const propTypes = {
   cbDeviceList: React.PropTypes.func,
@@ -32,7 +34,9 @@ class Settings extends VertoBaseComponent {
     Settings.toggleSettings = this.showMenu;
   }
 
-
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
 
   closeMenu(){
     this.props.cbToggleShowSettings(false);

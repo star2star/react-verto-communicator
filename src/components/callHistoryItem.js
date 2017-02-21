@@ -3,6 +3,8 @@ import VertoBaseComponent from './vertobasecomponent';
 import moment from 'moment';
 import { UpArrowIconSVG, DownArrowIconSVG, MenuIconSVG } from './svgIcons';
 import ToolTip from './tooltip';
+import { fromJS } from "immutable";
+
 
 const propTypes = {
   compStyle : React.PropTypes.object,
@@ -20,7 +22,9 @@ class CallHistoryItem extends VertoBaseComponent {
     this.showCalls = this.showCalls.bind(this);
 }
 
-
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
 
   getDefaultStyle(styleName) {
     const styles = {

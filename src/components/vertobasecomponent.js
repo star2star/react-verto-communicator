@@ -1,12 +1,20 @@
 import React from 'react';
 import themes from '../themes/theme-styles.js';
+import { fromJS } from "immutable";
+
 
 const objectMerge = require('object-merge');
 
 class VertoBaseComponent extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
+
   findWrappedMethods(obj={},methodName){
     if (!methodName) return;
 

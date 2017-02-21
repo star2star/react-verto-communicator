@@ -4,6 +4,8 @@ import ListSelect from './list-select';
 import ControlItem from './controlItem';
 import ToolTip from './tooltip';
 import { injectIntl } from 'react-intl';
+import { fromJS } from "immutable";
+
 
 const propTypes = {
   cbPlay : React.PropTypes.func.isRequired,
@@ -24,7 +26,9 @@ class AdminVideoControls extends VertoBaseComponent {
     this.handleShowLayoutList = this.handleShowLayoutList.bind(this);
   }
 
- 
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
 
   getDefaultStyle(styleName) {
     const styles = {

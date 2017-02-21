@@ -1,6 +1,8 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import AlertItem from './alertItem';
+import { fromJS } from "immutable";
+
 
 const propTypes = {
   compStyle : React.PropTypes.object
@@ -20,6 +22,9 @@ class AlertList extends VertoBaseComponent {
     document.addEventListener('alert', this.handleNewAlert);
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
 
   getDefaultStyle(styleName) {
     const styles = {

@@ -2,6 +2,8 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import SplashMessage from './splashmessage';
 import Radium from 'radium';
+import { fromJS } from "immutable";
+
 
 const propTypes = {
   step:   React.PropTypes.shape({
@@ -16,12 +18,16 @@ const propTypes = {
 class Splash extends VertoBaseComponent {
   constructor(props) {
     super(props);
+    this.state = {};
+
     this.getProgressBarWidth = this.getProgressBarWidth.bind(this);
     Splash.getProgressBarWidth = this.getProgressBarWidth.bind(this);
 
   }
 
- 
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
 
   getDefaultStyle(styleName) {
     const styles = {

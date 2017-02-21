@@ -1,7 +1,7 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import ControlItem from './controlItem';
-
+import { fromJS } from "immutable";
 
 const propTypes = {
   alertData: React.PropTypes.object.isRequired,
@@ -16,6 +16,10 @@ class AlertItem extends VertoBaseComponent {
     this.state = {};
 
     this.handleDismissClick = this.handleDismissClick.bind(this);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
   }
 
   componentDidMount() {

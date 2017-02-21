@@ -1,5 +1,7 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
+import { fromJS } from "immutable";
+
 
 const propTypes = {
   cbSubmitMessage : React.PropTypes.func,
@@ -11,6 +13,10 @@ class ChatInput extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {};
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
   }
 
   handleKeyPress(e){

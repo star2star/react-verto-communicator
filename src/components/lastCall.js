@@ -2,6 +2,8 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import ToolTip from './tooltip';
 import { injectIntl } from 'react-intl'
+import { fromJS } from "immutable";
+
 
 const propTypes = {
   lastNumber: React.PropTypes.string,
@@ -15,9 +17,12 @@ class LastCall extends VertoBaseComponent {
   constructor(props) {
     super(props);
     this.call = this.call.bind(this);
+    this.state = {};
   }
 
-
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
 
   getDefaultStyle(styleName) {
       const styles = {

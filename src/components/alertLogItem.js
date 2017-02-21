@@ -2,6 +2,7 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import ControlItem from './controlItem';
 import moment from 'moment';
+import { fromJS } from "immutable";
 
 
 const propTypes = {
@@ -23,7 +24,9 @@ class AlertLogItem extends VertoBaseComponent {
     this.props.cbRemoveAlert(this.props.index);
   }
 
-
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
 
   getDefaultStyle(styleName) {
     const styles = {

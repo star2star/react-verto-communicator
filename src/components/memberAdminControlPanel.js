@@ -4,6 +4,8 @@ import App from '../routes/app'; // for transfer
 import ControlItem from './controlItem';
 import InputModal from './inputModal';
 import { injectIntl } from 'react-intl';
+import { fromJS } from "immutable";
+
 
 const propTypes = {
   cbControlClick : React.PropTypes.func.isRequired,
@@ -17,7 +19,9 @@ class AdminControls extends VertoBaseComponent {
     this.state = {};
   }
 
-
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
 
   getDefaultStyle(styleName) {
     const styles = {

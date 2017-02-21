@@ -1,6 +1,8 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import { MicrophoneIconSVG } from './svgIcons';
+import { fromJS } from "immutable";
+
 
 const propTypes = {
   compStyle: React.PropTypes.object,
@@ -10,8 +12,12 @@ const propTypes = {
 class VolumeMeter extends VertoBaseComponent{
   constructor(props) {
     super(props);
+    this.state = {};
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
 
   getDefaultStyle(styleName) {
     const styles = {

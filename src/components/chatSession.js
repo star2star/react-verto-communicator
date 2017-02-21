@@ -3,6 +3,8 @@ import VertoBaseComponent from './vertobasecomponent';
 import ChatMessageList from './chatMessageList';
 import ChatInput from './chatInput';
 import Radium from 'radium';
+import { fromJS } from "immutable";
+
 
 const propTypes = {
   cbRemove : React.PropTypes.func,
@@ -17,6 +19,9 @@ class ChatSession extends VertoBaseComponent {
     this.state = {};
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
 
   getDefaultStyle(styleName) {
     const styles = {

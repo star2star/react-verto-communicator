@@ -2,6 +2,8 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import {AvatarSVG} from './svgIcons';
 import moment from 'moment';
+import { fromJS } from "immutable";
+
 
 const propTypes = {
   avatarUrl : React.PropTypes.string,
@@ -16,6 +18,9 @@ class ChatMessageItem extends VertoBaseComponent {
     this.state = {};
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
 
   getDefaultStyle(styleName) {
     const styles = {

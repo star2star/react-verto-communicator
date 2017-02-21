@@ -4,6 +4,8 @@ import ControlItem from './controlItem';
 import Badge from './badge';
 import ToolTip from './tooltip';
 import { injectIntl } from 'react-intl';
+import { fromJS } from "immutable";
+
 
 const propTypes = {
   cbMicMute : React.PropTypes.func.isRequired,
@@ -22,6 +24,10 @@ class UserVideoControls extends VertoBaseComponent {
     // addEventListener for dblclick to go to full screen moderator
     document.getElementById("webcam").addEventListener('dblclick', this.handleToggleFullScreen);
 
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
   }
 
   componentWillUnmount() {

@@ -4,6 +4,8 @@ import UserVideoControls from './vidControlsUser';
 import AdminVideoControls from './vidControlsAdmin';
 import { PhoneIconSVG } from './svgIcons';
 import Radium from 'radium';
+import { fromJS } from "immutable";
+
 
  const propTypes = {
       callData : React.PropTypes.object.isRequired,
@@ -31,6 +33,10 @@ class CallProgress extends VertoBaseComponent {
               while (s.length < len) s = c+s;
               return s;
             };
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+      return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
     }
 
     componentWillReceiveProps(nextProp){

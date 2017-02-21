@@ -3,6 +3,7 @@ import VertoBaseComponent from './vertobasecomponent';
 import Modal from 'react-modal';
 import { FormattedMessage } from 'react-intl';
 import WhiteLabel from '../js/whitelabel.js';
+import { fromJS } from "immutable";
 
 const propTypes = {
   compStyle: React.PropTypes.object,
@@ -11,9 +12,16 @@ const propTypes = {
   cbClose: React.PropTypes.func.isRequired
 };
 
+
+
 class About extends VertoBaseComponent{
   constructor(props) {
     super(props);
+    this.state = {};
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
   }
 
   getDefaultStyle(styleName) {

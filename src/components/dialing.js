@@ -7,6 +7,8 @@ import {
     PauseIconSVG,
     PhoneIconSVG
   } from './svgIcons';
+import { fromJS } from "immutable";
+
 
  const propTypes = {
    callData : React.PropTypes.object.isRequired,
@@ -25,6 +27,10 @@ class Dialing extends VertoBaseComponent {
             while (s.length < len) s = c+s;
             return s;
           };
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
   }
 
   componentWillReceiveProps(nextProp){

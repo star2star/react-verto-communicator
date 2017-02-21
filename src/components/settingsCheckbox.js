@@ -1,5 +1,7 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent.js';
+import { fromJS } from "immutable";
+
 
 const propTypes = {
   cbSubmitSetting: React.PropTypes.func.isRequired,
@@ -28,7 +30,10 @@ class SettingsCheckbox extends VertoBaseComponent {
     // console.log('things-------', this.refs.checkMe.checked, chkdObj);
     this.props.cbSubmitSetting(chkdObj);
   }
- 
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
 
   getDefaultStyle(styleName) {
 

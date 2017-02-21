@@ -2,6 +2,8 @@ import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
 import { FormattedMessage } from 'react-intl';
 import {AvatarSVG, PhoneIconSVG } from './svgIcons';
+import { fromJS } from "immutable";
+
 
  const propTypes = {
    callData : React.PropTypes.object.isRequired,
@@ -16,7 +18,9 @@ class IncomingCall extends VertoBaseComponent {
       this.state={};
   }
 
- 
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
 
   getDefaultStyle(styleName) {
     const styles = {

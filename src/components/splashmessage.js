@@ -1,5 +1,7 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
+import { fromJS } from "immutable";
+
 
 const propTypes = {
   errorObject: React.PropTypes.object,
@@ -10,9 +12,12 @@ const propTypes = {
 class SplashMessage extends VertoBaseComponent{
   constructor(props) {
     super(props);
+    this.state = {};
   }
 
- 
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
 
   getDefaultStyle(styleName) {
       const styles = {

@@ -3,6 +3,8 @@ import VertoBaseComponent from './vertobasecomponent';
 import {injectIntl, FormattedMessage} from 'react-intl';
 import Radium from 'radium';
 import Input from './input';
+import { fromJS } from "immutable";
+
 
 const propTypes = {
   compStyle : React.PropTypes.object,
@@ -19,6 +21,9 @@ class Login extends VertoBaseComponent{
     this.submitLogin = this.submitLogin.bind(this);
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
 
   getDefaultStyle(styleName) {
     const styles = {

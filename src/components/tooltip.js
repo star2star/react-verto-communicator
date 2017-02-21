@@ -1,6 +1,8 @@
 import React from 'react';
 import { Tooltip, Origin } from 'redux-tooltip';
 import VertoBaseComponent from './vertobasecomponent';
+import { fromJS } from "immutable";
+
 
 const propTypes = {
   auto: React.PropTypes.bool,
@@ -16,9 +18,12 @@ const propTypes = {
 class ToolTip extends VertoBaseComponent {
   constructor(props){
     super(props);
+    this.state = {};
   }
 
- 
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
 
   getDefaultStyle(styleName) {
     const styles = {

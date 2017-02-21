@@ -3,6 +3,8 @@ import VertoBaseComponent from './vertobasecomponent';
 import { StatusIconSVG } from './svgIcons';
 import ToolTip from './tooltip';
 import { injectIntl } from 'react-intl';
+import { fromJS } from "immutable";
+
 
 const propTypes = {
   status: React.PropTypes.oneOf(['connected','disconnected', 'connecting', 'active']).isRequired,
@@ -13,8 +15,12 @@ const propTypes = {
 class VCStatus extends VertoBaseComponent {
   constructor(props) {
     super(props);
+    this.state = {};
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
 
   getDefaultStyle(styleName) {
       const styles = {

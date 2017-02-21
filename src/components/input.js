@@ -1,5 +1,7 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
+import { fromJS } from "immutable";
+
 
 const propTypes = {
   cbChanging : React.PropTypes.func,
@@ -18,7 +20,9 @@ class Input extends VertoBaseComponent {
     this.state = { 'onFocus' : false, isEmpty: true };
 }
 
-
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
 
   getDefaultStyle(styleName) {
     const styles = {

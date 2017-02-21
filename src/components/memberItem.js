@@ -12,6 +12,8 @@ import {
   MuteVideoIconSVG,
   LockIconSVG
 } from './svgIcons';
+import { fromJS } from "immutable";
+
 
 const propTypes = {
   cbControlClick : React.PropTypes.func.isRequired,
@@ -32,7 +34,9 @@ class MemberItem extends VertoBaseComponent {
   }
 
 
- 
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
 
   getDefaultStyle(styleName) {
     const styles = {

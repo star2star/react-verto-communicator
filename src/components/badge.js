@@ -1,5 +1,7 @@
 import React from 'react';
 import VertoBaseComponent from './vertobasecomponent';
+import { fromJS } from "immutable";
+
 
  const propTypes = {
   compStyle: React.PropTypes.object,
@@ -13,7 +15,9 @@ class Badge extends VertoBaseComponent {
     this.state = {};
   }
 
-
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
 
   getDefaultStyle(styleName) {
     const styles = {

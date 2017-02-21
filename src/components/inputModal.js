@@ -3,6 +3,8 @@ import VertoBaseComponent from './vertobasecomponent';
 import Modal from 'react-modal';
 import Input from './input';
 import { FormattedMessage } from 'react-intl';
+import { fromJS } from "immutable";
+
 
 const propTypes = {
   cbClose: React.PropTypes.func.isRequired,
@@ -21,7 +23,9 @@ class InputModal extends VertoBaseComponent {
     this.changingInput = this.changingInput.bind(this);
   }
 
-
+  shouldComponentUpdate(nextProps, nextState) {
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
 
   getDefaultStyle(styleName) {
     const styles = {
