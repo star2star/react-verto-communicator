@@ -5,6 +5,7 @@ import {injectIntl} from 'react-intl';
 import Radium from 'radium';
 import { compose } from 'recompose';
 import VertoBaseComponent from '../components/vertobasecomponent';
+import { fromJS } from 'immutable';
 
 class AppSlpash extends VertoBaseComponent {
 
@@ -20,6 +21,10 @@ class AppSlpash extends VertoBaseComponent {
       }
     };
     return (styles[styleName]);
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
   }
 
   render() {

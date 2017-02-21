@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import {injectIntl} from 'react-intl';
 import Radium from 'radium';
 import { compose } from 'recompose';
-
+import { fromJS } from 'immutable';
 class AppLogin extends VertoBaseComponent {
 
   constructor(props) {
@@ -21,6 +21,10 @@ class AppLogin extends VertoBaseComponent {
       }
     };
     return (styles[styleName]);
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+    return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
   }
 
   render() {
