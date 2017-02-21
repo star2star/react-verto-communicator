@@ -13,6 +13,8 @@ class CallHistoryItem extends VertoBaseComponent {
 
     this.call = this.call.bind(this);
     this.showCalls = this.showCalls.bind(this);
+    this.showCallOnKeyPress = this.showCallOnKeyPress.bind(this);
+    this.callOnKeyPress = this.callOnKeyPress.bind(this);
   }
 
   static propTypes = {
@@ -98,6 +100,18 @@ class CallHistoryItem extends VertoBaseComponent {
     }
   }
 
+  showCallOnKeyPress(e){
+    if(e.which == 13 || e.keyCode == 13) {
+      this.showCalls();
+      return false;
+  }}
+  callOnKeyPress(e){
+    if(e.which == 13 || e.keyCode == 13) {
+      this.call();
+      return false;
+  }}
+
+
   render(){
     const renderedTS = moment(this.props.data.lastTimestamp).format('ddd MMM DD YYYY HH:mm:ss A');
 
@@ -115,11 +129,7 @@ class CallHistoryItem extends VertoBaseComponent {
         <span
             tabIndex="0"
             className="menuCont"
-            onKeyPress={(e)=>{
-              if(e.which == 13 || e.keyCode == 13) {
-                this.showCalls();
-                return false;
-              }}}
+            onKeyPress={this.showCallOnKeyPress}
             onClick={this.showCalls}
             style={{...this.getDefaultStyle('menuCont')}}>
           <MenuIconSVG svgStyle={{...this.getStyle('dirSVG')}} />
@@ -156,11 +166,7 @@ class CallHistoryItem extends VertoBaseComponent {
           <div
               tabIndex="0"
               className="top"
-              onKeyPress={(e)=>{
-                if(e.which == 13 || e.keyCode == 13) {
-                  this.call();
-                  return false;
-                }}}
+              onKeyPress={this.callOnKeyPress}
               onClick={this.call}
               style={{...this.getDefaultStyle('top')}}>
               <div className="info">
@@ -190,11 +196,7 @@ class CallHistoryItem extends VertoBaseComponent {
           <div
               tabIndex="0"
               className="top"
-              onKeyPress={(e)=>{
-                if(e.which == 13 || e.keyCode == 13) {
-                  this.call();
-                  return false;
-                }}}
+              onKeyPress={this.callOnKeyPress}
               onClick={this.call}
               style={{...this.getDefaultStyle('top')}}>
               <div className="info">

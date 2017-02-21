@@ -19,6 +19,10 @@ class Dialing extends VertoBaseComponent {
             while (s.length < len) s = c+s;
             return s;
           };
+
+      this.micOnClick = this.micOnClick.bind(this);
+      this.pauseOnClick = this.pauseOnClick.bind(this);
+      this.hangupOnClick = this.hangupOnClick.bind(this);
   }
 
   static propTypes = {
@@ -111,6 +115,21 @@ class Dialing extends VertoBaseComponent {
     return (styles[styleName]);
   }
 
+  micOnClick(){
+    //console.log('mute Microphone clicked: ', this.props);
+    this.props.cbMute(this.props.callData.callId, 'mic');
+  }
+
+  pauseOnClick(){
+    //console.log('mute Microphone clicked: ', this.props);
+    this.props.cbHold(this.props.callData.callId);
+  }
+
+  hangupOnClick(){
+    //console.log('hangup clicked: ', this.props);
+    this.props.cbHangup(this.props.callData.callId);
+  }
+
   render() {
     //console.log('$@#$$%#@$#%$%$%$%&^%$#%^& ', this.props.callData);
       return (
@@ -125,23 +144,14 @@ class Dialing extends VertoBaseComponent {
           <div style={this.getStyle('iconRowStyle')}>
             <DialPadIconSVG svgStyle={this.getStyle("svgStyle")} />
 
-            <span onClick={()=>{
-              //console.log('mute Microphone clicked: ', this.props);
-              this.props.cbMute(this.props.callData.callId, 'mic');
-            }}>
+            <span onClick={this.micOnClick}>
               <MicrophoneIconSVG svgStyle={this.getStyle("svgStyle")} />
             </span>
-            <span onClick={()=>{
-              //console.log('mute Microphone clicked: ', this.props);
-              this.props.cbHold(this.props.callData.callId);
-            }}>
+            <span onClick={this.pauseOnClick}>
               <PauseIconSVG svgStyle={this.getStyle("svgStyle")} />
             </span>
 
-            <span onClick={()=>{
-              //console.log('hangup clicked: ', this.props);
-              this.props.cbHangup(this.props.callData.callId);
-            }}>
+            <span onClick={this.hangupOnClick}>
               <PhoneIconSVG svgStyle={{...this.getStyle("svgStyle"), backgroundColor: '#f00', borderRadius: '50%'}} />
             </span>
           </div>

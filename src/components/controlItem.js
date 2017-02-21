@@ -19,6 +19,7 @@ class ControlItem extends VertoBaseComponent {
   };
 
   static defaultProps = {
+    cbActionClick: ()=>{},
     compStyle : {svgStyle:{fill: '#6b6c6c', height: '24px', width: '24px'}}
   };
 
@@ -56,11 +57,7 @@ class ControlItem extends VertoBaseComponent {
     // console.log('---->',DynamicIcon);
     return (
       <span className="container" style={this.getStyle("controlStyle")}
-          onClick={()=>{
-              if (this.props.cbActionClick) {
-                this.props.cbActionClick();
-              }
-           }}
+          onClick={this.props.cbActionClick}
       >
         <DynamicIcon
             svgStyle={this.getStyle("svgStyle")}

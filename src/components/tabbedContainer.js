@@ -76,12 +76,14 @@ class TabbedContainer extends VertoBaseComponent {
       <div className="tabbedContainerWrap" style={this.getStyle("wrapStyles")}>
         <div style={this.getStyle("mainStyles")} >
           {this.props.tabLabels.map((label, index)=>{
+            const handleTabOnClick = ()=>{this.handleTabClick(index);}
+
             let theStyle=this.getStyle("tabStyles");
             if (index == this.state.activeTabIndex) {
               theStyle = {...theStyle, color: "#1194f6", borderBottom: "2px solid #1194f6"};
             }
             return(
-              <div key={index} style={theStyle} onClick={()=>{this.handleTabClick(index);}}>{label}</div>
+              <div key={index} style={theStyle} onClick={handleTabOnClick}>{label}</div>
             );
           })}
         </div>

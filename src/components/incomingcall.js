@@ -9,6 +9,9 @@ class IncomingCall extends VertoBaseComponent {
   constructor(props){
       super(props);
       this.state={};
+
+      this.clickAnswer = this.clickAnswer.bind(this);
+      this.clickHangup = this.clickHangup.bind(this);
   }
 
   static propTypes = {
@@ -105,6 +108,15 @@ class IncomingCall extends VertoBaseComponent {
     return (styles[styleName]);
   }
 
+  clickAnswer(){
+    //console.log('answer clicked: ', this.props);
+    this.props.cbAnswer(this.props.callData);
+  }
+  clickHangup(){
+    //console.log('hangup clicked: ', this.props);
+    this.props.cbHangup(this.props.callData);
+  }
+
   render() {
     //console.log('CP: ', this.props.callData);
     return (
@@ -124,10 +136,7 @@ class IncomingCall extends VertoBaseComponent {
             </div>
         </div>
         <div className="callControls" style={this.getStyle("callControlStyle")}>
-          <span className="buttonArea" style={this.getStyle("buttonContainer")} onClick={()=>{
-            //console.log('answer clicked: ', this.props);
-            this.props.cbAnswer(this.props.callData);
-            }}
+          <span className="buttonArea" style={this.getStyle("buttonContainer")} onClick={this.clickAnswer}
           >
             <PhoneIconSVG svgStyle={this.getStyle("answerIconStyle")} />
               <span className="answerLabel" style={this.getStyle("labelSpacingStyle")}>
@@ -137,10 +146,7 @@ class IncomingCall extends VertoBaseComponent {
                 />
               </span>
           </span>
-          <span className="buttonArea" style={this.getStyle("buttonContainer")} onClick={()=>{
-            //console.log('hangup clicked: ', this.props);
-            this.props.cbHangup(this.props.callData);
-            }}
+          <span className="buttonArea" style={this.getStyle("buttonContainer")} onClick={this.clickHangup}
           >
             <PhoneIconSVG svgStyle={this.getStyle("rejectIconStyle")} />
               <span className="rejectLabel" style={this.getStyle("labelSpacingStyle")}>

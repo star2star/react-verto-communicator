@@ -13,6 +13,7 @@ class Login extends VertoBaseComponent{
 
     this.changingInput = this.changingInput.bind(this);
     this.submitLogin = this.submitLogin.bind(this);
+    this.poundOnClick = this.poundOnClick.bind(this);
   }
 
   static propTypes = {
@@ -137,6 +138,10 @@ class Login extends VertoBaseComponent{
 
   }
 
+  poundOnClick(){
+    this.setState({...this.state, advanced: !this.state.advanced });
+  }
+
 
   render() {
     const { formatMessage } = this.props.intl;
@@ -226,9 +231,7 @@ class Login extends VertoBaseComponent{
           <a
               href="#"
               style={{...this.getStyle('settingsLink')}}
-              onClick={()=>{
-                this.setState({...this.state, advanced: !this.state.advanced });
-              }}
+              onClick={this.poundOnClick}
           >
               {this.state.advanced ? <FormattedMessage id="LESS_SETTINGS" defaultMessage="Less Settings"/> :
               <FormattedMessage id="MORE_SETTINGS" defaultMessage="More Settings"/>}</a>

@@ -43,6 +43,8 @@ class ListSelect extends VertoBaseComponent {
 
   render() {
     const listItems = this.props.items.map((item, index)=>{
+      const liOnClick = ()=>{this.props.cbChange(index);}
+
       let styles=this.getStyle("itemStyles");
 
       if (this.props.selected && this.props.selected == index) {
@@ -51,7 +53,7 @@ class ListSelect extends VertoBaseComponent {
 
       return (
         <li key={index} style={styles}
-            onClick={()=>{this.props.cbChange(index);}}
+            onClick={liOnClick}
         >
           {item}
         </li>

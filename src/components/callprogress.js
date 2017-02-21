@@ -17,6 +17,15 @@ class CallProgress extends VertoBaseComponent {
               while (s.length < len) s = c+s;
               return s;
             };
+
+        this.consolePlay = this.consolePlay.bind(this);
+        this.consoleStop = this.consoleStop.bind(this);
+        this.consoleRecord = this.consoleRecord.bind(this);
+        this.consoleStop = this.consoleStop.bind(this);
+        this.muteMic = this.muteMic.bind(this);
+        this.muteVideo = this.muteVideo.bind(this);
+        this.toggleChat = this.toggleChat.bind(this);
+        this.hangUp = this.hangUp.bind(this);
     }
 
     static propTypes = {
@@ -141,17 +150,35 @@ class CallProgress extends VertoBaseComponent {
       return (styles[styleName]);
     }
 
+    consolePlay(){console.log('Play Clicked');}
+
+    consoleStop(){console.log('Stop Clicked');}
+
+    consoleRecord(){console.log('Record Clicked');}
+
+    consoleStop(){console.log('Stop Record Clicked');}
+
+    muteMic(){this.props.cbMute(this.props.callData.callId, 'mic');}
+
+    muteVideo(){this.props.cbMute(this.props.callData.callId, 'video');}
+
+    toggleChat(){console.log('Toggling chat in callProgress?'); this.props.cbToggleChat();}
+
+    hangUp(){this.props.cbHangup(this.props.callData.callId);}
+
+
+
     render() {
       //console.log('<<<<<< CP: ', this.props.callData, this.state );
       const adminControls = this.props.isModerator ?
               (<div style={this.getStyle('controlStyleAdmin')}>
                 <AdminVideoControls
-                    cbPlay={()=>{console.log('Play Clicked');}}
-                    cbStop={()=>{console.log('Stop Clicked');}}
-                    cbRecord={()=>{console.log('Record Clicked');}}
-                    cbStopRecord={()=>{console.log('Stop Record Clicked');}}
+                    cbPlay={this.consolePlay}
+                    cbStop={this.consoleStop}
+                    cbRecord={this.consoleRecord}
+                    cbStopRecord={this.consoleStop}
                     cbSnapshot={this.props.cbSnapshot}
-                    cbSetVideoMode={(params)=>{this.props.cbSetVideoMode(params);}}
+                    cbSetVideoMode={this.props.cbSetVideoMode}
                     layouts={this.props.layouts}
                     currLayout={this.props.currLayout}
                 />
@@ -162,10 +189,10 @@ class CallProgress extends VertoBaseComponent {
       const userControls = (
             <div style={this.getStyle('controlStyleUser')}>
               <UserVideoControls
-                  cbMicMute={()=>{this.props.cbMute(this.props.callData.callId, 'mic');}}
-                  cbVideoMute={()=>{this.props.cbMute(this.props.callData.callId, 'video');}}
+                  cbMicMute={this.muteMic}
+                  cbVideoMute={this.muteVideo}
                   cbScreenShare={this.props.cbShare}
-                  cbToggleChat={()=>{console.log('Toggling chat in callProgress?'); this.props.cbToggleChat();}}
+                  cbToggleChat={this.toggleChat}
                   userConfStatus={this.props.userConfStatus}
                   newMsgCount={this.props.newMsgCount}
               />
@@ -182,11 +209,10 @@ class CallProgress extends VertoBaseComponent {
               {adminControls}
               {userControls}
           </div>
-          <span style={this.getStyle('phoneIconContainer')}
-              onClick={()=>{
-              //console.log('hangup clicked: ', this.props);
-              this.props.cbHangup(this.props.callData.callId);
-          }}>
+          <span
+              style={this.getStyle('phoneIconContainer')}
+              onClick={this.hangUp}
+              >
               <PhoneIconSVG svgStyle={this.getStyle('phoneIconStyle')} />
           </span>
 

@@ -17,6 +17,8 @@ class HistoryItems extends VertoBaseComponent {
     this.state = {};
 
     this.generateHistory = this.generateHistory.bind(this);
+    this.clearKeyPress = this.clearKeyPress.bind(this);
+    this.backOnKeyPress = this.backOnKeyPress.bind(this);
   }
 
   static propTypes = {
@@ -109,15 +111,17 @@ class HistoryItems extends VertoBaseComponent {
     let listitems;
     if(this.props.history.length >= 1){
     listitems = this.props.history.map((i, index)=>{
+      const callHistoryOnClick = ()=>{
+        this.props.cbCall(i.callerId);
+      };
+
         return(
             <CallHistoryItem
                 key={index}
                 allowToolTip
                 className="chi"
                 data={i}
-                cbClick={()=>{
-                  this.props.cbCall(i.callerId);
-                }}
+                cbClick={callHistoryOnClick}
                 cbShowCalls ={this.props.cbShowCalls}
             />
         );
@@ -137,6 +141,20 @@ class HistoryItems extends VertoBaseComponent {
     return listitems;
   }
 
+  clearKeyPress(e){
+    if(e.which == 13 || e.keyCode == 13) {
+      this.props.cbClearHistory();
+      return false;
+    }
+  }
+
+  backOnKeyPress(e){
+    if(e.which == 13 || e.keyCode == 13) {
+      this.props.cbBack();
+      return false;
+    }
+  }
+
   render(){
     let clearHistory;
       if(this.props.history.length > 0) {
@@ -144,11 +162,7 @@ class HistoryItems extends VertoBaseComponent {
           <span
               className="rmvHistory"
               style={{...this.getDefaultStyle('rmvHistory')}}
-              onKeyPress={(e)=>{
-              if(e.which == 13 || e.keyCode == 13) {
-                this.props.cbClearHistory();
-                return false;
-              }}}
+              onKeyPress={this.clearKeyPress}
               onClick={this.props.cbClearHistory}
               tabIndex="0"
           >
@@ -172,11 +186,7 @@ class HistoryItems extends VertoBaseComponent {
           >
               <span
                   className="back"
-                  onKeyPress={(e)=>{
-                  if(e.which == 13 || e.keyCode == 13) {
-                    this.props.cbBack();
-                    return false;
-                  }}}
+                  onKeyPress={this.backOnKeyPress}
                   onClick={this.props.cbBack}
                   tabIndex="0"
               >
@@ -211,6 +221,7 @@ class DetailItems extends VertoBaseComponent {
     this.state = {};
 
     this.generateDetails = this.generateDetails.bind(this);
+    this.headerBackKeyPress = this.headerBackKeyPress.bind(this);
   }
 
   static propTypes = {
@@ -309,6 +320,9 @@ class DetailItems extends VertoBaseComponent {
     const detailData = CallHistoryService.getInstance().getHistoryDetail(this.props.callerId);
     details = detailData.length ? (
       detailData.map(function(i, index){
+      const detailsOnClick = ()=>{
+          self.props.cbCall(i.callerId);
+        }
       let renderedDirection;
       if(i.direction == 'outgoing') {
         renderedDirection = (
@@ -327,9 +341,7 @@ class DetailItems extends VertoBaseComponent {
             <div
                 key={index}
                 className="details"
-                onClick={()=>{
-                  self.props.cbCall(i.callerId);
-                }}
+                onClick={detailsOnClick}
                 style={{...self.getDefaultStyle('details') }}
             >
               {renderedDirection}
@@ -341,6 +353,12 @@ class DetailItems extends VertoBaseComponent {
 
     return details;
   }
+
+  headerBackKeyPress(e){
+  if(e.which == 13 || e.keyCode == 13) {
+    this.props.cbBack();
+    return false;
+  }}
 
   render(){
     return (
@@ -354,11 +372,7 @@ class DetailItems extends VertoBaseComponent {
                 style={{...this.getDefaultStyle('header')}}
             >
                 <span
-                    onKeyPress={(e)=>{
-                    if(e.which == 13 || e.keyCode == 13) {
-                      this.props.cbBack();
-                      return false;
-                    }}}
+                    onKeyPress={this.headerBackKeyPress}
                     onClick={this.props.cbBack}
                     tabIndex="0"
                 >
@@ -394,6 +408,7 @@ class CallHistory extends VertoBaseComponent {
       };
 
       this.clickHandler = this.clickHandler.bind(this);
+      this.showCallSetState = this.showCallSetState.bind(this);
   }
 
   static propTypes = {
@@ -454,6 +469,10 @@ class CallHistory extends VertoBaseComponent {
     return (styles[styleName]);
   }
 
+  showCallSetState(num){
+    this.setState({...this.state, currItem : 1, callItem: num});
+  }
+
   generateContent(style, i) {
     let myReturnComp;
     if (i==0){
@@ -471,9 +490,7 @@ class CallHistory extends VertoBaseComponent {
             history={this.props.history}
             cbClick={this.clickHandler}
             cbBack={this.props.cbBack}
-            cbShowCalls={(num)=>{
-              this.setState({...this.state, currItem : 1, callItem: num});
-            }}
+            cbShowCalls={this.showCallSetState}
             cbClearHistory={this.props.cbClearHistory}
             cbCall={this.props.cbCall}
         />
@@ -491,9 +508,7 @@ class CallHistory extends VertoBaseComponent {
         >
           <DetailItems
               key={i}
-              cbBack={()=>{
-                this.clickHandler();
-              }}
+              cbBack={this.clickHandler}
               cbCall={this.props.cbCall}
               callerId={this.state.callItem}
           />

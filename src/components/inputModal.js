@@ -11,6 +11,7 @@ class InputModal extends VertoBaseComponent {
     super(props);
     this.state = {inputVal: ''};
     this.changingInput = this.changingInput.bind(this);
+    this.okOnClick = this.okOnClick.bind(this);
   }
 
   static propTypes = {
@@ -73,6 +74,8 @@ class InputModal extends VertoBaseComponent {
 
   }
 
+  okOnClick(){this.props.cbSubmit(this.state.inputVal); this.props.cbClose();}
+
   render() {
     // TODO - ta INternationalize the strings here, style input, etc.
 
@@ -102,7 +105,7 @@ class InputModal extends VertoBaseComponent {
 
           <button className="okButton"
               style={this.getStyle("okStyle")}
-              onClick={()=>{this.props.cbSubmit(this.state.inputVal); this.props.cbClose();}}
+              onClick={this.okOnClick}
           >
             OK
           </button>

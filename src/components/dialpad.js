@@ -20,6 +20,14 @@ class Dialpad extends VertoBaseComponent {
     this.dialNumber = this.dialNumber.bind(this);
     this.makeCall = this.makeCall.bind(this);
     this.changingNumber = this.changingNumber.bind(this);
+    this.setCurrItemStateClearHistory = this.setCurrItemStateClearHistory.bind(this);
+    this.setNumberCurrItemState = this.setNumberCurrItemState.bind(this);
+    this.setCurrItemStateZero = this.setCurrItemStateZero.bind(this);
+    this.makeCallKeyPress = this.makeCallKeyPress.bind(this);
+    this.setCurrItemStateOne = this.setCurrItemStateOne.bind(this);
+    this.setInputFocusedTrue = this.setInputFocusedTrue.bind(this);
+    this.setInputFocusedFalse = this.setInputFocusedFalse.bind(this);
+    this.setStateNumber = this.setStateNumber.bind(this);
   }
 
   static propTypes = {
@@ -205,17 +213,9 @@ class Dialpad extends VertoBaseComponent {
                 allowToolTip
                 compStyle={{...this.getStyle('callh')}}
                 history={CallHistoryService.getInstance().getHistory()}
-                cbClearHistory={()=>{
-                  //setTimeout()
-                  setTimeout(()=>this.props.cbClearHistory(), 1000);
-                  this.setState({...this.state, currItem: 0});
-                }}
-                cbCall={(num)=>{
-                  this.setState({...this.state, currItem: 0, number : num});
-                }}
-                cbBack={()=>{
-                  this.setState({ ...this.state, currItem: 0});
-                }}
+                cbClearHistory={this.setCurrItemStateClearHistory}
+                cbCall={this.setNumberCurrItemState}
+                cbBack={this.setCurrItemStateZero}
             />
         </div>
       </span>
@@ -235,11 +235,7 @@ class Dialpad extends VertoBaseComponent {
             >
             <div
                 style={{...this.getStyle('dpad') }}
-                onKeyPress={(e)=>{
-                  if(e.which == 13 || e.keyCode == 13) {
-                    this.makeCall();
-                    return false;
-                  }}}
+                onKeyPress={this.makeCallKeyPress}
             >
             <div
                 className="header"
@@ -248,9 +244,7 @@ class Dialpad extends VertoBaseComponent {
               <span
                   className="callhist"
                   style={{...this.getStyle('span')}}
-                  onClick={()=>{
-                    this.setState({ ...this.state, currItem: 1});
-                  }}
+                  onClick={this.setCurrItemStateOne}
               >
                 <CallHistoryIconSVG
                     svgStyle={{...this.getStyle('callhist')}}
@@ -262,21 +256,13 @@ class Dialpad extends VertoBaseComponent {
                   style={{...this.getStyle('input')}}
                   value={this.state.number}
                   onChange={this.changingNumber}
-                  onFocus={()=>{
-                    this.setState({...this.state,'inputFocused': true});
-                  }}
-                  onBlur={()=>{
-                    this.setState({...this.state,'inputFocused': false});
-                  }}
+                  onFocus={this.setInputFocusedTrue}
+                  onBlur={this.setInputFocusedFalse}
               />
               <span
                   className="back"
                   style={{...this.getStyle('span')}}
-                  onClick={()=>{
-                    const number = this.state.number;
-                    const newNumber = number.slice(0, number.length - 1);
-                    this.setState({...this.state,'number': newNumber });
-                  }}
+                  onClick={this.setStateNumber}
               >
                   <DeleteIconSVG svgStyle={{...this.getStyle('back')}} />
               </span>
@@ -299,16 +285,12 @@ class Dialpad extends VertoBaseComponent {
             </div>
             <Numberpad cbClick={this.dialNumber} />
             <div
-                onFocus={()=>{
-                  this.setState({...this.state,'inputFocused': false});
-                }}
+                onFocus={this.setInputFocusedFalse}
                 style={{...this.getStyle('callcont')}}
             >
               <div
                   className="dial"
-                  onClick={()=>{
-                    this.makeCall();
-                  }}
+                  onClick={this.makeCall}
                   style={{...this.getStyle('callbg')}}
               >
                 <PhoneIconSVG
@@ -327,6 +309,46 @@ class Dialpad extends VertoBaseComponent {
 
     return myReturnComp;
   }
+
+  setCurrItemStateClearHistory(){
+    //setTimeout()
+    setTimeout(()=>this.props.cbClearHistory(), 1000);
+    this.setState({...this.state, currItem: 0});
+  }
+
+  setNumberCurrItemState(num){
+    this.setState({...this.state, currItem: 0, number : num});
+  }
+
+  setCurrItemStateZero(){
+    this.setState({ ...this.state, currItem: 0});
+  }
+
+  makeCallKeyPress(e){
+      if(e.which == 13 || e.keyCode == 13) {
+        this.makeCall();
+        return false;
+      }
+  }
+
+  setCurrItemStateOne(){
+      this.setState({ ...this.state, currItem: 1});
+  }
+
+  setInputFocusedTrue(){
+      this.setState({...this.state,'inputFocused': true});
+  }
+
+  setInputFocusedFalse(){
+      this.setState({...this.state,'inputFocused': false});
+  }
+
+  setStateNumber(){
+      const number = this.state.number;
+      const newNumber = number.slice(0, number.length - 1);
+      this.setState({...this.state,'number': newNumber });
+  }
+
 
   render() {
 

@@ -7,6 +7,10 @@ class Input extends VertoBaseComponent {
   constructor(props) {
     super(props);
     this.state = { 'onFocus' : false, isEmpty: true };
+
+    this.stateOnFocusFalse = this.stateOnFocusFalse.bind(this);
+    this.stateOnFocusTrue = this.stateOnFocusTrue.bind(this);
+    this.inputOnChange = this.inputOnChange.bind(this);
 }
 
   static propTypes = {
@@ -98,6 +102,19 @@ class Input extends VertoBaseComponent {
     return (styles[styleName]);
   }
 
+  stateOnFocusFalse(){
+    this.setState({...this.state, 'onFocus': false });
+  }
+
+  stateOnFocusTrue(){
+    this.setState({...this.state,'onFocus': true});
+  }
+
+  inputOnChange(e){
+    this.props.cbChanging(this.props.label.replace(' ', '').toLowerCase(), e.target.value );
+  }
+
+
   render(){
 
     return (
@@ -115,17 +132,10 @@ class Input extends VertoBaseComponent {
               ref="name"
               placeholder={this.props.placeholder}
               style={{...this.getStyle('inputArea') }}
-              onBlur={()=>{
-                this.setState({...this.state, 'onFocus': false });
-            }}
-              onFocus={()=>{
-                this.setState({...this.state,'onFocus': true});
-            }}
-              onChange={
-              (e) =>{
-                this.props.cbChanging(this.props.label.replace(' ', '').toLowerCase(), e.target.value );
-              }
-          } defaultValue={this.props.value}
+              onBlur={this.stateOnFocusFalse}
+              onFocus={this.stateOnFocusTrue}
+              onChange={this.inputOnChange}
+              defaultValue={this.props.value}
           />
           <span style={{...this.getStyle('bar')}}>
             <span className="left" style={{...this.getStyle('left')}}> &nbsp;</span>
