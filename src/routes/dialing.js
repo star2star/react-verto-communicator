@@ -13,6 +13,11 @@ class AppDialing extends VertoBaseComponent {
   constructor(props) {
     super(props);
     this.state={};
+
+    this.dispatchHangUp = this.dispatchHangUp.bind(this);
+    this.dispatchMuteDevices = this.dispatchMuteDevices.bind(this);
+    this.consoleLogcbDTMF = this.consoleLogcbDTMF.bind(this);
+    this.dispatchDoHold = this.dispatchDoHold.bind(this);
   }
 
   getDefaultStyle(styleName) {
@@ -29,26 +34,34 @@ class AppDialing extends VertoBaseComponent {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
   }
 
+  dispatchHangUp(callId){
+    this.props.dispatch(doHangUp(callId));
+  }
+
+  dispatchMuteDevices(callId, mutedDevice='mic' ){
+    if (mutedDevice === 'mic'){
+      this.props.dispatch(doMuteMic(callId));
+    } else {
+      this.props.dispatch(doMuteVideo(callId));
+    }
+  }
+
+  consoleLogcbDTMF(callId, key){
+    console.log('cbDTMF', callId, key);
+  }
+
+  dispatchDoHold(callId){
+    this.props.dispatch(doHold(callId));
+  }
+
   render() {
     return(
       <div style={this.getStyle("dialingStyle")}>
         <Dialing callData={this.props.callInfo.activeCalls[this.props.callInfo.currentCallId]}
-            cbHangup={(callId)=>{
-              this.props.dispatch(doHangUp(callId));
-            }}
-            cbMute ={(callId, mutedDevice='mic' )=>{
-              if (mutedDevice === 'mic'){
-                this.props.dispatch(doMuteMic(callId));
-              } else {
-                this.props.dispatch(doMuteVideo(callId));
-              }
-            }}
-            cbDTMF={(callId, key)=>{
-              console.log('cbDTMF', callId, key);
-            }}
-            cbHold={(callId)=>{
-              this.props.dispatch(doHold(callId));
-            }}
+            cbHangup={this.dispatchHangUp}
+            cbMute ={this.dispatchMuteDevices}
+            cbDTMF={this.consoleLogcbDTMF}
+            cbHold={this.dispatchDoHold}
         />
       </div>
     );

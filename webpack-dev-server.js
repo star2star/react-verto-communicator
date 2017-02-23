@@ -16,7 +16,7 @@ const devServerConfig = {
   historyApiFallback: { disableDotRule: true }, // need historyApiFallback to be able to refresh on dynamic route
   stats: { colors: true} // Pretty colors on console
 };
-
+console.log('ANY THING?', webpackConfig)
 const server = new WebpackDevServer(webpack(webpackConfig(env)), devServerConfig);
 
 // server will be live at http://localhost:8080

@@ -16,6 +16,7 @@ class UserMenu extends VertoBaseComponent {
 
     this.toggleMenu = this.toggleMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
+    this.eventStopPropagations = this.eventStopPropagations.bind(this);
   }
 
   static propTypes = {
@@ -92,6 +93,11 @@ class UserMenu extends VertoBaseComponent {
     }
   }
 
+  eventStopPropagations(event){
+    event.stopPropagation();
+    event.nativeEvent.stopImmediatePropagation();
+  }
+
   render() {
     const { formatMessage } = this.props.intl;
     const menuContainer = (
@@ -108,10 +114,7 @@ class UserMenu extends VertoBaseComponent {
     }
     //nClick={this.toggleMenu.bind(this)}
     return (
-      <div onClick={(event)=>{
-        event.stopPropagation();
-        event.nativeEvent.stopImmediatePropagation();
-      }}>
+      <div onClick={this.eventStopPropagations}>
         <span onClick={this.toggleMenu.bind(this)}  style={this.getStyle("container")} >
           <ToolTip name="user" place={this.props.ttPosition} msg={theMsg} custStyle={{base:{marginTop: '10px'}}} >
             <AvatarSVG svgStyle={{...this.getStyle('icon')}}  />

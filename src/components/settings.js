@@ -82,6 +82,12 @@ class Settings extends VertoBaseComponent {
     }
   }
 
+  eventStopPropagations(event){
+    console.log('settttttttttttttttttttt')
+    event.stopPropagation();
+    event.nativeEvent.stopImmediatePropagation();
+  }
+
   render() {
     const { formatMessage } = this.props.intl;
     let theMsg;
@@ -92,11 +98,10 @@ class Settings extends VertoBaseComponent {
     }
     // console.log('settings render props: ', this.props.settingsData);
     return (
-      <div  style={this.getStyle("container")} onClick={(event)=>{
-        console.log('settttttttttttttttttttt')
-        event.stopPropagation();
-        event.nativeEvent.stopImmediatePropagation();
-      }}>
+      <div
+          style={this.getStyle("container")}
+          onClick={this.eventStopPropagations}
+        >
         <span onClick={this.showMenu.bind(this)}  >
           <ToolTip name="settings" place={this.props.ttPosition} msg={theMsg} custStyle={{base: {marginTop:'10px'}}}>
             <SettingsIconSVG svgStyle={{...this.getStyle('icon')}}  />

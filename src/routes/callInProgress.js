@@ -15,6 +15,17 @@ class CallInProgress extends VertoBaseComponent {
   constructor(props) {
     super(props);
     this.state={};
+
+    this.generateMembers = this.generateMembers.bind(this);
+    this.controlClickMemberList = this.controlClickMemberList.bind(this);
+    this.emptyFunction = this.emptyFunction.bind(this);
+    this.dispatchDoSendChat = this.dispatchDoSendChat.bind(this);
+    this.dispatchHangUp = this.dispatchHangUp.bind(this);
+    this.dispatchMuteDevices = this.dispatchMuteDevices.bind(this);
+    this.consoleLogDTMF = this.consoleLogDTMF.bind(this);
+    this.dispatchHold = this.dispatchHold.bind(this);
+    this.dispatchShareScreen = this.dispatchShareScreen.bind(this);
+    this.controlClickSetLayout = this.controlClickSetLayout.bind(this);
   }
 
   getDefaultStyle(styleName) {
@@ -29,6 +40,52 @@ class CallInProgress extends VertoBaseComponent {
 
   shouldComponentUpdate(nextProps, nextState){
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
+  }
+
+  generateMembers(){
+    Object.keys(this.props.confData.users).map(
+      (k)=>{
+        return ({...this.props.confData.users[k]});
+      }
+    )
+  }
+
+  controlClickMemberList(callId, params){
+    this.handleControlClick(callId, params);
+  }
+
+  emptyFunction(){}
+
+  dispatchDoSendChat(id,msg){
+    this.props.dispatch(doSendChat(msg));
+  }
+
+  dispatchHangUp(callId){
+    this.props.dispatch(doHangUp(callId));
+  }
+
+  dispatchMuteDevices(callId, mutedDevice='mic' ){
+    if (mutedDevice === 'mic'){
+      this.props.dispatch(doMuteMic(callId));
+    } else {
+      this.props.dispatch(doMuteVideo(callId));
+    }
+  }
+
+  consoleLogDTMF(callId, key){
+    console.log('cbDTMF', callId, key);
+  }
+
+  dispatchHold(callId){
+    this.props.dispatch(doHold(callId));
+  }
+
+  dispatchShareScreen(){
+    this.props.dispatch(doShareScreen(this.props.app));
+  }
+
+  controlClickSetLayout(params){
+    this.handleControlClick('SETLAYOUT', params);
   }
 
   render() {
@@ -50,19 +107,15 @@ class CallInProgress extends VertoBaseComponent {
         >
           <TabbedContainer tabLabels={["Members", "Chat"]}>
             <Memberlist
-                members={Object.keys(this.props.confData.users).map(
-                  (k)=>{
-                    return ({...this.props.confData.users[k]});
-                  }
-                )}
+                members={this.generateMembers()}
                 isModerator={this.props.confData.currentRole == "moderator"}
                 allowPresenter={this.props.confData.allowPresenter}
                 hasMultipleCanvases={this.props.confData.hasMultipleCanvases}
-                cbControlClick={(callId, params)=>{this.handleControlClick(callId, params);}}
+                cbControlClick={this.controlClickMemberList}
             />
             <ChatSession
-                cbRemove={()=>{}}
-                cbSubmitMessage={(id,msg)=>{this.props.dispatch(doSendChat(msg));}}
+                cbRemove={this.emptyFunction}
+                cbSubmitMessage={this.dispatchDoSendChat}
                 chatData={this.props.confData}
             />
           </TabbedContainer>
@@ -74,31 +127,17 @@ class CallInProgress extends VertoBaseComponent {
       <div>
         <div style={this.getStyle("inProgessStyle")}>
           <CallProgress callData={this.props.callInfo.activeCalls[this.props.callInfo.currentCallId]}
-              cbHangup={(callId)=>{
-                this.props.dispatch(doHangUp(callId));
-              }}
-              cbMute ={(callId, mutedDevice='mic' )=>{
-                if (mutedDevice === 'mic'){
-                  this.props.dispatch(doMuteMic(callId));
-                } else {
-                  this.props.dispatch(doMuteVideo(callId));
-                }
-              }}
-              cbDTMF={(callId, key)=>{
-                console.log('cbDTMF', callId, key);
-              }}
-              cbHold={(callId)=>{
-                this.props.dispatch(doHold(callId));
-              }}
-              cbShare={()=>{
-                this.props.dispatch(doShareScreen(this.props.app));
-              }}
+              cbHangup={this.dispatchHangUp}
+              cbMute ={this.dispatchMuteDevices}
+              cbDTMF={this.consoleLogDTMF}
+              cbHold={this.dispatchHold}
+              cbShare={this.dispatchShareScreen}
               cbToggleChat={this.handleToggleChat}
               isModerator={this.props.confData ? this.props.confData.currentRole == 'moderator' : undefined}
               userConfStatus={this.props.confData && this.props.confData.users[this.props.confData.callId]? this.props.confData.users[this.props.confData.callId].conferenceStatus:
                       undefined
                     }
-              cbSetVideoMode={(params)=>{this.handleControlClick('SETLAYOUT', params);}}
+              cbSetVideoMode={this.controlClickSetLayout}
               layouts={this.props.confData ? this.props.confData.layouts : undefined}
               currLayout={this.props.confData ? this.props.confData.videoLayout : undefined}
               newMsgCount={this.state.newMsgCount}

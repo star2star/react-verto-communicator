@@ -17,6 +17,7 @@ class TagMenu extends VertoBaseComponent {
 
     this.toggleMenu = this.toggleMenu.bind(this);
     TagMenu.closeMenu = this.closeMenu.bind(this);
+    this.eventStopPropagations = this.eventStopPropagations.bind(this);
   }
 
   static propTypes = {
@@ -90,6 +91,12 @@ class TagMenu extends VertoBaseComponent {
       this.setState({...this.state, dropdownDisplayed: false});
     }
   }
+
+  eventStopPropagations(event){
+    event.stopPropagation();
+    event.nativeEvent.stopImmediatePropagation();
+  }
+
   render() {
     const { formatMessage } = this.props.intl;
     const menuContainer = (
@@ -100,10 +107,7 @@ class TagMenu extends VertoBaseComponent {
 
     let theMsg = formatMessage({"id":"MENU_INFO", "defaultMessage":"Click to Dial"});
     return (
-      <div onClick={(event)=>{
-        event.stopPropagation();
-        event.nativeEvent.stopImmediatePropagation();
-      }}>
+      <div onClick={this.eventStopPropagations}>
         <span onClick={this.toggleMenu}  style={this.getStyle("container")}>
         <ToolTip name="info" place={this.props.ttPosition} msg={theMsg} auto={false} custStyle={{base:{marginTop: '10px'}}}>
           <TagIconSVG svgStyle={{...this.getStyle('icon'), fill: 'white'}}  />

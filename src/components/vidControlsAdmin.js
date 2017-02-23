@@ -13,6 +13,7 @@ class AdminVideoControls extends VertoBaseComponent {
     this.state = {showLayoutList: false};
 
     this.handleShowLayoutList = this.handleShowLayoutList.bind(this);
+    this.setVideoModeShowLayoutList = this.setVideoModeShowLayoutList.bind(this);
   }
 
   static propTypes = {
@@ -79,6 +80,12 @@ class AdminVideoControls extends VertoBaseComponent {
     this.setState({...this.state, showLayoutList: !this.state.showLayoutList});
   }
 
+  setVideoModeShowLayoutList(layoutIndex){
+    // function expects an array of params...
+    this.props.cbSetVideoMode([this.props.layouts[layoutIndex]]);
+    this.setState({...this.state, showLayoutList: false});
+  }
+
   render(){
     // TODO - ta - if we know we are recording, will icon svg be changed?
     // if so, check the state and set it up here like this...
@@ -98,11 +105,7 @@ class AdminVideoControls extends VertoBaseComponent {
       layoutList = (
         <ListSelect items={this.props.layouts}
             selected={[this.props.layouts.indexOf(this.props.currLayout[0].layoutName)]}
-            cbChange={(layoutIndex)=>{
-              // function expects an array of params...
-              this.props.cbSetVideoMode([this.props.layouts[layoutIndex]]);
-              this.setState({...this.state, showLayoutList: false});
-            }}
+            cbChange={this.setVideoModeShowLayoutList}
          />
       );
     }

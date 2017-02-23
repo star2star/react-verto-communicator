@@ -11,6 +11,30 @@ class AdminControls extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {};
+
+    this.controlClickMuteMic = this.controlClickMuteMic.bind(this);
+    this.controlClickMuteVideo = this.controlClickMuteVideo.bind(this);
+    this.controlClickKick = this.controlClickKick.bind(this);
+    this.controlClickVideoFloor = this.controlClickVideoFloor.bind(this);
+    this.appToggleModalTransfer = this.appToggleModalTransfer.bind(this);
+    this.controlClickVolumeDown = this.controlClickVolumeDown.bind(this);
+    this.controlClickGainDown = this.controlClickGainDown.bind(this);
+    this.controlClickVolumeUp = this.controlClickVolumeUp.bind(this);
+    this.controlClickGainUp = this.controlClickGainUp.bind(this);
+    this.appToggleModalChat = this.appToggleModalChat.bind(this);
+    this.controlClickResetBanner = this.controlClickResetBanner.bind(this);
+    this.appToggleLayoutPosition = this.appToggleLayoutPosition.bind(this);
+    this.controlClickNextLayer = this.controlClickNextLayer.bind(this);
+    this.controlClickPrevLayer = this.controlClickPrevLayer.bind(this);
+    this.controlClickTransfer = this.controlClickTransfer.bind(this);
+    this.controlClickBanner = this.controlClickBanner.bind(this);
+    this.controlClickSetLayer = this.controlClickSetLayer.bind(this);
+    this.consoleLogSetWatchingCanvas = this.consoleLogSetWatchingCanvas.bind(this);
+    this.consoleLogNextWatchingCanvas = this.consoleLogNextWatchingCanvas.bind(this);
+    this.consoleLogPrevWatchingCanvas = this.consoleLogPrevWatchingCanvas.bind(this);
+    this.consoleLogSetInputCanvas = this.consoleLogSetInputCanvas.bind(this);
+    this.consoleLogNextInputCanvas = this.consoleLogNextInputCanvas.bind(this);
+    this.consoleLogPrevInputCanvas = this.consoleLogPrevInputCanvas.bind(this);
   }
 
   static propTypes = {
@@ -113,6 +137,118 @@ class AdminControls extends VertoBaseComponent {
     return styles[styleName];
   }
 
+  controlClickMuteMic(){
+    this.props.cbControlClick("MUTEMIC", [this.props.member.memberId]);
+  }
+
+  controlClickMuteVideo(){
+    this.props.cbControlClick("MUTEVIDEO", [this.props.member.memberId]);
+  }
+
+  controlClickKick(){
+    this.props.cbControlClick("KICK", [this.props.member.memberId]);
+  }
+
+  controlClickVideoFloor(){
+    this.props.cbControlClick("VIDEOFLOOR", [this.props.member.memberId]);
+  }
+
+  controlClickTransfer(dest){
+      this.props.cbControlClick("TRANSFER", [this.props.member.memberId, dest]);
+  }
+
+  appToggleModalTransfer(){
+    App.toggleModal((
+      <InputModal cbClose={App.toggleModal}
+          title={formatMessage({"id":"TITLE_TRANSFER", "defaultMessage":"Transfer Party?"})}
+          label={formatMessage({"id":"LABEL_TRANSFER", "defaultMessage":"Destination"})}
+          message={formatMessage({"id":"MESSAGE_TRANSFER", "defaultMessage":"To what destination would you like to transfer this call?"})}
+          placeholder={formatMessage({"id":"LABEL_TRANSFER", "defaultMessage":"Destination"})}
+          cbSubmit={this.controlClickTransfer}
+      />));
+  }
+
+  controlClickVolumeDown(){
+    this.props.cbControlClick("VOLUMEDOWN", [this.props.member.memberId]);
+  }
+
+  controlClickGainDown(){
+    this.props.cbControlClick("GAINDOWN", [this.props.member.memberId]);
+  }
+
+  controlClickVolumeUp(){
+    this.props.cbControlClick("VOLUMEUP", [this.props.member.memberId]);
+  }
+
+  controlClickGainUp(){
+    this.props.cbControlClick("GAINUP", [this.props.member.memberId]);
+  }
+
+  controlClickBanner(text){
+      this.props.cbControlClick("BANNER", [this.props.member.memberId, text]);
+    }
+
+  appToggleModalChat(){
+    App.toggleModal((
+      <InputModal cbClose={App.toggleModal}
+          title={formatMessage({"id":"CHAT_BANNER", "defaultMessage":"Banner "})}
+          label={formatMessage({"id":"TITLE_INSERT_BANNER", "defaultMessage":"Please insert the banner text "})}
+          placeholder={formatMessage({"id":"CHAT_BANNER", "defaultMessage":"Banner "})}
+          cbSubmit={this.controlClickBanner}
+      />));
+  }
+
+  controlClickResetBanner(){
+    this.props.cbControlClick("RESETBANNER", [this.props.member.memberId, 'reset']);
+  }
+
+  controlClickSetLayer(value){
+      this.props.cbControlClick("SETLAYER", ['vid-layer', this.props.member.memberId, value.toString()]);
+    }
+
+  appToggleLayoutPosition(){
+      App.toggleModal((
+        <InputModal cbClose={App.toggleModal}
+            title="Set Layout Position"
+            label="Please enter layout position"
+            placeholder="Layout position"
+            cbSubmit={this.controlClickSetLayer}
+        />));
+    }
+
+  controlClickNextLayer(){
+    this.props.cbControlClick("NEXTLAYER", ['vid-layer', this.props.member.memberId, 'next']);
+  }
+
+  controlClickPrevLayer(){
+    this.props.cbControlClick("PREVLAYER", ['vid-layer', this.props.member.memberId, 'prev']);
+  }
+
+  consoleLogSetWatchingCanvas(){
+    console.log('Set Watching Canvas');
+  }
+
+  consoleLogNextWatchingCanvas(){
+    console.log('Next Watching Canvas');
+  }
+
+  consoleLogPrevWatchingCanvas(){
+    console.log('Prev Watching Canvas');
+  }
+
+  consoleLogSetInputCanvas(){
+    console.log('Set Input Canvas');
+  }
+
+  consoleLogNextInputCanvas(){
+    console.log('Next Input Canvas');
+  }
+
+  consoleLogPrevInputCanvas(){
+    console.log('Prev Input Canvas');
+  }
+
+
   render(){
     const { formatMessage } = this.props.intl;
 
@@ -125,21 +261,21 @@ class AdminControls extends VertoBaseComponent {
     const micStatus = this.props.member.conferenceStatus.audio.muted ?
             (<ControlItem type="MuteMicrophoneIconSVG" label={formatMessage({"id":"CHAT_UNMUTE_MIC", "defaultMessage":"Unmute"})}
                 compStyle={this.getStyle("controlIconStyle")}
-                cbActionClick={()=>{this.props.cbControlClick("MUTEMIC", [this.props.member.memberId]);}}
+                cbActionClick={this.controlClickMuteMic}
             />) :
             (<ControlItem type="MicrophoneIconSVG" label={formatMessage({"id":"CHAT_MUTE_MIC", "defaultMessage":"Mute"})}
                 compStyle={this.getStyle("controlIconStyle")}
-                cbActionClick={()=>{this.props.cbControlClick("MUTEMIC", [this.props.member.memberId]);}}
+                cbActionClick={this.controlClickMuteMic}
             />);
 
     const videoStatus = this.props.member.conferenceStatus.video.muted ?
             (<ControlItem type="MuteVideoIconSVG" label={formatMessage({"id":"CHAT_UNMUTE_MIC", "defaultMessage":"Unmute"})}
                 compStyle={this.getStyle("controlIconStyle")}
-                cbActionClick={()=>{this.props.cbControlClick("MUTEVIDEO", [this.props.member.memberId]);}}
+                cbActionClick={this.controlClickMuteVideo}
             />) :
             (<ControlItem type="VideoIconSVG" label={formatMessage({"id":"CHAT_MUTE_MIC", "defaultMessage":"Mute"})}
                 compStyle={this.getStyle("controlIconStyle")}
-                cbActionClick={()=>{this.props.cbControlClick("MUTEVIDEO", [this.props.member.memberId]);}}
+                cbActionClick={this.controlClickMuteVideo}
             />);
 
       // Setup JSX for controls that only appear with multiple canvas
@@ -150,30 +286,30 @@ class AdminControls extends VertoBaseComponent {
                   <div style={this.getStyle("multiCanvasStyle")}>
                     <ControlItem type="SetIconSVG" label={formatMessage({"id":"CHAT_SET", "defaultMessage":"Set"})}
                         compStyle={this.getStyle("controlIconStyle")}
-                        cbActionClick={()=>{console.log('Set Watching Canvas');}}
+                        cbActionClick={this.consoleLogSetWatchingCanvas}
                     />
                     <ControlItem type="NextIconSVG" label={formatMessage({"id":"CHAT_NEXT", "defaultMessage":"Next"})}
                         compStyle={this.getStyle("controlIconStyle")}
-                        cbActionClick={()=>{console.log('Next Watching Canvas');}}
+                        cbActionClick={this.consoleLogNextWatchingCanvas}
                     />
                     <ControlItem type="PreviousIconSVG" label={formatMessage({"id":"PREVIOUS", "defaultMessage":"Previous"})}
                         compStyle={this.getStyle("controlIconStyle")}
-                        cbActionClick={()=>{console.log('Prev Watching Canvas');}}
+                        cbActionClick={this.consoleLogPrevWatchingCanvas}
                     />
                   </div>
                   <div style={this.getStyle("headingStyle")}>{formatMessage({"id":"INPUT_CANVAS", "defaultMessage":"Input Canvas"})}</div>
                   <div style={this.getStyle("multiCanvasStyle")}>
                     <ControlItem type="SetIconSVG" label={formatMessage({"id":"CHAT_SET", "defaultMessage":"Set"})}
                         compStyle={this.getStyle("controlIconStyle")}
-                        cbActionClick={()=>{console.log('Set Input Canvas');}}
+                        cbActionClick={this.consoleLogSetInputCanvas}
                     />
                     <ControlItem type="NextIconSVG" label={formatMessage({"id":"CHAT_NEXT", "defaultMessage":"Next"})}
                         compStyle={this.getStyle("controlIconStyle")}
-                        cbActionClick={()=>{console.log('Next Input Canvas');}}
+                        cbActionClick={this.consoleLogNextInputCanvas}
                     />
                     <ControlItem type="PreviousIconSVG" label={formatMessage({"id":"PREVIOUS", "defaultMessage":"Previous"})}
                         compStyle={this.getStyle("controlIconStyle")}
-                        cbActionClick={()=>{console.log('Prev Input Canvas');}}
+                        cbActionClick={this.consoleLogPrevInputCanvas}
                     />
                   </div>
                 </div>
@@ -188,27 +324,15 @@ class AdminControls extends VertoBaseComponent {
             <div style={this.getStyle("generalStyle")}>
               <ControlItem type="KickIconSVG" label={formatMessage({"id":"CHAT_KICK", "defaultMessage":"Kick"})}
                   compStyle={this.getStyle("controlIconStyle")}
-                  cbActionClick={()=>{this.props.cbControlClick("KICK", [this.props.member.memberId]);}}
+                  cbActionClick={this.controlClickKick}
               />
               <ControlItem type="FullScreenIconSVG" label={formatMessage({"id":"CHAT_FLOOR", "defaultMessage":"Floor"})}
                   compStyle={this.getStyle("controlIconStyle")}
-                  cbActionClick={()=>{this.props.cbControlClick("VIDEOFLOOR", [this.props.member.memberId]);}}
+                  cbActionClick={this.controlClickVideoFloor}
               />
             <ControlItem type="UpArrowIconSVG" label={formatMessage({"id":"CHAT_TRANSFER", "defaultMessage":"Transfer"})}
                 compStyle={this.getStyle("controlIconStyle")}
-                cbActionClick={()=>{
-                    App.toggleModal((
-                      <InputModal cbClose={App.toggleModal}
-                          title={formatMessage({"id":"TITLE_TRANSFER", "defaultMessage":"Transfer Party?"})}
-                          label={formatMessage({"id":"LABEL_TRANSFER", "defaultMessage":"Destination"})}
-                          message={formatMessage({"id":"MESSAGE_TRANSFER", "defaultMessage":"To what destination would you like to transfer this call?"})}
-                          placeholder={formatMessage({"id":"LABEL_TRANSFER", "defaultMessage":"Destination"})}
-                          cbSubmit={(dest)=>{
-                              this.props.cbControlClick("TRANSFER", [this.props.member.memberId, dest]);
-
-                          }}
-                      />));
-                  }}
+                cbActionClick={this.appToggleModalTransfer}
               />
             </div>
           </div>
@@ -219,22 +343,22 @@ class AdminControls extends VertoBaseComponent {
                 {micStatus}
                 <ControlItem type="VolumeDownIconSVG" label={formatMessage({"id":"CHAT_TITLE_VOL_MINUS", "defaultMessage":"VOL-"})}
                     compStyle={this.getStyle("controlIconStyle")}
-                    cbActionClick={()=>{this.props.cbControlClick("VOLUMEDOWN", [this.props.member.memberId]);}}
+                    cbActionClick={this.controlClickVolumeDown}
                 />
                 <ControlItem type="VolumeDownIconSVG" label={formatMessage({"id":"CHAT_TITLE_GAIN_MINUS", "defaultMessage":"GAIN-"})}
                     compStyle={this.getStyle("controlIconStyle")}
-                    cbActionClick={()=>{this.props.cbControlClick("GAINDOWN", [this.props.member.memberId]);}}
+                    cbActionClick={this.controlClickGainDown}
                 />
               </div>
               <div className="avLeftCol" style={this.getStyle('volumeAndGainStyle')}>
                 {videoStatus}
                 <ControlItem type="VolumeUpIconSVG" label={formatMessage({"id":"CHAT_TITLE_VOL_PLUS", "defaultMessage":"VOL+"})}
                     compStyle={this.getStyle("controlIconStyle")}
-                    cbActionClick={()=>{this.props.cbControlClick("VOLUMEUP", [this.props.member.memberId]);}}
+                    cbActionClick={this.controlClickVolumeUp}
                 />
                 <ControlItem type="VolumeUpIconSVG" label={formatMessage({"id":"CHAT_TITLE_GAIN_PLUS", "defaultMessage":"GAIN+"})}
                     compStyle={this.getStyle("controlIconStyle")}
-                    cbActionClick={()=>{this.props.cbControlClick("GAINUP", [this.props.member.memberId]);}}
+                    cbActionClick={this.controlClickGainUp}
                 />
               </div>
             </div>
@@ -245,23 +369,11 @@ class AdminControls extends VertoBaseComponent {
           <div style={this.getStyle("bannerStyle")}>
             <ControlItem type="StatusIconSVG" label={formatMessage({"id":"CHAT_SET", "defaultMessage":"Set"})}
                 compStyle={this.getStyle("controlIconStyle")}
-                cbActionClick={()=>{
-                  App.toggleModal((
-                    <InputModal cbClose={App.toggleModal}
-                        title={formatMessage({"id":"CHAT_BANNER", "defaultMessage":"Banner "})}
-                        label={formatMessage({"id":"TITLE_INSERT_BANNER", "defaultMessage":"Please insert the banner text "})}
-                        placeholder={formatMessage({"id":"CHAT_BANNER", "defaultMessage":"Banner "})}
-                        cbSubmit={(text)=>{
-                            this.props.cbControlClick("BANNER", [this.props.member.memberId, text]);
-                          }
-                        }
-                    />));
-                }
-              }
+                cbActionClick={this.appToggleModalChat}
             />
             <ControlItem type="RemoveIconSVG" label={formatMessage({"id":"CHAT_BANNER", "defaultMessage":"Banner "})}
                 compStyle={this.getStyle("controlIconStyle")}
-                cbActionClick={()=>{this.props.cbControlClick("RESETBANNER", [this.props.member.memberId, 'reset']);}}
+                cbActionClick={this.controlClickResetBanner}
             />
           </div>
           <div className="canvasSettings">
@@ -269,26 +381,15 @@ class AdminControls extends VertoBaseComponent {
             <div style={this.getStyle("canvasStyle")}>
               <ControlItem type="SetIconSVG" label={formatMessage({"id":"CHAT_TITLE_RESET", "defaultMessage":"Reset"})}
                   compStyle={this.getStyle("controlIconStyle")}
-                  cbActionClick={()=>{
-                    App.toggleModal((
-                      <InputModal cbClose={App.toggleModal}
-                          title="Set Layout Position"
-                          label="Please enter layout position"
-                          placeholder="Layout position"
-                          cbSubmit={(value)=>{
-                              this.props.cbControlClick("SETLAYER", ['vid-layer', this.props.member.memberId, value.toString()]);
-                            }
-                          }
-                      />));
-                  }}
+                  cbActionClick={this.appToggleLayoutPosition}
               />
               <ControlItem type="NextIconSVG" label={formatMessage({"id":"CHAT_NEXT", "defaultMessage":"Next"})}
                   compStyle={this.getStyle("controlIconStyle")}
-                  cbActionClick={()=>{this.props.cbControlClick("NEXTLAYER", ['vid-layer', this.props.member.memberId, 'next']);}}
+                  cbActionClick={this.controlClickNextLayer}
               />
               <ControlItem type="PreviousIconSVG" label={formatMessage({"id":"PREVIOUS", "defaultMessage":"Previous"})}
                   compStyle={this.getStyle("controlIconStyle")}
-                  cbActionClick={()=>{this.props.cbControlClick("PREVLAYER", ['vid-layer', this.props.member.memberId, 'prev']);}}
+                  cbActionClick={this.controlClickPrevLayer}
               />
             </div>
             {multCanvasControls}

@@ -11,6 +11,7 @@ class NumberItem extends VertoBaseComponent {
     this.state = {'onHover': false, 'onFocus': false};
 
     this.numberClicked = this.numberClicked.bind(this);
+    this.setOnFocusState = this.setOnFocusState.bind(this);
   }
 
   static propTypes = {
@@ -69,6 +70,10 @@ class NumberItem extends VertoBaseComponent {
     return (styles[styleName]);
   }
 
+  setOnFocusState(){
+    this.setState({...this.state, onFocus: true});
+  }
+
   render(){
     return (
       <div
@@ -76,9 +81,7 @@ class NumberItem extends VertoBaseComponent {
           className="numberItemCont"
           tabIndex="0"
           style={{...this.getStyle('container')}}
-          onFocus={()=>{
-            this.setState({...this.state, onFocus: true});
-          }}
+          onFocus={this.setOnFocusState}
           onClick={this.numberClicked}
           >
         <div

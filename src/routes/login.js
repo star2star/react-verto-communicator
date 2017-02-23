@@ -13,6 +13,8 @@ class AppLogin extends VertoBaseComponent {
   constructor(props) {
     super(props);
     this.state={};
+
+    this.dispatchSubmitLogin = this.dispatchSubmitLogin.bind(this);
   }
 
   getDefaultStyle(styleName) {
@@ -28,14 +30,18 @@ class AppLogin extends VertoBaseComponent {
     return !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state));
   }
 
+  dispatchSubmitLogin(data){
+    // fix websocket url
+    this.props.dispatch(doSubmitLogin({ ...data, wsURL: data.websocketurl }));
+  }
+
   render() {
     return(
       <div style={this.getStyle("loggedInOutStyles")}>
-        <Login cbClick={(data)=>{
-          // fix websocket url
-          this.props.dispatch(doSubmitLogin({ ...data, wsURL: data.websocketurl }));
-              }}
-            settings={this.props.auth.loginSettings} />
+        <Login
+            cbClick={this.dispatchSubmitLogin}
+            settings={this.props.auth.loginSettings}
+          />
     </div>
     );
   }

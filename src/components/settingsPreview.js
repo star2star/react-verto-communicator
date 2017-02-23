@@ -24,6 +24,8 @@ class SettingsPreview extends VertoBaseComponent{
     this.stopMedia = this.stopMedia.bind(this);
     this.submitSave = this.submitSave.bind(this);
     this.submitRefresh = this.submitRefresh.bind(this);
+    this.setStateSelectedVideo = this.setStateSelectedVideo.bind(this);
+    this.setStateSelectedAudio = this.setStateSelectedAudio.bind(this);
   }
 
   static propTypes = {
@@ -116,8 +118,6 @@ class SettingsPreview extends VertoBaseComponent{
     mediaStreamSource.connect(meter);
     this.streamObj.onended = meter.stop.bind(meter);
   }
-
-
 
   getDefaultStyle(styleName) {
     const styles = {
@@ -251,6 +251,14 @@ class SettingsPreview extends VertoBaseComponent{
     this.props.cbClose();
   }
 
+  setStateSelectedVideo(data){
+    this.setState({...this.state, selectedVideo: data.selectedVideo});
+  }
+
+  setStateSelectedAudio(data){
+    this.setState({...this.state, selectedAudio: data.selectedAudio});
+  }
+
 
   render() {
     //console.log(this.state.volume);
@@ -268,21 +276,21 @@ class SettingsPreview extends VertoBaseComponent{
               <div style={this.getStyle('menuStyle')}>
                 <SettingsMenuSelect
                     compStyle={this.getStyle("compMenuStyles")}
-                    cbSubmitSetting={(data)=>{this.setState({...this.state, selectedVideo: data.selectedVideo});}}
+                    cbSubmitSetting={this.setStateSelectedVideo}
                     options={this.props.settingsData.videoDevices ? this.props.settingsData.videoDevices : []}
                     label={formatMessage({"id": "CAMERA_SETTINGS", "defaultMessage": "Camera:"})}
                     selectedOption={{id:"selectedVideo", data:this.state.selectedVideo}}
                 />
                 <SettingsMenuSelect
                     compStyle={this.getStyle("compMenuStyles")}
-                    cbSubmitSetting={(data)=>{this.setState({...this.state, selectedAudio: data.selectedAudio});}}
+                    cbSubmitSetting={this.setStateSelectedAudio}
                     options={this.props.settingsData.audioDevices ? this.props.settingsData.audioDevices : []}
                     label={formatMessage({"id": "MIC_SETTINGS", "defaultMessage": "Microphone:"})}
                     selectedOption={{id:"selectedAudio", data:this.state.selectedAudio}}
                 />
                 <button
                     style={{...this.getStyle('refreshStyle')}}
-                    onClick={this.submitRefresh.bind(this)}
+                    onClick={this.submitRefresh}
                   >
                   <RestoreIconSVG svgStyle={{height:"20px", width: "20px", fill: "white"}}/>
                 </button>
@@ -290,7 +298,7 @@ class SettingsPreview extends VertoBaseComponent{
               <div style={{...this.getStyle('saveContainer')}}>
                 <button
                     style={{...this.getStyle('saveStyle')}}
-                    onClick={this.submitSave.bind(this)}
+                    onClick={this.submitSave}
                   >
                   <FormattedMessage
                       id="SAVE"

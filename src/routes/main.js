@@ -42,6 +42,8 @@ class Main extends VertoBaseComponent {
     this.handleClearHistory = this.handleClearHistory.bind(this);
     this.handleToggleChat = this.handleToggleChat.bind(this);
     this.makeCall = this.makeCall.bind(this);
+    this.dispatchHangUp = this.dispatchHangUp.bind(this);
+    this.dispatchAnswer = this.dispatchAnswer.bind(this);
   }
 
   componentWillMount() {
@@ -163,27 +165,26 @@ class Main extends VertoBaseComponent {
     this.setState({...this.state, showChat: !this.state.showChat, msgCountAtToggle: this.props.chatMsgCount, newMsgCount: 0 });
   }
 
+  dispatchHangUp(d){
+    console.log('hang up', d);
+    this.props.dispatch(doHangUp(d.callID));
+  }
+
+  dispatchAnswer(d){
+    console.log('Answering: ', d);
+    this.props.dispatch(doAnswer(d.callID));
+  }
+
   render() {
     const { formatMessage } = this.props.intl;
-
-    let loggedInfo;
-    let chatSideBar;
-    let testingSpeed;
-    const splashObject = { ...this.props.auth.splash };
 
     const incomingCall = this.props.callInfo && Object.keys(this.props.callInfo.incomingCalls).map((callId)=>{
       console.log('------- GOT CALL', this.props.callInfo.incomingCalls[callId]);
       return (
           <IncomingCall key={callId}
               callData={this.props.callInfo.incomingCalls[callId]}
-              cbHangup={(d)=>{
-                console.log('hang up', d);
-                this.props.dispatch(doHangUp(d.callID));
-              }}
-              cbAnswer={(d)=>{
-                console.log('Answering: ', d);
-                this.props.dispatch(doAnswer(d.callID));
-              }}
+              cbHangup={this.dispatchHangUp}
+              cbAnswer={this.dispatchAnswer}
           />
       );
     });
@@ -195,213 +196,13 @@ class Main extends VertoBaseComponent {
           ) : undefined;
 
 
-    switch (this.props.auth.showPage){
-      case 'splash':
-        switch(this.props.auth.splash.title){
-          case 'browser':
-            splashObject.title = formatMessage({"id":"BROWSER_COMPATIBILITY", "defaultMessage":"Checking browser compatibility."});
-            break;
-          case 'media':
-            splashObject.title = formatMessage({"id":"CHECK_PERMISSION_MEDIA", "defaultMessage":"Checking media permissions"});
-            break;
-          case 'resolution':
-          default:
-            splashObject.title = formatMessage({"id":"CHECK_RESOLUTION", "defaultMessage":"Checking resolution."});
-            break;
-        }
-        break;
-
-      case 'login':
-      case 'logout':
-        loggedInfo = (
-          <div style={this.getStyle("loggedInOutStyles")}>
-            <Login cbClick={(data)=>{
-              // fix websocket url
-              this.props.dispatch(doSubmitLogin({ ...data, wsURL: data.websocketurl }));
-            }} settings={this.props.auth.loginSettings} />
-        </div>);
-        break;
-
-      case 'resolution_refresh':
-        loggedInfo = (<div >Resolution Refresh .... in progress</div>);
-        break;
-
-
-      case 'loggedIn':
-        loggedInfo = (
-          <div style={this.getStyle("loggedInOutStyles")}>
-            <Dialpad cbCall={this.makeCall} cbClearHistory={this.handleClearHistory} lastNumber={this.props.callInfo.lastNumber} nbrToDial="" />
-        </div>);
-        break;
-
-      case 'resolution_failed':
-        splashObject.title = formatMessage({"id":"CHECK_RESOLUTION", "defaultMessage":"Checking resolution."});
-        splashObject.errorObject = {
-          header: formatMessage({"id":"ERRORS", "defaultMessage":"Errors"}),
-          body: formatMessage({"id":"ERROR_PERMISSION_MEDIA", "defaultMessage":"Error: internal error checking resolution"})
-        };
-        break;
-
-      case 'bns':
-        //console.log('BBBNNNNSSSS', this.props.auth);
-        splashObject.title = formatMessage({"id":"BROWSER_COMPATIBILITY", "defaultMessage":"Checking browser compatibility."});
-        splashObject.errorObject = {
-          header: formatMessage({"id":"ERRORS", "defaultMessage":"Errors"}),
-          body: formatMessage({"id":"BROWSER_WITHOUT_WEBRTC", "defaultMessage":"Error: browser doesn't support WebRTC"})
-        };
-        break;
-
-      case 'noMedia':
-        splashObject.title = formatMessage({"id":"CHECK_PERMISSION_MEDIA", "defaultMessage":"Checking media permissions"});
-        splashObject.errorObject = {
-          header: formatMessage({"id":"ERRORS", "defaultMessage":"Errors"}),
-          body: formatMessage({"id":"ERROR_PERMISSION_MEDIA", "defaultMessage":"Error: Media Permission Denied"})
-        };
-        break;
-
-     case 'speed-test':
-        //console.log('>>>>>> speed test stuff should go here ');
-        testingSpeed = (
-          <div>
-            <div style={this.getStyle('testingStyle')}>
-              {formatMessage({"id":"DETERMINING_SPEED", "defaultMessage":"Error: Media Permission Denied"})}
-            </div>
-            <div style={this.getStyle('loaderStyle')}>
-              <Loader color="black" size="325px"/>
-            </div>
-          </div>
-        )
-        break;
-
-      case 'dialing':
-        loggedInfo = (
-            <div style={this.getStyle("dialingStyle")}>
-              <Dialing callData={this.props.callInfo.activeCalls[this.props.callInfo.currentCallId]}
-                  cbHangup={(callId)=>{
-                    this.props.dispatch(doHangUp(callId));
-                  }}
-                  cbMute ={(callId, mutedDevice='mic' )=>{
-                    if (mutedDevice === 'mic'){
-                      this.props.dispatch(doMuteMic(callId));
-                    } else {
-                      this.props.dispatch(doMuteVideo(callId));
-                    }
-                  }}
-                  cbDTMF={(callId, key)=>{
-
-                  }}
-                  cbHold={(callId)=>{
-                    this.props.dispatch(doHold(callId));
-                  }}
-              />
-            </div>
-          );
-        break;
-
-      case 'call_inprogress':
-        //console.log('jjj');
-        // Extract conference data from currentCall (if it is a conference)
-        {
-          //const confData = this.props.callInfo.activeCalls[this.props.callInfo.currentCallId].conferenceData;
-          window.conf = this.props.confData;
-          // if (this.props.confData) {
-            loggedInfo = (
-              <div style={this.getStyle("inProgessStyle")}>
-                <CallProgress callData={this.props.callInfo.activeCalls[this.props.callInfo.currentCallId]}
-                    cbHangup={(callId)=>{
-                      this.props.dispatch(doHangUp(callId));
-                    }}
-                    cbMute ={(callId, mutedDevice='mic' )=>{
-                      if (mutedDevice === 'mic'){
-                        this.props.dispatch(doMuteMic(callId));
-                      } else {
-                        this.props.dispatch(doMuteVideo(callId));
-                      }
-                    }}
-                    cbDTMF={(callId, key)=>{
-
-                    }}
-                    cbHold={(callId)=>{
-                      this.props.dispatch(doHold(callId));
-                    }}
-                    cbShare={()=>{
-                      this.props.dispatch(doShareScreen(this.props.app));
-                    }}
-                    cbToggleChat={this.handleToggleChat}
-                    isModerator={this.props.confData ? this.props.confData.currentRole == 'moderator' : undefined}
-                    userConfStatus={this.props.confData && this.props.confData.users[this.props.confData.callId]? this.props.confData.users[this.props.confData.callId].conferenceStatus:
-                            undefined
-                          }
-                    cbSetVideoMode={(params)=>{this.handleControlClick('SETLAYOUT', params);}}
-                    layouts={this.props.confData ? this.props.confData.layouts : undefined}
-                    currLayout={this.props.confData ? this.props.confData.videoLayout : undefined}
-                    newMsgCount={this.state.newMsgCount}
-                />
-              </div>
-            );
-
-          // Show chat sidebar only if confData has a value
-          //console.log('#### conf data', confData);
-
-          // NOTE:  Child components MUST be in the same order that their labels
-          // are in the tabLabels array
-          if (this.props.confData) {
-            const contentStyle = this.state.showChat ?
-                          {...this.getStyle("sidebarWrapStyles")} :
-                          {...this.getStyle("sidebarWrapStyles"),
-                              opacity: '0',
-                              width: '0px',
-                              visibility: 'hidden',
-                              transition: 'opacity 0.4s ease-out, width 0.3s ease-out, visibility 1s'};
-
-            chatSideBar = (
-              <div className="sidebarWrapper"
-                  style={contentStyle}
-              >
-                <TabbedContainer tabLabels={["Members", "Chat"]}>
-                  <Memberlist
-                      members={Object.keys(this.props.confData.users).map(
-                        (k)=>{
-                          return ({...this.props.confData.users[k]});
-                        }
-                      )}
-                      isModerator={this.props.confData.currentRole == "moderator"}
-                      allowPresenter={this.props.confData.allowPresenter}
-                      hasMultipleCanvases={this.props.confData.hasMultipleCanvases}
-                      cbControlClick={(callId, params)=>{this.handleControlClick(callId, params);}}
-                  />
-                  <ChatSession
-                      cbRemove={()=>{}}
-                      cbSubmitMessage={(id,msg)=>{this.props.dispatch(doSendChat(msg));}}
-                      chatData={this.props.confData}
-                  />
-                </TabbedContainer>
-              </div>
-            );
-          }
-        }
-        break;
-
-      default:
-        break;
-    }
-
-    let showSplash;
-
-    if (this.props.auth.splash && this.props.auth.splash.current != this.props.auth.splash.number) {
-      const intlTitle = formatMessage({"id": "LOADING", "defaultMessage": "Loading"});
-      showSplash = (<Splash step={splashObject} title={intlTitle} style={this.getStyle('showSplashStyle')}/>);
-    }
-
     return (
       <div id="chatVideoWrapper" style={this.getStyle('chatVidWrapStyles')}>
         <AlertList />
         <div style={this.getStyle("vidWindowStyle")}>
           {incomingCallsContainer}
           <video id="webcam" autoPlay="autoplay"  style={this.getStyle("videoStyles")}></video>
-          {loggedInfo}
-          {showSplash}
-          {testingSpeed}
+          {this.props.children}
         </div>
       </div>
     );

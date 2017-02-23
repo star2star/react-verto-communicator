@@ -9,6 +9,7 @@ class SettingsCheckbox extends VertoBaseComponent {
     this.state={ isChecked: this.props.checkedOption.value, items: [[13,5],[13,5]], currItem: 0 };
 
     this.handleSelect = this.handleSelect.bind(this);
+    this.handleSelectCheckStateToggle = this.handleSelectCheckStateToggle.bind(this);
   }
 
   static propTypes = {
@@ -103,6 +104,11 @@ class SettingsCheckbox extends VertoBaseComponent {
     return (styles[styleName]);
   }
 
+  handleSelectCheckStateToggle(){
+    this.handleSelect();
+    setTimeout(()=>this.setState({...this.state, isChecked: !this.state.isChecked}),0);
+  }
+
   render() {
     return (
       <div
@@ -116,10 +122,7 @@ class SettingsCheckbox extends VertoBaseComponent {
               ref="checkMe"
               type="checkbox"
               style={{...this.getDefaultStyle('input')}}
-              onChange={()=>{
-                this.handleSelect();
-                setTimeout(()=>this.setState({...this.state, isChecked: !this.state.isChecked}),0);
-              }}
+              onChange={this.handleSelectCheckStateToggle}
               checked={this.props.checkedOption.value}
           />
           <label

@@ -19,6 +19,10 @@ class MemberItem extends VertoBaseComponent {
   constructor(props){
     super(props);
     this.state = {showAdminControls: false};
+
+    this.controlClickMuteMic = this.controlClickMuteMic.bind(this);
+    this.controlClickMute = this.controlClickMute.bind(this);
+    this.openAdminControls = this.openAdminControls.bind(this);
   }
 
   static propTypes = {
@@ -157,6 +161,18 @@ class MemberItem extends VertoBaseComponent {
     return styleReturn;
   }
 
+  controlClickMuteMic(){
+    this.props.cbControlClick("MUTEMIC", [this.props.member.memberId]);
+  }
+
+  controlClickMute(){
+    this.props.cbControlClick("MUTEVIDEO", [this.props.member.memberId]);
+  }
+
+  openAdminControls(){
+     this.props.cbOpenAdminControls(this.props.member);
+   }
+
   render(){
     //console.log('&&&&&& member object', this.props.member, this.props.controlSettings);
 
@@ -184,21 +200,21 @@ class MemberItem extends VertoBaseComponent {
       micStatus = this.props.member.conferenceStatus.audio.muted ?
               (<ControlItem type="MuteMicrophoneIconSVG"
                   compStyle={this.getStyle("controlAudioIconStyle")}
-                  cbActionClick={()=>{this.props.cbControlClick("MUTEMIC", [this.props.member.memberId]);}}
+                  cbActionClick={this.controlClickMuteMic}
               />) :
               (<ControlItem type="MicrophoneIconSVG"
                   compStyle={this.getStyle("controlAudioIconStyle")}
-                  cbActionClick={()=>{this.props.cbControlClick("MUTEMIC", [this.props.member.memberId]);}}
+                  cbActionClick={this.controlClickMuteMic}
               />);
 
       videoStatus = this.props.member.conferenceStatus.video.muted ?
               (<ControlItem type="MuteVideoIconSVG"
                   compStyle={this.getStyle("controlVideoIconStyle")}
-                  cbActionClick={()=>{this.props.cbControlClick("MUTEVIDEO", [this.props.member.memberId]);}}
+                  cbActionClick={this.controlClickMute}
               />) :
               (<ControlItem type="VideoIconSVG"
                   compStyle={this.getStyle("controlVideoIconStyle")}
-                  cbActionClick={()=>{this.props.cbControlClick("MUTEVIDEO", [this.props.member.memberId]);}}
+                  cbActionClick={this.controlClickMute}
               />);
     }
 
@@ -269,7 +285,7 @@ class MemberItem extends VertoBaseComponent {
               <img src={this.props.member.avatar.avatar} style={avatarStyle}/>
           </span>
           <div className="userInfo" style={this.getStyle("userInfoStyle")}
-              onClick={()=>{ this.props.cbOpenAdminControls(this.props.member);}}
+              onClick={this.openAdminControls}
           >
             <span style={this.getStyle("nameStyle")}>{this.props.member.name}</span>
             <span style={this.getStyle("emailStyle")}>{this.props.member.avatar.email}</span>
