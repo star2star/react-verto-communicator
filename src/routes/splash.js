@@ -7,7 +7,7 @@ import { compose } from 'recompose';
 import VertoBaseComponent from '../components/vertobasecomponent';
 import { fromJS } from 'immutable';
 
-class AppSlpash extends VertoBaseComponent {
+class AppSplash extends VertoBaseComponent {
 
   constructor(props) {
     super(props);
@@ -89,4 +89,4 @@ const hocComponent = compose(injectIntl, Radium, connect((state)=>{
       });
   }));
 
-export default hocComponent(AppSlpash);
+export default hocComponent(AppSplash);

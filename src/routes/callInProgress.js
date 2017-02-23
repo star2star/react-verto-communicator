@@ -26,6 +26,7 @@ class CallInProgress extends VertoBaseComponent {
     this.dispatchHold = this.dispatchHold.bind(this);
     this.dispatchShareScreen = this.dispatchShareScreen.bind(this);
     this.controlClickSetLayout = this.controlClickSetLayout.bind(this);
+    this.handleToggleChat = this.handleToggleChat.bind(this);
   }
 
   getDefaultStyle(styleName) {
@@ -86,6 +87,15 @@ class CallInProgress extends VertoBaseComponent {
 
   controlClickSetLayout(params){
     this.handleControlClick('SETLAYOUT', params);
+  }
+
+  handleToggleChat(){
+    // if chat will be hidden (currently showing), then we need to keep track of how many
+    // chat messages are received and update the count for the chat message badge
+    // if chat is will be showing (currently hidden), then the message count in state should be 0
+    //console.log('handleToggleChat')
+
+    this.setState({...this.state, showChat: !this.state.showChat, msgCountAtToggle: this.props.chatMsgCount, newMsgCount: 0 });
   }
 
   render() {

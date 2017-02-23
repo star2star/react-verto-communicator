@@ -69,7 +69,7 @@ class About extends VertoBaseComponent{
     const logoSrc = WhiteLabel.get('logoSrc');
     const poweredBy = WhiteLabel.get('poweredBy');
     return (
-      <Modal isOpen onRequestClose={this.props.cbClose} style={this.getStyle('mymodal')}>
+      <Modal isOpen onRequestClose={this.props.cbClose} contentLabel = "About Modal" style={this.getStyle('mymodal')}>
         <div className="container" style={this.getStyle('container')}>
           <div className="image" style={this.getStyle('imageStyle')}>
             <img src={logoSrc} style={this.getStyle("logoSrcStyle")}  />

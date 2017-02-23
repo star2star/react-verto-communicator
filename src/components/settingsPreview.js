@@ -265,7 +265,7 @@ class SettingsPreview extends VertoBaseComponent{
     const { formatMessage } = this.props.intl;
 
     return (
-      <Modal isOpen onRequestClose={this.props.cbClose} style={this.getStyle('modal')}>
+      <Modal isOpen onRequestClose={this.props.cbClose} contentLabel = "Settings Modal" style={this.getStyle('modal')}>
         <div style={this.getStyle("previewStyles")}>
           <div style={this.getStyle('headerStyle')}>
             <FormattedMessage id="TITLE_PREVIEW_SETTINGS" defaultMessage="Setup your camera and microphone settings" />

@@ -70,9 +70,10 @@ class Contributors extends VertoBaseComponent{
   render() {
     return (
       <Modal
-          isOpen 
+          isOpen
           onRequestClose={App.toggleModal}
           style={{...this.getStyle('modal')}}
+          contentLabel = "Contributors Modal"
         >
         <div >
           <h1 style={{...this.getStyle('header')}}>

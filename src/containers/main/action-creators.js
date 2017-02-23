@@ -1,19 +1,28 @@
 import VertoService from '../../js/vertoService';
+import { browserHistory } from 'react-router';
 
 // validation steps include
 const doValidation = (step=1) => {
   return dispatch => {
     switch (step) {
       case 1:
+        browserHistory.push('/app/splash/browser'); //this is working
+        //console.log('CHECKING BROWSER');
         dispatch(doingValidation(step, 'browser', 4));
         return dispatch(doBrowserCheck());
       case 2:
+        browserHistory.push('/app/splash/media'); //this is working
+        //console.log('CHECKING MEDIA');
         dispatch(doingValidation(step, 'media', 4));
         return dispatch(doMediaCheck());
       case 3:
+        browserHistory.push('/app/splash/resolution'); //this is working
+        //console.log('RESOLUTION');
         dispatch(doingValidation(step, 'resolution', 4));
         return dispatch(doResolutionRefresh());
       case 4:
+        browserHistory.push('/app/splash/login'); //this is working
+        //console.log('LOGIN');
         dispatch(doingValidation(step, 'login', 4));
         return dispatch(doShowLogin());
     }
@@ -39,8 +48,9 @@ const doBrowserCheck = () => {
     navigator.getUserMedia = navigator.getUserMedia ||
       navigator.webkitGetUserMedia ||
       navigator.mozGetUserMedia;
-
+      //console.log('CHECKING FOR SUPPORTED BROWSER');
     if (!navigator.getUserMedia) {
+      browserHistory.push('/app/splash/bns'); //this is working
       dispatch({
         type: "BNS"
       });
@@ -55,7 +65,9 @@ const doMediaCheck = () => {
   return dispatch => {
     VertoService.mediaPerm((status)=>{ //permissions
         //console.log('^^^^^', status);
+        //console.log('CHECKING FOR MEDIA');
         if (!status) {
+          browserHistory.push('/app/splash/noMedia'); //this is working
           dispatch({
             type: "NO_MEDIA"
           });
@@ -82,6 +94,7 @@ const doResolutionRefresh = (skipValidation=false, refresh) => {
               dispatch(doValidation(4));
             }
           } else {
+            browserHistory.push('/app/splash/resolution_failed'); //this is working
             dispatch({
               "type": "RESOLUTION_FAILED"
             });
@@ -124,8 +137,11 @@ const doingSpeedTest = () => {
 
 const doingResolutionRefresh = () => {
   // rendering login through navigation
-  return {
-    "type": "RESOLUTION_REFRESH"
+  return (dispatch)=>{
+    browserHistory.push('/app/resolutionRefresh');
+    dispatch({
+      "type": "RESOLUTION_REFRESH"
+    })
   };
 };
 
@@ -143,6 +159,7 @@ const doShowLogin = () => {
       if (state.auth.loginSettings.autologin) {
         dispatch(doSubmitLogin(state.auth.loginSettings));
       } else {
+        browserHistory.push('/app/login');
         dispatch ({
           "type": "SHOW_LOGIN"
         });
@@ -168,7 +185,7 @@ const doSubmitLogin = (data) => {
     }
     // dispatching so we change from not authorized to pending
     dispatch(doingLogin(data));
-
+    browserHistory.push('/app/loggedIn'); //this seems to be working
     // Thunk here
     VertoService.getInstance().login( data);
     //dispatch(doVertoLogin(data)); // this sent the WS request
@@ -179,9 +196,11 @@ const doVertoLogin = (success, data) => {
   return dispatch => {
     console.log('verto ....', data);
     if(success){
+      browserHistory.push('/app/loggedIn');
       dispatch(doVertoLoginValid(data));
       dispatch(doSpeedTest());
     } else {
+      browserHistory.push('/app/login');
       dispatch({
         type: "LOGIN_FAILED"
       });
@@ -206,9 +225,13 @@ const doingLogin = (data) => {
 // logOUT
 // called from verto
 const doLogOut = () => {
-  return {
-    "type": "LOGOUT"
-  };
+  return dispatch => {
+    browserHistory.push('/app/login'); //this is working
+
+    dispatch({
+      "type": "LOGOUT"
+    });
+}
 };
 // called by client actions
 const doSubmitLogOut = () =>{
@@ -237,6 +260,7 @@ const doMakeCall = (aPhoneNumber, appSettings) => {
     // console.log('>>>> appSetttings: ', appSettings)
     if (appSettings.settings.testSpeedJoin){
       // dispatches event so we can change screen layout
+      browserHistory.push('/app/speedTest');
       dispatch({
         "type": "SPEED_TEST_BEFORE_CALL"
       });
@@ -264,7 +288,8 @@ const doShareScreen = (appSettings) => {
 };
 
 const doHangUp = (callId) => {
-  return dispatch =>{
+  return (dispatch) =>{
+    browserHistory.push('/app/loggedIn'); //this is working
     VertoService.getInstance().hangup(callId);
   };
 };
@@ -307,24 +332,38 @@ const doAnswer = (callId) => {
 };
 
 const doHungUp = (dialog) =>{
-  return {
-    "type": "CALL_HUNG_UP",
-    "data": dialog
+  return (dispatch) =>{
+    browserHistory.push('/app/loggedIn'); //this is working
+    dispatch({
+      "type": "CALL_HUNG_UP",
+      "data": dialog
+    })
   };
 };
 
 const doMakeCallError = (aErrorObject) =>{
-  return {
-    "type": "CALLING_ERROR",
-    "data": aErrorObject
+  return (dispatch) =>{
+    browserHistory.push('/app/loggedIn'); //this is working
+      dispatch({
+      "type": "CALLING_ERROR",
+      "data": aErrorObject
+    })
   };
 };
 
+
 const doingMakeCall = (status, dest, callId, direction) => {
   //console.log('doingMakeCall', dialog);
-  return {
-    "type": "CALLING",
-    "data": {status: status, destination: dest, callId: callId, direction: direction}
+  return (dispatch)=>{
+    if(status === 'trying'){
+      browserHistory.push('/app/dialing'); //this is working
+    } else {
+      browserHistory.push('/app/callInProgress'); // this is working
+    }
+    dispatch({
+      "type": "CALLING",
+      "data": {status: status, destination: dest, callId: callId, direction: direction}
+    })
   };
 };
 

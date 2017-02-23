@@ -80,7 +80,7 @@ class InputModal extends VertoBaseComponent {
     // TODO - ta INternationalize the strings here, style input, etc.
 
     return (
-      <Modal isOpen onRequestClose={this.props.cbClose} style={this.getStyle("modalStyle")}>
+      <Modal isOpen onRequestClose={this.props.cbClose} contentLabel = "Input Modal" style={this.getStyle("modalStyle")}>
         <div style={this.getStyle("container")}>
           <div className="inputHeading"
               style={this.getStyle("headingStyle")}>

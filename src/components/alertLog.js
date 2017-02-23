@@ -130,7 +130,7 @@ class AlertLog extends VertoBaseComponent {
       );
     }
     return(
-        <Modal isOpen onRequestClose={this.props.cbClose} style={this.getStyle("myModal")}>
+        <Modal isOpen contentLabel = "Alerts Modal" onRequestClose={this.props.cbClose} style={this.getStyle("myModal")}>
           {alertContent}
         </Modal>
     );
