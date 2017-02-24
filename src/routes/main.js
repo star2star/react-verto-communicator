@@ -141,18 +141,18 @@ class Main extends VertoBaseComponent {
   }
 
   makeCall(number) {
-    //console.log('calling ...', number, this.props.app);
+    // console.log('calling ...', number, this.props.app);
     this.props.dispatch(doMakeCall(number, this.props.app));
   }
 
   handleControlClick(controlId, params) {
     // based on the controlId, call the appropriate dispatch
-    //console.log('@@@@@@@@@@@ control click', controlId, params);
+    // console.log('@@@@@@@@@@@ control click', controlId, params);
     this.props.dispatch(doSendConfCommand(controlId, params));
   }
 
   handleClearHistory(){
-    console.log('at handleClearHistory()');
+    // console.log('at handleClearHistory()');
     this.props.dispatch(doClearHistory());
   }
 
@@ -166,12 +166,12 @@ class Main extends VertoBaseComponent {
   }
 
   dispatchHangUp(d){
-    console.log('hang up', d);
+    // console.log('hang up', d);
     this.props.dispatch(doHangUp(d.callID));
   }
 
   dispatchAnswer(d){
-    console.log('Answering: ', d);
+    // console.log('Answering: ', d);
     this.props.dispatch(doAnswer(d.callID));
   }
 
@@ -179,7 +179,7 @@ class Main extends VertoBaseComponent {
     const { formatMessage } = this.props.intl;
 
     const incomingCall = this.props.callInfo && Object.keys(this.props.callInfo.incomingCalls).map((callId)=>{
-      console.log('------- GOT CALL', this.props.callInfo.incomingCalls[callId]);
+      // console.log('------- GOT CALL', this.props.callInfo.incomingCalls[callId]);
       return (
           <IncomingCall key={callId}
               callData={this.props.callInfo.incomingCalls[callId]}

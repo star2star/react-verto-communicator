@@ -65,7 +65,7 @@ addLocaleData(localeData);
 store.subscribe(()=>{
   const newLocale = store.getState().app.settings.language.id;
   if (dialect && dialect !== newLocale ){
-    console.log('it changed ', locale, newLocale, dialect);
+    // console.log('it changed ', locale, newLocale, dialect);
     locale = newLocale;
 
     dialect = Messages.getDialect(locale);
@@ -122,7 +122,7 @@ const subId = VertoService.getInstance().subscribe((event, status, data)=>{
   }
 });
 
-console.log('verto subscriptionID:', subId);
+// console.log('verto subscriptionID:', subId);
 
 window.theStore = store;
 

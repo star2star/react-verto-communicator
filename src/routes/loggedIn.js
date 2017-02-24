@@ -32,7 +32,7 @@ class LoggedIn extends VertoBaseComponent {
   }
 
   handleClearHistory(){
-    console.log('at handleClearHistory()');
+    //console.log('at handleClearHistory()');
     this.props.dispatch(doClearHistory());
   }
 

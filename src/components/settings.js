@@ -83,7 +83,7 @@ class Settings extends VertoBaseComponent {
   }
 
   eventStopPropagations(event){
-    console.log('settttttttttttttttttttt')
+    //console.log('settttttttttttttttttttt')
     event.stopPropagation();
     event.nativeEvent.stopImmediatePropagation();
   }

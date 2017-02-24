@@ -194,7 +194,7 @@ const doSubmitLogin = (data) => {
 // verto login callback
 const doVertoLogin = (success, data) => {
   return dispatch => {
-    console.log('verto ....', data);
+    //console.log('verto ....', data);
     if(success){
       browserHistory.push('/app/loggedIn');
       dispatch(doVertoLoginValid(data));

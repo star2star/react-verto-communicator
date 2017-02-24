@@ -35,7 +35,7 @@ class SettingsCheckbox extends VertoBaseComponent {
   static displayName = "SettingsCheckbox";
 
   handleSelect() {
-    console.log('handleSelect');
+    // console.log('handleSelect');
     // this.props.cbSubmitSetting();
 
     let chkdObj = {};

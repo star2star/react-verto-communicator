@@ -1,4 +1,4 @@
-import Container from './routes/container';
+import App from './routes/app';
 //import Route from 'react-router';
 
 // throws an error in the console if the page wasn't able to load
@@ -13,9 +13,24 @@ const loadRoute = (cb) => {
 };
 
 
+// Code splitting below produces the equivlent of the following route structure:
+// <Route path="/" component={App}>
+//   <IndexRoute component={Main} />
+//   <Route path="app" component={Main}>
+//     <Route path="callInProgress" component={CallInProgress} />
+//     <Route path="dialing" component={AppDialing} />
+//     <Route path="loggedIn" component={LoggedIn} />
+//     <Route path="login" component={AppLogin} />
+//     <Route path="resolutionRefresh" component={ResolutionRefresh} />
+//     <Route path="speedTest" component={SpeedTest} />
+//     <Route path="splash/:type" component={AppSplash} />
+//   </Route>
+// </Route>
+
+
 export default {
   path: '/',
-  component: Container,
+  component: App,
   indexRoute: {
     getComponent(location, cb) {
       System.import('./routes/main')
@@ -33,17 +48,17 @@ export default {
       },
       childRoutes: [
           {
-            path: 'login',
+            path: 'callInProgress',
             getComponent(location, cb) {
-              System.import('./routes/login')
+              System.import('./routes/callInProgress')
                 .then(loadRoute(cb))
                 .catch(errorLoading);
             }
           },
           {
-            path: 'resetPassword',
+            path: 'dialing',
             getComponent(location, cb) {
-              System.import('./routes/resetPassword')
+              System.import('./routes/dialing')
                 .then(loadRoute(cb))
                 .catch(errorLoading);
             },
@@ -57,116 +72,38 @@ export default {
             },
           },
           {
-            path: 'dialing',
+            path: 'login',
             getComponent(location, cb) {
-              System.import('./routes/dialing')
+              System.import('./routes/login')
                 .then(loadRoute(cb))
                 .catch(errorLoading);
             },
           },
           {
-            path: 'callInProgress',
+            path: 'resolutionRefresh',
             getComponent(location, cb) {
-              System.import('./routes/callInProgress')
+              System.import('./routes/resolutionRefresh')
                 .then(loadRoute(cb))
                 .catch(errorLoading);
             },
           },
           {
-            path: 'initiateTransfer',
+            path: 'speedTest',
             getComponent(location, cb) {
-              System.import('./routes/initiateTransfer')
+              System.import('./routes/speedTest')
                 .then(loadRoute(cb))
                 .catch(errorLoading);
             },
           },
           {
-            path: 'attendedTransfer',
+            path: 'splash/:type',
             getComponent(location, cb) {
-              System.import('./routes/attendedTransfer')
+              System.import('./routes/splash')
                 .then(loadRoute(cb))
                 .catch(errorLoading);
             },
           }
         ]
-    },
-    {
-      path: 'update',
-      getComponent(location, cb) {
-        System.import('./routes/update')
-          .then(loadRoute(cb))
-          .catch(errorLoading);
-      },
     }
   ]
 };
-
-
-
-
-
-// export default {
-//   path: '/',
-//   component: Main,
-//   indexRoute: {
-//     getComponent(location, cb) {
-//       System.import('./routes/appmain')
-//         .then(loadRoute(cb))
-//         .catch(errorLoading);
-//     }
-//   },
-//   childRoutes: [
-//     {
-//       path: 'app',
-//       getComponent(location, cb) {
-//         System.import('./routes/appmain')
-//           .then(loadRoute(cb))
-//           .catch(errorLoading);
-//       },
-//       childRoutes: [
-//           {
-//             path: 'login',
-//             getComponent(location, cb) {
-//               System.import('./routes/login')
-//                 .then(loadRoute(cb))
-//                 .catch(errorLoading);
-//             }
-//           },
-//           {
-//             path: 'panel1',
-//             getComponent(location, cb) {
-//               System.import('./routes/panel1')
-//                 .then(loadRoute(cb))
-//                 .catch(errorLoading);
-//             },
-//             childRoutes : [
-//               {
-//                 path: 'contacts/:tab',
-//                 getComponent(location, cb) {
-//                   System.import('./routes/contacts')
-//                     .then(loadRoute(cb))
-//                     .catch(errorLoading);
-//                 }
-//               },
-//               {
-//                 path: 'events',
-//                 getComponent(location, cb) {
-//                   System.import('./routes/events')
-//                     .then(loadRoute(cb))
-//                     .catch(errorLoading);
-//                 }
-//               }
-//             ]
-//           },
-//           {
-//             path: 'item/:itemtype/:id',
-//             getComponent(location, cb) {
-//               System.import('./routes/item')
-//                 .then(loadRoute(cb))
-//                 .catch(errorLoading);
-//             }
-//           }
-//         ]
-//     }
-//   ]
-// };

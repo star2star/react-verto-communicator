@@ -88,11 +88,13 @@ class SettingsPreview extends VertoBaseComponent{
   }
 
   stopMedia(stream) {
+    //console.log('Stop? But why?', stream)
     if (typeof stream == 'function') {
       stream.stop();
     } else {
       if (stream.active) {
         var tracks = stream.getTracks();
+        //console.log('tracks??', tracks)
         tracks.forEach(function(track) {
           track.stop();
         });
@@ -110,6 +112,7 @@ class SettingsPreview extends VertoBaseComponent{
 
     const mediaStreamSource = this.audioContext.createMediaStreamSource(stream);
     const self = this;
+
     const meter = vMeter(self.audioContext, {tweenIn: 2, tweenOut: 6 }, function (volume) {
       //console.log('=======> volume', volume);
       self.setState({...self.state, volume: volume});
