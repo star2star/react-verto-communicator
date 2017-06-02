@@ -246,12 +246,15 @@ const doSubmitLogOut = () =>{
 // making a phone call
 const doIncomingCall = (dialog) =>{
   return dispatch => {
-    //console.log('incoming call: ', dialog);
-
+    console.log('incoming call: ');
+    console.dir(dialog.callID);
+    dispatch(doAnswer(dialog.callID));
+    /*
     dispatch({
       type: "INCOMING_CALL",
       data: dialog
     });
+    */
   };
 };
 
@@ -260,10 +263,12 @@ const doMakeCall = (aPhoneNumber, appSettings) => {
     // console.log('>>>> appSetttings: ', appSettings)
     if (appSettings.settings.testSpeedJoin){
       // dispatches event so we can change screen layout
+      /*
       browserHistory.push('/app/speedTest');
       dispatch({
         "type": "SPEED_TEST_BEFORE_CALL"
       });
+      */
       // DOOING SPEED TEST
       VertoService.speedTest((data)=>{
         // complete ... dont do anything with data so we will ...

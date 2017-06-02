@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM, {server } from 'react-dom';
 import { Router, Route, browserHistory, hashHistory, IndexRoute } from 'react-router';
 import {StyleRoot} from 'radium';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware , compose } from 'redux';
 import { addLocaleData, IntlProvider} from 'react-intl';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
@@ -35,17 +35,23 @@ function getLanguage(){
     sReturn = lang;
   }
   // console.log('lang:', lang);
-  // console.log('language being set to: ', sReturn);
+  // console.log('language set to: ', sReturn);
   return sReturn;
 }
 
-//TODO where will this be set and managed when this is released??
+//TODO where will this set and managed when this releas??
 // Set styling theme globally
 window.theme={ value: 'default'};
 
+//TODO must works only in dev enviroment
+/* eslint-disable no-underscore-dangle */
+const composeEnhancers =  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const preloadedState = window.__PRELOADED_STATE__;
+/* eslint-enable no-underscore-dangle */
+const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 
 
-const store = createStore(reducer, applyMiddleware(thunk));
+// const store = createStore(reducer, applyMiddleware(thunk));
 
 let locale, dialect, messages, localeData;
 
@@ -115,8 +121,12 @@ const subId = VertoService.getInstance().subscribe((event, status, data)=>{
     case 'showAlert':
       AlertService.getInstance().createAlert(data);
       break;
+    case 'incoming-call':
+      
+      store.dispatch(doIncomingCall(data));
+      break;
 
-      //this is were I am adding things
+      //Add handlers there
     default:
       console.log('>>> Subscription Not Handled:', event, data);
   }
