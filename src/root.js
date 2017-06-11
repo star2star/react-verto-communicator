@@ -1,5 +1,6 @@
 import React from 'react';
-import { IndexRoute, Route, Router, browserHistory } from "react-router";
+// import { IndexRoute, Route, Router, browserHistory } from 'react-router';
+import { Router, browserHistory } from 'react-router';
 import routes from './routes';
 
 // import App from './routes/app.js'
@@ -12,9 +13,6 @@ import routes from './routes';
 // import SpeedTest from './routes/speedTest';
 // import AppSplash from './routes/splash';
 
-
-const Root = () => (
-  <Router history={browserHistory} routes={routes} />
-);
+const Root = () => <Router history={browserHistory} routes={routes} />;
 
 export default Root;
