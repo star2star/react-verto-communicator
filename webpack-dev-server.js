@@ -12,6 +12,7 @@ const path = require('path');
 const env = { dev: process.env.NODE_ENV}
 
 const devServerConfig = {
+  hot: true,
   contentBase: path.join(__dirname, './src/'),
   historyApiFallback: { disableDotRule: true }, // need historyApiFallback to be able to refresh on dynamic route
   stats: { colors: true} // Pretty colors on console

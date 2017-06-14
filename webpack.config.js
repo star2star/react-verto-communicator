@@ -8,8 +8,13 @@ module.exports = env => {
   const removeEmpty = array => array.filter(p => !!p);
   console.log('DIR', __dirname)
   var config = {
+    devtool:	'source-map',
     entry: {
-      app: path.join(__dirname, './src/'),
+      'app': [
+            'react-hot-loader/patch',
+            path.join(__dirname, './src/')
+          ],
+      //app: path.join(__dirname, './src/'),
       vendor: [
         'react',
         'react-dom',
@@ -17,7 +22,9 @@ module.exports = env => {
         'redux',
         'react-redux',
         'react-intl',
-        'redux-thunk'
+        'redux-thunk',
+
+
       ]
     },
     output: {
@@ -29,6 +36,7 @@ module.exports = env => {
       contentBase: path.join(__dirname, './src/'),
       historyApiFallback: true,
       inline: true,
+      hot: true,
       contentBase: './src',
       port: 8080
     },
@@ -37,11 +45,13 @@ module.exports = env => {
         {
           test: /\.js$/,
           exclude: /node_modules/,
-          loaders: ['react-hot-loader', 'babel-loader?presets[]=es2015&presets[]=stage-0&presets[]=react&cacheDirectory=true']
+          loaders: [ 'babel-loader?presets[]=es2015&presets[]=stage-0&presets[]=react&cacheDirectory=true']
         }
       ]
     },
     plugins: removeEmpty([
+      new	webpack.HotModuleReplacementPlugin(),
+			//new	webpack.NoErrorsPlugin(),
       // used to split out our specified vendors script
       new webpack.optimize.CommonsChunkPlugin({name: 'vendor', minChunks: Infinity, filename: '[name].[hash].js'}),
 

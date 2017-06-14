@@ -1,6 +1,14 @@
+if (module.hot) {
+  module.hot.accept('./root', () => {
+    console.log('it works!')
+  })
+}
+
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import { Router, Route, browserHistory, hashHistory, IndexRoute } from 'react-router';
+import { AppContainer } from 'react-hot-loader'
 import { StyleRoot } from 'radium';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { addLocaleData, IntlProvider } from 'react-intl';
@@ -161,12 +169,32 @@ store.dispatch(doValidation());
 
 // console.log('INTL: ', locale, messages);
 ReactDOM.render(
-  <Provider store={store}>
+  <AppContainer>
+    <Provider store={store}>
     <IntlProvider locale={locale} messages={messages}>
       <StyleRoot>
         <Root />
       </StyleRoot>
     </IntlProvider>
-  </Provider>,
+  </Provider>
+  </AppContainer>,
   document.getElementById('app'),
 );
+
+
+if (module.hot) {
+  module.hot.accept('./root', () => {
+    ReactDom.render(
+      <AppContainer>
+        <Provider store={store}>
+        <IntlProvider locale={locale} messages={messages}>
+          <StyleRoot>
+            <Root />
+          </StyleRoot>
+        </IntlProvider>
+      </Provider>
+      </AppContainer>,
+      document.getElementById('app')
+    );
+  });
+}
