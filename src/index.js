@@ -167,6 +167,23 @@ window.theStore = store;
 
 store.dispatch(doValidation());
 
+const rootEl = document.getElementById('app');
+const render = Component =>ReactDOM.render(
+  <AppContainer>
+    <Provider store={store}>
+    <IntlProvider locale={locale} messages={messages}>
+      <StyleRoot>
+        <Component />
+      </StyleRoot>
+    </IntlProvider>
+  </Provider>
+  </AppContainer>,
+  rootEl
+);
+
+render(Root);
+if (module.hot) module.hot.accept('./root', () => render(Root));
+/*
 // console.log('INTL: ', locale, messages);
 ReactDOM.render(
   <AppContainer>
@@ -198,3 +215,4 @@ if (module.hot) {
     );
   });
 }
+*/

@@ -57,6 +57,7 @@
     "react-addons-test-utils": "^15.1.0",
     "react-hot-loader": "^3.0.0-beta.6",
     "sinon": "^1.17.4",
+    "source-map": "^0.5.6",
     "ui-harness": "^3.9.4",
     "webpack": "^2.6.1",
     "webpack-dev-middleware": "^1.10.2",

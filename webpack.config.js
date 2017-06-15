@@ -8,12 +8,13 @@ module.exports = env => {
   const removeEmpty = array => array.filter(p => !!p);
   console.log('DIR', __dirname)
   var config = {
-    devtool:	'source-map',
+    devtool: 'inline-source-maps',
     entry: {
       'app': [
-            'react-hot-loader/patch',
-            path.join(__dirname, './src/')
-          ],
+        //  'webpack-hot-middleware/client',
+        'react-hot-loader/patch',
+        path.join(__dirname, './src/')
+      ],
       //app: path.join(__dirname, './src/'),
       vendor: [
         'react',
@@ -23,8 +24,9 @@ module.exports = env => {
         'react-redux',
         'react-intl',
         'redux-thunk',
-
-
+        'react-hot-loader/patch',
+        'webpack-dev-server/client',
+        'webpack/hot/only-dev-server'
       ]
     },
     output: {
@@ -45,13 +47,20 @@ module.exports = env => {
         {
           test: /\.js$/,
           exclude: /node_modules/,
-          loaders: [ 'babel-loader?presets[]=es2015&presets[]=stage-0&presets[]=react&cacheDirectory=true']
+          loaders: ['babel-loader?presets[]=es2015&presets[]=stage-0&presets[]=react&cacheDirectory=true']
         }
       ]
     },
     plugins: removeEmpty([
-      new	webpack.HotModuleReplacementPlugin(),
-			//new	webpack.NoErrorsPlugin(),
+      new webpack.HotModuleReplacementPlugin(),
+      // enable HMR globally
+
+      new webpack.NamedModulesPlugin(),
+      // prints more readable module names in the browser console on HMR updates
+
+      new webpack.NoEmitOnErrorsPlugin(),
+      // do not emit compiled assets that include errors
+      //new	webpack.NoErrorsPlugin(),
       // used to split out our specified vendors script
       new webpack.optimize.CommonsChunkPlugin({name: 'vendor', minChunks: Infinity, filename: '[name].[hash].js'}),
 
