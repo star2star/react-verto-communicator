@@ -74,8 +74,8 @@ class SettingsMenuSelect extends VertoBaseComponent {
         border: 'none',
         boxShadow:'none',
         fontSize: '.9rem',
-        backgroundColor: 'rgba(0,0,0,0)',
-        color: '#FFF'
+        backgroundColor: 'rgba(255,255,255,0.9)',
+        color: '#000'
       }
     };
 

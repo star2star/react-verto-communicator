@@ -1,14 +1,8 @@
-if (module.hot) {
-  module.hot.accept('./root', () => {
-    console.log('it works!')
-  })
-}
-
-
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import { Router, Route, browserHistory, hashHistory, IndexRoute } from 'react-router';
-import { AppContainer } from 'react-hot-loader'
+/* eslint-disable import/no-extraneous-dependencies */
+import { AppContainer } from 'react-hot-loader'; // TODO must works only in dev enviroment
+/* eslint-enable import/no-extraneous-dependencies */
 import { StyleRoot } from 'radium';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { addLocaleData, IntlProvider } from 'react-intl';
@@ -17,7 +11,6 @@ import thunk from 'redux-thunk';
 import VertoService from './js/vertoService';
 import reducer from './containers/reducers';
 import Messages from './js/messages';
-// import App from './routes/app';
 import Root from './root';
 import {
   doValidation,
@@ -33,37 +26,13 @@ import {
 } from './containers/main/action-creators';
 import AlertService from './js/alertService';
 
-/*
-function getLanguage() {
-  let sReturn = 'en-US';
-
-  const lang = navigator.language;
-  if (lang.length < 4) {
-    // fix lang variable
-
-    switch (lang.toLowerCase()) {
-      case 'es':
-        sReturn = 'es';
-
-        break;
-      default:
-        // should be English
-        break;
-    }
-  } else {
-    sReturn = lang;
-  }
-  // console.log('lang:', lang);
-  // console.log('language set to: ', sReturn);
-  return sReturn;
-}
-*/
 // TODO where will this set and managed when this releas??
 // Set styling theme globally
+/*
 window.theme = {
   value: 'default',
 };
-
+*/
 // TODO must works only in dev enviroment
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -108,7 +77,7 @@ store.subscribe(() => {
   }
 });
 
-const subId = VertoService.getInstance().subscribe((event, status, data) => {
+/* const subId = */ VertoService.getInstance().subscribe((event, status, data) => {
   // console.log('>>>> Subscription: ', event, status, data)
   switch (event) {
     case 'loggedIn':
@@ -161,58 +130,22 @@ const subId = VertoService.getInstance().subscribe((event, status, data) => {
   }
 });
 
-// console.log('verto subscriptionID:', subId);
-
-window.theStore = store;
-
 store.dispatch(doValidation());
 
 const rootEl = document.getElementById('app');
-const render = Component =>ReactDOM.render(
-  <AppContainer>
-    <Provider store={store}>
-    <IntlProvider locale={locale} messages={messages}>
-      <StyleRoot>
-        <Component />
-      </StyleRoot>
-    </IntlProvider>
-  </Provider>
-  </AppContainer>,
-  rootEl
-);
-
-render(Root);
-if (module.hot) module.hot.accept('./root', () => render(Root));
-/*
-// console.log('INTL: ', locale, messages);
-ReactDOM.render(
-  <AppContainer>
-    <Provider store={store}>
-    <IntlProvider locale={locale} messages={messages}>
-      <StyleRoot>
-        <Root />
-      </StyleRoot>
-    </IntlProvider>
-  </Provider>
-  </AppContainer>,
-  document.getElementById('app'),
-);
-
-
-if (module.hot) {
-  module.hot.accept('./root', () => {
-    ReactDom.render(
-      <AppContainer>
-        <Provider store={store}>
+const render = Component =>
+  ReactDOM.render(
+    <AppContainer>
+      <Provider store={store}>
         <IntlProvider locale={locale} messages={messages}>
           <StyleRoot>
-            <Root />
+            <Component />
           </StyleRoot>
         </IntlProvider>
       </Provider>
-      </AppContainer>,
-      document.getElementById('app')
-    );
-  });
-}
-*/
+    </AppContainer>,
+    rootEl,
+  );
+
+render(Root);
+if (module.hot) module.hot.accept('./root', () => render(Root));
