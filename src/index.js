@@ -27,7 +27,7 @@ import {
 import AlertService from './js/alertService';
 
 // TODO where will this set and managed when this releas??
-// Set styling theme globally
+// Set styling theme globally? partilay in vertobasecomponent
 /*
 window.theme = {
   value: 'default',
@@ -71,6 +71,7 @@ store.subscribe(() => {
 
     // console.log('##########', messages);
     // needed for INTL
+    // Does it required dinamicly ?
     localeData = require(`react-intl/locale-data/${dialect}`);
     addLocaleData(localeData);
     location.reload(true);

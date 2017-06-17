@@ -1,10 +1,11 @@
 import React from 'react';
+import Radium from 'radium';
+import { fromJS } from "immutable";
 import VertoBaseComponent from './vertobasecomponent';
 import UserVideoControls from './vidControlsUser';
 import AdminVideoControls from './vidControlsAdmin';
 import { PhoneIconSVG } from './svgIcons';
-import Radium from 'radium';
-import { fromJS } from "immutable";
+
 
 
 class CallProgress extends VertoBaseComponent {
