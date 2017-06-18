@@ -1,7 +1,7 @@
 import React from 'react';
-import VertoBaseComponent from '../components/vertobasecomponent';
 import Radium from 'radium';
 import { connect } from 'react-redux';
+import VertoBaseComponent from '../components/vertobasecomponent';
 // import ReactTooltip from 'react-tooltip';
 // import VCStatus from '../../components/vcstatus';
 import {
@@ -25,6 +25,7 @@ import { injectIntl } from 'react-intl';
 import CallProgress from '../components/callprogress';
 import Dialing from '../components/dialing';
 import IncomingCall from '../components/incomingcall';
+import IncomingCalls from '../components/incomingcalls';
 import ChatSession from '../components/chatSession';
 import Memberlist from '../components/memberList';
 import TabbedContainer from '../components/tabbedContainer';
@@ -49,6 +50,14 @@ class Main extends VertoBaseComponent {
   componentWillMount() {}
 
   componentWillReceiveProps(nextProps) {
+    // console.log('------- GOT CALL', this.props.callInfo.incomingCalls);
+    /*
+    if (Object.keys(this.props.callInfo.incomingCalls).length) {
+      this.render();
+      //console.log('------- GOT CALL ID', Object.keys(this.props.callInfo.incomingCalls));
+      //console.log('------- GOT CALL', this.props.callInfo.incomingCalls);
+    }
+    */
     if (!this.state.showChat) {
       // in case we got thrown from session, check integrity of data
       const newCountAtToggle = nextProps.chatMsgCount < this.state.msgCountAtToggle
@@ -182,31 +191,39 @@ class Main extends VertoBaseComponent {
 
   render() {
     const { formatMessage } = this.props.intl;
-
+    /*
     const incomingCall =
       this.props.callInfo &&
-      Object.keys(this.props.callInfo.incomingCalls).map((callId) => {
-        console.log('------- GOT CALL', this.props.callInfo.incomingCalls[callId]);
-          <IncomingCall
-            key={callId}
-            callData={this.props.callInfo.incomingCalls[callId]}
-            cbHangup={this.dispatchHangUp}
-            cbAnswer={this.dispatchAnswer}
-          />;
-      });
+      Object.keys(this.props.callInfo.incomingCalls).map(callId =>
+        (<IncomingCall
+          key={callId}
+          callData={this.props.callInfo.incomingCalls[callId]}
+          cbHangup={this.dispatchHangUp}
+          cbAnswer={this.dispatchAnswer}
+        />),
+      );
+
+    console.log('incomingCall', incomingCall);
 
     const incomingCallsContainer = incomingCall.length
       ? (<div className="incomingCallContainer" style={this.getStyle('incomingContainerStyles')}>
-        {incomingCall}
+          1234
+          {incomingCall}
       </div>)
       : undefined;
+    console.log('incomingCallsContainer', incomingCallsContainer);
+    */
+    console.log('this.props.callInfo', this.props.callInfo);
 
     return (
       <div id="chatVideoWrapper" style={this.getStyle('chatVidWrapStyles')}>
         <AlertList />
+
         <div style={this.getStyle('vidWindowStyle')}>
-          1234
-          {incomingCallsContainer}
+          <IncomingCalls
+            cbHangup={this.dispatchHangUp}
+            cbAnswer={this.dispatchAnswer}
+          />
           <video id="webcam" autoPlay="autoplay" style={this.getStyle('videoStyles')} />
           {this.props.children}
         </div>
@@ -218,13 +235,13 @@ class Main extends VertoBaseComponent {
 export default connect(state => ({
   auth: state.auth,
   app: state.app,
-  callInfo: state.callInfo,
-  confData: state.callInfo.currentCallId
-    ? state.callInfo.activeCalls[state.callInfo.currentCallId].conferenceData
-    : undefined,
-  chatMsgCount: state.callInfo.currentCallId &&
-    state.callInfo.activeCalls[state.callInfo.currentCallId].conferenceData
-    ? state.callInfo.activeCalls[state.callInfo.currentCallId].conferenceData.messages.length
-    : undefined,
+  //callInfo: state.callInfo,
+  // confData: state.callInfo.currentCallId
+  //   ? state.callInfo.activeCalls[state.callInfo.currentCallId].conferenceData
+  //   : undefined,
+  // chatMsgCount: state.callInfo.currentCallId &&
+  //   state.callInfo.activeCalls[state.callInfo.currentCallId].conferenceData
+  //   ? state.callInfo.activeCalls[state.callInfo.currentCallId].conferenceData.messages.length
+  //   : undefined,
 }))(injectIntl(Radium(Main)));
 // reviewed on 7/15/2016

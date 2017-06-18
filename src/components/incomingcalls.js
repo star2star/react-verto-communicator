@@ -1,10 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { fromJS } from 'immutable';
 import VertoBaseComponent from './vertobasecomponent';
 import { FormattedMessage } from 'react-intl';
 import { AvatarSVG, PhoneIconSVG } from './svgIcons';
 
-class IncomingCall extends VertoBaseComponent {
+class IncomingCalls extends VertoBaseComponent {
   constructor(props) {
     super(props);
     this.state = {};
@@ -26,13 +27,16 @@ class IncomingCall extends VertoBaseComponent {
     cbAnswer: () => {},
   };
 
-  static filename = 'incomingcall';
-  static displayName = 'IncomingCall';
+  static filename = 'incomingcalls';
+  static displayName = 'IncomingCalls';
 
   shouldComponentUpdate(nextProps, nextState) {
-    return (
-      !fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state))
-    );
+    return true;
+    //!fromJS(nextProps).equals(fromJS(this.props)) || !fromJS(nextState).equals(fromJS(this.state))
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('------- GOT NEW PROPS', this.props);
   }
 
   getDefaultStyle(styleName) {
@@ -104,6 +108,10 @@ class IncomingCall extends VertoBaseComponent {
         borderRadius: '50%',
         cursor: 'pointer',
       },
+      incomingContainerStyles: {
+        minWidth: '40vw',
+        margin: 'auto',
+      },
     };
 
     return styles[styleName];
@@ -119,46 +127,58 @@ class IncomingCall extends VertoBaseComponent {
   }
 
   render() {
-    console.log('CP: ', this.props.callData);
+    let {callInfo} = this.props;
+    const incomingCallsContainer = Object.keys(callInfo.incomingCalls).length
+      ?
+      Object.keys(callInfo.incomingCalls).map(callId =>
+          <div className="container" style={this.getStyle('container')}>
+            <div className="displayArea" style={this.getStyle('displayAreaStyle')}>
+              <AvatarSVG svgStyle={this.getStyle('avatarStyle')} />
+              <div className="callFrom" style={this.getStyle('callFromDisplay')}>
+                <span className="callFromLabel">
+                  <FormattedMessage id="CALL_FROM" defaultMessage="Call From:" />
+                </span>
+                <span className="callID" style={this.getStyle('callIdDisplay')}>
+                  {callInfo.incomingCalls[callId].params.caller_id_number}
+                </span>
+              </div>
+            </div>
+            <div className="callControls" style={this.getStyle('callControlStyle')}>
+              <span
+                className="buttonArea"
+                style={this.getStyle('buttonContainer')}
+                onClick={this.clickAnswer}
+              >
+                <PhoneIconSVG svgStyle={this.getStyle('answerIconStyle')} />
+                <span className="answerLabel" style={this.getStyle('labelSpacingStyle')}>
+                  <FormattedMessage id="ANSWER" defaultMessage="Answer" />
+                </span>
+              </span>
+              <span
+                className="buttonArea"
+                style={this.getStyle('buttonContainer')}
+                onClick={this.clickHangup}
+              >
+                <PhoneIconSVG svgStyle={this.getStyle('rejectIconStyle')} />
+                <span className="rejectLabel" style={this.getStyle('labelSpacingStyle')}>
+                  <FormattedMessage id="REJECT" defaultMessage="Reject" />
+                </span>
+              </span>
+            </div>
+          </div>,
+        )
+
+      : null;
+      console.log(incomingCallsContainer);
     return (
-      <div className="container" style={this.getStyle('container')}>
-        <div className="displayArea" style={this.getStyle('displayAreaStyle')}>
-          <AvatarSVG svgStyle={this.getStyle('avatarStyle')} />
-          <div className="callFrom" style={this.getStyle('callFromDisplay')}>
-            <span className="callFromLabel">
-              <FormattedMessage id="CALL_FROM" defaultMessage="Call From:" />
-            </span>
-            <span className="callID" style={this.getStyle('callIdDisplay')}>
-              {this.props.callData.params.caller_id_number}
-            </span>
-          </div>
-        </div>
-        <div className="callControls" style={this.getStyle('callControlStyle')}>
-          <span
-            className="buttonArea"
-            style={this.getStyle('buttonContainer')}
-            onClick={this.clickAnswer}
-          >
-            <PhoneIconSVG svgStyle={this.getStyle('answerIconStyle')} />
-            <span className="answerLabel" style={this.getStyle('labelSpacingStyle')}>
-              <FormattedMessage id="ANSWER" defaultMessage="Answer" />
-            </span>
-          </span>
-          <span
-            className="buttonArea"
-            style={this.getStyle('buttonContainer')}
-            onClick={this.clickHangup}
-          >
-            <PhoneIconSVG svgStyle={this.getStyle('rejectIconStyle')} />
-            <span className="rejectLabel" style={this.getStyle('labelSpacingStyle')}>
-              <FormattedMessage id="REJECT" defaultMessage="Reject" />
-            </span>
-          </span>
-        </div>
-      </div>
-    );
+      <div className="incomingCallContainer" style={this.getStyle('incomingContainerStyles')}>
+       {incomingCallsContainer}
+     </div>)
   }
 }
 
-export default IncomingCall;
+export default connect(state => ({
+  callInfo: state.callInfo,
+}))(IncomingCalls);
+
 // reviewed 7/13/2016

@@ -119,7 +119,7 @@ class Numberpad extends VertoBaseComponent {
               cbClick={this.numberClicked}
           />
           <NumberItem
-              keyValue="#"
+              keyValue="#1"
               keyString=""
               compStyle={{keyValue: {color: '#999'}}}
               cbClick={this.numberClicked}

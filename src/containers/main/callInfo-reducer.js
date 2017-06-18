@@ -30,6 +30,7 @@ const callInfo = (state, action) => {
       return oStateReturn;
     case 'INCOMING_CALL':
       oStateReturn.incomingCalls[action.data.callID] = action.data;
+      console.log('action.data:', action.data);
       return oStateReturn;
     case 'CONFERENCE_DATA':
       // console.log('<<<<', state, action.data );
