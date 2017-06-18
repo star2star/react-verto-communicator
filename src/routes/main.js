@@ -1,6 +1,7 @@
 import React from 'react';
 import Radium from 'radium';
 import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
 import VertoBaseComponent from '../components/vertobasecomponent';
 // import ReactTooltip from 'react-tooltip';
 // import VCStatus from '../../components/vcstatus';
@@ -21,10 +22,9 @@ import {
 import Splash from '../components/splash';
 import Login from '../components/login';
 import Dialpad from '../components/dialpad';
-import { injectIntl } from 'react-intl';
+
 import CallProgress from '../components/callprogress';
 import Dialing from '../components/dialing';
-import IncomingCall from '../components/incomingcall';
 import IncomingCalls from '../components/incomingcalls';
 import ChatSession from '../components/chatSession';
 import Memberlist from '../components/memberList';
@@ -43,21 +43,13 @@ class Main extends VertoBaseComponent {
     this.handleClearHistory = this.handleClearHistory.bind(this);
     this.handleToggleChat = this.handleToggleChat.bind(this);
     this.makeCall = this.makeCall.bind(this);
-    this.dispatchHangUp = this.dispatchHangUp.bind(this);
-    this.dispatchAnswer = this.dispatchAnswer.bind(this);
+    // this.dispatchHangUp = this.dispatchHangUp.bind(this);
+    // this.dispatchAnswer = this.dispatchAnswer.bind(this);
   }
 
   componentWillMount() {}
 
   componentWillReceiveProps(nextProps) {
-    // console.log('------- GOT CALL', this.props.callInfo.incomingCalls);
-    /*
-    if (Object.keys(this.props.callInfo.incomingCalls).length) {
-      this.render();
-      //console.log('------- GOT CALL ID', Object.keys(this.props.callInfo.incomingCalls));
-      //console.log('------- GOT CALL', this.props.callInfo.incomingCalls);
-    }
-    */
     if (!this.state.showChat) {
       // in case we got thrown from session, check integrity of data
       const newCountAtToggle = nextProps.chatMsgCount < this.state.msgCountAtToggle
@@ -179,52 +171,16 @@ class Main extends VertoBaseComponent {
     });
   }
 
-  dispatchHangUp(d) {
-    // console.log('hang up', d);
-    this.props.dispatch(doHangUp(d.callID));
-  }
-
-  dispatchAnswer(d) {
-    // console.log('Answering: ', d);
-    this.props.dispatch(doAnswer(d.callID));
-  }
-
   render() {
     const { formatMessage } = this.props.intl;
-    /*
-    const incomingCall =
-      this.props.callInfo &&
-      Object.keys(this.props.callInfo.incomingCalls).map(callId =>
-        (<IncomingCall
-          key={callId}
-          callData={this.props.callInfo.incomingCalls[callId]}
-          cbHangup={this.dispatchHangUp}
-          cbAnswer={this.dispatchAnswer}
-        />),
-      );
-
-    console.log('incomingCall', incomingCall);
-
-    const incomingCallsContainer = incomingCall.length
-      ? (<div className="incomingCallContainer" style={this.getStyle('incomingContainerStyles')}>
-          1234
-          {incomingCall}
-      </div>)
-      : undefined;
-    console.log('incomingCallsContainer', incomingCallsContainer);
-    */
-    console.log('this.props.callInfo', this.props.callInfo);
 
     return (
       <div id="chatVideoWrapper" style={this.getStyle('chatVidWrapStyles')}>
         <AlertList />
-
+        <video id="webcam" autoPlay="autoplay" style={this.getStyle('videoStyles')} />
         <div style={this.getStyle('vidWindowStyle')}>
-          <IncomingCalls
-            cbHangup={this.dispatchHangUp}
-            cbAnswer={this.dispatchAnswer}
-          />
-          <video id="webcam" autoPlay="autoplay" style={this.getStyle('videoStyles')} />
+          <IncomingCalls />
+
           {this.props.children}
         </div>
       </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { fromJS } from 'immutable';
+import PropTypes from 'prop-types';
 import VertoBaseComponent from './vertobasecomponent';
 import { FormattedMessage } from 'react-intl';
 import { AvatarSVG, PhoneIconSVG } from './svgIcons';
@@ -12,13 +13,6 @@ class IncomingCall extends VertoBaseComponent {
     this.clickAnswer = this.clickAnswer.bind(this);
     this.clickHangup = this.clickHangup.bind(this);
   }
-
-  static propTypes = {
-    callData: React.PropTypes.object,
-    cbHangup: React.PropTypes.func,
-    cbAnswer: React.PropTypes.func,
-    compStyle: React.PropTypes.object,
-  };
 
   static defaultProps = {
     callData: {},
@@ -159,6 +153,12 @@ class IncomingCall extends VertoBaseComponent {
     );
   }
 }
+
+IncomingCall.propTypes = {
+  callData: PropTypes.object,
+  cbHangup: PropTypes.func,
+  cbAnswer: PropTypes.func,
+};
 
 export default IncomingCall;
 // reviewed 7/13/2016
