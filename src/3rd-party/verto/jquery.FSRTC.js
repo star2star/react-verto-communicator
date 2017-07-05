@@ -57,7 +57,7 @@
         var result = sdpLine.match(pattern);
         return (result && result.length == 2) ? result[1] : null;
     }
-    
+
     // Returns a new m= line with the specified codec as the first one.
     function setDefaultCodec(mLine, payload) {
         var elements = mLine.split(' ');
@@ -366,7 +366,7 @@
 
     $.FSRTC.prototype.setMute = function(what) {
 	var self = this;
-	var audioTracks = self.localStream.getAudioTracks();	
+	var audioTracks = self.localStream.getAudioTracks();
 
 	for (var i = 0, len = audioTracks.length; i < len; i++ ) {
 	    switch(what) {
@@ -395,7 +395,7 @@
 
     $.FSRTC.prototype.setVideoMute = function(what) {
 	var self = this;
-	var videoTracks = self.localStream.getVideoTracks();	
+	var videoTracks = self.localStream.getVideoTracks();
 
 	for (var i = 0, len = videoTracks.length; i < len; i++ ) {
 	    switch(what) {
@@ -554,8 +554,8 @@
 	video = {
 	    mandatory: obj.options.videoParams,
 	    optional: []
-        }	    	    
-	
+        }
+
 	var useVideo = obj.options.useVideo;
 
 	if (useVideo && obj.options.useCamera && obj.options.useCamera !== "none") {
@@ -580,10 +580,10 @@
 
 	return {audio: audio, video: video, useVideo: useVideo};
     }
-    
+
     $.FSRTC.prototype.call = function(profile) {
         checkCompat();
-	
+
         var self = this;
 	var screen = false;
 
@@ -595,7 +595,7 @@
 
         function onSuccess(stream) {
 	    self.localStream = stream;
-	    
+
 	    if (screen) {
 		if (moz) {
 		    self.constraints.OfferToReceiveVideo = false;
@@ -603,7 +603,7 @@
 		    self.constraints.mandatory.OfferToReceiveVideo = false;
 		}
 	    }
-	    
+
             self.peer = RTCPeerConnection({
                 type: self.type,
                 attachStream: self.localStream,
@@ -680,7 +680,7 @@
         PeerConnection = w.mozRTCPeerConnection || w.webkitRTCPeerConnection,
         SessionDescription = w.mozRTCSessionDescription || w.RTCSessionDescription,
         IceCandidate = w.mozRTCIceCandidate || w.RTCIceCandidate;
-	
+
         var STUN = {
             url: !moz ? 'stun:stun.l.google.com:19302' : 'stun:23.21.150.121'
         };
@@ -734,7 +734,7 @@
             if (options.onICEComplete) {
                 options.onICEComplete();
             }
-	    
+
             if (options.type == "offer") {
                 if ((!moz || (!options.sentICESDP && peer.localDescription.sdp.match(/a=candidate/)) && !x && options.onICESDP)) {
                     options.onICESDP(peer.localDescription);
@@ -777,7 +777,7 @@
 	    if (!gathering) {
 		gathering = setTimeout(ice_handler, 1000);
 	    }
-	    
+
 	    if (event) {
 		if (event.candidate) {
 		    options.onICE(event.candidate);
@@ -823,7 +823,7 @@
 
         var constraints = options.constraints || {
 	    offerToReceiveAudio: true,
-	    offerToReceiveVideo: true   
+	    offerToReceiveVideo: true
         };
 
         // onOfferSDP(RTCSessionDescription)
@@ -1100,9 +1100,9 @@
                'validRes': $.FSRTC.validRes,
                'bestResSupported': $.FSRTC.bestResSupported()
             };
-	    
+
 	    localStorage.setItem("res_" + cam, $.toJSON(res));
-	    
+
 	    if (func) return func(res);
 	    return;
 	}
@@ -1110,12 +1110,12 @@
 	var video = {
             mandatory: {},
             optional: []
-        }	
+        }
 
 	if (cam) {
 	    video.optional = [{sourceId: cam}];
 	}
-	
+
 	w = resList[resI][0];
 	h = resList[resI][1];
 	resI++;
@@ -1130,7 +1130,7 @@
 	getUserMedia({
 	    constraints: {
                 audio: ttl++ == 0,
-                video: video	    
+                video: video
 	    },
 	    onsuccess: function(e) {
 		e.getTracks().forEach(function(track) {track.stop();});
@@ -1138,12 +1138,12 @@
 	    onerror: function(e) {console.error( w + "x" + h + " not supported."); checkRes(cam, func);}
         });
     }
-    
+
 
     $.FSRTC.getValidRes = function (cam, func) {
 	var used = [];
 	var cached = localStorage.getItem("res_" + cam);
-	
+
 	if (cached) {
 	    var cache = $.parseJSON(cached);
 
@@ -1171,8 +1171,8 @@
 	    },
 	    onsuccess: function(e) {
 		e.getTracks().forEach(function(track) {track.stop();});
-		
-		console.info("media perm init complete"); 
+
+		console.info("media perm init complete");
 		if (runtime) {
                     setTimeout(runtime, 100, true);
 		}

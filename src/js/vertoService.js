@@ -207,6 +207,11 @@ class VertoService {
             xInstance.notify('recovering', 'true', d);
             break;
 
+          case $.verto.enum.state.answering:
+            console.log('^^^^^^^answering ....', d);
+            //xInstance.notify('answering', 'true', d);
+            break;
+
           default:
             // display("");
             console.error('^^^^^^^default state not handled:', d.state, d);
@@ -668,10 +673,9 @@ class VertoService {
       const call = _verto.verto.newCall({
         destination_number: `${destination}-screen`,
         caller_id_name: `${_verto.verto.options.loginParams.name} (Screen)`,
-        caller_id_number:
-          `${_verto.verto.options.loginParams.callerid
-            ? _verto.verto.options.loginParams.callerid
-            : _verto.verto.options.loginParams.email} (Screen)`,
+        caller_id_number: `${_verto.verto.options.loginParams.callerid
+          ? _verto.verto.options.loginParams.callerid
+          : _verto.verto.options.loginParams.email} (Screen)`,
         outgoingBandwidth: settings.settings.outgoingBandwidth,
         incomingBandwidth: settings.settings.incomingBandwidth,
         videoParams: screen_constraints.video.mandatory, // coming from function call
@@ -681,11 +685,9 @@ class VertoService {
         mirrorInput: settings.settings.mirrorInput,
         userVariables: {
           email: _verto.verto.options.loginParams.email,
-          avatar:
-            `${that.protocol
-              }//gravatar.com/avatar/${
-              md5(_verto.verto.options.loginParams.email)
-              }.png?s=600`,
+          avatar: `${that.protocol}//gravatar.com/avatar/${md5(
+            _verto.verto.options.loginParams.email,
+          )}.png?s=600`,
         },
       });
 
@@ -783,11 +785,9 @@ class VertoService {
       mirrorInput: settings.settings.mirrorInput, // storage.data.mirrorInput,
       userVariables: {
         email: _verto.verto.options.loginParams.email, // storage.data.email,
-        avatar:
-          `${this.protocol
-            }//gravatar.com/avatar/${
-            md5(_verto.verto.options.loginParams.email)
-            }.png?s=75`,
+        avatar: `${this.protocol}//gravatar.com/avatar/${md5(
+          _verto.verto.options.loginParams.email,
+        )}.png?s=75`,
       },
     };
 
@@ -879,15 +879,16 @@ class VertoService {
     // console.debug("VQ length: " + VideoConstants.VIDEO_QUALITY_SOURCE.length);
     // console.debug(supportedResolutions);
 
-    return VideoConstants.VIDEO_QUALITY_SOURCE.filter(resolution => (
+    return VideoConstants.VIDEO_QUALITY_SOURCE.filter(
+      resolution =>
         supportedResolutions.filter((res) => {
           // console.log('RES: ', res);
           const width = res[0];
           const height = res[1];
 
           return resolution.width == width && resolution.height == height;
-        }).length > 0
-      ));
+        }).length > 0,
+    );
   }
 
   static refreshDevices(callback) {

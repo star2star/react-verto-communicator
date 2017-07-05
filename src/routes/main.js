@@ -100,8 +100,10 @@ class Main extends VertoBaseComponent {
       },
       videoStyles: {
         display: 'none',
-        maxWidth: '100%',
-        objectFit: 'inherit',
+        //maxWidth: '100%',
+        //height: 'auto',
+        //width: 'auto',
+        //objectFit: 'fill',
         flex: '1',
         transition: 'padding 0.3s ease-out',
       },
@@ -176,9 +178,10 @@ class Main extends VertoBaseComponent {
 
     return (
       <div id="chatVideoWrapper" style={this.getStyle('chatVidWrapStyles')}>
-        <AlertList />
-        <video id="webcam" autoPlay="autoplay" style={this.getStyle('videoStyles')} />
-        <div style={this.getStyle('vidWindowStyle')}>
+        {/* <AlertList /> */}
+
+        <div id="container1" style={this.getStyle('vidWindowStyle')}>
+          <video id="webcam" autoPlay="autoplay" style={this.getStyle('videoStyles')} />
           <IncomingCalls />
 
           {this.props.children}

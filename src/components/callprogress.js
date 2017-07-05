@@ -89,7 +89,7 @@ class CallProgress extends VertoBaseComponent {
         vidControlStyles: {
           display: 'flex',
           justifyContent: 'center',
-          width: '75%',
+          width: '100%',
           maxWidth: '780px'
         },
 
