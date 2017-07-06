@@ -12,11 +12,12 @@ const path = require('path');
 const env = { dev: process.env.NODE_ENV}
 
 const devServerConfig = {
+  hot: true,
   contentBase: path.join(__dirname, './src/'),
   historyApiFallback: { disableDotRule: true }, // need historyApiFallback to be able to refresh on dynamic route
   stats: { colors: true} // Pretty colors on console
 };
-console.log('ANY THING?', webpackConfig)
+//console.log('ANY THING?', webpackConfig)
 const server = new WebpackDevServer(webpack(webpackConfig(env)), devServerConfig);
 
 // server will be live at http://localhost:8080

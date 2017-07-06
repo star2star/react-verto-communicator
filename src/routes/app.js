@@ -1,20 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router';
+//import { Link } from 'react-router';
 import VertoBaseComponent from '../components/vertobasecomponent';
 
-//import Main from '../containers/main/index.js';
-import AppBar from '../containers/appbar/index.js';
+// import Main from '../containers/main/index.js';
+import AppBar from '../containers/appbar';
 
 class App extends VertoBaseComponent {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state = {isModalOpen: false};
+    this.state = { isModalOpen: false };
     this.modal = undefined;
     App.toggleModal = this.toggleModal.bind(this);
   }
 
-  toggleModal(aModal){
-    //console.log('aaaaa')
+  toggleModal(aModal) {
+    // console.log('aaaaa')
     if (!this.state.isModalOpen) {
       this.modal = aModal;
     } else {
@@ -24,8 +24,6 @@ class App extends VertoBaseComponent {
     this.setState({ ...this.state, isModalOpen: !this.state.isModalOpen });
   }
 
-
-
   getDefaultStyle(styleName) {
     const styles = {
       appStyles: {
@@ -33,21 +31,21 @@ class App extends VertoBaseComponent {
         flexDirection: 'column',
         justifyContent: 'flex-start',
         height: '100vh', // want to fill the whole screen height
-        width: '100vw' // and fill screen width
-      }
+        width: '100vw', // and fill screen width
+      },
     };
 
-    return (styles[styleName]);
+    return styles[styleName];
   }
 
-  render(){
+  render() {
     return (
-      <div style={this.getStyle("appStyles")}>
+      <div style={this.getStyle('appStyles')}>
         <AppBar />
         {this.props.children}
         {this.modal}
-      </div>);
-
+      </div>
+    );
   }
 }
 

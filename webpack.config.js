@@ -3,25 +3,42 @@ const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-
 module.exports = env => {
 
   const removeEmpty = array => array.filter(p => !!p);
-  console.log('DIR',__dirname)
+  console.log('DIR', __dirname)
   var config = {
+    devtool: 'inline-source-maps',
     entry: {
-      app: path.join(__dirname, './src/'),
-      vendor: ['react','react-dom' ,'react-router', 'redux', 'react-redux', 'react-intl', 'redux-thunk']
+      'app': [
+        //  'webpack-hot-middleware/client',
+        'react-hot-loader/patch',
+        path.join(__dirname, './src/')
+      ],
+      //app: path.join(__dirname, './src/'),
+      vendor: [
+        'react',
+        'react-dom',
+        'react-router',
+        'redux',
+        'react-redux',
+        'react-intl',
+        'redux-thunk',
+        'react-hot-loader/patch',
+        'webpack-dev-server/client',
+        'webpack/hot/only-dev-server'
+      ]
     },
     output: {
       filename: '[name].[hash].js',
-      path:  path.join(__dirname, './build/'),
+      path: path.join(__dirname, './build/'),
       publicPath: '/' // want everything relative to root '/'
     },
     devServer: {
       contentBase: path.join(__dirname, './src/'),
       historyApiFallback: true,
       inline: true,
+      hot: true,
       contentBase: './src',
       port: 8080
     },
@@ -30,16 +47,22 @@ module.exports = env => {
         {
           test: /\.js$/,
           exclude: /node_modules/,
-          loaders:  ['react-hot-loader', 'babel-loader?presets[]=es2015&presets[]=stage-0&presets[]=react&cacheDirectory=true']
+          loaders: ['babel-loader?presets[]=es2015&presets[]=stage-0&presets[]=react&cacheDirectory=true']
         }
       ]
     },
     plugins: removeEmpty([
+      new webpack.HotModuleReplacementPlugin(),
+      // enable HMR globally
+
+      new webpack.NamedModulesPlugin(),
+      // prints more readable module names in the browser console on HMR updates
+
+      new webpack.NoEmitOnErrorsPlugin(),
+      // do not emit compiled assets that include errors
+      //new	webpack.NoErrorsPlugin(),
       // used to split out our specified vendors script
-      new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
-            minChunks: Infinity,
-            filename: '[name].[hash].js'}),
+      new webpack.optimize.CommonsChunkPlugin({name: 'vendor', minChunks: Infinity, filename: '[name].[hash].js'}),
 
       // HtmlWebpackPlugin will make sure our Javascript files are being called
       // from within our index.html
@@ -71,22 +94,35 @@ module.exports = env => {
       }
     }));
     config.plugins.push(new CopyWebpackPlugin([
-            // {output}/file.txt
-            //{ from: 'messages', to: 'messages' },
-            { from: 'src/index.html', to: 'index.html' },
-            { from: 'src/css', to: 'css'},
-            { from: 'src/img', to: 'img' },
-            { from: 'images', to: 'img' },
-            { from: 'src/locales', to: 'locales'},
-            { from: 'src/3rd-party', to: '3rd-party'},
-            { from: 'src/favicon.ico', to: 'favicon.ico' }
-          ], {
-              ignore: [
-                  // Doesn't copy any files with a txt extension
-                  '*.txt'
-              ]
-          }));
+      // {output}/file.txt
+      //{ from: 'messages', to: 'messages' },
+      {
+        from: 'src/index.html',
+        to: 'index.html'
+      }, {
+        from: 'src/css',
+        to: 'css'
+      }, {
+        from: 'src/img',
+        to: 'img'
+      }, {
+        from: 'images',
+        to: 'img'
+      }, {
+        from: 'src/locales',
+        to: 'locales'
+      }, {
+        from: 'src/3rd-party',
+        to: '3rd-party'
+      }, {
+        from: 'src/favicon.ico',
+        to: 'favicon.ico'
+      }
+    ], {
+      ignore: [// Doesn't copy any files with a txt extension
+        '*.txt']
+    }));
   }
 
-return config;
+  return config;
 };
