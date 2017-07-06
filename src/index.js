@@ -122,6 +122,7 @@ store.subscribe(() => {
       AlertService.getInstance().createAlert(data);
       break;
     case 'incoming-call':
+      //console.log('this.props.app', this.props.app);
       store.dispatch(doIncomingCall(data));
       break;
 

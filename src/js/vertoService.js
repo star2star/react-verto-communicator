@@ -649,9 +649,10 @@ class VertoService {
     _verto._data.conf.sendChat(message, 'message');
   }
 
-  answer(callerId) {
+  answer(callerId, useVideo) {
     if (_verto._data._activeCalls[callerId]) {
-      _verto._data._activeCalls[callerId].answer();
+      _verto._data._activeCalls[callerId].answer({ useVideo });
+      console.log('Call object', _verto._data._activeCalls[callerId]);
     } else {
       console.log('answer    NOT FOUND----------');
     }

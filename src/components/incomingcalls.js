@@ -43,8 +43,8 @@ class IncomingCalls extends VertoBaseComponent {
   }
 
   dispatchAnswer(d) {
-    // console.log('Answering: ', d);
-    this.props.dispatch(doAnswer(d.callID));
+     console.log('this.props.appSettings ', this.props.appSettings);
+    this.props.dispatch(doAnswer(d.callID, this.props.appSettings));
   }
 
   render() {
@@ -57,6 +57,7 @@ class IncomingCalls extends VertoBaseComponent {
           callData={callInfo.incomingCalls[callId]}
           cbHangup={this.dispatchHangUp}
           cbAnswer={this.dispatchAnswer}
+
         />,
       );
 
@@ -74,4 +75,5 @@ IncomingCalls.propTypes = {
 
 export default connect(state => ({
   callInfo: state.callInfo,
+  appSettings: state.app.settings,
 }))(IncomingCalls);

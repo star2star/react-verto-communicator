@@ -280,8 +280,8 @@ const doConferenceData = confData => ({
   data: confData,
 });
 
-const doAnswer = callId => (dispatch) => {
-  VertoService.getInstance().answer(callId);
+const doAnswer = (callId, appSettings) => (dispatch) => {
+  VertoService.getInstance().answer(callId, appSettings.useVideo);
 };
 
 const doHungUp = dialog => (dispatch) => {
